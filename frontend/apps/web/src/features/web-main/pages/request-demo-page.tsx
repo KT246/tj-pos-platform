@@ -1,3 +1,5 @@
+"use client";
+
 import { Headphones, LayoutDashboard, ShieldCheck } from "lucide-react";
 
 import { PageShell } from "../../../components/layout/page-shell";
@@ -6,11 +8,14 @@ import { CTASection } from "../../../components/ui/cta-section";
 import { Field } from "../../../components/ui/field";
 import { IconBox } from "../../../components/ui/icon-box";
 import { SelectField } from "../../../components/ui/select-field";
+import { useI18n } from "../../../lib/i18n";
 import { demoTrustItems, posTypes } from "../data";
 import { DashboardMockup } from "../components/dashboard-mockup";
 import { HeroShell } from "../components/hero-shell";
 
 export function RequestDemoPage() {
+  const { t } = useI18n();
+
   return (
     <PageShell active="Contact">
       <HeroShell
@@ -27,11 +32,12 @@ export function RequestDemoPage() {
       <section className="mx-auto grid max-w-[1320px] gap-6 px-6 py-10 lg:grid-cols-[1.35fr_0.65fr] lg:px-10">
         <div className="rounded-lg border border-blue-100 bg-white p-6 shadow-sm">
           <h2 className="text-xl font-black text-slate-950">
-            Tell Us About Your Business
+            {t("Tell Us About Your Business")}
           </h2>
           <p className="mt-2 text-sm text-slate-600">
-            Fill in the details below and our team will contact you to confirm your
-            demo.
+            {t(
+              "Fill in the details below and our team will contact you to confirm your demo."
+            )}
           </p>
           <div className="mt-6 grid gap-5 md:grid-cols-3">
             <Field label="Full Name" placeholder="Somchai Phomsavanh" />
@@ -59,8 +65,9 @@ export function RequestDemoPage() {
               defaultChecked
               className="mt-1 h-4 w-4 rounded border-blue-200"
             />
-            I agree to the Terms of Service and Privacy Policy and consent to be
-            contacted by TJ POS.
+            {t(
+              "I agree to the Terms of Service and Privacy Policy and consent to be contacted by TJ POS."
+            )}
           </label>
           <div className="mt-6 flex gap-4">
             <PrimaryButton href="#">Submit Demo Request</PrimaryButton>
@@ -69,7 +76,7 @@ export function RequestDemoPage() {
         </div>
         <div className="space-y-5">
           <div className="rounded-lg border border-blue-100 bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-black text-slate-950">What to Expect</h2>
+            <h2 className="text-xl font-black text-slate-950">{t("What to Expect")}</h2>
             <div className="mt-5 space-y-5">
               {[
                 [
@@ -88,8 +95,8 @@ export function RequestDemoPage() {
                     tone="blue"
                   />
                   <div>
-                    <p className="font900 text-slate-950">{title}</p>
-                    <p className="text-sm leading-6 text-slate-600">{body}</p>
+                    <p className="font900 text-slate-950">{t(title)}</p>
+                    <p className="text-sm leading-6 text-slate-600">{t(body)}</p>
                   </div>
                 </div>
               ))}
@@ -97,7 +104,7 @@ export function RequestDemoPage() {
           </div>
           <div className="rounded-lg border border-blue-100 bg-white p-6 shadow-sm">
             <h2 className="text-xl font-black text-slate-950">
-              Our 3-Step Demo Process
+              {t("Our 3-Step Demo Process")}
             </h2>
             <div className="mt-5 space-y-4">
               {[
@@ -110,9 +117,9 @@ export function RequestDemoPage() {
                     {index + 1}
                   </span>
                   <div>
-                    <p className="font900 text-slate-950">{step}</p>
+                    <p className="font900 text-slate-950">{t(step)}</p>
                     <p className="text-sm text-slate-600">
-                      Our team guides you through the right solution.
+                      {t("Our team guides you through the right solution.")}
                     </p>
                   </div>
                 </div>
@@ -124,10 +131,10 @@ export function RequestDemoPage() {
       <section className="mx-auto grid max-w-[1320px] gap-5 px-6 pb-4 lg:grid-cols-[1.2fr_0.8fr] lg:px-8">
         <div className="rounded-lg border border-blue-100 bg-white p-5 shadow-sm">
           <h2 className="text-lg font-black text-slate-950">
-            TJ POS Supports Businesses Like Yours
+            {t("TJ POS Supports Businesses Like Yours")}
           </h2>
           <p className="mt-1 text-sm text-slate-600">
-            Choose your business type to see how we can help you grow.
+            {t("Choose your business type to see how we can help you grow.")}
           </p>
           <div className="mt-4 grid gap-3 sm:grid-cols-5">
             {posTypes.map((item) => (
@@ -137,7 +144,7 @@ export function RequestDemoPage() {
               >
                 <IconBox Icon={item.Icon} tone={item.tone} />
                 <span className="font900 text-sm text-slate-900">
-                  {item.shortTitle}
+                  {t(item.shortTitle)}
                 </span>
               </div>
             ))}
@@ -150,10 +157,10 @@ export function RequestDemoPage() {
             </span>
             <div>
               <h2 className="text-lg font-black text-slate-950">
-                Need help choosing the right setup?
+                {t("Need help choosing the right setup?")}
               </h2>
               <p className="mt-1 text-sm text-slate-600">
-                Our specialists are ready to help you find the best solution.
+                {t("Our specialists are ready to help you find the best solution.")}
               </p>
             </div>
           </div>

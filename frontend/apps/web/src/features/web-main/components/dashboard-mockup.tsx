@@ -1,8 +1,13 @@
+"use client";
+
 import { Bell, LayoutDashboard } from "lucide-react";
 
 import { Logo } from "../../../components/layout/logo";
+import { useI18n } from "../../../lib/i18n";
 
 export function DashboardMockup({ compact = false }: { compact?: boolean }) {
+  const { t } = useI18n();
+
   const metrics = [
     ["Total Sales", "K 45,680,000", "+16.4%"],
     ["Transactions", "1,256", "+12.4%"],
@@ -16,7 +21,7 @@ export function DashboardMockup({ compact = false }: { compact?: boolean }) {
         <Logo />
         <div className="hidden items-center gap-3 md:flex">
           <button className="font800 h-8 rounded-md border border-slate-200 px-3 text-xs text-slate-600">
-            Vientiane Cafe
+            {t("Vientiane Cafe")}
           </button>
           <Bell className="h-4 w-4 text-emerald-500" />
           <div className="h-8 w-8 rounded-full bg-gradient-to-br from-emerald-300 to-blue-500" />
@@ -40,7 +45,7 @@ export function DashboardMockup({ compact = false }: { compact?: boolean }) {
               }`}
             >
               <LayoutDashboard className="h-3 w-3" />
-              {item}
+              {t(item)}
             </div>
           ))}
         </aside>
@@ -52,12 +57,12 @@ export function DashboardMockup({ compact = false }: { compact?: boolean }) {
                   key={label}
                   className="rounded-lg border border-slate-100 bg-white p-2"
                 >
-                  <p className="font800 text-[10px] text-slate-500">{label}</p>
+                  <p className="font800 text-[10px] text-slate-500">{t(label)}</p>
                   <p className="mt-1 text-sm font-black whitespace-nowrap text-slate-950">
                     {value}
                   </p>
                   <p className="font800 mt-1 text-[9px] leading-3 text-emerald-600">
-                    {change} vs last week
+                    {change} {t("vs last week")}
                   </p>
                 </div>
               ))}
@@ -68,9 +73,11 @@ export function DashboardMockup({ compact = false }: { compact?: boolean }) {
           >
             <div className="rounded-lg border border-slate-100 bg-white p-3">
               <div className="mb-3 flex items-center justify-between">
-                <h3 className="font900 text-sm text-slate-950">Sales Overview</h3>
+                <h3 className="font900 text-sm text-slate-950">
+                  {t("Sales Overview")}
+                </h3>
                 <span className="font800 rounded-md border border-slate-200 px-2 py-1 text-[10px] text-slate-500">
-                  This Week
+                  {t("This Week")}
                 </span>
               </div>
               <svg viewBox="0 0 320 150" className="h-[94px] w-full">
@@ -98,7 +105,7 @@ export function DashboardMockup({ compact = false }: { compact?: boolean }) {
               </svg>
             </div>
             <div className="rounded-lg border border-slate-100 bg-white p-3">
-              <h3 className="font900 text-sm text-slate-950">Top Products</h3>
+              <h3 className="font900 text-sm text-slate-950">{t("Top Products")}</h3>
               <div className="mt-3 space-y-2">
                 {["Iced Latte", "Green Tea", "Croissant", "Bagel", "Brownie"].map(
                   (item, index) => (
@@ -106,7 +113,7 @@ export function DashboardMockup({ compact = false }: { compact?: boolean }) {
                       <div className="flex items-center gap-2">
                         <span className="h-7 w-7 rounded-md bg-gradient-to-br from-amber-200 to-amber-700" />
                         <span className="font800 text-[10px] text-slate-700">
-                          {item}
+                          {t(item)}
                         </span>
                       </div>
                       <span className="font900 text-[10px] whitespace-nowrap text-slate-900">
@@ -119,8 +126,12 @@ export function DashboardMockup({ compact = false }: { compact?: boolean }) {
             </div>
             <div className="rounded-lg border border-slate-100 bg-white p-3">
               <div className="mb-4 flex items-center justify-between">
-                <h3 className="font900 text-sm text-slate-950">Recent Transactions</h3>
-                <span className="font900 text-[10px] text-blue-600">View all</span>
+                <h3 className="font900 text-sm text-slate-950">
+                  {t("Recent Transactions")}
+                </h3>
+                <span className="font900 text-[10px] text-blue-600">
+                  {t("View all")}
+                </span>
               </div>
               <div className="space-y-2">
                 {["INV-00155", "INV-00154", "INV-00153", "INV-00152"].map(

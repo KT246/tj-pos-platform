@@ -1,16 +1,21 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { IconBox, iconToneClass } from "../../../components/ui/icon-box";
+import { useI18n } from "../../../lib/i18n";
 import type { AddOn, HomeAddOn } from "../types";
 
 export function AddOnCard({ item }: { item: AddOn }) {
+  const { t } = useI18n();
+
   return (
     <div className="rounded-lg border border-blue-100 bg-white p-4 shadow-sm">
       <IconBox Icon={item.Icon} tone={item.tone} />
-      <h3 className="mt-3 text-sm font-black text-slate-950">{item.title}</h3>
+      <h3 className="mt-3 text-sm font-black text-slate-950">{t(item.title)}</h3>
       <p className="mt-2 min-h-10 text-xs leading-5 text-slate-600">
-        {item.description}
+        {t(item.description)}
       </p>
       <p className="mt-3 text-lg font-black whitespace-nowrap text-slate-950">
         {item.price}
@@ -18,13 +23,13 @@ export function AddOnCard({ item }: { item: AddOn }) {
       </p>
       <div className="mt-3 flex items-center justify-between gap-3">
         <button className="font900 h-8 rounded-md border border-blue-300 px-3 text-xs text-blue-600">
-          Add
+          {t("Add")}
         </button>
         <Link
           href="/add-ons"
           className="font900 inline-flex items-center gap-1 text-xs text-blue-600"
         >
-          More
+          {t("More")}
           <ArrowRight className="h-3.5 w-3.5" />
         </Link>
       </div>
@@ -33,6 +38,8 @@ export function AddOnCard({ item }: { item: AddOn }) {
 }
 
 export function HomeAddOnCard({ item }: { item: HomeAddOn }) {
+  const { t } = useI18n();
+
   return (
     <div
       className={`rounded-md border bg-white p-2.5 text-center shadow-sm ${
@@ -45,10 +52,10 @@ export function HomeAddOnCard({ item }: { item: HomeAddOn }) {
         <item.Icon className="h-3.5 w-3.5" />
       </span>
       <h3 className="mt-2 min-h-7 text-[11px] leading-4 font-black text-slate-950">
-        {item.title}
+        {t(item.title)}
       </h3>
       <p className="mt-1 min-h-8 text-[9px] leading-4 text-slate-600">
-        {item.description}
+        {t(item.description)}
       </p>
       {item.price ? (
         <p className="mt-1.5 text-sm font-black whitespace-nowrap text-slate-950">
@@ -63,7 +70,7 @@ export function HomeAddOnCard({ item }: { item: HomeAddOn }) {
             : "border-blue-300 bg-white text-blue-600"
         }`}
       >
-        {item.cta}
+        {t(item.cta)}
       </button>
     </div>
   );

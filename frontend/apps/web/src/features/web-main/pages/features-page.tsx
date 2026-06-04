@@ -1,14 +1,19 @@
+"use client";
+
 import { Gift } from "lucide-react";
 
 import { PageShell } from "../../../components/layout/page-shell";
 import { CTASection } from "../../../components/ui/cta-section";
 import { IconBox } from "../../../components/ui/icon-box";
+import { useI18n } from "../../../lib/i18n";
 import { addOns, coreFeatures } from "../data";
 import { DashboardMockup } from "../components/dashboard-mockup";
 import { FeatureCard } from "../components/feature-card";
 import { HeroShell } from "../components/hero-shell";
 
 export function FeaturesPage() {
+  const { t } = useI18n();
+
   return (
     <PageShell active="Features">
       <HeroShell
@@ -40,7 +45,7 @@ export function FeaturesPage() {
         <div className="mx-auto grid max-w-[1320px] gap-5 px-6 lg:grid-cols-[1fr_1fr] lg:px-10">
           <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-7">
             <h2 className="text-xl font-black text-emerald-700">
-              Core Features Included in Every Plan
+              {t("Core Features Included in Every Plan")}
             </h2>
             <div className="mt-5 grid gap-3 sm:grid-cols-4">
               {coreFeatures.slice(0, 8).map((feature) => (
@@ -48,14 +53,16 @@ export function FeaturesPage() {
                   <div className="mx-auto w-fit">
                     <IconBox Icon={feature.Icon} tone={feature.tone} />
                   </div>
-                  <p className="font900 mt-2 text-xs text-slate-800">{feature.title}</p>
+                  <p className="font900 mt-2 text-xs text-slate-800">
+                    {t(feature.title)}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
           <div className="rounded-lg border border-violet-200 bg-violet-50 p-7">
             <h2 className="text-xl font-black text-violet-700">
-              Optional Add-ons Extend Your System
+              {t("Optional Add-ons Extend Your System")}
             </h2>
             <div className="mt-5 grid gap-3 sm:grid-cols-4">
               {addOns.slice(0, 8).map((item) => (
@@ -63,7 +70,7 @@ export function FeaturesPage() {
                   <div className="mx-auto w-fit">
                     <IconBox Icon={item.Icon} tone={item.tone} />
                   </div>
-                  <p className="font900 mt-2 text-xs text-slate-800">{item.title}</p>
+                  <p className="font900 mt-2 text-xs text-slate-800">{t(item.title)}</p>
                 </div>
               ))}
             </div>

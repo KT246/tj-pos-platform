@@ -1,6 +1,9 @@
+"use client";
+
 import { Building2, Check, Headphones, Mail, Phone, User } from "lucide-react";
 
 import { IconBox } from "../../../components/ui/icon-box";
+import { useI18n } from "../../../lib/i18n";
 
 const contactCards = [
   [
@@ -41,6 +44,8 @@ const contactCards = [
 ] as const;
 
 export function ContactCards() {
+  const { t } = useI18n();
+
   return (
     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
       {contactCards.map(([title, body, value, Icon, tone]) => (
@@ -51,12 +56,12 @@ export function ContactCards() {
           <div className="mx-auto w-fit">
             <IconBox Icon={Icon} tone={tone} />
           </div>
-          <h3 className="mt-4 text-base font-black text-slate-950">{title}</h3>
-          <p className="mt-2 text-sm leading-6 text-slate-600">{body}</p>
-          <p className="font900 mt-4 text-sm text-blue-600">{value}</p>
+          <h3 className="mt-4 text-base font-black text-slate-950">{t(title)}</h3>
+          <p className="mt-2 text-sm leading-6 text-slate-600">{t(body)}</p>
+          <p className="font900 mt-4 text-sm text-blue-600">{t(value)}</p>
           <p className="font800 mt-5 flex items-center justify-center gap-2 text-xs text-slate-500">
             <Check className="h-3.5 w-3.5 text-emerald-600" />
-            Response within 2 hours
+            {t("Response within 2 hours")}
           </p>
         </div>
       ))}

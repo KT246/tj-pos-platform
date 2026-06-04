@@ -1,3 +1,5 @@
+"use client";
+
 import { Info } from "lucide-react";
 
 import { PageShell } from "../../../components/layout/page-shell";
@@ -9,8 +11,11 @@ import { FeatureCard } from "../components/feature-card";
 import { HeroShell } from "../components/hero-shell";
 import { PosTypeCard } from "../components/pos-type-card";
 import { IconBox } from "../../../components/ui/icon-box";
+import { useI18n } from "../../../lib/i18n";
 
 export function PosTypesPage() {
+  const { t } = useI18n();
+
   return (
     <PageShell active="POS Types">
       <HeroShell
@@ -32,7 +37,9 @@ export function PosTypesPage() {
                 <div className="mx-auto w-fit">
                   <IconBox Icon={item.Icon} tone={item.tone} />
                 </div>
-                <p className="font900 mt-3 text-sm text-slate-950">{item.shortTitle}</p>
+                <p className="font900 mt-3 text-sm text-slate-950">
+                  {t(item.shortTitle)}
+                </p>
               </div>
             ))}
           </div>

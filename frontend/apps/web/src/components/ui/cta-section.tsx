@@ -1,5 +1,8 @@
+"use client";
+
 import { Headphones } from "lucide-react";
 
+import { useI18n } from "../../lib/i18n";
 import { PrimaryButton, SecondaryButton } from "./buttons";
 
 export function CTASection({
@@ -17,6 +20,8 @@ export function CTASection({
   secondaryLabel?: string;
   secondaryHref?: string;
 }) {
+  const { t } = useI18n();
+
   return (
     <section className="mx-auto my-6 max-w-[1320px] px-6 lg:px-8">
       <div className="flex flex-col gap-5 rounded-lg border border-blue-200 bg-blue-50/70 p-5 md:flex-row md:items-center md:justify-between">
@@ -25,9 +30,9 @@ export function CTASection({
             <Headphones className="h-7 w-7" />
           </span>
           <div>
-            <h2 className="text-xl font-black text-slate-950">{title}</h2>
+            <h2 className="text-xl font-black text-slate-950">{t(title)}</h2>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
-              {description}
+              {t(description)}
             </p>
           </div>
         </div>

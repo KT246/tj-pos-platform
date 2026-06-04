@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, ChevronDown, Headphones, Search } from "lucide-react";
 
@@ -5,9 +7,12 @@ import { PageShell } from "../../../components/layout/page-shell";
 import { Badge } from "../../../components/ui/badge";
 import { CTASection } from "../../../components/ui/cta-section";
 import { IconBox } from "../../../components/ui/icon-box";
+import { useI18n } from "../../../lib/i18n";
 import { faqGroups } from "../data";
 
 export function FaqHelpPage() {
+  const { t } = useI18n();
+
   return (
     <PageShell active="FAQ/Help">
       <section className="border-b border-blue-100 bg-[linear-gradient(180deg,#f8fbff_0%,#ffffff_100%)]">
@@ -15,20 +20,24 @@ export function FaqHelpPage() {
           <div>
             <Badge Icon={Headphones}>Get Help, Fast</Badge>
             <h1 className="mt-6 text-5xl leading-tight font-black text-slate-950">
-              Frequently Asked <span className="text-blue-600">Questions</span>
+              {t("Frequently Asked")}{" "}
+              <span className="text-blue-600">{t("Questions")}</span>
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-8 text-slate-600">
-              Find answers to common questions about TJ POS. Everything you need to know
-              to run your business with confidence.
+              {t(
+                "Find answers to common questions about TJ POS. Everything you need to know to run your business with confidence."
+              )}
             </p>
           </div>
           <div className="flex items-center">
             <div className="w-full rounded-lg border border-blue-100 bg-white p-7 shadow-sm">
               <h2 className="text-xl font-black text-slate-950">
-                How can we help you today?
+                {t("How can we help you today?")}
               </h2>
               <div className="mt-5 flex h-14 items-center gap-3 rounded-md border border-blue-100 px-4">
-                <span className="text-sm text-slate-500">Search for answers...</span>
+                <span className="text-sm text-slate-500">
+                  {t("Search for answers...")}
+                </span>
                 <Search className="ml-auto h-5 w-5 text-slate-500" />
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
@@ -38,7 +47,7 @@ export function FaqHelpPage() {
                       key={tag}
                       className="font900 rounded-md bg-blue-50 px-4 py-2 text-xs text-blue-600"
                     >
-                      {tag}
+                      {t(tag)}
                     </span>
                   )
                 )}
@@ -55,15 +64,17 @@ export function FaqHelpPage() {
               className="rounded-lg border border-blue-100 bg-white p-6 shadow-sm"
             >
               <IconBox Icon={group.Icon} tone={group.tone} />
-              <h3 className="mt-4 text-lg font-black text-slate-950">{group.title}</h3>
+              <h3 className="mt-4 text-lg font-black text-slate-950">
+                {t(group.title)}
+              </h3>
               <p className="mt-2 text-sm leading-6 text-slate-600">
-                View questions and support topics.
+                {t("View questions and support topics.")}
               </p>
               <Link
                 href="#"
                 className="font900 mt-4 inline-flex items-center gap-2 text-sm text-blue-600"
               >
-                View questions
+                {t("View questions")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -77,7 +88,7 @@ export function FaqHelpPage() {
             >
               <div className="mb-4 flex items-center gap-3">
                 <IconBox Icon={group.Icon} tone={group.tone} />
-                <h2 className="text-xl font-black text-slate-950">{group.title}</h2>
+                <h2 className="text-xl font-black text-slate-950">{t(group.title)}</h2>
               </div>
               <div className="space-y-3">
                 {group.questions.map((question) => (
@@ -86,7 +97,7 @@ export function FaqHelpPage() {
                     className="rounded-md border border-blue-100 px-4 py-3"
                   >
                     <p className="font800 flex justify-between text-sm text-slate-800">
-                      {question}
+                      {t(question)}
                       <ChevronDown className="h-4 w-4" />
                     </p>
                   </div>
