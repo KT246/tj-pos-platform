@@ -19,7 +19,8 @@ body {
   background: #ffffff;
   color: var(--tj-navy);
   font-family:
-    Inter,
+    var(--font-inter),
+    var(--font-noto-sans-lao),
     ui-sans-serif,
     system-ui,
     -apple-system,
