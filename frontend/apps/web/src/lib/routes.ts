@@ -14,10 +14,10 @@ export type PageShellProps = {
   children: ReactNode;
 };
 
-export const navItems: { label: ActiveNav; href: string; hasMenu?: boolean }[] = [
+export const navItems: { label: ActiveNav; href: string }[] = [
   { label: "Home", href: "/" },
-  { label: "POS Types", href: "/pos-types", hasMenu: true },
-  { label: "Features", href: "/features", hasMenu: true },
+  { label: "POS Types", href: "/pos-types" },
+  { label: "Features", href: "/features" },
   { label: "Pricing", href: "/pricing" },
   { label: "Add-ons", href: "/add-ons" },
   { label: "FAQ/Help", href: "/faq-help" },

@@ -35,7 +35,6 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
               }`}
             >
               {t(item.label)}
-              {item.hasMenu ? <ChevronDown className="h-3.5 w-3.5" /> : null}
               {active === item.label ? (
                 <span className="absolute inset-x-4 bottom-0 h-1 rounded-t bg-blue-600" />
               ) : null}
