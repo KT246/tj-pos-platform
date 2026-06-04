@@ -58,17 +58,17 @@ export function PosTypeCard({
 
 export function HomePosTypeCard({ item }: { item: PosType }) {
   return (
-    <div className="rounded-lg border border-blue-100 bg-white p-2.5 shadow-sm">
+    <div className="rounded-lg border border-blue-100 bg-white p-2 shadow-sm">
       <div className="mb-2 flex items-center gap-2">
         <span
-          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-md ring-1 ${iconToneClass(item.tone)}`}
+          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-md ring-1 ${iconToneClass(item.tone)}`}
         >
-          <item.Icon className="h-4 w-4" />
+          <item.Icon className="h-3.5 w-3.5" />
         </span>
         <h3 className="text-sm font-black text-slate-950">{item.shortTitle}</h3>
       </div>
       <div
-        className="h-14 rounded-md border border-blue-50"
+        className="h-[52px] rounded-md border border-blue-50"
         style={{ background: item.visual }}
       />
       <p className="mt-2 min-h-8 text-[10px] leading-4 text-slate-600">
@@ -76,7 +76,7 @@ export function HomePosTypeCard({ item }: { item: PosType }) {
       </p>
       <Link
         href="/pos-types"
-        className="font900 mt-2 inline-flex items-center gap-1 text-xs text-blue-600"
+        className="font900 mt-1.5 inline-flex items-center gap-1 text-[10px] text-blue-600"
       >
         Learn more
         <ArrowRight className="h-3.5 w-3.5" />

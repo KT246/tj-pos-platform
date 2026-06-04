@@ -22,7 +22,7 @@ export function FeaturesPage() {
       >
         <DashboardMockup />
       </HeroShell>
-      <section className="mx-auto max-w-[1480px] px-6 py-6 lg:px-10">
+      <section className="mx-auto max-w-[1320px] px-6 py-6 lg:px-10">
         <div className="grid gap-4 md:grid-cols-4 xl:grid-cols-8">
           {coreFeatures.map((feature) => (
             <FeatureCard key={feature.title} feature={feature} />

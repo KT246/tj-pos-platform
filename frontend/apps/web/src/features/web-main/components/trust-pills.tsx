@@ -7,10 +7,10 @@ export function TrustPills({
   items?: readonly TrustPill[];
 }) {
   return (
-    <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
       {items.map(([title, body, Icon]) => (
         <div key={title} className="flex items-center gap-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-md bg-emerald-50 text-emerald-600">
+          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-emerald-50 text-emerald-600">
             <Icon className="h-4 w-4" />
           </span>
           <span>

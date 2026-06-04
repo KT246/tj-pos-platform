@@ -35,14 +35,14 @@ export function HeroShell({
   children: ReactNode;
 }) {
   return (
-    <section className="border-b border-blue-100 bg-[linear-gradient(180deg,#f8fbff_0%,#ffffff_100%)]">
-      <div className="mx-auto grid max-w-[1320px] gap-8 px-6 py-7 lg:grid-cols-[0.42fr_0.58fr] lg:items-center lg:px-8">
+    <section className="border-y border-blue-100 bg-[linear-gradient(180deg,#f8fbff_0%,#ffffff_100%)]">
+      <div className="mx-auto grid max-w-[1320px] gap-8 px-6 py-6 lg:grid-cols-[0.38fr_0.62fr] lg:items-center lg:px-8">
         <div className="flex flex-col justify-center">
           <Badge>{badge}</Badge>
-          <h1 className="mt-5 max-w-2xl text-4xl leading-tight font-black tracking-normal text-slate-950 lg:text-5xl">
+          <h1 className="mt-5 max-w-2xl text-4xl leading-tight font-black tracking-normal text-slate-950 lg:text-[46px]">
             {title} <span className="text-blue-600">{accent}</span>
           </h1>
-          <p className="mt-4 max-w-xl text-base leading-7 text-slate-600">
+          <p className="mt-4 max-w-xl text-sm leading-7 text-slate-600">
             {description}
           </p>
           {!hideActions ? (

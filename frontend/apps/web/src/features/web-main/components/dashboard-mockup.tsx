@@ -11,8 +11,8 @@ export function DashboardMockup({ compact = false }: { compact?: boolean }) {
   ];
 
   return (
-    <div className="rounded-lg border border-blue-100 bg-white p-3 shadow-[0_20px_70px_rgba(37,99,235,0.10)]">
-      <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+    <div className="rounded-lg border border-blue-100 bg-white p-2.5 shadow-[0_20px_70px_rgba(37,99,235,0.10)]">
+      <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
         <Logo />
         <div className="hidden items-center gap-3 md:flex">
           <button className="font800 h-8 rounded-md border border-slate-200 px-3 text-xs text-slate-600">
@@ -22,7 +22,7 @@ export function DashboardMockup({ compact = false }: { compact?: boolean }) {
           <div className="h-8 w-8 rounded-full bg-gradient-to-br from-emerald-300 to-blue-500" />
         </div>
       </div>
-      <div className="grid gap-3 pt-3 md:grid-cols-[132px_1fr]">
+      <div className="grid gap-3 pt-3 md:grid-cols-[118px_1fr]">
         <aside className="hidden rounded-md bg-slate-50 p-2 md:block">
           {[
             "Dashboard",
@@ -35,11 +35,11 @@ export function DashboardMockup({ compact = false }: { compact?: boolean }) {
           ].map((item, index) => (
             <div
               key={item}
-              className={`font800 mb-1.5 flex items-center gap-2 rounded-md px-2.5 py-1.5 text-xs ${
+              className={`font800 mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-[10px] ${
                 index === 0 ? "bg-blue-100 text-blue-600" : "text-slate-500"
               }`}
             >
-              <LayoutDashboard className="h-3.5 w-3.5" />
+              <LayoutDashboard className="h-3 w-3" />
               {item}
             </div>
           ))}
@@ -50,11 +50,13 @@ export function DashboardMockup({ compact = false }: { compact?: boolean }) {
               {metrics.map(([label, value, change]) => (
                 <div
                   key={label}
-                  className="rounded-lg border border-slate-100 bg-white p-3"
+                  className="rounded-lg border border-slate-100 bg-white p-2"
                 >
-                  <p className="font800 text-xs text-slate-500">{label}</p>
-                  <p className="mt-2 text-base font-black text-slate-950">{value}</p>
-                  <p className="font800 mt-1 text-xs text-emerald-600">
+                  <p className="font800 text-[10px] text-slate-500">{label}</p>
+                  <p className="mt-1 text-sm font-black whitespace-nowrap text-slate-950">
+                    {value}
+                  </p>
+                  <p className="font800 mt-1 text-[9px] leading-3 text-emerald-600">
                     {change} vs last week
                   </p>
                 </div>
@@ -71,7 +73,7 @@ export function DashboardMockup({ compact = false }: { compact?: boolean }) {
                   This Week
                 </span>
               </div>
-              <svg viewBox="0 0 320 150" className="h-[120px] w-full">
+              <svg viewBox="0 0 320 150" className="h-[94px] w-full">
                 <defs>
                   <linearGradient id="chartFill" x1="0" x2="0" y1="0" y2="1">
                     <stop offset="0%" stopColor="#2563eb" stopOpacity="0.16" />
@@ -102,10 +104,12 @@ export function DashboardMockup({ compact = false }: { compact?: boolean }) {
                   (item, index) => (
                     <div key={item} className="flex items-center justify-between gap-3">
                       <div className="flex items-center gap-2">
-                        <span className="h-8 w-8 rounded-md bg-gradient-to-br from-amber-200 to-amber-700" />
-                        <span className="font800 text-xs text-slate-700">{item}</span>
+                        <span className="h-7 w-7 rounded-md bg-gradient-to-br from-amber-200 to-amber-700" />
+                        <span className="font800 text-[10px] text-slate-700">
+                          {item}
+                        </span>
                       </div>
-                      <span className="font900 text-xs text-slate-900">
+                      <span className="font900 text-[10px] whitespace-nowrap text-slate-900">
                         K {(index + 2) * 840},000
                       </span>
                     </div>
@@ -116,19 +120,19 @@ export function DashboardMockup({ compact = false }: { compact?: boolean }) {
             <div className="rounded-lg border border-slate-100 bg-white p-3">
               <div className="mb-4 flex items-center justify-between">
                 <h3 className="font900 text-sm text-slate-950">Recent Transactions</h3>
-                <span className="font900 text-xs text-blue-600">View all</span>
+                <span className="font900 text-[10px] text-blue-600">View all</span>
               </div>
               <div className="space-y-2">
                 {["INV-00155", "INV-00154", "INV-00153", "INV-00152"].map(
                   (item, index) => (
                     <div key={item} className="flex items-center justify-between">
                       <div>
-                        <p className="font900 text-xs text-blue-600">{item}</p>
+                        <p className="font900 text-[10px] text-blue-600">{item}</p>
                         <p className="text-[10px] text-slate-500">
                           May 18, 11:{25 - index} AM
                         </p>
                       </div>
-                      <p className="font900 text-xs text-slate-900">
+                      <p className="font900 text-[10px] whitespace-nowrap text-slate-900">
                         K {65 + index * 25},000
                       </p>
                     </div>

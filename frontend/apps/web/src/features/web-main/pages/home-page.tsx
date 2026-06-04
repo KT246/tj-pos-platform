@@ -1,11 +1,12 @@
-import { ChevronDown, Info } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ChevronDown, Info } from "lucide-react";
 
 import { PageShell } from "../../../components/layout/page-shell";
 import { PrimaryButton } from "../../../components/ui/buttons";
-import { addOns, coreFeatures, posTypes, pricingPlans } from "../data";
+import { homeAddOns, homeCoreFeatures, homePricingPlans, posTypes } from "../data";
 import { HomeAddOnCard } from "../components/add-on-card";
 import { DashboardMockup } from "../components/dashboard-mockup";
-import { FeatureCard } from "../components/feature-card";
+import { HomeFeatureItem } from "../components/feature-card";
 import { HeroShell } from "../components/hero-shell";
 import { HomePosTypeCard } from "../components/pos-type-card";
 import { HomePricingCard } from "../components/pricing-card";
@@ -23,10 +24,10 @@ export function HomePage() {
         secondaryIcon={<Info className="h-4 w-4" />}
         showTrust
       >
-        <DashboardMockup compact />
+        <DashboardMockup />
       </HeroShell>
-      <section className="mx-auto grid max-w-[1320px] gap-8 px-6 py-5 lg:grid-cols-[1fr_1fr] lg:px-8">
-        <div>
+      <section className="mx-auto grid max-w-[1320px] gap-0 px-6 py-4 lg:grid-cols-[1fr_1fr] lg:divide-x lg:divide-blue-100 lg:px-8">
+        <div className="lg:pr-7">
           <h2 className="text-2xl font-black text-slate-950">
             Built for Every Business Type
           </h2>
@@ -38,34 +39,63 @@ export function HomePage() {
               <HomePosTypeCard key={item.title} item={item} />
             ))}
           </div>
+          <div className="mt-2 flex justify-center">
+            <Link
+              href="/pos-types"
+              className="font900 inline-flex h-6 items-center justify-center gap-1 rounded-md border border-blue-300 bg-white px-9 text-[10px] text-blue-600"
+            >
+              View All POS Types
+              <ArrowRight className="h-3 w-3" />
+            </Link>
+          </div>
         </div>
-        <div>
+        <div className="pt-7 lg:pt-0 lg:pl-7">
           <h2 className="text-2xl font-black text-slate-950">
             Powerful Features to Grow Your Business
           </h2>
-          <div className="mt-5 grid gap-3 sm:grid-cols-2">
-            {coreFeatures.slice(0, 6).map((feature) => (
-              <FeatureCard key={feature.title} feature={feature} />
+          <div className="mt-7 grid gap-x-7 gap-y-8 sm:grid-cols-2 xl:grid-cols-3">
+            {homeCoreFeatures.map((feature) => (
+              <HomeFeatureItem key={feature.title} feature={feature} />
             ))}
           </div>
         </div>
       </section>
-      <section className="border-y border-blue-100 bg-slate-50/40 py-5">
-        <div className="mx-auto grid max-w-[1320px] gap-8 px-6 lg:grid-cols-[1.1fr_1fr] lg:px-8">
-          <div>
-            <h2 className="text-2xl font-black text-slate-950">
-              Simple Packages, One Powerful Platform
-            </h2>
-            <div className="mt-5 grid gap-3 md:grid-cols-4">
-              {pricingPlans.map((plan) => (
+      <section className="border-y border-blue-100 bg-white py-3">
+        <div className="mx-auto grid max-w-[1320px] gap-0 px-6 lg:grid-cols-[1fr_1fr] lg:divide-x lg:divide-blue-100 lg:px-8">
+          <div className="lg:pr-7">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <h2 className="text-lg font-black text-slate-950">
+                  Simple Packages, One Powerful Platform
+                </h2>
+                <p className="mt-1 text-xs text-slate-600">
+                  Choose the plan that fits your business.
+                </p>
+              </div>
+              <div className="font900 hidden items-center rounded-full border border-blue-100 bg-slate-50 p-0.5 text-[10px] md:flex">
+                <span className="rounded-full bg-blue-600 px-3 py-1 text-white">
+                  Monthly
+                </span>
+                <span className="px-3 py-1 text-slate-600">Yearly (Save 20%)</span>
+              </div>
+            </div>
+            <div className="mt-4 grid gap-3 md:grid-cols-4">
+              {homePricingPlans.map((plan) => (
                 <HomePricingCard key={plan.name} plan={plan} />
               ))}
             </div>
+            <p className="mt-3 text-[10px] text-slate-500">
+              All plans include cloud access, offline mode, backups and local support in
+              Laos.
+            </p>
           </div>
-          <div>
-            <h2 className="text-2xl font-black text-slate-950">Add-ons to Do More</h2>
-            <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
-              {addOns.slice(0, 5).map((item) => (
+          <div className="pt-6 lg:pt-0 lg:pl-7">
+            <h2 className="text-lg font-black text-slate-950">Add-ons to Do More</h2>
+            <p className="mt-1 text-xs text-slate-600">
+              Extend TJ POS with powerful add-ons.
+            </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+              {homeAddOns.map((item) => (
                 <HomeAddOnCard key={item.title} item={item} />
               ))}
             </div>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { IconBox, iconToneClass } from "../../../components/ui/icon-box";
-import type { AddOn } from "../types";
+import type { AddOn, HomeAddOn } from "../types";
 
 export function AddOnCard({ item }: { item: AddOn }) {
   return (
@@ -32,24 +32,38 @@ export function AddOnCard({ item }: { item: AddOn }) {
   );
 }
 
-export function HomeAddOnCard({ item }: { item: AddOn }) {
+export function HomeAddOnCard({ item }: { item: HomeAddOn }) {
   return (
-    <div className="rounded-lg border border-blue-100 bg-white p-3 shadow-sm">
+    <div
+      className={`rounded-md border bg-white p-2.5 text-center shadow-sm ${
+        item.variant === "view-all" ? "border-blue-200" : "border-blue-100"
+      }`}
+    >
       <span
-        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-md ring-1 ${iconToneClass(item.tone)}`}
+        className={`mx-auto flex h-8 w-8 shrink-0 items-center justify-center rounded-md ring-1 ${iconToneClass(item.tone)}`}
       >
-        <item.Icon className="h-4 w-4" />
+        <item.Icon className="h-3.5 w-3.5" />
       </span>
-      <h3 className="mt-2 min-h-8 text-xs font-black text-slate-950">{item.title}</h3>
-      <p className="mt-1 min-h-7 text-[10px] leading-4 text-slate-600">
+      <h3 className="mt-2 min-h-7 text-[11px] leading-4 font-black text-slate-950">
+        {item.title}
+      </h3>
+      <p className="mt-1 min-h-8 text-[9px] leading-4 text-slate-600">
         {item.description}
       </p>
-      <p className="mt-2 text-sm font-black whitespace-nowrap text-slate-950">
-        {item.price}
-        <span className="font700 text-[10px] text-slate-500"> /month</span>
-      </p>
-      <button className="font900 mt-2 h-7 w-full rounded-md border border-blue-300 text-[11px] text-blue-600">
-        Add
+      {item.price ? (
+        <p className="mt-1.5 text-sm font-black whitespace-nowrap text-slate-950">
+          {item.price}
+          <span className="font700 text-[10px] text-slate-500"> /month</span>
+        </p>
+      ) : null}
+      <button
+        className={`font900 mt-1.5 h-6 w-full rounded-md border text-[10px] ${
+          item.variant === "view-all"
+            ? "border-blue-600 bg-blue-600 text-white"
+            : "border-blue-300 bg-white text-blue-600"
+        }`}
+      >
+        {item.cta}
       </button>
     </div>
   );

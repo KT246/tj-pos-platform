@@ -9,6 +9,7 @@ import {
   Headphones,
   Hotel,
   LayoutDashboard,
+  LayoutGrid,
   MapPin,
   PackageCheck,
   ReceiptText,
@@ -17,6 +18,7 @@ import {
   ShoppingBag,
   ShoppingCart,
   Sparkles,
+  Star,
   Store,
   TabletSmartphone,
   TrendingUp,
@@ -29,6 +31,8 @@ import {
 import type {
   AddOn,
   FaqGroup,
+  HomeAddOn,
+  HomePricingPlan,
   IconCard,
   PosType,
   PricingPlan,
@@ -164,6 +168,45 @@ export const coreFeatures: IconCard[] = [
     title: "Payment Methods",
     description: "Cash, card, QR and digital wallet setup.",
     Icon: WalletCards,
+    tone: "blue"
+  }
+];
+
+export const homeCoreFeatures: IconCard[] = [
+  {
+    title: "Sales & Billing",
+    description: "Fast billing, multiple payment methods and receipts.",
+    Icon: BriefcaseBusiness,
+    tone: "blue"
+  },
+  {
+    title: "Inventory Management",
+    description: "Real-time stock tracking, alerts and adjustments.",
+    Icon: PackageCheck,
+    tone: "teal"
+  },
+  {
+    title: "Reports & Analytics",
+    description: "Insightful reports to track performance anytime.",
+    Icon: TrendingUp,
+    tone: "green"
+  },
+  {
+    title: "Customer Management",
+    description: "Build customer profiles and reward loyalty.",
+    Icon: Users,
+    tone: "orange"
+  },
+  {
+    title: "Employee Management",
+    description: "Manage staff, roles, permissions and shifts.",
+    Icon: User,
+    tone: "purple"
+  },
+  {
+    title: "Multi-Store Management",
+    description: "Centralized control for multiple locations.",
+    Icon: Store,
     tone: "blue"
   }
 ];
@@ -315,6 +358,85 @@ export const pricingPlans: PricingPlan[] = [
     ],
     cta: "Contact Sales",
     featured: false
+  }
+];
+
+export const homePricingPlans: HomePricingPlan[] = [
+  {
+    name: "Starter",
+    subtitle: "For small businesses",
+    price: "K 290,000",
+    period: "/month",
+    features: ["1 Store", "2 Users", "Basic Features"],
+    cta: "Get Started"
+  },
+  {
+    name: "Professional",
+    subtitle: "For growing businesses",
+    price: "K 590,000",
+    period: "/month",
+    features: ["Up to 3 Stores", "5 Users", "Advanced Features"],
+    cta: "Get Started",
+    featured: true,
+    badge: "Most Popular"
+  },
+  {
+    name: "Business",
+    subtitle: "For established businesses",
+    price: "K 990,000",
+    period: "/month",
+    features: ["Up to 10 Stores", "15 Users", "Advanced Reports"],
+    cta: "Get Started"
+  },
+  {
+    name: "Enterprise",
+    subtitle: "For large organizations",
+    price: "Custom Pricing",
+    features: ["Unlimited Stores", "Unlimited Users", "Custom Integrations"],
+    cta: "Contact Sales"
+  }
+];
+
+export const homeAddOns: HomeAddOn[] = [
+  {
+    title: "Loyalty Program",
+    description: "Reward your customers and increase retention.",
+    price: "K 90,000",
+    cta: "Add",
+    Icon: Star,
+    tone: "orange"
+  },
+  {
+    title: "Online Ordering",
+    description: "Let customers order online and pay easily.",
+    price: "K 120,000",
+    cta: "Add",
+    Icon: ShoppingCart,
+    tone: "green"
+  },
+  {
+    title: "Kitchen Display (KDS)",
+    description: "Improve kitchen efficiency and order accuracy.",
+    price: "K 150,000",
+    cta: "Add",
+    Icon: LayoutDashboard,
+    tone: "purple"
+  },
+  {
+    title: "E-Invoicing",
+    description: "Create e-invoices compliant with regulations.",
+    price: "K 80,000",
+    cta: "Add",
+    Icon: ReceiptText,
+    tone: "orange"
+  },
+  {
+    title: "View All Add-ons",
+    description: "Explore more integrations and tools.",
+    cta: "View All",
+    Icon: LayoutGrid,
+    tone: "blue",
+    variant: "view-all"
   }
 ];
 

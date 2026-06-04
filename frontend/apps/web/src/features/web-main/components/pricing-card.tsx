@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Check } from "lucide-react";
 
-import { IconBox, iconToneClass } from "../../../components/ui/icon-box";
-import type { PricingPlan } from "../types";
+import { IconBox } from "../../../components/ui/icon-box";
+import type { HomePricingPlan, PricingPlan } from "../types";
 
 export function PricingCard({ plan }: { plan: PricingPlan }) {
   return (
@@ -53,55 +53,58 @@ export function PricingCard({ plan }: { plan: PricingPlan }) {
   );
 }
 
-export function HomePricingCard({ plan }: { plan: PricingPlan }) {
+export function HomePricingCard({ plan }: { plan: HomePricingPlan }) {
   return (
     <div
-      className={`relative rounded-lg border bg-white p-3 shadow-sm ${
-        plan.featured ? "border-blue-500" : "border-blue-100"
+      className={`relative rounded-md border bg-white p-2.5 shadow-sm ${
+        plan.featured ? "border-emerald-400 shadow-emerald-50" : "border-blue-100"
       }`}
     >
       {plan.featured ? (
-        <div className="font900 absolute -top-3 right-3 rounded-md bg-blue-600 px-3 py-1 text-[10px] text-white">
-          Most Popular
+        <div className="font900 absolute -top-2.5 right-3 rounded-md bg-emerald-500 px-3 py-1 text-[9px] text-white">
+          {plan.badge}
         </div>
       ) : null}
-      <span
-        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-md ring-1 ${iconToneClass(
-          plan.featured ? "teal" : "blue"
-        )}`}
+      <h3
+        className={`text-sm font-black ${
+          plan.featured ? "text-emerald-600" : "text-blue-600"
+        }`}
       >
-        <plan.Icon className="h-4 w-4" />
-      </span>
-      <h3 className="mt-2 text-sm font-black text-slate-950">{plan.name}</h3>
-      <p className="mt-1 min-h-6 text-[10px] leading-4 text-slate-600">
-        {plan.subtitle}
-      </p>
-      <p className="mt-2 text-lg font-black whitespace-nowrap text-blue-600">
+        {plan.name}
+      </h3>
+      <p className="mt-0.5 text-[9px] leading-3 text-slate-500">{plan.subtitle}</p>
+      <p
+        className={`mt-2 text-base font-black whitespace-nowrap ${
+          plan.featured ? "text-emerald-600" : "text-blue-600"
+        }`}
+      >
         {plan.price}
-        {plan.price !== "Custom" ? (
-          <span className="font700 text-[10px] text-slate-500"> /month</span>
+        {plan.period ? (
+          <span className="font700 text-[10px] text-slate-500"> {plan.period}</span>
         ) : null}
       </p>
       <ul className="mt-2 space-y-1">
-        {plan.features.slice(0, 3).map((feature) => (
+        {plan.features.map((feature) => (
           <li
             key={feature}
-            className="font800 flex items-center gap-1.5 text-[10px] text-slate-700"
+            className="font800 flex items-center gap-1.5 text-[9px] text-slate-700"
           >
-            <Check className="h-3 w-3 text-blue-600" />
+            <Check
+              className={`h-2.5 w-2.5 ${plan.featured ? "text-emerald-500" : "text-blue-600"}`}
+            />
             {feature}
           </li>
         ))}
       </ul>
       <Link
         href={plan.name === "Enterprise" ? "/contact" : "/request-demo"}
-        className={`font900 mt-3 flex h-7 items-center justify-center rounded-md border text-[11px] ${
+        className={`font900 mt-2.5 flex h-6 items-center justify-center rounded-md border text-[9px] ${
           plan.featured
-            ? "border-blue-600 bg-blue-600 text-white"
+            ? "border-emerald-500 bg-emerald-500 text-white"
             : "border-blue-300 bg-white text-blue-600"
         }`}
       >
-        {plan.name === "Enterprise" ? "Contact Sales" : "Get Started"}
+        {plan.cta}
       </Link>
     </div>
   );
