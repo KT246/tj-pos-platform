@@ -456,6 +456,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = language === "lo" ? "lo" : "en";
+    document.body.classList.toggle("language-lo", language === "lo");
+    document.body.classList.toggle("language-en", language === "en");
     window.localStorage.setItem(STORAGE_KEY, language);
   }, [language]);
 
