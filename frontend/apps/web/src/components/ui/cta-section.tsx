@@ -11,7 +11,7 @@ export function CTASection({
   primaryLabel = "Request Demo",
   primaryHref = "/request-demo",
   secondaryLabel = "Contact TJ POS",
-  secondaryHref = "/contact"
+  secondaryHref = "/#contact"
 }: {
   title?: string;
   description?: string;

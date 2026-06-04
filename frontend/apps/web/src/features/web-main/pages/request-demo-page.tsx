@@ -165,7 +165,7 @@ export function RequestDemoPage() {
             </div>
           </div>
           <div className="mt-4 flex gap-3">
-            <PrimaryButton href="/contact">Contact TJ POS</PrimaryButton>
+            <PrimaryButton href="/#contact">Contact TJ POS</PrimaryButton>
             <SecondaryButton href="#">Call Us</SecondaryButton>
           </div>
         </div>

@@ -47,7 +47,7 @@ export function PricingCard({ plan }: { plan: PricingPlan }) {
         ))}
       </ul>
       <Link
-        href={plan.name === "Enterprise" ? "/contact" : "/request-demo"}
+        href={plan.name === "Enterprise" ? "/#contact" : "/request-demo"}
         className={`font900 mt-5 flex h-9 items-center justify-center rounded-md border text-xs ${
           plan.featured
             ? "border-blue-600 bg-blue-600 text-white"
@@ -106,7 +106,7 @@ export function HomePricingCard({ plan }: { plan: HomePricingPlan }) {
         ))}
       </ul>
       <Link
-        href={plan.name === "Enterprise" ? "/contact" : "/request-demo"}
+        href={plan.name === "Enterprise" ? "/#contact" : "/request-demo"}
         className={`font900 mt-2.5 flex h-6 items-center justify-center rounded-md border text-[9px] ${
           plan.featured
             ? "border-emerald-500 bg-emerald-500 text-white"

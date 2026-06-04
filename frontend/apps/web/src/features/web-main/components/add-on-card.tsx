@@ -26,7 +26,7 @@ export function AddOnCard({ item }: { item: AddOn }) {
           {t("Add")}
         </button>
         <Link
-          href="/add-ons"
+          href="/#add-ons"
           className="font900 inline-flex items-center gap-1 text-xs text-blue-600"
         >
           {t("More")}
