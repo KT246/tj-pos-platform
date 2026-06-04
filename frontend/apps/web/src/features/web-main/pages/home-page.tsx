@@ -75,7 +75,7 @@ export function HomePage() {
               <h2 className="text-2xl font-black text-slate-950">
                 {t("Built for Every Business Type")}
               </h2>
-              <p className="mt-2 text-sm text-slate-600">
+              <p className="mt-2 text-sm leading-6 text-slate-600">
                 {t("Powerful features tailored to how your business works.")}
               </p>
             </div>
@@ -104,6 +104,11 @@ export function HomePage() {
           <h2 className="text-2xl font-black text-slate-950">
             {t("Powerful Features to Grow Your Business")}
           </h2>
+          <p className="mt-2 text-sm leading-6 text-slate-600">
+            {t(
+              "Powerful core features to run your business smoothly. Simple to use. Easy to manage. Built to help you grow."
+            )}
+          </p>
           <div className="mt-7 grid gap-x-7 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
             {homeCoreFeatures.map((feature) => (
               <HomeFeatureItem key={feature.title} feature={feature} />
@@ -123,7 +128,7 @@ export function HomePage() {
               <h2 className="text-2xl font-black text-slate-950">
                 {t("Simple Packages, One Powerful Platform")}
               </h2>
-              <p className="mt-2 text-sm text-slate-600">
+              <p className="mt-2 text-sm leading-6 text-slate-600">
                 {t("Choose the plan that fits your business.")}
               </p>
             </div>
@@ -158,7 +163,7 @@ export function HomePage() {
           <h2 className="text-2xl font-black text-slate-950">
             {t("Add-ons to Do More")}
           </h2>
-          <p className="mt-2 text-sm text-slate-600">
+          <p className="mt-2 text-sm leading-6 text-slate-600">
             {t("Extend TJ POS with powerful add-ons.")}
           </p>
           <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
@@ -235,7 +240,9 @@ export function HomePage() {
             <div>
               <h2 className="text-2xl font-black text-slate-950">{t("FAQ")}</h2>
               <p className="mt-2 text-sm leading-6 text-slate-600">
-                {t("View FAQ/Help")}
+                {t(
+                  "Find answers to common questions about TJ POS. Everything you need to know to run your business with confidence."
+                )}
               </p>
               <div className="mt-5">
                 <PrimaryButton href="/request-demo">Request Demo</PrimaryButton>
@@ -272,7 +279,7 @@ export function HomePage() {
             <h2 className="text-2xl font-black text-blue-700">
               {t("Ready to Transform Your Business?")}
             </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
               {t(
                 "Let us show you how TJ POS can help you sell more and manage easier."
               )}

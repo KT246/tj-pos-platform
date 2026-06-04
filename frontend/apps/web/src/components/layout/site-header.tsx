@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, ChevronDown, Globe } from "lucide-react";
-import { useState, type MouseEvent } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 
 import { revealSection, scrollToSection } from "../animations/animated-content";
 import type { ActiveNav } from "../../lib/routes";
@@ -11,18 +11,127 @@ import { navItems } from "../../lib/routes";
 import { useI18n, type Language } from "../../lib/i18n";
 import { Logo } from "./logo";
 
+const ACTIVE_NAV_STORAGE_KEY = "tj-pos-web-active-section";
+
 const languageOptions: { value: Language; label: string; shortLabel: string }[] = [
   { value: "en", label: "English", shortLabel: "EN" },
   { value: "lo", label: "ລາວ", shortLabel: "ລາວ" }
 ];
 
+function getNavItemBySection(sectionId: string) {
+  return navItems.find((item) => item.sectionId === sectionId);
+}
+
 export function SiteHeader({ active }: { active: ActiveNav }) {
   const pathname = usePathname();
   const { language, setLanguage, t } = useI18n();
+  const [currentActive, setCurrentActive] = useState<ActiveNav>(active);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const currentLanguage = languageOptions.find((item) => item.value === language);
 
+  useEffect(() => {
+    if (pathname !== "/") {
+      return undefined;
+    }
+
+    let frameId = 0;
+
+    const setActiveSection = (
+      sectionId: string,
+      options: { updateHash?: boolean } = {}
+    ) => {
+      const item = getNavItemBySection(sectionId);
+
+      if (!item) {
+        return;
+      }
+
+      setCurrentActive(item.label);
+      window.localStorage.setItem(ACTIVE_NAV_STORAGE_KEY, sectionId);
+
+      if (options.updateHash && window.location.hash !== `#${sectionId}`) {
+        window.history.replaceState(null, "", `/#${sectionId}`);
+      }
+    };
+
+    const setActiveFromHash = () => {
+      const sectionId = window.location.hash.slice(1);
+
+      if (sectionId) {
+        setActiveSection(sectionId);
+      }
+    };
+
+    const setActiveFromScroll = (updateHash = false) => {
+      window.cancelAnimationFrame(frameId);
+      frameId = window.requestAnimationFrame(() => {
+        const targetLine = 96;
+        const activeEntry = navItems
+          .map((item) => {
+            const element = document.getElementById(item.sectionId);
+
+            if (!element) {
+              return null;
+            }
+
+            return { item, rect: element.getBoundingClientRect() };
+          })
+          .filter((entry) => entry && entry.rect.bottom > targetLine)
+          .find((entry) => entry!.rect.top <= targetLine);
+
+        if (activeEntry) {
+          setActiveSection(activeEntry.item.sectionId, { updateHash });
+          return;
+        }
+
+        const firstVisible = navItems.find((item) => {
+          const element = document.getElementById(item.sectionId);
+
+          if (!element) {
+            return false;
+          }
+
+          return element.getBoundingClientRect().bottom > targetLine;
+        });
+
+        if (firstVisible) {
+          setActiveSection(firstVisible.sectionId, { updateHash });
+        }
+      });
+    };
+    const handleScroll = () => setActiveFromScroll(true);
+
+    setActiveFromHash();
+    if (!window.location.hash) {
+      const storedSectionId = window.localStorage.getItem(ACTIVE_NAV_STORAGE_KEY);
+
+      if (window.scrollY > 100 && storedSectionId) {
+        setActiveSection(storedSectionId);
+      } else {
+        setActiveFromScroll();
+      }
+    }
+
+    window.addEventListener("hashchange", setActiveFromHash);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      window.removeEventListener("hashchange", setActiveFromHash);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [active, pathname]);
+
+  const displayActive = pathname === "/" ? currentActive : active;
+
   const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    const item = getNavItemBySection(sectionId);
+
+    if (item) {
+      setCurrentActive(item.label);
+      window.localStorage.setItem(ACTIVE_NAV_STORAGE_KEY, sectionId);
+    }
+
     if (pathname !== "/") {
       return;
     }
@@ -47,13 +156,13 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
               href={item.href}
               onClick={(event) => handleNavClick(event, item.sectionId)}
               className={`font800 relative flex h-full items-center gap-1 px-4 text-sm transition ${
-                active === item.label
+                displayActive === item.label
                   ? "text-blue-600"
                   : "text-slate-900 hover:text-blue-600"
               }`}
             >
               {t(item.label)}
-              {active === item.label ? (
+              {displayActive === item.label ? (
                 <span className="absolute inset-x-4 bottom-0 h-1 rounded-t bg-blue-600" />
               ) : null}
             </Link>
