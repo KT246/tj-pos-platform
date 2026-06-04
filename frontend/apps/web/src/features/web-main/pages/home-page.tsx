@@ -59,6 +59,7 @@ export function HomePage() {
           secondaryHref="/#features"
           secondaryLabel="Explore Features"
           secondaryIcon={<Info className="h-4 w-4" />}
+          animateTitle
           showTrust
         >
           <DashboardMockup />

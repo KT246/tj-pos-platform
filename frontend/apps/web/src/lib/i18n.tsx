@@ -417,6 +417,7 @@ const I18nContext = createContext<I18nContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>("en");
+  const [hasLoadedLanguage, setHasLoadedLanguage] = useState(false);
 
   useEffect(() => {
     const frameId = window.requestAnimationFrame(() => {
@@ -425,6 +426,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       if (stored === "lo" || stored === "en") {
         setLanguageState(stored);
       }
+
+      setHasLoadedLanguage(true);
     });
 
     return () => window.cancelAnimationFrame(frameId);
@@ -434,8 +437,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     document.documentElement.lang = language === "lo" ? "lo" : "en";
     document.body.classList.toggle("language-lo", language === "lo");
     document.body.classList.toggle("language-en", language === "en");
-    window.localStorage.setItem(STORAGE_KEY, language);
-  }, [language]);
+
+    if (hasLoadedLanguage) {
+      window.localStorage.setItem(STORAGE_KEY, language);
+    }
+  }, [hasLoadedLanguage, language]);
 
   const setLanguage = useCallback((nextLanguage: Language) => {
     setLanguageState(nextLanguage);
