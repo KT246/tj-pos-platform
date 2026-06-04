@@ -46,27 +46,6 @@ export type PricingPlan = {
   featured: boolean;
 };
 
-export type HomePricingPlan = {
-  name: string;
-  subtitle: string;
-  price: string;
-  period?: string;
-  features: string[];
-  cta: string;
-  featured?: boolean;
-  badge?: string;
-};
-
-export type HomeAddOn = {
-  title: string;
-  description: string;
-  price?: string;
-  cta: string;
-  Icon: LucideIcon;
-  tone: IconTone;
-  variant?: "default" | "view-all";
-};
-
 export type FaqGroup = {
   title: string;
   Icon: LucideIcon;

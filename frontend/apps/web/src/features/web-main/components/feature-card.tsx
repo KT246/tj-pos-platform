@@ -27,18 +27,16 @@ export function HomeFeatureItem({ feature }: { feature: IconCard }) {
   const { t } = useI18n();
 
   return (
-    <div className="grid grid-cols-[38px_1fr] gap-3">
+    <div className="flex h-full flex-col items-center rounded-lg border border-blue-100 bg-white p-4 text-center shadow-sm">
       <span
-        className={`flex h-8 w-8 items-center justify-center rounded-md ring-1 ${iconToneClass(feature.tone)}`}
+        className={`flex h-10 w-10 items-center justify-center rounded-md ring-1 ${iconToneClass(feature.tone)}`}
       >
-        <feature.Icon className="h-3.5 w-3.5" />
+        <feature.Icon className="h-5 w-5" />
       </span>
-      <div>
-        <h3 className="font900 text-xs text-slate-950">{t(feature.title)}</h3>
-        <p className="mt-1 text-[10px] leading-4 text-slate-600">
-          {t(feature.description)}
-        </p>
-      </div>
+      <h3 className="font900 mt-3 text-sm text-slate-950">{t(feature.title)}</h3>
+      <p className="mt-2 min-h-10 text-xs leading-5 text-slate-600">
+        {t(feature.description)}
+      </p>
     </div>
   );
 }

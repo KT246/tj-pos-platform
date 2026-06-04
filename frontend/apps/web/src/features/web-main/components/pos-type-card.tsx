@@ -65,25 +65,33 @@ export function HomePosTypeCard({ item }: { item: PosType }) {
   const { t } = useI18n();
 
   return (
-    <div className="rounded-lg border border-blue-100 bg-white p-2 shadow-sm">
-      <div className="mb-2 flex items-center gap-2">
+    <div className="flex h-full min-h-[300px] flex-col rounded-lg border border-blue-100 bg-white p-3 text-center shadow-sm">
+      <div className="mb-3 flex flex-col items-center gap-2">
         <span
-          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-md ring-1 ${iconToneClass(item.tone)}`}
+          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-md ring-1 ${iconToneClass(item.tone)}`}
         >
-          <item.Icon className="h-3.5 w-3.5" />
+          <item.Icon className="h-[18px] w-[18px]" />
         </span>
-        <h3 className="text-sm font-black text-slate-950">{t(item.shortTitle)}</h3>
+        <h3 className="text-base font-black text-slate-950">{t(item.shortTitle)}</h3>
       </div>
       <div
-        className="h-[52px] rounded-md border border-blue-50"
+        className="h-[64px] rounded-md border border-blue-50"
         style={{ background: item.visual }}
       />
-      <p className="mt-2 min-h-8 text-[10px] leading-4 text-slate-600">
-        {t(item.bullets[0])}.
+      <p className="mt-3 min-h-12 text-xs leading-5 text-slate-600">
+        {t(item.description)}
       </p>
+      <ul className="mt-3 flex-1 space-y-1.5 text-left">
+        {item.bullets.map((bullet) => (
+          <li key={bullet} className="font700 flex gap-2 text-[11px] text-slate-700">
+            <Check className="mt-0.5 h-3 w-3 shrink-0 text-blue-600" />
+            <span>{t(bullet)}</span>
+          </li>
+        ))}
+      </ul>
       <Link
         href="/#pos-types"
-        className="font900 mt-1.5 inline-flex items-center gap-1 text-[10px] text-blue-600"
+        className="font900 mt-4 inline-flex items-center justify-center gap-1 text-xs text-blue-600"
       >
         {t("Learn more")}
         <ArrowRight className="h-3.5 w-3.5" />

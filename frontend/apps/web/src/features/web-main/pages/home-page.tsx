@@ -12,13 +12,13 @@ import {
 import { PageShell } from "../../../components/layout/page-shell";
 import { PrimaryButton } from "../../../components/ui/buttons";
 import { useI18n } from "../../../lib/i18n";
-import { homeAddOns, homeCoreFeatures, homePricingPlans, posTypes } from "../data";
-import { HomeAddOnCard } from "../components/add-on-card";
+import { addOns, homeCoreFeatures, posTypes, pricingPlans } from "../data";
+import { AddOnCard } from "../components/add-on-card";
 import { DashboardMockup } from "../components/dashboard-mockup";
 import { HomeFeatureItem } from "../components/feature-card";
 import { HeroShell } from "../components/hero-shell";
 import { HomePosTypeCard } from "../components/pos-type-card";
-import { HomePricingCard } from "../components/pricing-card";
+import { PricingCard } from "../components/pricing-card";
 
 export function HomePage() {
   const { t } = useI18n();
@@ -110,7 +110,7 @@ export function HomePage() {
               "Powerful core features to run your business smoothly. Simple to use. Easy to manage. Built to help you grow."
             )}
           </p>
-          <div className="mt-7 grid gap-x-7 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-7 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             {homeCoreFeatures.map((feature) => (
               <HomeFeatureItem key={feature.title} feature={feature} />
             ))}
@@ -133,18 +133,10 @@ export function HomePage() {
                 {t("Choose the plan that fits your business.")}
               </p>
             </div>
-            <div className="font900 hidden items-center rounded-full border border-blue-100 bg-slate-50 p-0.5 text-xs md:flex">
-              <span className="rounded-full bg-blue-600 px-4 py-1.5 text-white">
-                {t("Monthly")}
-              </span>
-              <span className="px-4 py-1.5 text-slate-600">
-                {t("Yearly (Save 20%)")}
-              </span>
-            </div>
           </div>
-          <div className="mt-6 grid gap-3 md:grid-cols-4">
-            {homePricingPlans.map((plan) => (
-              <HomePricingCard key={plan.name} plan={plan} />
+          <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {pricingPlans.map((plan) => (
+              <PricingCard key={plan.name} plan={plan} />
             ))}
           </div>
           <p className="mt-4 text-xs text-slate-500">
@@ -167,9 +159,9 @@ export function HomePage() {
           <p className="mt-2 text-sm leading-6 text-slate-600">
             {t("Extend TJ POS with powerful add-ons.")}
           </p>
-          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-            {homeAddOns.map((item) => (
-              <HomeAddOnCard key={item.title} item={item} />
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {addOns.map((item) => (
+              <AddOnCard key={item.title} item={item} />
             ))}
           </div>
         </section>
