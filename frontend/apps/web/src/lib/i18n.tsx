@@ -22,13 +22,11 @@ const lo: Record<string, string> = {
   "Add-ons": "ໂມດູນເສີມ",
   "FAQ/Help": "ຄຳຖາມ/ຊ່ວຍເຫຼືອ",
   Contact: "ຕິດຕໍ່",
-  Login: "ເຂົ້າລະບົບ",
   "Request Demo": "ຂໍດູເດໂມ",
   "Contact TJ POS": "ຕິດຕໍ່ TJ POS",
   "Explore Features": "ເບິ່ງຟີເຈີ",
   "Explore Pricing": "ເບິ່ງລາຄາ",
   "View FAQ/Help": "ເບິ່ງຄຳຖາມ/ຊ່ວຍເຫຼືອ",
-  "Back to website": "ກັບໄປໜ້າເວັບ",
 
   "#1 POS Solution in Laos": "ໂຊລູຊັນ POS ອັນດັບ 1 ໃນລາວ",
   "Run Your Business Smarter with": "ບໍລິຫານທຸລະກິດໃຫ້ສະຫຼາດຂຶ້ນດ້ວຍ",
@@ -289,28 +287,6 @@ const lo: Record<string, string> = {
     "ຜູ້ຊ່ຽວຊານພ້ອມຊ່ວຍຊອກຫາໂຊລູຊັນທີ່ດີທີ່ສຸດ.",
   "Call Us": "ໂທຫາພວກເຮົາ",
   "Ready to see TJ POS in action?": "ພ້ອມເບິ່ງ TJ POS ໃນການໃຊ້ງານຈິງບໍ?",
-
-  "Login to TJ POS": "ເຂົ້າລະບົບ TJ POS",
-  "Access Platform Admin and Business Admin from one secure entry point.":
-    "ເຂົ້າໃຊ້ Platform Admin ແລະ Business Admin ຈາກຈຸດເຂົ້າທີ່ປອດໄພຈຸດດຽວ.",
-  "Forgot password?": "ລືມລະຫັດຜ່ານ?",
-  "Reset Your Password": "ຣີເຊັດລະຫັດຜ່ານ",
-  "Enter your admin email and we will send reset instructions.":
-    "ປ້ອນອີເມວແອດມິນ ແລະ ພວກເຮົາຈະສົ່ງຄຳແນະນຳການຣີເຊັດ.",
-  "Send Reset Link": "ສົ່ງລິ້ງຣີເຊັດ",
-  "Back to login": "ກັບໄປເຂົ້າລະບົບ",
-  "Create New Password": "ສ້າງລະຫັດຜ່ານໃໝ່",
-  "Set a new secure password for your TJ POS admin account.":
-    "ຕັ້ງລະຫັດຜ່ານໃໝ່ທີ່ປອດໄພສຳລັບບັນຊີແອດມິນ TJ POS.",
-  "Update Password": "ອັບເດດລະຫັດຜ່ານ",
-  "Secure Admin Access": "ເຂົ້າໃຊ້ແອດມິນຢ່າງປອດໄພ",
-  "Smart POS for": "Smart POS ສຳລັບ",
-  "Manage your platform, businesses, branches and POS operations with a clean, reliable admin experience.":
-    "ບໍລິຫານແພລດຟອມ, ທຸລະກິດ, ສາຂາ ແລະ ການໃຊ້ POS ດ້ວຍປະສົບການແອດມິນທີ່ສະອາດ ແລະ ເຊື່ອຖືໄດ້.",
-  Password: "ລະຫັດຜ່ານ",
-  "Enter your password": "ປ້ອນລະຫັດຜ່ານ",
-  "Confirm Password": "ຢືນຢັນລະຫັດຜ່ານ",
-  "Confirm your password": "ຢືນຢັນລະຫັດຜ່ານ",
 
   Dashboard: "ແດຊບອດ",
   Sales: "ການຂາຍ",

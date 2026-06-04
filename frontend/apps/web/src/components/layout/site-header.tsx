@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ChevronDown, Globe, User } from "lucide-react";
+import { ArrowRight, ChevronDown, Globe } from "lucide-react";
 import { useState } from "react";
 
 import type { ActiveNav } from "../../lib/routes";
@@ -77,13 +77,6 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
               </div>
             ) : null}
           </div>
-          <Link
-            href="/login"
-            className="font800 hidden h-9 items-center gap-2 rounded-md border border-blue-300 bg-white px-5 text-sm text-blue-600 md:flex"
-          >
-            <User className="h-4 w-4" />
-            {t("Login")}
-          </Link>
           <Link
             href="/request-demo"
             className="font800 inline-flex h-9 items-center gap-2 rounded-md bg-blue-600 px-5 text-sm text-white shadow-sm"
