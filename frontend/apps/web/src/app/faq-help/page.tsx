@@ -1,4 +1,4 @@
-import { FaqHelpPage } from "../../components/web-main";
+import { FaqHelpPage } from "../../features/web-main/pages/faq-help-page";
 
 export default function Page() {
   return <FaqHelpPage />;

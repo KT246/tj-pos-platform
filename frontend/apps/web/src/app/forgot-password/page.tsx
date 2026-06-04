@@ -1,4 +1,4 @@
-import { AuthPage } from "../../components/web-main";
+import { AuthPage } from "../../features/auth/auth-page";
 
 export default function Page() {
   return <AuthPage mode="forgot" />;
