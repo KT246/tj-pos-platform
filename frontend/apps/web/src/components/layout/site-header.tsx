@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowRight, ChevronDown, Globe } from "lucide-react";
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 
+import { revealSection, scrollToSection } from "../animations/animated-content";
 import type { ActiveNav } from "../../lib/routes";
 import { navItems } from "../../lib/routes";
 import { useI18n, type Language } from "../../lib/i18n";
@@ -15,9 +17,24 @@ const languageOptions: { value: Language; label: string; shortLabel: string }[] 
 ];
 
 export function SiteHeader({ active }: { active: ActiveNav }) {
+  const pathname = usePathname();
   const { language, setLanguage, t } = useI18n();
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const currentLanguage = languageOptions.find((item) => item.value === language);
+
+  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    if (pathname !== "/") {
+      return;
+    }
+
+    if (!scrollToSection(sectionId)) {
+      return;
+    }
+
+    event.preventDefault();
+    window.history.pushState(null, "", `/#${sectionId}`);
+    revealSection(sectionId);
+  };
 
   return (
     <header className="sticky top-0 z-40 border-b border-blue-100 bg-white/95 backdrop-blur">
@@ -28,6 +45,7 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
             <Link
               key={item.label}
               href={item.href}
+              onClick={(event) => handleNavClick(event, item.sectionId)}
               className={`font800 relative flex h-full items-center gap-1 px-4 text-sm transition ${
                 active === item.label
                   ? "text-blue-600"

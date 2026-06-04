@@ -2,7 +2,13 @@
 
 import Link from "next/link";
 import { ArrowRight, ChevronDown, Info } from "lucide-react";
+import { useEffect } from "react";
 
+import {
+  AnimatedContent,
+  revealSection,
+  scrollToSection
+} from "../../../components/animations/animated-content";
 import { PageShell } from "../../../components/layout/page-shell";
 import { PrimaryButton } from "../../../components/ui/buttons";
 import { useI18n } from "../../../lib/i18n";
@@ -17,22 +23,49 @@ import { HomePricingCard } from "../components/pricing-card";
 export function HomePage() {
   const { t } = useI18n();
 
+  useEffect(() => {
+    const scrollToHash = () => {
+      const sectionId = window.location.hash.slice(1);
+
+      if (!sectionId) {
+        return;
+      }
+
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          if (!scrollToSection(sectionId)) {
+            return;
+          }
+
+          revealSection(sectionId, 350);
+        });
+      });
+    };
+
+    scrollToHash();
+    window.addEventListener("hashchange", scrollToHash);
+
+    return () => window.removeEventListener("hashchange", scrollToHash);
+  }, []);
+
   return (
     <PageShell active="Home">
-      <HeroShell
-        badge="#1 POS Solution in Laos"
-        title="Run Your Business Smarter with"
-        accent="TJ POS"
-        description="A complete, cloud-based POS platform for Retail, Cafe, Restaurant, Beauty and Hospitality businesses. Easy to use. Powerful features. Built for Laos."
-        secondaryHref="/features"
-        secondaryLabel="Explore Features"
-        secondaryIcon={<Info className="h-4 w-4" />}
-        showTrust
-      >
-        <DashboardMockup />
-      </HeroShell>
+      <AnimatedContent id="home" className="scroll-mt-20" distance={28}>
+        <HeroShell
+          badge="#1 POS Solution in Laos"
+          title="Run Your Business Smarter with"
+          accent="TJ POS"
+          description="A complete, cloud-based POS platform for Retail, Cafe, Restaurant, Beauty and Hospitality businesses. Easy to use. Powerful features. Built for Laos."
+          secondaryHref="/#features"
+          secondaryLabel="Explore Features"
+          secondaryIcon={<Info className="h-4 w-4" />}
+          showTrust
+        >
+          <DashboardMockup />
+        </HeroShell>
+      </AnimatedContent>
       <section className="mx-auto grid max-w-[1320px] gap-0 px-6 py-4 lg:grid-cols-[1fr_1fr] lg:divide-x lg:divide-blue-100 lg:px-8">
-        <div className="lg:pr-7">
+        <AnimatedContent id="pos-types" className="scroll-mt-20 lg:pr-7" distance={34}>
           <h2 className="text-2xl font-black text-slate-950">
             {t("Built for Every Business Type")}
           </h2>
@@ -53,8 +86,13 @@ export function HomePage() {
               <ArrowRight className="h-3 w-3" />
             </Link>
           </div>
-        </div>
-        <div className="pt-7 lg:pt-0 lg:pl-7">
+        </AnimatedContent>
+        <AnimatedContent
+          id="features"
+          className="scroll-mt-20 pt-7 lg:pt-0 lg:pl-7"
+          distance={34}
+          delay={0.04}
+        >
           <h2 className="text-2xl font-black text-slate-950">
             {t("Powerful Features to Grow Your Business")}
           </h2>
@@ -63,11 +101,11 @@ export function HomePage() {
               <HomeFeatureItem key={feature.title} feature={feature} />
             ))}
           </div>
-        </div>
+        </AnimatedContent>
       </section>
       <section className="border-y border-blue-100 bg-white py-3">
         <div className="mx-auto grid max-w-[1320px] gap-0 px-6 lg:grid-cols-[1fr_1fr] lg:divide-x lg:divide-blue-100 lg:px-8">
-          <div className="lg:pr-7">
+          <AnimatedContent id="pricing" className="scroll-mt-20 lg:pr-7" distance={34}>
             <div className="flex items-start justify-between gap-4">
               <div>
                 <h2 className="text-lg font-black text-slate-950">
@@ -96,8 +134,13 @@ export function HomePage() {
                 "All plans include cloud access, offline mode, backups and local support in Laos."
               )}
             </p>
-          </div>
-          <div className="pt-6 lg:pt-0 lg:pl-7">
+          </AnimatedContent>
+          <AnimatedContent
+            id="add-ons"
+            className="scroll-mt-20 pt-6 lg:pt-0 lg:pl-7"
+            distance={34}
+            delay={0.04}
+          >
             <h2 className="text-lg font-black text-slate-950">
               {t("Add-ons to Do More")}
             </h2>
@@ -109,11 +152,11 @@ export function HomePage() {
                 <HomeAddOnCard key={item.title} item={item} />
               ))}
             </div>
-          </div>
+          </AnimatedContent>
         </div>
       </section>
       <section className="mx-auto grid max-w-[1320px] gap-6 px-6 py-5 lg:grid-cols-[0.95fr_1fr_0.85fr_0.85fr] lg:px-8">
-        <div>
+        <AnimatedContent className="scroll-mt-20" distance={30}>
           <h2 className="text-xl font-black text-slate-950">
             {t("Trusted by Businesses Across Laos")}
           </h2>
@@ -134,8 +177,8 @@ export function HomePage() {
               </div>
             ))}
           </div>
-        </div>
-        <div>
+        </AnimatedContent>
+        <AnimatedContent className="scroll-mt-20" distance={30} delay={0.04}>
           <h2 className="text-xl font-black text-slate-950">
             {t("What Our Customers Say")}
           </h2>
@@ -163,8 +206,13 @@ export function HomePage() {
               </div>
             ))}
           </div>
-        </div>
-        <div>
+        </AnimatedContent>
+        <AnimatedContent
+          id="faq-help"
+          className="scroll-mt-20"
+          distance={30}
+          delay={0.08}
+        >
           <h2 className="text-xl font-black text-slate-950">{t("FAQ")}</h2>
           <div className="mt-5 space-y-2">
             {[
@@ -186,8 +234,13 @@ export function HomePage() {
           <div className="mt-5">
             <PrimaryButton href="/request-demo">Request Demo</PrimaryButton>
           </div>
-        </div>
-        <div className="rounded-lg border border-blue-200 bg-blue-50 p-5">
+        </AnimatedContent>
+        <AnimatedContent
+          id="contact"
+          className="scroll-mt-20 rounded-lg border border-blue-200 bg-blue-50 p-5"
+          distance={30}
+          delay={0.12}
+        >
           <h2 className="text-xl font-black text-blue-700">
             {t("Ready to Transform Your Business?")}
           </h2>
@@ -197,7 +250,7 @@ export function HomePage() {
           <div className="mt-5">
             <PrimaryButton href="/request-demo">Request Demo</PrimaryButton>
           </div>
-        </div>
+        </AnimatedContent>
       </section>
     </PageShell>
   );
