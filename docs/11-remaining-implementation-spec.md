@@ -758,8 +758,10 @@ Home
 POS Types
 Features
 Pricing
-Gallery
+Add-ons
+FAQ/Help
 Contact
+Request Demo
 Login
 ```
 

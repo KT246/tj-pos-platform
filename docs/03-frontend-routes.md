@@ -84,7 +84,7 @@ Branding
 Receipt Designer
 Payment Methods
 Public Menu สำหรับลูกค้าดู
-Contact / Pricing / Gallery
+Contact / Pricing / Add-ons / FAQ/Help / Request Demo
 ```
 
 ---
@@ -165,16 +165,32 @@ Hospitality POS
 แสดงแพ็กเกจบริการเพื่อให้ลูกค้าเข้าใจและใช้ตัดสินใจก่อนติดต่อ TJ POS
 
 ```text
-/gallery
+/add-ons
 ```
 
-รูปภาพตัวอย่าง UI, screenshot, mockup
+แสดง module เสริมที่ลูกค้าสามารถเปิดเพิ่มตาม business เช่น KDS, Customer Display, Staff Order, QR Menu และ Advanced Reports
+
+```text
+/faq-help
+```
+
+รวมคำถามที่พบบ่อย วิธีติดต่อ support และช่องทางขอความช่วยเหลือ
 
 ```text
 /contact
 ```
 
 ฟอร์มติดต่อ ขอคำปรึกษา ขอใบเสนอราคา หรือนัดดู demo ส่วนตัว
+
+```text
+/request-demo
+```
+
+ฟอร์มขอนัด demo ส่วนตัวสำหรับลูกค้าที่สนใจ TJ POS
+
+## 5.2 Auth / Admin Entry Routes
+
+ใช้สำหรับลูกค้าที่ทีม TJ POS setup account ให้แล้ว และใช้เป็นทางเข้า Platform Admin / Business Admin ตามสิทธิ์ผู้ใช้
 
 ```text
 /login
@@ -878,9 +894,13 @@ Customer Display ตามอุปกรณ์
 | `/pos-types` | `frontend/apps/web` |
 | `/features` | `frontend/apps/web` |
 | `/pricing` | `frontend/apps/web` |
-| `/gallery` | `frontend/apps/web` |
+| `/add-ons` | `frontend/apps/web` |
+| `/faq-help` | `frontend/apps/web` |
 | `/contact` | `frontend/apps/web` |
+| `/request-demo` | `frontend/apps/web` |
 | `/login` | `frontend/apps/web` |
+| `/forgot-password` | `frontend/apps/web` |
+| `/reset-password` | `frontend/apps/web` |
 | `/platform-admin/...` | `frontend/apps/web` |
 | `/b/[businessSlug]/...` | `frontend/apps/web` |
 | `/menu/[businessSlug]` | `frontend/apps/web` |

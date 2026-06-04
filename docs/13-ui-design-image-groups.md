@@ -62,7 +62,7 @@ design export image
 
 | ลำดับ | โฟลเดอร์ | กลุ่ม | จำนวนรูปตามรายการ |
 |---|---|---|---|
-| 01 | `01-web-main` | Web หลัก | 9 |
+| 01 | `01-web-main` | Web หลัก | 8 |
 | 02 | `02-platform-admin` | Platform Admin | 19 |
 | 03 | `03-business-admin-core` | Business Admin Core | 32 |
 | 04 | `04-pos-terminal` | POS Terminal | 17 |
@@ -76,10 +76,23 @@ design export image
 | 12 | `12-beauty-specific` | Beauty-specific | 8 |
 | 13 | `13-hospitality-specific` | Hospitality-specific | 7 |
 
-รวมทั้งหมดตามรายการ: **134 รูป**
+รวมทั้งหมดตามรายการ: **133 รูป**
 
 ---
 
 ## 4. หมายเหตุ
 
 ตอนนี้โฟลเดอร์กลุ่มถูกเตรียมไว้แล้ว แต่ถ้ายังไม่มีรูป UI ในโฟลเดอร์ ระบบจะยังไม่มีอะไรให้ rename เป็นรายไฟล์
+
+สำหรับ `01-web-main` ตามทิศทางล่าสุด ไม่มีหน้า Gallery แล้ว และใช้รูป UI 8 หน้าเป็น source of truth:
+
+```text
+Home
+POS Types
+Features
+Pricing
+Add-ons
+FAQ/Help
+Contact
+Request Demo
+```
