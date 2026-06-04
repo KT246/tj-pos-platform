@@ -51,7 +51,7 @@ export function PosTypeCard({
         </ul>
       ) : null}
       <Link
-        href="/pos-types"
+        href="/#pos-types"
         className="font900 mt-3 inline-flex items-center gap-2 text-xs text-blue-600"
       >
         {t("Learn more")}
@@ -82,7 +82,7 @@ export function HomePosTypeCard({ item }: { item: PosType }) {
         {t(item.bullets[0])}.
       </p>
       <Link
-        href="/pos-types"
+        href="/#pos-types"
         className="font900 mt-1.5 inline-flex items-center gap-1 text-[10px] text-blue-600"
       >
         {t("Learn more")}

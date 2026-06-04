@@ -81,7 +81,7 @@ export function HomePage() {
               </p>
             </div>
             <Link
-              href="/pos-types"
+              href="/#pos-types"
               className="font900 inline-flex h-8 w-fit items-center justify-center gap-1 rounded-md border border-blue-300 bg-white px-5 text-xs text-blue-600"
             >
               {t("View All POS Types")}
