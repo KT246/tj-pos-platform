@@ -84,7 +84,7 @@ Branding
 Receipt Designer
 Payment Methods
 Public Menu สำหรับลูกค้าดู
-Contact / Pricing / Add-ons / FAQ/Help / Request Demo
+Contact / Pricing / Add-ons / FAQ/Help
 ```
 
 ---
@@ -112,6 +112,33 @@ Kitchen / Bar Display
 
 ใช้สำหรับลูกค้าที่ยังไม่ได้ใช้งาน TJ POS
 
+ตามทิศทางล่าสุด เว็บไซต์หลักใช้ route จริงเพียงหน้าเดียว:
+
+```text
+/
+```
+
+เมนูในเว็บไซต์หลักไม่ใช่ route แยก แต่เป็น hash section ในหน้าเดียว:
+
+```text
+/
+/#home
+/#pos-types
+/#features
+/#pricing
+/#add-ons
+/#faq-help
+/#contact
+```
+
+กฎสำคัญ:
+
+```text
+ห้ามสร้าง route แยกสำหรับ /pos-types, /features, /pricing, /add-ons, /faq-help, /contact
+ห้ามสร้าง route /request-demo
+ปุ่มในเว็บไซต์หลักให้เลื่อนไปยัง section ที่เกี่ยวข้องแทนการเปลี่ยนหน้า
+```
+
 ### ภาษา
 
 Public Website ใน `frontend/apps/web` รองรับเนื้อหาเว็บไซต์เฉพาะ 2 ภาษา:
@@ -132,17 +159,7 @@ en
 ไม่ใช้เป็น i18n กลางของระบบ
 ```
 
-```text
-/
-```
-
-หน้าแรก แนะนำ TJ POS
-
-```text
-/pos-types
-```
-
-แนะนำ POS ทั้ง 5 ประเภท:
+Section `/#pos-types` แนะนำ POS ทั้ง 5 ประเภท:
 
 ```text
 Retail POS
@@ -151,42 +168,6 @@ Restaurant POS
 Beauty POS
 Hospitality POS
 ```
-
-```text
-/features
-```
-
-แนะนำฟีเจอร์หลักของระบบ
-
-```text
-/pricing
-```
-
-แสดงแพ็กเกจบริการเพื่อให้ลูกค้าเข้าใจและใช้ตัดสินใจก่อนติดต่อ TJ POS
-
-```text
-/add-ons
-```
-
-แสดง module เสริมที่ลูกค้าสามารถเปิดเพิ่มตาม business เช่น KDS, Customer Display, Staff Order, QR Menu และ Advanced Reports
-
-```text
-/faq-help
-```
-
-รวมคำถามที่พบบ่อย วิธีติดต่อ support และช่องทางขอความช่วยเหลือ
-
-```text
-/contact
-```
-
-ฟอร์มติดต่อ ขอคำปรึกษา ขอใบเสนอราคา หรือนัดดู demo ส่วนตัว
-
-```text
-/request-demo
-```
-
-ฟอร์มขอนัด demo ส่วนตัวสำหรับลูกค้าที่สนใจ TJ POS
 
 ## 5.2 Auth / Admin Entry Routes
 
@@ -298,6 +279,12 @@ Base route:
 
 ใช้จัดการ add-on เช่น Customer Display, Staff Order, Smart Menu, Advanced Inventory
 
+```text
+/platform-admin/add-ons/catalog
+```
+
+ใช้จัดการ global modules catalog ที่ระบบสามารถเปิดให้ business ใช้งานได้
+
 ## 6.7 Payments
 
 ```text
@@ -305,6 +292,12 @@ Base route:
 ```
 
 ใช้จัดการการชำระเงินแบบ manual, การต่ออายุ, บันทึกการจ่ายเงินของลูกค้า
+
+```text
+/platform-admin/payments/settings
+```
+
+ใช้ตั้งค่า master bank / payment config สำหรับระบบ
 
 ## 6.8 Contact Requests
 
@@ -332,6 +325,12 @@ Base route:
 
 ใช้ตั้งค่าระบบรวม
 
+```text
+/platform-admin/system-settings/notification-templates
+```
+
+ใช้จัดการ template การแจ้งเตือนของระบบ
+
 ## 6.11 Audit Logs
 
 ```text
@@ -339,6 +338,14 @@ Base route:
 ```
 
 ใช้ดูประวัติการกระทำสำคัญของระบบ
+
+## 6.12 Profile & Security
+
+```text
+/platform-admin/profile-security
+```
+
+ใช้จัดการ profile และ security ของ Platform Admin ที่ login อยู่
 
 ---
 
@@ -891,13 +898,12 @@ Customer Display ตามอุปกรณ์
 | Route | App |
 |---|---|
 | `/` | `frontend/apps/web` |
-| `/pos-types` | `frontend/apps/web` |
-| `/features` | `frontend/apps/web` |
-| `/pricing` | `frontend/apps/web` |
-| `/add-ons` | `frontend/apps/web` |
-| `/faq-help` | `frontend/apps/web` |
-| `/contact` | `frontend/apps/web` |
-| `/request-demo` | `frontend/apps/web` |
+| `/#pos-types` | `frontend/apps/web` |
+| `/#features` | `frontend/apps/web` |
+| `/#pricing` | `frontend/apps/web` |
+| `/#add-ons` | `frontend/apps/web` |
+| `/#faq-help` | `frontend/apps/web` |
+| `/#contact` | `frontend/apps/web` |
 | `/login` | `frontend/apps/web` |
 | `/forgot-password` | `frontend/apps/web` |
 | `/reset-password` | `frontend/apps/web` |

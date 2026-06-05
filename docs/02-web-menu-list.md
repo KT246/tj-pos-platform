@@ -28,16 +28,22 @@ TJ POS แบ่งออกเป็น 3 ส่วนหลัก:
 
 ```text
 /
- /pos-types
- /features
- /pricing
- /add-ons
- /faq-help
- /contact
- /request-demo
- /login
- /forgot-password
- /reset-password
+ /#home
+ /#pos-types
+ /#features
+ /#pricing
+ /#add-ons
+ /#faq-help
+ /#contact
+```
+
+หมายเหตุ:
+
+```text
+เว็บไซต์หลักใช้หน้าเดียวและเลื่อนไปยัง section ด้วย hash
+ไม่ใช้ route แยก /pos-types, /features, /pricing, /add-ons, /faq-help, /contact
+ไม่ใช้ /request-demo
+/login, /forgot-password, /reset-password เป็น Auth/Admin Entry ไม่ใช่เมนูของเว็บไซต์หลัก
 ```
 
 ### เมนูเว็บไซต์หลัก
@@ -51,16 +57,13 @@ TJ POS แบ่งออกเป็น 3 ส่วนหลัก:
 | Add-ons | แสดง module เสริมที่สามารถเปิดเพิ่มตาม business | ลูกค้าที่ยังไม่ได้ใช้งาน |
 | FAQ/Help | รวมคำถามที่พบบ่อยและช่องทางขอความช่วยเหลือ | ลูกค้าที่ยังไม่ได้ใช้งาน |
 | Contact | ส่งคำขอปรึกษา / ขอใบเสนอราคา | ลูกค้าที่ยังไม่ได้ใช้งาน |
-| Request Demo | ฟอร์มขอนัด demo ส่วนตัว | ลูกค้าที่ยังไม่ได้ใช้งาน |
-| Login | เข้าสู่ระบบ | ลูกค้าที่ TJ POS setup ให้แล้ว |
 
 ### CTA ที่ควรใช้
 
 ```text
 ติดต่อเพื่อขอคำปรึกษา
 ขอใบเสนอราคา
-นัดดู Demo ส่วนตัว
-เข้าสู่ระบบ
+นัดคุยกับทีม TJ POS
 ```
 
 ### CTA ที่ไม่ควรเน้นใน MVP
@@ -89,11 +92,15 @@ Platform Admin คือพื้นที่สำหรับทีม TJ POS 
 /platform-admin/plans
 /platform-admin/subscriptions
 /platform-admin/add-ons
+/platform-admin/add-ons/catalog
 /platform-admin/payments
+/platform-admin/payments/settings
 /platform-admin/contact-requests
 /platform-admin/support-tickets
 /platform-admin/system-settings
+/platform-admin/system-settings/notification-templates
 /platform-admin/audit-logs
+/platform-admin/profile-security
 ```
 
 ### เมนู Platform Admin
@@ -106,11 +113,15 @@ Platform Admin คือพื้นที่สำหรับทีม TJ POS 
 | Plans | จัดการแพ็กเกจ Starter / Pro / Business / Enterprise |
 | Subscriptions | ดูแพ็กเกจที่แต่ละ business ใช้งาน |
 | Add-ons | เปิด/ปิด add-on ให้แต่ละ business |
+| Global Modules Catalog | จัดการ module catalog กลางของระบบ |
 | Payments | จัดการการชำระเงินแบบ manual / ต่ออายุ |
+| Master Bank / Payment Config | ตั้งค่า bank และ payment config กลาง |
 | Contact Requests | คำขอติดต่อจากเว็บไซต์หลัก |
 | Support Tickets | แจ้งปัญหา, feedback, request feature |
 | System Settings | ตั้งค่าระบบรวม |
+| Notification Templates | ตั้งค่า template การแจ้งเตือน |
 | Audit Logs | ประวัติการกระทำสำคัญในระบบ |
+| Profile & Security | จัดการ profile และ security ของ Platform Admin ที่ login อยู่ |
 
 ---
 

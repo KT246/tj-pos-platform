@@ -761,8 +761,14 @@ Pricing
 Add-ons
 FAQ/Help
 Contact
-Request Demo
-Login
+```
+
+หมายเหตุ:
+
+```text
+เว็บไซต์หลักใช้หน้า / หน้าเดียวและเลื่อนด้วย hash section
+ไม่ใช้ route /request-demo
+Login อยู่ใน Auth/Admin Entry ไม่ใช่เมนูของเว็บไซต์หลัก
 ```
 
 หลัก UI:
@@ -793,6 +799,7 @@ Action Modal
 หน้าที่สำคัญ:
 
 ```text
+Dashboard
 Businesses
 Users
 Plans
@@ -801,8 +808,13 @@ Add-ons
 Payments
 Contact Requests
 Support Tickets
+System Settings
 Audit Logs
+Profile & Security
 ```
+
+หน้าจอ Platform Admin ให้ยึดรูปใน `docs/designs/02-platform-admin` เป็น visual source of truth
+และใช้ mock data ก่อนต่อ API จริงตามกฎ FE/BE collaboration
 
 ---
 
