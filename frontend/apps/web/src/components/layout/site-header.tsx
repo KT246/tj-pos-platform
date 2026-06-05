@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, ChevronDown, Globe } from "lucide-react";
-import { useEffect, useState, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 
 import { revealSection, scrollToSection } from "../animations/animated-content";
 import type { ActiveNav } from "../../lib/routes";
@@ -27,6 +27,8 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
   const { language, setLanguage, t } = useI18n();
   const [currentActive, setCurrentActive] = useState<ActiveNav>(active);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const pendingSectionRef = useRef<string | null>(null);
+  const pendingTimerRef = useRef<number | null>(null);
   const currentLanguage = languageOptions.find((item) => item.value === language);
 
   useEffect(() => {
@@ -62,10 +64,39 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
       }
     };
 
+    const clearPendingSection = () => {
+      pendingSectionRef.current = null;
+
+      if (pendingTimerRef.current) {
+        window.clearTimeout(pendingTimerRef.current);
+        pendingTimerRef.current = null;
+      }
+    };
+
     const setActiveFromScroll = (updateHash = false) => {
       window.cancelAnimationFrame(frameId);
       frameId = window.requestAnimationFrame(() => {
         const targetLine = 96;
+        const pendingSectionId = pendingSectionRef.current;
+
+        if (pendingSectionId) {
+          const pendingElement = document.getElementById(pendingSectionId);
+
+          if (!pendingElement) {
+            clearPendingSection();
+            return;
+          }
+
+          const pendingRect = pendingElement.getBoundingClientRect();
+
+          if (pendingRect.top <= targetLine && pendingRect.bottom > targetLine) {
+            clearPendingSection();
+            setActiveSection(pendingSectionId, { updateHash });
+          }
+
+          return;
+        }
+
         const activeEntry = navItems
           .map((item) => {
             const element = document.getElementById(item.sectionId);
@@ -117,6 +148,7 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
 
     return () => {
       window.cancelAnimationFrame(frameId);
+      clearPendingSection();
       window.removeEventListener("hashchange", setActiveFromHash);
       window.removeEventListener("scroll", handleScroll);
     };
@@ -141,6 +173,17 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
     }
 
     event.preventDefault();
+    pendingSectionRef.current = sectionId;
+
+    if (pendingTimerRef.current) {
+      window.clearTimeout(pendingTimerRef.current);
+    }
+
+    pendingTimerRef.current = window.setTimeout(() => {
+      pendingSectionRef.current = null;
+      pendingTimerRef.current = null;
+    }, 1400);
+
     window.history.pushState(null, "", `/#${sectionId}`);
     revealSection(sectionId);
   };
