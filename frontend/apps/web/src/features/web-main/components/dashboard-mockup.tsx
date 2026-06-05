@@ -1,6 +1,15 @@
 "use client";
 
-import { Bell, LayoutDashboard } from "lucide-react";
+import {
+  BarChart3,
+  Bell,
+  LayoutDashboard,
+  Package,
+  ReceiptText,
+  Settings,
+  ShoppingCart,
+  Users
+} from "lucide-react";
 
 import { Logo } from "../../../components/layout/logo";
 import { useI18n } from "../../../lib/i18n";
@@ -14,6 +23,16 @@ export function DashboardMockup({ compact = false }: { compact?: boolean }) {
     ["Average Order Value", "K 36,340", "+8.7%"],
     ["Gross Profit", "K 16,890,000", "+21.3%"]
   ];
+
+  const sidebarItems = [
+    ["Dashboard", LayoutDashboard],
+    ["Sales", ShoppingCart],
+    ["Transactions", ReceiptText],
+    ["Products", Package],
+    ["Customers", Users],
+    ["Reports", BarChart3],
+    ["Settings", Settings]
+  ] as const;
 
   return (
     <div className="rounded-lg border border-blue-100 bg-white p-2.5 shadow-[0_20px_70px_rgba(37,99,235,0.10)]">
@@ -29,22 +48,14 @@ export function DashboardMockup({ compact = false }: { compact?: boolean }) {
       </div>
       <div className="grid gap-3 pt-3 md:grid-cols-[118px_1fr]">
         <aside className="hidden rounded-md bg-slate-50 p-2 md:block">
-          {[
-            "Dashboard",
-            "Sales",
-            "Transactions",
-            "Products",
-            "Customers",
-            "Reports",
-            "Settings"
-          ].map((item, index) => (
+          {sidebarItems.map(([item, Icon], index) => (
             <div
               key={item}
               className={`font800 mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-[10px] ${
                 index === 0 ? "bg-blue-100 text-blue-600" : "text-slate-500"
               }`}
             >
-              <LayoutDashboard className="h-3 w-3" />
+              <Icon className="h-3 w-3 shrink-0" />
               {t(item)}
             </div>
           ))}
