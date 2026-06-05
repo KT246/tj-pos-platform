@@ -2,16 +2,13 @@ import {
   BarChart3,
   BriefcaseBusiness,
   Building2,
-  Coffee,
   CreditCard,
   Gift,
   Headphones,
-  Hotel,
   LayoutDashboard,
   PackageCheck,
   ReceiptText,
   Rocket,
-  ShoppingBag,
   ShoppingCart,
   Sparkles,
   Store,
@@ -19,7 +16,6 @@ import {
   TrendingUp,
   User,
   Users,
-  Utensils,
   WalletCards
 } from "lucide-react";
 
@@ -37,10 +33,9 @@ export const posTypes: PosType[] = [
       "Sales, returns and promotions",
       "Multi-store and warehouse support"
     ],
-    Icon: ShoppingBag,
-    tone: "blue",
-    visual:
-      "linear-gradient(135deg,#152a52 0%,#3f6fc7 38%,#f3a854 39%,#173a76 64%,#d7ebff 100%)"
+    imageUrl:
+      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Retail store interior with clothes and product displays"
   },
   {
     title: "Cafe POS",
@@ -53,10 +48,9 @@ export const posTypes: PosType[] = [
       "Menu modifiers",
       "Daily sales and shift reports"
     ],
-    Icon: Coffee,
-    tone: "teal",
-    visual:
-      "radial-gradient(circle at 50% 48%,#f8ead4 0 18%,#9b663a 19% 34%,#d9b083 35% 50%,#f7f0e7 51% 100%)"
+    imageUrl:
+      "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Cafe counter with coffee cups and warm lighting"
   },
   {
     title: "Restaurant POS",
@@ -69,10 +63,9 @@ export const posTypes: PosType[] = [
       "Combo and menu management",
       "Service charge and tax rules"
     ],
-    Icon: Utensils,
-    tone: "orange",
-    visual:
-      "radial-gradient(circle at 38% 55%,#f8c17a 0 16%,#8a331f 17% 30%,transparent 31%),radial-gradient(circle at 68% 48%,#ffe4b5 0 16%,#b15b2a 17% 30%,transparent 31%),linear-gradient(135deg,#f7efe6,#d97935)"
+    imageUrl:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Restaurant dining room with tables ready for service"
   },
   {
     title: "Beauty POS",
@@ -85,10 +78,9 @@ export const posTypes: PosType[] = [
       "Staff commission tracking",
       "Product sales and inventory"
     ],
-    Icon: Sparkles,
-    tone: "pink",
-    visual:
-      "radial-gradient(circle at 65% 45%,#fff7fb 0 18%,#e8b6c8 19% 42%,transparent 43%),linear-gradient(135deg,#fff1f7,#d7c0ff)"
+    imageUrl:
+      "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Beauty salon workspace with styling chairs and mirrors"
   },
   {
     title: "Hospitality POS",
@@ -101,9 +93,9 @@ export const posTypes: PosType[] = [
       "Housekeeping and minibar",
       "Guest history and reporting"
     ],
-    Icon: Hotel,
-    tone: "blue",
-    visual: "linear-gradient(135deg,#f8efe0 0%,#b48754 45%,#264a78 46%,#f6fbff 100%)"
+    imageUrl:
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Hotel hospitality area with poolside guest experience"
   }
 ];
 

@@ -21,9 +21,8 @@ export type PosType = {
   shortTitle: string;
   description: string;
   bullets: string[];
-  Icon: LucideIcon;
-  tone: IconTone;
-  visual: string;
+  imageUrl: string;
+  imageAlt: string;
 };
 
 export type AddOn = {
