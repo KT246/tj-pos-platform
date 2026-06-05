@@ -13,7 +13,7 @@ export function HeroShell({
   accent,
   description,
   primaryHref = "/#contact",
-  primaryLabel = "Request Demo",
+  primaryLabel = "Contact TJ POS",
   secondaryHref,
   secondaryLabel,
   secondaryIcon,

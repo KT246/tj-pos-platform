@@ -134,8 +134,8 @@ Kitchen / Bar Display
 กฎสำคัญ:
 
 ```text
-ห้ามสร้าง route แยกสำหรับ /pos-types, /features, /pricing, /add-ons, /faq-help, /contact
-ห้ามสร้าง route /request-demo
+ห้ามสร้าง route แยกสำหรับเมนูเว็บไซต์หลัก
+ห้ามสร้าง route demo แยก
 ปุ่มในเว็บไซต์หลักให้เลื่อนไปยัง section ที่เกี่ยวข้องแทนการเปลี่ยนหน้า
 ```
 

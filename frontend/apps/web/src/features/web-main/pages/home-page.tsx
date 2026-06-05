@@ -304,7 +304,7 @@ export function HomePage() {
                 )}
               </p>
               <div className="mt-5">
-                <PrimaryButton href="/#contact">Request Demo</PrimaryButton>
+                <PrimaryButton href="/#contact">{t("Contact TJ POS")}</PrimaryButton>
               </div>
             </div>
             <div className="space-y-3">
@@ -344,7 +344,7 @@ export function HomePage() {
               )}
             </p>
           </div>
-          <PrimaryButton href="/#contact">Request Demo</PrimaryButton>
+          <PrimaryButton href="/#contact">{t("Contact TJ POS")}</PrimaryButton>
         </section>
       </AnimatedContent>
     </PageShell>

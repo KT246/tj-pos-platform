@@ -8,7 +8,7 @@ import { PrimaryButton, SecondaryButton } from "./buttons";
 export function CTASection({
   title = "Need help choosing the right setup?",
   description = "Our experts are ready to understand your needs and recommend the best POS solution.",
-  primaryLabel = "Request Demo",
+  primaryLabel = "Contact TJ POS",
   primaryHref = "/#contact",
   secondaryLabel = "Contact TJ POS",
   secondaryHref = "/#contact"

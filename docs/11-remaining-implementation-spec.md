@@ -767,7 +767,7 @@ Contact
 
 ```text
 เว็บไซต์หลักใช้หน้า / หน้าเดียวและเลื่อนด้วย hash section
-ไม่ใช้ route /request-demo
+ไม่ใช้ route demo แยก
 Login อยู่ใน Auth/Admin Entry ไม่ใช่เมนูของเว็บไซต์หลัก
 ```
 

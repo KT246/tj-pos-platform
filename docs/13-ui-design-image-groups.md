@@ -97,9 +97,9 @@ Contact
 ```
 
 เว็บไซต์หลักใช้หน้า `/` หน้าเดียว แล้วเลื่อนไปยัง section ด้วย hash เช่น `/#pricing` หรือ `/#contact`
-ไม่ใช้ route แยก `/pos-types`, `/features`, `/pricing`, `/add-ons`, `/faq-help`, `/contact` และไม่ใช้ `/request-demo`
+ไม่ใช้ route แยกของเมนูเว็บไซต์หลัก และไม่ใช้ route demo แยก
 
-ถ้ายังมีรูปเก่าเกี่ยวกับ Request Demo อยู่ใน folder ให้ถือว่า deprecated และไม่ใช้เป็น source of truth
+ถ้ายังมีรูปเก่าเกี่ยวกับ demo request อยู่ใน folder ให้ถือว่า deprecated และไม่ใช้เป็น source of truth
 
 สำหรับ `02-platform-admin` ให้ใช้รูป UI 21 รูปนี้เป็น source of truth สำหรับ dev:
 

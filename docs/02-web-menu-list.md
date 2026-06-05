@@ -41,8 +41,8 @@ TJ POS แบ่งออกเป็น 3 ส่วนหลัก:
 
 ```text
 เว็บไซต์หลักใช้หน้าเดียวและเลื่อนไปยัง section ด้วย hash
-ไม่ใช้ route แยก /pos-types, /features, /pricing, /add-ons, /faq-help, /contact
-ไม่ใช้ /request-demo
+ไม่ใช้ route แยกของเมนูเว็บไซต์หลัก
+ไม่ใช้ route demo แยก
 /login, /forgot-password, /reset-password เป็น Auth/Admin Entry ไม่ใช่เมนูของเว็บไซต์หลัก
 ```
 

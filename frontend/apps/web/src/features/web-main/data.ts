@@ -302,7 +302,7 @@ export const pricingPlans: PricingPlan[] = [
       "Up to 10,000 Items",
       "Up to 30,000 Orders / month"
     ],
-    cta: "Request Demo",
+    cta: "Contact Sales",
     featured: true
   },
   {
@@ -316,7 +316,7 @@ export const pricingPlans: PricingPlan[] = [
       "Up to 50,000 Items",
       "Up to 100,000 Orders / month"
     ],
-    cta: "Request Demo",
+    cta: "Contact Sales",
     featured: false
   },
   {

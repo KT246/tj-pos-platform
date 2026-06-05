@@ -250,7 +250,7 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
             href="/#contact"
             className="font800 inline-flex h-9 items-center gap-2 rounded-md bg-blue-600 px-5 text-sm text-white shadow-sm"
           >
-            {t("Request Demo")}
+            {t("Contact TJ POS")}
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
