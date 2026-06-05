@@ -6,7 +6,8 @@ import { Check } from "lucide-react";
 import { useI18n } from "../../../lib/i18n";
 import type { BillingCycle, PricingPlan } from "../types";
 
-const YEARLY_PRICE_MULTIPLIER = 12 * 0.8;
+const MONTHS_PER_YEAR = 12;
+const YEARLY_DISCOUNT_RATE = 0.8;
 
 function getNumericPrice(price: string) {
   const value = Number(price.replace(/[^\d]/g, ""));
@@ -18,18 +19,6 @@ function formatKipPrice(value: number) {
   return `K ${new Intl.NumberFormat("en-US").format(value)}`;
 }
 
-function getDisplayPrice(plan: PricingPlan, billingCycle: BillingCycle) {
-  if (plan.price === "Custom" || billingCycle === "monthly") {
-    return plan.price;
-  }
-
-  const monthlyPrice = getNumericPrice(plan.price);
-
-  return monthlyPrice
-    ? formatKipPrice(Math.round(monthlyPrice * YEARLY_PRICE_MULTIPLIER))
-    : plan.price;
-}
-
 export function PricingCard({
   plan,
   billingCycle
@@ -38,13 +27,21 @@ export function PricingCard({
   billingCycle: BillingCycle;
 }) {
   const { t } = useI18n();
-  const displayPrice = getDisplayPrice(plan, billingCycle);
-  const unitLabel = billingCycle === "yearly" ? "/year" : "/month";
-  const billingLabel = billingCycle === "yearly" ? "Billed yearly" : "Billed monthly";
+  const monthlyPrice = getNumericPrice(plan.price);
+  const hasYearlyDiscount = billingCycle === "yearly" && monthlyPrice !== null;
+  const displayPrice = hasYearlyDiscount
+    ? formatKipPrice(Math.round(monthlyPrice * YEARLY_DISCOUNT_RATE))
+    : plan.price;
+  const yearlyTotal = monthlyPrice
+    ? formatKipPrice(Math.round(monthlyPrice * MONTHS_PER_YEAR * YEARLY_DISCOUNT_RATE))
+    : null;
+  const billingLabel = hasYearlyDiscount
+    ? "Billed yearly - Save 20%"
+    : "Billed monthly";
 
   return (
     <div
-      className={`group relative flex h-full min-h-[330px] flex-col rounded-lg border bg-white p-5 pt-7 text-center shadow-sm transition-all duration-300 focus-within:border-blue-500 focus-within:shadow-xl focus-within:shadow-blue-100/70 hover:-translate-y-1 hover:border-blue-400 hover:shadow-xl hover:shadow-blue-100/70 motion-reduce:hover:translate-y-0 ${
+      className={`group relative flex h-full min-h-[350px] flex-col rounded-lg border bg-white p-5 pt-7 text-center shadow-sm transition-all duration-300 focus-within:border-blue-500 focus-within:shadow-xl focus-within:shadow-blue-100/70 hover:-translate-y-1 hover:border-blue-400 hover:shadow-xl hover:shadow-blue-100/70 motion-reduce:hover:translate-y-0 ${
         plan.featured ? "border-blue-500 shadow-blue-100" : "border-blue-100"
       }`}
     >
@@ -59,13 +56,25 @@ export function PricingCard({
       </p>
       <p className="mt-4 text-2xl font-black whitespace-nowrap text-blue-600">
         {displayPrice}
-        {plan.price !== "Custom" ? (
-          <span className="font700 text-sm text-slate-500"> {t(unitLabel)}</span>
+        {monthlyPrice ? (
+          <span className="font700 text-sm text-slate-500"> {t("/month")}</span>
         ) : null}
       </p>
+      {hasYearlyDiscount ? (
+        <p className="mt-1 text-xs text-slate-400">
+          <span className="line-through">
+            {plan.price} {t("/month")}
+          </span>
+        </p>
+      ) : null}
       <p className="mt-2 text-xs text-slate-500">
         {plan.price === "Custom" ? t("Tailored to your needs") : t(billingLabel)}
       </p>
+      {hasYearlyDiscount && yearlyTotal ? (
+        <p className="mt-1 text-xs font-bold text-blue-600">
+          {yearlyTotal} {t("/year")}
+        </p>
+      ) : null}
       <ul className="mt-4 flex-1 space-y-2 text-left">
         {plan.features.map((feature) => (
           <li

@@ -316,6 +316,7 @@ const lo: Record<string, string> = {
   "Tailored to your needs": "ປັບຕາມຄວາມຕ້ອງການ",
   "Billed monthly": "ຄິດເງິນລາຍເດືອນ",
   "Billed yearly": "ຄິດເງິນລາຍປີ",
+  "Billed yearly - Save 20%": "ຄິດເງິນລາຍປີ - ປະຫຍັດ 20%",
   "Perfect for small businesses just getting started.":
     "ເໝາະສຳລັບທຸລະກິດນ້ອຍທີ່ເລີ່ມຕົ້ນ.",
   "Great for growing businesses that need more power.":
