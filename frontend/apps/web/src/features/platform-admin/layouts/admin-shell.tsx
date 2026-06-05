@@ -8,7 +8,6 @@ import {
   Bell,
   ChevronDown,
   Headphones,
-  Menu,
   Plus,
   Search
 } from "lucide-react";
@@ -45,12 +44,6 @@ export function AdminShell({ children }: { children: ReactNode }) {
             taglineClassName="text-[6px]"
             priority
           />
-          <button
-            type="button"
-            className="flex h-9 w-9 items-center justify-center rounded-md text-slate-600 hover:bg-blue-50"
-          >
-            <Menu className="h-5 w-5" />
-          </button>
         </div>
 
         <div className="relative flex h-full min-w-0 flex-1 items-center px-6">
