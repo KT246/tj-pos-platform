@@ -6,8 +6,6 @@ import { HeroTitleReveal } from "../../../components/animations/hero-title-revea
 import { Badge } from "../../../components/ui/badge";
 import { PrimaryButton, SecondaryButton } from "../../../components/ui/buttons";
 import { useI18n } from "../../../lib/i18n";
-import type { TrustPill } from "../types";
-import { TrustPills } from "./trust-pills";
 
 export function HeroShell({
   badge,
@@ -19,8 +17,6 @@ export function HeroShell({
   secondaryHref,
   secondaryLabel,
   secondaryIcon,
-  showTrust = false,
-  trustItems,
   animateTitle = false,
   hideActions = false,
   children
@@ -34,8 +30,6 @@ export function HeroShell({
   secondaryHref?: string;
   secondaryLabel?: string;
   secondaryIcon?: ReactNode;
-  showTrust?: boolean;
-  trustItems?: readonly TrustPill[];
   animateTitle?: boolean;
   hideActions?: boolean;
   children: ReactNode;
@@ -74,7 +68,6 @@ export function HeroShell({
               ) : null}
             </div>
           ) : null}
-          {showTrust ? <TrustPills items={trustItems} /> : null}
         </div>
         {children}
       </div>

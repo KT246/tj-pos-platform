@@ -16,8 +16,6 @@ export type IconCard = {
   tone: IconTone;
 };
 
-export type TrustPill = readonly [string, string, LucideIcon];
-
 export type PosType = {
   title: string;
   shortTitle: string;

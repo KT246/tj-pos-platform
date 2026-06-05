@@ -8,7 +8,6 @@ import {
   Headphones,
   Hotel,
   LayoutDashboard,
-  MapPin,
   PackageCheck,
   ReceiptText,
   Rocket,
@@ -25,14 +24,7 @@ import {
   WalletCards
 } from "lucide-react";
 
-import type {
-  AddOn,
-  FaqGroup,
-  IconCard,
-  PosType,
-  PricingPlan,
-  TrustPill
-} from "./types";
+import type { AddOn, FaqGroup, IconCard, PosType, PricingPlan } from "./types";
 
 export const posTypes: PosType[] = [
   {
@@ -418,10 +410,3 @@ export const faqGroups: FaqGroup[] = [
     ]
   }
 ];
-
-export const defaultTrustItems: readonly TrustPill[] = [
-  ["No Installation", "100% Cloud-based", Rocket],
-  ["Works Offline", "Keep selling always", TabletSmartphone],
-  ["Local Support", "Here in Laos", MapPin],
-  ["Secure & Reliable", "Enterprise-grade security", ShieldCheck]
-] as const;

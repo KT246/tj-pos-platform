@@ -88,7 +88,6 @@ export function HomePage() {
           secondaryLabel="Explore Features"
           secondaryIcon={<Info className="h-4 w-4" />}
           animateTitle
-          showTrust
         >
           <DashboardMockup />
         </HeroShell>

@@ -143,15 +143,6 @@ const lo: Record<string, string> = {
     "ສ້າງໃບກຳກັບພາສີອິເລັກໂທຣນິກຕາມຂໍ້ກຳນົດ.",
   "Explore more integrations and tools.": "ສຳຫຼວດການເຊື່ອມຕໍ່ ແລະ ເຄື່ອງມືອື່ນໆ.",
 
-  "No Installation": "ບໍ່ຕ້ອງຕິດຕັ້ງ",
-  "100% Cloud-based": "ໃຊ້ງານຜ່ານຄລາວດ໌ 100%",
-  "Works Offline": "ໃຊ້ງານອອບລາຍໄດ້",
-  "Keep selling always": "ຂາຍໄດ້ຕໍ່ເນື່ອງ",
-  "Local Support": "ຊ່ວຍເຫຼືອໃນລາວ",
-  "Here in Laos": "ຢູ່ໃນລາວ",
-  "Secure & Reliable": "ປອດໄພ ແລະ ເຊື່ອຖືໄດ້",
-  "Enterprise-grade security": "ຄວາມປອດໄພລະດັບອົງກອນ",
-
   "Everything You Need, Built Into": "ທຸກຢ່າງທີ່ຕ້ອງການ ຢູ່ໃນ",
   "Powerful core features to run your business smoothly. Simple to use. Easy to manage. Built to help you grow.":
     "ຟີເຈີຫຼັກທີ່ຊ່ວຍໃຫ້ທຸລະກິດເຮັດວຽກລື່ນໄຫຼ. ໃຊ້ງ່າຍ, ຈັດການງ່າຍ, ຊ່ວຍໃຫ້ເຕີບໂຕ.",
