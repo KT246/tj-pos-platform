@@ -11,7 +11,6 @@ import {
   PackageCheck,
   ReceiptText,
   Rocket,
-  ShieldCheck,
   ShoppingBag,
   ShoppingCart,
   Sparkles,
@@ -290,7 +289,6 @@ export const pricingPlans: PricingPlan[] = [
     name: "Starter",
     subtitle: "Perfect for small businesses just getting started.",
     price: "K 120,000",
-    Icon: Rocket,
     features: [
       "1 Branch",
       "1 POS Device",
@@ -305,7 +303,6 @@ export const pricingPlans: PricingPlan[] = [
     name: "Pro",
     subtitle: "Great for growing businesses that need more power.",
     price: "K 250,000",
-    Icon: TrendingUp,
     features: [
       "Up to 3 Branches",
       "Up to 3 POS Devices",
@@ -320,7 +317,6 @@ export const pricingPlans: PricingPlan[] = [
     name: "Business",
     subtitle: "Advanced features for high-volume operations.",
     price: "K 500,000",
-    Icon: BriefcaseBusiness,
     features: [
       "Up to 10 Branches",
       "Up to 10 POS Devices",
@@ -335,7 +331,6 @@ export const pricingPlans: PricingPlan[] = [
     name: "Enterprise",
     subtitle: "Unlimited scale with dedicated support and customization.",
     price: "Custom",
-    Icon: ShieldCheck,
     features: [
       "Unlimited Branches",
       "Unlimited POS Devices",

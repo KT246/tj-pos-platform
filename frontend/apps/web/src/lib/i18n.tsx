@@ -41,6 +41,9 @@ const lo: Record<string, string> = {
   "Choose the plan that fits your business.": "ເລືອກແຜນທີ່ເໝາະກັບທຸລະກິດຂອງທ່ານ.",
   Monthly: "ລາຍເດືອນ",
   "Yearly (Save 20%)": "ລາຍປີ (ປະຫຍັດ 20%)",
+  "Billing cycle": "ຮອບການຄິດເງິນ",
+  "/month": "/ເດືອນ",
+  "/year": "/ປີ",
   "All plans include cloud access, offline mode, backups and local support in Laos.":
     "ທຸກແຜນລວມການໃຊ້ງານຜ່ານຄລາວດ໌, ໂໝດອອບລາຍ, ການສຳຮອງຂໍ້ມູນ ແລະ ການຊ່ວຍເຫຼືອໃນລາວ.",
   "Add-ons to Do More": "ໂມດູນເສີມເພື່ອເຮັດໄດ້ຫຼາຍຂຶ້ນ",
@@ -312,6 +315,7 @@ const lo: Record<string, string> = {
 
   "Tailored to your needs": "ປັບຕາມຄວາມຕ້ອງການ",
   "Billed monthly": "ຄິດເງິນລາຍເດືອນ",
+  "Billed yearly": "ຄິດເງິນລາຍປີ",
   "Perfect for small businesses just getting started.":
     "ເໝາະສຳລັບທຸລະກິດນ້ອຍທີ່ເລີ່ມຕົ້ນ.",
   "Great for growing businesses that need more power.":

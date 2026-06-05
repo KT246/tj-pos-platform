@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, ChevronDown, Info, Quote, Star } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import {
   AnimatedContent,
@@ -19,6 +19,7 @@ import { HomeFeatureItem } from "../components/feature-card";
 import { HeroShell } from "../components/hero-shell";
 import { HomePosTypeCard } from "../components/pos-type-card";
 import { PricingCard } from "../components/pricing-card";
+import type { BillingCycle } from "../types";
 
 const trustedBrands = [
   { name: "Joma", initials: "JO", tone: "from-sky-500 to-blue-700" },
@@ -46,6 +47,7 @@ const customerStories = [
 
 export function HomePage() {
   const { t } = useI18n();
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
 
   useEffect(() => {
     const scrollToHash = () => {
@@ -151,7 +153,7 @@ export function HomePage() {
         distance={34}
       >
         <section className="mx-auto max-w-[1320px] px-6 lg:px-8">
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
             <div>
               <h2 className="text-2xl font-black text-slate-950">
                 {t("Simple Packages, One Powerful Platform")}
@@ -160,10 +162,36 @@ export function HomePage() {
                 {t("Choose the plan that fits your business.")}
               </p>
             </div>
+            <div
+              className="inline-flex w-fit rounded-full border border-blue-200 bg-blue-50 p-1"
+              role="group"
+              aria-label={t("Billing cycle")}
+            >
+              {(
+                [
+                  ["monthly", "Monthly"],
+                  ["yearly", "Yearly (Save 20%)"]
+                ] as const
+              ).map(([value, label]) => (
+                <button
+                  key={value}
+                  type="button"
+                  aria-pressed={billingCycle === value}
+                  onClick={() => setBillingCycle(value)}
+                  className={`font900 h-9 cursor-pointer rounded-full px-5 text-xs transition-all duration-200 focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 focus-visible:outline-none ${
+                    billingCycle === value
+                      ? "bg-blue-600 text-white shadow-sm"
+                      : "text-slate-600 hover:bg-white hover:text-blue-600"
+                  }`}
+                >
+                  {t(label)}
+                </button>
+              ))}
+            </div>
           </div>
           <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
             {pricingPlans.map((plan) => (
-              <PricingCard key={plan.name} plan={plan} />
+              <PricingCard key={plan.name} plan={plan} billingCycle={billingCycle} />
             ))}
           </div>
           <p className="mt-4 text-xs text-slate-500">

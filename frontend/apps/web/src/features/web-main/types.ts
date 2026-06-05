@@ -34,11 +34,12 @@ export type AddOn = {
   tone: IconTone;
 };
 
+export type BillingCycle = "monthly" | "yearly";
+
 export type PricingPlan = {
   name: string;
   subtitle: string;
   price: string;
-  Icon: LucideIcon;
   features: string[];
   cta: string;
   featured: boolean;
