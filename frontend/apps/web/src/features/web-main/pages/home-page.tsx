@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ChevronDown, Info } from "lucide-react";
+import { ArrowRight, ChevronDown, Info, Quote, Star } from "lucide-react";
 import { useEffect } from "react";
 
 import {
@@ -19,6 +19,30 @@ import { HomeFeatureItem } from "../components/feature-card";
 import { HeroShell } from "../components/hero-shell";
 import { HomePosTypeCard } from "../components/pos-type-card";
 import { PricingCard } from "../components/pricing-card";
+
+const trustedBrands = [
+  { name: "Joma", initials: "JO", tone: "from-sky-500 to-blue-700" },
+  { name: "Vientiane Center", initials: "VC", tone: "from-emerald-400 to-teal-700" },
+  { name: "BCEL", initials: "BC", tone: "from-blue-500 to-indigo-700" },
+  { name: "Sabaidee Hotel", initials: "SH", tone: "from-amber-400 to-orange-700" },
+  { name: "Parkson", initials: "PK", tone: "from-fuchsia-400 to-violet-700" },
+  { name: "Paragon", initials: "PG", tone: "from-cyan-400 to-blue-700" }
+] as const;
+
+const customerStories = [
+  {
+    name: "Khampheng L.",
+    quote: "TJ POS helped us manage our cafe more efficiently.",
+    initials: "KL",
+    tone: "from-sky-100 to-blue-300"
+  },
+  {
+    name: "Vilayphone S.",
+    quote: "Reports and inventory features save us hours every day.",
+    initials: "VS",
+    tone: "from-emerald-100 to-teal-300"
+  }
+] as const;
 
 export function HomePage() {
   const { t } = useI18n();
@@ -171,55 +195,66 @@ export function HomePage() {
         </section>
       </AnimatedContent>
 
-      <AnimatedContent className="bg-white py-8" distance={30}>
-        <section className="mx-auto grid max-w-[1320px] gap-8 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+      <AnimatedContent
+        className="border-y border-blue-100 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] py-10"
+        distance={30}
+      >
+        <section className="mx-auto grid max-w-[1320px] gap-8 px-6 lg:grid-cols-[0.82fr_1.18fr] lg:px-8">
           <div>
-            <h2 className="text-xl font-black text-slate-950">
+            <h2 className="text-2xl font-black text-slate-950">
               {t("Trusted by Businesses Across Laos")}
             </h2>
-            <div className="font900 mt-5 grid grid-cols-2 gap-3 text-center text-base text-slate-500 sm:grid-cols-3">
-              {[
-                "Joma",
-                "Vientiane Center",
-                "BCEL",
-                "Sabaidee Hotel",
-                "Parkson",
-                "Paragon"
-              ].map((brand) => (
+            <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+              {trustedBrands.map((brand) => (
                 <div
-                  key={brand}
-                  className="rounded-lg border border-blue-100 bg-white p-3"
+                  key={brand.name}
+                  className="group flex min-h-[76px] items-center gap-3 rounded-lg border border-blue-100 bg-white p-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-100/70 motion-reduce:hover:translate-y-0"
                 >
-                  {brand}
+                  <span
+                    className={`font900 flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-gradient-to-br text-xs text-white shadow-sm ${brand.tone}`}
+                  >
+                    {brand.initials}
+                  </span>
+                  <span className="font900 text-sm leading-5 text-slate-700 transition-colors group-hover:text-slate-950">
+                    {brand.name}
+                  </span>
                 </div>
               ))}
             </div>
           </div>
           <div>
-            <h2 className="text-xl font-black text-slate-950">
+            <h2 className="text-2xl font-black text-slate-950">
               {t("What Our Customers Say")}
             </h2>
             <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              {[
-                "TJ POS helped us manage our cafe more efficiently.",
-                "Reports and inventory features save us hours every day."
-              ].map((quote, index) => (
+              {customerStories.map((story) => (
                 <div
-                  key={quote}
-                  className="rounded-lg border border-blue-100 bg-white p-4 shadow-sm"
+                  key={story.name}
+                  className="group relative min-h-[190px] overflow-hidden rounded-lg border border-blue-100 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-100/70 motion-reduce:hover:translate-y-0"
                 >
+                  <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-600 via-sky-400 to-emerald-400" />
+                  <Quote className="absolute top-5 right-5 h-8 w-8 text-blue-100 transition-colors group-hover:text-blue-200" />
                   <div className="flex items-center gap-3">
-                    <div className="h-12 w-12 rounded-full bg-gradient-to-br from-slate-200 to-blue-300" />
+                    <div
+                      className={`font900 flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-sm text-blue-900 ${story.tone}`}
+                    >
+                      {story.initials}
+                    </div>
                     <div>
-                      <p className="font900 text-slate-950">
-                        {index === 0 ? "Khampheng L." : "Vilayphone S."}
-                      </p>
+                      <p className="font900 text-slate-950">{story.name}</p>
                       <p className="text-xs text-slate-500">
                         {t("Owner, Local Business")}
                       </p>
                     </div>
                   </div>
-                  <p className="mt-4 text-sm leading-6 text-slate-600">{t(quote)}</p>
+                  <div className="mt-4 flex gap-1 text-amber-400">
+                    {[0, 1, 2, 3, 4].map((item) => (
+                      <Star key={item} className="h-3.5 w-3.5 fill-current" />
+                    ))}
+                  </div>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    {t(story.quote)}
+                  </p>
                 </div>
               ))}
             </div>
