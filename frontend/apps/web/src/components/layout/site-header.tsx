@@ -247,7 +247,7 @@ export function SiteHeader({ active }: { active: ActiveNav }) {
             ) : null}
           </div>
           <Link
-            href="/request-demo"
+            href="/#contact"
             className="font800 inline-flex h-9 items-center gap-2 rounded-md bg-blue-600 px-5 text-sm text-white shadow-sm"
           >
             {t("Request Demo")}

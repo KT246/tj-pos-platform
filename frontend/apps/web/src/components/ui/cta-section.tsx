@@ -9,7 +9,7 @@ export function CTASection({
   title = "Need help choosing the right setup?",
   description = "Our experts are ready to understand your needs and recommend the best POS solution.",
   primaryLabel = "Request Demo",
-  primaryHref = "/request-demo",
+  primaryHref = "/#contact",
   secondaryLabel = "Contact TJ POS",
   secondaryHref = "/#contact"
 }: {

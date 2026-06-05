@@ -277,7 +277,7 @@ export function HomePage() {
                 )}
               </p>
               <div className="mt-5">
-                <PrimaryButton href="/request-demo">Request Demo</PrimaryButton>
+                <PrimaryButton href="/#contact">Request Demo</PrimaryButton>
               </div>
             </div>
             <div className="space-y-3">
@@ -317,7 +317,7 @@ export function HomePage() {
               )}
             </p>
           </div>
-          <PrimaryButton href="/request-demo">Request Demo</PrimaryButton>
+          <PrimaryButton href="/#contact">Request Demo</PrimaryButton>
         </section>
       </AnimatedContent>
     </PageShell>

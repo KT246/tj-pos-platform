@@ -2,7 +2,6 @@ import {
   BarChart3,
   BriefcaseBusiness,
   Building2,
-  Check,
   Coffee,
   CreditCard,
   Gift,
@@ -425,11 +424,4 @@ export const defaultTrustItems: readonly TrustPill[] = [
   ["Works Offline", "Keep selling always", TabletSmartphone],
   ["Local Support", "Here in Laos", MapPin],
   ["Secure & Reliable", "Enterprise-grade security", ShieldCheck]
-] as const;
-
-export const demoTrustItems: readonly TrustPill[] = [
-  ["Tailored to Your Business", "Personal walkthrough", BriefcaseBusiness],
-  ["No Obligation", "100% free", Check],
-  ["Expert-Led", "Live demo", Headphones],
-  ["Secure & Private", "Your data is safe", ShieldCheck]
 ] as const;

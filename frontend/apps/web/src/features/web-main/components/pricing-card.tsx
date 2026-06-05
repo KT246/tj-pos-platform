@@ -49,7 +49,7 @@ export function PricingCard({ plan }: { plan: PricingPlan }) {
         ))}
       </ul>
       <Link
-        href={plan.name === "Enterprise" ? "/#contact" : "/request-demo"}
+        href="/#contact"
         className={`font900 mt-5 flex h-9 items-center justify-center rounded-md border text-xs transition-all duration-200 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 focus-visible:outline-none motion-reduce:hover:translate-y-0 ${
           plan.featured
             ? "border-blue-600 bg-blue-600 text-white hover:bg-blue-700 hover:shadow-md hover:shadow-blue-100"

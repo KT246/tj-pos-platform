@@ -14,7 +14,7 @@ export function HeroShell({
   title,
   accent,
   description,
-  primaryHref = "/request-demo",
+  primaryHref = "/#contact",
   primaryLabel = "Request Demo",
   secondaryHref,
   secondaryLabel,
