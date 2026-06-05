@@ -44,6 +44,7 @@ TJ POS แบ่งออกเป็น 3 ส่วนหลัก:
 ไม่ใช้ route แยกของเมนูเว็บไซต์หลัก
 ไม่ใช้ route demo แยก
 /login, /forgot-password, /reset-password เป็น Auth/Admin Entry ไม่ใช่เมนูของเว็บไซต์หลัก
+เว็บไซต์หลักห้ามมีปุ่มหรือ link ไป /login
 ```
 
 ### เมนูเว็บไซต์หลัก

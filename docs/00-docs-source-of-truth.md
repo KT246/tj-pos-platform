@@ -100,6 +100,7 @@
 | Business field | `05-menu-detail-spec.md`, `07-domain-schema.md`, `08-postgresql-database-schema.md` | `phone` เป็น optional, `country` ค่าเริ่มต้น `LA`, `currency` ค่าเริ่มต้น `LAK`, ไม่ใช้ `language` เป็น field ของ business |
 | ภาษาเว็บไซต์หลัก | `03-frontend-routes.md` | ไม่ใช้ i18n กลางทั้งระบบ; ใช้เฉพาะ Public Website ใน `frontend/apps/web` และรองรับเฉพาะ `lo` / `en` |
 | Route เว็บไซต์หลัก | `02-web-menu-list.md`, `03-frontend-routes.md`, `11-remaining-implementation-spec.md` | เว็บไซต์หลักใช้หน้า `/` หน้าเดียวและ hash section เช่น `/#pricing`; ไม่ใช้ route แยกของเมนูเว็บไซต์หลัก และไม่ใช้ route demo แยก |
+| Login บนเว็บไซต์หลัก | `02-web-menu-list.md`, `03-frontend-routes.md`, `15-platform-admin-dev-plan.md` | เว็บไซต์หลักไม่มีปุ่มหรือ link ไป `/login`; `/login` เป็น Auth/Admin Entry ที่เข้าผ่าน URL โดยตรงหรือ flow ภายในหลังทีม TJ POS setup ให้แล้ว |
 | รูป Platform Admin | `13-ui-design-image-groups.md`, `15-platform-admin-dev-plan.md` | ใช้รูป 21 รูปใน `docs/designs/02-platform-admin` เป็น visual source of truth สำหรับ dev Platform Admin |
 | Staff / Role field | `05-menu-detail-spec.md`, `07-domain-schema.md`, `08-postgresql-database-schema.md` | ใช้ `branch_ids` สำหรับหลายสาขา และ role ต้องมี `bar` ด้วย |
 | Item status | `05-menu-detail-spec.md`, `07-domain-schema.md`, `08-postgresql-database-schema.md` | ใช้ status กลาง `active/inactive/suspended/archived`; สถานะขายใช้ `available_for_sale` และ stock แยกต่างหาก |

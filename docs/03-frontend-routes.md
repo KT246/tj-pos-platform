@@ -173,6 +173,13 @@ Hospitality POS
 
 ใช้สำหรับลูกค้าที่ทีม TJ POS setup account ให้แล้ว และใช้เป็นทางเข้า Platform Admin / Business Admin ตามสิทธิ์ผู้ใช้
 
+กฎสำคัญ:
+
+```text
+เว็บไซต์หลักไม่มีปุ่มหรือ link ไป /login
+/login ใช้เข้าผ่าน URL โดยตรง หรือ flow ภายในหลังทีม TJ POS setup account ให้แล้ว
+```
+
 ```text
 /login
 ```
