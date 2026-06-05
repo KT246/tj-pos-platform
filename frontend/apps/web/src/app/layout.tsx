@@ -4,12 +4,13 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "TJ POS"
+  title: "TJ POS Business Admin",
+  description: "Business admin workspace for TJ POS"
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="lo">
+    <html lang="en">
       <body>{children}</body>
     </html>
   );
