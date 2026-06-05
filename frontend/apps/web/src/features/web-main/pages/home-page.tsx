@@ -82,10 +82,10 @@ export function HomePage() {
             </div>
             <Link
               href="/#pos-types"
-              className="font900 inline-flex h-8 w-fit items-center justify-center gap-1 rounded-md border border-blue-300 bg-white px-5 text-xs text-blue-600"
+              className="font900 group inline-flex h-8 w-fit items-center justify-center gap-1 rounded-md border border-blue-300 bg-white px-5 text-xs text-blue-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-600 hover:bg-blue-600 hover:text-white hover:shadow-sm focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 focus-visible:outline-none motion-reduce:hover:translate-y-0"
             >
               {t("View All POS Types")}
-              <ArrowRight className="h-3 w-3" />
+              <ArrowRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0" />
             </Link>
           </div>
           <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">

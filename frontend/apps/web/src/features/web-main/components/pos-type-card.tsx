@@ -18,7 +18,7 @@ export function PosTypeCard({
 
   return (
     <div
-      className={`rounded-lg border border-blue-100 bg-white shadow-sm ${
+      className={`group rounded-lg border border-blue-100 bg-white shadow-sm transition-all duration-300 focus-within:border-blue-400 focus-within:shadow-lg focus-within:shadow-blue-100/70 hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-100/70 motion-reduce:hover:translate-y-0 ${
         large ? "p-5" : "p-3"
       }`}
     >
@@ -29,9 +29,13 @@ export function PosTypeCard({
         </h3>
       </div>
       <div
-        className={`${large ? "h-28" : "h-20"} rounded-md border border-blue-50`}
-        style={{ background: item.visual }}
-      />
+        className={`${large ? "h-28" : "h-20"} overflow-hidden rounded-md border border-blue-50`}
+      >
+        <div
+          className="h-full w-full transition duration-500 group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
+          style={{ background: item.visual }}
+        />
+      </div>
       <p
         className={`${large ? "mt-4 text-sm leading-6" : "mt-3 text-xs leading-5"} text-slate-600`}
       >
@@ -52,10 +56,10 @@ export function PosTypeCard({
       ) : null}
       <Link
         href="/#pos-types"
-        className="font900 mt-3 inline-flex items-center gap-2 text-xs text-blue-600"
+        className="font900 group/link mt-3 inline-flex items-center gap-2 text-xs text-blue-600 transition-colors duration-200 hover:text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 focus-visible:outline-none"
       >
         {t("Learn more")}
-        <ArrowRight className="h-4 w-4" />
+        <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover/link:translate-x-0.5 motion-reduce:group-hover/link:translate-x-0" />
       </Link>
     </div>
   );
@@ -65,19 +69,21 @@ export function HomePosTypeCard({ item }: { item: PosType }) {
   const { t } = useI18n();
 
   return (
-    <div className="flex h-full min-h-[300px] flex-col rounded-lg border border-blue-100 bg-white p-3 text-center shadow-sm">
+    <div className="group flex h-full min-h-[300px] flex-col rounded-lg border border-blue-100 bg-white p-3 text-center shadow-sm transition-all duration-300 focus-within:border-blue-400 focus-within:shadow-lg focus-within:shadow-blue-100/70 hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-100/70 motion-reduce:hover:translate-y-0">
       <div className="mb-3 flex flex-col items-center gap-2">
         <span
-          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-md ring-1 ${iconToneClass(item.tone)}`}
+          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-md ring-1 transition duration-300 group-hover:-translate-y-0.5 group-hover:scale-105 motion-reduce:group-hover:translate-y-0 motion-reduce:group-hover:scale-100 ${iconToneClass(item.tone)}`}
         >
           <item.Icon className="h-[18px] w-[18px]" />
         </span>
         <h3 className="text-base font-black text-slate-950">{t(item.shortTitle)}</h3>
       </div>
-      <div
-        className="h-[64px] rounded-md border border-blue-50"
-        style={{ background: item.visual }}
-      />
+      <div className="h-[64px] overflow-hidden rounded-md border border-blue-50">
+        <div
+          className="h-full w-full transition duration-500 group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
+          style={{ background: item.visual }}
+        />
+      </div>
       <p className="mt-3 min-h-12 text-xs leading-5 text-slate-600">
         {t(item.description)}
       </p>
@@ -91,10 +97,10 @@ export function HomePosTypeCard({ item }: { item: PosType }) {
       </ul>
       <Link
         href="/#pos-types"
-        className="font900 mt-4 inline-flex items-center justify-center gap-1 text-xs text-blue-600"
+        className="font900 group/link mt-4 inline-flex items-center justify-center gap-1 text-xs text-blue-600 transition-colors duration-200 hover:text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 focus-visible:outline-none"
       >
         {t("Learn more")}
-        <ArrowRight className="h-3.5 w-3.5" />
+        <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/link:translate-x-0.5 motion-reduce:group-hover/link:translate-x-0" />
       </Link>
     </div>
   );

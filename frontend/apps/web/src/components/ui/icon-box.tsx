@@ -17,7 +17,7 @@ export function iconToneClass(tone: string) {
 export function IconBox({ Icon, tone }: { Icon: LucideIcon; tone: string }) {
   return (
     <span
-      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-md ring-1 ${iconToneClass(tone)}`}
+      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-md ring-1 transition duration-300 group-hover:-translate-y-0.5 group-hover:scale-105 motion-reduce:group-hover:translate-y-0 motion-reduce:group-hover:scale-100 ${iconToneClass(tone)}`}
     >
       <Icon className="h-5 w-5" />
     </span>

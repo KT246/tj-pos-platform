@@ -12,7 +12,7 @@ export function PricingCard({ plan }: { plan: PricingPlan }) {
 
   return (
     <div
-      className={`relative flex h-full min-h-[360px] flex-col rounded-lg border bg-white p-5 text-center shadow-sm ${
+      className={`group relative flex h-full min-h-[360px] flex-col rounded-lg border bg-white p-5 text-center shadow-sm transition-all duration-300 focus-within:border-blue-500 focus-within:shadow-xl focus-within:shadow-blue-100/70 hover:-translate-y-1 hover:border-blue-400 hover:shadow-xl hover:shadow-blue-100/70 motion-reduce:hover:translate-y-0 ${
         plan.featured ? "border-blue-500 shadow-blue-100" : "border-blue-100"
       }`}
     >
@@ -50,10 +50,10 @@ export function PricingCard({ plan }: { plan: PricingPlan }) {
       </ul>
       <Link
         href={plan.name === "Enterprise" ? "/#contact" : "/request-demo"}
-        className={`font900 mt-5 flex h-9 items-center justify-center rounded-md border text-xs ${
+        className={`font900 mt-5 flex h-9 items-center justify-center rounded-md border text-xs transition-all duration-200 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 focus-visible:outline-none motion-reduce:hover:translate-y-0 ${
           plan.featured
-            ? "border-blue-600 bg-blue-600 text-white"
-            : "border-blue-300 bg-white text-blue-600"
+            ? "border-blue-600 bg-blue-600 text-white hover:bg-blue-700 hover:shadow-md hover:shadow-blue-100"
+            : "border-blue-300 bg-white text-blue-600 hover:border-blue-600 hover:bg-blue-600 hover:text-white"
         }`}
       >
         {t(plan.cta)}
