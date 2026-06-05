@@ -23,6 +23,7 @@ type AnimatedContentProps = {
 
 const REVEAL_EVENT = "tj-pos:section-reveal";
 const HEADER_OFFSET = 80;
+const revealedSectionIds = new Set<string>();
 
 function resolveScrollContainer(container?: string | HTMLElement | null) {
   if (!container) {
@@ -64,6 +65,7 @@ export function AnimatedContent({
 }: AnimatedContentProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const hasRevealedRef = useRef(false);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -78,6 +80,13 @@ export function AnimatedContent({
     ).matches;
 
     if (prefersReducedMotion) {
+      gsap.set(content, { clearProps: "all" });
+
+      return undefined;
+    }
+
+    if (id && revealedSectionIds.has(id)) {
+      hasRevealedRef.current = true;
       gsap.set(content, { clearProps: "all" });
 
       return undefined;
@@ -106,13 +115,28 @@ export function AnimatedContent({
       }
     };
 
+    const markRevealed = () => {
+      hasRevealedRef.current = true;
+
+      if (id) {
+        revealedSectionIds.add(id);
+      }
+    };
+    const playOnce = () => {
+      if (hasRevealedRef.current || (id && revealedSectionIds.has(id))) {
+        return;
+      }
+
+      markRevealed();
+      tween.play(0);
+    };
     const tween = gsap.fromTo(content, fromVars, toVars);
     const trigger = ScrollTrigger.create({
       trigger: wrapper,
       scroller: resolveScrollContainer(container),
       start: getTriggerStart(threshold),
       once: true,
-      onEnter: () => tween.play(0)
+      onEnter: playOnce
     });
     const replayTimers = new Set<number>();
 
@@ -125,7 +149,7 @@ export function AnimatedContent({
 
       const playWhenVisible = () => {
         if (isNearViewport(wrapper)) {
-          tween.play(0);
+          playOnce();
           return;
         }
 

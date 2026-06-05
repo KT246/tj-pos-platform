@@ -37,6 +37,10 @@ export function HomePage() {
             return;
           }
 
+          if (sectionId === "home") {
+            return;
+          }
+
           revealSection(sectionId, 350);
         });
       });
