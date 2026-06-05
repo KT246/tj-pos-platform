@@ -9,6 +9,8 @@ coverage/
 **/coverage/
 playwright-report/
 test-results/
+.turbo/
+**/.turbo/
 
 .env
 .env.*

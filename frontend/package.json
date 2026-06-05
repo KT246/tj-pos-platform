@@ -5,9 +5,9 @@
   "scripts": {
     "dev:web": "pnpm --filter web dev",
     "dev:terminal": "pnpm --filter terminal dev",
-    "build": "pnpm -r --filter ./apps/* build",
+    "build": "turbo build",
     "lint": "eslint . --max-warnings=0",
-    "typecheck": "pnpm -r --filter ./apps/* typecheck",
+    "typecheck": "turbo typecheck",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest --passWithNoTests",
     "e2e": "playwright test --pass-with-no-tests",
@@ -33,6 +33,7 @@
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.8.0",
     "tailwindcss": "^4.3.0",
+    "turbo": "^2.6.3",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.60.1",
     "vitest": "^4.1.8"
