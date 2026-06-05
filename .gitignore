@@ -17,5 +17,6 @@ test-results/
 !.env.example
 
 *.tsbuildinfo
+dev-server*.log
 package-lock.json
 yarn.lock

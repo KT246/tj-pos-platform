@@ -8,5 +8,6 @@ test-results
 .env
 .env.*
 !.env.example
+dev-server*.log
 package-lock.json
 yarn.lock

@@ -79,6 +79,13 @@ docs/designs/02-platform-admin
 | 20 | `20-platform-audit-logs.png` | `/platform-admin/audit-logs` | Audit logs |
 | 21 | `21-platform-profile-security.png` | `/platform-admin/profile-security` | Admin profile/security |
 
+หมายเหตุ:
+
+```text
+แม้จะมี route /login แต่เว็บไซต์หลักไม่มีปุ่มหรือ link ไป /login
+/login เป็น Auth/Admin Entry สำหรับการเข้าผ่าน URL โดยตรง หรือ flow หลังทีม TJ POS setup account ให้แล้ว
+```
+
 ---
 
 ## 4. โครงสร้างไฟล์ที่ควรใช้
