@@ -32,6 +32,7 @@ import {
   RightRail,
   SummaryCard
 } from "../components/business-admin-primitives";
+import { BusinessAdminLink } from "../components/business-admin-link";
 import {
   branches,
   customers,
@@ -466,12 +467,12 @@ const purchaseColumns: TableColumn<Row>[] = [
     key: "ref",
     label: "Receipt #",
     render: (row, index) => (
-      <a
+      <BusinessAdminLink
         className="text-blue-600"
         href={`/business-admin/purchase-receipts/${index + 1}`}
       >
         {row[0]}
-      </a>
+      </BusinessAdminLink>
     )
   },
   { key: "supplier", label: "Supplier", render: (row) => row[1] },
