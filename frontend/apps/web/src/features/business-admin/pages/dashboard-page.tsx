@@ -25,6 +25,7 @@ import {
   toneClasses
 } from "../data/mock-business-admin";
 import { BusinessAdminShell } from "../layouts/business-admin-shell";
+import { BusinessAdminLink } from "../components/business-admin-link";
 
 type Order = {
   id: string;
@@ -138,9 +139,12 @@ function RecentOrdersCard() {
     <Card
       title="Recent Orders"
       action={
-        <a href="/business-admin/orders" className="text-xs font-black text-blue-600">
+        <BusinessAdminLink
+          href="/business-admin/orders"
+          className="text-xs font-black text-blue-600"
+        >
           View all orders
-        </a>
+        </BusinessAdminLink>
       }
     >
       <table className="w-full border-collapse text-left text-[11px]">
