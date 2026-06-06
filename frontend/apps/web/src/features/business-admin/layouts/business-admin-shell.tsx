@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   Bell,
   ChevronDown,
@@ -14,6 +13,7 @@ import type { ReactNode } from "react";
 
 import { activeBranch, businessName, sidebarItems } from "../data/mock-business-admin";
 import type { BusinessMenuKey } from "../types";
+import { BusinessAdminLink } from "../components/business-admin-link";
 import { TjLogo } from "../components/business-admin-primitives";
 
 export function BusinessAdminShell({
@@ -43,7 +43,7 @@ export function BusinessAdminShell({
               const isActive = item.label === active;
 
               return (
-                <Link
+                <BusinessAdminLink
                   key={item.label}
                   href={item.href}
                   className={`flex h-9 items-center gap-2.5 rounded-md px-2.5 text-[12px] font-extrabold transition ${
@@ -54,7 +54,7 @@ export function BusinessAdminShell({
                 >
                   <Icon className="h-4.5 w-4.5" />
                   <span className="truncate">{item.label}</span>
-                </Link>
+                </BusinessAdminLink>
               );
             })}
           </div>
@@ -93,13 +93,13 @@ export function BusinessAdminShell({
             </button>
             <TopSelect icon={Store} label={businessName} className="ml-auto" />
             <TopSelect icon={MapPin} label={activeBranch} />
-            <Link
+            <BusinessAdminLink
               href="/business-admin/pos"
               className="hidden h-10 items-center gap-2 rounded-md bg-blue-600 px-4 text-sm font-black text-white shadow-[0_8px_18px_rgba(37,99,235,0.2)] transition hover:bg-blue-700 lg:flex"
             >
               <Monitor className="h-4 w-4" />
               Open POS
-            </Link>
+            </BusinessAdminLink>
             <label className="relative hidden w-[330px] 2xl:flex">
               <Search className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-slate-400" />
               <input
