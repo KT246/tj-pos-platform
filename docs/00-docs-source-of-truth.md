@@ -24,6 +24,7 @@
 11. รูปภาพ UI ใน `docs/designs` ให้ยึด `13-ui-design-image-groups.md`
 12. Frontend stack ให้ยึด `14-frontend-stack.md`
 13. แผน dev Platform Admin ให้ยึด `15-platform-admin-dev-plan.md`
+14. UI prompt, group style, locked prompt rule และ QA checklist ให้ยึด `TJ_POS_MASTER_GUIDE.md`
 ```
 
 หมายเหตุ:
@@ -54,6 +55,7 @@
 | `13-ui-design-image-groups.md` | กฎจัดกลุ่มและตั้งชื่อรูปภาพ UI ใน `docs/designs` |
 | `14-frontend-stack.md` | แหล่งอ้างอิงหลักสำหรับ frontend stack และ package ที่ใช้ |
 | `15-platform-admin-dev-plan.md` | แผน dev Platform Admin จากรูป UI ใน `docs/designs/02-platform-admin` |
+| `TJ_POS_MASTER_GUIDE.md` | แหล่งอ้างอิงหลักสำหรับ UI prompt, group style, locked status, QA checklist และ anchor screen |
 
 หมายเหตุสำหรับ frontend setup:
 
@@ -101,6 +103,9 @@
 | ภาษาเว็บไซต์หลัก | `03-frontend-routes.md` | ไม่ใช้ i18n กลางทั้งระบบ; ใช้เฉพาะ Public Website ใน `frontend/apps/web` และรองรับเฉพาะ `lo` / `en` |
 | Route เว็บไซต์หลัก | `02-web-menu-list.md`, `03-frontend-routes.md`, `11-remaining-implementation-spec.md` | เว็บไซต์หลักใช้หน้า `/` หน้าเดียวและ hash section เช่น `/#pricing`; ไม่ใช้ route แยกของเมนูเว็บไซต์หลัก และไม่ใช้ route demo แยก |
 | Login บนเว็บไซต์หลัก | `02-web-menu-list.md`, `03-frontend-routes.md`, `15-platform-admin-dev-plan.md` | เว็บไซต์หลักไม่มีปุ่มหรือ link ไป `/login`; `/login` เป็น Auth/Admin Entry ที่เข้าผ่าน URL โดยตรงหรือ flow ภายในหลังทีม TJ POS setup ให้แล้ว |
+| Route Public Business / QR Menu | `02-web-menu-list.md`, `03-frontend-routes.md`, `TJ_POS_MASTER_GUIDE.md` | `/b/[businessSlug]` เป็น public route ของแต่ละร้าน ไม่ต้อง login และใช้กับ Public Menu / QR Menu เช่น `/b/[businessSlug]/menu` |
+| Route Business Workspace | `02-web-menu-list.md`, `03-frontend-routes.md`, `TJ_POS_MASTER_GUIDE.md` | Route หลัง login ของ Business Workspace ต้องใช้ `/business-admin/[businessSlug]/...`; ห้ามใช้ `/b/[businessSlug]/...` เป็น admin route และไม่ใช้ `/b/{businessSlug}` |
+| Master guide เก่ากับทิศทางใหม่ | `TJ_POS_MASTER_GUIDE.md`, `02-web-menu-list.md`, `03-frontend-routes.md`, `13-ui-design-image-groups.md` | Web หลักไม่มี Gallery, ไม่มี Request Demo route, ไม่มี Login ใน navbar; ใช้ `/` + hash sections เท่านั้น |
 | รูป Platform Admin | `13-ui-design-image-groups.md`, `15-platform-admin-dev-plan.md` | ใช้รูป 21 รูปใน `docs/designs/02-platform-admin` เป็น visual source of truth สำหรับ dev Platform Admin |
 | Staff / Role field | `05-menu-detail-spec.md`, `07-domain-schema.md`, `08-postgresql-database-schema.md` | ใช้ `branch_ids` สำหรับหลายสาขา และ role ต้องมี `bar` ด้วย |
 | Item status | `05-menu-detail-spec.md`, `07-domain-schema.md`, `08-postgresql-database-schema.md` | ใช้ status กลาง `active/inactive/suspended/archived`; สถานะขายใช้ `available_for_sale` และ stock แยกต่างหาก |
@@ -126,6 +131,7 @@ FE/BE collaboration → อ่าน 12
 UI image / screenshot / mockup → อ่าน 13
 Frontend stack / package → อ่าน 14
 Platform Admin dev plan → อ่าน 15
+UI prompt / group style / locked prompt → อ่าน TJ_POS_MASTER_GUIDE
 ```
 
 ---

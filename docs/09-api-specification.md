@@ -307,6 +307,7 @@ payments
 refunds
 inventory
 stock movements
+purchase receipts
 suppliers
 staff
 support tickets
@@ -329,6 +330,9 @@ permissions
 module settings
 branding
 receipt template
+platform system settings
+notification templates
+master payment config
 health
 ```
 
@@ -737,7 +741,63 @@ Paginated List
 
 ---
 
+## 8.10 Platform System Settings
+
+```text
+GET   /api/platform/system-settings
+PATCH /api/platform/system-settings
+```
+
+Response type:
+
+```text
+GET → Single Object
+PATCH → Single Object
+```
+
+ใช้ตั้งค่าระดับ platform เช่น default currency, support contact, system limits, global feature flags
+
+---
+
+## 8.11 Notification Templates
+
+```text
+GET   /api/platform/system-settings/notification-templates
+PATCH /api/platform/system-settings/notification-templates/:templateKey
+```
+
+Response type:
+
+```text
+GET → Simple List
+PATCH → Single Object
+```
+
+ใช้จัดการ template การแจ้งเตือนระดับระบบ
+
+---
+
+## 8.12 Master Payment Config
+
+```text
+GET   /api/platform/payments/settings
+PATCH /api/platform/payments/settings
+```
+
+Response type:
+
+```text
+GET → Single Object
+PATCH → Single Object
+```
+
+ใช้ตั้งค่า bank / QR / payment config กลางของ TJ POS สำหรับ subscription payment และการชำระเงินให้ทีม TJ POS
+
+---
+
 # 9. Business Profile API
+
+Business API กลุ่มนี้ใช้ให้แต่ละร้านจัดการข้อมูลของตัวเองตาม role, permission, plan, POS Type และ enabled modules โดย backend ต้องตรวจ `businessId` และ permission ทุกครั้ง
 
 ---
 
@@ -1806,6 +1866,71 @@ Single Object
 
 ---
 
+## 17.9 Purchase Receipts List
+
+```text
+GET /api/businesses/:businessId/purchase-receipts
+```
+
+Response type:
+
+```text
+Paginated List
+```
+
+Query:
+
+```text
+page
+limit
+branchId
+supplierId
+status
+from
+to
+search
+```
+
+---
+
+## 17.10 Purchase Receipt Detail
+
+```text
+GET /api/businesses/:businessId/purchase-receipts/:receiptId
+```
+
+Response type:
+
+```text
+Single Object
+```
+
+---
+
+## 17.11 Create / Update Purchase Receipt
+
+```text
+POST  /api/businesses/:businessId/purchase-receipts
+PATCH /api/businesses/:businessId/purchase-receipts/:receiptId
+```
+
+Response type:
+
+```text
+Single Object
+```
+
+Business rules:
+
+```text
+ต้องมี branchId
+ต้องมี supplierId ถ้าเป็นการรับของจาก supplier
+เมื่อ confirm แล้วสามารถสร้าง stock movement แบบ in ได้
+ห้ามแก้ข้อมูลสำคัญหลัง confirm ยกเว้นมี permission เฉพาะ
+```
+
+---
+
 # 18. Customers / Loyalty API
 
 ---
@@ -2807,7 +2932,37 @@ Platform Admin
 
 ---
 
-# 31. Health API
+# 31. Public Business / QR Menu API
+
+สถานะ: pending backend
+
+```text
+/b/[businessSlug]
+/b/[businessSlug]/menu
+/b/[businessSlug]/menu/[itemSlug]
+/b/[businessSlug]/info
+/b/[businessSlug]/book
+/b/[businessSlug]/branch/[branchSlug]/menu
+/q/[qrCode]
+```
+
+ตอนนี้โฟกัส FE ก่อน จึงยังไม่ชี้ขาด backend endpoint ของกลุ่มนี้
+
+Business rules:
+
+```text
+Public route กลุ่มนี้ไม่ต้อง login
+ข้อมูลต้องเป็น read-only สำหรับลูกค้า
+ต้องแสดงเฉพาะ business ที่ active
+ต้องแสดงเฉพาะ branch ที่ active
+ต้องแสดงเฉพาะ item ที่ public/published และ available ตาม rule ของร้าน
+ห้ามสร้าง order ห้าม checkout และห้ามชำระเงิน
+ถ้า item หมด ให้แสดง out-of-stock หรือซ่อนตาม setting ของร้าน
+```
+
+---
+
+# 32. Health API
 
 ```text
 GET /api/health
@@ -2830,7 +2985,7 @@ uptime
 
 ---
 
-# 32. สรุป API ที่ต้องมี Pagination
+# 33. สรุป API ที่ต้องมี Pagination
 
 ```text
 orders
@@ -2851,7 +3006,7 @@ devices
 
 ---
 
-# 33. สรุป API ที่ไม่ต้องมี Pagination
+# 34. สรุป API ที่ไม่ต้องมี Pagination
 
 ```text
 auth/me
@@ -2869,7 +3024,7 @@ health
 
 ---
 
-# 34. API ที่มีได้ทั้ง 2 รูปแบบ
+# 35. API ที่มีได้ทั้ง 2 รูปแบบ
 
 ```text
 branches
@@ -2889,7 +3044,7 @@ Select / dropdown / options → ใช้ Options List
 
 ---
 
-# 35. สรุป Module API ทั้งหมด
+# 36. สรุป Module API ทั้งหมด
 
 API ของ TJ POS แบ่งตาม module:
 
@@ -2905,6 +3060,7 @@ Payments / Payment Methods
 Refunds
 Cash Sessions
 Inventory / Suppliers
+Purchase Receipts
 Customers / Loyalty
 Promotions
 Tables / Kitchen
@@ -2917,12 +3073,14 @@ Support
 Files
 Import / Export
 Audit Logs
+Platform Settings / Notification Templates / Master Payment Config
+Public Business / QR Menu (pending backend)
 Health
 ```
 
 ---
 
-# 36. ข้อกำหนดเวลาเขียน API Spec รายละเอียด
+# 37. ข้อกำหนดเวลาเขียน API Spec รายละเอียด
 
 เมื่อเขียน spec รายละเอียดของแต่ละ API ต้องระบุ:
 
@@ -2941,7 +3099,7 @@ Errors
 
 ---
 
-## 37. ข้อสรุปสุดท้าย
+## 38. ข้อสรุปสุดท้าย
 
 เอกสารนี้เป็น API Specification ระดับระบบของ TJ POS
 
