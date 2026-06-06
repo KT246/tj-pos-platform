@@ -2,6 +2,8 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { CustomerDisplayPage } from "./features/customer-display/pages/customer-display-page";
 import type { CustomerDisplayRouteMode } from "./features/customer-display/types";
+import { KitchenDisplayPage } from "./features/kitchen-bar-display/pages/kitchen-display-page";
+import type { KitchenBoardMode } from "./features/kitchen-bar-display/types";
 import { PosTerminalPage } from "./features/pos-terminal/pages/pos-terminal-page";
 import type { PosScreen } from "./features/pos-terminal/types";
 import { StaffOrderPage } from "./features/staff-order-mobile/pages/staff-order-page";
@@ -19,6 +21,10 @@ function StaffOrderRoute({ screen }: { screen: StaffOrderScreen }) {
 
 function CustomerDisplayRoute({ mode }: { mode: CustomerDisplayRouteMode }) {
   return <CustomerDisplayPage mode={mode} />;
+}
+
+function KitchenDisplayRoute({ mode }: { mode: KitchenBoardMode }) {
+  return <KitchenDisplayPage mode={mode} />;
 }
 
 export function App() {
@@ -102,6 +108,18 @@ export function App() {
         <Route
           path="/terminal/b/:businessSlug/display/:deviceId"
           element={<CustomerDisplayRoute mode="device" />}
+        />
+        <Route
+          path="/terminal/b/:businessSlug/kitchen"
+          element={<KitchenDisplayRoute mode="kitchen" />}
+        />
+        <Route
+          path="/terminal/b/:businessSlug/bar"
+          element={<KitchenDisplayRoute mode="bar" />}
+        />
+        <Route
+          path="/terminal/b/:businessSlug/kitchen/ticket/:ticketId"
+          element={<KitchenDisplayRoute mode="kitchen" />}
         />
         <Route
           path="*"
