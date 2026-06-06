@@ -1,5 +1,6 @@
 import { create } from "zustand";
 
+import { showTerminalNotice } from "../../../lib/terminal-toasts";
 import {
   activeStaffOrders,
   selectedBranch,
@@ -23,7 +24,6 @@ type StaffOrderState = {
   cart: StaffOrderLine[];
   activeOrders: StaffOrderRecord[];
   lastSentOrder: StaffOrderRecord | null;
-  notice: string | null;
 };
 
 type StaffOrderActions = {
@@ -49,7 +49,6 @@ type StaffOrderActions = {
   startNewOrder: () => void;
   markServed: (orderId: string) => void;
   showNotice: (message: string) => void;
-  clearNotice: () => void;
 };
 
 function cloneLines(lines: StaffOrderLine[]) {
@@ -93,7 +92,6 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
     cart: starterStaffCart,
     activeOrders: activeStaffOrders,
     lastSentOrder: null,
-    notice: null,
     setSelectedBranch: (branch) => set({ selectedBranch: branch }),
     setSelectedTable: (tableId) => set({ selectedTableId: tableId }),
     incrementGuests: () =>
@@ -107,33 +105,41 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
         const existing = state.cart.find((line) => line.productId === product.id);
 
         if (existing) {
+          showTerminalNotice(`${product.name} added.`, "success");
+
           return {
             cart: state.cart.map((line) =>
               line.id === existing.id
                 ? { ...line, quantity: line.quantity + 1 }
                 : line
-            ),
-            notice: `${product.name} added.`
+            )
           };
         }
 
+        showTerminalNotice(`${product.name} added.`, "success");
+
         return {
-          cart: [...state.cart, createLine(product)],
-          notice: `${product.name} added.`
+          cart: [...state.cart, createLine(product)]
         };
       }),
     addCustomizedProduct: (product, options) =>
-      set((state) => ({
-        cart: [...state.cart, { ...createLine(product), ...options }],
-        notice: `${product.name} customized and added.`
-      })),
+      set((state) => {
+        showTerminalNotice(`${product.name} customized and added.`, "success");
+
+        return {
+          cart: [...state.cart, { ...createLine(product), ...options }]
+        };
+      }),
     updateLine: (lineId, patch) =>
-      set((state) => ({
-        cart: state.cart.map((line) =>
-          line.id === lineId ? { ...line, ...patch } : line
-        ),
-        notice: "Item options updated."
-      })),
+      set((state) => {
+        showTerminalNotice("Item options updated.", "success");
+
+        return {
+          cart: state.cart.map((line) =>
+            line.id === lineId ? { ...line, ...patch } : line
+          )
+        };
+      }),
     incrementLine: (lineId) =>
       set((state) => ({
         cart: state.cart.map((line) =>
@@ -150,7 +156,9 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
           )
           .filter((line) => line.quantity > 0)
       })),
-    saveDraft: () => set({ notice: "Order draft saved." }),
+    saveDraft: () => {
+      showTerminalNotice("Order draft saved.", "success");
+    },
     sendOrder: () =>
       set((state) => {
         const summary = getStaffCartSummary(state.cart);
@@ -166,29 +174,35 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
           lines: cloneLines(state.cart)
         };
 
+        showTerminalNotice(`${order.id} sent to kitchen and bar.`, "success");
+
         return {
           activeOrders: [order, ...state.activeOrders],
-          lastSentOrder: order,
-          notice: `${order.id} sent to kitchen and bar.`
+          lastSentOrder: order
         };
       }),
     startNewOrder: () =>
-      set({
-        selectedTableId: "T03",
-        guests: 3,
-        cart: [],
-        activeCategory: "all",
-        query: "",
-        notice: "New staff order ready."
+      set(() => {
+        showTerminalNotice("New staff order ready.", "info");
+
+        return {
+          selectedTableId: "T03",
+          guests: 3,
+          cart: [],
+          activeCategory: "all",
+          query: ""
+        };
       }),
     markServed: (orderId) =>
-      set((state) => ({
-        activeOrders: state.activeOrders.map((order) =>
-          order.id === orderId ? { ...order, status: "Waiting Bill" } : order
-        ),
-        notice: `${orderId} marked as served.`
-      })),
-    showNotice: (message) => set({ notice: message }),
-    clearNotice: () => set({ notice: null })
+      set((state) => {
+        showTerminalNotice(`${orderId} marked as served.`, "success");
+
+        return {
+          activeOrders: state.activeOrders.map((order) =>
+            order.id === orderId ? { ...order, status: "Waiting Bill" } : order
+          )
+        };
+      }),
+    showNotice: (message) => showTerminalNotice(message)
   })
 );

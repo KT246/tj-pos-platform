@@ -1,5 +1,6 @@
 import { create } from "zustand";
 
+import { showTerminalNotice } from "../../../lib/terminal-toasts";
 import { initialCart, openOrders, products } from "../data/mock-pos-data";
 import type {
   CartLine,
@@ -49,7 +50,6 @@ type PosTerminalState = {
   discountOpen: boolean;
   customerOpen: boolean;
   tableOpen: boolean;
-  notice: string | null;
 };
 
 type PosTerminalActions = {
@@ -82,7 +82,6 @@ type PosTerminalActions = {
   setCustomerOpen: (open: boolean) => void;
   setTableOpen: (open: boolean) => void;
   showNotice: (message: string) => void;
-  clearNotice: () => void;
 };
 
 function cloneCart(cart: CartLine[]) {
@@ -187,14 +186,16 @@ export const usePosTerminalStore = create<
   discountOpen: false,
   customerOpen: false,
   tableOpen: false,
-  notice: null,
   setActiveCategory: (categoryId) => set({ activeCategory: categoryId }),
   setQuery: (query) => set({ query }),
   addProduct: (product) =>
-    set((state) => ({
-      cart: addProductToCart(state.cart, product),
-      notice: `${product.name} added to cart.`
-    })),
+    set((state) => {
+      showTerminalNotice(`${product.name} added to cart.`, "success");
+
+      return {
+        cart: addProductToCart(state.cart, product)
+      };
+    }),
   scanBarcode: (barcode) =>
     set((state) => {
       const normalized = barcode.trim().toLowerCase();
@@ -206,16 +207,21 @@ export const usePosTerminalStore = create<
       );
 
       if (!product) {
+        showTerminalNotice(
+          `No item found for ${barcode || "this barcode"}.`,
+          "error"
+        );
+
         return {
-          scanOpen: false,
-          notice: `No item found for ${barcode || "this barcode"}.`
+          scanOpen: false
         };
       }
 
+      showTerminalNotice(`${product.name} scanned and added.`, "success");
+
       return {
         cart: addProductToCart(state.cart, product),
-        scanOpen: false,
-        notice: `${product.name} scanned and added.`
+        scanOpen: false
       };
     }),
   incrementLine: (lineId) =>
@@ -239,28 +245,38 @@ export const usePosTerminalStore = create<
       cart: state.cart.filter((line) => line.id !== lineId)
     })),
   clearCart: () =>
-    set({
-      cart: [],
-      discount: null,
-      activeOrderId: null,
-      notice: "Cart cleared."
+    set(() => {
+      showTerminalNotice("Cart cleared.", "info");
+
+      return {
+        cart: [],
+        discount: null,
+        activeOrderId: null
+      };
     }),
   startNewSale: () =>
-    set({
-      cart: [],
-      activeOrderId: null,
-      selectedTable: null,
-      orderType: "Dine In",
-      customer: null,
-      discount: null,
-      paymentMethod: "cash",
-      receivedAmount: 0,
-      notice: "New sale ready."
+    set(() => {
+      showTerminalNotice("New sale ready.", "info");
+
+      return {
+        cart: [],
+        activeOrderId: null,
+        selectedTable: null,
+        orderType: "Dine In",
+        customer: null,
+        discount: null,
+        paymentMethod: "cash",
+        receivedAmount: 0
+      };
     }),
   holdOrder: () =>
     set((state) => {
       if (state.cart.length === 0) {
-        return { notice: "Cart is empty. Add items before holding an order." };
+        showTerminalNotice(
+          "Cart is empty. Add items before holding an order.",
+          "warning"
+        );
+        return {};
       }
 
       const order = createOrderSnapshot({
@@ -273,6 +289,8 @@ export const usePosTerminalStore = create<
         status: "Held"
       });
 
+      showTerminalNotice(`${order.id} held for later checkout.`, "success");
+
       return {
         orders: [order, ...state.orders.filter((item) => item.id !== order.id)],
         cart: [],
@@ -280,8 +298,7 @@ export const usePosTerminalStore = create<
         selectedTable: null,
         orderType: "Dine In",
         customer: null,
-        discount: null,
-        notice: `${order.id} held for later checkout.`
+        discount: null
       };
     }),
   resumeOrder: (orderId) =>
@@ -289,8 +306,11 @@ export const usePosTerminalStore = create<
       const order = state.orders.find((item) => item.id === orderId);
 
       if (!order) {
-        return { notice: "Order was not found." };
+        showTerminalNotice("Order was not found.", "error");
+        return {};
       }
+
+      showTerminalNotice(`${order.id} loaded into cart.`, "info");
 
       return {
         activeOrderId: order.id,
@@ -300,55 +320,80 @@ export const usePosTerminalStore = create<
         customer: order.customerRecord ?? null,
         discount: order.discount ?? null,
         paymentMethod: order.paymentMethod ?? "cash",
-        receivedAmount: order.receivedAmount ?? order.amount,
-        notice: `${order.id} loaded into cart.`
+        receivedAmount: order.receivedAmount ?? order.amount
       };
     }),
   setOrderSearch: (query) => set({ orderSearch: query }),
   setSelectedTable: (tableId) =>
-    set({
-      selectedTable: tableId,
-      orderType: tableId ? "Dine In" : "Take Away",
-      tableOpen: false,
-      notice: tableId ? `${tableId} selected.` : "Take away selected."
+    set(() => {
+      showTerminalNotice(
+        tableId ? `${tableId} selected.` : "Take away selected.",
+        "info"
+      );
+
+      return {
+        selectedTable: tableId,
+        orderType: tableId ? "Dine In" : "Take Away",
+        tableOpen: false
+      };
     }),
   setOrderType: (orderType) =>
-    set({
-      orderType,
-      selectedTable: orderType === "Take Away" ? null : get().selectedTable,
-      notice:
+    set(() => {
+      showTerminalNotice(
         orderType === "Take Away"
           ? "Take away order selected."
-          : "Dine in order selected."
+          : "Dine in order selected.",
+        "info"
+      );
+
+      return {
+        orderType,
+        selectedTable: orderType === "Take Away" ? null : get().selectedTable
+      };
     }),
   setCustomer: (customer) =>
-    set({
-      customer,
-      customerOpen: false,
-      notice: `${customer?.name ?? "Walk-in Customer"} selected.`
+    set(() => {
+      showTerminalNotice(
+        `${customer?.name ?? "Walk-in Customer"} selected.`,
+        "info"
+      );
+
+      return {
+        customer,
+        customerOpen: false
+      };
     }),
   applyDiscount: (discount) =>
     set((state) => {
       if (state.cart.length === 0) {
-        return { notice: "Cart is empty. Add items before discount." };
+        showTerminalNotice("Cart is empty. Add items before discount.", "warning");
+        return {};
       }
+
+      showTerminalNotice(
+        discount.mode === "percent"
+          ? `${discount.value}% discount applied.`
+          : `${discount.value.toLocaleString("en-US")} LAK discount applied.`,
+        "success"
+      );
 
       return {
         discount,
-        discountOpen: false,
-        notice:
-          discount.mode === "percent"
-            ? `${discount.value}% discount applied.`
-            : `${discount.value.toLocaleString("en-US")} LAK discount applied.`
+        discountOpen: false
       };
     }),
-  clearDiscount: () => set({ discount: null, notice: "Discount removed." }),
+  clearDiscount: () =>
+    set(() => {
+      showTerminalNotice("Discount removed.", "info");
+      return { discount: null };
+    }),
   setPaymentMethod: (method) => set({ paymentMethod: method }),
   setReceivedAmount: (amount) => set({ receivedAmount: Math.max(amount, 0) }),
   confirmPayment: () =>
     set((state) => {
       if (state.cart.length === 0) {
-        return { notice: "Cart is empty. Add items before payment." };
+        showTerminalNotice("Cart is empty. Add items before payment.", "warning");
+        return {};
       }
 
       const summary = getCartSummary(state.cart, state.discount);
@@ -367,6 +412,8 @@ export const usePosTerminalStore = create<
             : summary.total
       });
 
+      showTerminalNotice(`${order.id} payment completed.`, "success");
+
       return {
         orders: [order, ...state.orders.filter((item) => item.id !== order.id)],
         lastPaidOrder: order,
@@ -379,8 +426,7 @@ export const usePosTerminalStore = create<
         receivedAmount: 0,
         refundSearch: order.id,
         refundOrderId: order.id,
-        refundSelectedLineIds: order.cart?.map((line) => line.id) ?? [],
-        notice: `${order.id} payment completed.`
+        refundSelectedLineIds: order.cart?.map((line) => line.id) ?? []
       };
     }),
   setRefundSearch: (query) => set({ refundSearch: query }),
@@ -395,17 +441,18 @@ export const usePosTerminalStore = create<
       );
 
       if (!order) {
+        showTerminalNotice("No completed receipt found.", "error");
         return {
           refundOrderId: null,
-          refundSelectedLineIds: [],
-          notice: "No completed receipt found."
+          refundSelectedLineIds: []
         };
       }
 
+      showTerminalNotice(`${order.id} ready for refund review.`, "info");
+
       return {
         refundOrderId: order.id,
-        refundSelectedLineIds: order.cart?.map((line) => line.id) ?? [],
-        notice: `${order.id} ready for refund review.`
+        refundSelectedLineIds: order.cart?.map((line) => line.id) ?? []
       };
     }),
   toggleRefundLine: (lineId) =>
@@ -417,18 +464,19 @@ export const usePosTerminalStore = create<
   confirmRefund: () =>
     set((state) => {
       if (!state.refundOrderId || state.refundSelectedLineIds.length === 0) {
-        return { notice: "Select at least one paid item to refund." };
+        showTerminalNotice("Select at least one paid item to refund.", "warning");
+        return {};
       }
 
+      showTerminalNotice(`${state.refundOrderId} refund request created.`, "success");
+
       return {
-        refundSelectedLineIds: [],
-        notice: `${state.refundOrderId} refund request created.`
+        refundSelectedLineIds: []
       };
     }),
   setScanOpen: (open) => set({ scanOpen: open }),
   setDiscountOpen: (open) => set({ discountOpen: open }),
   setCustomerOpen: (open) => set({ customerOpen: open }),
   setTableOpen: (open) => set({ tableOpen: open }),
-  showNotice: (message) => set({ notice: message }),
-  clearNotice: () => set({ notice: null })
+  showNotice: (message) => showTerminalNotice(message)
 }));
