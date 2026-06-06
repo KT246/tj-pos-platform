@@ -12,19 +12,10 @@ type KitchenDisplayPageProps = {
 export function KitchenDisplayPage({ mode }: KitchenDisplayPageProps) {
   const { businessSlug = "tj-cafe-vientiane", ticketId } = useParams();
   const setBoardMode = useKitchenDisplayStore((state) => state.setBoardMode);
-  const clearNotice = useKitchenDisplayStore((state) => state.clearNotice);
-  const notice = useKitchenDisplayStore((state) => state.notice);
 
   useEffect(() => {
     setBoardMode(mode);
   }, [mode, setBoardMode]);
-
-  useEffect(() => {
-    if (!notice) return;
-
-    const timer = window.setTimeout(clearNotice, 2200);
-    return () => window.clearTimeout(timer);
-  }, [clearNotice, notice]);
 
   return (
     <KitchenBoard

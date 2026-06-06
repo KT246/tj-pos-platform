@@ -41,7 +41,6 @@ export function KitchenBoard({
   const alertTicketId = useKitchenDisplayStore((state) => state.alertTicketId);
   const tickets = useKitchenDisplayStore((state) => state.tickets);
   const settings = useKitchenDisplayStore((state) => state.settings);
-  const notice = useKitchenDisplayStore((state) => state.notice);
   const setActiveStatus = useKitchenDisplayStore((state) => state.setActiveStatus);
   const setSelectedStation = useKitchenDisplayStore(
     (state) => state.setSelectedStation
@@ -135,12 +134,6 @@ export function KitchenBoard({
         onOpenSettings={() => setSettingsOpen(true)}
         onRefresh={handleRefresh}
       />
-
-      {notice ? (
-        <div className="fixed top-[88px] right-6 z-30 rounded-xl border border-emerald-100 bg-emerald-50 px-5 py-3 text-[13px] font-black text-emerald-700 shadow-sm">
-          {notice}
-        </div>
-      ) : null}
 
       <main className="grid min-h-0 flex-1 grid-rows-[auto_minmax(0,1fr)] gap-5 overflow-hidden p-6">
         <StatusAndFilters

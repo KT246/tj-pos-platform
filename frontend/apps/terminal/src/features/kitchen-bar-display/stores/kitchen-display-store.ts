@@ -1,5 +1,6 @@
 import { create } from "zustand";
 
+import { showTerminalNotice } from "../../../lib/terminal-toasts";
 import {
   defaultKitchenSettings,
   kitchenTickets
@@ -25,7 +26,6 @@ type KitchenDisplayState = {
   selectedTicketId: string | null;
   tickets: KitchenTicket[];
   settings: KitchenSettings;
-  notice: string | null;
 };
 
 type KitchenDisplayActions = {
@@ -46,7 +46,6 @@ type KitchenDisplayActions = {
   recallTicket: (ticketId: string) => void;
   dismissAlert: () => void;
   showNotice: (message: string) => void;
-  clearNotice: () => void;
 };
 
 function assignStaff(ticket: KitchenTicket) {
@@ -83,7 +82,6 @@ export const useKitchenDisplayStore = create<
   selectedTicketId: null,
   tickets: kitchenTickets,
   settings: defaultKitchenSettings,
-  notice: null,
   setBoardMode: (mode) =>
     set((state) => ({
       boardMode: mode,
@@ -124,7 +122,12 @@ export const useKitchenDisplayStore = create<
   startPreparing: (ticketId) =>
     set((state) => {
       const ticket = state.tickets.find((item) => item.id === ticketId);
-      if (!ticket) return { notice: "Ticket was not found." };
+      if (!ticket) {
+        showTerminalNotice("Ticket was not found.", "error");
+        return {};
+      }
+
+      showTerminalNotice(`${ticketId} moved to Preparing.`, "success");
 
       return {
         tickets: updateTicketStatus(state.tickets, ticketId, {
@@ -132,31 +135,41 @@ export const useKitchenDisplayStore = create<
           assignedTo: assignStaff(ticket)
         }),
         activeStatus: "preparing",
-        alertOpen: state.alertTicketId === ticketId ? false : state.alertOpen,
-        notice: `${ticketId} moved to Preparing.`
+        alertOpen: state.alertTicketId === ticketId ? false : state.alertOpen
       };
     }),
   markReady: (ticketId) =>
-    set((state) => ({
-      tickets: updateTicketStatus(state.tickets, ticketId, { status: "ready" }),
-      activeStatus: "ready",
-      notice: `${ticketId} marked ready.`
-    })),
+    set((state) => {
+      showTerminalNotice(`${ticketId} marked ready.`, "success");
+
+      return {
+        tickets: updateTicketStatus(state.tickets, ticketId, { status: "ready" }),
+        activeStatus: "ready"
+      };
+    }),
   completePickup: (ticketId) =>
-    set((state) => ({
-      tickets: updateTicketStatus(state.tickets, ticketId, { status: "done" }),
-      selectedTicketId: null,
-      notice: `${ticketId} completed and removed from Ready queue.`
-    })),
+    set((state) => {
+      showTerminalNotice(
+        `${ticketId} completed and removed from Ready queue.`,
+        "success"
+      );
+
+      return {
+        tickets: updateTicketStatus(state.tickets, ticketId, { status: "done" }),
+        selectedTicketId: null
+      };
+    }),
   recallTicket: (ticketId) =>
-    set((state) => ({
-      tickets: updateTicketStatus(state.tickets, ticketId, {
-        status: "preparing"
-      }),
-      activeStatus: "preparing",
-      notice: `${ticketId} recalled to Preparing.`
-    })),
+    set((state) => {
+      showTerminalNotice(`${ticketId} recalled to Preparing.`, "info");
+
+      return {
+        tickets: updateTicketStatus(state.tickets, ticketId, {
+          status: "preparing"
+        }),
+        activeStatus: "preparing"
+      };
+    }),
   dismissAlert: () => set({ alertOpen: false }),
-  showNotice: (message) => set({ notice: message }),
-  clearNotice: () => set({ notice: null })
+  showNotice: (message) => showTerminalNotice(message)
 }));

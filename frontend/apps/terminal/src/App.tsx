@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
+import { TerminalToastHost } from "./lib/terminal-toasts";
 import { CustomerDisplayPage } from "./features/customer-display/pages/customer-display-page";
 import type { CustomerDisplayRouteMode } from "./features/customer-display/types";
 import { KitchenDisplayPage } from "./features/kitchen-bar-display/pages/kitchen-display-page";
@@ -128,6 +129,7 @@ export function App() {
           }
         />
       </Routes>
+      <TerminalToastHost />
     </BrowserRouter>
   );
 }

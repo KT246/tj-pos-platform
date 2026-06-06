@@ -39,7 +39,6 @@ export function PosTerminalPage({ screen }: { screen: PosScreen }) {
   const discountOpen = usePosTerminalStore((state) => state.discountOpen);
   const customerOpen = usePosTerminalStore((state) => state.customerOpen);
   const tableOpen = usePosTerminalStore((state) => state.tableOpen);
-  const notice = usePosTerminalStore((state) => state.notice);
   const setActiveCategory = usePosTerminalStore(
     (state) => state.setActiveCategory
   );
@@ -63,14 +62,6 @@ export function PosTerminalPage({ screen }: { screen: PosScreen }) {
   const setCustomerOpen = usePosTerminalStore((state) => state.setCustomerOpen);
   const setTableOpen = usePosTerminalStore((state) => state.setTableOpen);
   const showNotice = usePosTerminalStore((state) => state.showNotice);
-  const clearNotice = usePosTerminalStore((state) => state.clearNotice);
-
-  useEffect(() => {
-    if (!notice) return;
-
-    const timer = window.setTimeout(clearNotice, 2400);
-    return () => window.clearTimeout(timer);
-  }, [clearNotice, notice]);
 
   useEffect(() => {
     if (screen === "new-sale") {
@@ -117,11 +108,6 @@ export function PosTerminalPage({ screen }: { screen: PosScreen }) {
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-[#f3f7fb] text-slate-950">
       <TerminalTopBar />
-      {notice ? (
-        <div className="fixed top-[66px] right-4 z-30 rounded-lg border border-emerald-100 bg-emerald-50 px-4 py-2 text-[12px] font-black text-emerald-600 shadow-sm">
-          {notice}
-        </div>
-      ) : null}
       <main className="min-h-0 flex-1 overflow-hidden p-3">
         {screen === "checkout" ? (
           <CheckoutView businessSlug={businessSlug} />
