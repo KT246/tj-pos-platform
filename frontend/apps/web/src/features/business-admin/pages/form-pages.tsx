@@ -1,4 +1,5 @@
 import {
+  Boxes,
   Building2,
   ChevronLeft,
   CheckCircle2,
@@ -30,6 +31,7 @@ import {
   SummaryCard,
   Tabs
 } from "../components/business-admin-primitives";
+import { BusinessAdminLink } from "../components/business-admin-link";
 import { importExportActions, pageKpis } from "../data/mock-business-admin";
 import { BusinessAdminShell } from "../layouts/business-admin-shell";
 import type { BusinessMenuKey, Kpi } from "../types";
@@ -42,16 +44,16 @@ export function BranchFormPage() {
         description="Update branch details, settings and assignments."
         breadcrumb={
           <div className="flex items-center gap-2 text-xs font-bold text-slate-500">
-            <a
+            <BusinessAdminLink
               href="/business-admin/branches"
               className="flex h-8 w-8 items-center justify-center rounded-md border border-blue-100 text-blue-600 hover:bg-blue-50"
               aria-label="Back to branches"
             >
               <ChevronLeft className="h-4 w-4" />
-            </a>
-            <a href="/business-admin/branches" className="text-blue-600">
+            </BusinessAdminLink>
+            <BusinessAdminLink href="/business-admin/branches" className="text-blue-600">
               Branches
-            </a>
+            </BusinessAdminLink>
             <span>/</span>
             <span>Branch Form</span>
           </div>
@@ -389,6 +391,43 @@ export function ItemVariantsPage() {
         <Field label="Milk Options" value="Fresh Milk, Oat Milk, Soy Milk" full />
         <Field label="Sugar Level" value="0%, 25%, 50%, 75%, 100%" full />
       </FormCard>
+    </FormShell>
+  );
+}
+
+export function CategoryFormPage() {
+  return (
+    <FormShell
+      active="Categories"
+      title="Category Form"
+      description="Create or edit product and menu categories, branch visibility, and ordering rules."
+      kpis={pageKpis.items}
+      right={<ValidationRail title="Category Rules" />}
+    >
+      <FormCard title="Category Details">
+        <Field label="Category Name" value="Coffee" />
+        <Field label="Lao Name" value="ກາເຟ" />
+        <Field label="Department" value="Beverage" type="select" />
+        <Field label="Status" value="Active" type="select" />
+        <Field
+          label="Description"
+          value="Coffee drinks, espresso-based drinks, and iced coffee menu items."
+          type="textarea"
+          full
+        />
+      </FormCard>
+      <FormCard title="Display Settings">
+        <Field label="Branch Visibility" value="All Branches" type="select" />
+        <Field label="Public Menu Visibility" value="Visible" type="select" />
+        <Field label="Sort Order" value="1" />
+        <Field label="Icon" value="Coffee Cup" type="select" />
+      </FormCard>
+      <QuickActionsCard
+        actions={[
+          { label: "Preview Category", icon: Boxes, tone: "blue" },
+          { label: "Apply to Public Menu", icon: CheckCircle2, tone: "emerald" }
+        ]}
+      />
     </FormShell>
   );
 }
