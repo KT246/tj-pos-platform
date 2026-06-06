@@ -1,5 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
+import { CustomerDisplayPage } from "./features/customer-display/pages/customer-display-page";
+import type { CustomerDisplayRouteMode } from "./features/customer-display/types";
 import { PosTerminalPage } from "./features/pos-terminal/pages/pos-terminal-page";
 import type { PosScreen } from "./features/pos-terminal/types";
 import { StaffOrderPage } from "./features/staff-order-mobile/pages/staff-order-page";
@@ -13,6 +15,10 @@ function PosRoute({ screen }: { screen: PosScreen }) {
 
 function StaffOrderRoute({ screen }: { screen: StaffOrderScreen }) {
   return <StaffOrderPage screen={screen} />;
+}
+
+function CustomerDisplayRoute({ mode }: { mode: CustomerDisplayRouteMode }) {
+  return <CustomerDisplayPage mode={mode} />;
 }
 
 export function App() {
@@ -84,6 +90,18 @@ export function App() {
         <Route
           path="/terminal/b/:businessSlug/staff-order/profile"
           element={<StaffOrderRoute screen="profile" />}
+        />
+        <Route
+          path="/terminal/b/:businessSlug/display"
+          element={<CustomerDisplayRoute mode="idle" />}
+        />
+        <Route
+          path="/terminal/b/:businessSlug/display/pair"
+          element={<CustomerDisplayRoute mode="pair" />}
+        />
+        <Route
+          path="/terminal/b/:businessSlug/display/:deviceId"
+          element={<CustomerDisplayRoute mode="device" />}
         />
         <Route
           path="*"
