@@ -1,6 +1,17 @@
 import { BrowserRouter, Navigate, Route, Routes, useParams } from "react-router-dom";
 
 import {
+  AppointmentCalendarPage,
+  BeautyCommissionPage,
+  BeautyCustomerHistoryPage,
+  BeautyDailySchedulePage,
+  BeautyPackagesPage,
+  BeautyServicesPage,
+  BeautyStaffSchedulePage,
+  CreateAppointmentPage,
+  DepositPolicyPage
+} from "./features/business-admin/pages/beauty-specific-pages";
+import {
   BaristaQueueDetailPage,
   CafeDailyQuickViewPage,
   CafeFloorTableMapPage,
@@ -82,60 +93,252 @@ export function App() {
           path="/business-admin"
           element={<Navigate to={`/business-admin/${defaultBusinessSlug}`} replace />}
         />
-        <Route path="/business-admin/:businessSlug" element={<BusinessDashboardPage />} />
-        <Route path="/business-admin/:businessSlug/profile" element={<BusinessProfilePage />} />
+        <Route
+          path="/business-admin/:businessSlug"
+          element={<BusinessDashboardPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/profile"
+          element={<BusinessProfilePage />}
+        />
         <Route path="/business-admin/:businessSlug/orders" element={<OrdersPage />} />
+        <Route
+          path="/business-admin/:businessSlug/appointments"
+          element={<AppointmentCalendarPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/appointments/create"
+          element={<CreateAppointmentPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/calendar"
+          element={<AppointmentCalendarPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/bookings"
+          element={<AppointmentCalendarPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/walk-in"
+          element={<CreateAppointmentPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/services"
+          element={<BeautyServicesPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/staff-schedule"
+          element={<BeautyStaffSchedulePage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/packages"
+          element={<BeautyPackagesPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/commission"
+          element={<BeautyCommissionPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/customer-history"
+          element={<BeautyCustomerHistoryPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/deposit-policy"
+          element={<DepositPolicyPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/beauty-daily-schedule"
+          element={<BeautyDailySchedulePage />}
+        />
         <Route path="/business-admin/:businessSlug/items" element={<ItemsListPage />} />
-        <Route path="/business-admin/:businessSlug/items/create" element={<ItemFormPage />} />
-        <Route path="/business-admin/:businessSlug/items/variants" element={<ItemVariantsPage />} />
-        <Route path="/business-admin/:businessSlug/categories" element={<CategoriesListPage />} />
-        <Route path="/business-admin/:businessSlug/categories/create" element={<CategoryFormPage />} />
-        <Route path="/business-admin/:businessSlug/inventory" element={<InventoryOverviewPage />} />
-        <Route path="/business-admin/:businessSlug/stock-movements" element={<StockMovementsPage />} />
-        <Route path="/business-admin/:businessSlug/stock-in" element={<StockInPage />} />
-        <Route path="/business-admin/:businessSlug/stock-adjustment" element={<StockAdjustmentPage />} />
-        <Route path="/business-admin/:businessSlug/stock-count" element={<StockCountPage />} />
-        <Route path="/business-admin/:businessSlug/low-stock-expiry" element={<LowStockExpiryPage />} />
-        <Route path="/business-admin/:businessSlug/goods-receiving" element={<GoodsReceivingPage />} />
-        <Route path="/business-admin/:businessSlug/returns" element={<ReturnExchangeCounterPage />} />
-        <Route path="/business-admin/:businessSlug/barcode-labels" element={<BarcodeLabelsPage />} />
-        <Route path="/business-admin/:businessSlug/suppliers" element={<SuppliersListPage />} />
-        <Route path="/business-admin/:businessSlug/suppliers/create" element={<SupplierFormPage />} />
-        <Route path="/business-admin/:businessSlug/purchase-receipts" element={<PurchaseReceiptsPage />} />
-        <Route path="/business-admin/:businessSlug/purchase-receipts/:receiptId" element={<PurchaseReceiptDetailPage />} />
-        <Route path="/business-admin/:businessSlug/customers" element={<CustomersListPage />} />
-        <Route path="/business-admin/:businessSlug/customers/:customerId" element={<CustomerDetailPage />} />
-        <Route path="/business-admin/:businessSlug/loyalty" element={<LoyaltySettingsPage />} />
-        <Route path="/business-admin/:businessSlug/promotions" element={<PromotionsListPage />} />
-        <Route path="/business-admin/:businessSlug/promotions/create" element={<PromotionFormPage />} />
+        <Route
+          path="/business-admin/:businessSlug/items/create"
+          element={<ItemFormPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/items/variants"
+          element={<ItemVariantsPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/categories"
+          element={<CategoriesListPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/categories/create"
+          element={<CategoryFormPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/inventory"
+          element={<InventoryOverviewPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/stock-movements"
+          element={<StockMovementsPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/stock-in"
+          element={<StockInPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/stock-adjustment"
+          element={<StockAdjustmentPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/stock-count"
+          element={<StockCountPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/low-stock-expiry"
+          element={<LowStockExpiryPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/goods-receiving"
+          element={<GoodsReceivingPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/returns"
+          element={<ReturnExchangeCounterPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/barcode-labels"
+          element={<BarcodeLabelsPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/suppliers"
+          element={<SuppliersListPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/suppliers/create"
+          element={<SupplierFormPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/purchase-receipts"
+          element={<PurchaseReceiptsPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/purchase-receipts/:receiptId"
+          element={<PurchaseReceiptDetailPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/customers"
+          element={<CustomersListPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/customers/:customerId"
+          element={<CustomerDetailPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/loyalty"
+          element={<LoyaltySettingsPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/promotions"
+          element={<PromotionsListPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/promotions/create"
+          element={<PromotionFormPage />}
+        />
         <Route path="/business-admin/:businessSlug/staff" element={<StaffListPage />} />
-        <Route path="/business-admin/:businessSlug/staff/:staffId" element={<StaffDetailPage />} />
-        <Route path="/business-admin/:businessSlug/roles-permissions" element={<RolesPermissionsPage />} />
-        <Route path="/business-admin/:businessSlug/branches" element={<BranchesListPage />} />
-        <Route path="/business-admin/:businessSlug/branches/create" element={<BranchFormPage />} />
+        <Route
+          path="/business-admin/:businessSlug/staff/:staffId"
+          element={<StaffDetailPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/roles-permissions"
+          element={<RolesPermissionsPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/branches"
+          element={<BranchesListPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/branches/create"
+          element={<BranchFormPage />}
+        />
         <Route path="/business-admin/:businessSlug/devices" element={<DevicesPage />} />
         <Route path="/business-admin/:businessSlug/reports" element={<ReportsPage />} />
-        <Route path="/business-admin/:businessSlug/receipt-bill" element={<ReceiptBillSettingsPage />} />
-        <Route path="/business-admin/:businessSlug/branding" element={<BrandingThemePage />} />
-        <Route path="/business-admin/:businessSlug/payment-methods" element={<PaymentMethodsPage />} />
-        <Route path="/business-admin/:businessSlug/modules" element={<ModuleSettingsPage />} />
-        <Route path="/business-admin/:businessSlug/import" element={<ImportCenterPage />} />
-        <Route path="/business-admin/:businessSlug/export" element={<ExportCenterPage />} />
-        <Route path="/business-admin/:businessSlug/settings" element={<SettingsPage />} />
+        <Route
+          path="/business-admin/:businessSlug/receipt-bill"
+          element={<ReceiptBillSettingsPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/branding"
+          element={<BrandingThemePage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/payment-methods"
+          element={<PaymentMethodsPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/modules"
+          element={<ModuleSettingsPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/import"
+          element={<ImportCenterPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/export"
+          element={<ExportCenterPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/settings"
+          element={<SettingsPage />}
+        />
         <Route path="/business-admin/:businessSlug/support" element={<SupportPage />} />
-        <Route path="/business-admin/:businessSlug/audit-logs" element={<AuditLogsPage />} />
-        <Route path="/business-admin/:businessSlug/pos" element={<PosPlaceholderPage />} />
-        <Route path="/business-admin/:businessSlug/tables" element={<RestaurantOrCafeTables />} />
-        <Route path="/business-admin/:businessSlug/modifiers" element={<CoffeeModifiersPage />} />
-        <Route path="/business-admin/:businessSlug/barista-queue" element={<BaristaQueueDetailPage />} />
-        <Route path="/business-admin/:businessSlug/happy-hour" element={<HappyHourComboSetupPage />} />
-        <Route path="/business-admin/:businessSlug/cafe-daily-view" element={<CafeDailyQuickViewPage />} />
-        <Route path="/business-admin/:businessSlug/reservations" element={<ReservationBookPage />} />
-        <Route path="/business-admin/:businessSlug/kitchen-courses" element={<KitchenCourseManagementPage />} />
-        <Route path="/business-admin/:businessSlug/split-bill" element={<SplitBillPage />} />
-        <Route path="/business-admin/:businessSlug/service-charge" element={<ServiceChargeTaxPreviewPage />} />
-        <Route path="/business-admin/:businessSlug/merge-transfer-table" element={<MergeTransferTablePage />} />
-        <Route path="/business-admin/:businessSlug/end-of-day" element={<RestaurantEndOfDaySummaryPage />} />
+        <Route
+          path="/business-admin/:businessSlug/audit-logs"
+          element={<AuditLogsPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/pos"
+          element={<PosPlaceholderPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/tables"
+          element={<RestaurantOrCafeTables />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/modifiers"
+          element={<CoffeeModifiersPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/barista-queue"
+          element={<BaristaQueueDetailPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/happy-hour"
+          element={<HappyHourComboSetupPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/cafe-daily-view"
+          element={<CafeDailyQuickViewPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/reservations"
+          element={<ReservationBookPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/kitchen-courses"
+          element={<KitchenCourseManagementPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/split-bill"
+          element={<SplitBillPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/service-charge"
+          element={<ServiceChargeTaxPreviewPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/merge-transfer-table"
+          element={<MergeTransferTablePage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/end-of-day"
+          element={<RestaurantEndOfDaySummaryPage />}
+        />
         <Route
           path="*"
           element={<Navigate to={`/business-admin/${defaultBusinessSlug}`} replace />}

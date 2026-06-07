@@ -43,15 +43,29 @@ export function BusinessAdminShell({
             {sidebarItems.map((item) => {
               const Icon = item.icon;
               const isActive = item.label === active;
+              const isBeautyItem =
+                item.label === "Appointments" ||
+                item.label === "Calendar" ||
+                item.label === "Bookings" ||
+                item.label === "Walk-in" ||
+                item.label === "Services" ||
+                item.label === "Staff Schedule" ||
+                item.label === "Packages" ||
+                item.label === "Deposit Policy" ||
+                item.label === "Beauty Daily";
+              const activeClass = isBeautyItem
+                ? "bg-pink-50 text-pink-600"
+                : "bg-blue-50 text-blue-600";
+              const idleClass = isBeautyItem
+                ? "text-slate-800 hover:bg-pink-50 hover:text-pink-600"
+                : "text-slate-800 hover:bg-slate-50 hover:text-blue-600";
 
               return (
                 <BusinessAdminLink
                   key={item.label}
                   href={item.href}
                   className={`flex h-9 items-center gap-2.5 rounded-md px-2.5 text-[12px] font-extrabold transition ${
-                    isActive
-                      ? "bg-blue-50 text-blue-600"
-                      : "text-slate-800 hover:bg-slate-50 hover:text-blue-600"
+                    isActive ? activeClass : idleClass
                   }`}
                 >
                   <Icon className="h-4.5 w-4.5" />

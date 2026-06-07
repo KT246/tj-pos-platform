@@ -745,11 +745,17 @@ Restaurant End-of-Day Summary
 
 ```text
 /business-admin/[businessSlug]/appointments
+/business-admin/[businessSlug]/appointments/create
 /business-admin/[businessSlug]/calendar
+/business-admin/[businessSlug]/bookings
+/business-admin/[businessSlug]/walk-in
 /business-admin/[businessSlug]/services
+/business-admin/[businessSlug]/staff-schedule
 /business-admin/[businessSlug]/packages
 /business-admin/[businessSlug]/commission
 /business-admin/[businessSlug]/customer-history
+/business-admin/[businessSlug]/deposit-policy
+/business-admin/[businessSlug]/beauty-daily-schedule
 ```
 
 ความหมาย:
@@ -757,10 +763,15 @@ Restaurant End-of-Day Summary
 ```text
 Appointments
 Calendar
+Bookings
+Walk-in
 Services
+Staff Schedule
 Packages / Treatment Course
 Commission
 Customer History
+Deposit Policy
+Beauty Daily Schedule
 ```
 
 ---

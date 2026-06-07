@@ -5,6 +5,7 @@ import {
   Boxes,
   Building2,
   CalendarCheck,
+  CalendarDays,
   ChartNoAxesCombined,
   ChefHat,
   Clock3,
@@ -18,6 +19,7 @@ import {
   Gift,
   GitMerge,
   HandCoins,
+  HeartPulse,
   History,
   LayoutDashboard,
   Map,
@@ -59,24 +61,57 @@ export const sidebarItems: {
   { label: "Dashboard", href: "/business-admin", icon: LayoutDashboard },
   { label: "POS", href: "/business-admin/pos", icon: Monitor },
   { label: "Orders", href: "/business-admin/orders", icon: ClipboardList },
+  { label: "Appointments", href: "/business-admin/appointments", icon: CalendarCheck },
+  { label: "Calendar", href: "/business-admin/calendar", icon: CalendarDays },
+  { label: "Bookings", href: "/business-admin/bookings", icon: ClipboardList },
+  { label: "Walk-in", href: "/business-admin/walk-in", icon: UserPlus },
   { label: "Items", href: "/business-admin/items", icon: Package },
+  { label: "Services", href: "/business-admin/services", icon: Sparkles },
   { label: "Categories", href: "/business-admin/categories", icon: Boxes },
   { label: "Table Map", href: "/business-admin/tables", icon: Map },
   { label: "Modifiers", href: "/business-admin/modifiers", icon: SlidersHorizontal },
   { label: "Barista Queue", href: "/business-admin/barista-queue", icon: Coffee },
-  { label: "Pickup Display", href: "/terminal/b/[businessSlug]/pickup-display", icon: Monitor },
+  {
+    label: "Pickup Display",
+    href: "/terminal/b/[businessSlug]/pickup-display",
+    icon: Monitor
+  },
   { label: "Happy Hour", href: "/business-admin/happy-hour", icon: Clock3 },
-  { label: "Cafe Daily View", href: "/business-admin/cafe-daily-view", icon: ChartNoAxesCombined },
+  {
+    label: "Cafe Daily View",
+    href: "/business-admin/cafe-daily-view",
+    icon: ChartNoAxesCombined
+  },
   { label: "Reservations", href: "/business-admin/reservations", icon: CalendarCheck },
   { label: "Kitchen Courses", href: "/business-admin/kitchen-courses", icon: ChefHat },
   { label: "Split Bill", href: "/business-admin/split-bill", icon: Split },
   { label: "Service Charge", href: "/business-admin/service-charge", icon: Percent },
-  { label: "Merge / Transfer", href: "/business-admin/merge-transfer-table", icon: GitMerge },
+  {
+    label: "Merge / Transfer",
+    href: "/business-admin/merge-transfer-table",
+    icon: GitMerge
+  },
   { label: "End of Day", href: "/business-admin/end-of-day", icon: ReceiptText },
+  {
+    label: "Staff Schedule",
+    href: "/business-admin/staff-schedule",
+    icon: CalendarDays
+  },
+  { label: "Packages", href: "/business-admin/packages", icon: Sparkles },
+  { label: "Deposit Policy", href: "/business-admin/deposit-policy", icon: HandCoins },
+  {
+    label: "Beauty Daily",
+    href: "/business-admin/beauty-daily-schedule",
+    icon: HeartPulse
+  },
   { label: "Inventory", href: "/business-admin/inventory", icon: Warehouse },
   { label: "Stock Movements", href: "/business-admin/stock-movements", icon: History },
   { label: "Stock Count", href: "/business-admin/stock-count", icon: ClipboardCheck },
-  { label: "Goods Receiving", href: "/business-admin/goods-receiving", icon: PackagePlus },
+  {
+    label: "Goods Receiving",
+    href: "/business-admin/goods-receiving",
+    icon: PackagePlus
+  },
   { label: "Returns", href: "/business-admin/returns", icon: RefreshCcw },
   {
     label: "Low Stock / Expiry",

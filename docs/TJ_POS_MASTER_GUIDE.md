@@ -248,7 +248,7 @@ There are **136 UI screens** divided into **13 groups**.
 | Retail-specific       | UI-104–UI-108 | Pending                                                         |
 | Cafe-specific         | UI-109–UI-114 | Implemented / pending review                                    |
 | Restaurant-specific   | UI-115–UI-121 | Source image added / in implementation                          |
-| Beauty-specific       | UI-122–UI-129 | Pending                                                         |
+| Beauty-specific       | UI-122–UI-129 | Implemented / pending review                                    |
 | Hospitality-specific  | UI-130–UI-136 | Pending                                                         |
 
 ---
@@ -875,6 +875,23 @@ UI-128 Deposit / Cancellation Policy
 UI-129 Beauty Daily Schedule Board
 ```
 
+### Implemented Routes
+
+```text
+/business-admin/[businessSlug]/appointments
+/business-admin/[businessSlug]/appointments/create
+/business-admin/[businessSlug]/calendar
+/business-admin/[businessSlug]/bookings
+/business-admin/[businessSlug]/walk-in
+/business-admin/[businessSlug]/services
+/business-admin/[businessSlug]/staff-schedule
+/business-admin/[businessSlug]/packages
+/business-admin/[businessSlug]/commission
+/business-admin/[businessSlug]/customer-history
+/business-admin/[businessSlug]/deposit-policy
+/business-admin/[businessSlug]/beauty-daily-schedule
+```
+
 ---
 
 ## 8.13 Hospitality-specific
@@ -1056,7 +1073,6 @@ Public Menu / QR Menu
 Retail-specific
 Cafe-specific
 Restaurant-specific
-Beauty-specific
 Hospitality-specific
 ```
 
