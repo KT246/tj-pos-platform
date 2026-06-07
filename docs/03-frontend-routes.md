@@ -935,25 +935,25 @@ order ที่พักไว้
 ใช้โดย waiter หรือพนักงานบริการ ลูกค้าไม่ใช้หน้านี้
 
 ```text
-/terminal/b/[businessSlug]/staff-order
+/staff-order/b/[businessSlug]
 ```
 
 หน้าหลัก Staff Order
 
 ```text
-/terminal/b/[businessSlug]/staff-order/tables
+/staff-order/b/[businessSlug]/tables
 ```
 
 รายชื่อโต๊ะ
 
 ```text
-/terminal/b/[businessSlug]/staff-order/table/[tableId]
+/staff-order/b/[businessSlug]/table/[tableId]
 ```
 
 รับ order ตามโต๊ะ
 
 ```text
-/terminal/b/[businessSlug]/staff-order/review
+/staff-order/b/[businessSlug]/review
 ```
 
 ตรวจ order ก่อนส่ง
@@ -1147,9 +1147,9 @@ Customer Display ตามอุปกรณ์
 ## Waiter
 
 ```text
-/terminal/b/[businessSlug]/staff-order
-/terminal/b/[businessSlug]/staff-order/tables
-/terminal/b/[businessSlug]/staff-order/table/[tableId]
+/staff-order/b/[businessSlug]
+/staff-order/b/[businessSlug]/tables
+/staff-order/b/[businessSlug]/table/[tableId]
 ```
 
 ---

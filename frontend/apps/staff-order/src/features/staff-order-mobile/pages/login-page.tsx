@@ -72,12 +72,8 @@ export function StaffLoginPage({ businessSlug }: { businessSlug: string }) {
               <Sun className="h-8 w-8" />
             </span>
             <div className="min-w-0">
-              <p className="text-[13px] font-bold text-slate-500">
-                Today's Shift
-              </p>
-              <h3 className="text-[19px] font-black text-slate-950">
-                Morning Shift
-              </h3>
+              <p className="text-[13px] font-bold text-slate-500">Today's Shift</p>
+              <h3 className="text-[19px] font-black text-slate-950">Morning Shift</h3>
               <p className="mt-2 flex items-center gap-3 text-[12px] font-bold text-slate-500">
                 <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-emerald-600">
                   Open

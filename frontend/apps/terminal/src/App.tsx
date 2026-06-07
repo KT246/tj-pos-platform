@@ -8,17 +8,11 @@ import { KitchenDisplayPage } from "./features/kitchen-bar-display/pages/kitchen
 import type { KitchenBoardMode } from "./features/kitchen-bar-display/types";
 import { PosTerminalPage } from "./features/pos-terminal/pages/pos-terminal-page";
 import type { PosScreen } from "./features/pos-terminal/types";
-import { StaffOrderPage } from "./features/staff-order-mobile/pages/staff-order-page";
-import type { StaffOrderScreen } from "./features/staff-order-mobile/types";
 
 const defaultBusinessSlug = "tj-cafe-vientiane";
 
 function PosRoute({ screen }: { screen: PosScreen }) {
   return <PosTerminalPage screen={screen} />;
-}
-
-function StaffOrderRoute({ screen }: { screen: StaffOrderScreen }) {
-  return <StaffOrderPage screen={screen} />;
 }
 
 function CustomerDisplayRoute({ mode }: { mode: CustomerDisplayRouteMode }) {
@@ -35,9 +29,7 @@ export function App() {
       <Routes>
         <Route
           path="/"
-          element={
-            <Navigate to={`/terminal/b/${defaultBusinessSlug}/pos`} replace />
-          }
+          element={<Navigate to={`/terminal/b/${defaultBusinessSlug}/pos`} replace />}
         />
         <Route
           path="/terminal/b/:businessSlug/pos"
@@ -66,38 +58,6 @@ export function App() {
         <Route
           path="/terminal/b/:businessSlug/pos/refund"
           element={<PosRoute screen="refund" />}
-        />
-        <Route
-          path="/terminal/b/:businessSlug/staff-order"
-          element={<StaffOrderRoute screen="login" />}
-        />
-        <Route
-          path="/terminal/b/:businessSlug/staff-order/tables"
-          element={<StaffOrderRoute screen="tables" />}
-        />
-        <Route
-          path="/terminal/b/:businessSlug/staff-order/table/:tableId"
-          element={<StaffOrderRoute screen="menu" />}
-        />
-        <Route
-          path="/terminal/b/:businessSlug/staff-order/table/:tableId/item/:itemId"
-          element={<StaffOrderRoute screen="customize" />}
-        />
-        <Route
-          path="/terminal/b/:businessSlug/staff-order/review"
-          element={<StaffOrderRoute screen="review" />}
-        />
-        <Route
-          path="/terminal/b/:businessSlug/staff-order/success"
-          element={<StaffOrderRoute screen="success" />}
-        />
-        <Route
-          path="/terminal/b/:businessSlug/staff-order/orders"
-          element={<StaffOrderRoute screen="orders" />}
-        />
-        <Route
-          path="/terminal/b/:businessSlug/staff-order/profile"
-          element={<StaffOrderRoute screen="profile" />}
         />
         <Route
           path="/terminal/b/:businessSlug/display"
@@ -129,9 +89,7 @@ export function App() {
         />
         <Route
           path="*"
-          element={
-            <Navigate to={`/terminal/b/${defaultBusinessSlug}/pos`} replace />
-          }
+          element={<Navigate to={`/terminal/b/${defaultBusinessSlug}/pos`} replace />}
         />
       </Routes>
       <TerminalToastHost />

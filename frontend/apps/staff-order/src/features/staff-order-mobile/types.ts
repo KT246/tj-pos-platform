@@ -1,5 +1,3 @@
-import type { Product } from "../pos-terminal/types";
-
 export type StaffOrderScreen =
   | "login"
   | "tables"
@@ -37,6 +35,21 @@ export type StaffOrderRecord = {
   lines: StaffOrderLine[];
 };
 
-export type StaffOrderProduct = Product & {
+export type StaffOrderProduct = {
+  id: string;
+  name: string;
+  category: string;
+  sku: string;
+  price: number;
+  image: string;
+  badge?: string;
   label?: string;
+};
+
+export type DiningTable = {
+  id: string;
+  seats: number;
+  area: "Indoor" | "Outdoor" | "VIP Room" | "Terrace";
+  status: "Available" | "Occupied" | "Reserved";
+  elapsed?: string;
 };

@@ -1,14 +1,15 @@
 import type { StaffOrderLine } from "./types";
 
 export function getStaffOrderPath(businessSlug: string, path = "") {
-  return `/terminal/b/${businessSlug}/staff-order${path}`;
+  return `/staff-order/b/${businessSlug}${path}`;
+}
+
+export function formatMoney(value: number) {
+  return `LAK ${value.toLocaleString("en-US")}`;
 }
 
 export function getStaffCartSummary(lines: StaffOrderLine[]) {
-  const subtotal = lines.reduce(
-    (sum, line) => sum + line.price * line.quantity,
-    0
-  );
+  const subtotal = lines.reduce((sum, line) => sum + line.price * line.quantity, 0);
   const serviceCharge = Math.round(subtotal * 0.05);
   const discount = subtotal > 100000 ? 5000 : 0;
   const total = subtotal + serviceCharge - discount;

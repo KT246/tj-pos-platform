@@ -1,9 +1,8 @@
 import { ArrowRight, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import { formatMoney } from "../../pos-terminal/utils";
 import type { StaffOrderLine } from "../types";
-import { getStaffCartSummary, getStaffOrderPath } from "../utils";
+import { formatMoney, getStaffCartSummary, getStaffOrderPath } from "../utils";
 
 export function StaffCartSummary({
   businessSlug,
@@ -15,7 +14,7 @@ export function StaffCartSummary({
   const summary = getStaffCartSummary(cart);
 
   return (
-    <div className="mx-3 mb-2 mt-3 grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-xl border border-blue-100 bg-white px-3 py-3 shadow-[0_14px_34px_rgba(15,23,42,0.1)]">
+    <div className="mx-3 mt-3 mb-2 grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-xl border border-blue-100 bg-white px-3 py-3 shadow-[0_14px_34px_rgba(15,23,42,0.1)]">
       <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-blue-600 ring-1 ring-blue-100">
         <ShoppingCart className="h-5 w-5" />
         <span className="absolute -top-1 -right-1 flex h-6 min-w-6 items-center justify-center rounded-full bg-blue-600 px-1 text-[11px] font-black text-white ring-2 ring-white">

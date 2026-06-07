@@ -155,6 +155,7 @@ Route ใน docs หลักอาจยังใช้รูปแบบ [bus
 ```text
 ถ้าต้องการแยก deploy ชัดเจน ให้แยก staff-order, kitchen-display, customer-display ออกจาก terminal
 ถ้ายังต้องการ dev เร็ว สามารถคงอยู่ใน terminal ชั่วคราวได้ แต่ route ownership ใน docs ให้ถือเป็นเป้าหมายใหม่
+สถานะปัจจุบัน: staff-order แยกเสร็จแล้ว, kitchen-display และ customer-display ยังอยู่ใน phase ถัดไป
 ```
 
 ---

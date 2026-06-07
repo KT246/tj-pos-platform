@@ -1,17 +1,13 @@
 import { create } from "zustand";
 
-import { showTerminalNotice } from "../../../lib/terminal-toasts";
+import { showStaffOrderNotice } from "../../../lib/staff-order-toasts";
 import {
   activeStaffOrders,
   selectedBranch,
   staffName,
   starterStaffCart
 } from "../data/staff-order-data";
-import type {
-  StaffOrderLine,
-  StaffOrderProduct,
-  StaffOrderRecord
-} from "../types";
+import type { StaffOrderLine, StaffOrderProduct, StaffOrderRecord } from "../types";
 import { getStaffCartSummary } from "../utils";
 
 type StaffOrderState = {
@@ -67,7 +63,8 @@ function createLine(product: StaffOrderProduct): StaffOrderLine {
     size: "Regular Size",
     milk: product.category === "coffee" ? "Full Cream Milk" : "-",
     sugar: product.category === "coffee" || product.category === "tea" ? "Normal" : "-",
-    ice: product.category === "coffee" || product.category === "tea" ? "Regular Ice" : "-"
+    ice:
+      product.category === "coffee" || product.category === "tea" ? "Regular Ice" : "-"
   };
 }
 
@@ -94,10 +91,8 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
     lastSentOrder: null,
     setSelectedBranch: (branch) => set({ selectedBranch: branch }),
     setSelectedTable: (tableId) => set({ selectedTableId: tableId }),
-    incrementGuests: () =>
-      set((state) => ({ guests: Math.min(state.guests + 1, 12) })),
-    decrementGuests: () =>
-      set((state) => ({ guests: Math.max(state.guests - 1, 1) })),
+    incrementGuests: () => set((state) => ({ guests: Math.min(state.guests + 1, 12) })),
+    decrementGuests: () => set((state) => ({ guests: Math.max(state.guests - 1, 1) })),
     setActiveCategory: (categoryId) => set({ activeCategory: categoryId }),
     setQuery: (query) => set({ query }),
     addProduct: (product) =>
@@ -105,18 +100,16 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
         const existing = state.cart.find((line) => line.productId === product.id);
 
         if (existing) {
-          showTerminalNotice(`${product.name} added.`, "success");
+          showStaffOrderNotice(`${product.name} added.`, "success");
 
           return {
             cart: state.cart.map((line) =>
-              line.id === existing.id
-                ? { ...line, quantity: line.quantity + 1 }
-                : line
+              line.id === existing.id ? { ...line, quantity: line.quantity + 1 } : line
             )
           };
         }
 
-        showTerminalNotice(`${product.name} added.`, "success");
+        showStaffOrderNotice(`${product.name} added.`, "success");
 
         return {
           cart: [...state.cart, createLine(product)]
@@ -124,7 +117,7 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
       }),
     addCustomizedProduct: (product, options) =>
       set((state) => {
-        showTerminalNotice(`${product.name} customized and added.`, "success");
+        showStaffOrderNotice(`${product.name} customized and added.`, "success");
 
         return {
           cart: [...state.cart, { ...createLine(product), ...options }]
@@ -132,7 +125,7 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
       }),
     updateLine: (lineId, patch) =>
       set((state) => {
-        showTerminalNotice("Item options updated.", "success");
+        showStaffOrderNotice("Item options updated.", "success");
 
         return {
           cart: state.cart.map((line) =>
@@ -157,7 +150,7 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
           .filter((line) => line.quantity > 0)
       })),
     saveDraft: () => {
-      showTerminalNotice("Order draft saved.", "success");
+      showStaffOrderNotice("Order draft saved.", "success");
     },
     sendOrder: () =>
       set((state) => {
@@ -174,7 +167,7 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
           lines: cloneLines(state.cart)
         };
 
-        showTerminalNotice(`${order.id} sent to kitchen and bar.`, "success");
+        showStaffOrderNotice(`${order.id} sent to kitchen and bar.`, "success");
 
         return {
           activeOrders: [order, ...state.activeOrders],
@@ -183,7 +176,7 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
       }),
     startNewOrder: () =>
       set(() => {
-        showTerminalNotice("New staff order ready.", "info");
+        showStaffOrderNotice("New staff order ready.", "info");
 
         return {
           selectedTableId: "T03",
@@ -195,7 +188,7 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
       }),
     markServed: (orderId) =>
       set((state) => {
-        showTerminalNotice(`${orderId} marked as served.`, "success");
+        showStaffOrderNotice(`${orderId} marked as served.`, "success");
 
         return {
           activeOrders: state.activeOrders.map((order) =>
@@ -203,6 +196,6 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
           )
         };
       }),
-    showNotice: (message) => showTerminalNotice(message)
+    showNotice: (message) => showStaffOrderNotice(message)
   })
 );

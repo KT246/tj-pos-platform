@@ -9,14 +9,13 @@ import {
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { formatMoney } from "../../pos-terminal/utils";
 import { StaffBottomNav } from "../components/staff-bottom-nav";
 import { StaffOrderHeader } from "../components/staff-order-header";
 import { StaffMobileShell, StaffScrollArea } from "../components/staff-mobile-shell";
 import { staffName } from "../data/staff-order-data";
 import { useStaffOrderStore } from "../stores/staff-order-store";
 import type { StaffOrderLine } from "../types";
-import { getStaffCartSummary, getStaffOrderPath } from "../utils";
+import { formatMoney, getStaffCartSummary, getStaffOrderPath } from "../utils";
 
 export function StaffReviewPage({ businessSlug }: { businessSlug: string }) {
   const navigate = useNavigate();
@@ -159,11 +158,7 @@ function ReviewLine({
 }) {
   return (
     <div className="grid grid-cols-[72px_1fr_auto] gap-3 border-b border-blue-50 p-4 last:border-b-0">
-      <img
-        src={line.image}
-        alt=""
-        className="h-20 w-[72px] rounded-lg object-cover"
-      />
+      <img src={line.image} alt="" className="h-20 w-[72px] rounded-lg object-cover" />
       <div className="min-w-0">
         <p className="text-[15px] font-black text-slate-950">{line.name}</p>
         <p className="mt-1 text-[12px] font-bold text-slate-500">
@@ -201,7 +196,10 @@ function ReviewLine({
           </button>
         </div>
         <Link
-          to={getStaffOrderPath(businessSlug, `/table/${tableId}/item/${line.productId}`)}
+          to={getStaffOrderPath(
+            businessSlug,
+            `/table/${tableId}/item/${line.productId}`
+          )}
           className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 transition hover:bg-blue-50 hover:text-blue-600"
           aria-label="Edit item"
         >

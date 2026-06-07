@@ -2,13 +2,12 @@ import { ArrowRight, Check, Minus, Plus } from "lucide-react";
 import type { FormEvent, ReactNode } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { formatMoney } from "../../pos-terminal/utils";
 import { StaffBottomNav } from "../components/staff-bottom-nav";
 import { StaffMobileShell, StaffScrollArea } from "../components/staff-mobile-shell";
 import { StaffOrderHeader } from "../components/staff-order-header";
 import { staffProducts } from "../data/staff-order-data";
 import { useStaffOrderStore } from "../stores/staff-order-store";
-import { getStaffOrderPath } from "../utils";
+import { formatMoney, getStaffOrderPath } from "../utils";
 
 export function StaffCustomizePage({ businessSlug }: { businessSlug: string }) {
   const navigate = useNavigate();
@@ -58,9 +57,7 @@ export function StaffCustomizePage({ businessSlug }: { businessSlug: string }) {
               className="h-32 w-full rounded-lg object-cover"
             />
             <div className="min-w-0 py-3">
-              <h2 className="text-[22px] font-black text-slate-950">
-                {product.name}
-              </h2>
+              <h2 className="text-[22px] font-black text-slate-950">{product.name}</h2>
               <p className="mt-1 text-[17px] font-black text-blue-600">
                 {formatMoney(product.price)}
               </p>
@@ -72,22 +69,45 @@ export function StaffCustomizePage({ businessSlug }: { businessSlug: string }) {
 
           <OptionSection title="Size">
             <OptionCard name="size" value="Small" label="Small" helper="LAK 24,000" />
-            <OptionCard name="size" value="Medium" label="Medium" helper="LAK 28,000" defaultChecked />
+            <OptionCard
+              name="size"
+              value="Medium"
+              label="Medium"
+              helper="LAK 28,000"
+              defaultChecked
+            />
             <OptionCard name="size" value="Large" label="Large" helper="LAK 32,000" />
           </OptionSection>
 
           <OptionSection title="Sugar Level">
             <OptionCard name="sugar" value="0%" label="0%" helper="No Sugar" />
             <OptionCard name="sugar" value="25%" label="25%" helper="Less Sweet" />
-            <OptionCard name="sugar" value="50%" label="50%" helper="Regular" defaultChecked />
+            <OptionCard
+              name="sugar"
+              value="50%"
+              label="50%"
+              helper="Regular"
+              defaultChecked
+            />
             <OptionCard name="sugar" value="100%" label="100%" helper="Extra Sweet" />
           </OptionSection>
 
           <OptionSection title="Ice Level">
             <OptionCard name="ice" value="No Ice" label="No Ice" helper="None" />
             <OptionCard name="ice" value="Less Ice" label="Less Ice" helper="Less" />
-            <OptionCard name="ice" value="Regular" label="Regular" helper="Normal" defaultChecked />
-            <OptionCard name="ice" value="Extra Ice" label="Extra Ice" helper="More Ice" />
+            <OptionCard
+              name="ice"
+              value="Regular"
+              label="Regular"
+              helper="Normal"
+              defaultChecked
+            />
+            <OptionCard
+              name="ice"
+              value="Extra Ice"
+              label="Extra Ice"
+              helper="More Ice"
+            />
           </OptionSection>
 
           <section className="mt-3 rounded-lg border border-blue-100 bg-white p-4 shadow-[0_8px_22px_rgba(15,23,42,0.035)]">
@@ -149,13 +169,7 @@ export function StaffCustomizePage({ businessSlug }: { businessSlug: string }) {
   );
 }
 
-function OptionSection({
-  title,
-  children
-}: {
-  title: string;
-  children: ReactNode;
-}) {
+function OptionSection({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section className="mt-3 rounded-lg border border-blue-100 bg-white p-4 shadow-[0_8px_22px_rgba(15,23,42,0.035)]">
       <h3 className="text-[15px] font-black text-slate-950">{title}</h3>
@@ -188,7 +202,7 @@ function OptionCard({
         defaultChecked={defaultChecked}
         className="peer sr-only"
       />
-      <span className="flex min-h-[76px] flex-col items-center justify-center rounded-lg border border-blue-100 bg-white px-2 text-center transition hover:bg-blue-50 peer-checked:border-blue-600 peer-checked:bg-blue-50">
+      <span className="flex min-h-[76px] flex-col items-center justify-center rounded-lg border border-blue-100 bg-white px-2 text-center transition peer-checked:border-blue-600 peer-checked:bg-blue-50 hover:bg-blue-50">
         <span className="text-[13px] font-black text-slate-950">{label}</span>
         <span className="mt-1 text-[11px] font-bold text-slate-500">{helper}</span>
       </span>

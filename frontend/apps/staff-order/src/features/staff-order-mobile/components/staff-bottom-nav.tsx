@@ -20,19 +20,20 @@ export function StaffBottomNav({
   selectedTableId: string;
 }) {
   return (
-    <nav className="grid h-[76px] grid-cols-4 px-3 pb-2 pt-2">
+    <nav className="grid h-[76px] grid-cols-4 px-3 pt-2 pb-2">
       {navItems.map((item) => {
         const Icon = item.icon;
         const isActive = item.id === active;
-        const path =
-          item.id === "menu" ? `/table/${selectedTableId}` : item.path;
+        const path = item.id === "menu" ? `/table/${selectedTableId}` : item.path;
 
         return (
           <Link
             key={item.id}
             to={getStaffOrderPath(businessSlug, path)}
             className={`relative flex flex-col items-center justify-center gap-1 rounded-lg text-[11px] font-bold transition ${
-              isActive ? "text-blue-600" : "text-slate-500 hover:bg-blue-50/50 hover:text-blue-600"
+              isActive
+                ? "text-blue-600"
+                : "text-slate-500 hover:bg-blue-50/50 hover:text-blue-600"
             }`}
           >
             <span

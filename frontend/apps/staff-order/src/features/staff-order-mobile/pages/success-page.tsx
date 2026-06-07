@@ -1,12 +1,19 @@
-import { BookOpen, Check, ClipboardList, Clock, ReceiptText, Table2, WalletCards } from "lucide-react";
+import {
+  BookOpen,
+  Check,
+  ClipboardList,
+  Clock,
+  ReceiptText,
+  Table2,
+  WalletCards
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
-import { formatMoney } from "../../pos-terminal/utils";
 import { StaffBottomNav } from "../components/staff-bottom-nav";
 import { StaffOrderHeader } from "../components/staff-order-header";
 import { StaffMobileShell, StaffScrollArea } from "../components/staff-mobile-shell";
 import { useStaffOrderStore } from "../stores/staff-order-store";
-import { getStaffOrderPath } from "../utils";
+import { formatMoney, getStaffOrderPath } from "../utils";
 
 export function StaffSuccessPage({ businessSlug }: { businessSlug: string }) {
   const selectedTableId = useStaffOrderStore((state) => state.selectedTableId);
@@ -51,7 +58,11 @@ export function StaffSuccessPage({ businessSlug }: { businessSlug: string }) {
           <SuccessRow icon={ReceiptText} label="Order No." value={order.id} />
           <SuccessRow icon={Table2} label="Table" value={order.tableId} />
           <SuccessRow icon={ClipboardList} label="Items" value={String(order.items)} />
-          <SuccessRow icon={WalletCards} label="Total" value={formatMoney(order.total)} />
+          <SuccessRow
+            icon={WalletCards}
+            label="Total"
+            value={formatMoney(order.total)}
+          />
           <SuccessRow icon={Clock} label="Sent Time" value="10:24 AM" />
         </section>
 

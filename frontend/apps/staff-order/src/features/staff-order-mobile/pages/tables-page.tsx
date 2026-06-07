@@ -1,12 +1,12 @@
 import { ArrowRight, Check, Minus, Plus, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import type { DiningTable } from "../../pos-terminal/types";
 import { StaffBottomNav } from "../components/staff-bottom-nav";
 import { StaffContextCard, StaffOrderHeader } from "../components/staff-order-header";
 import { StaffMobileShell, StaffScrollArea } from "../components/staff-mobile-shell";
 import { staffName, staffTables } from "../data/staff-order-data";
 import { useStaffOrderStore } from "../stores/staff-order-store";
+import type { DiningTable } from "../types";
 import { getStaffOrderPath } from "../utils";
 
 const areaFilters = ["All Areas", "Indoor", "Outdoor", "VIP Room", "Terrace"];
@@ -31,13 +31,9 @@ export function StaffTablesPage({ businessSlug }: { businessSlug: string }) {
     >
       <StaffOrderHeader title="Select Table" />
       <StaffScrollArea>
-        <StaffContextCard
-          branch={selectedBranch}
-          staff={staffName}
-          shift="Morning"
-        />
+        <StaffContextCard branch={selectedBranch} staff={staffName} shift="Morning" />
 
-        <div className="mt-4 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="mt-4 flex [scrollbar-width:none] gap-2 overflow-x-auto pb-1 [&::-webkit-scrollbar]:hidden">
           {areaFilters.map((area, index) => (
             <button
               key={area}
@@ -66,15 +62,22 @@ export function StaffTablesPage({ businessSlug }: { businessSlug: string }) {
         </div>
 
         <div className="mt-4 grid h-16 grid-cols-[1fr_auto] items-center rounded-lg border border-blue-100 bg-white px-4 shadow-[0_8px_22px_rgba(15,23,42,0.035)]">
-          <p className="text-[15px] font-black text-slate-950">
-            Number of Guests
-          </p>
+          <p className="text-[15px] font-black text-slate-950">Number of Guests</p>
           <div className="flex items-center gap-4">
-            <StepperButton label="Decrease guests" onClick={decrementGuests} icon={Minus} />
+            <StepperButton
+              label="Decrease guests"
+              onClick={decrementGuests}
+              icon={Minus}
+            />
             <span className="min-w-5 text-center text-xl font-black text-slate-950">
               {guests}
             </span>
-            <StepperButton label="Increase guests" onClick={incrementGuests} icon={Plus} active />
+            <StepperButton
+              label="Increase guests"
+              onClick={incrementGuests}
+              icon={Plus}
+              active
+            />
           </div>
         </div>
 
@@ -106,7 +109,9 @@ function TableCard({
       type="button"
       onClick={onClick}
       className={`relative min-h-[172px] rounded-lg border bg-white p-3 text-left shadow-[0_10px_24px_rgba(15,23,42,0.04)] transition hover:-translate-y-0.5 hover:border-blue-200 ${
-        selected ? "border-blue-600 bg-blue-50/45 ring-2 ring-blue-100" : "border-blue-100"
+        selected
+          ? "border-blue-600 bg-blue-50/45 ring-2 ring-blue-100"
+          : "border-blue-100"
       }`}
     >
       {selected ? (
@@ -125,9 +130,7 @@ function TableCard({
       />
       <div className="mt-3 flex items-start justify-between gap-2">
         <div>
-          <p className="text-[27px] leading-7 font-black text-slate-950">
-            {table.id}
-          </p>
+          <p className="text-[27px] leading-7 font-black text-slate-950">{table.id}</p>
           <p className="mt-1 flex items-center gap-1 text-[12px] font-bold text-slate-500">
             <Users className="h-4 w-4" />
             {table.seats} Seats

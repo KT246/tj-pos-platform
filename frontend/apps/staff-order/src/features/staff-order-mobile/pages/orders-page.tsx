@@ -1,13 +1,21 @@
-import { CheckCircle2, ClipboardCheck, Filter, Plus, Search, Table2, Timer, WalletCards } from "lucide-react";
+import {
+  CheckCircle2,
+  ClipboardCheck,
+  Filter,
+  Plus,
+  Search,
+  Table2,
+  Timer,
+  WalletCards
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
-import { formatMoney } from "../../pos-terminal/utils";
 import { StaffBottomNav } from "../components/staff-bottom-nav";
 import { StaffOrderHeader } from "../components/staff-order-header";
 import { StaffMobileShell, StaffScrollArea } from "../components/staff-mobile-shell";
 import { useStaffOrderStore } from "../stores/staff-order-store";
 import type { StaffOrderRecord } from "../types";
-import { getStaffOrderPath, statusColor } from "../utils";
+import { formatMoney, getStaffOrderPath, statusColor } from "../utils";
 
 export function StaffOrdersPage({ businessSlug }: { businessSlug: string }) {
   const selectedTableId = useStaffOrderStore((state) => state.selectedTableId);
@@ -30,10 +38,7 @@ export function StaffOrdersPage({ businessSlug }: { businessSlug: string }) {
         />
       }
     >
-      <StaffOrderHeader
-        title="Active Orders"
-        showFilter
-      />
+      <StaffOrderHeader title="Active Orders" showFilter />
       <StaffScrollArea>
         <section className="mt-4 grid grid-cols-3 divide-x divide-blue-50 rounded-lg border border-blue-100 bg-white p-3 shadow-[0_10px_26px_rgba(15,23,42,0.045)]">
           <StatBlock label="Active" value={String(activeOrders.length)} />
@@ -58,7 +63,7 @@ export function StaffOrdersPage({ businessSlug }: { businessSlug: string }) {
         <label className="relative mt-4 block">
           <Search className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-slate-400" />
           <input
-            className="h-12 w-full rounded-lg border border-blue-100 bg-white pr-12 pl-12 text-[14px] font-bold shadow-[0_8px_20px_rgba(15,23,42,0.03)] outline-none transition focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
+            className="h-12 w-full rounded-lg border border-blue-100 bg-white pr-12 pl-12 text-[14px] font-bold shadow-[0_8px_20px_rgba(15,23,42,0.03)] transition outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
             placeholder="Search table or order"
           />
           <Filter className="absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 text-slate-500" />
@@ -97,7 +102,9 @@ function StatBlock({
 
   return (
     <div className="flex items-center gap-3 px-2">
-      <span className={`flex h-11 w-11 items-center justify-center rounded-lg ${toneClass}`}>
+      <span
+        className={`flex h-11 w-11 items-center justify-center rounded-lg ${toneClass}`}
+      >
         <ClipboardCheck className="h-5 w-5" />
       </span>
       <span>
@@ -151,7 +158,9 @@ function OrderCard({
           </div>
         </div>
         <div className="text-right">
-          <span className={`rounded-full px-2.5 py-1 text-[11px] font-black ${statusColor(order.status)}`}>
+          <span
+            className={`rounded-full px-2.5 py-1 text-[11px] font-black ${statusColor(order.status)}`}
+          >
             {order.status}
           </span>
           <p className="mt-5 text-[16px] font-black text-slate-950">

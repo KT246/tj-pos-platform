@@ -23,7 +23,7 @@ export function StaffMobileShell({
 
 export function StaffScrollArea({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-5 sm:px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <div className="min-h-0 flex-1 [scrollbar-width:none] overflow-y-auto px-4 pb-5 sm:px-5 [&::-webkit-scrollbar]:hidden">
       {children}
     </div>
   );

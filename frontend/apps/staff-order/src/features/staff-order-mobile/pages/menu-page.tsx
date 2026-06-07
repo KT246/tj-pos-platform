@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Plus, Search, SlidersHorizontal } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 
-import { formatMoney } from "../../pos-terminal/utils";
 import { StaffBottomNav } from "../components/staff-bottom-nav";
 import { StaffCartSummary } from "../components/staff-cart-summary";
 import { StaffContextCard, StaffOrderHeader } from "../components/staff-order-header";
@@ -10,7 +9,7 @@ import { StaffMobileShell, StaffScrollArea } from "../components/staff-mobile-sh
 import { staffCategories, staffName, staffProducts } from "../data/staff-order-data";
 import { useStaffOrderStore } from "../stores/staff-order-store";
 import type { StaffOrderProduct } from "../types";
-import { getStaffOrderPath } from "../utils";
+import { formatMoney, getStaffOrderPath } from "../utils";
 
 export function StaffMenuPage({ businessSlug }: { businessSlug: string }) {
   const params = useParams();
@@ -72,7 +71,7 @@ export function StaffMenuPage({ businessSlug }: { businessSlug: string }) {
           <input
             value={query}
             onChange={(event) => setQuery(event.currentTarget.value)}
-            className="h-[52px] w-full rounded-lg border border-blue-100 bg-white pr-14 pl-12 text-[14px] font-bold shadow-[0_8px_20px_rgba(15,23,42,0.03)] outline-none transition focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
+            className="h-[52px] w-full rounded-lg border border-blue-100 bg-white pr-14 pl-12 text-[14px] font-bold shadow-[0_8px_20px_rgba(15,23,42,0.03)] transition outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
             placeholder="Search menu items"
           />
           <button
@@ -84,7 +83,7 @@ export function StaffMenuPage({ businessSlug }: { businessSlug: string }) {
           </button>
         </label>
 
-        <div className="mt-4 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="mt-4 flex [scrollbar-width:none] gap-2 overflow-x-auto pb-1 [&::-webkit-scrollbar]:hidden">
           {staffCategories.map((category) => {
             const isActive = category.id === activeCategory;
 

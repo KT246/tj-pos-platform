@@ -12,6 +12,7 @@ pnpm dev:web
 pnpm dev:platform-admin
 pnpm dev:business-admin
 pnpm dev:public-menu
+pnpm dev:staff-order
 pnpm dev:terminal
 pnpm lint
 pnpm typecheck
@@ -29,6 +30,7 @@ frontend/
 |  +- business-admin   # Vite React business admin
 |  +- terminal         # Vite React POS terminal
 |  +- public-menu      # Vite React public menu / QR menu
+|  +- staff-order      # Vite React staff order mobile
 +- packages/
    +- ui
    +- shared

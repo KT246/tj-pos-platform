@@ -56,17 +56,53 @@ export function StaffProfilePage({ businessSlug }: { businessSlug: string }) {
 
         <h3 className="mt-5 text-[15px] font-black text-slate-500">Settings</h3>
         <section className="mt-3 overflow-hidden rounded-lg border border-blue-100 bg-white shadow-[0_10px_26px_rgba(15,23,42,0.045)]">
-          <SettingsRow icon={Store} title="Branch & Device" subtitle="View branch details and device info" />
-          <SettingsRow icon={Printer} title="Printer Settings" subtitle="Manage printers and print options" />
-          <SettingsRow icon={Volume2} title="Sound & Notifications" subtitle="Configure sounds and alerts" trailing={<Toggle />} />
-          <SettingsRow icon={Globe} title="Language" subtitle="Change app language" trailing={<span className="text-[13px] font-bold text-slate-600">English</span>} />
+          <SettingsRow
+            icon={Store}
+            title="Branch & Device"
+            subtitle="View branch details and device info"
+          />
+          <SettingsRow
+            icon={Printer}
+            title="Printer Settings"
+            subtitle="Manage printers and print options"
+          />
+          <SettingsRow
+            icon={Volume2}
+            title="Sound & Notifications"
+            subtitle="Configure sounds and alerts"
+            trailing={<Toggle />}
+          />
+          <SettingsRow
+            icon={Globe}
+            title="Language"
+            subtitle="Change app language"
+            trailing={
+              <span className="text-[13px] font-bold text-slate-600">English</span>
+            }
+          />
         </section>
 
         <h3 className="mt-5 text-[15px] font-black text-slate-500">System</h3>
         <section className="mt-3 overflow-hidden rounded-lg border border-blue-100 bg-white shadow-[0_10px_26px_rgba(15,23,42,0.045)]">
-          <SettingsRow icon={CircleHelp} title="Help Center" subtitle="FAQs and support" />
-          <SettingsRow icon={RefreshCw} title="Sync Status" subtitle="Keep data in sync across devices" trailing={<Toggle />} />
-          <SettingsRow icon={Info} title="About App" subtitle="App information and version" trailing={<span className="text-[13px] font-bold text-slate-600">v1.0.8</span>} />
+          <SettingsRow
+            icon={CircleHelp}
+            title="Help Center"
+            subtitle="FAQs and support"
+          />
+          <SettingsRow
+            icon={RefreshCw}
+            title="Sync Status"
+            subtitle="Keep data in sync across devices"
+            trailing={<Toggle />}
+          />
+          <SettingsRow
+            icon={Info}
+            title="About App"
+            subtitle="App information and version"
+            trailing={
+              <span className="text-[13px] font-bold text-slate-600">v1.0.8</span>
+            }
+          />
         </section>
 
         <Link
@@ -100,7 +136,9 @@ function ProfileMeta({
   return (
     <div className="border-b border-blue-50 py-2 last:border-b-0">
       <p className="text-[11px] font-bold text-slate-500">{label}</p>
-      <p className={`text-[13px] font-black ${positive ? "text-emerald-600" : "text-slate-950"}`}>
+      <p
+        className={`text-[13px] font-black ${positive ? "text-emerald-600" : "text-slate-950"}`}
+      >
         {value}
       </p>
     </div>
@@ -127,9 +165,7 @@ function SettingsRow({
         <Icon className="h-5 w-5" />
       </span>
       <span className="min-w-0">
-        <span className="block text-[14px] font-black text-slate-950">
-          {title}
-        </span>
+        <span className="block text-[14px] font-black text-slate-950">{title}</span>
         <span className="text-[12px] font-bold text-slate-500">{subtitle}</span>
       </span>
       <span className="flex items-center gap-2">
