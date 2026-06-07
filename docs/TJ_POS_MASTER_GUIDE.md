@@ -44,8 +44,14 @@ tj-pos-platform/
 - Backend should expose stable API contracts for frontend.
 - Shared naming should be kept consistent with the UI screen names in the Google Sheet.
 - UI screen names should remain in English for easier routing, component naming, and AI prompting.
-- ใช้ `frontend/apps/web` สำหรับเว็บไซต์หลัก, Platform Admin, Business Workspace และ Public Menu
-- ใช้ `frontend/apps/terminal` สำหรับ POS Terminal, Staff Order, Customer Display และ Kitchen / Bar Display
+- ใช้ `frontend/apps/web` สำหรับเว็บไซต์หลักของ TJ POS เท่านั้น
+- ใช้ `frontend/apps/platform-admin` สำหรับ Platform Admin ของทีม TJ Solution
+- ใช้ `frontend/apps/business-admin` สำหรับ Business Workspace / Business Admin ของร้าน
+- ใช้ `frontend/apps/terminal` สำหรับ POS Terminal
+- ใช้ `frontend/apps/staff-order` สำหรับ Staff Order Mobile
+- ใช้ `frontend/apps/kitchen-display` สำหรับ Kitchen / Bar Display
+- ใช้ `frontend/apps/customer-display` สำหรับ Customer Display
+- ใช้ `frontend/apps/public-menu` สำหรับ Public Menu / QR Menu ให้ลูกค้าสแกนดูเมนู
 - ใช้ `backend` เป็น backend API กลางที่ทุกเว็บ/แอปใช้งานร่วมกัน
 
 Example frontend naming:
@@ -241,7 +247,7 @@ There are **136 UI screens** divided into **13 groups**.
 | Public Menu / QR Menu | UI-098–UI-103 | Pending |
 | Retail-specific | UI-104–UI-108 | Pending |
 | Cafe-specific | UI-109–UI-114 | Implemented / pending review |
-| Restaurant-specific | UI-115–UI-121 | Pending |
+| Restaurant-specific | UI-115–UI-121 | Source image added / in implementation |
 | Beauty-specific | UI-122–UI-129 | Pending |
 | Hospitality-specific | UI-130–UI-136 | Pending |
 
@@ -833,6 +839,20 @@ UI-119 Service Charge / Tax Preview
 UI-120 Merge / Transfer Table
 UI-121 Restaurant End-of-Day Summary
 ```
+
+### Route Mapping
+
+```text
+UI-115 Restaurant Areas / Tables -> /business-admin/[businessSlug]/tables
+UI-116 Reservation Book -> /business-admin/[businessSlug]/reservations
+UI-117 Kitchen Course Management -> /business-admin/[businessSlug]/kitchen-courses
+UI-118 Split Bill by Guest / Item -> /business-admin/[businessSlug]/split-bill
+UI-119 Service Charge / Tax Preview -> /business-admin/[businessSlug]/service-charge
+UI-120 Merge / Transfer Table -> /business-admin/[businessSlug]/merge-transfer-table
+UI-121 Restaurant End-of-Day Summary -> /business-admin/[businessSlug]/end-of-day
+```
+
+หมายเหตุ: UI-115 ใช้ route `/tables` ร่วมกับ Cafe แต่ render ตาม POS Type/business slug.
 
 ---
 

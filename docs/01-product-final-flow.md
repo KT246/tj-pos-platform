@@ -29,8 +29,14 @@
 
 | ส่วนระบบ | เทคโนโลยีที่แนะนำ | ใช้ทำอะไร |
 |---|---|---|
-| **frontend/apps/web** | Next.js | เว็บไซต์หลัก, Platform Admin, Business Admin, Reports, Settings, Public Menu |
-| **frontend/apps/terminal** | Vite React | หน้าขาย POS, Staff Order บนมือถือ, Customer Display, Kitchen/Bar Display |
+| **frontend/apps/web** | Next.js | เว็บไซต์หลักของ TJ POS, landing, pricing, contact |
+| **frontend/apps/platform-admin** | Next.js | Platform Admin สำหรับทีม TJ Solution |
+| **frontend/apps/business-admin** | Vite React | Business Admin ของร้าน, Reports, Settings, Branding |
+| **frontend/apps/terminal** | Vite React | หน้าขาย POS |
+| **frontend/apps/staff-order** | Vite React | Staff Order บนมือถือ |
+| **frontend/apps/kitchen-display** | Vite React | Kitchen / Bar Display |
+| **frontend/apps/customer-display** | Vite React | Customer Display |
+| **frontend/apps/public-menu** | Vite React | Public Menu / QR Menu สำหรับลูกค้าสแกนดูเมนู |
 | **backend** | Backend API | Auth, Business, Branch, Orders, Payments, Plans, Modules, Reports, Backup settings |
 
 แนวคิดสำคัญคือระบบมีหลายพื้นที่ใช้งาน แต่ไม่ได้หมายความว่าต้องมีหลายระบบแยกกันทั้งหมด ทุกส่วนใช้ backend และ database เดียวกันในช่วงเริ่มต้น
@@ -915,10 +921,28 @@ Managed SaaS POS สำหรับใช้งานในประเทศ
 
 ```text
 frontend/apps/web = Next.js
-→ web หลัก, platform admin, business admin, reports, settings, public menu
+→ web หลักของ TJ POS
+
+frontend/apps/platform-admin = Next.js
+→ platform admin ของทีม TJ Solution
+
+frontend/apps/business-admin = Vite React
+→ business admin, reports, settings, branding
 
 frontend/apps/terminal = Vite React
-→ POS ขายหน้าร้าน, staff order, customer display, kitchen/bar display
+→ POS ขายหน้าร้าน
+
+frontend/apps/staff-order = Vite React
+→ staff order mobile
+
+frontend/apps/kitchen-display = Vite React
+→ kitchen/bar display
+
+frontend/apps/customer-display = Vite React
+→ customer display
+
+frontend/apps/public-menu = Vite React
+→ public menu / QR menu สำหรับลูกค้าสแกนดูเมนู
 
 backend = backend API
 → ใช้ร่วมกันทั้งระบบ

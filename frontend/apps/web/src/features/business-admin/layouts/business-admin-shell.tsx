@@ -18,9 +18,11 @@ import { TjLogo } from "../components/business-admin-primitives";
 
 export function BusinessAdminShell({
   active,
+  businessLabel = businessName,
   children
 }: {
   active: BusinessMenuKey;
+  businessLabel?: string;
   children: ReactNode;
 }) {
   return (
@@ -91,7 +93,7 @@ export function BusinessAdminShell({
             >
               <Menu className="h-5 w-5" />
             </button>
-            <TopSelect icon={Store} label={businessName} className="ml-auto" />
+            <TopSelect icon={Store} label={businessLabel} className="ml-auto" />
             <TopSelect icon={MapPin} label={activeBranch} />
             <BusinessAdminLink
               href="/business-admin/pos"

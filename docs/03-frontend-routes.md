@@ -70,6 +70,15 @@ pnpm
 
 ## 3. `apps/web` — Next.js
 
+หมายเหตุล่าสุด 2026-06-07:
+
+```text
+`apps/web` ใช้สำหรับเว็บไซต์หลักของ TJ POS เท่านั้น
+ไม่ใช้สำหรับ Platform Admin, Business Admin หรือ Public Menu แล้ว
+Platform Admin จะถูกแยกไป `frontend/apps/platform-admin`
+Business Admin และ Public Menu จะถูกย้ายไป Vite app ตามแผน `16-frontend-vite-migration-plan.md`
+```
+
 `apps/web` ใช้สำหรับหน้าที่เป็น web, admin, report, setting และ public page
 
 ใช้สำหรับ:
@@ -90,6 +99,14 @@ Contact / Pricing / Add-ons / FAQ/Help
 ---
 
 ## 4. `apps/terminal` — Vite React
+
+หมายเหตุล่าสุด 2026-06-07:
+
+```text
+`apps/terminal` ใช้สำหรับ POS Terminal
+Staff Order, Kitchen / Bar Display, Customer Display และ Public Menu จะมี Vite app แยกตามโครงสร้างเป้าหมาย
+ระหว่าง migration สามารถมี route เดิมใน terminal ชั่วคราวได้ แต่ source of truth เป้าหมายให้ยึด section Route Ownership ด้านล่าง
+```
 
 `apps/terminal` ใช้สำหรับหน้าที่ต้องการความเร็วสูงและ interaction เยอะ
 
@@ -706,21 +723,27 @@ Queue Pickup Screen
 
 ```text
 /business-admin/[businessSlug]/tables
-/business-admin/[businessSlug]/areas
-/business-admin/[businessSlug]/kitchen
+/business-admin/[businessSlug]/reservations
+/business-admin/[businessSlug]/kitchen-courses
 /business-admin/[businessSlug]/split-bill
 /business-admin/[businessSlug]/service-charge
+/business-admin/[businessSlug]/merge-transfer-table
+/business-admin/[businessSlug]/end-of-day
 ```
 
 ความหมาย:
 
 ```text
 Table Map
-Areas
-Kitchen Display
+Reservation Book
+Kitchen Course Management
 Split Bill
-Service Charge
+Service Charge / Tax Preview
+Merge / Transfer Table
+Restaurant End-of-Day Summary
 ```
+
+หมายเหตุ: `/business-admin/[businessSlug]/tables` เป็น route table map กลางตาม POS Type. ถ้า business เป็น Cafe ให้แสดง Cafe Floor Table Map; ถ้า business เป็น Restaurant ให้แสดง Restaurant Areas / Tables.
 
 ---
 
@@ -1005,39 +1028,46 @@ Customer Display ตามอุปกรณ์
 | `/#add-ons` | `frontend/apps/web` |
 | `/#faq-help` | `frontend/apps/web` |
 | `/#contact` | `frontend/apps/web` |
-| `/login` | `frontend/apps/web` |
-| `/forgot-password` | `frontend/apps/web` |
-| `/reset-password` | `frontend/apps/web` |
-| `/platform-admin/...` | `frontend/apps/web` |
-| `/business-admin/[businessSlug]/...` | `frontend/apps/web` |
-| `/business-admin/[businessSlug]/profile` | `frontend/apps/web` |
-| `/business-admin/[businessSlug]/inventory` | `frontend/apps/web` |
-| `/business-admin/[businessSlug]/stock-movements` | `frontend/apps/web` |
-| `/business-admin/[businessSlug]/stock-in` | `frontend/apps/web` |
-| `/business-admin/[businessSlug]/stock-adjustment` | `frontend/apps/web` |
-| `/business-admin/[businessSlug]/purchase-receipts` | `frontend/apps/web` |
-| `/business-admin/[businessSlug]/roles-permissions` | `frontend/apps/web` |
-| `/business-admin/[businessSlug]/import` | `frontend/apps/web` |
-| `/business-admin/[businessSlug]/export` | `frontend/apps/web` |
-| `/business-admin/[businessSlug]/audit-logs` | `frontend/apps/web` |
-| `/business-admin/[businessSlug]/tables` | `frontend/apps/web` |
-| `/business-admin/[businessSlug]/modifiers` | `frontend/apps/web` |
-| `/business-admin/[businessSlug]/barista-queue` | `frontend/apps/web` |
-| `/business-admin/[businessSlug]/happy-hour` | `frontend/apps/web` |
-| `/business-admin/[businessSlug]/cafe-daily-view` | `frontend/apps/web` |
-| `/b/[businessSlug]` | `frontend/apps/web` |
-| `/b/[businessSlug]/menu` | `frontend/apps/web` |
-| `/b/[businessSlug]/menu/[itemSlug]` | `frontend/apps/web` |
-| `/b/[businessSlug]/info` | `frontend/apps/web` |
-| `/b/[businessSlug]/book` | `frontend/apps/web` |
-| `/b/[businessSlug]/branch/[branchSlug]/menu` | `frontend/apps/web` |
-| `/q/[qrCode]` | `frontend/apps/web` |
+| `/login` | `frontend/apps/platform-admin` หรือ auth entry กลางตาม deploy จริง |
+| `/forgot-password` | `frontend/apps/platform-admin` หรือ auth entry กลางตาม deploy จริง |
+| `/reset-password` | `frontend/apps/platform-admin` หรือ auth entry กลางตาม deploy จริง |
+| `/platform-admin/...` | `frontend/apps/platform-admin` |
+| `/business-admin/[businessSlug]/...` | `frontend/apps/business-admin` |
+| `/business-admin/[businessSlug]/profile` | `frontend/apps/business-admin` |
+| `/business-admin/[businessSlug]/inventory` | `frontend/apps/business-admin` |
+| `/business-admin/[businessSlug]/stock-movements` | `frontend/apps/business-admin` |
+| `/business-admin/[businessSlug]/stock-in` | `frontend/apps/business-admin` |
+| `/business-admin/[businessSlug]/stock-adjustment` | `frontend/apps/business-admin` |
+| `/business-admin/[businessSlug]/purchase-receipts` | `frontend/apps/business-admin` |
+| `/business-admin/[businessSlug]/roles-permissions` | `frontend/apps/business-admin` |
+| `/business-admin/[businessSlug]/import` | `frontend/apps/business-admin` |
+| `/business-admin/[businessSlug]/export` | `frontend/apps/business-admin` |
+| `/business-admin/[businessSlug]/audit-logs` | `frontend/apps/business-admin` |
+| `/business-admin/[businessSlug]/tables` | `frontend/apps/business-admin` |
+| `/business-admin/[businessSlug]/modifiers` | `frontend/apps/business-admin` |
+| `/business-admin/[businessSlug]/barista-queue` | `frontend/apps/business-admin` |
+| `/business-admin/[businessSlug]/happy-hour` | `frontend/apps/business-admin` |
+| `/business-admin/[businessSlug]/cafe-daily-view` | `frontend/apps/business-admin` |
+| `/b/[businessSlug]` | `frontend/apps/public-menu` |
+| `/b/[businessSlug]/menu` | `frontend/apps/public-menu` |
+| `/b/[businessSlug]/menu/[itemSlug]` | `frontend/apps/public-menu` |
+| `/b/[businessSlug]/info` | `frontend/apps/public-menu` |
+| `/b/[businessSlug]/book` | `frontend/apps/public-menu` |
+| `/b/[businessSlug]/branch/[branchSlug]/menu` | `frontend/apps/public-menu` |
+| `/q/[qrCode]` | `frontend/apps/public-menu` |
 | `/terminal/b/[businessSlug]/pos` | `frontend/apps/terminal` |
-| `/terminal/b/[businessSlug]/staff-order` | `frontend/apps/terminal` |
-| `/terminal/b/[businessSlug]/display` | `frontend/apps/terminal` |
-| `/terminal/b/[businessSlug]/pickup-display` | `frontend/apps/terminal` |
-| `/terminal/b/[businessSlug]/kitchen` | `frontend/apps/terminal` |
-| `/terminal/b/[businessSlug]/bar` | `frontend/apps/terminal` |
+| `/staff-order/b/[businessSlug]/...` | `frontend/apps/staff-order` |
+| `/display/b/[businessSlug]/...` | `frontend/apps/customer-display` |
+| `/kitchen/b/[businessSlug]/...` | `frontend/apps/kitchen-display` |
+| `/bar/b/[businessSlug]/...` | `frontend/apps/kitchen-display` |
+
+หมายเหตุ:
+
+```text
+ใน Next.js docs ใช้ `[businessSlug]`
+ใน Vite / React Router implementation ให้ใช้ `:businessSlug`
+เช่น `/business-admin/:businessSlug/items`
+```
 
 ---
 
@@ -1185,10 +1215,28 @@ Production domain
 
 ```text
 frontend/apps/web = Next.js
-→ เว็บไซต์หลัก, Platform Admin, Business Admin, Public Menu
+→ เว็บไซต์หลักของ TJ POS
+
+frontend/apps/platform-admin = Next.js
+→ Platform Admin
+
+frontend/apps/business-admin = Vite React
+→ Business Admin / Business Workspace
 
 frontend/apps/terminal = Vite React
-→ POS ขายหน้าร้าน, Staff Order, Customer Display, Kitchen/Bar Display
+→ POS Terminal
+
+frontend/apps/staff-order = Vite React
+→ Staff Order Mobile
+
+frontend/apps/kitchen-display = Vite React
+→ Kitchen / Bar Display
+
+frontend/apps/customer-display = Vite React
+→ Customer Display
+
+frontend/apps/public-menu = Vite React
+→ Public Menu / QR Menu
 ```
 
 Routes ทั้งหมดในเอกสารนี้ใช้สำหรับเริ่มออกแบบ UI และ flow frontend ก่อน ยังไม่ใช่ API spec
