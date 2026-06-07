@@ -1,16 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
+import Image from "../../../compat/image";
+import Link from "../../../compat/link";
+import { usePathname } from "../../../compat/navigation";
 import type { ReactNode } from "react";
-import {
-  Bell,
-  ChevronDown,
-  Headphones,
-  Plus,
-  Search
-} from "lucide-react";
+import { Bell, ChevronDown, Headphones, Plus, Search } from "lucide-react";
 
 import { adminNavItems, adminUser } from "../data/mock-platform-admin";
 import { Logo } from "../../../components/layout/logo";
@@ -35,7 +29,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,#f8fbff_0%,#ffffff_42%)] text-slate-900">
-      <header className="fixed left-0 right-0 top-0 z-40 flex h-[64px] items-center border-b border-blue-100 bg-white/95 backdrop-blur">
+      <header className="fixed top-0 right-0 left-0 z-40 flex h-[64px] items-center border-b border-blue-100 bg-white/95 backdrop-blur">
         <div className="flex h-full w-[230px] shrink-0 items-center justify-between border-r border-blue-100 px-7">
           <Logo
             href="/platform-admin/dashboard"
@@ -47,13 +41,13 @@ export function AdminShell({ children }: { children: ReactNode }) {
         </div>
 
         <div className="relative flex h-full min-w-0 flex-1 items-center px-6">
-          <label className="absolute left-1/2 top-1/2 hidden w-[420px] -translate-x-1/2 -translate-y-1/2 lg:block 2xl:w-[520px]">
-            <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+          <label className="absolute top-1/2 left-1/2 hidden w-[420px] -translate-x-1/2 -translate-y-1/2 lg:block 2xl:w-[520px]">
+            <Search className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input
-              className="h-10 w-full rounded-lg border border-blue-100 bg-white pl-11 pr-16 text-sm outline-none placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
+              className="h-10 w-full rounded-lg border border-blue-100 bg-white pr-16 pl-11 text-sm outline-none placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
               placeholder="ຄົ້ນຫາທຸລະກິດ, ຜູ້ໃຊ້, tickets..."
             />
-            <span className="font800 absolute right-3 top-1/2 -translate-y-1/2 rounded border border-blue-100 px-2 py-0.5 text-xs text-slate-500">
+            <span className="font800 absolute top-1/2 right-3 -translate-y-1/2 rounded border border-blue-100 px-2 py-0.5 text-xs text-slate-500">
               ⌘K
             </span>
           </label>
@@ -64,7 +58,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
               className="relative flex h-10 w-10 items-center justify-center rounded-full text-slate-700 hover:bg-blue-50"
             >
               <Bell className="h-5 w-5" />
-              <span className="font900 absolute right-1 top-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] text-white">
+              <span className="font900 absolute top-0 right-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] text-white">
                 8
               </span>
             </button>
@@ -84,7 +78,9 @@ export function AdminShell({ children }: { children: ReactNode }) {
                 className="h-10 w-10 rounded-full object-cover ring-4 ring-emerald-50"
               />
               <span className="hidden text-left xl:block">
-                <span className="font900 block text-sm text-slate-950">{adminUser.name}</span>
+                <span className="font900 block text-sm text-slate-950">
+                  {adminUser.name}
+                </span>
                 <span className="block text-xs text-slate-500">{adminUser.role}</span>
               </span>
               <ChevronDown className="hidden h-4 w-4 text-slate-500 xl:block" />
@@ -93,7 +89,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <aside className="fixed bottom-0 left-0 top-[64px] z-30 hidden w-[230px] border-r border-blue-100 bg-white xl:block">
+      <aside className="fixed top-[64px] bottom-0 left-0 z-30 hidden w-[230px] border-r border-blue-100 bg-white xl:block">
         <nav className="flex h-full flex-col px-3 py-4">
           <div className="space-y-1">
             {adminNavItems.map((item) => {

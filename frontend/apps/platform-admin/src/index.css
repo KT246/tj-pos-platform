@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Lao:wght@400;500;600;700;800;900&display=swap");
+@import "@workspace/ui/styles.css";
+
+:root {
+  --font-inter: "Inter";
+  --font-noto-sans-lao: "Noto Sans Lao";
+}
+
+html {
+  background: #f8fbff;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-inter), var(--font-noto-sans-lao), system-ui, sans-serif;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+[role="button"] {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}

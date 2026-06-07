@@ -8,6 +8,8 @@
     "dev:business-admin": "pnpm --filter business-admin dev",
     "dev:public-menu": "pnpm --filter public-menu dev",
     "dev:staff-order": "pnpm --filter staff-order dev",
+    "dev:customer-display": "pnpm --filter customer-display dev",
+    "dev:kitchen-display": "pnpm --filter kitchen-display dev",
     "dev:terminal": "pnpm --filter terminal dev",
     "build": "turbo build",
     "lint": "eslint . --max-warnings=0",

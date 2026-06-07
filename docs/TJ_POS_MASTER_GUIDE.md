@@ -89,25 +89,25 @@ All Tasks Old
 
 ### Tab Purposes
 
-| Tab | Purpose |
-|---|---|
-| `Summary` | Overall progress summary for Frontend, Backend, and UI prompts |
-| `Frontend` | Development tasks for the frontend developer |
-| `Backend` | Development tasks for the backend developer |
+| Tab              | Purpose                                                              |
+| ---------------- | -------------------------------------------------------------------- |
+| `Summary`        | Overall progress summary for Frontend, Backend, and UI prompts       |
+| `Frontend`       | Development tasks for the frontend developer                         |
+| `Backend`        | Development tasks for the backend developer                          |
 | `UI Prompts 136` | Main screen list, descriptions, AI prompts, and UI completion status |
-| `Lists` | Dropdown source lists and helper values |
-| `All Tasks Old` | Legacy/backup tasks, not the main working tab |
+| `Lists`          | Dropdown source lists and helper values                              |
+| `All Tasks Old`  | Legacy/backup tasks, not the main working tab                        |
 
 ### Language Rules in Sheet
 
-| Field | Language |
-|---|---|
-| Screen name / `ຊື່ໜ້າຈໍ` | English |
-| Description / `ຄຳອະທິບາຍ` | Lao |
-| Status / `ສະຖານະ` | Lao |
-| AI Prompt | English |
-| UI labels inside generated mockups | English |
-| Sample business data | Realistic Laos context |
+| Field                              | Language               |
+| ---------------------------------- | ---------------------- |
+| Screen name / `ຊື່ໜ້າຈໍ`           | English                |
+| Description / `ຄຳອະທິບາຍ`          | Lao                    |
+| Status / `ສະຖານະ`                  | Lao                    |
+| AI Prompt                          | English                |
+| UI labels inside generated mockups | English                |
+| Sample business data               | Realistic Laos context |
 
 ### Font Rule
 
@@ -235,21 +235,21 @@ Do not shorten sidebar labels when exact labels are specified.
 
 There are **136 UI screens** divided into **13 groups**.
 
-| Group | UI Range | Status / Notes |
-|---|---:|---|
-| Web chính | UI-001–UI-007 | Approved style group; ไม่มี Gallery และไม่มี Request Demo route |
-| Platform Admin | UI-010–UI-030 | Approved / locked |
-| Business Admin Core | UI-031–UI-062 | UI-031 is approved anchor; group in progress |
-| POS Terminal | UI-063–UI-079 | Not yet locked as a group |
-| Staff Order Mobile | UI-080–UI-087 | Pending |
-| Customer Display | UI-088–UI-091 | Pending |
-| Kitchen / Bar Display | UI-092–UI-097 | Pending |
-| Public Menu / QR Menu | UI-098–UI-103 | Pending |
-| Retail-specific | UI-104–UI-108 | Pending |
-| Cafe-specific | UI-109–UI-114 | Implemented / pending review |
-| Restaurant-specific | UI-115–UI-121 | Source image added / in implementation |
-| Beauty-specific | UI-122–UI-129 | Pending |
-| Hospitality-specific | UI-130–UI-136 | Pending |
+| Group                 |      UI Range | Status / Notes                                                  |
+| --------------------- | ------------: | --------------------------------------------------------------- |
+| Web chính             | UI-001–UI-007 | Approved style group; ไม่มี Gallery และไม่มี Request Demo route |
+| Platform Admin        | UI-010–UI-030 | Approved / locked                                               |
+| Business Admin Core   | UI-031–UI-062 | UI-031 is approved anchor; group in progress                    |
+| POS Terminal          | UI-063–UI-079 | Not yet locked as a group                                       |
+| Staff Order Mobile    | UI-080–UI-087 | Pending                                                         |
+| Customer Display      | UI-088–UI-091 | Pending                                                         |
+| Kitchen / Bar Display | UI-092–UI-097 | Pending                                                         |
+| Public Menu / QR Menu | UI-098–UI-103 | Pending                                                         |
+| Retail-specific       | UI-104–UI-108 | Pending                                                         |
+| Cafe-specific         | UI-109–UI-114 | Implemented / pending review                                    |
+| Restaurant-specific   | UI-115–UI-121 | Source image added / in implementation                          |
+| Beauty-specific       | UI-122–UI-129 | Pending                                                         |
+| Hospitality-specific  | UI-130–UI-136 | Pending                                                         |
 
 ---
 
@@ -394,19 +394,19 @@ UI-030 Platform Profile & Security
 
 ### Platform Admin Relationship Rules
 
-| Screen | Parent / Relationship |
-|---|---|
-| Business Detail | Opens from Businesses List |
-| Create Business | Created from Businesses module |
-| Edit Business | Opens from Business Detail |
-| Owner Detail | Opens from Business Owners List |
-| Assign Plan | Related to Plans Management and Business Detail |
-| Contact Request Detail | Opens from Contact Requests List |
-| Support Ticket Detail | Opens from Support Tickets List |
-| Master Payment Config | Platform-level config table screen |
-| Notification Templates | Platform-level template/config screen |
-| Platform Audit Logs | Audit table + detail drawer |
-| Platform Profile & Security | Profile/security settings for platform admin |
+| Screen                      | Parent / Relationship                           |
+| --------------------------- | ----------------------------------------------- |
+| Business Detail             | Opens from Businesses List                      |
+| Create Business             | Created from Businesses module                  |
+| Edit Business               | Opens from Business Detail                      |
+| Owner Detail                | Opens from Business Owners List                 |
+| Assign Plan                 | Related to Plans Management and Business Detail |
+| Contact Request Detail      | Opens from Contact Requests List                |
+| Support Ticket Detail       | Opens from Support Tickets List                 |
+| Master Payment Config       | Platform-level config table screen              |
+| Notification Templates      | Platform-level template/config screen           |
+| Platform Audit Logs         | Audit table + detail drawer                     |
+| Platform Profile & Security | Profile/security settings for platform admin    |
 
 ---
 
@@ -546,39 +546,39 @@ UI-062 Export Center
 
 ### Business Admin Relationship Rules
 
-| Screen | Parent / Relationship |
-|---|---|
-| Business Profile | Related to Business Dashboard / Settings / Branding |
-| Branches List | Business Dashboard → Branches |
-| Branch Form | Opens from Branches List |
-| Staff List | Business Dashboard → Staff |
-| Staff Form / Detail | Opens from Staff List |
-| Roles & Permissions | Related to Staff List |
-| Categories List | Related to Items / menu structure |
-| Items List | Business Dashboard → Items |
-| Item Form | Opens from Items List |
-| Item Variants / Options | Opens from Item Form |
-| Inventory Overview | Business Dashboard → Inventory |
-| Stock Movements | Opens from Inventory Overview |
-| Stock In | Opens from Stock Movements |
-| Stock Adjustment | Opens from Stock Movements |
-| Suppliers List | Related to Inventory Overview |
-| Supplier Form | Opens from Suppliers List |
-| Purchase Receipts List | Related to Stock In and Suppliers List |
-| Purchase Receipt Detail / Form | Opens from Purchase Receipts List |
-| Customers List | Business Dashboard → Customers |
-| Customer Detail | Opens from Customers List |
-| Loyalty Settings | Related to Customers List and Customer Detail |
-| Promotions List | Related to Items, Customers, and Loyalty |
-| Promotion Form | Opens from Promotions List |
-| Coupons List | Related to Promotions List |
-| Payment Methods | Business-level payment config |
-| Receipt / Bill Settings | Related to Payment Methods and Branding |
-| Branding / Theme | Related to Business Profile and Receipt Settings |
-| Device Management | Related to Branches and POS devices |
-| Module Settings | Business-level enabled modules/add-ons |
-| Import Center | Related to Items, Customers, Suppliers |
-| Export Center | Related to Import Center and reporting/list data |
+| Screen                         | Parent / Relationship                               |
+| ------------------------------ | --------------------------------------------------- |
+| Business Profile               | Related to Business Dashboard / Settings / Branding |
+| Branches List                  | Business Dashboard → Branches                       |
+| Branch Form                    | Opens from Branches List                            |
+| Staff List                     | Business Dashboard → Staff                          |
+| Staff Form / Detail            | Opens from Staff List                               |
+| Roles & Permissions            | Related to Staff List                               |
+| Categories List                | Related to Items / menu structure                   |
+| Items List                     | Business Dashboard → Items                          |
+| Item Form                      | Opens from Items List                               |
+| Item Variants / Options        | Opens from Item Form                                |
+| Inventory Overview             | Business Dashboard → Inventory                      |
+| Stock Movements                | Opens from Inventory Overview                       |
+| Stock In                       | Opens from Stock Movements                          |
+| Stock Adjustment               | Opens from Stock Movements                          |
+| Suppliers List                 | Related to Inventory Overview                       |
+| Supplier Form                  | Opens from Suppliers List                           |
+| Purchase Receipts List         | Related to Stock In and Suppliers List              |
+| Purchase Receipt Detail / Form | Opens from Purchase Receipts List                   |
+| Customers List                 | Business Dashboard → Customers                      |
+| Customer Detail                | Opens from Customers List                           |
+| Loyalty Settings               | Related to Customers List and Customer Detail       |
+| Promotions List                | Related to Items, Customers, and Loyalty            |
+| Promotion Form                 | Opens from Promotions List                          |
+| Coupons List                   | Related to Promotions List                          |
+| Payment Methods                | Business-level payment config                       |
+| Receipt / Bill Settings        | Related to Payment Methods and Branding             |
+| Branding / Theme               | Related to Business Profile and Receipt Settings    |
+| Device Management              | Related to Branches and POS devices                 |
+| Module Settings                | Business-level enabled modules/add-ons              |
+| Import Center                  | Related to Items, Customers, Suppliers              |
+| Export Center                  | Related to Import Center and reporting/list data    |
 
 ### Special Fix: Loyalty Settings
 
@@ -801,7 +801,7 @@ Use Business Admin, POS, or display shell depending on the screen. Cafe screens 
 ```text
 UI-109 Cafe Floor Table Map -> /business-admin/[businessSlug]/tables
 UI-110 Coffee Modifiers / Recipe Options -> /business-admin/[businessSlug]/modifiers
-UI-111 Queue Pickup Screen -> /terminal/b/[businessSlug]/pickup-display
+UI-111 Queue Pickup Screen -> /display/b/[businessSlug]/pickup-display
 UI-112 Barista Queue Detail -> /business-admin/[businessSlug]/barista-queue
 UI-113 Happy Hour / Combo Setup -> /business-admin/[businessSlug]/happy-hour
 UI-114 Cafe Daily Quick View -> /business-admin/[businessSlug]/cafe-daily-view
@@ -812,7 +812,7 @@ UI-114 Cafe Daily Quick View -> /business-admin/[businessSlug]/cafe-daily-view
 ```text
 UI-109 Cafe Floor Table Map -> /business-admin/[businessSlug]/tables
 UI-110 Coffee Modifiers / Recipe Options -> /business-admin/[businessSlug]/modifiers
-UI-111 Queue Pickup Screen -> /terminal/b/[businessSlug]/pickup-display
+UI-111 Queue Pickup Screen -> /display/b/[businessSlug]/pickup-display
 UI-112 Barista Queue Detail -> /business-admin/[businessSlug]/barista-queue
 UI-113 Happy Hour / Combo Setup -> /business-admin/[businessSlug]/happy-hour
 UI-114 Cafe Daily Quick View -> /business-admin/[businessSlug]/cafe-daily-view

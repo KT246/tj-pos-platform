@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "../../../compat/link";
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -35,23 +35,23 @@ export function LoginPage() {
         <label>
           <span className="font800 mb-2 block text-sm text-slate-700">Email</span>
           <span className="relative block">
-            <Mail className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
+            <Mail className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-slate-500" />
             <input
               defaultValue="admin@tjpos.la"
-              className="h-14 w-full rounded-md border border-blue-100 pl-12 pr-4 text-base outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
+              className="h-14 w-full rounded-md border border-blue-100 pr-4 pl-12 text-base outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
             />
           </span>
         </label>
         <label>
           <span className="font800 mb-2 block text-sm text-slate-700">ລະຫັດຜ່ານ</span>
           <span className="relative block">
-            <Lock className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
+            <Lock className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-slate-500" />
             <input
               defaultValue="VtCoffee@2025!"
               type="password"
-              className="h-14 w-full rounded-md border border-blue-100 pl-12 pr-12 text-base outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
+              className="h-14 w-full rounded-md border border-blue-100 pr-12 pl-12 text-base outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
             />
-            <Eye className="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
+            <Eye className="absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 text-slate-500" />
           </span>
         </label>
 
@@ -90,7 +90,10 @@ export function LoginPage() {
 
       <div className="mt-7 flex items-start gap-3 rounded-lg bg-emerald-50 p-4 text-sm text-slate-600">
         <ShieldCheck className="h-5 w-5 shrink-0 text-emerald-600" />
-        <p>ການເຂົ້າໃຊ້ປອດໄພດ້ວຍການເຂົ້າລະຫັດລະດັບອົງກອນ. ກິດຈະກຳທັງໝົດຖືກຕິດຕາມ ແລະບັນທຶກ.</p>
+        <p>
+          ການເຂົ້າໃຊ້ປອດໄພດ້ວຍການເຂົ້າລະຫັດລະດັບອົງກອນ. ກິດຈະກຳທັງໝົດຖືກຕິດຕາມ
+          ແລະບັນທຶກ.
+        </p>
       </div>
     </AuthLayout>
   );
@@ -109,7 +112,7 @@ export function ForgotPasswordPage() {
         </p>
       </div>
       <label>
-          <span className="font800 mb-2 block text-sm text-slate-700">Email</span>
+        <span className="font800 mb-2 block text-sm text-slate-700">Email</span>
         <input
           defaultValue="admin@tjpos.la"
           className="h-14 w-full rounded-md border border-blue-100 px-4 text-base outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
@@ -121,7 +124,10 @@ export function ForgotPasswordPage() {
       >
         ສົ່ງ reset link
       </button>
-      <Link href="/login" className="font900 mt-5 block text-center text-sm text-blue-700">
+      <Link
+        href="/login"
+        className="font900 mt-5 block text-center text-sm text-blue-700"
+      >
         ກັບໄປ Login
       </Link>
     </AuthLayout>
@@ -181,12 +187,18 @@ function AuthLayout({
             priority
           />
           <div className="flex items-center gap-6">
-            <button type="button" className="font900 flex cursor-pointer items-center gap-2 text-sm text-slate-800">
+            <button
+              type="button"
+              className="font900 flex cursor-pointer items-center gap-2 text-sm text-slate-800"
+            >
               <Globe className="h-5 w-5" />
               EN
             </button>
-            <Link href="/" className="font900 flex items-center gap-2 text-sm text-blue-700">
-            ໄປໜ້າເວັບຫຼັກ
+            <Link
+              href="/"
+              className="font900 flex items-center gap-2 text-sm text-blue-700"
+            >
+              ໄປໜ້າເວັບຫຼັກ
               <ExternalLink className="h-4 w-4" />
             </Link>
           </div>
@@ -209,8 +221,8 @@ function AuthLayout({
               ເພີ່ມພະລັງໃຫ້ <span className="text-blue-600">ທຸກທຸລະກິດ.</span>
             </h2>
             <p className="mt-4 max-w-[620px] text-base leading-7 text-slate-600">
-              TJ POS Platform Admin ໃຫ້ທີມງານຈັດການລູກຄ້າ, ຕິດຕາມ performance
-              ແລະປັບປຸງ POS experience ທົ່ວລາວ.
+              TJ POS Platform Admin ໃຫ້ທີມງານຈັດການລູກຄ້າ, ຕິດຕາມ performance ແລະປັບປຸງ
+              POS experience ທົ່ວລາວ.
             </p>
             <div className="mt-5 rounded-xl border border-blue-100 bg-white p-3 shadow-[0_18px_60px_rgba(13,91,255,0.12)]">
               <div className="grid grid-cols-4 gap-3">
@@ -225,16 +237,18 @@ function AuthLayout({
               </div>
               <div className="mt-3 grid gap-3 rounded-lg border border-blue-50 p-2.5 md:grid-cols-[0.9fr_1.1fr]">
                 <div className="space-y-1.5">
-                  {["ແດຊບອດ", "ທຸລະກິດ", "ສາຂາ", "ຜູ້ໃຊ້", "ການສະໝັກ"].map((item, index) => (
-                    <div
-                      key={item}
-                      className={`font900 rounded-md px-3 py-1.5 text-xs ${
-                        index === 0 ? "bg-blue-50 text-blue-700" : "text-slate-600"
-                      }`}
-                    >
-                      {item}
-                    </div>
-                  ))}
+                  {["ແດຊບອດ", "ທຸລະກິດ", "ສາຂາ", "ຜູ້ໃຊ້", "ການສະໝັກ"].map(
+                    (item, index) => (
+                      <div
+                        key={item}
+                        className={`font900 rounded-md px-3 py-1.5 text-xs ${
+                          index === 0 ? "bg-blue-50 text-blue-700" : "text-slate-600"
+                        }`}
+                      >
+                        {item}
+                      </div>
+                    )
+                  )}
                 </div>
                 <div className="rounded-lg bg-blue-50/40 p-3">
                   <svg className="h-20 w-full" viewBox="0 0 360 150" aria-hidden="true">
@@ -254,32 +268,59 @@ function AuthLayout({
             </div>
             <div className="mt-4 grid gap-4 md:grid-cols-4">
               {[
-                { title: "ຄວບຄຸມສູນກາງ", text: "ຈັດການທຸລະກິດ, ສາຂາ ແລະສິດ.", icon: BriefcaseBusiness },
-                { title: "ຂໍ້ມູນທັນທີ", text: "ຕິດຕາມຍອດຂາຍ ແລະການສະໝັກ.", icon: ChartNoAxesCombined },
-                { title: "ປອດໄພ & ເຊື່ອຖືໄດ້", text: "ຄວາມປອດໄພລະດັບອົງກອນ.", icon: ShieldCheck },
-                { title: "ພ້ອມເຕີບໂຕ", text: "ຂະຫຍາຍການດຳເນີນງານທົ່ວລາວ.", icon: Headphones }
+                {
+                  title: "ຄວບຄຸມສູນກາງ",
+                  text: "ຈັດການທຸລະກິດ, ສາຂາ ແລະສິດ.",
+                  icon: BriefcaseBusiness
+                },
+                {
+                  title: "ຂໍ້ມູນທັນທີ",
+                  text: "ຕິດຕາມຍອດຂາຍ ແລະການສະໝັກ.",
+                  icon: ChartNoAxesCombined
+                },
+                {
+                  title: "ປອດໄພ & ເຊື່ອຖືໄດ້",
+                  text: "ຄວາມປອດໄພລະດັບອົງກອນ.",
+                  icon: ShieldCheck
+                },
+                {
+                  title: "ພ້ອມເຕີບໂຕ",
+                  text: "ຂະຫຍາຍການດຳເນີນງານທົ່ວລາວ.",
+                  icon: Headphones
+                }
               ].map((item) => {
                 const Icon = item.icon;
 
                 return (
-                  <div key={item.title} className="border-r border-blue-100 pr-4 last:border-r-0">
+                  <div
+                    key={item.title}
+                    className="border-r border-blue-100 pr-4 last:border-r-0"
+                  >
                     <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-blue-100 bg-blue-50 text-blue-600">
                       <Icon className="h-5 w-5" />
                     </span>
-                    <p className="font900 mt-2 text-[13px] text-slate-950">{item.title}</p>
-                    <p className="mt-1 text-[11px] leading-4 text-slate-500">{item.text}</p>
+                    <p className="font900 mt-2 text-[13px] text-slate-950">
+                      {item.title}
+                    </p>
+                    <p className="mt-1 text-[11px] leading-4 text-slate-500">
+                      {item.text}
+                    </p>
                   </div>
                 );
               })}
             </div>
             <div className="mt-4 rounded-xl border border-blue-100 bg-white px-5 py-3">
-              <p className="font900 text-sm text-slate-950">ໄດ້ຮັບຄວາມໄວ້ໃຈຈາກທຸລະກິດຊັ້ນນຳໃນລາວ</p>
+              <p className="font900 text-sm text-slate-950">
+                ໄດ້ຮັບຄວາມໄວ້ໃຈຈາກທຸລະກິດຊັ້ນນຳໃນລາວ
+              </p>
               <div className="mt-3 grid grid-cols-5 items-center gap-3 text-center">
-                {["Joma", "Vientiane Center", "BFL", "Sabaidee Hotel", "PARKSON"].map((logo) => (
-                  <span key={logo} className="font900 text-base text-slate-700">
-                    {logo}
-                  </span>
-                ))}
+                {["Joma", "Vientiane Center", "BFL", "Sabaidee Hotel", "PARKSON"].map(
+                  (logo) => (
+                    <span key={logo} className="font900 text-base text-slate-700">
+                      {logo}
+                    </span>
+                  )
+                )}
               </div>
             </div>
           </div>
@@ -299,7 +340,8 @@ function AuthLayout({
                 taglineClassName="text-[6px]"
               />
               <p className="mt-2 max-w-xs leading-5">
-                TJ POS is a modern, cloud-based point-of-sale platform designed for businesses in Laos.
+                TJ POS is a modern, cloud-based point-of-sale platform designed for
+                businesses in Laos.
               </p>
             </div>
             <div>
@@ -324,7 +366,10 @@ function AuthLayout({
               <p className="font900 mb-3 text-slate-950">Secure & Certified</p>
               <div className="grid grid-cols-2 gap-3">
                 {["ISO 27001", "PCI DSS"].map((item) => (
-                  <div key={item} className="font900 rounded-lg border border-blue-100 px-3 py-2.5 text-xs text-slate-800">
+                  <div
+                    key={item}
+                    className="font900 rounded-lg border border-blue-100 px-3 py-2.5 text-xs text-slate-800"
+                  >
                     {item}
                   </div>
                 ))}

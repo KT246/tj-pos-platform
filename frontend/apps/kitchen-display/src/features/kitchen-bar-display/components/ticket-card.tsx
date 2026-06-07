@@ -1,0 +1,204 @@
+import {
+  CheckCircle2,
+  MessageCircle,
+  MoreHorizontal,
+  ShoppingBag,
+  Timer,
+  UserRound,
+  Utensils
+} from "lucide-react";
+
+import type { KitchenTicket } from "../types";
+import { getElapsedLabel } from "../utils";
+
+type TicketCardProps = {
+  ticket: KitchenTicket;
+  showItemNotes: boolean;
+  showElapsedTime: boolean;
+  density: "comfortable" | "compact";
+  onStartPreparing: (ticketId: string) => void;
+  onMarkReady: (ticketId: string) => void;
+  onCompletePickup: (ticketId: string) => void;
+  onRecall: (ticketId: string) => void;
+  onViewDetail: (ticketId: string) => void;
+};
+
+function getCardTone(ticket: KitchenTicket) {
+  if (ticket.status === "preparing") {
+    return {
+      border: "border-orange-100",
+      accent: "text-orange-600",
+      primary:
+        "bg-orange-500 text-white hover:bg-orange-600 shadow-[0_10px_24px_rgba(249,115,22,0.24)]",
+      badge:
+        ticket.priority === "High"
+          ? "bg-red-50 text-red-600"
+          : "bg-orange-50 text-orange-600"
+    };
+  }
+
+  if (ticket.status === "ready") {
+    return {
+      border: "border-emerald-100",
+      accent: "text-emerald-600",
+      primary:
+        "bg-emerald-500 text-white hover:bg-emerald-600 shadow-[0_10px_24px_rgba(16,185,129,0.22)]",
+      badge:
+        ticket.priority === "High"
+          ? "bg-red-50 text-red-600"
+          : "bg-emerald-50 text-emerald-600"
+    };
+  }
+
+  return {
+    border: "border-blue-100",
+    accent: "text-blue-600",
+    primary:
+      "bg-blue-600 text-white hover:bg-blue-700 shadow-[0_10px_24px_rgba(37,99,235,0.22)]",
+    badge:
+      ticket.priority === "High" ? "bg-red-50 text-red-600" : "bg-blue-50 text-blue-600"
+  };
+}
+
+function TicketLocation({ ticket }: { ticket: KitchenTicket }) {
+  const Icon = ticket.type === "Take Away" ? ShoppingBag : Utensils;
+
+  return (
+    <span className="flex items-center gap-2 text-[15px] font-bold text-[#0b1736]">
+      <Icon className="h-5 w-5" strokeWidth={2.2} />
+      {ticket.table}
+    </span>
+  );
+}
+
+export function TicketCard({
+  ticket,
+  showItemNotes,
+  showElapsedTime,
+  density,
+  onStartPreparing,
+  onMarkReady,
+  onCompletePickup,
+  onRecall,
+  onViewDetail
+}: TicketCardProps) {
+  const tone = getCardTone(ticket);
+  const compact = density === "compact";
+
+  return (
+    <article
+      className={`flex min-h-[314px] flex-col rounded-xl border bg-white p-5 shadow-[0_3px_12px_rgba(15,23,42,0.06)] transition hover:-translate-y-1 hover:shadow-[0_18px_38px_rgba(37,99,235,0.12)] ${tone.border}`}
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <div className={`text-[21px] font-black ${tone.accent}`}>{ticket.id}</div>
+          <span
+            className={`mt-2 inline-flex rounded-md px-3 py-1 text-[12px] font-black ${tone.badge}`}
+          >
+            {ticket.priority}
+          </span>
+        </div>
+
+        <div className="text-right">
+          <TicketLocation ticket={ticket} />
+          {showElapsedTime ? (
+            <div className="mt-2 flex items-center justify-end gap-2 text-red-500">
+              <Timer className="h-4 w-4" strokeWidth={2.3} />
+              <span className="text-[22px] leading-none font-black">
+                {getElapsedLabel(ticket.elapsedMinutes)}
+              </span>
+            </div>
+          ) : null}
+          {showElapsedTime ? (
+            <div className="text-[12px] font-bold text-slate-500">elapsed</div>
+          ) : null}
+        </div>
+      </div>
+
+      <div className="mt-5 flex items-center gap-2 text-[13px] font-bold text-[#0b1736]">
+        <UserRound className="h-4 w-4" strokeWidth={2.3} />
+        <span>Assigned:</span>
+        <span className="font-semibold text-slate-600">{ticket.assignedTo}</span>
+      </div>
+
+      <div className={`mt-4 flex-1 ${compact ? "space-y-2" : "space-y-3"}`}>
+        {ticket.items.slice(0, compact ? 3 : 4).map((item) => (
+          <div
+            key={item.id}
+            className="grid grid-cols-[30px_minmax(0,1fr)] gap-2 text-[14px] leading-snug font-bold text-[#0b1736]"
+          >
+            <span>{item.quantity}</span>
+            <div>
+              <div>{item.name}</div>
+              {showItemNotes && item.note ? (
+                <div className="mt-1 text-[12px] font-semibold text-slate-500">
+                  {item.note}
+                </div>
+              ) : null}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-5 border-t border-slate-100 pt-4">
+        <div className="flex min-h-6 items-center gap-2 text-[13px] font-bold text-[#0b1736]">
+          <MessageCircle className="h-4 w-4 text-slate-500" strokeWidth={2.2} />
+          <span>Note:</span>
+          <span className="truncate font-semibold text-slate-600">
+            {ticket.kitchenNote}
+          </span>
+        </div>
+      </div>
+
+      <div className="mt-4 grid grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] gap-3">
+        {ticket.status === "new" ? (
+          <button
+            type="button"
+            onClick={() => onStartPreparing(ticket.id)}
+            className={`flex h-11 items-center justify-center gap-2 rounded-lg text-[14px] font-black transition ${tone.primary}`}
+          >
+            <Timer className="h-5 w-5" strokeWidth={2.4} />
+            Start Preparing
+          </button>
+        ) : ticket.status === "preparing" ? (
+          <button
+            type="button"
+            onClick={() => onMarkReady(ticket.id)}
+            className={`flex h-11 items-center justify-center gap-2 rounded-lg text-[14px] font-black transition ${tone.primary}`}
+          >
+            <CheckCircle2 className="h-5 w-5" strokeWidth={2.4} />
+            Mark Ready
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() => onCompletePickup(ticket.id)}
+            className={`flex h-11 items-center justify-center gap-2 rounded-lg text-[14px] font-black transition ${tone.primary}`}
+          >
+            <CheckCircle2 className="h-5 w-5" strokeWidth={2.4} />
+            Complete Pickup
+          </button>
+        )}
+
+        <button
+          type="button"
+          onClick={() => onViewDetail(ticket.id)}
+          className="flex h-11 items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white text-[14px] font-black text-[#0b1736] transition hover:border-blue-300 hover:bg-blue-50"
+        >
+          <MoreHorizontal className="h-5 w-5" strokeWidth={2.4} />
+          View Detail
+        </button>
+      </div>
+
+      {ticket.status === "ready" ? (
+        <button
+          type="button"
+          onClick={() => onRecall(ticket.id)}
+          className="mt-3 h-10 rounded-lg border border-emerald-100 bg-emerald-50 text-[13px] font-black text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-100"
+        >
+          Recall to Preparing
+        </button>
+      ) : null}
+    </article>
+  );
+}

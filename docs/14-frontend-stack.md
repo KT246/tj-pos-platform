@@ -31,22 +31,22 @@ script dev:* ของ app ใหม่จะเพิ่มเมื่อ app 
 
 ## 2. App Framework
 
-| App | Framework | หน้าที่ |
-|---|---|---|
-| `frontend/apps/web` | Next.js | เว็บไซต์หลัก TJ POS, landing, pricing, contact, content lo/en |
-| `frontend/apps/platform-admin` | Next.js | Platform Admin ของทีม TJ Solution |
-| `frontend/apps/business-admin` | Vite React | Business Admin / Owner / Manager ของร้าน |
-| `frontend/apps/terminal` | Vite React | POS Terminal |
-| `frontend/apps/staff-order` | Vite React | Staff Order Mobile |
-| `frontend/apps/kitchen-display` | Vite React | Kitchen / Bar Display |
-| `frontend/apps/customer-display` | Vite React | Customer Display |
-| `frontend/apps/public-menu` | Vite React | Public Menu / QR Menu สำหรับลูกค้าสแกนดูเมนู |
+| App                              | Framework  | หน้าที่                                                       |
+| -------------------------------- | ---------- | ------------------------------------------------------------- |
+| `frontend/apps/web`              | Next.js    | เว็บไซต์หลัก TJ POS, landing, pricing, contact, content lo/en |
+| `frontend/apps/platform-admin`   | Vite React | Platform Admin ของทีม TJ Solution                             |
+| `frontend/apps/business-admin`   | Vite React | Business Admin / Owner / Manager ของร้าน                      |
+| `frontend/apps/terminal`         | Vite React | POS Terminal                                                  |
+| `frontend/apps/staff-order`      | Vite React | Staff Order Mobile                                            |
+| `frontend/apps/kitchen-display`  | Vite React | Kitchen / Bar Display                                         |
+| `frontend/apps/customer-display` | Vite React | Customer Display                                              |
+| `frontend/apps/public-menu`      | Vite React | Public Menu / QR Menu สำหรับลูกค้าสแกนดูเมนู                  |
 
 หลักการ:
 
 ```text
-Next.js ใช้เฉพาะ app ที่ต้องการ website/admin shell และ route metadata ชัดเจน
-Vite React ใช้กับ app ฝั่งลูกค้าที่เน้นความเร็ว, offline/PWA, kiosk/mobile และ SPA interaction
+Next.js ใช้เฉพาะ `frontend/apps/web` สำหรับเว็บไซต์หลัก
+Vite React ใช้กับ admin app และ app ฝั่งลูกค้าที่เน้นความเร็ว, offline/PWA, kiosk/mobile และ SPA interaction
 ```
 
 ---
@@ -128,8 +128,7 @@ shared API client อยู่ใน packages/shared เมื่อ backend end
 
 ```text
 apps/web ใช้ Next.js App Router
-apps/platform-admin ใช้ Next.js App Router
-Vite apps ใช้ react-router-dom
+app อื่นทั้งหมดรวมถึง platform-admin ใช้ Vite + react-router-dom
 ```
 
 Dynamic route syntax:
@@ -190,7 +189,7 @@ frontend/packages/i18n
 
 ## 9. Env Naming
 
-Next.js apps:
+Next.js app:
 
 ```text
 NEXT_PUBLIC_API_BASE_URL=
@@ -211,6 +210,6 @@ VITE_API_BASE_URL=
 ทิศทางใหม่ให้ยึด `16-frontend-vite-migration-plan.md`
 
 ```text
-web และ platform-admin = Next.js
-business-admin, terminal, staff-order, kitchen-display, customer-display, public-menu = Vite React
+web = Next.js
+platform-admin, business-admin, terminal, staff-order, kitchen-display, customer-display, public-menu = Vite React
 ```

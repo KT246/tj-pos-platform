@@ -22,11 +22,7 @@ import {
   StatGrid,
   StatusBadge
 } from "../components/admin-primitives";
-import {
-  businesses,
-  businessStats,
-  planCards
-} from "../data/mock-platform-admin";
+import { businesses, businessStats, planCards } from "../data/mock-platform-admin";
 
 export function BusinessesPage() {
   return (
@@ -39,7 +35,10 @@ export function BusinessesPage() {
       <BusinessTable rows={businesses} />
       <div className="mt-5 grid gap-5 xl:grid-cols-[1fr_1fr]">
         <AdminCard className="p-5">
-          <PanelTitle title="ການລົງທະບຽນຫຼ້າສຸດ" action={<AdminButton variant="ghost">ເບິ່ງທັງໝົດ</AdminButton>} />
+          <PanelTitle
+            title="ການລົງທະບຽນຫຼ້າສຸດ"
+            action={<AdminButton variant="ghost">ເບິ່ງທັງໝົດ</AdminButton>}
+          />
           <SimpleList
             records={businesses.slice(0, 3).map((business) => ({
               title: business.name,
@@ -85,7 +84,10 @@ export function BusinessDetailPage() {
         description="ລາຍລະອຽດ business, owner, plan, modules ແລະ payment preference."
         action={
           <div className="flex gap-3">
-            <AdminButton variant="secondary" href="/platform-admin/businesses/BUS-001/edit">
+            <AdminButton
+              variant="secondary"
+              href="/platform-admin/businesses/BUS-001/edit"
+            >
               ແກ້ໄຂ
             </AdminButton>
             <AdminButton>ກຳນົດແພັກເກດ</AdminButton>
@@ -131,7 +133,10 @@ export function BusinessDetailPage() {
                 "Advanced Reporting",
                 "Loyalty Program"
               ].map((module) => (
-                <div key={module} className="flex items-center gap-3 rounded-lg border border-blue-100 p-3">
+                <div
+                  key={module}
+                  className="flex items-center gap-3 rounded-lg border border-blue-100 p-3"
+                >
                   <CheckSquare className="h-5 w-5 text-blue-600" />
                   <span className="font800 text-sm">{module}</span>
                 </div>
@@ -188,18 +193,33 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
               <FormField label="ປະເທດ" value="Laos" required />
               <FormField label="Timezone" value="(GMT+07:00) Indochina Time (ICT)" />
               <div className="rounded-lg border border-blue-50 px-3 md:col-span-2">
-                <SettingsRow title="ສະຖານະໃຊ້ງານ" description="ທຸລະກິດຈະເປີດໃຊ້ຫຼັງສ້າງສຳເລັດ." />
+                <SettingsRow
+                  title="ສະຖານະໃຊ້ງານ"
+                  description="ທຸລະກິດຈະເປີດໃຊ້ຫຼັງສ້າງສຳເລັດ."
+                />
               </div>
             </div>
           </FormSection>
           <FormSection index={2} title="ບັນຊີເຈົ້າຂອງ">
             <div className="grid gap-2.5 md:grid-cols-3">
               <FormField label="ຊື່ເຈົ້າຂອງ" value="Somkheo Phan" required />
-              <FormField label="Email ເຈົ້າຂອງ" value="somkheo.phan@vtcoffee.la" required />
+              <FormField
+                label="Email ເຈົ້າຂອງ"
+                value="somkheo.phan@vtcoffee.la"
+                required
+              />
               <FormField label="Phone" value="+856 20 5555 7890" required />
-              <FormField label="ລະຫັດຜ່ານຊົ່ວຄາວ" value="VtCoffee@2025!" wide required />
+              <FormField
+                label="ລະຫັດຜ່ານຊົ່ວຄາວ"
+                value="VtCoffee@2025!"
+                wide
+                required
+              />
               <div className="rounded-lg border border-blue-50 px-3">
-                <SettingsRow title="ສົ່ງ Email ຕ້ອນຮັບ" description="ສົ່ງລາຍລະອຽດ login ໄປຫາເຈົ້າຂອງ." />
+                <SettingsRow
+                  title="ສົ່ງ Email ຕ້ອນຮັບ"
+                  description="ສົ່ງລາຍລະອຽດ login ໄປຫາເຈົ້າຂອງ."
+                />
               </div>
             </div>
           </FormSection>
@@ -216,10 +236,23 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
               <div className="space-y-2">
                 {["VTC Downtown", "VTC Thatluang"].map((branch, index) => (
                   <div key={branch} className="grid grid-cols-[1fr_1fr_34px] gap-2">
-                    <input className="h-7 rounded-md border border-blue-100 px-2.5 text-xs" defaultValue={branch} />
-                    <input className="h-7 rounded-md border border-blue-100 px-2.5 text-xs" defaultValue="Vientiane Capital" />
-                    <button type="button" className="flex h-7 cursor-pointer items-center justify-center rounded-md border border-blue-100 text-slate-500 transition hover:bg-blue-50 hover:text-blue-700">
-                      {index === 0 ? <Plus className="h-4 w-4" /> : <Trash2 className="h-4 w-4" />}
+                    <input
+                      className="h-7 rounded-md border border-blue-100 px-2.5 text-xs"
+                      defaultValue={branch}
+                    />
+                    <input
+                      className="h-7 rounded-md border border-blue-100 px-2.5 text-xs"
+                      defaultValue="Vientiane Capital"
+                    />
+                    <button
+                      type="button"
+                      className="flex h-7 cursor-pointer items-center justify-center rounded-md border border-blue-100 text-slate-500 transition hover:bg-blue-50 hover:text-blue-700"
+                    >
+                      {index === 0 ? (
+                        <Plus className="h-4 w-4" />
+                      ) : (
+                        <Trash2 className="h-4 w-4" />
+                      )}
                     </button>
                   </div>
                 ))}
@@ -232,9 +265,23 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
             </FormSection>
             <FormSection index={5} title="ໂມດູນ / Add-ons ທີ່ເປີດໃຊ້">
               <div className="grid gap-2 md:grid-cols-2">
-                {["Point of Sale (POS)", "Inventory Management", "Customer Management", "Sales & Reporting", "Loyalty Program", "Kitchen Display System"].map((item, index) => (
-                  <label key={item} className="font800 flex items-center gap-2 text-[11px] leading-4 text-slate-800">
-                    <input type="checkbox" defaultChecked={index < 4} className="h-3.5 w-3.5 accent-blue-600" />
+                {[
+                  "Point of Sale (POS)",
+                  "Inventory Management",
+                  "Customer Management",
+                  "Sales & Reporting",
+                  "Loyalty Program",
+                  "Kitchen Display System"
+                ].map((item, index) => (
+                  <label
+                    key={item}
+                    className="font800 flex items-center gap-2 text-[11px] leading-4 text-slate-800"
+                  >
+                    <input
+                      type="checkbox"
+                      defaultChecked={index < 4}
+                      className="h-3.5 w-3.5 accent-blue-600"
+                    />
                     {item}
                   </label>
                 ))}
@@ -247,7 +294,11 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
                 <FormField label="ວິທີຊຳລະ" value="Bank Transfer" required />
                 <FormField label="ທະນາຄານ" value="LAOVIET Bank" required />
                 <FormField label="ເລກບັນຊີ" value="1234 5678 9012" required />
-                <FormField label="ຊື່ບັນຊີ" value="ViengTiane Coffee Co., Ltd." required />
+                <FormField
+                  label="ຊື່ບັນຊີ"
+                  value="ViengTiane Coffee Co., Ltd."
+                  required
+                />
               </div>
             </FormSection>
             <FormSection index={7} title="Notes (ບໍ່ບັງຄັບ)">
@@ -258,13 +309,15 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
               <p className="mt-1 text-right text-xs text-slate-400">100 / 500</p>
             </FormSection>
           </div>
-          <div className="fixed bottom-0 left-0 right-0 z-30 flex justify-between border-t border-blue-100 bg-white/95 px-6 py-3 backdrop-blur xl:left-[230px]">
+          <div className="fixed right-0 bottom-0 left-0 z-30 flex justify-between border-t border-blue-100 bg-white/95 px-6 py-3 backdrop-blur xl:left-[230px]">
             <AdminButton variant="secondary" href="/platform-admin/businesses">
               ຍົກເລີກ
             </AdminButton>
             <div className="flex gap-3">
               <AdminButton variant="secondary">ບັນທຶກເປັນ Draft</AdminButton>
-              <AdminButton icon={ArrowRight}>{mode === "create" ? "ສ້າງທຸລະກິດ" : "ບັນທຶກການແກ້ໄຂ"}</AdminButton>
+              <AdminButton icon={ArrowRight}>
+                {mode === "create" ? "ສ້າງທຸລະກິດ" : "ບັນທຶກການແກ້ໄຂ"}
+              </AdminButton>
             </div>
           </div>
         </div>
@@ -299,7 +352,9 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
             <p className="text-xs leading-5 text-slate-500">
               ສາມາດແກ້ໄຂການຕັ້ງຄ່າໄດ້ພາຍຫຼັງຈາກໜ້າລາຍລະອຽດທຸລະກິດ.
             </p>
-            <AdminButton variant="ghost" icon={ArrowRight}>ເບິ່ງເພີ່ມ</AdminButton>
+            <AdminButton variant="ghost" icon={ArrowRight}>
+              ເບິ່ງເພີ່ມ
+            </AdminButton>
           </AdminCard>
         </aside>
       </div>
@@ -310,15 +365,23 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
 export function AssignPlanPage() {
   return (
     <>
-      <PageHeader title="ກຳນົດແພັກເກດ" description="ເລືອກແພັກເກດ ແລະ billing cycle ໃຫ້ business." />
+      <PageHeader
+        title="ກຳນົດແພັກເກດ"
+        description="ເລືອກແພັກເກດ ແລະ billing cycle ໃຫ້ business."
+      />
       <div className="grid gap-5 lg:grid-cols-4">
         {planCards.map((plan) => (
           <AdminCard key={plan.name} className="p-5">
             <p className="font900 text-xl text-slate-950">{plan.name}</p>
             <p className="font900 mt-3 text-3xl text-blue-600">{plan.price}</p>
             <p className="mt-2 text-sm text-slate-500">{plan.businesses} businesses</p>
-            <p className="mt-4 rounded-md bg-blue-50 px-3 py-2 text-sm font-bold text-blue-700">{plan.modules}</p>
-            <button type="button" className="font900 mt-5 h-11 w-full rounded-md bg-blue-600 text-white">
+            <p className="mt-4 rounded-md bg-blue-50 px-3 py-2 text-sm font-bold text-blue-700">
+              {plan.modules}
+            </p>
+            <button
+              type="button"
+              className="font900 mt-5 h-11 w-full rounded-md bg-blue-600 text-white"
+            >
               ກຳນົດແພັກເກດ
             </button>
           </AdminCard>

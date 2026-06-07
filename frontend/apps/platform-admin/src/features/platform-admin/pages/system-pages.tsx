@@ -6,7 +6,7 @@ import {
   Mail,
   type LucideIcon
 } from "lucide-react";
-import Image from "next/image";
+import Image from "../../../compat/image";
 
 import {
   AdminButton,
@@ -41,14 +41,23 @@ export function SystemSettingsPage() {
         </AdminCard>
         <AdminCard className="p-5">
           <PanelTitle title="ຄວາມປອດໄພ & ການດຳເນີນງານ" />
-          <SettingsRow title="ບັງຄັບໃຊ້ 2FA" description="Platform Admin ຕ້ອງໃຊ້ 2FA." />
+          <SettingsRow
+            title="ບັງຄັບໃຊ້ 2FA"
+            description="Platform Admin ຕ້ອງໃຊ້ 2FA."
+          />
           <SettingsRow title="Audit Log" description="ບັນທຶກການກະທຳສຳຄັນຂອງ admin." />
-          <SettingsRow title="API Rate Limit" description="ປ້ອງກັນ API ຈາກການໃຊ້ງານເກີນ." />
+          <SettingsRow
+            title="API Rate Limit"
+            description="ປ້ອງກັນ API ຈາກການໃຊ້ງານເກີນ."
+          />
         </AdminCard>
         <AdminCard className="p-5">
           <PanelTitle title="ສຳຮອງຂໍ້ມູນ" />
           <SettingsRow title="ສຳຮອງຂໍ້ມູນທຸກມື້" description="ສຳຮອງ database ທຸກຄືນ." />
-          <SettingsRow title="ແຈ້ງເຕືອນ Backup" description="ແຈ້ງທີມ TJ POS ຖ້າ backup ລົ້ມເຫຼວ." />
+          <SettingsRow
+            title="ແຈ້ງເຕືອນ Backup"
+            description="ແຈ້ງທີມ TJ POS ຖ້າ backup ລົ້ມເຫຼວ."
+          />
         </AdminCard>
         <AdminCard className="p-5">
           <PanelTitle title="ສະຖານະ System" />
@@ -58,7 +67,10 @@ export function SystemSettingsPage() {
             ["Queue Worker", "ພ້ອມ"],
             ["Redis", "ພ້ອມ"]
           ].map(([label, value]) => (
-            <div key={label} className="flex items-center justify-between border-b border-blue-50 py-4 last:border-b-0">
+            <div
+              key={label}
+              className="flex items-center justify-between border-b border-blue-50 py-4 last:border-b-0"
+            >
               <span className="font900 text-sm">{label}</span>
               <span className="font800 text-sm text-emerald-700">{value}</span>
             </div>
@@ -78,11 +90,22 @@ export function NotificationTemplatesPage() {
         action={<AdminButton>ເພີ່ມແມ່ແບບ</AdminButton>}
       />
       <AdminCard className="overflow-hidden">
-        <FilterBar searchPlaceholder="ຄົ້ນຫາ template..." filters={["Channel", "ສະຖານະ", "Trigger"]} />
+        <FilterBar
+          searchPlaceholder="ຄົ້ນຫາ template..."
+          filters={["Channel", "ສະຖານະ", "Trigger"]}
+        />
         <table className="min-w-full text-left text-sm">
           <thead className="text-xs text-slate-500">
             <tr>
-              {["ແມ່ແບບ", "Channel", "Trigger", "ພາສາ", "ສະຖານະ", "ອັບເດດເມື່ອ", "ການກະທຳ"].map((head) => (
+              {[
+                "ແມ່ແບບ",
+                "Channel",
+                "Trigger",
+                "ພາສາ",
+                "ສະຖານະ",
+                "ອັບເດດເມື່ອ",
+                "ການກະທຳ"
+              ].map((head) => (
                 <th key={head} className="font900 border-b border-blue-100 px-4 py-3">
                   {head}
                 </th>
@@ -128,15 +151,20 @@ export function AuditLogsPage() {
         action={<AdminButton icon={Download}>ສົ່ງອອກ Logs</AdminButton>}
       />
       <AdminCard className="overflow-hidden">
-        <FilterBar searchPlaceholder="ຄົ້ນຫາ audit logs..." filters={["ຜູ້ກະທຳ", "ການກະທຳ", "Resource"]} />
+        <FilterBar
+          searchPlaceholder="ຄົ້ນຫາ audit logs..."
+          filters={["ຜູ້ກະທຳ", "ການກະທຳ", "Resource"]}
+        />
         <table className="min-w-full text-left text-sm">
           <thead className="text-xs text-slate-500">
             <tr>
-              {["ເວລາ", "ຜູ້ກະທຳ", "ການກະທຳ", "Resource", "ແຫຼ່ງທີ່ມາ", "ສະຖານະ"].map((head) => (
-                <th key={head} className="font900 border-b border-blue-100 px-4 py-3">
-                  {head}
-                </th>
-              ))}
+              {["ເວລາ", "ຜູ້ກະທຳ", "ການກະທຳ", "Resource", "ແຫຼ່ງທີ່ມາ", "ສະຖານະ"].map(
+                (head) => (
+                  <th key={head} className="font900 border-b border-blue-100 px-4 py-3">
+                    {head}
+                  </th>
+                )
+              )}
             </tr>
           </thead>
           <tbody className="divide-y divide-blue-50">
@@ -195,8 +223,14 @@ export function ProfileSecurityPage() {
           </AdminCard>
           <AdminCard className="p-5">
             <PanelTitle title="ຄວາມປອດໄພ" />
-            <SettingsRow title="Two-Factor Authentication" description="ໃຊ້ authenticator app ສຳລັບ login." />
-            <SettingsRow title="ແຈ້ງເຕືອນ Login" description="ແຈ້ງຜ່ານ Email ເມື່ອມີ device ໃໝ່ login." />
+            <SettingsRow
+              title="Two-Factor Authentication"
+              description="ໃຊ້ authenticator app ສຳລັບ login."
+            />
+            <SettingsRow
+              title="ແຈ້ງເຕືອນ Login"
+              description="ແຈ້ງຜ່ານ Email ເມື່ອມີ device ໃໝ່ login."
+            />
             <div className="mt-5 grid gap-3 md:grid-cols-4">
               {(
                 [
@@ -209,7 +243,11 @@ export function ProfileSecurityPage() {
                 const Icon = item.icon;
 
                 return (
-                  <button key={item.label} type="button" className="font900 flex h-14 items-center justify-center gap-2 rounded-md border border-blue-100 text-blue-700 hover:bg-blue-50">
+                  <button
+                    key={item.label}
+                    type="button"
+                    className="font900 flex h-14 items-center justify-center gap-2 rounded-md border border-blue-100 text-blue-700 hover:bg-blue-50"
+                  >
                     <Icon className="h-4 w-4" />
                     {item.label}
                   </button>

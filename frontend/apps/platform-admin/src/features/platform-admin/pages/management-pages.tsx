@@ -8,7 +8,7 @@ import {
   Smartphone,
   XCircle
 } from "lucide-react";
-import Image from "next/image";
+import Image from "../../../compat/image";
 
 import {
   AdminButton,
@@ -22,11 +22,7 @@ import {
   SimpleList,
   StatusBadge
 } from "../components/admin-primitives";
-import {
-  businesses,
-  paymentMethods,
-  planCards
-} from "../data/mock-platform-admin";
+import { businesses, paymentMethods, planCards } from "../data/mock-platform-admin";
 
 export function UsersPage() {
   return (
@@ -37,9 +33,20 @@ export function UsersPage() {
         action={<AdminButton>ເພີ່ມຜູ້ໃຊ້</AdminButton>}
       />
       <AdminCard className="overflow-hidden">
-        <FilterBar searchPlaceholder="ຄົ້ນຫາຜູ້ໃຊ້..." filters={["ບົດບາດທັງໝົດ", "ສະຖານະທັງໝົດ", "ທຸລະກິດທັງໝົດ"]} />
+        <FilterBar
+          searchPlaceholder="ຄົ້ນຫາຜູ້ໃຊ້..."
+          filters={["ບົດບາດທັງໝົດ", "ສະຖານະທັງໝົດ", "ທຸລະກິດທັງໝົດ"]}
+        />
         <GenericTable
-          headers={["ຜູ້ໃຊ້", "ທຸລະກິດ", "ບົດບາດ", "Email", "ສະຖານະ", "Login ຫຼ້າສຸດ", "ການກະທຳ"]}
+          headers={[
+            "ຜູ້ໃຊ້",
+            "ທຸລະກິດ",
+            "ບົດບາດ",
+            "Email",
+            "ສະຖານະ",
+            "Login ຫຼ້າສຸດ",
+            "ການກະທຳ"
+          ]}
           rows={businesses.map((business) => [
             business.owner,
             business.name,
@@ -103,9 +110,24 @@ export function OwnerDetailPage() {
         <PanelTitle title="ກິດຈະກຳຫຼ້າສຸດ" />
         <SimpleList
           records={[
-            { title: "Login ສຳເລັດ", subtitle: "Platform Admin", meta: "Today 10:24 AM", status: "active" },
-            { title: "ອັບເດດ profile ທຸລະກິດ", subtitle: business.name, meta: "Yesterday", status: "resolved" },
-            { title: "ປ່ຽນແພັກເກດ", subtitle: "Business -> Pro", meta: "May 16, 2025", status: "inProgress" }
+            {
+              title: "Login ສຳເລັດ",
+              subtitle: "Platform Admin",
+              meta: "Today 10:24 AM",
+              status: "active"
+            },
+            {
+              title: "ອັບເດດ profile ທຸລະກິດ",
+              subtitle: business.name,
+              meta: "Yesterday",
+              status: "resolved"
+            },
+            {
+              title: "ປ່ຽນແພັກເກດ",
+              subtitle: "Business -> Pro",
+              meta: "May 16, 2025",
+              status: "inProgress"
+            }
           ]}
         />
       </AdminCard>
@@ -132,7 +154,9 @@ export function PlansPage() {
               <CreditCard className="h-6 w-6 text-blue-600" />
             </div>
             <p className="font900 mt-5 text-3xl text-blue-600">{plan.price}</p>
-            <p className="mt-3 text-sm text-slate-500">{plan.businesses} ທຸລະກິດທີ່ໃຊ້ງານ</p>
+            <p className="mt-3 text-sm text-slate-500">
+              {plan.businesses} ທຸລະກິດທີ່ໃຊ້ງານ
+            </p>
             <div className="mt-5 space-y-2 text-sm">
               {["ຈຳກັດສາຂາ", "ຈຳກັດ POS device", "ຈຳກັດພະນັກງານ"].map((item) => (
                 <div key={item} className="flex items-center gap-2">
@@ -156,9 +180,20 @@ export function SubscriptionsPage() {
         description="ຕິດຕາມ plan, renewal date, payment status ແລະ lifecycle."
       />
       <AdminCard className="overflow-hidden">
-        <FilterBar searchPlaceholder="ຄົ້ນຫາການສະໝັກໃຊ້..." filters={["ແພັກເກດທັງໝົດ", "ສະຖານະທັງໝົດ", "ວັນຕໍ່ອາຍຸ"]} />
+        <FilterBar
+          searchPlaceholder="ຄົ້ນຫາການສະໝັກໃຊ້..."
+          filters={["ແພັກເກດທັງໝົດ", "ສະຖານະທັງໝົດ", "ວັນຕໍ່ອາຍຸ"]}
+        />
         <GenericTable
-          headers={["ທຸລະກິດ", "ແພັກເກດ", "ຮອບບິນ", "ຕໍ່ອາຍຸຄັ້ງຕໍ່ໄປ", "ຈຳນວນເງິນ", "ສະຖານະ", "ການກະທຳ"]}
+          headers={[
+            "ທຸລະກິດ",
+            "ແພັກເກດ",
+            "ຮອບບິນ",
+            "ຕໍ່ອາຍຸຄັ້ງຕໍ່ໄປ",
+            "ຈຳນວນເງິນ",
+            "ສະຖານະ",
+            "ການກະທຳ"
+          ]}
           rows={businesses.map((business) => [
             business.name,
             business.plan,
@@ -180,7 +215,9 @@ export function AddOnsPage() {
       <PageHeader
         title="ໂມດູນເສີມ"
         description="ເປີດ/ປິດ add-ons ແລະຈັດການ module access ຂອງ business."
-        action={<AdminButton href="/platform-admin/add-ons/catalog">ໂມດູນກາງ</AdminButton>}
+        action={
+          <AdminButton href="/platform-admin/add-ons/catalog">ໂມດູນກາງ</AdminButton>
+        }
       />
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         {[
@@ -200,14 +237,52 @@ export function AddOnsPage() {
         ))}
       </div>
       <AdminCard className="mt-5 overflow-hidden">
-        <FilterBar searchPlaceholder="ຄົ້ນຫາ add-on..." filters={["ປະເພດໂມດູນ", "ສະຖານະ", "ຂອບເຂດທຸລະກິດ"]} />
+        <FilterBar
+          searchPlaceholder="ຄົ້ນຫາ add-on..."
+          filters={["ປະເພດໂມດູນ", "ສະຖານະ", "ຂອບເຂດທຸລະກິດ"]}
+        />
         <GenericTable
-          headers={["Add-on", "ໝວດໝູ່", "ທຸລະກິດທີ່ເປີດໃຊ້", "ຄ່າລາຍເດືອນ", "ສະຖານະ", "ການກະທຳ"]}
+          headers={[
+            "Add-on",
+            "ໝວດໝູ່",
+            "ທຸລະກິດທີ່ເປີດໃຊ້",
+            "ຄ່າລາຍເດືອນ",
+            "ສະຖານະ",
+            "ການກະທຳ"
+          ]}
           rows={[
-            ["Customer Display", "Display", "1,048", "K 20,000", <StatusBadge key="s" status="active" />, "ຕັ້ງຄ່າ"],
-            ["Kitchen Display System", "Kitchen", "512", "K 50,000", <StatusBadge key="s" status="active" />, "ຕັ້ງຄ່າ"],
-            ["Loyalty Program", "CRM", "388", "K 20,000", <StatusBadge key="s" status="active" />, "ຕັ້ງຄ່າ"],
-            ["Online Ordering", "Public", "214", "K 120,000", <StatusBadge key="s" status="trial" />, "ຕັ້ງຄ່າ"]
+            [
+              "Customer Display",
+              "Display",
+              "1,048",
+              "K 20,000",
+              <StatusBadge key="s" status="active" />,
+              "ຕັ້ງຄ່າ"
+            ],
+            [
+              "Kitchen Display System",
+              "Kitchen",
+              "512",
+              "K 50,000",
+              <StatusBadge key="s" status="active" />,
+              "ຕັ້ງຄ່າ"
+            ],
+            [
+              "Loyalty Program",
+              "CRM",
+              "388",
+              "K 20,000",
+              <StatusBadge key="s" status="active" />,
+              "ຕັ້ງຄ່າ"
+            ],
+            [
+              "Online Ordering",
+              "Public",
+              "214",
+              "K 120,000",
+              <StatusBadge key="s" status="trial" />,
+              "ຕັ້ງຄ່າ"
+            ]
           ]}
         />
       </AdminCard>
@@ -239,10 +314,15 @@ export function GlobalModulesCatalogPage() {
                 <h2 className="font900 text-lg">{title}</h2>
                 <p className="mt-1 text-sm text-slate-500">{category}</p>
               </div>
-              <span className="font800 rounded-md bg-blue-50 px-3 py-1 text-xs text-blue-700">{rule}</span>
+              <span className="font800 rounded-md bg-blue-50 px-3 py-1 text-xs text-blue-700">
+                {rule}
+              </span>
             </div>
             <div className="mt-5">
-              <SettingsRow title="ພ້ອມໃຊ້" description="ທຸລະກິດສາມາດຂໍເປີດໃຊ້ໂມດູນນີ້." />
+              <SettingsRow
+                title="ພ້ອມໃຊ້"
+                description="ທຸລະກິດສາມາດຂໍເປີດໃຊ້ໂມດູນນີ້."
+              />
             </div>
           </AdminCard>
         ))}
@@ -257,12 +337,27 @@ export function PaymentsPage() {
       <PageHeader
         title="ການຊຳລະເງິນ"
         description="ຕິດຕາມ subscription payments, manual confirmation ແລະ transaction status."
-        action={<AdminButton href="/platform-admin/payments/settings">ຕັ້ງຄ່າການຊຳລະ</AdminButton>}
+        action={
+          <AdminButton href="/platform-admin/payments/settings">
+            ຕັ້ງຄ່າການຊຳລະ
+          </AdminButton>
+        }
       />
       <AdminCard className="overflow-hidden">
-        <FilterBar searchPlaceholder="ຄົ້ນຫາການຊຳລະ..." filters={["ສະຖານະ", "ວິທີຊຳລະ", "ທຸລະກິດ"]} />
+        <FilterBar
+          searchPlaceholder="ຄົ້ນຫາການຊຳລະ..."
+          filters={["ສະຖານະ", "ວິທີຊຳລະ", "ທຸລະກິດ"]}
+        />
         <GenericTable
-          headers={["Payment ID", "ທຸລະກິດ", "ວິທີ", "ຈຳນວນເງິນ", "ສະຖານະ", "ຊຳລະເມື່ອ", "ການກະທຳ"]}
+          headers={[
+            "Payment ID",
+            "ທຸລະກິດ",
+            "ວິທີ",
+            "ຈຳນວນເງິນ",
+            "ສະຖານະ",
+            "ຊຳລະເມື່ອ",
+            "ການກະທຳ"
+          ]}
           rows={businesses.map((business, index) => [
             `PAY-2025-${118 - index}`,
             business.name,
@@ -318,10 +413,14 @@ export function PaymentSettingsPage() {
                 </span>
                 <div>
                   <p className="font800 text-xs text-slate-500">{stat.label}</p>
-                  <p className="font900 mt-1 text-2xl leading-7 text-slate-950">{stat.value}</p>
+                  <p className="font900 mt-1 text-2xl leading-7 text-slate-950">
+                    {stat.value}
+                  </p>
                 </div>
               </div>
-              <p className={`font800 mt-3 text-xs ${stat.tone === "red" ? "text-red-600" : "text-emerald-600"}`}>
+              <p
+                className={`font800 mt-3 text-xs ${stat.tone === "red" ? "text-red-600" : "text-emerald-600"}`}
+              >
                 ເພີ່ມ 14.3% ຈາກເດືອນກ່ອນ
               </p>
             </AdminCard>
@@ -331,21 +430,44 @@ export function PaymentSettingsPage() {
       <div className="grid gap-4 xl:grid-cols-[1fr_300px]">
         <AdminCard className="overflow-hidden">
           <div className="flex gap-5 overflow-x-auto border-b border-blue-100 px-4 pt-4">
-            {["ວິທີຊຳລະ", "ທະນາຄານ & ບັນຊີ", "ແມ່ແບບ QR Code", "ປະເພດ POS Payment", "Payment Gateways", "Settlement & Fees", "ພາສີ & ຄ່າທຳນຽມ"].map((tab, index) => (
+            {[
+              "ວິທີຊຳລະ",
+              "ທະນາຄານ & ບັນຊີ",
+              "ແມ່ແບບ QR Code",
+              "ປະເພດ POS Payment",
+              "Payment Gateways",
+              "Settlement & Fees",
+              "ພາສີ & ຄ່າທຳນຽມ"
+            ].map((tab, index) => (
               <button
                 key={tab}
                 type="button"
-                className={`font900 cursor-pointer whitespace-nowrap border-b-2 pb-3 text-xs transition ${
-                  index === 0 ? "border-blue-600 text-blue-700" : "border-transparent text-slate-600 hover:text-blue-700"
+                className={`font900 cursor-pointer border-b-2 pb-3 text-xs whitespace-nowrap transition ${
+                  index === 0
+                    ? "border-blue-600 text-blue-700"
+                    : "border-transparent text-slate-600 hover:text-blue-700"
                 }`}
               >
                 {tab}
               </button>
             ))}
           </div>
-          <FilterBar searchPlaceholder="ຄົ້ນຫາວິທີຊຳລະ..." filters={["ປະເພດທັງໝົດ", "ສະຖານະທັງໝົດ", "Channel ທັງໝົດ", "ທຸລະກິດທັງໝົດ"]} />
+          <FilterBar
+            searchPlaceholder="ຄົ້ນຫາວິທີຊຳລະ..."
+            filters={["ປະເພດທັງໝົດ", "ສະຖານະທັງໝົດ", "Channel ທັງໝົດ", "ທຸລະກິດທັງໝົດ"]}
+          />
           <GenericTable
-            headers={["ວິທີຊຳລະ", "ປະເພດ", "Channel", "Provider / Bank", "ຮອງຮັບສຳລັບ", "ຄ່າຕັ້ງຕົ້ນ", "ສະຖານະ", "ອັບເດດເມື່ອ", "ການກະທຳ"]}
+            headers={[
+              "ວິທີຊຳລະ",
+              "ປະເພດ",
+              "Channel",
+              "Provider / Bank",
+              "ຮອງຮັບສຳລັບ",
+              "ຄ່າຕັ້ງຕົ້ນ",
+              "ສະຖານະ",
+              "ອັບເດດເມື່ອ",
+              "ການກະທຳ"
+            ]}
             rows={paymentMethods.map((row, index) => [
               row[0],
               row[1],
@@ -353,7 +475,10 @@ export function PaymentSettingsPage() {
               row[3],
               row[4],
               index < 4 ? "★" : "☆",
-              <StatusBadge key="s" status={row[5] === "active" ? "active" : "inactive"} />,
+              <StatusBadge
+                key="s"
+                status={row[5] === "active" ? "active" : "inactive"}
+              />,
               `May ${19 - index}, 2025`,
               "ແກ້ໄຂ"
             ])}
@@ -367,7 +492,10 @@ export function PaymentSettingsPage() {
             </div>
           </AdminCard>
           <AdminCard className="p-4">
-            <PanelTitle title="ແຍກຕາມ Channel" action={<AdminButton variant="ghost">ເບິ່ງທັງໝົດ</AdminButton>} />
+            <PanelTitle
+              title="ແຍກຕາມ Channel"
+              action={<AdminButton variant="ghost">ເບິ່ງທັງໝົດ</AdminButton>}
+            />
             <SimpleList
               records={[
                 { title: "Mobile Banking", subtitle: "8 ວິທີ", meta: "33.3%" },
@@ -380,7 +508,10 @@ export function PaymentSettingsPage() {
             <PanelTitle title="ຕົວຢ່າງທະນາຄານ" />
             <div className="grid grid-cols-2 gap-2">
               {["BCEL", "JDB", "LDB", "LAOVIET"].map((bank) => (
-                <div key={bank} className="font900 flex h-12 items-center justify-center rounded-lg border border-blue-100 text-xs text-slate-700">
+                <div
+                  key={bank}
+                  className="font900 flex h-12 items-center justify-center rounded-lg border border-blue-100 text-xs text-slate-700"
+                >
                   {bank}
                 </div>
               ))}
@@ -406,7 +537,10 @@ function GenericTable({
           <thead className="text-xs text-slate-500">
             <tr>
               {headers.map((head) => (
-                <th key={head} className="font900 whitespace-nowrap border-b border-blue-100 px-3.5 py-2.5">
+                <th
+                  key={head}
+                  className="font900 border-b border-blue-100 px-3.5 py-2.5 whitespace-nowrap"
+                >
                   {head}
                 </th>
               ))}
@@ -416,8 +550,15 @@ function GenericTable({
             {rows.map((row, rowIndex) => (
               <tr key={rowIndex} className="hover:bg-blue-50/40">
                 {row.map((cell, cellIndex) => (
-                  <td key={`${rowIndex}-${cellIndex}`} className="whitespace-pre-line px-3.5 py-2.5 text-slate-700">
-                    {cellIndex === 0 ? <span className="font900 text-slate-950">{cell}</span> : cell}
+                  <td
+                    key={`${rowIndex}-${cellIndex}`}
+                    className="px-3.5 py-2.5 whitespace-pre-line text-slate-700"
+                  >
+                    {cellIndex === 0 ? (
+                      <span className="font900 text-slate-950">{cell}</span>
+                    ) : (
+                      cell
+                    )}
                   </td>
                 ))}
               </tr>

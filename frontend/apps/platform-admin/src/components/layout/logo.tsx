@@ -1,5 +1,5 @@
-import Link from "next/link";
-import Image from "next/image";
+import Image from "../../compat/image";
+import Link from "../../compat/link";
 
 type LogoProps = {
   href?: string;
@@ -35,14 +35,19 @@ export function Logo({
         priority={priority}
       />
       <span className="min-w-0 leading-none">
-        <span className={joinClasses("font900 block whitespace-nowrap leading-none", textClassName)}>
+        <span
+          className={joinClasses(
+            "font900 block leading-none whitespace-nowrap",
+            textClassName
+          )}
+        >
           <span className="text-[#1494f7]">TJ</span>
           <span className="ml-1 text-[#061f55]">POS</span>
         </span>
         {showTagline ? (
           <span
             className={joinClasses(
-              "font800 mt-1 block whitespace-nowrap leading-none text-slate-500",
+              "font800 mt-1 block leading-none whitespace-nowrap text-slate-500",
               taglineClassName
             )}
           >

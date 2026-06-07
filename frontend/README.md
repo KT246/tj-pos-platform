@@ -13,6 +13,8 @@ pnpm dev:platform-admin
 pnpm dev:business-admin
 pnpm dev:public-menu
 pnpm dev:staff-order
+pnpm dev:customer-display
+pnpm dev:kitchen-display
 pnpm dev:terminal
 pnpm lint
 pnpm typecheck
@@ -26,11 +28,13 @@ pnpm build
 frontend/
 +- apps/
 |  +- web              # Next.js public website
-|  +- platform-admin   # Next.js platform admin
+|  +- platform-admin   # Vite React platform admin
 |  +- business-admin   # Vite React business admin
 |  +- terminal         # Vite React POS terminal
 |  +- public-menu      # Vite React public menu / QR menu
 |  +- staff-order      # Vite React staff order mobile
+|  +- customer-display # Vite React customer display
+|  +- kitchen-display  # Vite React kitchen / bar display
 +- packages/
    +- ui
    +- shared
@@ -38,8 +42,8 @@ frontend/
    +- config
 ```
 
-`apps/web` and `apps/platform-admin` use Next.js. Customer-facing and shop
-operation apps use Vite React.
+Only `apps/web` uses Next.js. Admin, customer-facing, and shop operation apps
+use Vite React.
 
 The frontend should use mock data until the API contract is agreed with backend.
 

@@ -1,12 +1,4 @@
-import {
-  Clock,
-  Mail,
-  MessageSquare,
-  Phone,
-  Send,
-  Ticket,
-  User
-} from "lucide-react";
+import { Clock, Mail, MessageSquare, Phone, Send, Ticket, User } from "lucide-react";
 
 import {
   AdminButton,
@@ -28,7 +20,10 @@ export function ContactRequestsPage() {
         description="ຄຳຂໍຈາກ website ຫຼັກທີ່ລໍຖ້າທີມ TJ POS ຕິດຕໍ່ກັບ."
       />
       <AdminCard className="overflow-hidden">
-        <FilterBar searchPlaceholder="ຄົ້ນຫາຄຳຂໍ..." filters={["ແຫຼ່ງທີ່ມາ", "ສະຖານະ", "ແຂວງ"]} />
+        <FilterBar
+          searchPlaceholder="ຄົ້ນຫາຄຳຂໍ..."
+          filters={["ແຫຼ່ງທີ່ມາ", "ສະຖານະ", "ແຂວງ"]}
+        />
         <RecordsTable type="request" />
       </AdminCard>
     </>
@@ -70,7 +65,10 @@ export function SupportTicketsPage() {
         description="ຕິດຕາມ ticket, priority, assignment ແລະ resolution status."
       />
       <AdminCard className="overflow-hidden">
-        <FilterBar searchPlaceholder="ຄົ້ນຫາ ticket..." filters={["ຄວາມສຳຄັນ", "ສະຖານະ", "ຜູ້ຮັບຜິດຊອບ"]} />
+        <FilterBar
+          searchPlaceholder="ຄົ້ນຫາ ticket..."
+          filters={["ຄວາມສຳຄັນ", "ສະຖານະ", "ຜູ້ຮັບຜິດຊອບ"]}
+        />
         <RecordsTable type="ticket" />
       </AdminCard>
     </>
@@ -166,7 +164,16 @@ function DetailLayout({
   message
 }: {
   title: string;
-  status: "active" | "trial" | "suspended" | "pending" | "new" | "inProgress" | "closed" | "resolved" | "inactive";
+  status:
+    | "active"
+    | "trial"
+    | "suspended"
+    | "pending"
+    | "new"
+    | "inProgress"
+    | "closed"
+    | "resolved"
+    | "inactive";
   left: [string, string][];
   message: string;
 }) {
@@ -187,7 +194,11 @@ function DetailLayout({
           <div className="space-y-4">
             {[
               ["ລູກຄ້າ", message, "10:24 AM"],
-              ["TJ POS Support", "ຮັບຂໍ້ມູນແລ້ວ. ທີມງານຈະຕິດຕໍ່ກັບໄປໃນໄວໆນີ້.", "10:42 AM"]
+              [
+                "TJ POS Support",
+                "ຮັບຂໍ້ມູນແລ້ວ. ທີມງານຈະຕິດຕໍ່ກັບໄປໃນໄວໆນີ້.",
+                "10:42 AM"
+              ]
             ].map(([who, text, time]) => (
               <div key={time} className="rounded-lg border border-blue-100 p-4">
                 <div className="mb-2 flex items-center justify-between">
@@ -219,9 +230,24 @@ function DetailLayout({
           <PanelTitle title="ການກະທຳຖັດໄປ" />
           <SimpleList
             records={[
-              { title: "ມອບໝາຍຜູ້ຮັບຜິດຊອບ", subtitle: "Vannapha Support", meta: "Now", status: "active" },
-              { title: "ຕັ້ງການເຕືອນ", subtitle: "ຕິດຕາມລູກຄ້າ", meta: "Tomorrow", status: "pending" },
-              { title: "ເພີ່ມ note ພາຍໃນ", subtitle: "ເຫັນໄດ້ໂດຍທີມ TJ POS", meta: "Optional", status: "new" }
+              {
+                title: "ມອບໝາຍຜູ້ຮັບຜິດຊອບ",
+                subtitle: "Vannapha Support",
+                meta: "Now",
+                status: "active"
+              },
+              {
+                title: "ຕັ້ງການເຕືອນ",
+                subtitle: "ຕິດຕາມລູກຄ້າ",
+                meta: "Tomorrow",
+                status: "pending"
+              },
+              {
+                title: "ເພີ່ມ note ພາຍໃນ",
+                subtitle: "ເຫັນໄດ້ໂດຍທີມ TJ POS",
+                meta: "Optional",
+                status: "new"
+              }
             ]}
           />
         </AdminCard>
@@ -239,18 +265,17 @@ function IconDot({ label }: { label: string }) {
     Ticket,
     Message: MessageSquare
   };
-  const Icon =
-    label.includes("Email")
-      ? icons.Email
-      : label.includes("Phone")
-        ? icons.Phone
-        : label.includes("Created")
-          ? icons.Created
-          : label.includes("Ticket")
-            ? icons.Ticket
-            : label.includes("Message")
-              ? icons.Message
-              : icons.User;
+  const Icon = label.includes("Email")
+    ? icons.Email
+    : label.includes("Phone")
+      ? icons.Phone
+      : label.includes("Created")
+        ? icons.Created
+        : label.includes("Ticket")
+          ? icons.Ticket
+          : label.includes("Message")
+            ? icons.Message
+            : icons.User;
 
   return (
     <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600">

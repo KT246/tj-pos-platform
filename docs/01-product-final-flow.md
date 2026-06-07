@@ -27,17 +27,17 @@
 
 ระบบ TJ POS แบ่งเป็น 3 ส่วนหลัก
 
-| ส่วนระบบ | เทคโนโลยีที่แนะนำ | ใช้ทำอะไร |
-|---|---|---|
-| **frontend/apps/web** | Next.js | เว็บไซต์หลักของ TJ POS, landing, pricing, contact |
-| **frontend/apps/platform-admin** | Next.js | Platform Admin สำหรับทีม TJ Solution |
-| **frontend/apps/business-admin** | Vite React | Business Admin ของร้าน, Reports, Settings, Branding |
-| **frontend/apps/terminal** | Vite React | หน้าขาย POS |
-| **frontend/apps/staff-order** | Vite React | Staff Order บนมือถือ |
-| **frontend/apps/kitchen-display** | Vite React | Kitchen / Bar Display |
-| **frontend/apps/customer-display** | Vite React | Customer Display |
-| **frontend/apps/public-menu** | Vite React | Public Menu / QR Menu สำหรับลูกค้าสแกนดูเมนู |
-| **backend** | Backend API | Auth, Business, Branch, Orders, Payments, Plans, Modules, Reports, Backup settings |
+| ส่วนระบบ                           | เทคโนโลยีที่แนะนำ | ใช้ทำอะไร                                                                          |
+| ---------------------------------- | ----------------- | ---------------------------------------------------------------------------------- |
+| **frontend/apps/web**              | Next.js           | เว็บไซต์หลักของ TJ POS, landing, pricing, contact                                  |
+| **frontend/apps/platform-admin**   | Vite React        | Platform Admin สำหรับทีม TJ Solution                                               |
+| **frontend/apps/business-admin**   | Vite React        | Business Admin ของร้าน, Reports, Settings, Branding                                |
+| **frontend/apps/terminal**         | Vite React        | หน้าขาย POS                                                                        |
+| **frontend/apps/staff-order**      | Vite React        | Staff Order บนมือถือ                                                               |
+| **frontend/apps/kitchen-display**  | Vite React        | Kitchen / Bar Display                                                              |
+| **frontend/apps/customer-display** | Vite React        | Customer Display                                                                   |
+| **frontend/apps/public-menu**      | Vite React        | Public Menu / QR Menu สำหรับลูกค้าสแกนดูเมนู                                       |
+| **backend**                        | Backend API       | Auth, Business, Branch, Orders, Payments, Plans, Modules, Reports, Backup settings |
 
 แนวคิดสำคัญคือระบบมีหลายพื้นที่ใช้งาน แต่ไม่ได้หมายความว่าต้องมีหลายระบบแยกกันทั้งหมด ทุกส่วนใช้ backend และ database เดียวกันในช่วงเริ่มต้น
 
@@ -237,14 +237,14 @@ app.tjpos.la/business-admin/tj-cafe
 
 แต่ผู้ใช้แต่ละ role จะเห็นไม่เหมือนกัน:
 
-| Role | เห็นอะไร |
-|---|---|
-| **Owner** | เห็น admin ของร้านเกือบทั้งหมด |
-| **Manager** | เห็นการจัดการสาขา พนักงาน รายงาน |
-| **Cashier** | เห็น POS ขายสินค้า Orders Payments |
-| **Waiter** | เห็น Staff Order โต๊ะ และเมนู |
-| **Kitchen / Bar** | เห็นรายการ order ที่ต้องทำ |
-| **Receptionist** | เห็นห้อง booking check-in/out สำหรับ Hospitality POS |
+| Role              | เห็นอะไร                                             |
+| ----------------- | ---------------------------------------------------- |
+| **Owner**         | เห็น admin ของร้านเกือบทั้งหมด                       |
+| **Manager**       | เห็นการจัดการสาขา พนักงาน รายงาน                     |
+| **Cashier**       | เห็น POS ขายสินค้า Orders Payments                   |
+| **Waiter**        | เห็น Staff Order โต๊ะ และเมนู                        |
+| **Kitchen / Bar** | เห็นรายการ order ที่ต้องทำ                           |
+| **Receptionist**  | เห็นห้อง booking check-in/out สำหรับ Hospitality POS |
 
 ดังนั้นระบบแยกด้วย:
 
@@ -263,11 +263,11 @@ plan limits
 
 ความหมายหลัก:
 
-| คำ | ความหมาย |
-|---|---|
-| **User** | คนที่ login เข้าระบบ |
-| **Business** | ร้าน แบรนด์ หรือธุรกิจ |
-| **Branch** | สาขา หรือสถานที่ขายของ business นั้น |
+| คำ           | ความหมาย                             |
+| ------------ | ------------------------------------ |
+| **User**     | คนที่ login เข้าระบบ                 |
+| **Business** | ร้าน แบรนด์ หรือธุรกิจ               |
+| **Branch**   | สาขา หรือสถานที่ขายของ business นั้น |
 
 กฎที่ตกลงกัน:
 
@@ -302,13 +302,13 @@ Business: TJ Spa
 
 ## 9. POS Type หลัก 5 ประเภท
 
-| ลำดับ | POS Type | เหมาะกับ |
-|---:|---|---|
-| 1 | **Retail POS** | ร้านค้าปลีก เช่น ร้านชำ มินิมาร์ท แฟชั่น เครื่องสำอาง decor ของขวัญ อุปกรณ์เสริม |
-| 2 | **Cafe POS** | ร้านกาแฟ ชานม น้ำผลไม้ smoothie bakery เล็ก take-away |
-| 3 | **Restaurant POS** | ร้านอาหาร ร้านข้าว เฝอ หม้อไฟ ปิ้งย่าง buffet เล็ก ร้านนั่งดื่ม |
-| 4 | **Beauty POS** | Spa, salon, nail, massage, skincare, barber |
-| 5 | **Hospitality POS** | Guesthouse, homestay, โรงแรมเล็ก, hostel, villa |
+| ลำดับ | POS Type            | เหมาะกับ                                                                         |
+| ----: | ------------------- | -------------------------------------------------------------------------------- |
+|     1 | **Retail POS**      | ร้านค้าปลีก เช่น ร้านชำ มินิมาร์ท แฟชั่น เครื่องสำอาง decor ของขวัญ อุปกรณ์เสริม |
+|     2 | **Cafe POS**        | ร้านกาแฟ ชานม น้ำผลไม้ smoothie bakery เล็ก take-away                            |
+|     3 | **Restaurant POS**  | ร้านอาหาร ร้านข้าว เฝอ หม้อไฟ ปิ้งย่าง buffet เล็ก ร้านนั่งดื่ม                  |
+|     4 | **Beauty POS**      | Spa, salon, nail, massage, skincare, barber                                      |
+|     5 | **Hospitality POS** | Guesthouse, homestay, โรงแรมเล็ก, hostel, villa                                  |
 
 ถ้าต้องการขยายในอนาคต สามารถเพิ่ม:
 
@@ -473,13 +473,13 @@ Resume Order
 
 Layout แตกต่างตามประเภท POS:
 
-| POS Type | Layout หลัก |
-|---|---|
-| Retail | product / barcode layout |
-| Cafe | menu / topping layout |
-| Restaurant | table layout |
-| Beauty | booking / service layout |
-| Hospitality | room / check-in layout |
+| POS Type    | Layout หลัก              |
+| ----------- | ------------------------ |
+| Retail      | product / barcode layout |
+| Cafe        | menu / topping layout    |
+| Restaurant  | table layout             |
+| Beauty      | booking / service layout |
+| Hospitality | room / check-in layout   |
 
 ---
 
@@ -923,7 +923,7 @@ Managed SaaS POS สำหรับใช้งานในประเทศ
 frontend/apps/web = Next.js
 → web หลักของ TJ POS
 
-frontend/apps/platform-admin = Next.js
+frontend/apps/platform-admin = Vite React
 → platform admin ของทีม TJ Solution
 
 frontend/apps/business-admin = Vite React

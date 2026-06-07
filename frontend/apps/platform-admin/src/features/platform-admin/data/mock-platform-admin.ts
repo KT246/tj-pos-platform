@@ -25,7 +25,8 @@ export const adminUser = {
   name: "Somchai Phommasenh",
   role: "Platform Admin",
   email: "somchai@tjpos.la",
-  avatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=96&q=80"
+  avatarUrl:
+    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=96&q=80"
 };
 
 export const adminNavItems: AdminNavItem[] = [
@@ -179,8 +180,10 @@ export const businesses: Business[] = [
     type: "ຮ້ານກາເຟ",
     owner: "Khamla Vongsa",
     ownerEmail: "khamla@jomabakery.la",
-    logoUrl: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=96&q=80",
-    ownerAvatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=96&q=80",
+    logoUrl:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=96&q=80",
+    ownerAvatarUrl:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=96&q=80",
     branches: 3,
     plan: "Pro",
     status: "active",
@@ -194,8 +197,10 @@ export const businesses: Business[] = [
     type: "ຮ້ານກາເຟ",
     owner: "Somkheo Phan",
     ownerEmail: "somkheo@vtcoffee.la",
-    logoUrl: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=96&q=80",
-    ownerAvatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=96&q=80",
+    logoUrl:
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=96&q=80",
+    ownerAvatarUrl:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=96&q=80",
     branches: 2,
     plan: "Business",
     status: "active",
@@ -209,8 +214,10 @@ export const businesses: Business[] = [
     type: "ຮ້ານຄ້າ",
     owner: "Bounleu Saysayone",
     ownerEmail: "bounleu@paksanlao.la",
-    logoUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=96&q=80",
-    ownerAvatarUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=96&q=80",
+    logoUrl:
+      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=96&q=80",
+    ownerAvatarUrl:
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=96&q=80",
     branches: 1,
     plan: "Enterprise",
     status: "active",
@@ -224,8 +231,10 @@ export const businesses: Business[] = [
     type: "ຮ້ານຄ້າ",
     owner: "Pheng Phetsouvanh",
     ownerEmail: "pheng@bflgroup.la",
-    logoUrl: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=96&q=80",
-    ownerAvatarUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=96&q=80",
+    logoUrl:
+      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=96&q=80",
+    ownerAvatarUrl:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=96&q=80",
     branches: 8,
     plan: "Pro",
     status: "active",
@@ -239,8 +248,10 @@ export const businesses: Business[] = [
     type: "ໂຮງແຮມ / ບໍລິການ",
     owner: "Vilaykham S.",
     ownerEmail: "vilaykham@sabaideehotel.la",
-    logoUrl: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=96&q=80",
-    ownerAvatarUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=80",
+    logoUrl:
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=96&q=80",
+    ownerAvatarUrl:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=80",
     branches: 2,
     plan: "Business",
     status: "trial",
@@ -254,8 +265,10 @@ export const businesses: Business[] = [
     type: "ຄວາມງາມ",
     owner: "Nittaya Khamphou",
     ownerEmail: "nittaya@beautyup.la",
-    logoUrl: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=96&q=80",
-    ownerAvatarUrl: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=96&q=80",
+    logoUrl:
+      "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=96&q=80",
+    ownerAvatarUrl:
+      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=96&q=80",
     branches: 1,
     plan: "Starter",
     status: "suspended",
@@ -346,10 +359,31 @@ export const planCards = [
 export const paymentMethods = [
   ["BCEL One", "Bank / QR", "Mobile Banking", "BCEL", "ທຸລະກິດທັງໝົດ", "active"],
   ["LaoViet QR", "Bank / QR", "QR Code", "LaoViet Bank", "ທຸລະກິດທັງໝົດ", "active"],
-  ["BIDV SmartBanking", "Bank / QR", "Mobile Banking", "BIDV Laos", "ທຸລະກິດທັງໝົດ", "active"],
-  ["ACLEDA iPay", "Bank / QR", "Mobile Banking", "ACLEDA Bank", "ທຸລະກິດທັງໝົດ", "active"],
+  [
+    "BIDV SmartBanking",
+    "Bank / QR",
+    "Mobile Banking",
+    "BIDV Laos",
+    "ທຸລະກິດທັງໝົດ",
+    "active"
+  ],
+  [
+    "ACLEDA iPay",
+    "Bank / QR",
+    "Mobile Banking",
+    "ACLEDA Bank",
+    "ທຸລະກິດທັງໝົດ",
+    "active"
+  ],
   ["Cash", "Cash", "In-Store", "ຊຳລະເງິນສົດ", "ທຸລະກິດທັງໝົດ", "active"],
-  ["VISA / MasterCard", "Card", "POS Terminal", "Card Network", "ທຸລະກິດທັງໝົດ", "active"],
+  [
+    "VISA / MasterCard",
+    "Card",
+    "POS Terminal",
+    "Card Network",
+    "ທຸລະກິດທັງໝົດ",
+    "active"
+  ],
   ["UnionPay", "Card", "POS Terminal", "UnionPay", "ທຸລະກິດທັງໝົດ", "active"],
   ["PromptPay QR", "QR", "QR Code", "PromptPay (TH)", "ທຸລະກິດທີ່ເລືອກ", "active"],
   ["WeChat Pay", "QR", "QR Code", "WeChat Pay", "ທຸລະກິດທີ່ເລືອກ", "inactive"],

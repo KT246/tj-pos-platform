@@ -689,7 +689,7 @@ Barcode Labels
 /business-admin/[businessSlug]/barista-queue
 /business-admin/[businessSlug]/happy-hour
 /business-admin/[businessSlug]/cafe-daily-view
-/terminal/b/[businessSlug]/pickup-display
+/display/b/[businessSlug]/pickup-display
 ```
 
 ความหมาย:
@@ -965,20 +965,20 @@ order ที่พักไว้
 ใช้สำหรับจอที่ลูกค้ามองเห็นหน้าเคาน์เตอร์
 
 ```text
-/terminal/b/[businessSlug]/display
+/display/b/[businessSlug]
 ```
 
 Customer Display ค่าเริ่มต้น
 
 ```text
-/terminal/b/[businessSlug]/display/[deviceId]
+/display/b/[businessSlug]/[deviceId]
 ```
 
 Customer Display ตามอุปกรณ์
 
 ```text
-/terminal/b/[businessSlug]/display/pair
-/terminal/b/[businessSlug]/pickup-display
+/display/b/[businessSlug]/pair
+/display/b/[businessSlug]/pickup-display
 ```
 
 จับคู่จอลูกค้ากับ POS device
@@ -990,19 +990,19 @@ Customer Display ตามอุปกรณ์
 ใช้สำหรับ Cafe / Restaurant ถ้าเปิด module
 
 ```text
-/terminal/b/[businessSlug]/kitchen
+/kitchen/b/[businessSlug]
 ```
 
 หน้าจอครัว
 
 ```text
-/terminal/b/[businessSlug]/bar
+/bar/b/[businessSlug]
 ```
 
 หน้าจอ bar
 
 ```text
-/terminal/b/[businessSlug]/kitchen/ticket/[ticketId]
+/kitchen/b/[businessSlug]/ticket/[ticketId]
 ```
 
 รายละเอียดใบครัว
@@ -1011,47 +1011,47 @@ Customer Display ตามอุปกรณ์
 
 # 11. Route ใดอยู่ใน app ใด
 
-| Route | App |
-|---|---|
-| `/` | `frontend/apps/web` |
-| `/#pos-types` | `frontend/apps/web` |
-| `/#features` | `frontend/apps/web` |
-| `/#pricing` | `frontend/apps/web` |
-| `/#add-ons` | `frontend/apps/web` |
-| `/#faq-help` | `frontend/apps/web` |
-| `/#contact` | `frontend/apps/web` |
-| `/login` | `frontend/apps/platform-admin` หรือ auth entry กลางตาม deploy จริง |
-| `/forgot-password` | `frontend/apps/platform-admin` หรือ auth entry กลางตาม deploy จริง |
-| `/reset-password` | `frontend/apps/platform-admin` หรือ auth entry กลางตาม deploy จริง |
-| `/platform-admin/...` | `frontend/apps/platform-admin` |
-| `/business-admin/[businessSlug]/...` | `frontend/apps/business-admin` |
-| `/business-admin/[businessSlug]/profile` | `frontend/apps/business-admin` |
-| `/business-admin/[businessSlug]/inventory` | `frontend/apps/business-admin` |
-| `/business-admin/[businessSlug]/stock-movements` | `frontend/apps/business-admin` |
-| `/business-admin/[businessSlug]/stock-in` | `frontend/apps/business-admin` |
-| `/business-admin/[businessSlug]/stock-adjustment` | `frontend/apps/business-admin` |
-| `/business-admin/[businessSlug]/purchase-receipts` | `frontend/apps/business-admin` |
-| `/business-admin/[businessSlug]/roles-permissions` | `frontend/apps/business-admin` |
-| `/business-admin/[businessSlug]/import` | `frontend/apps/business-admin` |
-| `/business-admin/[businessSlug]/export` | `frontend/apps/business-admin` |
-| `/business-admin/[businessSlug]/audit-logs` | `frontend/apps/business-admin` |
-| `/business-admin/[businessSlug]/tables` | `frontend/apps/business-admin` |
-| `/business-admin/[businessSlug]/modifiers` | `frontend/apps/business-admin` |
-| `/business-admin/[businessSlug]/barista-queue` | `frontend/apps/business-admin` |
-| `/business-admin/[businessSlug]/happy-hour` | `frontend/apps/business-admin` |
-| `/business-admin/[businessSlug]/cafe-daily-view` | `frontend/apps/business-admin` |
-| `/b/[businessSlug]` | `frontend/apps/public-menu` |
-| `/b/[businessSlug]/menu` | `frontend/apps/public-menu` |
-| `/b/[businessSlug]/menu/[itemSlug]` | `frontend/apps/public-menu` |
-| `/b/[businessSlug]/info` | `frontend/apps/public-menu` |
-| `/b/[businessSlug]/book` | `frontend/apps/public-menu` |
-| `/b/[businessSlug]/branch/[branchSlug]/menu` | `frontend/apps/public-menu` |
-| `/q/[qrCode]` | `frontend/apps/public-menu` |
-| `/terminal/b/[businessSlug]/pos` | `frontend/apps/terminal` |
-| `/staff-order/b/[businessSlug]/...` | `frontend/apps/staff-order` |
-| `/display/b/[businessSlug]/...` | `frontend/apps/customer-display` |
-| `/kitchen/b/[businessSlug]/...` | `frontend/apps/kitchen-display` |
-| `/bar/b/[businessSlug]/...` | `frontend/apps/kitchen-display` |
+| Route                                              | App                                                                |
+| -------------------------------------------------- | ------------------------------------------------------------------ |
+| `/`                                                | `frontend/apps/web`                                                |
+| `/#pos-types`                                      | `frontend/apps/web`                                                |
+| `/#features`                                       | `frontend/apps/web`                                                |
+| `/#pricing`                                        | `frontend/apps/web`                                                |
+| `/#add-ons`                                        | `frontend/apps/web`                                                |
+| `/#faq-help`                                       | `frontend/apps/web`                                                |
+| `/#contact`                                        | `frontend/apps/web`                                                |
+| `/login`                                           | `frontend/apps/platform-admin` หรือ auth entry กลางตาม deploy จริง |
+| `/forgot-password`                                 | `frontend/apps/platform-admin` หรือ auth entry กลางตาม deploy จริง |
+| `/reset-password`                                  | `frontend/apps/platform-admin` หรือ auth entry กลางตาม deploy จริง |
+| `/platform-admin/...`                              | `frontend/apps/platform-admin`                                     |
+| `/business-admin/[businessSlug]/...`               | `frontend/apps/business-admin`                                     |
+| `/business-admin/[businessSlug]/profile`           | `frontend/apps/business-admin`                                     |
+| `/business-admin/[businessSlug]/inventory`         | `frontend/apps/business-admin`                                     |
+| `/business-admin/[businessSlug]/stock-movements`   | `frontend/apps/business-admin`                                     |
+| `/business-admin/[businessSlug]/stock-in`          | `frontend/apps/business-admin`                                     |
+| `/business-admin/[businessSlug]/stock-adjustment`  | `frontend/apps/business-admin`                                     |
+| `/business-admin/[businessSlug]/purchase-receipts` | `frontend/apps/business-admin`                                     |
+| `/business-admin/[businessSlug]/roles-permissions` | `frontend/apps/business-admin`                                     |
+| `/business-admin/[businessSlug]/import`            | `frontend/apps/business-admin`                                     |
+| `/business-admin/[businessSlug]/export`            | `frontend/apps/business-admin`                                     |
+| `/business-admin/[businessSlug]/audit-logs`        | `frontend/apps/business-admin`                                     |
+| `/business-admin/[businessSlug]/tables`            | `frontend/apps/business-admin`                                     |
+| `/business-admin/[businessSlug]/modifiers`         | `frontend/apps/business-admin`                                     |
+| `/business-admin/[businessSlug]/barista-queue`     | `frontend/apps/business-admin`                                     |
+| `/business-admin/[businessSlug]/happy-hour`        | `frontend/apps/business-admin`                                     |
+| `/business-admin/[businessSlug]/cafe-daily-view`   | `frontend/apps/business-admin`                                     |
+| `/b/[businessSlug]`                                | `frontend/apps/public-menu`                                        |
+| `/b/[businessSlug]/menu`                           | `frontend/apps/public-menu`                                        |
+| `/b/[businessSlug]/menu/[itemSlug]`                | `frontend/apps/public-menu`                                        |
+| `/b/[businessSlug]/info`                           | `frontend/apps/public-menu`                                        |
+| `/b/[businessSlug]/book`                           | `frontend/apps/public-menu`                                        |
+| `/b/[businessSlug]/branch/[branchSlug]/menu`       | `frontend/apps/public-menu`                                        |
+| `/q/[qrCode]`                                      | `frontend/apps/public-menu`                                        |
+| `/terminal/b/[businessSlug]/pos`                   | `frontend/apps/terminal`                                           |
+| `/staff-order/b/[businessSlug]/...`                | `frontend/apps/staff-order`                                        |
+| `/display/b/[businessSlug]/...`                    | `frontend/apps/customer-display`                                   |
+| `/kitchen/b/[businessSlug]/...`                    | `frontend/apps/kitchen-display`                                    |
+| `/bar/b/[businessSlug]/...`                        | `frontend/apps/kitchen-display`                                    |
 
 หมายเหตุ:
 
@@ -1157,8 +1157,8 @@ Customer Display ตามอุปกรณ์
 ## Kitchen / Bar
 
 ```text
-/terminal/b/[businessSlug]/kitchen
-/terminal/b/[businessSlug]/bar
+/kitchen/b/[businessSlug]
+/bar/b/[businessSlug]
 ```
 
 ---
@@ -1209,7 +1209,7 @@ Production domain
 frontend/apps/web = Next.js
 → เว็บไซต์หลักของ TJ POS
 
-frontend/apps/platform-admin = Next.js
+frontend/apps/platform-admin = Vite React
 → Platform Admin
 
 frontend/apps/business-admin = Vite React

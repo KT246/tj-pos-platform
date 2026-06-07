@@ -1,11 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { TerminalToastHost } from "./lib/terminal-toasts";
-import { CafePickupDisplayPage } from "./features/cafe-pickup-display/pages/cafe-pickup-display-page";
-import { CustomerDisplayPage } from "./features/customer-display/pages/customer-display-page";
-import type { CustomerDisplayRouteMode } from "./features/customer-display/types";
-import { KitchenDisplayPage } from "./features/kitchen-bar-display/pages/kitchen-display-page";
-import type { KitchenBoardMode } from "./features/kitchen-bar-display/types";
 import { PosTerminalPage } from "./features/pos-terminal/pages/pos-terminal-page";
 import type { PosScreen } from "./features/pos-terminal/types";
 
@@ -13,14 +8,6 @@ const defaultBusinessSlug = "tj-cafe-vientiane";
 
 function PosRoute({ screen }: { screen: PosScreen }) {
   return <PosTerminalPage screen={screen} />;
-}
-
-function CustomerDisplayRoute({ mode }: { mode: CustomerDisplayRouteMode }) {
-  return <CustomerDisplayPage mode={mode} />;
-}
-
-function KitchenDisplayRoute({ mode }: { mode: KitchenBoardMode }) {
-  return <KitchenDisplayPage mode={mode} />;
 }
 
 export function App() {
@@ -58,34 +45,6 @@ export function App() {
         <Route
           path="/terminal/b/:businessSlug/pos/refund"
           element={<PosRoute screen="refund" />}
-        />
-        <Route
-          path="/terminal/b/:businessSlug/display"
-          element={<CustomerDisplayRoute mode="idle" />}
-        />
-        <Route
-          path="/terminal/b/:businessSlug/display/pair"
-          element={<CustomerDisplayRoute mode="pair" />}
-        />
-        <Route
-          path="/terminal/b/:businessSlug/display/:deviceId"
-          element={<CustomerDisplayRoute mode="device" />}
-        />
-        <Route
-          path="/terminal/b/:businessSlug/pickup-display"
-          element={<CafePickupDisplayPage />}
-        />
-        <Route
-          path="/terminal/b/:businessSlug/kitchen"
-          element={<KitchenDisplayRoute mode="kitchen" />}
-        />
-        <Route
-          path="/terminal/b/:businessSlug/bar"
-          element={<KitchenDisplayRoute mode="bar" />}
-        />
-        <Route
-          path="/terminal/b/:businessSlug/kitchen/ticket/:ticketId"
-          element={<KitchenDisplayRoute mode="kitchen" />}
         />
         <Route
           path="*"

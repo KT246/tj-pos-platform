@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import Image from "../../../compat/image";
+import Link from "../../../compat/link";
 import {
   ArrowRight,
   CalendarDays,
@@ -136,8 +136,12 @@ function StatCard({ stat }: { stat: StatCardType }) {
           </div>
           <div className="min-w-0">
             <p className="font700 text-[13px] leading-4 text-slate-600">{stat.label}</p>
-            <p className="font900 mt-1 text-[23px] leading-7 text-slate-950">{stat.value}</p>
-            <p className="font800 mt-1 text-[11px] leading-4 text-emerald-600">{stat.change}</p>
+            <p className="font900 mt-1 text-[23px] leading-7 text-slate-950">
+              {stat.value}
+            </p>
+            <p className="font800 mt-1 text-[11px] leading-4 text-emerald-600">
+              {stat.change}
+            </p>
           </div>
         </div>
         <MiniSparkline tone={stat.tone} />
@@ -197,9 +201,9 @@ export function FilterBar({
     <div className="flex flex-col gap-2.5 border-b border-blue-100 p-3">
       <div className="flex flex-wrap items-center gap-2.5">
         <label className="relative min-w-[220px] flex-1">
-          <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+          <Search className="absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <input
-            className="h-9 w-full rounded-md border border-blue-100 bg-white pl-10 pr-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
+            className="h-9 w-full rounded-md border border-blue-100 bg-white pr-3 pl-10 text-sm transition outline-none placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
             placeholder={searchPlaceholder}
           />
         </label>
@@ -274,7 +278,10 @@ export function BusinessTable({ rows = [] }: { rows: Business[] }) {
                 "ວັນທີ່ເຂົ້າຮ່ວມ",
                 "ການກະທຳ"
               ].map((head) => (
-                <th key={head} className="font900 whitespace-nowrap border-b border-blue-100 px-3.5 py-2.5">
+                <th
+                  key={head}
+                  className="font900 border-b border-blue-100 px-3.5 py-2.5 whitespace-nowrap"
+                >
                   {head}
                 </th>
               ))}
@@ -312,7 +319,9 @@ export function BusinessTable({ rows = [] }: { rows: Business[] }) {
                 <td className="px-3.5 py-2.5">
                   <StatusBadge status={row.status} />
                 </td>
-                <td className="whitespace-pre-line px-3.5 py-2.5 text-slate-700">{row.lastActivity}</td>
+                <td className="px-3.5 py-2.5 whitespace-pre-line text-slate-700">
+                  {row.lastActivity}
+                </td>
                 <td className="px-3.5 py-2.5 text-slate-700">{row.joinedOn}</td>
                 <td className="px-3.5 py-2.5">
                   <div className="flex items-center gap-2">
@@ -322,9 +331,9 @@ export function BusinessTable({ rows = [] }: { rows: Business[] }) {
                     >
                       ເບິ່ງລາຍລະອຽດ
                     </Link>
-        <button
-          type="button"
-          className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border border-blue-100 text-slate-500 transition hover:bg-blue-50 hover:text-blue-700"
+                    <button
+                      type="button"
+                      className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border border-blue-100 text-slate-500 transition hover:bg-blue-50 hover:text-blue-700"
                     >
                       <MoreVertical className="h-4 w-4" />
                     </button>
@@ -370,13 +379,7 @@ export function Pagination() {
   );
 }
 
-export function PanelTitle({
-  title,
-  action
-}: {
-  title: string;
-  action?: ReactNode;
-}) {
+export function PanelTitle({ title, action }: { title: string; action?: ReactNode }) {
   return (
     <div className="mb-3 flex items-center justify-between gap-4">
       <h2 className="font900 text-base text-slate-950">{title}</h2>
@@ -385,7 +388,11 @@ export function PanelTitle({
   );
 }
 
-export function SimpleList({ records }: { records: { title: string; subtitle: string; meta: string; status?: AdminStatus }[] }) {
+export function SimpleList({
+  records
+}: {
+  records: { title: string; subtitle: string; meta: string; status?: AdminStatus }[];
+}) {
   return (
     <div className="space-y-2.5">
       {records.map((item) => (
@@ -454,7 +461,15 @@ export function LineChartCard() {
           </linearGradient>
         </defs>
         {[40, 80, 120, 160, 200].map((y) => (
-          <line key={y} x1="24" x2="740" y1={y} y2={y} stroke="#dbeafe" strokeDasharray="4 6" />
+          <line
+            key={y}
+            x1="24"
+            x2="740"
+            y1={y}
+            y2={y}
+            stroke="#dbeafe"
+            strokeDasharray="4 6"
+          />
         ))}
         {[80, 170, 260, 350, 440, 530, 620, 710].map((x) => (
           <line key={x} x1={x} x2={x} y1="28" y2="220" stroke="#eff6ff" />
@@ -541,7 +556,9 @@ export function QuickAction({
         <Icon className="h-5 w-5" />
       </span>
       <span>
-        <span className="font900 block text-[13px] leading-4 text-slate-950">{title}</span>
+        <span className="font900 block text-[13px] leading-4 text-slate-950">
+          {title}
+        </span>
         <span className="mt-1 block text-xs text-slate-500">{subtitle}</span>
       </span>
     </Link>
