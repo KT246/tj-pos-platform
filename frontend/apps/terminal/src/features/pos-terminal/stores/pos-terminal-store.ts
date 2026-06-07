@@ -9,6 +9,7 @@ import type {
   OpenOrder,
   OrderType,
   PaymentMethodId,
+  PaymentStatus,
   Product
 } from "../types";
 import { getCartSummary, nowReceiptTime, nowTimeLabel } from "../utils";
@@ -25,6 +26,7 @@ const samplePaidOrder: OpenOrder = {
   status: "Completed",
   cart: initialCart,
   paymentMethod: "cash",
+  paymentStatus: "paid",
   receivedAmount: 100000,
   createdAt: "Mar 18, 2025, 09:58 AM"
 };
@@ -42,6 +44,7 @@ type PosTerminalState = {
   orderSearch: string;
   lastPaidOrder: OpenOrder | null;
   paymentMethod: PaymentMethodId;
+  paymentStatus: PaymentStatus;
   receivedAmount: number;
   refundSearch: string;
   refundOrderId: string | null;
@@ -71,6 +74,7 @@ type PosTerminalActions = {
   applyDiscount: (discount: Discount) => void;
   clearDiscount: () => void;
   setPaymentMethod: (method: PaymentMethodId) => void;
+  setPaymentStatus: (status: PaymentStatus) => void;
   setReceivedAmount: (amount: number) => void;
   confirmPayment: () => void;
   setRefundSearch: (query: string) => void;
@@ -86,6 +90,54 @@ type PosTerminalActions = {
 
 function cloneCart(cart: CartLine[]) {
   return cart.map((line) => ({ ...line }));
+}
+
+function resolveLinePricing(product: Product, customer: Customer | null, quantity: number) {
+  const minQuantity = product.minWholesaleQuantity ?? 1;
+  const base = {
+    price: product.price,
+    retailPrice: product.price,
+    priceType: "retail" as const,
+    priceList: product.priceList,
+    minWholesaleQuantity: product.minWholesaleQuantity
+  };
+
+  if (!customer || quantity < minQuantity) return base;
+
+  if (customer.customerType === "reseller" && product.resellerPrice) {
+    return {
+      ...base,
+      price: product.resellerPrice,
+      priceType: "reseller" as const,
+      priceList: customer.priceList
+    };
+  }
+
+  if (
+    (customer.customerType === "wholesale" || customer.customerType === "vip") &&
+    product.wholesalePrice
+  ) {
+    return {
+      ...base,
+      price: product.wholesalePrice,
+      priceType: "wholesale" as const,
+      priceList: customer.priceList
+    };
+  }
+
+  return base;
+}
+
+function repriceCart(cart: CartLine[], customer: Customer | null) {
+  return cart.map((line) => {
+    const product = products.find((item) => item.id === line.productId);
+    if (!product) return line;
+
+    return {
+      ...line,
+      ...resolveLinePricing(product, customer, line.quantity)
+    };
+  });
 }
 
 function createOrderId(orders: OpenOrder[]) {
@@ -107,6 +159,7 @@ function createOrderSnapshot({
   discount,
   status,
   paymentMethod,
+  paymentStatus,
   receivedAmount
 }: {
   id: string;
@@ -117,6 +170,7 @@ function createOrderSnapshot({
   discount: Discount | null;
   status: OpenOrder["status"];
   paymentMethod?: PaymentMethodId;
+  paymentStatus?: PaymentStatus;
   receivedAmount?: number;
 }): OpenOrder {
   const summary = getCartSummary(cart, discount);
@@ -134,19 +188,25 @@ function createOrderSnapshot({
     customerRecord: customer,
     discount,
     paymentMethod,
+    paymentStatus,
     receivedAmount,
     createdAt: nowReceiptTime()
   };
 }
 
-function addProductToCart(cart: CartLine[], product: Product) {
+function addProductToCart(cart: CartLine[], product: Product, customer: Customer | null) {
   const existing = cart.find((line) => line.productId === product.id);
 
   if (existing) {
+    const nextQuantity = existing.quantity + 1;
+    const pricing = resolveLinePricing(product, customer, nextQuantity);
+
     return cart.map((line) =>
-      line.id === existing.id ? { ...line, quantity: line.quantity + 1 } : line
+      line.id === existing.id ? { ...line, quantity: nextQuantity, ...pricing } : line
     );
   }
+
+  const pricing = resolveLinePricing(product, customer, 1);
 
   return [
     ...cart,
@@ -154,7 +214,7 @@ function addProductToCart(cart: CartLine[], product: Product) {
       id: `cart-${product.id}-${Date.now()}`,
       productId: product.id,
       name: product.name,
-      price: product.price,
+      ...pricing,
       quantity: 1,
       image: product.image
     }
@@ -178,6 +238,7 @@ export const usePosTerminalStore = create<
   orderSearch: "",
   lastPaidOrder: samplePaidOrder,
   paymentMethod: "cash",
+  paymentStatus: "paid",
   receivedAmount: 100000,
   refundSearch: "#ORD-0050",
   refundOrderId: samplePaidOrder.id,
@@ -193,7 +254,7 @@ export const usePosTerminalStore = create<
       showTerminalNotice(`${product.name} added to cart.`, "success");
 
       return {
-        cart: addProductToCart(state.cart, product)
+        cart: addProductToCart(state.cart, product, state.customer)
       };
     }),
   scanBarcode: (barcode) =>
@@ -220,25 +281,31 @@ export const usePosTerminalStore = create<
       showTerminalNotice(`${product.name} scanned and added.`, "success");
 
       return {
-        cart: addProductToCart(state.cart, product),
+        cart: addProductToCart(state.cart, product, state.customer),
         scanOpen: false
       };
     }),
   incrementLine: (lineId) =>
     set((state) => ({
-      cart: state.cart.map((line) =>
-        line.id === lineId ? { ...line, quantity: line.quantity + 1 } : line
+      cart: repriceCart(
+        state.cart.map((line) =>
+          line.id === lineId ? { ...line, quantity: line.quantity + 1 } : line
+        ),
+        state.customer
       )
     })),
   decrementLine: (lineId) =>
     set((state) => ({
-      cart: state.cart
-        .map((line) =>
-          line.id === lineId
-            ? { ...line, quantity: Math.max(0, line.quantity - 1) }
-            : line
-        )
-        .filter((line) => line.quantity > 0)
+      cart: repriceCart(
+        state.cart
+          .map((line) =>
+            line.id === lineId
+              ? { ...line, quantity: Math.max(0, line.quantity - 1) }
+              : line
+          )
+          .filter((line) => line.quantity > 0),
+        state.customer
+      )
     })),
   removeLine: (lineId) =>
     set((state) => ({
@@ -266,6 +333,7 @@ export const usePosTerminalStore = create<
         customer: null,
         discount: null,
         paymentMethod: "cash",
+        paymentStatus: "paid",
         receivedAmount: 0
       };
     }),
@@ -320,6 +388,7 @@ export const usePosTerminalStore = create<
         customer: order.customerRecord ?? null,
         discount: order.discount ?? null,
         paymentMethod: order.paymentMethod ?? "cash",
+        paymentStatus: order.paymentStatus ?? "paid",
         receivedAmount: order.receivedAmount ?? order.amount
       };
     }),
@@ -360,6 +429,7 @@ export const usePosTerminalStore = create<
 
       return {
         customer,
+        cart: repriceCart(get().cart, customer),
         customerOpen: false
       };
     }),
@@ -388,6 +458,7 @@ export const usePosTerminalStore = create<
       return { discount: null };
     }),
   setPaymentMethod: (method) => set({ paymentMethod: method }),
+  setPaymentStatus: (status) => set({ paymentStatus: status }),
   setReceivedAmount: (amount) => set({ receivedAmount: Math.max(amount, 0) }),
   confirmPayment: () =>
     set((state) => {
@@ -397,6 +468,12 @@ export const usePosTerminalStore = create<
       }
 
       const summary = getCartSummary(state.cart, state.discount);
+      const paidAmount =
+        state.paymentStatus === "debt"
+          ? 0
+          : state.paymentStatus === "partial"
+            ? Math.min(state.receivedAmount, summary.total)
+            : summary.total;
       const order = createOrderSnapshot({
         id: state.activeOrderId ?? createOrderId(state.orders),
         cart: state.cart,
@@ -406,13 +483,18 @@ export const usePosTerminalStore = create<
         discount: state.discount,
         status: "Completed",
         paymentMethod: state.paymentMethod,
-        receivedAmount:
-          state.paymentMethod === "cash"
-            ? Math.max(state.receivedAmount, summary.total)
-            : summary.total
+        paymentStatus: state.paymentStatus,
+        receivedAmount: paidAmount
       });
 
-      showTerminalNotice(`${order.id} payment completed.`, "success");
+      showTerminalNotice(
+        state.paymentStatus === "debt"
+          ? `${order.id} saved as customer debt.`
+          : state.paymentStatus === "partial"
+            ? `${order.id} partial payment recorded.`
+            : `${order.id} payment completed.`,
+        "success"
+      );
 
       return {
         orders: [order, ...state.orders.filter((item) => item.id !== order.id)],
@@ -423,6 +505,7 @@ export const usePosTerminalStore = create<
         orderType: "Dine In",
         customer: null,
         discount: null,
+        paymentStatus: "paid",
         receivedAmount: 0,
         refundSearch: order.id,
         refundOrderId: order.id,

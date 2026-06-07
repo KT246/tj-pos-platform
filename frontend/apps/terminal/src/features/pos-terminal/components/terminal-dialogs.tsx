@@ -231,6 +231,15 @@ export function CustomerDialog({
                   <span className="text-[11px] font-bold text-slate-500">
                     {customer.subtitle}
                   </span>
+                  <span className="mt-1 block text-[10px] font-black text-emerald-600">
+                    {customer.customerType.toUpperCase()} - {customer.priceList}
+                  </span>
+                  {customer.creditLimit > 0 ? (
+                    <span className="mt-0.5 block text-[10px] font-bold text-slate-500">
+                      Debt {formatMoney(customer.debtBalance)} / Limit{" "}
+                      {formatMoney(customer.creditLimit)}
+                    </span>
+                  ) : null}
                 </span>
               </span>
               <span className="text-right text-[12px] font-black text-blue-600">

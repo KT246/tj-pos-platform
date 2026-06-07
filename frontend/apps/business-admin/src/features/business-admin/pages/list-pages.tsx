@@ -36,6 +36,8 @@ import { BusinessAdminLink } from "../components/business-admin-link";
 import {
   branches,
   customers,
+  customerWholesaleProfiles,
+  itemPriceProfiles,
   items,
   pageKpis,
   promotions,
@@ -57,7 +59,13 @@ export function ItemsListPage() {
       description="Manage your products, menu items, and services."
       kpis={pageKpis.items}
       search="Search items by name, SKU, or barcode..."
-      filters={["All Categories", "All Statuses", "All Branches"]}
+      filters={[
+        "All Categories",
+        "All Statuses",
+        "All Branches",
+        "All Price Types",
+        "All Price Lists"
+      ]}
       primaryAction={
         <CreateButton href="/business-admin/items/create" label="Add Item" />
       }
@@ -104,7 +112,28 @@ const itemColumns: TableColumn<Row>[] = [
     label: "Category",
     render: (row) => <Badge tone={categoryTone(row[3])}>{row[3]}</Badge>
   },
-  { key: "price", label: "Unit Price", render: (row) => row[4] },
+  {
+    key: "price",
+    label: "Retail / Wholesale",
+    render: (_row, index) => {
+      const profile = getItemPriceProfile(index);
+
+      return (
+        <div className="space-y-1 text-xs font-bold">
+          <p className="text-slate-950">{profile.retailPrice}</p>
+          <p className="text-emerald-600">Wholesale {profile.wholesalePrice}</p>
+          <p className="text-slate-500">
+            Reseller {profile.resellerPrice} / min {profile.minWholesaleQty}
+          </p>
+        </div>
+      );
+    }
+  },
+  {
+    key: "priceList",
+    label: "Price List",
+    render: (_, index) => <Badge tone="violet">{getItemPriceProfile(index).priceList}</Badge>
+  },
   {
     key: "stock",
     label: "Stock",
@@ -138,10 +167,16 @@ export function CustomersListPage() {
     <ListShell
       active="Customers"
       title="Customers"
-      description="Manage your customers and members."
+      description="Manage retail customers, wholesale customers, resellers, members, and debt balances."
       kpis={pageKpis.customers}
       search="Search customers by name, phone, email or code..."
-      filters={["All Status", "All Member Levels", "All Branches"]}
+      filters={[
+        "All Status",
+        "All Customer Types",
+        "All Branches",
+        "All Debt Status",
+        "All Price Lists"
+      ]}
       primaryAction={
         <CreateButton href="/business-admin/customers/new" label="Add Customer" />
       }
@@ -168,8 +203,40 @@ const customerColumns: TableColumn<Row>[] = [
   { key: "phone", label: "Phone", render: (row) => row[2] },
   {
     key: "level",
-    label: "Member Level",
-    render: (row) => <Badge tone={levelTone(row[3])}>{row[3]}</Badge>
+    label: "Type / Level",
+    render: (row, index) => {
+      const profile = getCustomerWholesaleProfile(index);
+
+      return (
+        <div className="space-y-1">
+          <Badge tone={customerTypeTone(profile.customerType)}>
+            {profile.customerType}
+          </Badge>
+          <p className="text-[11px] font-bold text-slate-500">{row[3]}</p>
+        </div>
+      );
+    }
+  },
+  {
+    key: "priceList",
+    label: "Price List",
+    render: (_, index) => getCustomerWholesaleProfile(index).priceList
+  },
+  {
+    key: "debt",
+    label: "Debt / Credit",
+    render: (_, index) => {
+      const profile = getCustomerWholesaleProfile(index);
+
+      return (
+        <div className="space-y-1 text-xs font-bold">
+          <p className={profile.debtBalance === "LAK 0" ? "text-slate-500" : "text-amber-600"}>
+            {profile.debtBalance}
+          </p>
+          <p className="text-slate-500">Limit {profile.creditLimit}</p>
+        </div>
+      );
+    }
   },
   { key: "points", label: "Points", render: (row) => row[4] },
   { key: "spend", label: "Total Spend", render: (row) => row[5] },
@@ -182,9 +249,16 @@ const customerColumns: TableColumn<Row>[] = [
   {
     key: "status",
     label: "Status",
-    render: (row) => (
-      <Badge tone={row[7] === "Inactive" ? "slate" : "emerald"}>{row[7]}</Badge>
-    )
+    render: (row, index) => {
+      const profile = getCustomerWholesaleProfile(index);
+
+      return (
+        <div className="space-y-1">
+          <Badge tone={row[7] === "Inactive" ? "slate" : "emerald"}>{row[7]}</Badge>
+          <Badge tone={debtTone(profile.debtStatus)}>{profile.debtStatus}</Badge>
+        </div>
+      );
+    }
   },
   {
     key: "actions",
@@ -1007,6 +1081,27 @@ function CategoryDonut() {
       </div>
     </Card>
   );
+}
+
+function getItemPriceProfile(index: number) {
+  return itemPriceProfiles[index % itemPriceProfiles.length];
+}
+
+function getCustomerWholesaleProfile(index: number) {
+  return customerWholesaleProfiles[index % customerWholesaleProfiles.length];
+}
+
+function customerTypeTone(value: string) {
+  if (value.includes("Wholesale")) return "emerald";
+  if (value.includes("Reseller")) return "violet";
+  if (value.includes("VIP")) return "amber";
+  return "blue";
+}
+
+function debtTone(value: string) {
+  if (value === "Debt") return "red";
+  if (value === "Partial") return "amber";
+  return "emerald";
 }
 
 function categoryTone(value: string) {

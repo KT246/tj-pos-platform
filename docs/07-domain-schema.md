@@ -152,10 +152,21 @@ type PaymentStatus =
   | "unpaid"
   | "partial"
   | "paid"
+  | "debt"
   | "refunded"
 ```
 
-### 3.7 Payment Method Type
+### 3.7 Customer Type
+
+```ts
+type CustomerType =
+  | "retail_customer"
+  | "wholesale_customer"
+  | "reseller"
+  | "vip"
+```
+
+### 3.8 Payment Method Type
 
 ```ts
 type PaymentMethodType =
@@ -166,7 +177,7 @@ type PaymentMethodType =
   | "other"
 ```
 
-### 3.8 Stock Movement Type
+### 3.9 Stock Movement Type
 
 ```ts
 type StockMovementType =
@@ -177,7 +188,7 @@ type StockMovementType =
   | "refund"
 ```
 
-### 3.9 Support Ticket Type
+### 3.10 Support Ticket Type
 
 ```ts
 type SupportTicketType =
@@ -398,6 +409,10 @@ type Item = TenantEntity & {
 
   sellingPrice: number
   costPrice?: number | null
+  wholesalePrice?: number | null
+  resellerPrice?: number | null
+  minWholesaleQuantity?: number | null
+  priceListId?: string | null
 
   imageUrl?: string | null
   description?: string | null
@@ -436,6 +451,10 @@ status
 ```text
 branchId
 costPrice
+wholesalePrice
+resellerPrice
+minWholesaleQuantity
+priceListId
 imageUrl
 description
 sku
@@ -450,7 +469,31 @@ hospitality
 
 ---
 
-## 10. Retail Item Fields
+## 10. Price List Schema
+
+ใช้กับราคาพิเศษสำหรับ wholesale customer, reseller หรือ customer group โดยไม่สร้าง module แยก
+
+```ts
+type PriceList = TenantEntity & {
+  name: string
+  customerType?: CustomerType | null
+  description?: string | null
+}
+
+type PriceListItem = {
+  id: string
+  businessId: string
+  priceListId: string
+  itemId: string
+  price: number
+  minQuantity?: number | null
+  status: EntityStatus
+}
+```
+
+---
+
+## 11. Retail Item Fields
 
 ใช้กับ Retail POS เช่น mini mart, shop เสื้อผ้า, เครื่องสำอาง, decor, ของฝาก
 
@@ -468,14 +511,21 @@ type RetailItemFields = {
   batchNo?: string | null
   warrantyPeriod?: string | null
 
-  wholesalePrice?: number | null
   minimumStock?: number | null
 }
 ```
 
+หมายเหตุ:
+
+```text
+sellingPrice คือ default retail price
+wholesalePrice, resellerPrice และ minWholesaleQuantity ใช้กับขายส่ง/ลูกค้าส่งโดยไม่สร้าง item ซ้ำ
+ถ้าร้านใช้หลาย price list ให้ใช้ priceListId หรือ price list table เพิ่มเติมตาม phase backend
+```
+
 ---
 
-## 11. Food Item Fields
+## 12. Food Item Fields
 
 ใช้กับ Cafe POS และ Restaurant POS
 
@@ -513,7 +563,7 @@ Note: ไม่ใส่น้ำตาล, น้ำแข็งน้อย
 
 ---
 
-## 12. Beauty Service Fields
+## 13. Beauty Service Fields
 
 ใช้กับ Beauty POS เช่น spa, salon, nail, massage, barber
 
@@ -539,7 +589,7 @@ type BeautyServiceFields = {
 
 ---
 
-## 13. Hospitality Room Fields
+## 14. Hospitality Room Fields
 
 ใช้กับ Hospitality POS เช่น guesthouse, homestay, hotel เล็ก, hostel, villa
 
@@ -566,7 +616,7 @@ type HospitalityRoomFields = {
 
 ---
 
-## 14. Supplier Schema
+## 15. Supplier Schema
 
 ```ts
 type Supplier = TenantEntity & {
@@ -593,7 +643,7 @@ status
 
 ---
 
-## 15. Inventory Balance Schema
+## 16. Inventory Balance Schema
 
 ```ts
 type InventoryBalance = {
@@ -627,7 +677,7 @@ unit
 
 ---
 
-## 16. Stock Movement Schema
+## 17. Stock Movement Schema
 
 ```ts
 type StockMovement = {
@@ -673,7 +723,7 @@ createdAt
 
 ---
 
-## 17. Order Schema
+## 18. Order Schema
 
 ```ts
 type Order = {
@@ -686,12 +736,16 @@ type Order = {
   posType: PosType
   orderType:
     | "retail"
+    | "wholesale"
+    | "purchase"
+    | "return"
     | "dine_in"
     | "takeaway"
     | "service"
     | "room"
 
   customerId?: string | null
+  priceListId?: string | null
 
   staffId: string
   cashierId?: string | null
@@ -702,6 +756,8 @@ type Order = {
 
   status: OrderStatus
   paymentStatus: PaymentStatus
+  debtStatus?: "none" | "unpaid" | "partial" | "debt" | "settled" | null
+  deliveryStatus?: "not_required" | "pending" | "delivered" | "cancelled" | null
 
   subtotal: number
   discountTotal: number
@@ -742,20 +798,31 @@ createdAt
 
 ```text
 customerId
+priceListId
 cashierId
 tableId
 roomId
 appointmentId
 taxTotal
 serviceCharge
+debtStatus
+deliveryStatus
 note
 source
 paidAt
 ```
 
+หมายเหตุ Wholesale:
+
+```text
+Wholesale order ใช้ Order schema เดิม
+ไม่สร้าง order schema หรือ module แยก
+orderType=wholesale ต้องผูก customer/reseller, priceListId, paymentStatus/debtStatus และ deliveryStatus ถ้าต้องจัดส่ง
+```
+
 ---
 
-## 18. Order Item Schema
+## 19. Order Item Schema
 
 ```ts
 type OrderItem = {
@@ -800,7 +867,7 @@ unitPriceSnapshot
 
 ---
 
-## 19. Payment Method Schema
+## 20. Payment Method Schema
 
 ```ts
 type PaymentMethod = TenantEntity & {
@@ -855,7 +922,7 @@ Other
 
 ---
 
-## 20. Payment Transaction Schema
+## 21. Payment Transaction Schema
 
 ```ts
 type PaymentTransaction = {
@@ -889,11 +956,13 @@ type PaymentTransaction = {
 
 ---
 
-## 21. Customer / Member Profile Schema
+## 22. Customer / Member Profile Schema
 
 ```ts
 type Customer = TenantEntity & {
   name?: string | null
+  customerType: CustomerType
+
   phone?: string | null
   email?: string | null
 
@@ -902,6 +971,10 @@ type Customer = TenantEntity & {
   address?: string | null
 
   memberCode?: string | null
+  priceListId?: string | null
+  debtBalance?: number | null
+  creditLimit?: number | null
+  paymentTerm?: string | null
 
   pointsBalance?: number | null
   memberTier?: "normal" | "silver" | "gold" | "vip" | null
@@ -918,8 +991,8 @@ type Customer = TenantEntity & {
 ### หลักการ
 
 ```text
-ขายปกติไม่ต้องมี customer profile
-ใช้ customer profile เมื่อเปิด Loyalty / Membership
+ขายปกติอาจไม่ต้องมี customer profile
+ใช้ customer profile เมื่อเปิด Loyalty / Membership / Wholesale / Debt
 ```
 
 ถ้าเปิด Loyalty:
@@ -928,9 +1001,16 @@ type Customer = TenantEntity & {
 phone ควรเป็น field สำคัญ
 ```
 
+ถ้าเปิด Wholesale / Debt:
+
+```text
+customerType, priceListId, debtBalance, creditLimit และ paymentTerm เป็น field สำคัญ
+customerType รองรับ retail_customer, wholesale_customer, reseller และ vip
+```
+
 ---
 
-## 22. Loyalty Rule Schema
+## 23. Loyalty Rule Schema
 
 ```ts
 type LoyaltyRule = TenantEntity & {
@@ -963,7 +1043,7 @@ type LoyaltyRule = TenantEntity & {
 
 ---
 
-## 23. Promotion Schema
+## 24. Promotion Schema
 
 ```ts
 type Promotion = TenantEntity & {
@@ -999,7 +1079,7 @@ type Promotion = TenantEntity & {
 
 ---
 
-## 24. Area Schema
+## 25. Area Schema
 
 ใช้กับ Cafe ที่มีโต๊ะ และ Restaurant
 
@@ -1013,7 +1093,7 @@ type Area = TenantEntity & {
 
 ---
 
-## 25. Table Schema
+## 26. Table Schema
 
 ```ts
 type Table = TenantEntity & {
@@ -1036,7 +1116,7 @@ type Table = TenantEntity & {
 
 ---
 
-## 26. Kitchen Ticket Schema
+## 27. Kitchen Ticket Schema
 
 ```ts
 type KitchenTicket = {
@@ -1072,7 +1152,7 @@ type KitchenTicket = {
 
 ---
 
-## 27. Appointment Schema
+## 28. Appointment Schema
 
 ใช้กับ Beauty POS
 
@@ -1103,7 +1183,7 @@ type Appointment = TenantEntity & {
 
 ---
 
-## 28. Package / Treatment Course Schema
+## 29. Package / Treatment Course Schema
 
 ```ts
 type TreatmentPackage = TenantEntity & {
@@ -1127,7 +1207,7 @@ type TreatmentPackage = TenantEntity & {
 
 ---
 
-## 29. Room Schema
+## 30. Room Schema
 
 ใช้กับ Hospitality POS
 
@@ -1155,7 +1235,7 @@ type Room = TenantEntity & {
 
 ---
 
-## 30. Booking Schema
+## 31. Booking Schema
 
 ```ts
 type Booking = TenantEntity & {
@@ -1196,7 +1276,7 @@ type Booking = TenantEntity & {
 
 ---
 
-## 31. Receipt Template Schema
+## 32. Receipt Template Schema
 
 ```ts
 type ReceiptTemplate = TenantEntity & {
@@ -1235,7 +1315,7 @@ colorMode = black_white
 
 ---
 
-## 32. Branding Schema
+## 33. Branding Schema
 
 ```ts
 type Branding = {
@@ -1257,7 +1337,7 @@ type Branding = {
 
 ---
 
-## 33. Device Schema
+## 34. Device Schema
 
 ```ts
 type Device = TenantEntity & {
@@ -1282,7 +1362,7 @@ type Device = TenantEntity & {
 
 ---
 
-## 34. Module Setting Schema
+## 35. Module Setting Schema
 
 ```ts
 type ModuleSetting = {
@@ -1309,7 +1389,7 @@ type ModuleSetting = {
 
 ---
 
-## 35. Support Ticket Schema
+## 36. Support Ticket Schema
 
 ```ts
 type SupportTicket = TenantEntity & {
@@ -1339,7 +1419,7 @@ type SupportTicket = TenantEntity & {
 
 ---
 
-## 36. Refund Schema
+## 37. Refund Schema
 
 ```ts
 type Refund = {
@@ -1371,7 +1451,7 @@ type Refund = {
 
 ---
 
-## 37. Cash Session / Shift Schema
+## 38. Cash Session / Shift Schema
 
 ```ts
 type CashSession = {
@@ -1400,7 +1480,7 @@ type CashSession = {
 
 ---
 
-## 38. Import Job Schema
+## 39. Import Job Schema
 
 ```ts
 type ImportJob = {
@@ -1439,7 +1519,7 @@ type ImportJob = {
 
 ---
 
-## 39. Export Job Schema
+## 40. Export Job Schema
 
 ```ts
 type ExportJob = {
@@ -1473,7 +1553,7 @@ type ExportJob = {
 
 ---
 
-## 40. Audit Log Schema
+## 41. Audit Log Schema
 
 ```ts
 type AuditLog = {
@@ -1514,7 +1594,7 @@ plan update
 
 ---
 
-## 41. Plan / Subscription Schema
+## 42. Plan / Subscription Schema
 
 ### 41.1 Plan
 
@@ -1565,7 +1645,7 @@ type Subscription = {
 
 ---
 
-## 42. Schema ที่ควรใช้ก่อนใน Frontend MVP
+## 43. Schema ที่ควรใช้ก่อนใน Frontend MVP
 
 Frontend MVP ควรเริ่มจาก schema เหล่านี้ก่อน:
 
@@ -1604,7 +1684,7 @@ Smart Menu
 
 ---
 
-## 43. ข้อสรุปสุดท้าย
+## 44. ข้อสรุปสุดท้าย
 
 แนวทาง schema ของ TJ POS คือ:
 
@@ -1639,6 +1719,14 @@ Retail order → tableId = null
 Restaurant order → tableId มีค่า
 Beauty order → appointmentId อาจมีค่า
 Hospitality order → roomId อาจมีค่า
+```
+
+Wholesale support:
+
+```text
+ไม่สร้าง Wholesale schema แยก
+ใช้ Customer, Item, Order, PaymentTransaction, Report และ Import/Export schema เดิม
+เพิ่ม field optional สำหรับ customerType, priceList, wholesale/reseller price, debt และ payment term
 ```
 
 เอกสารนี้คือ Domain Schema หลักเพื่อให้ Frontend และ Backend ใช้ภาษาเดียวกัน ก่อนจะไปออกแบบ API และ Database จริง

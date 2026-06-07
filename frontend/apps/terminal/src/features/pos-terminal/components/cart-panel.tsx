@@ -152,6 +152,16 @@ function CartLineRow({
               <p className="text-[10px] leading-3 font-bold text-slate-500">
                 {line.quantity} x {formatMoney(line.price)}
               </p>
+              {line.priceType && line.priceType !== "retail" ? (
+                <p className="mt-1 text-[10px] leading-3 font-black text-emerald-600">
+                  {line.priceType.toUpperCase()} price
+                  {line.priceList ? ` - ${line.priceList}` : ""}
+                </p>
+              ) : line.minWholesaleQuantity ? (
+                <p className="mt-1 text-[10px] leading-3 font-bold text-slate-400">
+                  Wholesale at {line.minWholesaleQuantity}+ pcs
+                </p>
+              ) : null}
             </div>
             <p className="text-[12px] leading-4 font-black text-slate-950">
               {formatMoney(line.price * line.quantity)}

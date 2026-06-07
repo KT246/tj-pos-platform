@@ -39,6 +39,10 @@ export const products: Product[] = [
     category: "coffee",
     sku: "CF-1001",
     price: 26000,
+    wholesalePrice: 22000,
+    resellerPrice: 21000,
+    minWholesaleQuantity: 12,
+    priceList: "Cafe Wholesale",
     image:
       "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=360&q=80"
   },
@@ -48,6 +52,10 @@ export const products: Product[] = [
     category: "coffee",
     sku: "CF-1002",
     price: 22000,
+    wholesalePrice: 18500,
+    resellerPrice: 17800,
+    minWholesaleQuantity: 12,
+    priceList: "Cafe Wholesale",
     image:
       "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=360&q=80"
   },
@@ -57,6 +65,10 @@ export const products: Product[] = [
     category: "coffee",
     sku: "CF-1003",
     price: 25000,
+    wholesalePrice: 21000,
+    resellerPrice: 20000,
+    minWholesaleQuantity: 12,
+    priceList: "Cafe Wholesale",
     image:
       "https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=360&q=80"
   },
@@ -75,6 +87,10 @@ export const products: Product[] = [
     category: "pastry",
     sku: "BK-3001",
     price: 18000,
+    wholesalePrice: 15000,
+    resellerPrice: 14500,
+    minWholesaleQuantity: 24,
+    priceList: "Bakery Reseller",
     image:
       "https://images.unsplash.com/photo-1623334044303-241021148842?auto=format&fit=crop&w=360&q=80"
   },
@@ -102,6 +118,10 @@ export const products: Product[] = [
     category: "beverages",
     sku: "BV-5001",
     price: 10000,
+    wholesalePrice: 8000,
+    resellerPrice: 7600,
+    minWholesaleQuantity: 48,
+    priceList: "Beverage Wholesale",
     image:
       "https://images.unsplash.com/photo-1564419320461-6870880221ad?auto=format&fit=crop&w=360&q=80"
   },
@@ -203,6 +223,8 @@ export const initialCart: CartLine[] = [
     productId: "iced-latte",
     name: "Iced Latte",
     price: 26000,
+    retailPrice: 26000,
+    priceType: "retail",
     quantity: 1,
     image: products[0].image
   },
@@ -211,6 +233,8 @@ export const initialCart: CartLine[] = [
     productId: "croissant",
     name: "Croissant",
     price: 18000,
+    retailPrice: 18000,
+    priceType: "retail",
     quantity: 1,
     image: products[4].image,
     note: "No sesame"
@@ -220,6 +244,8 @@ export const initialCart: CartLine[] = [
     productId: "thai-milk-tea",
     name: "Thai Milk Tea",
     price: 22000,
+    retailPrice: 22000,
+    priceType: "retail",
     quantity: 1,
     image: products[3].image,
     note: "Extra pearl"
@@ -231,6 +257,11 @@ export const customers: Customer[] = [
     id: "CUS-0032",
     name: "Souksavanh Phommachanh",
     subtitle: "Member ID: CUS-0032",
+    customerType: "vip",
+    priceList: "VIP Retail",
+    debtBalance: 0,
+    creditLimit: 2000000,
+    paymentTerm: "Pay now",
     phone: "+856 20 5555 0032",
     points: 1250,
     avatar: "https://i.pravatar.cc/96?img=12"
@@ -239,6 +270,11 @@ export const customers: Customer[] = [
     id: "CUS-0018",
     name: "Khamla Vongsana",
     subtitle: "Member ID: CUS-0018",
+    customerType: "wholesale",
+    priceList: "Cafe Wholesale",
+    debtBalance: 1850000,
+    creditLimit: 8000000,
+    paymentTerm: "Net 15",
     phone: "+856 20 5555 0018",
     points: 680,
     avatar: "https://i.pravatar.cc/96?img=13"
@@ -247,6 +283,11 @@ export const customers: Customer[] = [
     id: "CUS-0027",
     name: "Phetsamone Inthilath",
     subtitle: "Member ID: CUS-0027",
+    customerType: "reseller",
+    priceList: "Beverage Reseller",
+    debtBalance: 920000,
+    creditLimit: 5000000,
+    paymentTerm: "Net 7",
     phone: "+856 20 5555 0027",
     points: 2340,
     avatar: "https://i.pravatar.cc/96?img=14"
@@ -255,6 +296,11 @@ export const customers: Customer[] = [
     id: "WALK-IN",
     name: "Walk-in Customer",
     subtitle: "No member",
+    customerType: "retail",
+    priceList: "Default Retail",
+    debtBalance: 0,
+    creditLimit: 0,
+    paymentTerm: "Pay now",
     points: 0,
     avatar: "https://i.pravatar.cc/96?img=15"
   }

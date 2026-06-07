@@ -14,7 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { branchName, cashierName } from "../data/mock-pos-data";
 import { usePosTerminalStore } from "../stores/pos-terminal-store";
-import type { OpenOrder, PaymentMethodId } from "../types";
+import type { OpenOrder, PaymentMethodId, PaymentStatus } from "../types";
 import { formatMoney, getBusinessPath, getCartSummary } from "../utils";
 
 const paymentMethods: {
@@ -30,6 +30,12 @@ const paymentMethods: {
   { id: "e-wallet", icon: WalletCards, label: "e-Wallet" }
 ];
 
+const paymentStatuses: { id: PaymentStatus; label: string; description: string }[] = [
+  { id: "paid", label: "Paid", description: "Full payment now" },
+  { id: "partial", label: "Partial", description: "Pay part now" },
+  { id: "debt", label: "Debt", description: "Customer pays later" }
+];
+
 export function CheckoutView({ businessSlug }: { businessSlug: string }) {
   const navigate = useNavigate();
   const cart = usePosTerminalStore((state) => state.cart);
@@ -39,16 +45,27 @@ export function CheckoutView({ businessSlug }: { businessSlug: string }) {
   const customer = usePosTerminalStore((state) => state.customer);
   const activeOrderId = usePosTerminalStore((state) => state.activeOrderId);
   const paymentMethod = usePosTerminalStore((state) => state.paymentMethod);
+  const paymentStatus = usePosTerminalStore((state) => state.paymentStatus);
   const receivedAmount = usePosTerminalStore((state) => state.receivedAmount);
   const setPaymentMethod = usePosTerminalStore((state) => state.setPaymentMethod);
+  const setPaymentStatus = usePosTerminalStore((state) => state.setPaymentStatus);
   const setReceivedAmount = usePosTerminalStore(
     (state) => state.setReceivedAmount
   );
   const confirmPayment = usePosTerminalStore((state) => state.confirmPayment);
   const summary = getCartSummary(cart, discount);
+  const paidAmount =
+    paymentStatus === "debt"
+      ? 0
+      : paymentStatus === "partial"
+        ? Math.min(receivedAmount, summary.total)
+        : summary.total;
+  const debtAmount = Math.max(summary.total - paidAmount, 0);
   const change =
-    paymentMethod === "cash" ? Math.max(receivedAmount - summary.total, 0) : 0;
-  const canPay = cart.length > 0;
+    paymentMethod === "cash" && paymentStatus === "paid"
+      ? Math.max(receivedAmount - summary.total, 0)
+      : 0;
+  const canPay = cart.length > 0 && (paymentStatus !== "debt" || Boolean(customer));
 
   function handleConfirmPayment() {
     if (!canPay) return;
@@ -72,22 +89,25 @@ export function CheckoutView({ businessSlug }: { businessSlug: string }) {
         </div>
         <label className="mt-5 block rounded-lg border border-blue-100 bg-blue-50/40 p-3">
           <span className="text-[12px] font-black text-slate-500">
-            Received
+            Received Now
           </span>
           <input
             type="number"
             min={0}
-            value={receivedAmount}
+            disabled={paymentStatus === "debt"}
+            value={paymentStatus === "debt" ? 0 : receivedAmount}
             onChange={(event) =>
               setReceivedAmount(Number(event.currentTarget.value))
             }
-            className="mt-1 h-10 w-full bg-transparent text-2xl font-black text-slate-950 outline-none"
+            className="mt-1 h-10 w-full bg-transparent text-2xl font-black text-slate-950 outline-none disabled:text-slate-400"
           />
         </label>
         <div className="mt-4 rounded-lg bg-emerald-50 p-3">
-          <p className="text-[12px] font-black text-emerald-600">Change</p>
+          <p className="text-[12px] font-black text-emerald-600">
+            {paymentStatus === "debt" ? "Debt Balance" : "Change"}
+          </p>
           <p className="mt-1 text-2xl font-black text-emerald-600">
-            {formatMoney(change)}
+            {formatMoney(paymentStatus === "debt" ? debtAmount : change)}
           </p>
         </div>
       </div>
@@ -96,6 +116,30 @@ export function CheckoutView({ businessSlug }: { businessSlug: string }) {
         <h2 className="text-[16px] font-black text-slate-950">
           Payment Method
         </h2>
+        <div className="mt-4 grid gap-3 md:grid-cols-3">
+          {paymentStatuses.map((status) => (
+            <button
+              key={status.id}
+              type="button"
+              onClick={() => setPaymentStatus(status.id)}
+              className={`rounded-lg border p-3 text-left transition ${
+                paymentStatus === status.id
+                  ? "border-blue-500 bg-blue-50 text-blue-700"
+                  : "border-blue-100 bg-white text-slate-700 hover:bg-blue-50"
+              }`}
+            >
+              <span className="block text-sm font-black">{status.label}</span>
+              <span className="mt-1 block text-[11px] font-bold text-slate-500">
+                {status.description}
+              </span>
+            </button>
+          ))}
+        </div>
+        {paymentStatus === "debt" && !customer ? (
+          <p className="mt-3 rounded-lg border border-amber-100 bg-amber-50 p-3 text-xs font-bold text-amber-700">
+            Debt checkout requires a customer profile with credit terms.
+          </p>
+        ) : null}
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           {paymentMethods.map((method) => (
             <PaymentMethod
@@ -127,7 +171,8 @@ export function CheckoutView({ businessSlug }: { businessSlug: string }) {
             onClick={handleConfirmPayment}
             className="flex h-12 items-center justify-center rounded-lg bg-blue-600 text-sm font-black text-white shadow-[0_12px_24px_rgba(37,99,235,0.24)] transition hover:bg-blue-700 disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
           >
-            Confirm Payment: {formatMoney(summary.total)}
+            {paymentStatus === "debt" ? "Save Debt" : "Confirm Payment"}:{" "}
+            {formatMoney(paymentStatus === "debt" ? debtAmount : paidAmount)}
           </button>
         </div>
       </div>
@@ -144,6 +189,9 @@ export function CheckoutView({ businessSlug }: { businessSlug: string }) {
           <InfoRow label="Cashier" value={cashierName} />
           <InfoRow label="Branch" value={branchName} />
           <InfoRow label="Items" value={String(summary.itemCount)} />
+          <InfoRow label="Payment Status" value={paymentStatus.toUpperCase()} />
+          <InfoRow label="Paid Now" value={formatMoney(paidAmount)} />
+          <InfoRow label="Debt" value={formatMoney(debtAmount)} />
         </div>
         <div className="mt-5 rounded-lg bg-blue-50 p-3">
           <p className="text-[12px] font-black text-blue-600">Customer</p>
@@ -152,9 +200,15 @@ export function CheckoutView({ businessSlug }: { businessSlug: string }) {
           </p>
           <p className="text-[11px] font-bold text-slate-500">
             {customer
-              ? `${customer.subtitle} - ${customer.points.toLocaleString("en-US")} points`
+              ? `${customer.subtitle} - ${customer.customerType} - ${customer.priceList}`
               : "No member selected"}
           </p>
+          {customer ? (
+            <p className="mt-1 text-[11px] font-bold text-slate-500">
+              Debt {formatMoney(customer.debtBalance)} / Limit{" "}
+              {formatMoney(customer.creditLimit)} / {customer.paymentTerm}
+            </p>
+          ) : null}
         </div>
       </div>
     </section>
@@ -179,11 +233,15 @@ export function ReceiptPreviewView({ businessSlug }: { businessSlug: string }) {
             <CheckCircle2 className="h-11 w-11" />
           </div>
           <h1 className="mt-5 text-3xl font-black text-slate-950">
-            Payment Successful
+            {order?.paymentStatus === "debt"
+              ? "Debt Saved"
+              : order?.paymentStatus === "partial"
+                ? "Partial Payment Saved"
+                : "Payment Successful"}
           </h1>
           <p className="mt-2 text-sm font-bold text-slate-500">
             {order
-              ? `Order ${order.id} has been paid and is ready to print.`
+              ? `Order ${order.id} is ready to print.`
               : "The last paid order is not available."}
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
@@ -386,6 +444,8 @@ function InfoRow({ label, value }: { label: string; value: string }) {
 function ReceiptCard({ order }: { order: OpenOrder | null }) {
   const lines = order?.cart ?? [];
   const summary = getCartSummary(lines, order?.discount ?? null);
+  const paidAmount = order?.receivedAmount ?? 0;
+  const debtAmount = Math.max(summary.total - paidAmount, 0);
   const paymentLabel =
     paymentMethods.find((method) => method.id === order?.paymentMethod)?.label ??
     "Cash";
@@ -403,6 +463,7 @@ function ReceiptCard({ order }: { order: OpenOrder | null }) {
         <InfoRow label="Receipt" value={order?.id ?? "-"} />
         <InfoRow label="Cashier" value={cashierName} />
         <InfoRow label="Payment" value={paymentLabel} />
+        <InfoRow label="Status" value={(order?.paymentStatus ?? "paid").toUpperCase()} />
         <InfoRow label="Time" value={order?.createdAt ?? "-"} />
       </div>
       <div className="my-4 border-t border-dashed border-slate-200" />
@@ -421,6 +482,8 @@ function ReceiptCard({ order }: { order: OpenOrder | null }) {
       <InfoRow label="Discount" value={`-${formatMoney(summary.discount)}`} />
       <InfoRow label="Tax" value={formatMoney(summary.tax)} />
       <InfoRow label="Total" value={formatMoney(summary.total)} />
+      <InfoRow label="Paid" value={formatMoney(paidAmount)} />
+      <InfoRow label="Debt" value={formatMoney(debtAmount)} />
     </div>
   );
 }

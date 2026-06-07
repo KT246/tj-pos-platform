@@ -580,6 +580,91 @@ UI-062 Export Center
 | Import Center                  | Related to Items, Customers, Suppliers              |
 | Export Center                  | Related to Import Center and reporting/list data    |
 
+### Business Admin Wholesale Support
+
+Wholesale is **not** a separate UI group and must not become a separate product/module.
+
+Use existing Business Admin Core screens:
+
+```text
+Customers List / Detail
+Items List / Item Form
+Orders
+Payments
+Reports
+Import Center
+Export Center
+Roles & Permissions
+```
+
+Required UI additions inside those screens:
+
+```text
+Customers:
+- Customer Type: Retail Customer, Wholesale Customer, Reseller, VIP
+- Price list assigned
+- Debt balance
+- Credit limit
+- Payment term
+- Purchase history
+- Wholesale order history
+
+Items:
+- Default retail price
+- Wholesale price
+- Reseller price
+- Min wholesale quantity
+- Cost price visibility by permission
+
+Orders:
+- Order Type: Retail, Wholesale, Purchase, Return
+- Price list
+- Payment status
+- Debt status
+- Delivery status
+- Discount by quantity
+
+Payments:
+- Paid
+- Partially Paid
+- Unpaid
+- Debt
+- Receive debt payment later
+
+Reports:
+- Sales by customer type
+- Wholesale sales
+- Top wholesale customers
+- Debt report
+- Payment by bank
+- Customer balance
+- Profit by price type
+
+Import / Export:
+- Import products with wholesale price
+- Import customer type
+- Import customer debt opening balance
+- Export customer debt
+- Export wholesale price list
+- Export wholesale orders
+```
+
+Permission-sensitive actions:
+
+```text
+Can view wholesale price
+Can edit wholesale price
+Can create wholesale order
+Can approve customer debt
+Can view customer debt
+Can receive debt payment
+Can change customer price list
+Can view cost price
+Can view profit
+```
+
+Owner/Manager should control cost price, profit, wholesale price editing and debt approval.
+
 ### Special Fix: Loyalty Settings
 
 The approved direction for Loyalty Settings is **not** a generic settings page. It must be a full loyalty/membership management screen.
@@ -1051,6 +1136,20 @@ Support
 Audit Logs
 Settings
 ```
+
+Wholesale support must be implemented inside existing backend modules only:
+
+```text
+Customers
+Items
+Orders
+Payments
+Reports
+Import/Export
+Roles & Permissions
+```
+
+Do not create a separate `Wholesale` backend module in the current phase.
 
 The backend should support multi-business and multi-branch logic from the start.
 

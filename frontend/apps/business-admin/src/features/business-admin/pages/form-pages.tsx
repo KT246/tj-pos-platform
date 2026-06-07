@@ -363,7 +363,11 @@ export function ItemFormPage() {
         />
       </FormCard>
       <FormCard title="Pricing & Inventory">
-        <Field label="Selling Price" value="LAK 25,000" />
+        <Field label="Default Retail Price" value="LAK 25,000" />
+        <Field label="Wholesale Price" value="LAK 21,000" />
+        <Field label="Reseller Price" value="LAK 20,000" />
+        <Field label="Min Wholesale Quantity" value="12" />
+        <Field label="Price List" value="Cafe Wholesale" type="select" />
         <Field label="Cost Price" value="LAK 11,500" />
         <Field label="Current Stock" value="48" />
         <Field label="Low Stock Alert" value="12" />
@@ -543,6 +547,14 @@ export function RolesPermissionsPage() {
           )}
         </div>
       </Card>
+      <FormCard title="Wholesale & Debt Permissions">
+        <Field label="View Wholesale Price" value="Owner, Manager" type="select" />
+        <Field label="Edit Wholesale Price" value="Owner only" type="select" />
+        <Field label="Create Wholesale Order" value="Owner, Manager, Cashier" type="select" />
+        <Field label="Approve Customer Debt" value="Owner, Manager approval" type="select" />
+        <Field label="Receive Debt Payment" value="Owner, Manager, Cashier" type="select" />
+        <Field label="View Cost Price / Profit" value="Owner, Manager" type="select" />
+      </FormCard>
     </FormShell>
   );
 }
@@ -584,7 +596,14 @@ export function PaymentMethodsPage() {
       title="Payment Methods"
       description="Configure cash, card, bank transfer, BCEL One, LaoViet QR, settlements, and fees."
       icon={CreditCard}
-      tabs={["Payment Methods", "Bank Accounts", "QR Templates", "Settlement", "Fees"]}
+      tabs={[
+        "Payment Methods",
+        "Bank Accounts",
+        "QR Templates",
+        "Debt Terms",
+        "Settlement",
+        "Fees"
+      ]}
     />
   );
 }
@@ -655,12 +674,19 @@ export function CustomerDetailPage() {
     >
       <FormCard title="Customer Profile">
         <Field label="Customer Name" value="Khamla Philavong" />
+        <Field label="Customer Type" value="Wholesale Customer" type="select" />
+        <Field label="Price List" value="Cafe Wholesale" type="select" />
         <Field label="Member Level" value="Gold" type="select" />
         <Field label="Phone" value="020 2233 4455" />
         <Field label="Points" value="15,200" />
+        <Field label="Debt Balance" value="LAK 1,850,000" />
+        <Field label="Credit Limit" value="LAK 8,000,000" />
+        <Field label="Payment Term" value="Net 15" type="select" />
+        <Field label="Purchase History" value="42 orders / LAK 12,680,000" />
+        <Field label="Wholesale Order History" value="8 wholesale orders this quarter" />
         <Field
           label="Notes"
-          value="Prefers iced drinks. VIP customer at Main Branch."
+          value="Prefers iced drinks. Uses Cafe Wholesale price list. Manager approval required when debt exceeds limit."
           type="textarea"
           full
         />
@@ -867,7 +893,10 @@ function ImportExportPage({
                 "Suppliers",
                 "Categories",
                 "Staff",
-                "Promotions"
+                "Promotions",
+                "Wholesale Price List",
+                "Customer Debt Opening Balance",
+                "Wholesale Orders"
               ].map((item) => (
                 <button
                   key={item}

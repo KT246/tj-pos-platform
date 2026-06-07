@@ -43,6 +43,38 @@
 
 ---
 
+## 2.1 ข้อสรุปเพิ่มเติมของ TJ POS
+
+ฟีเจอร์เชิงระบบที่ต้องเตรียมไว้ใน TJ POS:
+
+```text
+1. Shift & Cash Drawer Flow
+2. Cash + Bank Transfer / Bank QR Payment Flow
+3. Refund / Return Flow
+4. Stock Deduction Rules
+5. Recipe / Ingredient / BOM
+6. Promotion / Discount Rules
+7. Device / Printer / Offline Sync States
+8. Permission Matrix
+9. Audit Logs
+10. Global UI Components
+11. Business Setup Checklist
+12. Import / Export Format Rules
+13. Wholesale support inside existing modules
+```
+
+ข้อสรุปสำหรับ Wholesale:
+
+```text
+Wholesale ไม่ใช่ module แยกใน phase นี้
+ไม่สร้าง TJ Wholesale
+ไม่เพิ่มกลุ่ม UI ใหม่
+Wholesale ต้องรองรับภายใน Customers, Items, Orders, Payments, Reports และ Import/Export ที่มีอยู่แล้ว
+ระบบใช้สินค้า, stock, customers, orders และ reports ชุดเดียวกัน
+```
+
+---
+
 ## 3. เว็บไซต์หลักของ TJ POS
 
 เว็บไซต์หลักคือหน้าเว็บของ TJ POS ที่ใช้แนะนำสินค้าให้ลูกค้าที่ยังไม่ได้ใช้งานจริง

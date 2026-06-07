@@ -708,6 +708,132 @@ export const customers = [
   ]
 ];
 
+export const itemPriceProfiles = [
+  {
+    retailPrice: "LAK 25,000",
+    wholesalePrice: "LAK 21,000",
+    resellerPrice: "LAK 20,000",
+    minWholesaleQty: "12",
+    priceList: "Cafe Wholesale"
+  },
+  {
+    retailPrice: "LAK 22,000",
+    wholesalePrice: "LAK 18,500",
+    resellerPrice: "LAK 17,800",
+    minWholesaleQty: "12",
+    priceList: "Cafe Wholesale"
+  },
+  {
+    retailPrice: "LAK 18,000",
+    wholesalePrice: "LAK 15,000",
+    resellerPrice: "LAK 14,500",
+    minWholesaleQty: "24",
+    priceList: "Bakery Reseller"
+  },
+  {
+    retailPrice: "LAK 32,000",
+    wholesalePrice: "LAK 28,000",
+    resellerPrice: "LAK 26,500",
+    minWholesaleQty: "10",
+    priceList: "Lunch Box"
+  },
+  {
+    retailPrice: "LAK 30,000",
+    wholesalePrice: "LAK 26,000",
+    resellerPrice: "LAK 25,000",
+    minWholesaleQty: "10",
+    priceList: "Food Reseller"
+  },
+  {
+    retailPrice: "LAK 20,000",
+    wholesalePrice: "LAK 16,500",
+    resellerPrice: "LAK 15,500",
+    minWholesaleQty: "24",
+    priceList: "Beverage Wholesale"
+  },
+  {
+    retailPrice: "LAK 7,000",
+    wholesalePrice: "LAK 5,500",
+    resellerPrice: "LAK 5,200",
+    minWholesaleQty: "48",
+    priceList: "Beverage Wholesale"
+  },
+  {
+    retailPrice: "LAK 26,000",
+    wholesalePrice: "LAK 22,000",
+    resellerPrice: "LAK 21,000",
+    minWholesaleQty: "12",
+    priceList: "Cafe Wholesale"
+  }
+];
+
+export const customerWholesaleProfiles = [
+  {
+    customerType: "VIP",
+    priceList: "VIP Retail",
+    debtBalance: "LAK 0",
+    creditLimit: "LAK 2,000,000",
+    paymentTerm: "Pay now",
+    debtStatus: "Clear"
+  },
+  {
+    customerType: "Retail Customer",
+    priceList: "Default Retail",
+    debtBalance: "LAK 0",
+    creditLimit: "LAK 0",
+    paymentTerm: "Pay now",
+    debtStatus: "Clear"
+  },
+  {
+    customerType: "Wholesale Customer",
+    priceList: "Cafe Wholesale",
+    debtBalance: "LAK 1,850,000",
+    creditLimit: "LAK 8,000,000",
+    paymentTerm: "Net 15",
+    debtStatus: "Partial"
+  },
+  {
+    customerType: "Reseller",
+    priceList: "Beverage Reseller",
+    debtBalance: "LAK 920,000",
+    creditLimit: "LAK 5,000,000",
+    paymentTerm: "Net 7",
+    debtStatus: "Debt"
+  },
+  {
+    customerType: "Wholesale Customer",
+    priceList: "Bakery Wholesale",
+    debtBalance: "LAK 0",
+    creditLimit: "LAK 6,000,000",
+    paymentTerm: "Net 15",
+    debtStatus: "Clear"
+  },
+  {
+    customerType: "VIP",
+    priceList: "VIP Retail",
+    debtBalance: "LAK 0",
+    creditLimit: "LAK 2,000,000",
+    paymentTerm: "Pay now",
+    debtStatus: "Clear"
+  },
+  {
+    customerType: "Retail Customer",
+    priceList: "Default Retail",
+    debtBalance: "LAK 0",
+    creditLimit: "LAK 0",
+    paymentTerm: "Pay now",
+    debtStatus: "Clear"
+  },
+  {
+    customerType: "Reseller",
+    priceList: "Retail Partner",
+    debtBalance: "LAK 420,000",
+    creditLimit: "LAK 3,000,000",
+    paymentTerm: "Net 7",
+    debtStatus: "Partial"
+  }
+];
+
 export const promotions = [
   [
     "Happy Hour 15% Off Drinks",

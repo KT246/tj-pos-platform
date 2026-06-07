@@ -20,6 +20,10 @@ export type Product = {
   category: string;
   sku: string;
   price: number;
+  wholesalePrice?: number;
+  resellerPrice?: number;
+  minWholesaleQuantity?: number;
+  priceList?: string;
   image: string;
   badge?: string;
 };
@@ -29,6 +33,10 @@ export type CartLine = {
   productId: string;
   name: string;
   price: number;
+  retailPrice?: number;
+  priceType?: "retail" | "wholesale" | "reseller";
+  priceList?: string;
+  minWholesaleQuantity?: number;
   quantity: number;
   image: string;
   note?: string;
@@ -46,10 +54,17 @@ export type Customer = {
   id: string;
   name: string;
   subtitle: string;
+  customerType: "retail" | "wholesale" | "reseller" | "vip";
+  priceList: string;
+  debtBalance: number;
+  creditLimit: number;
+  paymentTerm: string;
   phone?: string;
   points: number;
   avatar: string;
 };
+
+export type PaymentStatus = "paid" | "partial" | "debt";
 
 export type PaymentMethodId =
   | "cash"
@@ -72,6 +87,7 @@ export type OpenOrder = {
   customerRecord?: Customer | null;
   discount?: Discount | null;
   paymentMethod?: PaymentMethodId;
+  paymentStatus?: PaymentStatus;
   receivedAmount?: number;
   createdAt?: string;
 };

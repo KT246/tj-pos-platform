@@ -149,6 +149,7 @@ audit logs
 reports detail
 import/export jobs
 devices
+price lists
 ```
 
 ---
@@ -1068,6 +1069,15 @@ itemType
 barcode
 sku
 availableForSale
+priceType
+```
+
+หมายเหตุ Wholesale:
+
+```text
+Item payload ต้องรองรับ sellingPrice เป็น default retail price
+field optional: wholesalePrice, resellerPrice, minWholesaleQuantity, priceListId
+ไม่สร้าง item ซ้ำสำหรับขายส่ง
 ```
 
 ---
@@ -1264,7 +1274,18 @@ to
 customerId
 staffId
 orderType
+customerType
+debtStatus
+deliveryStatus
 search
+```
+
+หมายเหตุ Wholesale:
+
+```text
+orderType ต้องรองรับ retail, wholesale, purchase, return
+Wholesale order ใช้ endpoint Orders เดิม
+payload เพิ่ม optional priceListId, debtStatus, deliveryStatus, quantity discount และ notes
 ```
 
 ---
@@ -1610,8 +1631,18 @@ limit
 branchId
 methodType
 status
+customerId
+orderType
+debtStatus
 from
 to
+```
+
+หมายเหตุ Debt:
+
+```text
+Payments endpoint เดิมต้องรองรับ order payment และ debt payment
+paymentContext รองรับ order_payment, debt_payment, opening_balance_payment
 ```
 
 ---
@@ -1945,6 +1976,25 @@ Response type:
 
 ```text
 Paginated List
+```
+
+Query:
+
+```text
+page
+limit
+search
+customerType
+priceListId
+debtStatus
+status
+```
+
+หมายเหตุ Wholesale:
+
+```text
+Customers endpoint เดิมต้องรองรับ retail_customer, wholesale_customer, reseller และ vip
+Customer detail ต้องมี priceListId, debtBalance, creditLimit, paymentTerm, purchase history และ wholesale order history
 ```
 
 ---
@@ -2458,6 +2508,9 @@ Query:
 branchId
 from
 to
+customerType
+orderType
+priceType
 ```
 
 ---
@@ -2474,6 +2527,14 @@ Response type:
 Paginated List
 ```
 
+Query เพิ่ม:
+
+```text
+customerType
+orderType
+debtStatus
+```
+
 ---
 
 ## 24.3 Payments Report
@@ -2488,6 +2549,15 @@ Response type:
 Paginated List
 ```
 
+Query เพิ่ม:
+
+```text
+methodType
+customerType
+orderType
+debtStatus
+```
+
 ---
 
 ## 24.4 Items Report
@@ -2500,6 +2570,25 @@ Response type:
 
 ```text
 Paginated List
+```
+
+Query เพิ่ม:
+
+```text
+priceType
+customerType
+```
+
+มุมมองที่ต้องรองรับใน Reports เดิม:
+
+```text
+Sales by customer type
+Wholesale sales
+Top wholesale customers
+Debt report
+Payment by bank
+Customer balance
+Profit by price type
 ```
 
 ---
@@ -2864,6 +2953,9 @@ GET /api/businesses/:businessId/export/orders
 GET /api/businesses/:businessId/export/payments
 GET /api/businesses/:businessId/export/inventory
 GET /api/businesses/:businessId/export/customers
+GET /api/businesses/:businessId/export/customer-debt
+GET /api/businesses/:businessId/export/wholesale-price-list
+GET /api/businesses/:businessId/export/wholesale-orders
 ```
 
 Response type:
@@ -2876,6 +2968,14 @@ Action Result หรือ File Download
 
 ```text
 สร้าง export job
+```
+
+หมายเหตุ Import / Export:
+
+```text
+Import items ต้องรองรับ wholesalePrice, resellerPrice, minWholesaleQuantity
+Import customers ต้องรองรับ customerType, priceListId, debt opening balance, creditLimit, paymentTerm
+Export เดิมต้อง filter ได้ด้วย customerType และ orderType โดยไม่สร้าง Wholesale module แยก
 ```
 
 ---
@@ -3076,6 +3176,13 @@ Audit Logs
 Platform Settings / Notification Templates / Master Payment Config
 Public Business / QR Menu (pending backend)
 Health
+```
+
+หมายเหตุ Wholesale:
+
+```text
+ไม่เพิ่ม Wholesale เป็น Module API แยก
+Wholesale support อยู่ใน Items, Customers, Orders, Payments, Reports และ Import / Export
 ```
 
 ---

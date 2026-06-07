@@ -80,6 +80,24 @@ design export image
 
 จำนวนรูป source of truth จริงใน repo อาจน้อยกว่าจำนวน UI target เพราะบางกลุ่มยังอยู่ในสถานะ pending/เตรียม source image และบางรูปที่ deprecated จะไม่ถูกนับเป็น source of truth
 
+### หมายเหตุเกี่ยวกับ Wholesale
+
+ไม่สร้างโฟลเดอร์ `14-wholesale-specific` และไม่เพิ่มกลุ่ม UI ใหม่สำหรับ Wholesale
+
+Wholesale จะถูกออกแบบเป็นส่วนเสริมในหน้าจอที่มีอยู่แล้ว เช่น:
+
+```text
+Customers List / Detail
+Items List / Item Form
+Orders
+Payments
+Reports
+Import / Export
+Roles & Permissions
+```
+
+ถ้ามีรูป UI เกี่ยวกับขายส่ง ให้เก็บไว้ในกลุ่มที่เกี่ยวข้องกับหน้าจอนั้น เช่น `03-business-admin-core` หรือกลุ่ม POS Type เดิม ไม่แยกเป็นกลุ่ม Wholesale-specific
+
 ---
 
 ## 4. หมายเหตุ

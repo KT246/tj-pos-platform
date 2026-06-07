@@ -427,6 +427,12 @@ Receptionist → ใช้ hospitality flow
 | Customers | ✅ | ✅ | ✅ | ⚠️ | ❌ | ❌ | ⚠️ |
 | Loyalty | ✅ | ✅ | ✅ | ⚠️ | ❌ | ❌ | ❌ |
 | Promotions | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| View Wholesale Price | ✅ | ✅ | ✅ | ⚠️ | ❌ | ❌ | ❌ |
+| Edit Wholesale Price | ✅ | ✅ | ⚠️ | ❌ | ❌ | ❌ | ❌ |
+| Create Wholesale Order | ✅ | ✅ | ✅ | ⚠️ | ❌ | ❌ | ❌ |
+| Approve Customer Debt | ✅ | ✅ | ⚠️ | ❌ | ❌ | ❌ | ❌ |
+| Receive Debt Payment | ✅ | ✅ | ✅ | ⚠️ | ❌ | ❌ | ⚠️ |
+| View Cost / Profit | ✅ | ✅ | ⚠️ | ❌ | ❌ | ❌ | ❌ |
 | Reports | ✅ | ✅ | ✅ | ⚠️ | ❌ | ❌ | ⚠️ |
 | Receipt / Bill Config | ✅ | ✅ | ⚠️ | ❌ | ❌ | ❌ | ❌ |
 | Branding | ✅ | ✅ | ⚠️ | ❌ | ❌ | ❌ | ❌ |
@@ -1034,6 +1040,8 @@ Suppliers Import Template
 Tables Import Template
 Rooms Import Template
 Promotions / Coupons Import Template
+Wholesale Price List Import Template
+Customer Debt Opening Balance Import Template
 ```
 
 ---
@@ -1056,6 +1064,10 @@ stock_tracking
 initial_stock
 minimum_stock
 supplier
+wholesale_price
+reseller_price
+min_wholesale_quantity
+price_list
 brand
 size
 color
@@ -1076,6 +1088,11 @@ address
 member_code
 member_tier
 points_balance
+customer_type
+price_list
+debt_opening_balance
+credit_limit
+payment_term
 notes
 ```
 
@@ -1325,6 +1342,22 @@ Sound
 Vibration
 ```
 
+## 11.11 Wholesale Support Inside Existing Modules
+
+```text
+ไม่สร้าง Wholesale-specific module
+ไม่สร้าง TJ Wholesale app
+ไม่เพิ่มกลุ่ม UI ใหม่
+Customers ต้องมี filter customer type
+Item form ต้องรองรับ wholesale/reseller price และ min wholesale quantity
+Orders ต้องมี filter retail/wholesale/purchase/return
+Checkout ต้องรองรับ paid, partial, unpaid และ debt
+Payments ต้องรับชำระหนี้ภายหลังได้
+Reports ต้องมี wholesale/debt/customer type filters
+Import/Export ต้องรองรับ wholesale price, customer type และ opening debt balance
+Permissions ต้องป้องกัน cost price, profit, wholesale price และ debt approval
+```
+
 ---
 
 # 12. Definition of Done
@@ -1361,6 +1394,7 @@ Vibration
 8. Report Formula
 9. Testing / QA Checklist
 10. Definition of Done
+11. Wholesale support inside existing modules
 ```
 
 เอกสารนี้ใช้เป็นแผนรวมสำหรับส่วน implementation detail ที่เหลือทั้งหมด เพื่อให้ทีม dev เดินต่อได้อย่างเป็นระบบ
