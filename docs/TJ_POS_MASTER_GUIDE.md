@@ -249,7 +249,7 @@ There are **136 UI screens** divided into **13 groups**.
 | Cafe-specific         | UI-109–UI-114 | Implemented / pending review                                    |
 | Restaurant-specific   | UI-115–UI-121 | Source image added / in implementation                          |
 | Beauty-specific       | UI-122–UI-129 | Implemented / pending review                                    |
-| Hospitality-specific  | UI-130–UI-136 | Pending                                                         |
+| Hospitality-specific  | UI-130–UI-136 | Implemented / pending review                                    |
 
 ---
 
@@ -912,6 +912,23 @@ UI-135 Check-out
 UI-136 Guest Folio / Extra Charges
 ```
 
+### Implemented Routes
+
+```text
+/business-admin/[businessSlug]/rooms
+/business-admin/[businessSlug]/room-calendar
+/business-admin/[businessSlug]/bookings
+/business-admin/[businessSlug]/bookings/create
+/business-admin/[businessSlug]/front-desk
+/business-admin/[businessSlug]/check-in
+/business-admin/[businessSlug]/check-out
+/business-admin/[businessSlug]/guests
+/business-admin/[businessSlug]/housekeeping
+/business-admin/[businessSlug]/room-settings
+/business-admin/[businessSlug]/guest-folio
+/business-admin/[businessSlug]/deposit-cancellation-policy
+```
+
 ---
 
 ## 9. AI Generation QA Checklist
@@ -1073,7 +1090,6 @@ Public Menu / QR Menu
 Retail-specific
 Cafe-specific
 Restaurant-specific
-Hospitality-specific
 ```
 
 ---

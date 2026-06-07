@@ -46,19 +46,33 @@ export function BusinessAdminShell({
               const isBeautyItem =
                 item.label === "Appointments" ||
                 item.label === "Calendar" ||
-                item.label === "Bookings" ||
                 item.label === "Walk-in" ||
                 item.label === "Services" ||
                 item.label === "Staff Schedule" ||
                 item.label === "Packages" ||
                 item.label === "Deposit Policy" ||
                 item.label === "Beauty Daily";
+              const isHospitalityItem =
+                item.label === "Rooms" ||
+                item.label === "Room Calendar" ||
+                item.label === "Bookings" ||
+                item.label === "Front Desk" ||
+                item.label === "Check-in" ||
+                item.label === "Check-out" ||
+                item.label === "Guests" ||
+                item.label === "Room Settings" ||
+                item.label === "Housekeeping" ||
+                item.label === "Guest Folio";
               const activeClass = isBeautyItem
                 ? "bg-pink-50 text-pink-600"
-                : "bg-blue-50 text-blue-600";
+                : isHospitalityItem
+                  ? "bg-blue-50 text-blue-600"
+                  : "bg-blue-50 text-blue-600";
               const idleClass = isBeautyItem
                 ? "text-slate-800 hover:bg-pink-50 hover:text-pink-600"
-                : "text-slate-800 hover:bg-slate-50 hover:text-blue-600";
+                : isHospitalityItem
+                  ? "text-slate-800 hover:bg-blue-50 hover:text-blue-600"
+                  : "text-slate-800 hover:bg-slate-50 hover:text-blue-600";
 
               return (
                 <BusinessAdminLink

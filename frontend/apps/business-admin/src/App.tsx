@@ -61,6 +61,16 @@ import {
 } from "./features/business-admin/pages/list-pages";
 import { PromotionFormPage } from "./features/business-admin/pages/promotion-form-page";
 import {
+  BookingListPage,
+  CheckInPage,
+  CheckOutPage,
+  CreateBookingPage,
+  DepositCancellationPolicyPage,
+  GuestFolioPage,
+  RoomCalendarPage,
+  RoomSettingsHousekeepingPage
+} from "./features/business-admin/pages/hospitality-specific-pages";
+import {
   KitchenCourseManagementPage,
   MergeTransferTablePage,
   ReservationBookPage,
@@ -149,6 +159,54 @@ export function App() {
         <Route
           path="/business-admin/:businessSlug/beauty-daily-schedule"
           element={<BeautyDailySchedulePage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/rooms"
+          element={<RoomSettingsHousekeepingPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/room-calendar"
+          element={<RoomCalendarPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/bookings"
+          element={<BookingListPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/bookings/create"
+          element={<CreateBookingPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/front-desk"
+          element={<BookingListPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/check-in"
+          element={<CheckInPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/check-out"
+          element={<CheckOutPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/guests"
+          element={<GuestFolioPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/housekeeping"
+          element={<RoomSettingsHousekeepingPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/room-settings"
+          element={<RoomSettingsHousekeepingPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/guest-folio"
+          element={<GuestFolioPage />}
+        />
+        <Route
+          path="/business-admin/:businessSlug/deposit-cancellation-policy"
+          element={<DepositCancellationPolicyPage />}
         />
         <Route path="/business-admin/:businessSlug/items" element={<ItemsListPage />} />
         <Route

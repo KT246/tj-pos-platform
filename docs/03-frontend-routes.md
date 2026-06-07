@@ -784,10 +784,15 @@ Beauty Daily Schedule
 /business-admin/[businessSlug]/rooms
 /business-admin/[businessSlug]/room-calendar
 /business-admin/[businessSlug]/bookings
+/business-admin/[businessSlug]/bookings/create
+/business-admin/[businessSlug]/front-desk
 /business-admin/[businessSlug]/check-in
 /business-admin/[businessSlug]/check-out
 /business-admin/[businessSlug]/guests
 /business-admin/[businessSlug]/housekeeping
+/business-admin/[businessSlug]/room-settings
+/business-admin/[businessSlug]/guest-folio
+/business-admin/[businessSlug]/deposit-cancellation-policy
 ```
 
 ความหมาย:
@@ -796,10 +801,15 @@ Beauty Daily Schedule
 Rooms
 Room Calendar
 Bookings
+Create Booking
+Front Desk
 Check-in
 Check-out
 Guests
 Housekeeping
+Room Settings
+Guest Folio
+Deposit / Cancellation Policy
 ```
 
 ---
