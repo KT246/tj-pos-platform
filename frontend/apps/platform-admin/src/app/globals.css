@@ -1,0 +1,9 @@
+@import "@workspace/ui/styles.css";
+
+html {
+  background: #f8fbff;
+}
+
+body {
+  min-height: 100vh;
+}

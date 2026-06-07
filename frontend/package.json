@@ -4,6 +4,7 @@
   "packageManager": "pnpm@10.24.0",
   "scripts": {
     "dev:web": "pnpm --filter web dev",
+    "dev:platform-admin": "pnpm --filter platform-admin dev",
     "dev:terminal": "pnpm --filter terminal dev",
     "build": "turbo build",
     "lint": "eslint . --max-warnings=0",
