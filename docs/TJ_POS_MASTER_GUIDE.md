@@ -240,7 +240,7 @@ There are **136 UI screens** divided into **13 groups**.
 | Kitchen / Bar Display | UI-092–UI-097 | Pending |
 | Public Menu / QR Menu | UI-098–UI-103 | Pending |
 | Retail-specific | UI-104–UI-108 | Pending |
-| Cafe-specific | UI-109–UI-114 | Pending |
+| Cafe-specific | UI-109–UI-114 | Implemented / pending review |
 | Restaurant-specific | UI-115–UI-121 | Pending |
 | Beauty-specific | UI-122–UI-129 | Pending |
 | Hospitality-specific | UI-130–UI-136 | Pending |
@@ -793,13 +793,26 @@ Use Business Admin, POS, or display shell depending on the screen. Cafe screens 
 ### Screens
 
 ```text
-UI-109 Cafe Floor Table Map
-UI-110 Coffee Modifiers / Recipe Options
-UI-111 Queue Pickup Screen
-UI-112 Barista Queue Detail
-UI-113 Happy Hour / Combo Setup
-UI-114 Cafe Daily Quick View
+UI-109 Cafe Floor Table Map -> /business-admin/[businessSlug]/tables
+UI-110 Coffee Modifiers / Recipe Options -> /business-admin/[businessSlug]/modifiers
+UI-111 Queue Pickup Screen -> /terminal/b/[businessSlug]/pickup-display
+UI-112 Barista Queue Detail -> /business-admin/[businessSlug]/barista-queue
+UI-113 Happy Hour / Combo Setup -> /business-admin/[businessSlug]/happy-hour
+UI-114 Cafe Daily Quick View -> /business-admin/[businessSlug]/cafe-daily-view
 ```
+
+### Route Mapping
+
+```text
+UI-109 Cafe Floor Table Map -> /business-admin/[businessSlug]/tables
+UI-110 Coffee Modifiers / Recipe Options -> /business-admin/[businessSlug]/modifiers
+UI-111 Queue Pickup Screen -> /terminal/b/[businessSlug]/pickup-display
+UI-112 Barista Queue Detail -> /business-admin/[businessSlug]/barista-queue
+UI-113 Happy Hour / Combo Setup -> /business-admin/[businessSlug]/happy-hour
+UI-114 Cafe Daily Quick View -> /business-admin/[businessSlug]/cafe-daily-view
+```
+
+หมายเหตุ: UI-111 เป็นจอ display ใน `frontend/apps/terminal` ไม่ใช่หน้า admin ใน `frontend/apps/web`.
 
 ---
 

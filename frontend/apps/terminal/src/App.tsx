@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { TerminalToastHost } from "./lib/terminal-toasts";
+import { CafePickupDisplayPage } from "./features/cafe-pickup-display/pages/cafe-pickup-display-page";
 import { CustomerDisplayPage } from "./features/customer-display/pages/customer-display-page";
 import type { CustomerDisplayRouteMode } from "./features/customer-display/types";
 import { KitchenDisplayPage } from "./features/kitchen-bar-display/pages/kitchen-display-page";
@@ -109,6 +110,10 @@ export function App() {
         <Route
           path="/terminal/b/:businessSlug/display/:deviceId"
           element={<CustomerDisplayRoute mode="device" />}
+        />
+        <Route
+          path="/terminal/b/:businessSlug/pickup-display"
+          element={<CafePickupDisplayPage />}
         />
         <Route
           path="/terminal/b/:businessSlug/kitchen"
