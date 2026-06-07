@@ -60,23 +60,25 @@ design export image
 
 ## 3. กลุ่ม UI
 
-| ลำดับ | โฟลเดอร์ | กลุ่ม | จำนวนรูป source of truth |
-|---|---|---|---|
-| 01 | `01-web-main` | Web หลัก | 7 |
-| 02 | `02-platform-admin` | Platform Admin | 21 |
-| 03 | `03-business-admin-core` | Business Admin Core | 32 |
-| 04 | `04-pos-terminal` | POS Terminal | 17 |
-| 05 | `05-staff-order-mobile` | Staff Order Mobile | 8 |
-| 06 | `06-customer-display` | Customer Display | 4 |
-| 07 | `07-kitchen-bar-display` | Kitchen / Bar Display | 6 |
-| 08 | `08-public-menu-qr-menu` | Public Menu / QR Menu | 6 |
-| 09 | `09-retail-specific` | Retail-specific | 5 |
-| 10 | `10-cafe-specific` | Cafe-specific | 6 |
-| 11 | `11-restaurant-specific` | Restaurant-specific | 7 |
-| 12 | `12-beauty-specific` | Beauty-specific | 8 |
-| 13 | `13-hospitality-specific` | Hospitality-specific | 7 |
+| ลำดับ | โฟลเดอร์ | กลุ่ม | จำนวน UI target | สถานะ source image |
+|---|---|---|---|---|
+| 01 | `01-web-main` | Web หลัก | 7 sections ที่ใช้งานจริง | Approved / locked |
+| 02 | `02-platform-admin` | Platform Admin | 21 | Approved / locked |
+| 03 | `03-business-admin-core` | Business Admin Core | 32 | UI-031 เป็น approved anchor, group in progress |
+| 04 | `04-pos-terminal` | POS Terminal | 17 | Pending / เตรียม source image |
+| 05 | `05-staff-order-mobile` | Staff Order Mobile | 8 | Pending / เตรียม source image |
+| 06 | `06-customer-display` | Customer Display | 4 | Pending / เตรียม source image |
+| 07 | `07-kitchen-bar-display` | Kitchen / Bar Display | 6 | Pending / เตรียม source image |
+| 08 | `08-public-menu-qr-menu` | Public Menu / QR Menu | 6 | Pending / เตรียม source image |
+| 09 | `09-retail-specific` | Retail-specific | 5 | Source image added |
+| 10 | `10-cafe-specific` | Cafe-specific | 6 | Implemented / pending review |
+| 11 | `11-restaurant-specific` | Restaurant-specific | 7 | Pending / เตรียม source image |
+| 12 | `12-beauty-specific` | Beauty-specific | 8 | Pending / เตรียม source image |
+| 13 | `13-hospitality-specific` | Hospitality-specific | 7 | Pending / เตรียม source image |
 
-รวมทั้งหมดตาม source of truth: **134 รูป**
+จำนวน UI target ตาม master guide: **136 screens / 13 groups**
+
+จำนวนรูป source of truth จริงใน repo อาจน้อยกว่าจำนวน UI target เพราะบางกลุ่มยังอยู่ในสถานะ pending/เตรียม source image และบางรูปที่ deprecated จะไม่ถูกนับเป็น source of truth
 
 ---
 

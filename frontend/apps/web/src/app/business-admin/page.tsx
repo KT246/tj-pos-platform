@@ -1,5 +1,5 @@
-import { BusinessDashboardPage } from "../../features/business-admin/pages/dashboard-page";
+import { redirect } from "next/navigation";
 
 export default function Page() {
-  return <BusinessDashboardPage />;
+  redirect("/business-admin/tj-cafe-vientiane");
 }
