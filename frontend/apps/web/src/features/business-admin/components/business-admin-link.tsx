@@ -10,15 +10,17 @@ export function resolveBusinessAdminHref(
   href: string,
   businessSlug = defaultBusinessSlug
 ) {
-  if (href === "/business-admin") {
+  const scopedHref = href.replaceAll("[businessSlug]", businessSlug);
+
+  if (scopedHref === "/business-admin") {
     return `/business-admin/${businessSlug}`;
   }
 
-  if (href.startsWith("/business-admin/")) {
-    return `/business-admin/${businessSlug}${href.slice("/business-admin".length)}`;
+  if (scopedHref.startsWith("/business-admin/")) {
+    return `/business-admin/${businessSlug}${scopedHref.slice("/business-admin".length)}`;
   }
 
-  return href;
+  return scopedHref;
 }
 
 function useBusinessSlug() {

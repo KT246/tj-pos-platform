@@ -673,26 +673,30 @@ Barcode Labels
 ใช้สำหรับ cafe, ชานม, ร้านน้ำ, bakery เล็ก
 
 ```text
-/business-admin/[businessSlug]/menu-items
+/business-admin/[businessSlug]/items
 /business-admin/[businessSlug]/categories
-/business-admin/[businessSlug]/options
-/business-admin/[businessSlug]/toppings
 /business-admin/[businessSlug]/tables
-/business-admin/[businessSlug]/bar-orders
-/business-admin/[businessSlug]/qr-menu
+/business-admin/[businessSlug]/modifiers
+/business-admin/[businessSlug]/barista-queue
+/business-admin/[businessSlug]/happy-hour
+/business-admin/[businessSlug]/cafe-daily-view
+/terminal/b/[businessSlug]/pickup-display
 ```
 
 ความหมาย:
 
 ```text
 Menu Items
-Size / Options
-Toppings
-Sugar / Ice
-Tables ถ้ามีที่นั่ง
-Bar Orders
-QR Menu
+Categories
+Cafe Floor Table Map
+Coffee Modifiers / Recipe Options
+Barista Queue Detail
+Happy Hour / Combo Setup
+Cafe Daily Quick View
+Queue Pickup Screen
 ```
+
+หมายเหตุ: `Queue Pickup Screen` เป็น route ของ `frontend/apps/terminal` เพราะเป็นจอ display ให้ลูกค้าดูคิว ไม่ใช่หน้า admin form.
 
 ---
 
@@ -959,6 +963,7 @@ Customer Display ตามอุปกรณ์
 
 ```text
 /terminal/b/[businessSlug]/display/pair
+/terminal/b/[businessSlug]/pickup-display
 ```
 
 จับคู่จอลูกค้ากับ POS device
@@ -1015,6 +1020,11 @@ Customer Display ตามอุปกรณ์
 | `/business-admin/[businessSlug]/import` | `frontend/apps/web` |
 | `/business-admin/[businessSlug]/export` | `frontend/apps/web` |
 | `/business-admin/[businessSlug]/audit-logs` | `frontend/apps/web` |
+| `/business-admin/[businessSlug]/tables` | `frontend/apps/web` |
+| `/business-admin/[businessSlug]/modifiers` | `frontend/apps/web` |
+| `/business-admin/[businessSlug]/barista-queue` | `frontend/apps/web` |
+| `/business-admin/[businessSlug]/happy-hour` | `frontend/apps/web` |
+| `/business-admin/[businessSlug]/cafe-daily-view` | `frontend/apps/web` |
 | `/b/[businessSlug]` | `frontend/apps/web` |
 | `/b/[businessSlug]/menu` | `frontend/apps/web` |
 | `/b/[businessSlug]/menu/[itemSlug]` | `frontend/apps/web` |
@@ -1025,6 +1035,7 @@ Customer Display ตามอุปกรณ์
 | `/terminal/b/[businessSlug]/pos` | `frontend/apps/terminal` |
 | `/terminal/b/[businessSlug]/staff-order` | `frontend/apps/terminal` |
 | `/terminal/b/[businessSlug]/display` | `frontend/apps/terminal` |
+| `/terminal/b/[businessSlug]/pickup-display` | `frontend/apps/terminal` |
 | `/terminal/b/[businessSlug]/kitchen` | `frontend/apps/terminal` |
 | `/terminal/b/[businessSlug]/bar` | `frontend/apps/terminal` |
 
