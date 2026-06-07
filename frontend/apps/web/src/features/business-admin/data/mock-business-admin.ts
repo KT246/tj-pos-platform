@@ -55,6 +55,15 @@ export const sidebarItems: {
   { label: "Categories", href: "/business-admin/categories", icon: Boxes },
   { label: "Inventory", href: "/business-admin/inventory", icon: Warehouse },
   { label: "Stock Movements", href: "/business-admin/stock-movements", icon: History },
+  { label: "Stock Count", href: "/business-admin/stock-count", icon: ClipboardCheck },
+  { label: "Goods Receiving", href: "/business-admin/goods-receiving", icon: PackagePlus },
+  { label: "Returns", href: "/business-admin/returns", icon: RefreshCcw },
+  {
+    label: "Low Stock / Expiry",
+    href: "/business-admin/low-stock-expiry",
+    icon: BellRing
+  },
+  { label: "Barcode Labels", href: "/business-admin/barcode-labels", icon: ScanLine },
   { label: "Suppliers", href: "/business-admin/suppliers", icon: Building2 },
   { label: "Customers", href: "/business-admin/customers", icon: Users },
   { label: "Loyalty", href: "/business-admin/loyalty", icon: Gift },

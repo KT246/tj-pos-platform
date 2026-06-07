@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import {
   CalendarDays,
@@ -17,10 +16,11 @@ import type { ReactNode } from "react";
 
 import { toneClasses } from "../data/mock-business-admin";
 import type { Kpi, QuickAction, SummaryItem, TableColumn, Tone } from "../types";
+import { BusinessAdminLink } from "./business-admin-link";
 
 export function TjLogo() {
   return (
-    <Link href="/business-admin" className="flex items-center">
+    <BusinessAdminLink href="/business-admin" className="flex items-center">
       <Image
         src="/business-admin-logo.png"
         alt="TJ POS"
@@ -29,7 +29,7 @@ export function TjLogo() {
         className="h-[38px] w-auto"
         priority
       />
-    </Link>
+    </BusinessAdminLink>
   );
 }
 
@@ -84,12 +84,12 @@ export function Button({
 
   if (href) {
     return (
-      <Link
+      <BusinessAdminLink
         href={href}
         className={`inline-flex h-10 items-center justify-center gap-2 rounded-md px-4 text-sm font-extrabold transition ${className}`}
       >
         {content}
-      </Link>
+      </BusinessAdminLink>
     );
   }
 
@@ -335,9 +335,14 @@ export function IconButton({
 
   if (href) {
     return (
-      <Link href={href} className={className} aria-label={label} title={label}>
+      <BusinessAdminLink
+        href={href}
+        className={className}
+        aria-label={label}
+        title={label}
+      >
         {content}
-      </Link>
+      </BusinessAdminLink>
     );
   }
 
@@ -561,13 +566,13 @@ export function QuickActionsCard({
 
           if (action.href) {
             return (
-              <Link
+              <BusinessAdminLink
                 href={action.href}
                 key={action.label}
                 className="flex items-center gap-3 rounded-md border border-transparent p-2 transition hover:border-blue-100 hover:bg-blue-50/50"
               >
                 {body}
-              </Link>
+              </BusinessAdminLink>
             );
           }
 
