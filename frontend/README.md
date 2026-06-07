@@ -9,6 +9,9 @@ Use `pnpm` only.
 ```bash
 pnpm install
 pnpm dev:web
+pnpm dev:platform-admin
+pnpm dev:business-admin
+pnpm dev:public-menu
 pnpm dev:terminal
 pnpm lint
 pnpm typecheck
@@ -20,14 +23,21 @@ pnpm build
 
 ```text
 frontend/
-├── apps/
-│   ├── web
-│   └── terminal
-└── packages/
-    └── config
++- apps/
+|  +- web              # Next.js public website
+|  +- platform-admin   # Next.js platform admin
+|  +- business-admin   # Vite React business admin
+|  +- terminal         # Vite React POS terminal
+|  +- public-menu      # Vite React public menu / QR menu
++- packages/
+   +- ui
+   +- shared
+   +- i18n
+   +- config
 ```
 
-`apps/web` is the Next.js app. `apps/terminal` is the Vite React app.
+`apps/web` and `apps/platform-admin` use Next.js. Customer-facing and shop
+operation apps use Vite React.
 
 The frontend should use mock data until the API contract is agreed with backend.
 
@@ -51,5 +61,6 @@ Testing Library
 Playwright
 ```
 
-No i18n package is installed. Public website content in `apps/web` can support
-`lo` and `en` later without making i18n a shared system-wide dependency.
+i18n is scoped to public website `lo` and `en` content. Do not make it a
+system-wide requirement for admin, terminal, or display apps unless the docs
+explicitly change that rule.

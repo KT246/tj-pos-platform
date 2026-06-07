@@ -2,7 +2,7 @@
 
 **อัปเดตล่าสุด:** 2026-06-07
 **ภาษา:** ไทย
-**สถานะ:** Approved direction / migration plan
+**สถานะ:** Approved direction / migration in progress
 **วัตถุประสงค์:** ใช้เป็นแผนย้าย frontend ไปสู่โครงสร้างที่ Next.js ใช้เฉพาะเว็บหลักและ Platform Admin ส่วน app ฝั่งลูกค้าใช้ Vite React
 
 ---
@@ -125,6 +125,7 @@ Route ใน docs หลักอาจยังใช้รูปแบบ [bus
 สร้าง frontend/apps/platform-admin
 ย้าย route และ feature platform-admin จาก frontend/apps/web
 คง Next.js App Router สำหรับ Platform Admin
+สถานะปัจจุบัน: เสร็จแล้ว
 ```
 
 ### Phase 3 — Business Admin Vite
@@ -134,6 +135,7 @@ Route ใน docs หลักอาจยังใช้รูปแบบ [bus
 ย้าย Business Admin UI จาก frontend/apps/web
 เปลี่ยน next/link, next/navigation, next/image ไปใช้ react-router-dom และ browser primitives
 ใช้ route /business-admin/:businessSlug/*
+สถานะปัจจุบัน: เสร็จแล้ว
 ```
 
 ### Phase 4 — Public Menu Vite
@@ -141,8 +143,11 @@ Route ใน docs หลักอาจยังใช้รูปแบบ [bus
 ```text
 สร้าง frontend/apps/public-menu
 ใช้ route /b/:businessSlug/*
+ใช้ route /q/:qrCode
 ใช้สำหรับลูกค้าสแกน QR ดูเมนูและข้อมูลร้าน
 ไม่ต้องใช้ i18n กลางของเว็บหลัก
+ย้าย Public Menu / QR Menu ออกจาก frontend/apps/web
+สถานะปัจจุบัน: เสร็จแล้ว
 ```
 
 ### Phase 5 — แยก customer apps

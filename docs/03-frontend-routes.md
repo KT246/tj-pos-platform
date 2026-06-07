@@ -76,23 +76,15 @@ pnpm
 `apps/web` ใช้สำหรับเว็บไซต์หลักของ TJ POS เท่านั้น
 ไม่ใช้สำหรับ Platform Admin, Business Admin หรือ Public Menu แล้ว
 Platform Admin จะถูกแยกไป `frontend/apps/platform-admin`
-Business Admin และ Public Menu จะถูกย้ายไป Vite app ตามแผน `16-frontend-vite-migration-plan.md`
+Business Admin และ Public Menu อยู่ใน Vite app แยกตามแผน `16-frontend-vite-migration-plan.md`
 ```
 
-`apps/web` ใช้สำหรับหน้าที่เป็น web, admin, report, setting และ public page
+`apps/web` ใช้สำหรับ public website หลักของ TJ POS เท่านั้น
 
 ใช้สำหรับ:
 
 ```text
 เว็บไซต์หลักของ TJ POS
-Platform Admin ของทีม TJ POS
-Business Admin ของแต่ละร้าน
-Reports
-Settings
-Branding
-Receipt Designer
-Payment Methods
-Public Menu สำหรับลูกค้าดู
 Contact / Pricing / Add-ons / FAQ/Help
 ```
 
@@ -373,7 +365,7 @@ Base route:
 
 ---
 
-# 7. Business Workspace / Business Admin Routes — Next.js
+# 7. Business Workspace / Business Admin Routes — Vite React
 
 Business Workspace เป็นพื้นที่ของแต่ละร้านในระบบเดียวกัน
 
@@ -801,7 +793,7 @@ Housekeeping
 
 ---
 
-# 9. Public Menu Routes — Next.js
+# 9. Public Menu Routes — Vite React
 
 ใช้สำหรับลูกค้าดู menu หรือสินค้า ไม่ให้ลูกค้าสั่งเอง
 

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import {
   ArrowLeft,
   CalendarDays,
@@ -303,7 +303,7 @@ function BusinessHeader({
 }) {
   return (
     <header className="flex flex-col gap-4 rounded-2xl border border-blue-100 bg-white px-4 py-4 shadow-sm sm:px-5 lg:flex-row lg:items-center lg:justify-between">
-      <Link href={`/b/${businessSlug}`} className="flex min-w-0 items-center gap-3">
+      <Link to={`/b/${businessSlug}`} className="flex min-w-0 items-center gap-3">
         <img
           src={business.logo}
           alt={business.name}
@@ -320,14 +320,14 @@ function BusinessHeader({
       </Link>
       <div className="flex flex-wrap items-center gap-2 sm:gap-3">
         <Link
-          href={`/b/${businessSlug}/menu`}
+          to={`/b/${businessSlug}/menu`}
           className="inline-flex h-10 items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 text-[12px] font-black text-blue-600 transition hover:border-blue-300 hover:bg-blue-100"
         >
           <Grid2X2 className="h-4 w-4" />
           Menu
         </Link>
         <Link
-          href={`/b/${businessSlug}/info`}
+          to={`/b/${businessSlug}/info`}
           className="inline-flex h-10 items-center gap-2 rounded-full border border-blue-100 bg-white px-4 text-[12px] font-black text-[#071633] transition hover:border-blue-300 hover:bg-blue-50"
         >
           <Info className="h-4 w-4" />
@@ -383,11 +383,11 @@ function MenuSearch({
           name="search"
           defaultValue={value}
           placeholder="Search menu..."
-          className="h-12 w-full rounded-2xl border border-blue-100 bg-white pr-9 pl-10 text-[14px] font-bold text-[#071633] outline-none transition focus:border-blue-400 focus:ring-4 focus:ring-blue-50"
+          className="h-12 w-full rounded-2xl border border-blue-100 bg-white pr-9 pl-10 text-[14px] font-bold text-[#071633] transition outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-50"
         />
         {value ? (
           <Link
-            href={cancelHref}
+            to={cancelHref}
             className="absolute top-1/2 right-3 -translate-y-1/2 text-slate-400"
             aria-label="Clear search"
           >
@@ -396,7 +396,7 @@ function MenuSearch({
         ) : null}
       </label>
       {cancel ? (
-        <Link href={cancelHref} className="text-[12px] font-black text-blue-600">
+        <Link to={cancelHref} className="text-[12px] font-black text-blue-600">
           Cancel
         </Link>
       ) : (
@@ -420,7 +420,7 @@ function CategoryTabs({
       {categories.map(({ id, label, icon: Icon }) => (
         <Link
           key={id}
-          href={menuHref(businessSlug, id)}
+          to={menuHref(businessSlug, id)}
           className={`grid min-w-[72px] place-items-center rounded-2xl border px-4 py-3 text-[11px] font-black transition hover:-translate-y-0.5 hover:shadow-md sm:min-w-[104px] sm:text-[12px] ${
             active === id
               ? "border-blue-600 bg-blue-50 text-blue-600"
@@ -447,7 +447,7 @@ function CoffeeTabs({
       {coffeeTabs.map((tab) => (
         <Link
           key={tab.id}
-          href={menuHref(businessSlug, tab.id)}
+          to={menuHref(businessSlug, tab.id)}
           className={`inline-flex h-10 shrink-0 items-center justify-center rounded-full border px-4 text-[12px] font-black transition hover:-translate-y-0.5 hover:shadow-md sm:px-5 ${
             active === tab.id
               ? "border-blue-600 bg-blue-600 text-white"
@@ -466,7 +466,12 @@ function StoreContextCard() {
     <div className="grid grid-cols-3 gap-2 sm:gap-3">
       <SmallInfoCard icon={Grid2X2} label="Table" value={business.table} />
       <SmallInfoCard icon={CalendarDays} label="Dine In" value="Today" />
-      <SmallInfoCard icon={Clock} label="Open" value={business.openHours} tone="green" />
+      <SmallInfoCard
+        icon={Clock}
+        label="Open"
+        value={business.openHours}
+        tone="green"
+      />
     </div>
   );
 }
@@ -488,7 +493,9 @@ function SmallInfoCard({
         className={`h-4 w-4 ${tone === "green" ? "text-emerald-500" : "text-blue-600"}`}
         strokeWidth={2.35}
       />
-      <div className="mt-2 text-[10px] font-bold text-slate-500 sm:text-[11px]">{label}</div>
+      <div className="mt-2 text-[10px] font-bold text-slate-500 sm:text-[11px]">
+        {label}
+      </div>
       <div
         className={`truncate text-[11px] font-black sm:text-[13px] ${
           tone === "green" ? "text-emerald-600" : "text-[#071633]"
@@ -510,10 +517,10 @@ function HeroCard() {
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/25 to-transparent" />
       <div className="absolute top-8 left-6 max-w-[280px] text-white sm:top-10 sm:left-8 sm:max-w-[440px]">
-        <h1 className="text-[30px] font-black leading-tight sm:text-[48px]">
+        <h1 className="text-[30px] leading-tight font-black sm:text-[48px]">
           Freshly brewed for you
         </h1>
-        <p className="mt-3 text-[13px] font-bold leading-5 sm:text-[16px] sm:leading-7">
+        <p className="mt-3 text-[13px] leading-5 font-bold sm:text-[16px] sm:leading-7">
           Quality ingredients, great taste.
         </p>
       </div>
@@ -532,7 +539,7 @@ function MenuListItem({
 }) {
   return (
     <Link
-      href={`/b/${businessSlug}/menu/${item.slug}`}
+      to={`/b/${businessSlug}/menu/${item.slug}`}
       className="grid grid-cols-[96px_minmax(0,1fr)] gap-3 rounded-2xl border border-blue-100 bg-white p-2.5 shadow-sm transition hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg sm:grid-cols-[132px_minmax(0,1fr)] sm:gap-4 sm:p-3"
     >
       <div className="relative h-[88px] overflow-hidden rounded-xl bg-blue-50 sm:h-[124px]">
@@ -549,7 +556,9 @@ function MenuListItem({
       </div>
       <div className="min-w-0 py-1">
         <div className="flex items-start justify-between gap-2">
-          <h2 className="truncate text-[14px] font-black sm:text-[16px]">{item.name}</h2>
+          <h2 className="truncate text-[14px] font-black sm:text-[16px]">
+            {item.name}
+          </h2>
           {item.unavailable ? (
             <span className="shrink-0 rounded-md bg-red-50 px-2 py-1 text-[9px] font-black text-red-600">
               Out
@@ -561,7 +570,7 @@ function MenuListItem({
           ) : null}
         </div>
         <p
-          className={`mt-1 text-[12px] font-semibold leading-5 text-slate-500 sm:text-[13px] ${
+          className={`mt-1 text-[12px] leading-5 font-semibold text-slate-500 sm:text-[13px] ${
             compact ? "line-clamp-2" : ""
           }`}
         >
@@ -583,14 +592,14 @@ function BottomActions({ businessSlug }: { businessSlug: string }) {
   return (
     <div className="mt-4 grid grid-cols-3 gap-2">
       <Link
-        href={`/b/${businessSlug}/menu`}
+        to={`/b/${businessSlug}/menu`}
         className="flex h-10 items-center justify-center gap-2 rounded-xl bg-blue-50 text-[12px] font-black text-blue-600"
       >
         <Grid2X2 className="h-4 w-4" />
         Photos
       </Link>
       <Link
-        href={`/b/${businessSlug}/info`}
+        to={`/b/${businessSlug}/info`}
         className="flex h-10 items-center justify-center gap-2 rounded-xl bg-white text-[12px] font-black text-[#071633]"
       >
         <Info className="h-4 w-4" />
@@ -620,8 +629,10 @@ export function PublicBusinessLanding({ businessSlug }: { businessSlug: string }
           <StoreContextCard />
           <div className="rounded-2xl border border-blue-100 bg-white p-4 shadow-sm">
             <p className="text-[12px] font-black text-blue-600">Store Info</p>
-            <h2 className="mt-2 text-[22px] font-black">{businessName(businessSlug)}</h2>
-            <p className="mt-2 text-[13px] font-semibold leading-6 text-slate-600">
+            <h2 className="mt-2 text-[22px] font-black">
+              {businessName(businessSlug)}
+            </h2>
+            <p className="mt-2 text-[13px] leading-6 font-semibold text-slate-600">
               {business.branch}, {business.address}
             </p>
             <BottomActions businessSlug={businessSlug} />
@@ -632,7 +643,7 @@ export function PublicBusinessLanding({ businessSlug }: { businessSlug: string }
         <div className="flex items-center justify-between gap-4">
           <h2 className="text-[18px] font-black sm:text-[22px]">Categories</h2>
           <Link
-            href={`/b/${businessSlug}/menu`}
+            to={`/b/${businessSlug}/menu`}
             className="text-[12px] font-black text-blue-600 sm:text-[13px]"
           >
             View all
@@ -682,13 +693,13 @@ export function PublicMenuPage({
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <Link
-            href={`/b/${businessSlug}`}
+            to={`/b/${businessSlug}`}
             className="inline-flex items-center gap-2 text-[13px] font-black text-blue-600"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to store
           </Link>
-          <h1 className="mt-3 text-[28px] font-black leading-tight sm:text-[40px]">
+          <h1 className="mt-3 text-[28px] leading-tight font-black sm:text-[40px]">
             {menuCategoryTitle(activeCategory)}
           </h1>
           {branchSlug ? (
@@ -753,7 +764,7 @@ export function PublicMenuItemPage({
       <BusinessHeader businessSlug={businessSlug} />
       <div className="mt-6 flex items-center justify-between gap-4">
         <Link
-          href={`/b/${businessSlug}/menu`}
+          to={`/b/${businessSlug}/menu`}
           className="inline-flex items-center gap-2 text-[13px] font-black text-blue-600"
         >
           <ArrowLeft className="h-4 w-4" />
@@ -771,7 +782,11 @@ export function PublicMenuItemPage({
 
       <section className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.08fr)_minmax(390px,0.92fr)] lg:items-start">
         <div className="relative h-[300px] overflow-hidden rounded-[28px] bg-blue-50 shadow-[0_22px_70px_rgba(13,91,255,0.14)] sm:h-[420px] lg:h-[560px]">
-          <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
+          <img
+            src={item.image}
+            alt={item.name}
+            className="h-full w-full object-cover"
+          />
           {item.badge ? (
             <span className="absolute top-4 right-4 rounded-full bg-orange-50 px-3 py-1.5 text-[11px] font-black text-orange-500 shadow-sm">
               {item.badge}
@@ -783,11 +798,11 @@ export function PublicMenuItemPage({
           <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-[11px] font-black text-blue-600">
             {item.category}
           </span>
-          <h1 className="mt-4 text-[34px] font-black leading-tight sm:text-[44px]">
+          <h1 className="mt-4 text-[34px] leading-tight font-black sm:text-[44px]">
             {item.name}
           </h1>
           <p className="mt-3 text-[24px] font-black text-blue-600">{item.price}</p>
-          <p className="mt-4 text-[14px] font-semibold leading-7 text-slate-600 sm:text-[15px]">
+          <p className="mt-4 text-[14px] leading-7 font-semibold text-slate-600 sm:text-[15px]">
             {item.description} A perfect balance of bold and creamy.
           </p>
 
@@ -798,7 +813,7 @@ export function PublicMenuItemPage({
             <DetailRow icon={Info} label="Allergens" value={item.allergens} />
           </div>
 
-          <div className="mt-5 rounded-2xl border border-blue-100 bg-blue-50 px-4 py-4 text-[13px] font-bold leading-6 text-blue-600">
+          <div className="mt-5 rounded-2xl border border-blue-100 bg-blue-50 px-4 py-4 text-[13px] leading-6 font-bold text-blue-600">
             This is a digital menu item. Please place your order with our staff.
           </div>
         </div>
@@ -819,7 +834,7 @@ function PublicUnavailableItemPage({
       <BusinessHeader businessSlug={businessSlug} />
       <div className="mt-6 flex items-center justify-between gap-4">
         <Link
-          href={`/b/${businessSlug}/menu`}
+          to={`/b/${businessSlug}/menu`}
           className="inline-flex items-center gap-2 text-[13px] font-black text-blue-600"
         >
           <ArrowLeft className="h-4 w-4" />
@@ -854,16 +869,16 @@ function PublicUnavailableItemPage({
           <span className="inline-flex rounded-full bg-red-50 px-3 py-1 text-[11px] font-black text-red-600">
             Temporarily unavailable
           </span>
-          <h1 className="mt-4 text-[34px] font-black leading-tight sm:text-[44px]">
+          <h1 className="mt-4 text-[34px] leading-tight font-black sm:text-[44px]">
             {item.name}
           </h1>
           <p className="mt-3 text-[24px] font-black text-slate-400 line-through">
             {item.price}
           </p>
-          <p className="mt-4 text-[14px] font-semibold leading-7 text-slate-600 sm:text-[15px]">
+          <p className="mt-4 text-[14px] leading-7 font-semibold text-slate-600 sm:text-[15px]">
             {item.description}
           </p>
-          <div className="mt-6 rounded-2xl bg-red-50 px-4 py-4 text-[13px] font-bold leading-6 text-red-600">
+          <div className="mt-6 rounded-2xl bg-red-50 px-4 py-4 text-[13px] leading-6 font-bold text-red-600">
             Sorry, this item is currently out of stock. Please try another item.
           </div>
         </div>
@@ -885,7 +900,7 @@ function DetailRow({
     <div className="grid grid-cols-[28px_minmax(80px,120px)_minmax(0,1fr)] items-center gap-2 px-4 py-3">
       <Icon className="h-4 w-4 text-slate-500" />
       <span className="text-[12px] font-bold text-slate-500">{label}</span>
-      <span className="break-words text-right text-[12px] font-black text-[#071633]">
+      <span className="text-right text-[12px] font-black break-words text-[#071633]">
         {value}
       </span>
     </div>
@@ -898,7 +913,7 @@ export function PublicInfoPage({ businessSlug }: { businessSlug: string }) {
       <BusinessHeader businessSlug={businessSlug} />
       <div className="mt-6 flex items-center justify-between">
         <Link
-          href={`/b/${businessSlug}`}
+          to={`/b/${businessSlug}`}
           className="inline-flex items-center gap-2 text-[13px] font-black text-blue-600"
         >
           <ArrowLeft className="h-4 w-4" />
@@ -914,14 +929,17 @@ export function PublicInfoPage({ businessSlug }: { businessSlug: string }) {
               className="h-[68px] w-[68px] rounded-full border border-blue-100 object-cover"
             />
             <div>
-              <h1 className="text-[28px] font-black leading-tight sm:text-[36px]">
+              <h1 className="text-[28px] leading-tight font-black sm:text-[36px]">
                 {businessName(businessSlug)}
               </h1>
               <p className="text-[13px] font-bold text-slate-500">{business.tagline}</p>
             </div>
           </div>
           <div className="mt-6 space-y-4">
-            <ContactRow icon={MapPin} text={`${business.branch}, ${business.address}`} />
+            <ContactRow
+              icon={MapPin}
+              text={`${business.branch}, ${business.address}`}
+            />
             <ContactRow icon={Phone} text={business.phone} />
             <ContactRow icon={Mail} text={business.email} />
             <ContactRow icon={Store} text={business.website} />
@@ -949,9 +967,9 @@ export function PublicInfoPage({ businessSlug }: { businessSlug: string }) {
           </div>
           <div className="rounded-[28px] border border-blue-100 bg-white p-5 shadow-sm sm:p-6">
             <h2 className="text-[20px] font-black">About Us</h2>
-            <p className="mt-2 text-[13px] font-semibold leading-6 text-slate-600">
-              TJ Cafe Vientiane serves quality coffee, delicious drinks, and tasty
-              food in a cozy and welcoming atmosphere.
+            <p className="mt-2 text-[13px] leading-6 font-semibold text-slate-600">
+              TJ Cafe Vientiane serves quality coffee, delicious drinks, and tasty food
+              in a cozy and welcoming atmosphere.
             </p>
             <img
               src={business.storeImage}
@@ -962,7 +980,11 @@ export function PublicInfoPage({ businessSlug }: { businessSlug: string }) {
         </div>
       </section>
       <section className="mt-5 grid gap-3 md:grid-cols-3">
-        <InfoPanel icon={Wifi} title="Facilities" text="Free Wi-Fi, Power Outlets, Air Condition" />
+        <InfoPanel
+          icon={Wifi}
+          title="Facilities"
+          text="Free Wi-Fi, Power Outlets, Air Condition"
+        />
         <InfoPanel icon={Store} title="Payment" text="Cash, Card, LAK QR" />
         <InfoPanel icon={Info} title="Note" text="Prices are inclusive of VAT." />
       </section>
@@ -993,7 +1015,9 @@ function SocialDot({
   };
 
   return (
-    <span className={`grid h-9 w-9 place-items-center rounded-full text-white ${classes[tone]}`}>
+    <span
+      className={`grid h-9 w-9 place-items-center rounded-full text-white ${classes[tone]}`}
+    >
       <Icon className="h-4 w-4" />
     </span>
   );
@@ -1030,7 +1054,7 @@ export function PublicBookingPage({ businessSlug }: { businessSlug: string }) {
       <BusinessHeader businessSlug={businessSlug} />
       <div className="mt-6 flex items-center justify-between">
         <Link
-          href={`/b/${businessSlug}`}
+          to={`/b/${businessSlug}`}
           className="inline-flex items-center gap-2 text-[13px] font-black text-blue-600"
         >
           <ArrowLeft className="h-4 w-4" />
@@ -1039,10 +1063,10 @@ export function PublicBookingPage({ businessSlug }: { businessSlug: string }) {
       </div>
       <div className="mt-5 rounded-[28px] border border-blue-100 bg-white p-6 shadow-sm sm:p-8 lg:max-w-3xl">
         <CalendarDays className="h-12 w-12 text-blue-600" />
-        <h1 className="mt-5 text-[34px] font-black leading-tight sm:text-[44px]">
+        <h1 className="mt-5 text-[34px] leading-tight font-black sm:text-[44px]">
           Booking Request
         </h1>
-        <p className="mt-4 text-[14px] font-semibold leading-7 text-slate-600 sm:text-[15px]">
+        <p className="mt-4 text-[14px] leading-7 font-semibold text-slate-600 sm:text-[15px]">
           Booking can be enabled for supported businesses. This public menu stays
           view-only and does not create orders or payments.
         </p>
@@ -1061,11 +1085,11 @@ export function PublicQrPage({ qrCode }: { qrCode: string }) {
         <Grid2X2 className="mx-auto h-12 w-12 text-blue-600" />
         <p className="mt-4 text-[12px] font-black text-blue-600">QR Code</p>
         <h1 className="mt-2 text-[34px] font-black sm:text-[44px]">{qrCode}</h1>
-        <p className="mt-4 text-[14px] font-semibold leading-7 text-slate-600">
+        <p className="mt-4 text-[14px] leading-7 font-semibold text-slate-600">
           This QR opens the linked public menu for table {business.table}.
         </p>
         <Link
-          href={`/b/${businessSlug}/menu`}
+          to={`/b/${businessSlug}/menu`}
           className="mt-6 inline-flex h-12 items-center justify-center rounded-full bg-blue-600 px-6 text-[13px] font-black text-white transition hover:bg-blue-700"
         >
           Open linked menu

@@ -6,6 +6,7 @@
     "dev:web": "pnpm --filter web dev",
     "dev:platform-admin": "pnpm --filter platform-admin dev",
     "dev:business-admin": "pnpm --filter business-admin dev",
+    "dev:public-menu": "pnpm --filter public-menu dev",
     "dev:terminal": "pnpm --filter terminal dev",
     "build": "turbo build",
     "lint": "eslint . --max-warnings=0",
