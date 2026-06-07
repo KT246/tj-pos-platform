@@ -772,6 +772,16 @@ UI-107 Return / Exchange Counter
 UI-108 Shelf Label / Barcode Print
 ```
 
+### Frontend Routes
+
+```text
+UI-104 Stock Count → /business-admin/[businessSlug]/stock-count
+UI-105 Low Stock / Expiry Alerts → /business-admin/[businessSlug]/low-stock-expiry
+UI-106 Goods Receiving → /business-admin/[businessSlug]/goods-receiving
+UI-107 Return / Exchange Counter → /business-admin/[businessSlug]/returns
+UI-108 Shelf Label / Barcode Print → /business-admin/[businessSlug]/barcode-labels
+```
+
 ---
 
 ## 8.10 Cafe-specific

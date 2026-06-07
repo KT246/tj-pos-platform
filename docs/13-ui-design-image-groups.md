@@ -70,7 +70,7 @@ design export image
 | 06 | `06-customer-display` | Customer Display | 4 | Pending / เตรียม source image |
 | 07 | `07-kitchen-bar-display` | Kitchen / Bar Display | 6 | Pending / เตรียม source image |
 | 08 | `08-public-menu-qr-menu` | Public Menu / QR Menu | 6 | Pending / เตรียม source image |
-| 09 | `09-retail-specific` | Retail-specific | 5 | Pending / เตรียม source image |
+| 09 | `09-retail-specific` | Retail-specific | 5 | Source image added |
 | 10 | `10-cafe-specific` | Cafe-specific | 6 | Pending / เตรียม source image |
 | 11 | `11-restaurant-specific` | Restaurant-specific | 7 | Pending / เตรียม source image |
 | 12 | `12-beauty-specific` | Beauty-specific | 8 | Pending / เตรียม source image |
