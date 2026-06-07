@@ -25,6 +25,7 @@ import { BusinessAdminLink } from "../components/business-admin-link";
 import { PageHeader } from "../components/business-admin-primitives";
 import { BusinessAdminShell } from "../layouts/business-admin-shell";
 import type { BusinessMenuKey } from "../types";
+import { toLaoNode, toLaoText } from "../utils/lao-labels";
 
 const hotelName = "TJ Riverside Hotel";
 
@@ -237,7 +238,7 @@ function HotelButton({
   const body = (
     <>
       <Icon className="h-4 w-4" />
-      {children}
+      {toLaoNode(children)}
     </>
   );
 
@@ -280,7 +281,9 @@ function HotelCard({
       {title || action ? (
         <div className="flex items-center justify-between gap-3 border-b border-blue-50 px-4 py-3">
           {title ? (
-            <h2 className="text-[15px] font-black text-slate-950">{title}</h2>
+            <h2 className="text-[15px] font-black text-slate-950">
+              {toLaoText(title)}
+            </h2>
           ) : (
             <span />
           )}
@@ -305,7 +308,7 @@ function HotelTabs({ tabs, active }: { tabs: string[]; active: string }) {
               : "bg-white text-slate-500 hover:bg-blue-50 hover:text-blue-600"
           }`}
         >
-          {tab}
+          {toLaoText(tab)}
         </button>
       ))}
     </div>
@@ -316,8 +319,8 @@ function HotelIconButton({ icon: Icon, label }: { icon: LucideIcon; label: strin
   return (
     <button
       type="button"
-      aria-label={label}
-      title={label}
+      aria-label={toLaoText(label)}
+      title={toLaoText(label)}
       className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-blue-100 bg-white text-slate-500 transition hover:-translate-y-0.5 hover:bg-blue-50 hover:text-blue-600 hover:shadow-sm"
     >
       <Icon className="h-4 w-4" />
@@ -330,7 +333,7 @@ function StatusPill({ status }: { status: string }) {
 
   return (
     <span className={`rounded-md border px-2 py-1 text-[10px] font-black ${className}`}>
-      {status}
+      {toLaoText(status)}
     </span>
   );
 }
@@ -381,7 +384,7 @@ export function RoomCalendarPage() {
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
-            May 18 - May 24, 2025
+            {toLaoText("May 18 - May 24, 2025")}
             <button
               className="rounded-md border border-blue-100 p-2 text-slate-500"
               type="button"
@@ -407,7 +410,7 @@ export function RoomCalendarPage() {
             ].map(([label, dot]) => (
               <span key={label} className="flex items-center gap-2">
                 <span className={`h-2.5 w-2.5 rounded-full ${dot}`} />
-                {label}
+                {toLaoText(label)}
               </span>
             ))}
           </div>
@@ -415,7 +418,7 @@ export function RoomCalendarPage() {
         <div className="overflow-x-auto p-4">
           <div className="min-w-[1000px]">
             <div className="grid grid-cols-[150px_repeat(7,1fr)] gap-2 text-[11px] font-black text-slate-500">
-              <span>Floor / Room</span>
+              <span>{toLaoText("Floor / Room")}</span>
               {[
                 "Sun 18",
                 "Mon 19",
@@ -426,7 +429,7 @@ export function RoomCalendarPage() {
                 "Sat 24"
               ].map((day) => (
                 <span key={day} className="text-center">
-                  {day}
+                  {toLaoText(day)}
                 </span>
               ))}
             </div>
@@ -458,7 +461,7 @@ export function RoomCalendarPage() {
                     <span
                       className={`text-xs ${isFloor ? "font-black text-slate-950" : "font-bold text-slate-600"}`}
                     >
-                      {label}
+                      {toLaoText(label)}
                     </span>
                     {Array.from({ length: 7 }, (_, index) => (
                       <span
@@ -471,7 +474,7 @@ export function RoomCalendarPage() {
                         className={`absolute top-1 left-[170px] flex h-7 items-center rounded-md border px-3 text-[11px] font-black shadow-sm ${block[4]} ${block[3]}`}
                         style={{ marginLeft: block[2] }}
                       >
-                        {block[1]}
+                        {toLaoText(block[1])}
                       </span>
                     ) : null}
                   </div>
@@ -900,16 +903,18 @@ function HotelField({
 }) {
   return (
     <label className={full ? "md:col-span-2" : ""}>
-      <span className="mb-1.5 block text-xs font-black text-slate-600">{label}</span>
+      <span className="mb-1.5 block text-xs font-black text-slate-600">
+        {toLaoText(label)}
+      </span>
       {textarea ? (
         <textarea
           className="min-h-24 w-full resize-none rounded-md border border-blue-100 px-3 py-2 text-sm font-semibold text-slate-800 outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-          defaultValue={value}
+          defaultValue={toLaoText(value)}
         />
       ) : (
         <input
           className="h-10 w-full rounded-md border border-blue-100 px-3 text-sm font-semibold text-slate-800 outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-          defaultValue={value}
+          defaultValue={toLaoText(value)}
         />
       )}
     </label>
@@ -922,7 +927,7 @@ function HotelSelect({ label }: { label: string }) {
       type="button"
       className="h-10 rounded-md border border-blue-100 bg-white px-3 text-sm font-black text-slate-700 transition hover:bg-blue-50"
     >
-      {label}
+      {toLaoText(label)}
     </button>
   );
 }
@@ -930,8 +935,8 @@ function HotelSelect({ label }: { label: string }) {
 function InfoLine({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="text-[11px] font-black text-slate-400">{label}</p>
-      <p className="mt-1 text-sm font-black text-slate-950">{value}</p>
+      <p className="text-[11px] font-black text-slate-400">{toLaoText(label)}</p>
+      <p className="mt-1 text-sm font-black text-slate-950">{toLaoText(value)}</p>
     </div>
   );
 }
@@ -939,7 +944,7 @@ function InfoLine({ label, value }: { label: string; value: string }) {
 function ToggleLine({ title, enabled }: { title: string; enabled: boolean }) {
   return (
     <div className="flex items-center justify-between gap-4 rounded-lg border border-blue-100 bg-white p-3">
-      <span className="text-sm font-black text-slate-700">{title}</span>
+      <span className="text-sm font-black text-slate-700">{toLaoText(title)}</span>
       <span
         className={`relative h-6 w-11 rounded-full ${enabled ? "bg-blue-600" : "bg-slate-200"}`}
       >
@@ -981,7 +986,7 @@ function HotelTable({
                   index === headers.length - 1 ? "text-right" : ""
                 }`}
               >
-                {header}
+                {toLaoText(header)}
               </th>
             ))}
           </tr>
@@ -996,7 +1001,7 @@ function HotelTable({
                     cellIndex === row.length - 1 ? "text-right" : ""
                   }`}
                 >
-                  {cell}
+                  {toLaoNode(cell)}
                 </td>
               ))}
             </tr>
@@ -1012,7 +1017,7 @@ function HotelPagination() {
   return (
     <div className="flex items-center justify-between border-t border-blue-50 px-4 py-3">
       <p className="text-[13px] font-semibold text-slate-600">
-        Showing 1 to 8 of 28 records
+        {toLaoText("Showing 1 to 8 of 28 records")}
       </p>
       <div className="flex items-center gap-2">
         {["<", "1", "2", ">"].map((item) => (

@@ -1,6 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 
 import { FooterLineArt } from "./display-illustrations";
+import { lo } from "../utils/lao-labels";
 
 export function DisplayFooterNote({
   title,
@@ -18,9 +19,11 @@ export function DisplayFooterNote({
       </div>
       <div className="ml-12 min-w-0">
         <h3 className="text-[35px] font-black leading-tight text-blue-600">
-          {title}
+          {lo(title)}
         </h3>
-        <p className="mt-3 text-[23px] font-medium text-slate-600">{subtitle}</p>
+        <p className="mt-3 text-[23px] font-medium text-slate-600">
+          {lo(subtitle)}
+        </p>
       </div>
       <div className="pointer-events-none absolute right-10 bottom-[-12px] h-[150px] w-[340px] opacity-70">
         <FooterLineArt />

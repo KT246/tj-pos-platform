@@ -2,6 +2,7 @@ import { BellRing, ChefHat, Eye, PackageCheck, Timer, VolumeX, X } from "lucide-
 
 import type { KitchenTicket } from "../types";
 import { getElapsedLabel, getTicketItemCount } from "../utils";
+import { lo } from "../utils/lao-labels";
 
 type NewOrderAlertProps = {
   ticket: KitchenTicket;
@@ -38,10 +39,10 @@ export function NewOrderAlert({
             </div>
             <div>
               <h2 className="text-[34px] leading-none font-black">
-                New Order Received
+                ມີອໍເດີໃໝ່
               </h2>
               <p className="mt-2 text-[16px] font-semibold text-blue-100">
-                Review this ticket before sending it to preparation.
+                ກວດ Ticket ນີ້ກ່ອນສົ່ງໄປການກຽມ.
               </p>
             </div>
           </div>
@@ -53,11 +54,11 @@ export function NewOrderAlert({
               <div>
                 <div className="text-[32px] font-black text-[#0b1736]">{ticket.id}</div>
                 <div className="mt-2 flex items-center gap-3 text-[15px] font-bold text-slate-600">
-                  <span>{ticket.table}</span>
+                  <span>{lo(ticket.table)}</span>
                   <span className="h-1.5 w-1.5 rounded-full bg-slate-300" />
-                  <span>{ticket.type}</span>
+                  <span>{lo(ticket.type)}</span>
                   <span className="h-1.5 w-1.5 rounded-full bg-slate-300" />
-                  <span className="capitalize">{ticket.station}</span>
+                  <span>{lo(ticket.station)}</span>
                 </div>
               </div>
               <span
@@ -67,7 +68,7 @@ export function NewOrderAlert({
                     : "bg-blue-50 text-blue-600"
                 }`}
               >
-                {ticket.priority}
+                {lo(ticket.priority)}
               </span>
             </div>
 
@@ -75,16 +76,16 @@ export function NewOrderAlert({
               <div className="rounded-xl bg-white px-4 py-3">
                 <div className="flex items-center gap-2 text-[12px] font-black text-slate-500 uppercase">
                   <ChefHat className="h-4 w-4" strokeWidth={2.2} />
-                  Station
+                  {lo("Station")}
                 </div>
                 <div className="mt-1 text-[18px] font-black text-[#0b1736] capitalize">
-                  {ticket.station}
+                  {lo(ticket.station)}
                 </div>
               </div>
               <div className="rounded-xl bg-white px-4 py-3">
                 <div className="flex items-center gap-2 text-[12px] font-black text-slate-500 uppercase">
                   <PackageCheck className="h-4 w-4" strokeWidth={2.2} />
-                  Items
+                  {lo("Items")}
                 </div>
                 <div className="mt-1 text-[18px] font-black text-[#0b1736]">
                   {getTicketItemCount(ticket)}
@@ -93,7 +94,7 @@ export function NewOrderAlert({
               <div className="rounded-xl bg-white px-4 py-3">
                 <div className="flex items-center gap-2 text-[12px] font-black text-slate-500 uppercase">
                   <Timer className="h-4 w-4" strokeWidth={2.2} />
-                  Received
+                  ຮັບເມື່ອ
                 </div>
                 <div className="mt-1 text-[18px] font-black text-red-500">
                   {getElapsedLabel(ticket.elapsedMinutes)}
@@ -108,11 +109,11 @@ export function NewOrderAlert({
                   className="flex items-center justify-between rounded-lg bg-white px-4 py-3 text-[15px] font-bold text-[#0b1736]"
                 >
                   <span>
-                    {item.quantity} x {item.name}
+                    {item.quantity} x {lo(item.name)}
                   </span>
                   {item.note ? (
                     <span className="text-[12px] font-semibold text-orange-500">
-                      {item.note}
+                      {lo(item.note)}
                     </span>
                   ) : null}
                 </div>
@@ -121,9 +122,9 @@ export function NewOrderAlert({
           </div>
 
           <div className="mt-5 rounded-xl border border-blue-100 bg-white px-5 py-4 text-[15px] font-bold text-[#0b1736] shadow-sm">
-            Sound alert:{" "}
+            ສຽງແຈ້ງເຕືອນ:{" "}
             <span className={soundEnabled ? "text-blue-600" : "text-slate-500"}>
-              {soundEnabled ? "Playing" : "Muted"}
+              {soundEnabled ? "ກຳລັງເປີດ" : "ປິດສຽງ"}
             </span>
           </div>
 
@@ -134,7 +135,7 @@ export function NewOrderAlert({
               className="flex h-12 items-center justify-center gap-2 rounded-lg border border-blue-200 bg-white text-[15px] font-black text-blue-600 transition hover:border-blue-400 hover:bg-blue-50"
             >
               <Eye className="h-5 w-5" strokeWidth={2.35} />
-              View Ticket
+              ເບິ່ງ Ticket
             </button>
             <button
               type="button"
@@ -142,7 +143,7 @@ export function NewOrderAlert({
               className="flex h-12 items-center justify-center gap-2 rounded-lg bg-blue-600 text-[15px] font-black text-white transition hover:bg-blue-700"
             >
               <Timer className="h-5 w-5" strokeWidth={2.35} />
-              Start Preparing
+              {lo("Start Preparing")}
             </button>
             <button
               type="button"
@@ -150,14 +151,14 @@ export function NewOrderAlert({
               className="flex h-12 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white text-[15px] font-black text-[#0b1736] transition hover:border-slate-300 hover:bg-slate-50"
             >
               <VolumeX className="h-5 w-5" strokeWidth={2.35} />
-              Mute Alert
+              ປິດສຽງແຈ້ງເຕືອນ
             </button>
             <button
               type="button"
               onClick={onDismiss}
               className="flex h-12 items-center justify-center rounded-lg border border-slate-200 bg-white text-[15px] font-black text-[#0b1736] transition hover:border-slate-300 hover:bg-slate-50"
             >
-              Dismiss
+              ປິດ
             </button>
           </div>
         </div>

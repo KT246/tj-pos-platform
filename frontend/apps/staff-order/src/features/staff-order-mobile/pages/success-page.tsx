@@ -14,6 +14,7 @@ import { StaffOrderHeader } from "../components/staff-order-header";
 import { StaffMobileShell, StaffScrollArea } from "../components/staff-mobile-shell";
 import { useStaffOrderStore } from "../stores/staff-order-store";
 import { formatMoney, getStaffOrderPath } from "../utils";
+import { lo } from "../utils/lao-labels";
 
 export function StaffSuccessPage({ businessSlug }: { businessSlug: string }) {
   const selectedTableId = useStaffOrderStore((state) => state.selectedTableId);
@@ -46,10 +47,10 @@ export function StaffSuccessPage({ businessSlug }: { businessSlug: string }) {
             </span>
           </div>
           <h2 className="mt-5 text-[24px] font-black text-emerald-600">
-            Order sent successfully
+            {lo("Order sent successfully")}
           </h2>
           <p className="mt-3 max-w-[320px] text-[16px] leading-6 font-bold text-slate-500">
-            The kitchen and bar have received the order for Table{" "}
+            {lo("The kitchen and bar have received the order for Table")}{" "}
             <span className="font-black text-blue-600">{order.tableId}</span>.
           </p>
         </section>
@@ -71,21 +72,21 @@ export function StaffSuccessPage({ businessSlug }: { businessSlug: string }) {
           className="mt-5 flex h-14 items-center justify-center gap-3 rounded-lg bg-blue-600 text-[17px] font-black text-white shadow-[0_16px_28px_rgba(37,99,235,0.24)] hover:bg-blue-700"
         >
           <BookOpen className="h-5 w-5" />
-          Back to Menu
+          {lo("Back to Menu")}
         </Link>
         <Link
           to={getStaffOrderPath(businessSlug, "/orders")}
           className="mt-3 flex h-[52px] items-center justify-center gap-3 rounded-lg border border-blue-200 text-[16px] font-black text-blue-600 hover:bg-blue-50"
         >
           <ClipboardList className="h-5 w-5" />
-          View Active Orders
+          {lo("View Active Orders")}
         </Link>
         <button
           type="button"
           onClick={startNewOrder}
           className="mt-4 flex h-11 w-full items-center justify-center text-[15px] font-black text-blue-600"
         >
-          Start New Order
+          {lo("Start New Order")}
         </button>
       </StaffScrollArea>
     </StaffMobileShell>
@@ -105,7 +106,7 @@ function SuccessRow({
     <div className="flex items-center justify-between border-b border-blue-50 py-3 last:border-b-0">
       <span className="flex items-center gap-3 text-[14px] font-bold text-slate-500">
         <Icon className="h-5 w-5 text-emerald-600" />
-        {label}
+        {lo(label)}
       </span>
       <span className="text-[16px] font-black text-blue-600">{value}</span>
     </div>

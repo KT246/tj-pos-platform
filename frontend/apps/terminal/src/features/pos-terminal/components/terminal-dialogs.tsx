@@ -4,6 +4,7 @@ import type { FormEvent, ReactNode } from "react";
 import { customers, tables } from "../data/mock-pos-data";
 import type { CartLine, Customer, Discount, OrderType } from "../types";
 import { formatMoney, getCartSummary } from "../utils";
+import { lo, loCustomerType } from "../utils/lao-labels";
 
 export function TerminalModal({
   title,
@@ -22,7 +23,7 @@ export function TerminalModal({
         className={`flex max-h-[calc(100vh-40px)] w-full ${width} flex-col overflow-hidden rounded-xl border border-blue-100 bg-white shadow-[0_26px_70px_rgba(15,23,42,0.28)]`}
       >
         <div className="flex shrink-0 items-center justify-between border-b border-blue-50 px-5 py-4">
-          <h2 className="text-[16px] font-black text-slate-950">{title}</h2>
+          <h2 className="text-[16px] font-black text-slate-950">{lo(title)}</h2>
           <button
             type="button"
             onClick={onClose}
@@ -62,10 +63,10 @@ export function BarcodeScanDialog({
           </div>
           <div>
             <p className="text-[18px] font-black text-slate-950">
-              Scan or type SKU
+              {lo("Scan or type SKU")}
             </p>
             <p className="text-[12px] font-bold text-slate-500">
-              Try CF-1001, BK-3001, or TE-2001.
+              {lo("Try CF-1001, BK-3001, or TE-2001.")}
             </p>
           </div>
         </div>
@@ -81,13 +82,13 @@ export function BarcodeScanDialog({
             onClick={onClose}
             className="h-11 rounded-md border border-blue-100 text-sm font-black text-slate-600 transition hover:bg-slate-50"
           >
-            Cancel
+            {lo("Cancel")}
           </button>
           <button
             type="submit"
             className="h-11 rounded-md bg-blue-600 text-sm font-black text-white transition hover:bg-blue-700"
           >
-            Add Item
+            {lo("Add Item")}
           </button>
         </div>
       </form>
@@ -124,20 +125,20 @@ export function DiscountDialog({
         <div className="grid gap-3 md:grid-cols-2">
           <label>
             <span className="mb-1.5 block text-[12px] font-black text-slate-600">
-              Discount Mode
+              {lo("Discount Mode")}
             </span>
             <select
               name="mode"
               defaultValue={discount?.mode ?? "percent"}
               className="h-11 w-full rounded-md border border-blue-100 px-3 text-sm font-black outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
             >
-              <option value="percent">By Percent (%)</option>
-              <option value="amount">By Amount (LAK)</option>
+              <option value="percent">{lo("By Percent (%)")}</option>
+              <option value="amount">{lo("By Amount (LAK)")}</option>
             </select>
           </label>
           <label>
             <span className="mb-1.5 block text-[12px] font-black text-slate-600">
-              Discount Value
+              {lo("Discount Value")}
             </span>
             <input
               name="value"
@@ -149,22 +150,22 @@ export function DiscountDialog({
           </label>
           <label className="md:col-span-2">
             <span className="mb-1.5 block text-[12px] font-black text-slate-600">
-              Reason
+              {lo("Reason")}
             </span>
             <select
               name="reason"
               defaultValue={discount?.reason ?? "Member Discount"}
               className="h-11 w-full rounded-md border border-blue-100 px-3 text-sm font-black outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
             >
-              <option>Member Discount</option>
-              <option>Manager Approval</option>
-              <option>Promotion Campaign</option>
+              <option value="Member Discount">{lo("Member Discount")}</option>
+              <option value="Manager Approval">{lo("Manager Approval")}</option>
+              <option value="Promotion Campaign">{lo("Promotion Campaign")}</option>
             </select>
           </label>
         </div>
         <div className="rounded-lg bg-slate-50 p-4">
           <p className="text-[12px] font-black text-slate-500">
-            Current Order
+            {lo("Current Order")}
           </p>
           <div className="mt-2 grid grid-cols-2 gap-3">
             <PreviewStat label="Subtotal" value={formatMoney(summary.subtotal)} />
@@ -177,13 +178,13 @@ export function DiscountDialog({
             onClick={onClose}
             className="h-11 rounded-md border border-blue-100 text-sm font-black text-slate-600 transition hover:bg-slate-50"
           >
-            Cancel
+            {lo("Cancel")}
           </button>
           <button
             type="submit"
             className="h-11 rounded-md bg-blue-600 text-sm font-black text-white transition hover:bg-blue-700"
           >
-            Apply Discount
+            {lo("Apply Discount")}
           </button>
         </div>
       </form>
@@ -205,7 +206,7 @@ export function CustomerDialog({
           <Search className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <input
             className="h-11 w-full rounded-md border border-blue-100 pr-4 pl-11 text-sm font-bold outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-            placeholder="Search by name, phone, or member ID"
+            placeholder={lo("Search by name, phone, or member ID")}
           />
         </label>
         <div className="overflow-hidden rounded-lg border border-blue-100">
@@ -226,17 +227,17 @@ export function CustomerDialog({
                 />
                 <span className="min-w-0">
                   <span className="block truncate text-[13px] font-black text-slate-950">
-                    {customer.name}
+                    {lo(customer.name)}
                   </span>
                   <span className="text-[11px] font-bold text-slate-500">
-                    {customer.subtitle}
+                    {lo(customer.subtitle)}
                   </span>
                   <span className="mt-1 block text-[10px] font-black text-emerald-600">
-                    {customer.customerType.toUpperCase()} - {customer.priceList}
+                    {loCustomerType(customer.customerType)} - {lo(customer.priceList)}
                   </span>
                   {customer.creditLimit > 0 ? (
                     <span className="mt-0.5 block text-[10px] font-bold text-slate-500">
-                      Debt {formatMoney(customer.debtBalance)} / Limit{" "}
+                      {lo("Debt")} {formatMoney(customer.debtBalance)} / {lo("Limit")}{" "}
                       {formatMoney(customer.creditLimit)}
                     </span>
                   ) : null}
@@ -244,7 +245,7 @@ export function CustomerDialog({
               </span>
               <span className="text-right text-[12px] font-black text-blue-600">
                 {customer.points.toLocaleString("en-US")}
-                <span className="block text-[10px] text-slate-400">Points</span>
+                <span className="block text-[10px] text-slate-400">{lo("Points")}</span>
               </span>
             </button>
           ))}
@@ -254,7 +255,7 @@ export function CustomerDialog({
           className="flex h-11 items-center justify-center gap-2 rounded-md border border-blue-200 bg-blue-50 px-4 text-sm font-black text-blue-600 transition hover:bg-blue-100"
         >
           <UserPlus className="h-4 w-4" />
-          New Customer
+          {lo("New Customer")}
         </button>
       </div>
     </TerminalModal>
@@ -290,7 +291,7 @@ export function TableDialog({
                   orderType === item ? "bg-blue-600 text-white" : "text-slate-600"
                 }`}
               >
-                {item}
+                {lo(item)}
               </button>
             ))}
           </div>
@@ -298,14 +299,14 @@ export function TableDialog({
             <Search className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input
               className="h-11 w-full rounded-lg border border-blue-100 pr-4 pl-11 text-sm font-bold outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-              placeholder="Search table"
+              placeholder={lo("Search table")}
             />
           </label>
           <button
             type="button"
             className="h-11 rounded-lg border border-blue-100 px-4 text-[12px] font-black text-slate-700 hover:bg-blue-50"
           >
-            Floor
+            {lo("Floor")}
           </button>
         </div>
         <div className="grid grid-cols-[130px_1fr] gap-4">
@@ -321,7 +322,7 @@ export function TableDialog({
                       : "text-slate-600 hover:bg-blue-50"
                   }`}
                 >
-                  {area}
+                  {lo(area)}
                 </button>
               )
             )}
@@ -353,7 +354,7 @@ export function TableDialog({
                   ) : null}
                 </span>
                 <span className="mt-1 block text-[11px] font-bold text-slate-500">
-                  {table.seats} Seats
+                  {table.seats} {lo("Seats")}
                 </span>
                 <span
                   className={`mt-3 inline-flex rounded-full px-2 py-1 text-[10px] font-black ${
@@ -364,7 +365,7 @@ export function TableDialog({
                         : "bg-blue-100 text-blue-600"
                   }`}
                 >
-                  {table.status}
+                  {lo(table.status)}
                 </span>
               </button>
             ))}
@@ -378,7 +379,7 @@ export function TableDialog({
 function PreviewStat({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="text-[11px] font-bold text-slate-500">{label}</p>
+      <p className="text-[11px] font-bold text-slate-500">{lo(label)}</p>
       <p className="mt-1 text-[18px] font-black text-slate-950">{value}</p>
     </div>
   );

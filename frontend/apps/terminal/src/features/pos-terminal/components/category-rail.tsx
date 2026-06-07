@@ -1,4 +1,5 @@
 import type { Category } from "../types";
+import { lo } from "../utils/lao-labels";
 
 export function CategoryRail({
   categories,
@@ -26,7 +27,7 @@ export function CategoryRail({
                   : "text-slate-700 hover:bg-blue-50/70 hover:text-blue-600"
               }`}
             >
-              <span className="truncate">{category.label}</span>
+              <span className="truncate">{lo(category.label)}</span>
             </button>
           );
         })}

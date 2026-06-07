@@ -8,6 +8,7 @@ import { staffName, staffTables } from "../data/staff-order-data";
 import { useStaffOrderStore } from "../stores/staff-order-store";
 import type { DiningTable } from "../types";
 import { getStaffOrderPath } from "../utils";
+import { lo } from "../utils/lao-labels";
 
 const areaFilters = ["All Areas", "Indoor", "Outdoor", "VIP Room", "Terrace"];
 
@@ -44,7 +45,7 @@ export function StaffTablesPage({ businessSlug }: { businessSlug: string }) {
                   : "border border-blue-100 bg-white text-slate-500 hover:bg-blue-50"
               }`}
             >
-              {area}
+              {lo(area)}
             </button>
           ))}
         </div>
@@ -62,7 +63,7 @@ export function StaffTablesPage({ businessSlug }: { businessSlug: string }) {
         </div>
 
         <div className="mt-4 grid h-16 grid-cols-[1fr_auto] items-center rounded-lg border border-blue-100 bg-white px-4 shadow-[0_8px_22px_rgba(15,23,42,0.035)]">
-          <p className="text-[15px] font-black text-slate-950">Number of Guests</p>
+          <p className="text-[15px] font-black text-slate-950">{lo("Number of Guests")}</p>
           <div className="flex items-center gap-4">
             <StepperButton
               label="Decrease guests"
@@ -85,7 +86,7 @@ export function StaffTablesPage({ businessSlug }: { businessSlug: string }) {
           to={getStaffOrderPath(businessSlug, `/table/${selectedTableId}`)}
           className="mt-4 flex h-14 items-center justify-center gap-3 rounded-lg bg-blue-600 text-[16px] font-black text-white shadow-[0_16px_28px_rgba(37,99,235,0.26)] transition hover:bg-blue-700"
         >
-          Continue with {selectedTableId}
+          {lo("Continue with")} {selectedTableId}
           <ArrowRight className="h-5 w-5" />
         </Link>
       </StaffScrollArea>
@@ -133,14 +134,14 @@ function TableCard({
           <p className="text-[27px] leading-7 font-black text-slate-950">{table.id}</p>
           <p className="mt-1 flex items-center gap-1 text-[12px] font-bold text-slate-500">
             <Users className="h-4 w-4" />
-            {table.seats} Seats
+            {table.seats} {lo("Seats")}
           </p>
         </div>
         <StatusPill status={table.status} />
       </div>
       {table.elapsed ? (
         <p className="mt-2 text-right text-[12px] font-bold text-blue-600">
-          {table.id === "T03" ? `${guests} Guests` : "2 Guests"} - {table.elapsed}
+          {table.id === "T03" ? `${guests} ${lo("Guests")}` : `2 ${lo("Guests")}`} - {table.elapsed}
         </p>
       ) : null}
     </button>
@@ -184,7 +185,7 @@ function StatusPill({ status }: { status: string }) {
 
   return (
     <span className={`rounded-lg px-2 py-1 text-[11px] font-black ${className}`}>
-      {status}
+      {lo(status)}
     </span>
   );
 }

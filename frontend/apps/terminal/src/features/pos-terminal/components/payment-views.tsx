@@ -16,6 +16,7 @@ import { branchName, cashierName } from "../data/mock-pos-data";
 import { usePosTerminalStore } from "../stores/pos-terminal-store";
 import type { OpenOrder, PaymentMethodId, PaymentStatus } from "../types";
 import { formatMoney, getBusinessPath, getCartSummary } from "../utils";
+import { lo, loCustomerType, loPaymentStatus } from "../utils/lao-labels";
 
 const paymentMethods: {
   id: PaymentMethodId;
@@ -77,19 +78,19 @@ export function CheckoutView({ businessSlug }: { businessSlug: string }) {
   return (
     <section className="grid h-full min-h-0 gap-4 overflow-y-auto xl:grid-cols-[330px_1fr_320px] xl:overflow-hidden">
       <div className="min-h-0 overflow-y-auto rounded-lg border border-blue-100 bg-white p-4 shadow-[0_12px_28px_rgba(15,23,42,0.055)]">
-        <h2 className="text-[16px] font-black text-slate-950">Order Summary</h2>
+        <h2 className="text-[16px] font-black text-slate-950">{lo("Order Summary")}</h2>
         <div className="mt-4 space-y-2">
           <PaymentSummary label="Subtotal" value={summary.subtotal} />
           <PaymentSummary label="Discount" value={summary.discount} accent />
           <PaymentSummary label="Tax (10%)" value={summary.tax} />
           <div className="flex items-center justify-between border-t border-blue-50 pt-3">
-            <span className="text-sm font-black text-slate-950">Total</span>
+            <span className="text-sm font-black text-slate-950">{lo("Total")}</span>
             <span className="text-xl font-black">{formatMoney(summary.total)}</span>
           </div>
         </div>
         <label className="mt-5 block rounded-lg border border-blue-100 bg-blue-50/40 p-3">
           <span className="text-[12px] font-black text-slate-500">
-            Received Now
+            {lo("Received Now")}
           </span>
           <input
             type="number"
@@ -104,7 +105,7 @@ export function CheckoutView({ businessSlug }: { businessSlug: string }) {
         </label>
         <div className="mt-4 rounded-lg bg-emerald-50 p-3">
           <p className="text-[12px] font-black text-emerald-600">
-            {paymentStatus === "debt" ? "Debt Balance" : "Change"}
+            {paymentStatus === "debt" ? lo("Debt Balance") : lo("Change")}
           </p>
           <p className="mt-1 text-2xl font-black text-emerald-600">
             {formatMoney(paymentStatus === "debt" ? debtAmount : change)}
@@ -114,7 +115,7 @@ export function CheckoutView({ businessSlug }: { businessSlug: string }) {
 
       <div className="min-h-0 overflow-y-auto rounded-lg border border-blue-100 bg-white p-4 shadow-[0_12px_28px_rgba(15,23,42,0.055)]">
         <h2 className="text-[16px] font-black text-slate-950">
-          Payment Method
+          {lo("Payment Method")}
         </h2>
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           {paymentStatuses.map((status) => (
@@ -128,16 +129,16 @@ export function CheckoutView({ businessSlug }: { businessSlug: string }) {
                   : "border-blue-100 bg-white text-slate-700 hover:bg-blue-50"
               }`}
             >
-              <span className="block text-sm font-black">{status.label}</span>
+              <span className="block text-sm font-black">{lo(status.label)}</span>
               <span className="mt-1 block text-[11px] font-bold text-slate-500">
-                {status.description}
+                {lo(status.description)}
               </span>
             </button>
           ))}
         </div>
         {paymentStatus === "debt" && !customer ? (
           <p className="mt-3 rounded-lg border border-amber-100 bg-amber-50 p-3 text-xs font-bold text-amber-700">
-            Debt checkout requires a customer profile with credit terms.
+            {lo("Debt checkout requires a customer profile with credit terms.")}
           </p>
         ) : null}
         <div className="mt-4 grid gap-3 md:grid-cols-3">
@@ -156,14 +157,14 @@ export function CheckoutView({ businessSlug }: { businessSlug: string }) {
           className="mt-4 flex h-14 w-full items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white text-[13px] font-black text-slate-700 transition hover:bg-blue-50"
         >
           <CreditCard className="h-4 w-4 text-blue-600" />
-          Split Payment
+          {lo("Split Payment")}
         </button>
         <div className="mt-5 grid grid-cols-[140px_1fr] gap-3">
           <Link
             to={getBusinessPath(businessSlug, "")}
             className="flex h-12 items-center justify-center rounded-lg border border-blue-100 bg-white text-sm font-black text-slate-600 transition hover:bg-slate-50"
           >
-            Back to Cart
+            {lo("Back to Cart")}
           </Link>
           <button
             type="button"
@@ -171,14 +172,14 @@ export function CheckoutView({ businessSlug }: { businessSlug: string }) {
             onClick={handleConfirmPayment}
             className="flex h-12 items-center justify-center rounded-lg bg-blue-600 text-sm font-black text-white shadow-[0_12px_24px_rgba(37,99,235,0.24)] transition hover:bg-blue-700 disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
           >
-            {paymentStatus === "debt" ? "Save Debt" : "Confirm Payment"}:{" "}
+            {paymentStatus === "debt" ? lo("Save Debt") : lo("Confirm Payment")}:{" "}
             {formatMoney(paymentStatus === "debt" ? debtAmount : paidAmount)}
           </button>
         </div>
       </div>
 
       <div className="min-h-0 overflow-y-auto rounded-lg border border-blue-100 bg-white p-4 shadow-[0_12px_28px_rgba(15,23,42,0.055)]">
-        <h2 className="text-[16px] font-black text-slate-950">Order Info</h2>
+        <h2 className="text-[16px] font-black text-slate-950">{lo("Order Info")}</h2>
         <div className="mt-4 space-y-3 text-[12px] font-bold">
           <InfoRow label="Order ID" value={activeOrderId ?? "New Order"} />
           <InfoRow
@@ -189,23 +190,23 @@ export function CheckoutView({ businessSlug }: { businessSlug: string }) {
           <InfoRow label="Cashier" value={cashierName} />
           <InfoRow label="Branch" value={branchName} />
           <InfoRow label="Items" value={String(summary.itemCount)} />
-          <InfoRow label="Payment Status" value={paymentStatus.toUpperCase()} />
+          <InfoRow label="Payment Status" value={loPaymentStatus(paymentStatus)} />
           <InfoRow label="Paid Now" value={formatMoney(paidAmount)} />
           <InfoRow label="Debt" value={formatMoney(debtAmount)} />
         </div>
         <div className="mt-5 rounded-lg bg-blue-50 p-3">
-          <p className="text-[12px] font-black text-blue-600">Customer</p>
+          <p className="text-[12px] font-black text-blue-600">{lo("Customer")}</p>
           <p className="mt-1 text-sm font-black text-slate-950">
-            {customer?.name ?? "Walk-in Customer"}
+            {lo(customer?.name ?? "Walk-in Customer")}
           </p>
           <p className="text-[11px] font-bold text-slate-500">
             {customer
-              ? `${customer.subtitle} - ${customer.customerType} - ${customer.priceList}`
-              : "No member selected"}
+              ? `${lo(customer.subtitle)} - ${loCustomerType(customer.customerType)} - ${lo(customer.priceList)}`
+              : lo("No member selected")}
           </p>
           {customer ? (
             <p className="mt-1 text-[11px] font-bold text-slate-500">
-              Debt {formatMoney(customer.debtBalance)} / Limit{" "}
+              {lo("Debt")} {formatMoney(customer.debtBalance)} / {lo("Limit")}{" "}
               {formatMoney(customer.creditLimit)} / {customer.paymentTerm}
             </p>
           ) : null}
@@ -234,15 +235,15 @@ export function ReceiptPreviewView({ businessSlug }: { businessSlug: string }) {
           </div>
           <h1 className="mt-5 text-3xl font-black text-slate-950">
             {order?.paymentStatus === "debt"
-              ? "Debt Saved"
+              ? lo("Debt Saved")
               : order?.paymentStatus === "partial"
-                ? "Partial Payment Saved"
-                : "Payment Successful"}
+                ? lo("Partial Payment Saved")
+                : lo("Payment Successful")}
           </h1>
           <p className="mt-2 text-sm font-bold text-slate-500">
             {order
-              ? `Order ${order.id} is ready to print.`
-              : "The last paid order is not available."}
+              ? `${lo("Order")} ${order.id} ${lo("is ready to print.")}`
+              : lo("The last paid order is not available.")}
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <button
@@ -250,7 +251,7 @@ export function ReceiptPreviewView({ businessSlug }: { businessSlug: string }) {
               className="flex h-12 items-center gap-2 rounded-lg bg-blue-600 px-5 text-sm font-black text-white hover:bg-blue-700"
             >
               <Printer className="h-4 w-4" />
-              Print Bill
+              {lo("Print Bill")}
             </button>
             <button
               type="button"
@@ -258,7 +259,7 @@ export function ReceiptPreviewView({ businessSlug }: { businessSlug: string }) {
               className="flex h-12 items-center gap-2 rounded-lg border border-blue-100 bg-white px-5 text-sm font-black text-blue-600 hover:bg-blue-50"
             >
               <ReceiptText className="h-4 w-4" />
-              New Sale
+              {lo("New Sale")}
             </button>
           </div>
         </div>
@@ -298,10 +299,10 @@ export function RefundView({ businessSlug }: { businessSlug: string }) {
           </span>
           <div>
             <h1 className="text-xl font-black text-slate-950">
-              Refund / Return
+              {lo("Refund / Return")}
             </h1>
             <p className="text-[12px] font-bold text-slate-500">
-              Search receipt, select items, and confirm refund approval.
+              {lo("Search receipt, select items, and confirm refund approval.")}
             </p>
           </div>
         </div>
@@ -310,14 +311,14 @@ export function RefundView({ businessSlug }: { businessSlug: string }) {
             value={refundSearch}
             onChange={(event) => setRefundSearch(event.currentTarget.value)}
             className="h-12 rounded-lg border border-blue-100 px-4 text-sm font-bold outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-            placeholder="Search receipt number or customer"
+            placeholder={lo("Search receipt number or customer")}
           />
           <button
             type="button"
             onClick={selectRefundOrder}
             className="h-12 rounded-lg bg-blue-600 text-sm font-black text-white hover:bg-blue-700"
           >
-            Find Receipt
+            {lo("Find Receipt")}
           </button>
         </div>
         <div className="mt-5 overflow-hidden rounded-lg border border-blue-100">
@@ -348,14 +349,14 @@ export function RefundView({ businessSlug }: { businessSlug: string }) {
             ))
           ) : (
             <div className="p-5 text-sm font-bold text-slate-500">
-              No completed receipt selected.
+              {lo("No completed receipt selected.")}
             </div>
           )}
         </div>
       </div>
       <div className="min-h-0 overflow-y-auto rounded-lg border border-blue-100 bg-white p-5 shadow-[0_12px_28px_rgba(15,23,42,0.055)]">
         <h2 className="text-[16px] font-black text-slate-950">
-          Refund Summary
+          {lo("Refund Summary")}
         </h2>
         <div className="mt-4 space-y-3">
           <InfoRow label="Receipt" value={order?.id ?? "-"} />
@@ -368,13 +369,13 @@ export function RefundView({ businessSlug }: { businessSlug: string }) {
           onClick={confirmRefund}
           className="mt-5 h-12 w-full rounded-lg bg-orange-500 text-sm font-black text-white hover:bg-orange-600"
         >
-          Confirm Refund
+          {lo("Confirm Refund")}
         </button>
         <Link
           to={getBusinessPath(businessSlug, "")}
           className="mt-3 flex h-12 items-center justify-center rounded-lg border border-blue-100 text-sm font-black text-slate-600 hover:bg-slate-50"
         >
-          Cancel
+          {lo("Cancel")}
         </Link>
       </div>
     </section>
@@ -403,7 +404,7 @@ function PaymentMethod({
       }`}
     >
       <Icon className="h-5 w-5" />
-      {label}
+      {lo(label)}
     </button>
   );
 }
@@ -419,7 +420,7 @@ function PaymentSummary({
 }) {
   return (
     <div className="flex items-center justify-between">
-      <span className="text-[12px] font-bold text-slate-500">{label}</span>
+      <span className="text-[12px] font-bold text-slate-500">{lo(label)}</span>
       <span
         className={`text-[13px] font-black ${
           accent ? "text-emerald-600" : "text-slate-800"
@@ -435,8 +436,8 @@ function PaymentSummary({
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between gap-3">
-      <span className="text-slate-500">{label}</span>
-      <span className="text-right font-black text-slate-950">{value}</span>
+      <span className="text-slate-500">{lo(label)}</span>
+      <span className="text-right font-black text-slate-950">{lo(value)}</span>
     </div>
   );
 }
@@ -470,7 +471,7 @@ function ReceiptCard({ order }: { order: OpenOrder | null }) {
       {lines.map((line) => (
         <div key={line.id} className="mb-2 flex items-center justify-between text-[12px]">
           <span className="font-bold text-slate-700">
-            {line.quantity} x {line.name}
+            {line.quantity} x {lo(line.name)}
           </span>
           <span className="font-black text-slate-950">
             {formatMoney(line.price * line.quantity)}

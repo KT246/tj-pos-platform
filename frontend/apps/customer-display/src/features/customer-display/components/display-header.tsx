@@ -12,6 +12,7 @@ import type {
   CustomerDisplayOrder,
   CustomerDisplayScreen
 } from "../types";
+import { lo } from "../utils/lao-labels";
 
 function HeaderPill({ children }: { children: React.ReactNode }) {
   return (
@@ -58,7 +59,7 @@ export function DisplayHeader({
           <MonitorSmartphone className="h-7 w-7 text-blue-600" strokeWidth={2.5} />
           <span>{device.name}</span>
           <span className="h-8 w-px bg-blue-100" />
-          <span className="text-emerald-600">Pairing</span>
+          <span className="text-emerald-600">{lo("Pairing")}</span>
         </HeaderPill>
       ) : isIdle ? (
         <HeaderPill>
@@ -66,13 +67,13 @@ export function DisplayHeader({
           <span>{device.time}</span>
           <span className="h-8 w-px bg-blue-100" />
           <span className="h-4 w-4 rounded-full bg-emerald-500" />
-          <span>{brand.status}</span>
+          <span>{lo(brand.status)}</span>
         </HeaderPill>
       ) : (
         <HeaderPill>
           <ReceiptText className="h-7 w-7 text-slate-600" strokeWidth={2.5} />
           <span>
-            Order <span className="text-blue-600">{order.id}</span>
+            {lo("Order")} <span className="text-blue-600">{order.id}</span>
           </span>
           <span className="h-8 w-px bg-blue-100" />
           <Clock3 className="h-7 w-7 text-slate-600" strokeWidth={2.5} />

@@ -2,6 +2,7 @@ import { CheckCircle2, ChefHat, ClipboardList, ListFilter, Timer } from "lucide-
 
 import { kitchenStations } from "../data/kitchen-display-data";
 import type { KitchenSortMode, KitchenStationId, KitchenVisibleStatus } from "../types";
+import { lo } from "../utils/lao-labels";
 
 type StatusAndFiltersProps = {
   activeStatus: KitchenVisibleStatus;
@@ -78,7 +79,7 @@ export function StatusAndFilters({
             >
               <span className="flex items-center gap-4">
                 <Icon className="h-9 w-9" strokeWidth={2.3} />
-                <span className="text-[27px] font-black">{label}</span>
+                <span className="text-[27px] font-black">{lo(label)}</span>
               </span>
               <span className="text-[40px] leading-none font-black">{counts[id]}</span>
             </button>
@@ -99,7 +100,7 @@ export function StatusAndFilters({
               )}`}
             >
               <Icon className="h-5 w-5" strokeWidth={2.3} />
-              {label}
+              {lo(label)}
             </button>
           ))}
         </div>
@@ -116,9 +117,9 @@ export function StatusAndFilters({
             }
             className="h-[54px] w-full appearance-none rounded-xl border border-blue-100 bg-white pr-10 pl-12 text-[15px] font-black text-[#0b1736] shadow-sm transition outline-none hover:border-blue-300 focus:border-blue-500"
           >
-            <option value="longest">Longest Waiting</option>
-            <option value="priority">Priority First</option>
-            <option value="newest">Newest First</option>
+            <option value="longest">{lo("Longest Waiting")}</option>
+            <option value="priority">{lo("Priority First")}</option>
+            <option value="newest">{lo("Newest First")}</option>
           </select>
           <Timer
             className="pointer-events-none absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 text-slate-400"

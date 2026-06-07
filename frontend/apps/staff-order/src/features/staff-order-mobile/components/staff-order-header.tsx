@@ -10,6 +10,8 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import { lo } from "../utils/lao-labels";
+
 export function StaffOrderHeader({
   title,
   backHref,
@@ -39,10 +41,10 @@ export function StaffOrderHeader({
             />
           )}
         </div>
-        <h1 className="text-center text-[17px] font-black text-slate-950">{title}</h1>
+        <h1 className="text-center text-[17px] font-black text-slate-950">{lo(title)}</h1>
         <div className="flex items-center justify-end gap-2">
           <span className="hidden items-center gap-1 rounded-full bg-emerald-50 px-2 py-1 text-[10px] font-black text-emerald-600 min-[390px]:flex">
-            Online
+            {lo("Online")}
             <span className="h-2 w-2 rounded-full bg-emerald-500" />
           </span>
           <button
@@ -116,8 +118,8 @@ function ContextItem({
   return (
     <div className="min-w-0 px-3 py-3">
       <Icon className="mb-1 h-4 w-4 text-slate-500" />
-      <p className="text-[10px] font-bold text-slate-500">{label}</p>
-      <p className="truncate text-[12px] font-black text-slate-950">{value}</p>
+      <p className="text-[10px] font-bold text-slate-500">{lo(label)}</p>
+      <p className="truncate text-[12px] font-black text-slate-950">{lo(value)}</p>
     </div>
   );
 }

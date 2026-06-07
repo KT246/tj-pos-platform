@@ -16,6 +16,7 @@ import { staffName } from "../data/staff-order-data";
 import { useStaffOrderStore } from "../stores/staff-order-store";
 import type { StaffOrderLine } from "../types";
 import { formatMoney, getStaffCartSummary, getStaffOrderPath } from "../utils";
+import { lo } from "../utils/lao-labels";
 
 export function StaffReviewPage({ businessSlug }: { businessSlug: string }) {
   const navigate = useNavigate();
@@ -69,7 +70,7 @@ export function StaffReviewPage({ businessSlug }: { businessSlug: string }) {
             ))
           ) : (
             <div className="p-6 text-center text-[13px] font-bold text-slate-500">
-              No items in this order yet.
+              {lo("No items in this order yet.")}
             </div>
           )}
 
@@ -78,7 +79,7 @@ export function StaffReviewPage({ businessSlug }: { businessSlug: string }) {
             <SummaryRow label="Service Charge (5%)" value={summary.serviceCharge} />
             <SummaryRow label="Discount" value={summary.discount} discount />
             <div className="mt-3 flex items-center justify-between border-t border-blue-50 pt-3">
-              <span className="text-[18px] font-black text-slate-950">Total</span>
+              <span className="text-[18px] font-black text-slate-950">{lo("Total")}</span>
               <span className="text-[20px] font-black text-slate-950">
                 {formatMoney(summary.total)}
               </span>
@@ -93,10 +94,10 @@ export function StaffReviewPage({ businessSlug }: { businessSlug: string }) {
             </span>
             <span className="min-w-0">
               <span className="block truncate text-[14px] font-black text-slate-950">
-                Walk-in Customer
+                {lo("Walk-in Customer")}
               </span>
               <span className="text-[12px] font-bold text-slate-500">
-                No member attached
+                {lo("No member attached")}
               </span>
             </span>
           </span>
@@ -105,7 +106,7 @@ export function StaffReviewPage({ businessSlug }: { businessSlug: string }) {
             className="flex h-10 items-center gap-2 rounded-lg border border-blue-100 px-3 text-[13px] font-black text-blue-600 transition hover:bg-blue-50"
           >
             <Plus className="h-4 w-4" />
-            Add
+            {lo("Add")}
           </button>
         </section>
 
@@ -116,7 +117,7 @@ export function StaffReviewPage({ businessSlug }: { businessSlug: string }) {
             className="flex h-[52px] items-center justify-center gap-2 rounded-lg border border-blue-200 bg-white text-[14px] font-black text-blue-600 transition hover:bg-blue-50"
           >
             <FileText className="h-4 w-4" />
-            Save Draft
+            {lo("Save Draft")}
           </button>
           <button
             type="button"
@@ -125,7 +126,7 @@ export function StaffReviewPage({ businessSlug }: { businessSlug: string }) {
             className="flex h-[52px] items-center justify-center gap-2 rounded-lg bg-blue-600 text-[14px] font-black text-white shadow-[0_16px_28px_rgba(37,99,235,0.24)] transition hover:bg-blue-700 disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
           >
             <ChefHat className="h-4 w-4" />
-            Send Order
+            {lo("Send Order")}
             <ArrowRight className="h-4 w-4" />
           </button>
         </div>
@@ -137,8 +138,8 @@ export function StaffReviewPage({ businessSlug }: { businessSlug: string }) {
 function ReviewMeta({ label, value }: { label: string; value: string }) {
   return (
     <div className="min-w-0 px-2">
-      <p className="text-[10px] font-bold text-slate-500">{label}</p>
-      <p className="truncate text-[12px] font-black text-slate-950">{value}</p>
+      <p className="text-[10px] font-bold text-slate-500">{lo(label)}</p>
+      <p className="truncate text-[12px] font-black text-slate-950">{lo(value)}</p>
     </div>
   );
 }
@@ -160,13 +161,13 @@ function ReviewLine({
     <div className="grid grid-cols-[72px_1fr_auto] gap-3 border-b border-blue-50 p-4 last:border-b-0">
       <img src={line.image} alt="" className="h-20 w-[72px] rounded-lg object-cover" />
       <div className="min-w-0">
-        <p className="text-[15px] font-black text-slate-950">{line.name}</p>
+        <p className="text-[15px] font-black text-slate-950">{lo(line.name)}</p>
         <p className="mt-1 text-[12px] font-bold text-slate-500">
-          {line.size} - {line.milk}
+          {lo(line.size)} - {lo(line.milk)}
         </p>
         {line.note ? (
           <p className="mt-2 inline-flex max-w-full rounded-md bg-blue-50 px-2 py-1 text-[11px] font-bold text-blue-600">
-            <span className="truncate">Note: {line.note}</span>
+            <span className="truncate">{lo("Note")}: {lo(line.note)}</span>
           </p>
         ) : null}
         <p className="mt-3 text-[14px] font-black text-slate-950">
@@ -221,7 +222,7 @@ function SummaryRow({
 }) {
   return (
     <div className="flex items-center justify-between py-1 text-[14px] font-bold">
-      <span className="text-slate-500">{label}</span>
+      <span className="text-slate-500">{lo(label)}</span>
       <span className={discount ? "text-emerald-600" : "text-slate-950"}>
         {discount && value > 0 ? "-" : ""}
         {formatMoney(value)}

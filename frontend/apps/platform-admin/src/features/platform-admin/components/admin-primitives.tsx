@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 import type { AdminStatus, Business, StatCard as StatCardType } from "../types";
+import { toLaoNode, toLaoText } from "../utils/lao-labels";
 import { getStatusClass, getStatusLabel } from "../utils/status";
 
 type CardProps = {
@@ -54,12 +55,16 @@ export function PageHeader({
     <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
       <div>
         <div className="mb-2.5 flex items-center gap-2 text-xs text-slate-500">
-          <span>{eyebrow}</span>
+          <span>{toLaoText(eyebrow)}</span>
           <ArrowRight className="h-3.5 w-3.5" />
-          <span className="font800 text-slate-700">{title}</span>
+          <span className="font800 text-slate-700">{toLaoText(title)}</span>
         </div>
-        <h1 className="font900 text-[26px] leading-tight text-slate-950">{title}</h1>
-        <p className="mt-1.5 text-sm leading-5 text-slate-600">{description}</p>
+        <h1 className="font900 text-[26px] leading-tight text-slate-950">
+          {toLaoText(title)}
+        </h1>
+        <p className="mt-1.5 text-sm leading-5 text-slate-600">
+          {toLaoText(description)}
+        </p>
       </div>
       {action}
     </div>
@@ -87,7 +92,7 @@ export function AdminButton({
   const content = (
     <>
       {Icon ? <Icon className="h-4 w-4" /> : null}
-      {children}
+      {toLaoNode(children)}
     </>
   );
 
@@ -135,12 +140,14 @@ function StatCard({ stat }: { stat: StatCardType }) {
             <Icon className="h-6 w-6" />
           </div>
           <div className="min-w-0">
-            <p className="font700 text-[13px] leading-4 text-slate-600">{stat.label}</p>
+            <p className="font700 text-[13px] leading-4 text-slate-600">
+              {toLaoText(stat.label)}
+            </p>
             <p className="font900 mt-1 text-[23px] leading-7 text-slate-950">
               {stat.value}
             </p>
             <p className="font800 mt-1 text-[11px] leading-4 text-emerald-600">
-              {stat.change}
+              {toLaoText(stat.change)}
             </p>
           </div>
         </div>
@@ -204,7 +211,7 @@ export function FilterBar({
           <Search className="absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <input
             className="h-9 w-full rounded-md border border-blue-100 bg-white pr-3 pl-10 text-sm transition outline-none placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-            placeholder={searchPlaceholder}
+            placeholder={toLaoText(searchPlaceholder)}
           />
         </label>
         {filters.map((filter) => (
@@ -213,7 +220,7 @@ export function FilterBar({
             type="button"
             className="font800 flex h-9 min-w-[145px] cursor-pointer items-center justify-between gap-3 rounded-md border border-blue-100 bg-white px-3 text-left text-sm text-slate-700 transition hover:border-blue-200 hover:bg-blue-50/50"
           >
-            {filter}
+            {toLaoText(filter)}
             <ChevronDown className="h-4 w-4 text-slate-400" />
           </button>
         ))}
@@ -222,7 +229,7 @@ export function FilterBar({
           className="font800 flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md border border-blue-100 bg-white px-3 text-sm text-slate-700 transition hover:border-blue-200 hover:bg-blue-50/50"
         >
           <CalendarDays className="h-4 w-4 text-blue-500" />
-          May 12 - May 18, 2025
+          {toLaoText("May 12 - May 18, 2025")}
         </button>
         {showExport ? (
           <AdminButton variant="secondary" icon={Download}>
@@ -250,7 +257,7 @@ export function FilterBar({
                       : "bg-orange-50 text-orange-700"
               }`}
             >
-              {item}
+              {toLaoText(item)}
             </span>
           )
         )}
@@ -282,7 +289,7 @@ export function BusinessTable({ rows = [] }: { rows: Business[] }) {
                   key={head}
                   className="font900 border-b border-blue-100 px-3.5 py-2.5 whitespace-nowrap"
                 >
-                  {head}
+                  {toLaoText(head)}
                 </th>
               ))}
             </tr>
@@ -301,13 +308,13 @@ export function BusinessTable({ rows = [] }: { rows: Business[] }) {
                     />
                     <div>
                       <p className="font900 text-slate-900">{row.name}</p>
-                      <p className="text-xs text-slate-500">{row.location}</p>
+                      <p className="text-xs text-slate-500">{toLaoText(row.location)}</p>
                     </div>
                   </div>
                 </td>
                 <td className="px-3.5 py-2.5">
                   <span className="font800 rounded-md bg-blue-50 px-2.5 py-1 text-xs text-blue-700">
-                    {row.type}
+                    {toLaoText(row.type)}
                   </span>
                 </td>
                 <td className="px-3.5 py-2.5">
@@ -320,9 +327,11 @@ export function BusinessTable({ rows = [] }: { rows: Business[] }) {
                   <StatusBadge status={row.status} />
                 </td>
                 <td className="px-3.5 py-2.5 whitespace-pre-line text-slate-700">
-                  {row.lastActivity}
+                  {toLaoText(row.lastActivity)}
                 </td>
-                <td className="px-3.5 py-2.5 text-slate-700">{row.joinedOn}</td>
+                <td className="px-3.5 py-2.5 text-slate-700">
+                  {toLaoText(row.joinedOn)}
+                </td>
                 <td className="px-3.5 py-2.5">
                   <div className="flex items-center gap-2">
                     <Link
@@ -364,7 +373,7 @@ export function Pagination() {
                 : "border-blue-100 bg-white text-slate-700"
             }`}
           >
-            {item}
+            {toLaoText(item)}
           </button>
         ))}
         <button
@@ -382,7 +391,7 @@ export function Pagination() {
 export function PanelTitle({ title, action }: { title: string; action?: ReactNode }) {
   return (
     <div className="mb-3 flex items-center justify-between gap-4">
-      <h2 className="font900 text-base text-slate-950">{title}</h2>
+      <h2 className="font900 text-base text-slate-950">{toLaoText(title)}</h2>
       {action}
     </div>
   );
@@ -401,12 +410,12 @@ export function SimpleList({
           className="flex items-center justify-between gap-4 rounded-lg border border-blue-50 bg-white px-3 py-2.5"
         >
           <div>
-            <p className="font900 text-[13px] text-slate-950">{item.title}</p>
-            <p className="mt-1 text-xs text-slate-500">{item.subtitle}</p>
+            <p className="font900 text-[13px] text-slate-950">{toLaoText(item.title)}</p>
+            <p className="mt-1 text-xs text-slate-500">{toLaoText(item.subtitle)}</p>
           </div>
           <div className="text-right">
             {item.status ? <StatusBadge status={item.status} /> : null}
-            <p className="mt-1 text-xs text-slate-500">{item.meta}</p>
+            <p className="mt-1 text-xs text-slate-500">{toLaoText(item.meta)}</p>
           </div>
         </div>
       ))}
@@ -446,7 +455,7 @@ export function LineChartCard() {
                 type="button"
                 className="font800 flex h-8 cursor-pointer items-center gap-2 rounded-md border border-blue-100 px-3 text-xs text-slate-700 transition hover:bg-blue-50"
               >
-                {item}
+                {toLaoText(item)}
                 <ChevronDown className="h-3.5 w-3.5" />
               </button>
             ))}
@@ -504,10 +513,10 @@ export function FormField({
   return (
     <label className={wide ? "md:col-span-2" : ""}>
       <span className="font800 mb-1 block text-[10px] text-slate-600">
-        {label} {required ? <span className="text-red-500">*</span> : null}
+        {toLaoText(label)} {required ? <span className="text-red-500">*</span> : null}
       </span>
       <input
-        defaultValue={value}
+        defaultValue={toLaoText(value)}
         className="h-7 w-full rounded-md border border-blue-100 bg-white px-2.5 text-xs text-slate-800 outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
       />
     </label>
@@ -529,7 +538,7 @@ export function FormSection({
         <span className="font900 flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-[11px] text-white">
           {index}
         </span>
-        <h2 className="font900 text-sm text-slate-950">{title}</h2>
+        <h2 className="font900 text-sm text-slate-950">{toLaoText(title)}</h2>
       </div>
       {children}
     </AdminCard>
@@ -557,9 +566,9 @@ export function QuickAction({
       </span>
       <span>
         <span className="font900 block text-[13px] leading-4 text-slate-950">
-          {title}
+          {toLaoText(title)}
         </span>
-        <span className="mt-1 block text-xs text-slate-500">{subtitle}</span>
+        <span className="mt-1 block text-xs text-slate-500">{toLaoText(subtitle)}</span>
       </span>
     </Link>
   );
@@ -577,8 +586,10 @@ export function SettingsRow({
   return (
     <div className="flex items-center justify-between gap-3 border-b border-blue-50 py-1.5 last:border-b-0">
       <div>
-        <p className="font900 text-xs text-slate-950">{title}</p>
-        <p className="mt-0.5 text-[11px] leading-4 text-slate-500">{description}</p>
+        <p className="font900 text-xs text-slate-950">{toLaoText(title)}</p>
+        <p className="mt-0.5 text-[11px] leading-4 text-slate-500">
+          {toLaoText(description)}
+        </p>
       </div>
       <button
         type="button"

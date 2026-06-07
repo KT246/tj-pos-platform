@@ -2,6 +2,7 @@ import { ClipboardList, Table2, UserCircle, ClipboardCheck } from "lucide-react"
 import { Link } from "react-router-dom";
 
 import { getStaffOrderPath } from "../utils";
+import { lo } from "../utils/lao-labels";
 
 const navItems = [
   { id: "tables", label: "Tables", icon: Table2, path: "/tables" },
@@ -48,7 +49,7 @@ export function StaffBottomNav({
             {item.id === "orders" ? (
               <span className="absolute top-2 right-[34%] h-2.5 w-2.5 rounded-full bg-red-500" />
             ) : null}
-            {item.label}
+            {lo(item.label)}
           </Link>
         );
       })}

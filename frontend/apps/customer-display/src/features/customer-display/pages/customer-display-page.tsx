@@ -25,6 +25,7 @@ import type {
 } from "../types";
 import { formatDisplayMoney } from "../utils";
 import { resolveDisplayScreen } from "../utils";
+import { lo } from "../utils/lao-labels";
 import {
   Banknote,
   BadgeCheck,
@@ -43,10 +44,10 @@ function IdleScreen() {
       <div className="grid h-full min-h-0 grid-cols-[minmax(0,1.28fr)_minmax(520px,0.82fr)] items-center gap-12 overflow-hidden">
         <section className="min-w-0">
           <h1 className="text-[88px] font-black leading-[0.98] tracking-normal text-[#071633]">
-            Welcome to TJ POS
+            {lo("Welcome to TJ POS")}
           </h1>
           <p className="mt-7 text-[30px] font-medium text-slate-600">
-            Your order details will appear here during checkout.
+            {lo("Your order details will appear here during checkout.")}
           </p>
 
           <div className="relative mt-9 h-[356px] overflow-hidden rounded-[26px] border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-blue-50 shadow-[0_16px_42px_rgba(13,91,255,0.08)]">
@@ -67,10 +68,10 @@ function IdleScreen() {
             </div>
             <div>
               <h2 className="text-[40px] font-black leading-none text-[#071633]">
-                We Accept
+                {lo("We Accept")}
               </h2>
               <p className="mt-4 text-[22px] font-medium text-slate-600">
-                Multiple payment options for your convenience.
+                {lo("Multiple payment options for your convenience.")}
               </p>
             </div>
           </div>
@@ -79,7 +80,7 @@ function IdleScreen() {
           </div>
           <div className="mt-8 flex items-center gap-4 border-t border-blue-100 pt-7 text-[21px] font-medium text-slate-600">
             <ShieldCheck className="h-8 w-8 text-blue-600" strokeWidth={2.5} />
-            <span>All payments are secure and protected.</span>
+            <span>{lo("All payments are secure and protected.")}</span>
           </div>
         </section>
       </div>
@@ -104,10 +105,10 @@ function ReviewScreen() {
       <div className="grid h-full min-h-0 grid-cols-[minmax(0,1.12fr)_600px] gap-9 overflow-hidden">
         <section className="flex min-h-0 min-w-0 flex-col">
           <h1 className="shrink-0 text-[66px] font-black leading-none text-[#071633]">
-            Review Your Order
+            {lo("Review Your Order")}
           </h1>
           <p className="mt-4 shrink-0 text-[27px] font-medium text-slate-600">
-            Please confirm your items before payment.
+            {lo("Please confirm your items before payment.")}
           </p>
           <div className="mt-7 min-h-0 flex-1">
             <OrderReview order={order} />
@@ -143,15 +144,15 @@ function PaymentScreen() {
       <div className="grid h-full min-h-0 grid-cols-[minmax(0,1.18fr)_650px] gap-9 overflow-hidden">
         <section className="flex min-h-0 min-w-0 flex-col">
           <h1 className="shrink-0 text-[66px] font-black leading-none text-[#071633]">
-            Scan to Pay
+            {lo("Scan to Pay")}
           </h1>
           <p className="mt-4 shrink-0 text-[27px] font-medium text-slate-600">
-            Please complete your payment using QR code or bank transfer.
+            {lo("Please complete your payment using QR code or bank transfer.")}
           </p>
 
           <div className="mt-7 flex min-h-0 flex-1 flex-col items-center justify-center rounded-[24px] border border-blue-100 bg-white p-6 shadow-[0_18px_44px_rgba(13,91,255,0.1)]">
             <h2 className="text-[28px] font-black text-[#071633]">
-              Scan with your banking app
+              {lo("Scan with your banking app")}
             </h2>
             <div className="relative mt-5">
               <img
@@ -169,7 +170,7 @@ function PaymentScreen() {
             </div>
             <div className="mt-4 flex items-center gap-3 text-[19px] font-bold text-blue-600">
               <ShieldCheck className="h-7 w-7" strokeWidth={2.5} />
-              <span>Secure payment - Powered by TJ POS</span>
+              <span>{lo("Secure payment - Powered by TJ POS")}</span>
             </div>
           </div>
         </section>
@@ -208,10 +209,10 @@ function SuccessScreen() {
           <CheckCircle2 className="h-[116px] w-[116px]" strokeWidth={2.3} />
         </div>
         <h1 className="mt-7 text-[74px] font-black leading-none text-[#071633]">
-          Payment Successful
+          {lo("Payment Successful")}
         </h1>
         <p className="mt-6 text-[38px] font-medium text-slate-600">
-          Thank you for your purchase!
+          {lo("Thank you for your purchase!")}
         </p>
 
         <div className="mt-9 grid w-[1180px] max-w-full grid-cols-4 rounded-[22px] border border-blue-100 bg-white px-8 py-7 shadow-[0_18px_44px_rgba(13,91,255,0.1)]">
@@ -222,14 +223,14 @@ function SuccessScreen() {
             >
               <Icon className="mx-auto h-9 w-9 text-blue-600" strokeWidth={2.4} />
               <div className="mt-3 text-[21px] font-medium text-slate-600">
-                {label}
+                {lo(label)}
               </div>
               <div
                 className={`mt-4 text-[28px] font-black ${
                   label === "Status" ? "text-emerald-500" : "text-blue-600"
                 }`}
               >
-                {value}
+                {lo(value)}
               </div>
             </div>
           ))}
@@ -237,7 +238,7 @@ function SuccessScreen() {
 
         <div className="mt-8 flex items-center gap-4 text-[24px] font-medium text-slate-600">
           <ShieldCheck className="h-8 w-8 text-blue-600" strokeWidth={2.5} />
-          <span>Please keep your receipt and wait for your order.</span>
+          <span>{lo("Please keep your receipt and wait for your order.")}</span>
         </div>
       </section>
 
@@ -259,11 +260,10 @@ function PairScreen() {
             <MonitorSmartphone className="h-12 w-12" strokeWidth={2.5} />
           </div>
           <h1 className="mt-10 text-[64px] font-black leading-none text-[#071633]">
-            Pair Customer Display
+            {lo("Pair Customer Display")}
           </h1>
           <p className="mt-6 max-w-[720px] text-[28px] font-medium leading-relaxed text-slate-600">
-            Connect this display to the cashier POS device for live order and
-            payment updates.
+            {lo("Connect this display to the cashier POS device for live order and payment updates.")}
           </p>
 
           <div className="mt-12 grid grid-cols-3 gap-5">
@@ -272,7 +272,7 @@ function PairScreen() {
                 key={item}
                 className="rounded-[18px] border border-blue-100 bg-blue-50/50 px-6 py-5 text-[20px] font-black text-blue-600"
               >
-                {item}
+                {lo(item)}
               </div>
             ))}
           </div>
@@ -280,7 +280,7 @@ function PairScreen() {
 
         <div className="rounded-[24px] border border-blue-100 bg-blue-50/45 p-8 text-center">
           <div className="text-[18px] font-black uppercase tracking-[0.18em] text-slate-500">
-            Pairing Code
+            {lo("Pairing Code")}
           </div>
           <div className="mt-4 rounded-[20px] bg-white px-8 py-7 text-[58px] font-black tracking-[0.16em] text-blue-600 shadow-[0_12px_30px_rgba(13,91,255,0.1)]">
             {customerDisplayDevice.pairCode}
@@ -291,7 +291,7 @@ function PairScreen() {
             className="mx-auto mt-8 h-[250px] w-[250px] rounded-[18px] bg-white p-4 shadow-[0_12px_30px_rgba(13,91,255,0.1)]"
           />
           <p className="mt-7 text-[20px] font-bold text-slate-600">
-            Waiting for POS device confirmation
+            {lo("Waiting for POS device confirmation")}
           </p>
         </div>
       </div>

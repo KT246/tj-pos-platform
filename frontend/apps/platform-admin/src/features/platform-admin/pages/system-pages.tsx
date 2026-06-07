@@ -20,6 +20,7 @@ import {
   StatusBadge
 } from "../components/admin-primitives";
 import { adminUser, auditRows } from "../data/mock-platform-admin";
+import { toLaoText } from "../utils/lao-labels";
 
 export function SystemSettingsPage() {
   return (
@@ -107,7 +108,7 @@ export function NotificationTemplatesPage() {
                 "ການກະທຳ"
               ].map((head) => (
                 <th key={head} className="font900 border-b border-blue-100 px-4 py-3">
-                  {head}
+                  {toLaoText(head)}
                 </th>
               ))}
             </tr>
@@ -122,13 +123,13 @@ export function NotificationTemplatesPage() {
               <tr key={row[0]} className="hover:bg-blue-50/40">
                 {row.map((cell) => (
                   <td key={cell} className="px-4 py-3">
-                    {cell}
+                    {toLaoText(cell)}
                   </td>
                 ))}
                 <td className="px-4 py-3">
                   <StatusBadge status="active" />
                 </td>
-                <td className="px-4 py-3">May 18, 2025</td>
+                <td className="px-4 py-3">{toLaoText("May 18, 2025")}</td>
                 <td className="px-4 py-3">
                   <AdminButton variant="secondary">ແກ້ໄຂ</AdminButton>
                 </td>
@@ -161,7 +162,7 @@ export function AuditLogsPage() {
               {["ເວລາ", "ຜູ້ກະທຳ", "ການກະທຳ", "Resource", "ແຫຼ່ງທີ່ມາ", "ສະຖານະ"].map(
                 (head) => (
                   <th key={head} className="font900 border-b border-blue-100 px-4 py-3">
-                    {head}
+                  {toLaoText(head)}
                   </th>
                 )
               )}
@@ -172,7 +173,7 @@ export function AuditLogsPage() {
               <tr key={`${row[0]}-${row[2]}`} className="hover:bg-blue-50/40">
                 {row.map((cell) => (
                   <td key={cell} className="px-4 py-3 text-slate-700">
-                    {cell}
+                    {toLaoText(cell)}
                   </td>
                 ))}
                 <td className="px-4 py-3">

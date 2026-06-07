@@ -33,6 +33,7 @@ import {
 } from "../components/business-admin-primitives";
 import { BusinessAdminShell } from "../layouts/business-admin-shell";
 import type { BusinessMenuKey, Kpi, Tone } from "../types";
+import { toLaoNode, toLaoText } from "../utils/lao-labels";
 
 type RestaurantTableStatus = "available" | "occupied" | "reserved" | "cleaning" | "blocked";
 
@@ -454,7 +455,9 @@ export function SplitBillPage() {
             </table>
           </div>
           <div className="flex items-center justify-between border-t border-blue-50 px-4 py-3">
-            <span className="text-sm font-bold text-slate-500">Total Amount</span>
+            <span className="text-sm font-bold text-slate-500">
+              {toLaoText("Total Amount")}
+            </span>
             <span className="text-lg font-black text-slate-950">LAK 585,000</span>
           </div>
         </Card>
@@ -489,7 +492,9 @@ export function ServiceChargeTaxPreviewPage() {
               <InfoRow key={label} label={label} value={value} />
             ))}
             <div className="flex items-center justify-between rounded-lg bg-blue-50 p-4">
-              <span className="text-sm font-black text-slate-700">Total Payable</span>
+              <span className="text-sm font-black text-slate-700">
+                {toLaoText("Total Payable")}
+              </span>
               <span className="text-2xl font-black text-blue-600">LAK 708,000</span>
             </div>
           </div>
@@ -556,7 +561,9 @@ export function MergeTransferTablePage() {
               >
                 <span className={`h-4 w-4 rounded-full border ${index === 1 ? "border-blue-600 bg-blue-600" : "border-slate-300"}`} />
                 <span className="flex-1 text-sm font-black text-slate-950">{table}</span>
-                <span className="text-xs font-bold text-slate-500">{area}</span>
+                <span className="text-xs font-bold text-slate-500">
+                  {toLaoText(area)}
+                </span>
                 <Badge tone="emerald">Available</Badge>
                 <span className="text-xs font-bold text-slate-500">{pax}</span>
               </button>
@@ -611,7 +618,7 @@ export function RestaurantEndOfDaySummaryPage() {
               <InfoRow key={label} label={label} value={value} />
             ))}
             <div className="flex items-center justify-between rounded-lg bg-slate-50 p-3">
-              <span className="font-black text-slate-700">Total</span>
+              <span className="font-black text-slate-700">{toLaoText("Total")}</span>
               <span className="text-xl font-black text-slate-950">LAK 8,450,000</span>
             </div>
           </div>
@@ -633,7 +640,7 @@ export function RestaurantEndOfDaySummaryPage() {
                 >
                   <span className="flex min-w-0 items-center gap-2 text-slate-600">
                     <span className={`h-2.5 w-2.5 rounded-full ${color}`} />
-                    {label}
+                    {toLaoText(label)}
                   </span>
                   <span className="text-right text-slate-950">
                     {value}
@@ -648,7 +655,9 @@ export function RestaurantEndOfDaySummaryPage() {
           <div className="divide-y divide-blue-50">
             {endDayItems.map(([name, qty], index) => (
               <div key={name} className="flex items-center justify-between px-4 py-3 text-sm">
-                <span className="font-black text-slate-950">{index + 1}. {name}</span>
+                <span className="font-black text-slate-950">
+                  {index + 1}. {toLaoText(name)}
+                </span>
                 <span className="font-black text-slate-600">{qty}</span>
               </div>
             ))}
@@ -656,9 +665,9 @@ export function RestaurantEndOfDaySummaryPage() {
         </Card>
         <Card title="Notes" className="xl:col-span-2">
           <div className="p-4 text-sm font-bold leading-7 text-slate-600">
-            <p>- Restaurant closed at 11:30 PM</p>
-            <p>- All cash deposited</p>
-            <p>- One void order reviewed by manager</p>
+            <p>- {toLaoText("Restaurant closed at 11:30 PM")}</p>
+            <p>- {toLaoText("All cash deposited")}</p>
+            <p>- {toLaoText("One void order reviewed by manager")}</p>
           </div>
         </Card>
         <Card title="Closed By">
@@ -672,7 +681,9 @@ export function RestaurantEndOfDaySummaryPage() {
             />
             <span>
               <span className="block text-sm font-black text-slate-950">Somchai Phommaseanh</span>
-              <span className="block text-xs font-bold text-slate-500">Manager - 11:35 PM</span>
+              <span className="block text-xs font-bold text-slate-500">
+                {toLaoText("Manager - 11:35 PM")}
+              </span>
             </span>
           </div>
         </Card>
@@ -758,8 +769,10 @@ function RestaurantAreaCard({ title, area }: { title: string; area: string }) {
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between gap-4 border-b border-blue-50 pb-2 last:border-b-0">
-      <span className="text-xs font-bold text-slate-500">{label}</span>
-      <span className="text-right text-xs font-black text-slate-950">{value}</span>
+      <span className="text-xs font-bold text-slate-500">{toLaoText(label)}</span>
+      <span className="text-right text-xs font-black text-slate-950">
+        {toLaoText(value)}
+      </span>
     </div>
   );
 }
@@ -767,7 +780,7 @@ function InfoRow({ label, value }: { label: string; value: string }) {
 function ToggleRow({ title, enabled }: { title: string; enabled: boolean }) {
   return (
     <div className="flex items-center justify-between">
-      <span className="text-sm font-black text-slate-700">{title}</span>
+      <span className="text-sm font-black text-slate-700">{toLaoText(title)}</span>
       <span className={`relative h-6 w-11 rounded-full ${enabled ? "bg-blue-600" : "bg-slate-200"}`}>
         <span className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow ${enabled ? "left-6" : "left-1"}`} />
       </span>
@@ -778,7 +791,7 @@ function ToggleRow({ title, enabled }: { title: string; enabled: boolean }) {
 function SettingRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="grid grid-cols-[110px_1fr] items-center gap-3">
-      <span className="text-xs font-black text-slate-500">{label}</span>
+      <span className="text-xs font-black text-slate-500">{toLaoText(label)}</span>
       <SelectPill>{value}</SelectPill>
     </div>
   );
@@ -790,7 +803,7 @@ function SelectPill({ children }: { children: ReactNode }) {
       type="button"
       className="flex h-9 w-full items-center justify-between rounded-md border border-blue-100 bg-white px-3 text-left text-[12px] font-black text-slate-700 transition hover:bg-blue-50"
     >
-      {children}
+      {toLaoNode(children)}
       <span className="text-slate-400">⌄</span>
     </button>
   );
@@ -801,7 +814,9 @@ function DonutChart({ center }: { center: string }) {
     <div className="relative h-40 w-40 rounded-full bg-[conic-gradient(#2563eb_0_34%,#10b981_34%_65%,#f59e0b_65%_100%)]">
       <div className="absolute inset-8 flex flex-col items-center justify-center rounded-full bg-white text-center shadow-inner">
         <span className="text-sm font-black text-slate-950">{center}</span>
-        <span className="text-[10px] font-bold text-slate-500">Total</span>
+        <span className="text-[10px] font-bold text-slate-500">
+          {toLaoText("Total")}
+        </span>
       </div>
     </div>
   );
@@ -810,7 +825,7 @@ function DonutChart({ center }: { center: string }) {
 function PaginationLite({ label }: { label: string }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 border-t border-blue-50 px-4 py-3">
-      <p className="text-[12px] font-semibold text-slate-500">{label}</p>
+      <p className="text-[12px] font-semibold text-slate-500">{toLaoText(label)}</p>
       <div className="flex items-center gap-2">
         {["<", "1", "2", ">"].map((item, index) => (
           <button

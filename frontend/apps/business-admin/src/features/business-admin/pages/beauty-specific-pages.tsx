@@ -25,6 +25,7 @@ import { BusinessAdminLink } from "../components/business-admin-link";
 import { PageHeader } from "../components/business-admin-primitives";
 import { BusinessAdminShell } from "../layouts/business-admin-shell";
 import type { BusinessMenuKey } from "../types";
+import { toLaoNode, toLaoText } from "../utils/lao-labels";
 
 const beautyBusiness = "TJ Beauty & Spa";
 
@@ -238,7 +239,7 @@ function BeautyButton({
   const body = (
     <>
       <Icon className="h-4 w-4" />
-      {children}
+      {toLaoNode(children)}
     </>
   );
 
@@ -281,7 +282,9 @@ function BeautyCard({
       {title || action ? (
         <div className="flex items-center justify-between gap-3 border-b border-pink-50 px-4 py-3">
           {title ? (
-            <h2 className="text-[15px] font-black text-slate-950">{title}</h2>
+            <h2 className="text-[15px] font-black text-slate-950">
+              {toLaoText(title)}
+            </h2>
           ) : (
             <span />
           )}
@@ -306,7 +309,7 @@ function BeautyTabs({ tabs, active }: { tabs: string[]; active: string }) {
               : "bg-white text-slate-500 hover:bg-pink-50 hover:text-pink-600"
           }`}
         >
-          {tab}
+          {toLaoText(tab)}
         </button>
       ))}
     </div>
@@ -317,8 +320,8 @@ function BeautyIconButton({ icon: Icon, label }: { icon: LucideIcon; label: stri
   return (
     <button
       type="button"
-      aria-label={label}
-      title={label}
+      aria-label={toLaoText(label)}
+      title={toLaoText(label)}
       className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-pink-100 bg-white text-slate-500 transition hover:-translate-y-0.5 hover:bg-pink-50 hover:text-pink-600 hover:shadow-sm"
     >
       <Icon className="h-4 w-4" />
@@ -336,7 +339,9 @@ function StaffAvatar({ staff }: { staff: (typeof staffMembers)[number] }) {
       />
       <span>
         <span className="block text-xs font-black text-slate-950">{staff.name}</span>
-        <span className="block text-[10px] font-bold text-slate-400">{staff.role}</span>
+        <span className="block text-[10px] font-bold text-slate-400">
+          {toLaoText(staff.role)}
+        </span>
       </span>
     </div>
   );
@@ -345,7 +350,7 @@ function StaffAvatar({ staff }: { staff: (typeof staffMembers)[number] }) {
 function StatusPill({ children }: { children: ReactNode }) {
   return (
     <span className="rounded-md border border-emerald-100 bg-emerald-50 px-2 py-1 text-[10px] font-black text-emerald-600">
-      {children}
+      {toLaoNode(children)}
     </span>
   );
 }
@@ -360,14 +365,16 @@ function MiniCalendar() {
           <button type="button" className="text-slate-400">
             <ChevronLeft className="h-4 w-4" />
           </button>
-          <span className="text-sm font-black text-slate-950">May 2025</span>
+          <span className="text-sm font-black text-slate-950">
+            {toLaoText("May 2025")}
+          </span>
           <button type="button" className="text-slate-400">
             <ChevronRight className="h-4 w-4" />
           </button>
         </div>
         <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-black text-slate-400">
           {["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].map((day) => (
-            <span key={day}>{day}</span>
+            <span key={day}>{toLaoText(day)}</span>
           ))}
           {days.map((day) => (
             <span
@@ -407,7 +414,7 @@ function AreaSummary() {
           >
             <span className="flex items-center gap-2">
               <span className={`h-2.5 w-2.5 rounded-full ${dot}`} />
-              {label}
+              {toLaoText(label)}
             </span>
             <span>{count}</span>
           </div>
@@ -449,7 +456,9 @@ export function AppointmentCalendarPage() {
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </button>
-                <span className="text-sm font-black text-slate-950">May 18, 2025</span>
+                <span className="text-sm font-black text-slate-950">
+                  {toLaoText("May 18, 2025")}
+                </span>
                 <button
                   className="rounded-md border border-pink-100 p-2 text-slate-500"
                   type="button"
@@ -464,7 +473,7 @@ export function AppointmentCalendarPage() {
             <div className="min-w-[880px]">
               <div className="grid grid-cols-[76px_repeat(4,1fr)] border-b border-pink-50">
                 <span className="px-4 py-3 text-xs font-black text-slate-400">
-                  Time
+                  {toLaoText("Time")}
                 </span>
                 {staffMembers.slice(0, 4).map((staff) => (
                   <div key={staff.name} className="px-4 py-3">
@@ -514,7 +523,9 @@ export function AppointmentCalendarPage() {
                             <MoreVertical className="h-3 w-3" />
                           </div>
                           <p className="mt-1">{block.customer}</p>
-                          <p className="font-bold opacity-75">{block.service}</p>
+                          <p className="font-bold opacity-75">
+                            {toLaoText(block.service)}
+                          </p>
                         </div>
                       ))}
                   </div>
@@ -533,7 +544,7 @@ export function AppointmentCalendarPage() {
             ].map(([label, dot]) => (
               <span key={label} className="flex items-center gap-2">
                 <span className={`h-2.5 w-2.5 rounded-full ${dot}`} />
-                {label}
+                {toLaoText(label)}
               </span>
             ))}
           </div>
@@ -698,7 +709,7 @@ export function BeautyStaffSchedulePage() {
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
-            May 18 - May 24, 2025
+            {toLaoText("May 18 - May 24, 2025")}
             <button
               className="rounded-md border border-pink-100 p-2 text-slate-500"
               type="button"
@@ -711,7 +722,7 @@ export function BeautyStaffSchedulePage() {
         <div className="overflow-x-auto p-4">
           <div className="min-w-[920px]">
             <div className="grid grid-cols-[170px_repeat(7,1fr)] gap-2 text-xs font-black text-slate-500">
-              <span>Staff</span>
+              <span>{toLaoText("Staff")}</span>
               {[
                 "Sun 18",
                 "Mon 19",
@@ -722,7 +733,7 @@ export function BeautyStaffSchedulePage() {
                 "Sat 24"
               ].map((day) => (
                 <span key={day} className="text-center">
-                  {day}
+                  {toLaoText(day)}
                 </span>
               ))}
             </div>
@@ -762,7 +773,7 @@ export function BeautyStaffSchedulePage() {
                           }`}
                         >
                           {off
-                            ? "Day Off"
+                            ? toLaoText("Day Off")
                             : dayIndex % 2 === 0
                               ? "08:00 - 18:00"
                               : "10:00 - 19:00"}
@@ -776,13 +787,16 @@ export function BeautyStaffSchedulePage() {
         </div>
         <div className="flex justify-center gap-6 border-t border-pink-50 p-4 text-xs font-black text-slate-500">
           <span className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-pink-500" /> Working
+            <span className="h-2.5 w-2.5 rounded-full bg-pink-500" />{" "}
+            {toLaoText("Working")}
           </span>
           <span className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-slate-300" /> Day Off
+            <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />{" "}
+            {toLaoText("Day Off")}
           </span>
           <span className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-sky-400" /> Time Off
+            <span className="h-2.5 w-2.5 rounded-full bg-sky-400" />{" "}
+            {toLaoText("Time Off")}
           </span>
         </div>
       </BeautyCard>
@@ -1156,16 +1170,18 @@ function BeautyField({
 }) {
   return (
     <label className={full ? "md:col-span-2" : ""}>
-      <span className="mb-1.5 block text-xs font-black text-slate-600">{label}</span>
+      <span className="mb-1.5 block text-xs font-black text-slate-600">
+        {toLaoText(label)}
+      </span>
       {textarea ? (
         <textarea
           className="min-h-24 w-full resize-none rounded-md border border-pink-100 px-3 py-2 text-sm font-semibold text-slate-800 outline-none focus:border-pink-300 focus:ring-4 focus:ring-pink-50"
-          defaultValue={value}
+          defaultValue={toLaoText(value)}
         />
       ) : (
         <input
           className="h-10 w-full rounded-md border border-pink-100 px-3 text-sm font-semibold text-slate-800 outline-none focus:border-pink-300 focus:ring-4 focus:ring-pink-50"
-          defaultValue={value}
+          defaultValue={toLaoText(value)}
         />
       )}
     </label>
@@ -1175,7 +1191,7 @@ function BeautyField({
 function ToggleLine({ title, enabled }: { title: string; enabled: boolean }) {
   return (
     <div className="flex items-center justify-between gap-4 rounded-lg border border-pink-100 bg-white p-3">
-      <span className="text-sm font-black text-slate-700">{title}</span>
+      <span className="text-sm font-black text-slate-700">{toLaoText(title)}</span>
       <span
         className={`relative h-6 w-11 rounded-full ${enabled ? "bg-blue-600" : "bg-slate-200"}`}
       >
@@ -1209,7 +1225,7 @@ function BeautyTable({ headers, rows }: { headers: string[]; rows: ReactNode[][]
                   index === headers.length - 1 ? "text-right" : ""
                 }`}
               >
-                {header}
+                {toLaoText(header)}
               </th>
             ))}
           </tr>
@@ -1224,7 +1240,7 @@ function BeautyTable({ headers, rows }: { headers: string[]; rows: ReactNode[][]
                     cellIndex === row.length - 1 ? "text-right" : ""
                   }`}
                 >
-                  {cell}
+                  {toLaoNode(cell)}
                 </td>
               ))}
             </tr>

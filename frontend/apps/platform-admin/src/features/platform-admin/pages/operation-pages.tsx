@@ -11,6 +11,7 @@ import {
   StatusBadge
 } from "../components/admin-primitives";
 import { requests, tickets } from "../data/mock-platform-admin";
+import { toLaoText } from "../utils/lao-labels";
 
 export function ContactRequestsPage() {
   return (
@@ -120,7 +121,7 @@ function RecordsTable({ type }: { type: "request" | "ticket" }) {
                 "ການກະທຳ"
               ].map((head) => (
                 <th key={head} className="font900 border-b border-blue-100 px-4 py-3">
-                  {head}
+                  {toLaoText(head)}
                 </th>
               ))}
             </tr>
@@ -129,12 +130,14 @@ function RecordsTable({ type }: { type: "request" | "ticket" }) {
             {rows.map((row) => (
               <tr key={row.id} className="hover:bg-blue-50/40">
                 <td className="font900 px-4 py-3 text-blue-700">{row.id}</td>
-                <td className="font900 px-4 py-3 text-slate-950">{row.title}</td>
-                <td className="px-4 py-3 text-slate-700">{row.subtitle}</td>
+                <td className="font900 px-4 py-3 text-slate-950">
+                  {toLaoText(row.title)}
+                </td>
+                <td className="px-4 py-3 text-slate-700">{toLaoText(row.subtitle)}</td>
                 <td className="px-4 py-3">
                   <StatusBadge status={row.status} />
                 </td>
-                <td className="px-4 py-3 text-slate-600">{row.meta}</td>
+                <td className="px-4 py-3 text-slate-600">{toLaoText(row.meta)}</td>
                 <td className="px-4 py-3">
                   <AdminButton
                     variant="secondary"
@@ -183,8 +186,8 @@ function DetailLayout({
         <AdminCard className="p-5">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h2 className="font900 text-xl text-slate-950">{title}</h2>
-              <p className="mt-2 text-sm leading-6 text-slate-600">{message}</p>
+              <h2 className="font900 text-xl text-slate-950">{toLaoText(title)}</h2>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{toLaoText(message)}</p>
             </div>
             <StatusBadge status={status} />
           </div>
@@ -202,10 +205,10 @@ function DetailLayout({
             ].map(([who, text, time]) => (
               <div key={time} className="rounded-lg border border-blue-100 p-4">
                 <div className="mb-2 flex items-center justify-between">
-                  <span className="font900 text-sm text-slate-950">{who}</span>
-                  <span className="text-xs text-slate-500">{time}</span>
+                  <span className="font900 text-sm text-slate-950">{toLaoText(who)}</span>
+                  <span className="text-xs text-slate-500">{toLaoText(time)}</span>
                 </div>
-                <p className="text-sm leading-6 text-slate-600">{text}</p>
+                <p className="text-sm leading-6 text-slate-600">{toLaoText(text)}</p>
               </div>
             ))}
           </div>
@@ -219,8 +222,8 @@ function DetailLayout({
               <div key={label} className="flex items-start gap-3">
                 <IconDot label={label} />
                 <div>
-                  <p className="font800 text-xs text-slate-500">{label}</p>
-                  <p className="font900 mt-1 text-slate-950">{value}</p>
+                  <p className="font800 text-xs text-slate-500">{toLaoText(label)}</p>
+                  <p className="font900 mt-1 text-slate-950">{toLaoText(value)}</p>
                 </div>
               </div>
             ))}

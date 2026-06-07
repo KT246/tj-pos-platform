@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { usePosTerminalStore } from "../stores/pos-terminal-store";
 import type { OpenOrder } from "../types";
 import { formatMoney, getBusinessPath } from "../utils";
+import { lo } from "../utils/lao-labels";
 
 export function OrdersView({
   businessSlug,
@@ -57,25 +58,25 @@ export function OrdersView({
             className="flex h-10 items-center justify-center gap-2 rounded-md border border-blue-100 bg-white px-4 text-[12px] font-black text-slate-700 transition hover:bg-blue-50"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to POS
+            {lo("Back to POS")}
           </Link>
           <div className="flex rounded-lg border border-blue-100 bg-white p-1">
             <OrderTab
               active={mode === "open-orders"}
               href={getBusinessPath(businessSlug, "/open-orders")}
-              label={`Open Orders (${openCount})`}
+              label={`${lo("Open Orders")} (${openCount})`}
             />
             <OrderTab
               active={mode === "held-orders"}
               href={getBusinessPath(businessSlug, "/held-orders")}
-              label={`Held Orders (${heldCount})`}
+              label={`${lo("Held Orders")} (${heldCount})`}
             />
             <button
               type="button"
               onClick={() => showNotice(`${completedCount} completed receipts.`)}
               className="h-9 min-w-36 rounded-md px-4 text-[12px] font-black text-slate-400 hover:bg-slate-50"
             >
-              Completed ({completedCount})
+              {lo("Completed")} ({completedCount})
             </button>
           </div>
           <div className="flex items-center gap-2">
@@ -84,14 +85,14 @@ export function OrdersView({
               className="flex h-10 items-center gap-2 rounded-md border border-blue-100 bg-white px-3 text-[12px] font-black text-blue-600 hover:bg-blue-50"
             >
               <Grid2X2 className="h-4 w-4" />
-              Grid
+              {lo("Grid")}
             </button>
             <button
               type="button"
               className="flex h-10 items-center gap-2 rounded-md border border-blue-100 bg-white px-3 text-[12px] font-black text-slate-600 hover:bg-blue-50"
             >
               <List className="h-4 w-4" />
-              List
+              {lo("List")}
             </button>
           </div>
         </div>
@@ -102,7 +103,7 @@ export function OrdersView({
               value={orderSearch}
               onChange={(event) => setOrderSearch(event.currentTarget.value)}
               className="h-11 w-full rounded-lg border border-blue-100 pr-4 pl-11 text-[13px] font-bold outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-              placeholder="Search order, table, or customer"
+              placeholder={lo("Search order, table, or customer")}
             />
           </label>
           <button
@@ -111,7 +112,7 @@ export function OrdersView({
             className="flex h-11 items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white px-4 text-[12px] font-black text-blue-600 hover:bg-blue-50"
           >
             <RefreshCw className="h-4 w-4" />
-            Refresh
+            {lo("Refresh")}
           </button>
         </div>
       </div>
@@ -122,7 +123,7 @@ export function OrdersView({
               {["Order", "Table / Type", "Customer", "Items", "Amount", "Time", "Status", "Action"].map(
                 (heading) => (
                   <th key={heading} className="px-4 py-3">
-                    {heading}
+                    {lo(heading)}
                   </th>
                 )
               )}
@@ -143,7 +144,7 @@ export function OrdersView({
                   colSpan={8}
                   className="px-4 py-10 text-center text-sm font-bold text-slate-500"
                 >
-                  No orders match this view.
+                  {lo("No orders match this view.")}
                 </td>
               </tr>
             )}
@@ -152,14 +153,14 @@ export function OrdersView({
       </div>
       <div className="shrink-0 flex items-center justify-between border-t border-blue-50 px-4 py-3">
         <p className="text-[12px] font-bold text-slate-500">
-          Total {rows.length} orders
+          {lo("Total")} {rows.length} {lo("orders")}
         </p>
         <button
           type="button"
           onClick={handleNewOrder}
           className="flex h-9 items-center justify-center rounded-md border border-blue-100 bg-blue-50 px-4 text-[12px] font-black text-blue-600 hover:bg-blue-100"
         >
-          New Order
+          {lo("New Order")}
         </button>
       </div>
     </section>
@@ -193,9 +194,9 @@ function OrderRow({ order, onOpen }: { order: OpenOrder; onOpen: () => void }) {
       <td className="px-4 py-3 font-black text-blue-600">{order.id}</td>
       <td className="px-4 py-3 font-bold text-slate-800">
         {order.table}
-        <span className="block text-[11px] text-slate-500">{order.type}</span>
+        <span className="block text-[11px] text-slate-500">{lo(order.type)}</span>
       </td>
-      <td className="px-4 py-3 font-bold text-slate-700">{order.customer}</td>
+      <td className="px-4 py-3 font-bold text-slate-700">{lo(order.customer)}</td>
       <td className="px-4 py-3 font-black text-slate-800">{order.items}</td>
       <td className="px-4 py-3 font-black text-slate-800">
         {formatMoney(order.amount)}
@@ -209,7 +210,7 @@ function OrderRow({ order, onOpen }: { order: OpenOrder; onOpen: () => void }) {
               : "bg-blue-50 text-blue-600"
           }`}
         >
-          {order.status}
+          {lo(order.status)}
         </span>
       </td>
       <td className="px-4 py-3">
@@ -218,7 +219,7 @@ function OrderRow({ order, onOpen }: { order: OpenOrder; onOpen: () => void }) {
           onClick={onOpen}
           className="h-8 rounded-md border border-blue-200 bg-blue-50 px-3 text-[12px] font-black text-blue-600 hover:bg-blue-100"
         >
-          Open
+          {lo("Open")}
         </button>
       </td>
     </tr>

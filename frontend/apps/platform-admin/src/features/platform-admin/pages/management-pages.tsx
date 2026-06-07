@@ -23,6 +23,7 @@ import {
   StatusBadge
 } from "../components/admin-primitives";
 import { businesses, paymentMethods, planCards } from "../data/mock-platform-admin";
+import { toLaoNode, toLaoText } from "../utils/lao-labels";
 
 export function UsersPage() {
   return (
@@ -149,7 +150,7 @@ export function PlansPage() {
             <div className="flex items-start justify-between">
               <div>
                 <p className="font900 text-xl text-slate-950">{plan.name}</p>
-                <p className="mt-1 text-sm text-slate-500">{plan.modules}</p>
+                <p className="mt-1 text-sm text-slate-500">{toLaoText(plan.modules)}</p>
               </div>
               <CreditCard className="h-6 w-6 text-blue-600" />
             </div>
@@ -228,8 +229,8 @@ export function AddOnsPage() {
         ].map(([title, subtitle, status]) => (
           <AdminCard key={title} className="p-5">
             <Puzzle className="h-8 w-8 text-blue-600" />
-            <h2 className="font900 mt-4 text-lg">{title}</h2>
-            <p className="mt-2 text-sm text-slate-500">{subtitle}</p>
+            <h2 className="font900 mt-4 text-lg">{toLaoText(title)}</h2>
+            <p className="mt-2 text-sm text-slate-500">{toLaoText(subtitle)}</p>
             <div className="mt-5">
               <StatusBadge status={status === "active" ? "active" : "inactive"} />
             </div>
@@ -311,11 +312,11 @@ export function GlobalModulesCatalogPage() {
             <Box className="h-8 w-8 text-blue-600" />
             <div className="mt-4 flex items-start justify-between">
               <div>
-                <h2 className="font900 text-lg">{title}</h2>
-                <p className="mt-1 text-sm text-slate-500">{category}</p>
+                <h2 className="font900 text-lg">{toLaoText(title)}</h2>
+                <p className="mt-1 text-sm text-slate-500">{toLaoText(category)}</p>
               </div>
               <span className="font800 rounded-md bg-blue-50 px-3 py-1 text-xs text-blue-700">
-                {rule}
+                {toLaoText(rule)}
               </span>
             </div>
             <div className="mt-5">
@@ -412,7 +413,7 @@ export function PaymentSettingsPage() {
                   <Icon className="h-5 w-5" />
                 </span>
                 <div>
-                  <p className="font800 text-xs text-slate-500">{stat.label}</p>
+                  <p className="font800 text-xs text-slate-500">{toLaoText(stat.label)}</p>
                   <p className="font900 mt-1 text-2xl leading-7 text-slate-950">
                     {stat.value}
                   </p>
@@ -448,7 +449,7 @@ export function PaymentSettingsPage() {
                     : "border-transparent text-slate-600 hover:text-blue-700"
                 }`}
               >
-                {tab}
+                {toLaoText(tab)}
               </button>
             ))}
           </div>
@@ -541,7 +542,7 @@ function GenericTable({
                   key={head}
                   className="font900 border-b border-blue-100 px-3.5 py-2.5 whitespace-nowrap"
                 >
-                  {head}
+                  {toLaoText(head)}
                 </th>
               ))}
             </tr>
@@ -555,9 +556,9 @@ function GenericTable({
                     className="px-3.5 py-2.5 whitespace-pre-line text-slate-700"
                   >
                     {cellIndex === 0 ? (
-                      <span className="font900 text-slate-950">{cell}</span>
+                      <span className="font900 text-slate-950">{toLaoNode(cell)}</span>
                     ) : (
-                      cell
+                      toLaoNode(cell)
                     )}
                   </td>
                 ))}

@@ -118,11 +118,11 @@ export const useKitchenDisplayStore = create<
     set((state) => {
       const ticket = state.tickets.find((item) => item.id === ticketId);
       if (!ticket) {
-        showKitchenDisplayNotice("Ticket was not found.", "error");
+        showKitchenDisplayNotice("ບໍ່ພົບ Ticket.", "error");
         return {};
       }
 
-      showKitchenDisplayNotice(`${ticketId} moved to Preparing.`, "success");
+      showKitchenDisplayNotice(`${ticketId} ຖືກຍ້າຍໄປກຳລັງກຽມ.`, "success");
 
       return {
         tickets: updateTicketStatus(state.tickets, ticketId, {
@@ -135,7 +135,7 @@ export const useKitchenDisplayStore = create<
     }),
   markReady: (ticketId) =>
     set((state) => {
-      showKitchenDisplayNotice(`${ticketId} marked ready.`, "success");
+      showKitchenDisplayNotice(`${ticketId} ຖືກໝາຍວ່າພ້ອມແລ້ວ.`, "success");
 
       return {
         tickets: updateTicketStatus(state.tickets, ticketId, { status: "ready" }),
@@ -145,7 +145,7 @@ export const useKitchenDisplayStore = create<
   completePickup: (ticketId) =>
     set((state) => {
       showKitchenDisplayNotice(
-        `${ticketId} completed and removed from Ready queue.`,
+        `${ticketId} ສຳເລັດ ແລະ ຖືກຍ້າຍອອກຈາກຄິວພ້ອມ.`,
         "success"
       );
 
@@ -156,7 +156,7 @@ export const useKitchenDisplayStore = create<
     }),
   recallTicket: (ticketId) =>
     set((state) => {
-      showKitchenDisplayNotice(`${ticketId} recalled to Preparing.`, "info");
+      showKitchenDisplayNotice(`${ticketId} ຖືກດຶງກັບໄປກຳລັງກຽມ.`, "info");
 
       return {
         tickets: updateTicketStatus(state.tickets, ticketId, {

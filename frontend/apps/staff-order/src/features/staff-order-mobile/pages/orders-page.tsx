@@ -16,6 +16,7 @@ import { StaffMobileShell, StaffScrollArea } from "../components/staff-mobile-sh
 import { useStaffOrderStore } from "../stores/staff-order-store";
 import type { StaffOrderRecord } from "../types";
 import { formatMoney, getStaffOrderPath, statusColor } from "../utils";
+import { lo } from "../utils/lao-labels";
 
 export function StaffOrdersPage({ businessSlug }: { businessSlug: string }) {
   const selectedTableId = useStaffOrderStore((state) => state.selectedTableId);
@@ -55,7 +56,7 @@ export function StaffOrdersPage({ businessSlug }: { businessSlug: string }) {
                 index === 0 ? "bg-blue-600 text-white" : "text-slate-500"
               }`}
             >
-              {item}
+              {lo(item)}
             </button>
           ))}
         </div>
@@ -64,7 +65,7 @@ export function StaffOrdersPage({ businessSlug }: { businessSlug: string }) {
           <Search className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-slate-400" />
           <input
             className="h-12 w-full rounded-lg border border-blue-100 bg-white pr-12 pl-12 text-[14px] font-bold shadow-[0_8px_20px_rgba(15,23,42,0.03)] transition outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-            placeholder="Search table or order"
+            placeholder={lo("Search table or order")}
           />
           <Filter className="absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 text-slate-500" />
         </label>
@@ -108,7 +109,7 @@ function StatBlock({
         <ClipboardCheck className="h-5 w-5" />
       </span>
       <span>
-        <span className="block text-[13px] font-bold text-slate-500">{label}</span>
+        <span className="block text-[13px] font-bold text-slate-500">{lo(label)}</span>
         <span className="text-[18px] font-black text-slate-950">{value}</span>
       </span>
     </div>
@@ -143,13 +144,13 @@ function OrderCard({
               {order.tableId}
             </h3>
             <span className="rounded-full bg-blue-50 px-2 py-1 text-[11px] font-black text-blue-600">
-              {order.type}
+              {lo(order.type)}
             </span>
           </div>
           <div className="mt-3 flex items-center gap-4 text-[12px] font-bold text-slate-500">
             <span className="flex items-center gap-1">
               <ClipboardCheck className="h-4 w-4" />
-              {order.items} items
+              {order.items} {lo("items")}
             </span>
             <span className="flex items-center gap-1">
               <Timer className="h-4 w-4" />
@@ -161,7 +162,7 @@ function OrderCard({
           <span
             className={`rounded-full px-2.5 py-1 text-[11px] font-black ${statusColor(order.status)}`}
           >
-            {order.status}
+            {lo(order.status)}
           </span>
           <p className="mt-5 text-[16px] font-black text-slate-950">
             {formatMoney(order.total)}
@@ -174,7 +175,7 @@ function OrderCard({
           className="flex h-11 items-center justify-center gap-2 rounded-lg border border-blue-100 text-[14px] font-black text-blue-600 hover:bg-blue-50"
         >
           <ClipboardCheck className="h-4 w-4" />
-          Open
+          {lo("Open")}
         </Link>
         <button
           type="button"
@@ -194,7 +195,7 @@ function OrderCard({
           ) : (
             <Plus className="h-4 w-4" />
           )}
-          {actionLabel}
+          {lo(actionLabel)}
         </button>
       </div>
     </article>

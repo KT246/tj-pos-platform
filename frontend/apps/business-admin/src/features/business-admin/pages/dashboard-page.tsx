@@ -26,6 +26,7 @@ import {
 } from "../data/mock-business-admin";
 import { BusinessAdminShell } from "../layouts/business-admin-shell";
 import { BusinessAdminLink } from "../components/business-admin-link";
+import { toLaoText } from "../utils/lao-labels";
 
 type Order = {
   id: string;
@@ -143,7 +144,7 @@ function RecentOrdersCard() {
           href="/business-admin/orders"
           className="text-xs font-black text-blue-600"
         >
-          View all orders
+          {toLaoText("View all orders")}
         </BusinessAdminLink>
       }
     >
@@ -155,7 +156,7 @@ function RecentOrdersCard() {
                 key={head}
                 className="border-b border-blue-100 px-2 py-2.5 text-[10px] font-black text-slate-500"
               >
-                {head}
+                {toLaoText(head)}
               </th>
             ))}
           </tr>
@@ -165,7 +166,9 @@ function RecentOrdersCard() {
             <tr key={order.id} className="border-b border-blue-50 last:border-b-0">
               <td className="px-2 py-2.5 font-black text-blue-600">{order.id}</td>
               <td className="px-2 py-2.5 font-bold text-slate-800">{order.customer}</td>
-              <td className="px-2 py-2.5 font-bold text-slate-800">{order.type}</td>
+              <td className="px-2 py-2.5 font-bold text-slate-800">
+                {toLaoText(order.type)}
+              </td>
               <td className="px-2 py-2.5 font-bold text-slate-800">{order.amount}</td>
               <td className="px-2 py-2.5">
                 <Badge tone={order.status === "Preparing" ? "amber" : "emerald"}>
@@ -202,10 +205,10 @@ function DashboardQuickActions() {
               </span>
               <span className="min-w-0">
                 <span className="block truncate text-[13px] font-black text-slate-950">
-                  {action.label}
+                  {toLaoText(action.label)}
                 </span>
                 <span className="mt-0.5 block truncate text-xs font-semibold text-slate-500">
-                  {action.description}
+                  {toLaoText(action.description ?? "")}
                 </span>
               </span>
             </a>
@@ -258,7 +261,7 @@ function SalesOverview() {
           <div className="absolute inset-x-8 bottom-2 flex justify-between text-[11px] font-bold text-slate-500">
             {["May 12", "May 13", "May 14", "May 15", "May 16", "May 17", "May 18"].map(
               (day) => (
-                <span key={day}>{day}</span>
+                <span key={day}>{toLaoText(day)}</span>
               )
             )}
           </div>
@@ -285,12 +288,14 @@ function BusinessGlanceCard() {
     <Card title="Business at a Glance">
       <div className="space-y-3 p-4">
         <div className="rounded-lg border border-blue-100 bg-gradient-to-br from-blue-50 to-white p-4">
-          <p className="text-xs font-bold text-slate-600">Gross Sales (This Week)</p>
+          <p className="text-xs font-bold text-slate-600">
+            {toLaoText("Gross Sales (This Week)")}
+          </p>
           <div className="mt-2 flex items-end justify-between gap-4">
             <div>
               <p className="text-xl font-black text-slate-950">LAK 56,420,000</p>
               <p className="mt-1 text-xs font-black text-emerald-600">
-                + 16.2% vs last week
+                + 16.2% {toLaoText("vs last week")}
               </p>
             </div>
             <svg className="h-10 w-24" viewBox="0 0 96 40" aria-hidden="true">
@@ -316,7 +321,9 @@ function BusinessGlanceCard() {
                 >
                   <MetricIcon className="h-4 w-4" />
                 </span>
-                <span className="text-xs font-bold text-slate-600">{label}</span>
+                <span className="text-xs font-bold text-slate-600">
+                  {toLaoText(label)}
+                </span>
               </div>
               <span className={`text-right text-xs font-black ${toneClass.text}`}>
                 {value}
@@ -336,9 +343,9 @@ function TopSellingItems() {
         <table className="w-full text-left text-xs">
           <thead>
             <tr className="text-[11px] font-black text-slate-500">
-              <th className="pb-2">Item</th>
-              <th className="pb-2 text-right">Sold</th>
-              <th className="pb-2 text-right">Revenue</th>
+              <th className="pb-2">{toLaoText("Item")}</th>
+              <th className="pb-2 text-right">{toLaoText("Sold")}</th>
+              <th className="pb-2 text-right">{toLaoText("Revenue")}</th>
             </tr>
           </thead>
           <tbody>
@@ -377,9 +384,9 @@ function InventoryAlerts() {
         <table className="w-full text-left text-xs">
           <thead>
             <tr className="text-[11px] font-black text-slate-500">
-              <th className="pb-2">Item</th>
-              <th className="pb-2 text-center">Current Stock</th>
-              <th className="pb-2 text-right">Status</th>
+              <th className="pb-2">{toLaoText("Item")}</th>
+              <th className="pb-2 text-center">{toLaoText("Current Stock")}</th>
+              <th className="pb-2 text-right">{toLaoText("Status")}</th>
             </tr>
           </thead>
           <tbody>
@@ -416,9 +423,9 @@ function BranchPerformance() {
         <table className="w-full text-left text-xs">
           <thead>
             <tr className="text-[11px] font-black text-slate-500">
-              <th className="pb-2">Branch</th>
-              <th className="pb-2 text-right">Sales (This Week)</th>
-              <th className="pb-2 text-right">vs Last Week</th>
+              <th className="pb-2">{toLaoText("Branch")}</th>
+              <th className="pb-2 text-right">{toLaoText("Sales (This Week)")}</th>
+              <th className="pb-2 text-right">{toLaoText("vs Last Week")}</th>
             </tr>
           </thead>
           <tbody>
@@ -429,7 +436,9 @@ function BranchPerformance() {
               ["Pak Ngum Branch", "LAK 9,240,000", "+3.7%"]
             ].map((row) => (
               <tr key={row[0]} className="border-t border-blue-50">
-                <td className="py-3 font-black text-slate-950">{row[0]}</td>
+                <td className="py-3 font-black text-slate-950">
+                  {toLaoText(row[0])}
+                </td>
                 <td className="py-3 text-right font-bold text-slate-700">{row[1]}</td>
                 <td
                   className={`py-3 text-right font-black ${

@@ -15,6 +15,7 @@ import { activeBranch, businessName, sidebarItems } from "../data/mock-business-
 import type { BusinessMenuKey } from "../types";
 import { BusinessAdminLink } from "../components/business-admin-link";
 import { TjLogo } from "../components/business-admin-primitives";
+import { toLaoText } from "../utils/lao-labels";
 
 export function BusinessAdminShell({
   active,
@@ -33,7 +34,7 @@ export function BusinessAdminShell({
           <button
             type="button"
             className="flex h-9 w-9 items-center justify-center rounded-md text-slate-500 transition hover:bg-blue-50 hover:text-blue-600"
-            aria-label="Collapse sidebar"
+            aria-label={toLaoText("Collapse sidebar")}
           >
             <Menu className="h-5 w-5" />
           </button>
@@ -83,7 +84,7 @@ export function BusinessAdminShell({
                   }`}
                 >
                   <Icon className="h-4.5 w-4.5" />
-                  <span className="truncate">{item.label}</span>
+                  <span className="truncate">{toLaoText(item.label)}</span>
                 </BusinessAdminLink>
               );
             })}
@@ -93,16 +94,18 @@ export function BusinessAdminShell({
               <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-blue-600">
                 <HelpCircle className="h-5 w-5" />
               </span>
-              <span className="text-[13px] font-black text-slate-950">Need Help?</span>
+              <span className="text-[13px] font-black text-slate-950">
+                {toLaoText("Need Help?")}
+              </span>
             </div>
             <p className="text-xs leading-5 font-semibold text-slate-600">
-              Visit our Help Center for guides and tutorials.
+              {toLaoText("Visit our Help Center for guides and tutorials.")}
             </p>
             <button
               type="button"
               className="mt-4 flex h-9 w-full items-center justify-between rounded-md bg-white px-3 text-xs font-black text-blue-600"
             >
-              Go to Help Center
+              {toLaoText("Go to Help Center")}
               <ChevronDown className="h-4 w-4 -rotate-90" />
             </button>
           </div>
@@ -128,13 +131,13 @@ export function BusinessAdminShell({
               className="hidden h-10 items-center gap-2 rounded-md bg-blue-600 px-4 text-sm font-black text-white shadow-[0_8px_18px_rgba(37,99,235,0.2)] transition hover:bg-blue-700 lg:flex"
             >
               <Monitor className="h-4 w-4" />
-              Open POS
+              {toLaoText("Open POS")}
             </BusinessAdminLink>
             <label className="relative hidden w-[330px] 2xl:flex">
               <Search className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-slate-400" />
               <input
                 className="h-10 w-full rounded-md border border-blue-100 bg-white px-12 text-sm font-semibold outline-none placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-                placeholder="Search items, orders, customers..."
+                placeholder={toLaoText("Search items, orders, customers...")}
               />
               <span className="absolute top-1/2 right-3 flex h-6 -translate-y-1/2 items-center gap-0.5 rounded border border-blue-100 px-2 text-[11px] font-black text-slate-400">
                 <Command className="h-3 w-3" />K
@@ -167,7 +170,7 @@ export function BusinessAdminShell({
                   Somchai Phommaseanh
                 </span>
                 <span className="block truncate text-xs font-semibold text-slate-500">
-                  Business Owner
+                  {toLaoText("Business Owner")}
                 </span>
               </span>
               <ChevronDown className="h-4 w-4 text-slate-500" />
@@ -195,7 +198,7 @@ function TopSelect({
       className={`hidden h-10 min-w-[190px] items-center gap-3 rounded-md border border-blue-100 bg-white px-3 text-left text-sm font-black text-slate-950 transition hover:border-blue-200 hover:bg-blue-50/50 md:flex ${className}`}
     >
       <Icon className="h-5 w-5 text-blue-600" />
-      <span className="min-w-0 flex-1 truncate">{label}</span>
+      <span className="min-w-0 flex-1 truncate">{toLaoText(label)}</span>
       <ChevronDown className="h-4 w-4 text-slate-400" />
     </button>
   );

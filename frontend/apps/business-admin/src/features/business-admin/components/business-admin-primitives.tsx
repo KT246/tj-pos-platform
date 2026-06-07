@@ -15,6 +15,7 @@ import type { ReactNode } from "react";
 
 import { toneClasses } from "../data/mock-business-admin";
 import type { Kpi, QuickAction, SummaryItem, TableColumn, Tone } from "../types";
+import { toLaoNode, toLaoText } from "../utils/lao-labels";
 import { BusinessAdminLink } from "./business-admin-link";
 
 export function TjLogo() {
@@ -46,9 +47,11 @@ export function PageHeader({
     <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
       <div>
         {breadcrumb ? <div className="mb-3">{breadcrumb}</div> : null}
-        <h1 className="text-[26px] leading-tight font-black text-slate-950">{title}</h1>
+        <h1 className="text-[26px] leading-tight font-black text-slate-950">
+          {toLaoText(title)}
+        </h1>
         <p className="mt-1 text-[13px] leading-5 font-medium text-slate-600">
-          {description}
+          {toLaoText(description)}
         </p>
       </div>
       {actions ? <div className="flex items-center gap-3">{actions}</div> : null}
@@ -76,7 +79,7 @@ export function Button({
   const content = (
     <>
       {Icon ? <Icon className="h-4 w-4" /> : null}
-      {children}
+      {toLaoNode(children)}
     </>
   );
 
@@ -124,7 +127,9 @@ function KpiCard({ kpi }: { kpi: Kpi }) {
           <Icon className="h-5 w-5" />
         </span>
         <div className="min-w-0">
-          <p className="text-[12px] font-bold text-slate-500">{kpi.label}</p>
+          <p className="text-[12px] font-bold text-slate-500">
+            {toLaoText(kpi.label)}
+          </p>
           <p className="mt-1 text-[19px] leading-6 font-black whitespace-nowrap text-slate-950">
             {kpi.value}
           </p>
@@ -134,7 +139,7 @@ function KpiCard({ kpi }: { kpi: Kpi }) {
                 kpi.tone === "red" ? "text-red-500" : "text-emerald-600"
               }`}
             >
-              + {kpi.change}
+              + {toLaoText(kpi.change)}
             </p>
           ) : null}
         </div>
@@ -162,7 +167,7 @@ export function Card({
         <div className="flex items-center justify-between gap-3 border-b border-blue-50 px-4 py-3">
           {title ? (
             <h2 className="shrink-0 text-[15px] font-black whitespace-nowrap text-slate-950">
-              {title}
+              {toLaoText(title)}
             </h2>
           ) : (
             <span />
@@ -193,13 +198,13 @@ export function FilterBar({
       <div className="grid gap-3 p-4 xl:grid-cols-[minmax(260px,1.4fr)_repeat(3,minmax(150px,0.6fr))_auto]">
         <label>
           <span className="mb-1.5 block text-[11px] font-black text-slate-600">
-            Search
+            {toLaoText("Search")}
           </span>
           <span className="relative block">
             <Search className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input
               className="h-10 w-full rounded-md border border-blue-100 bg-white pr-4 pl-11 text-[13px] font-semibold text-slate-800 transition outline-none placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-              placeholder={searchPlaceholder}
+              placeholder={toLaoText(searchPlaceholder)}
             />
           </span>
         </label>
@@ -214,7 +219,7 @@ export function FilterBar({
         <div className="flex items-end justify-end gap-2">
           {showFilterButton ? (
             <Button icon={Filter} variant="primary">
-              Filter
+              {toLaoText("Filter")}
             </Button>
           ) : null}
           {actions}
@@ -236,7 +241,7 @@ function LabeledSelect({ label, children }: { label: string; children: ReactNode
   return (
     <label>
       <span className="mb-1.5 block text-[11px] font-black text-slate-600">
-        {label}
+        {toLaoText(label)}
       </span>
       <SelectButton>{children}</SelectButton>
     </label>
@@ -246,14 +251,14 @@ function LabeledSelect({ label, children }: { label: string; children: ReactNode
 function defaultFilterLabel(value: string) {
   const normalized = value.toLowerCase();
 
-  if (normalized.includes("categor")) return "Category";
-  if (normalized.includes("status")) return "Status";
-  if (normalized.includes("branch")) return "Branch";
-  if (normalized.includes("type")) return "Type";
-  if (normalized.includes("audience")) return "Target Audience";
-  if (normalized.includes("may")) return "Date Range";
+  if (normalized.includes("categor")) return toLaoText("Category");
+  if (normalized.includes("status")) return toLaoText("Status");
+  if (normalized.includes("branch")) return toLaoText("Branch");
+  if (normalized.includes("type")) return toLaoText("Type");
+  if (normalized.includes("audience")) return toLaoText("Target Audience");
+  if (normalized.includes("may")) return toLaoText("Date Range");
 
-  return "Filter";
+  return toLaoText("Filter");
 }
 
 export function SelectButton({
@@ -270,7 +275,7 @@ export function SelectButton({
     >
       <span className="flex min-w-0 items-center gap-2 truncate">
         {Icon ? <Icon className="h-4 w-4 text-blue-500" /> : null}
-        <span className="truncate">{children}</span>
+        <span className="truncate">{toLaoNode(children)}</span>
       </span>
       <ChevronDown className="h-4 w-4 shrink-0 text-slate-400" />
     </button>
@@ -294,7 +299,7 @@ export function Badge({
     <span
       className={`inline-flex rounded-md border px-2 py-1 text-[11px] font-extrabold ${toneClass.soft} ${toneClass.text} ${toneClass.border}`}
     >
-      {children}
+      {toLaoNode(children)}
     </span>
   );
 }
@@ -308,9 +313,9 @@ export function ActionButtons({
 }) {
   return (
     <div className="flex items-center justify-end gap-2">
-      {viewHref ? <IconButton href={viewHref} icon={Eye} label="View" /> : null}
-      {editHref ? <IconButton href={editHref} icon={Pencil} label="Edit" /> : null}
-      <IconButton icon={MoreVertical} label="More" tone="slate" />
+      {viewHref ? <IconButton href={viewHref} icon={Eye} label={toLaoText("View")} /> : null}
+      {editHref ? <IconButton href={editHref} icon={Pencil} label={toLaoText("Edit")} /> : null}
+      <IconButton icon={MoreVertical} label={toLaoText("More")} tone="slate" />
     </div>
   );
 }
@@ -387,7 +392,7 @@ export function DataTable<T>({
                         : ""
                   }`}
                 >
-                  {column.label}
+                  {toLaoText(column.label)}
                 </th>
               ))}
             </tr>
@@ -426,7 +431,7 @@ export function Pagination({
 }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 border-t border-blue-50 px-4 py-3">
-      <p className="text-[13px] font-semibold text-slate-600">{label}</p>
+      <p className="text-[13px] font-semibold text-slate-600">{toLaoText(label)}</p>
       <div className="flex flex-wrap items-center gap-2">
         {["<", "1", "2", "3", "...", "43", ">"].map((item, index) => (
           <button
@@ -445,7 +450,7 @@ export function Pagination({
           type="button"
           className="flex h-8 min-w-[92px] items-center justify-between gap-2 rounded-md border border-blue-100 bg-white px-3 text-[12px] font-extrabold text-slate-700 transition hover:bg-blue-50"
         >
-          10 / page
+          {toLaoText("10 / page")}
           <ChevronDown className="h-3.5 w-3.5 text-slate-400" />
         </button>
       </div>
@@ -482,10 +487,10 @@ export function ItemIdentity({
         </span>
       )}
       <span className="min-w-0">
-        <span className="block font-black text-slate-950">{title}</span>
+        <span className="block font-black text-slate-950">{toLaoText(title)}</span>
         {subtitle ? (
           <span className="mt-0.5 block text-xs font-semibold text-slate-500">
-            {subtitle}
+            {toLaoText(subtitle)}
           </span>
         ) : null}
       </span>
@@ -512,14 +517,14 @@ export function SummaryCard({
         {items.map((item) => (
           <div key={item.label} className="flex items-center justify-between gap-4">
             <span className="text-[13px] font-semibold text-slate-600">
-              {item.label}
+              {toLaoText(item.label)}
             </span>
             <span
               className={`text-right text-[13px] font-black ${
                 item.tone ? toneClasses[item.tone].text : "text-slate-950"
               }`}
             >
-              {item.value}
+            {toLaoText(item.value)}
             </span>
           </div>
         ))}
@@ -536,7 +541,7 @@ export function QuickActionsCard({
   actions: QuickAction[];
 }) {
   return (
-    <Card title={title}>
+    <Card title={toLaoText(title)}>
       <div className="space-y-2 p-4">
         {actions.map((action) => {
           const Icon = action.icon;
@@ -550,11 +555,11 @@ export function QuickActionsCard({
               </span>
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-[13px] font-black text-slate-950">
-                  {action.label}
+                  {toLaoText(action.label)}
                 </span>
                 {action.description ? (
                   <span className="mt-0.5 block truncate text-xs font-semibold text-slate-500">
-                    {action.description}
+                    {toLaoText(action.description)}
                   </span>
                 ) : null}
               </span>
@@ -602,7 +607,7 @@ export function Tabs({ tabs, active }: { tabs: string[]; active: string }) {
               : "text-slate-600 hover:bg-blue-50 hover:text-blue-600"
           }`}
         >
-          {tab}
+          {toLaoText(tab)}
         </button>
       ))}
     </div>
@@ -621,9 +626,11 @@ export function FormCard({
   return (
     <Card>
       <div className="border-b border-blue-50 px-4 py-3">
-        <h2 className="text-[15px] font-black text-slate-950">{title}</h2>
+        <h2 className="text-[15px] font-black text-slate-950">{toLaoText(title)}</h2>
         {description ? (
-          <p className="mt-1 text-xs font-semibold text-slate-500">{description}</p>
+          <p className="mt-1 text-xs font-semibold text-slate-500">
+            {toLaoText(description)}
+          </p>
         ) : null}
       </div>
       <div className="grid gap-4 p-4 md:grid-cols-2">{children}</div>
@@ -644,24 +651,26 @@ export function Field({
 }) {
   return (
     <label className={full ? "md:col-span-2" : ""}>
-      <span className="mb-1.5 block text-xs font-black text-slate-600">{label}</span>
+      <span className="mb-1.5 block text-xs font-black text-slate-600">
+        {toLaoText(label)}
+      </span>
       {type === "textarea" ? (
         <textarea
           className="min-h-24 w-full resize-none rounded-md border border-blue-100 bg-white px-3 py-2 text-sm font-semibold text-slate-800 outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-          defaultValue={value}
+          defaultValue={toLaoText(value)}
         />
       ) : type === "select" ? (
         <button
           type="button"
           className="flex h-10 w-full items-center justify-between rounded-md border border-blue-100 bg-white px-3 text-left text-sm font-extrabold text-slate-900"
         >
-          {value}
+          {toLaoText(value)}
           <ChevronDown className="h-4 w-4 text-slate-400" />
         </button>
       ) : (
         <input
           className="h-10 w-full rounded-md border border-blue-100 bg-white px-3 text-sm font-semibold text-slate-800 outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-          defaultValue={value}
+          defaultValue={toLaoText(value)}
         />
       )}
     </label>
@@ -671,7 +680,7 @@ export function Field({
 export function ExportButton() {
   return (
     <Button icon={Download} variant="secondary">
-      Export
+      {toLaoText("Export")}
     </Button>
   );
 }
@@ -679,7 +688,7 @@ export function ExportButton() {
 export function CreateButton({ href, label }: { href: string; label: string }) {
   return (
     <Button href={href} icon={Plus}>
-      {label}
+      {toLaoText(label)}
     </Button>
   );
 }

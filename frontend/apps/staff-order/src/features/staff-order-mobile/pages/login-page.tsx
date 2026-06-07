@@ -24,6 +24,7 @@ import {
   staffRole
 } from "../data/staff-order-data";
 import { getStaffOrderPath } from "../utils";
+import { lo } from "../utils/lao-labels";
 import { StaffMobileShell, StaffScrollArea } from "../components/staff-mobile-shell";
 import { StaffOrderHeader } from "../components/staff-order-header";
 
@@ -46,10 +47,10 @@ export function StaffLoginPage({ businessSlug }: { businessSlug: string }) {
             />
             <div className="min-w-0 flex-1 py-1">
               <h2 className="text-[20px] leading-6 font-black text-slate-950">
-                Welcome back, Somchai!
+                {lo("Welcome back, Somchai!")}
               </h2>
               <p className="mt-1 text-[13px] font-bold text-slate-500">
-                Let's get ready to take great orders.
+                {lo("Let's get ready to take great orders.")}
               </p>
               <div className="mt-4 grid grid-cols-2 divide-x divide-blue-50">
                 <SmallMeta icon={CalendarDays} label="Date" value="May 20, 2024" />
@@ -72,13 +73,13 @@ export function StaffLoginPage({ businessSlug }: { businessSlug: string }) {
               <Sun className="h-8 w-8" />
             </span>
             <div className="min-w-0">
-              <p className="text-[13px] font-bold text-slate-500">Today's Shift</p>
-              <h3 className="text-[19px] font-black text-slate-950">Morning Shift</h3>
+              <p className="text-[13px] font-bold text-slate-500">{lo("Today's Shift")}</p>
+              <h3 className="text-[19px] font-black text-slate-950">{lo("Morning Shift")}</h3>
               <p className="mt-2 flex items-center gap-3 text-[12px] font-bold text-slate-500">
                 <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-emerald-600">
-                  Open
+                  {lo("Open")}
                 </span>
-                Main Floor
+                {lo("Main Floor")}
               </p>
             </div>
           </div>
@@ -87,14 +88,14 @@ export function StaffLoginPage({ businessSlug }: { businessSlug: string }) {
         <section className="mt-4 rounded-lg border border-blue-100 bg-white p-3">
           <div className="mb-2 flex items-center justify-between">
             <h3 className="text-[15px] font-black text-slate-950">
-              Quick Branch Switch
+              {lo("Quick Branch Switch")}
             </h3>
             <button
               type="button"
-              onClick={() => showNotice("Branch management opens in admin.")}
+              onClick={() => showNotice(lo("Branch management opens in admin."))}
               className="text-[12px] font-black text-blue-600"
             >
-              Manage Branches
+              {lo("Manage Branches")}
             </button>
           </div>
           <div className="overflow-hidden rounded-lg border border-blue-50">
@@ -141,16 +142,16 @@ export function StaffLoginPage({ businessSlug }: { businessSlug: string }) {
           to={getStaffOrderPath(businessSlug, "/tables")}
           className="mt-4 flex h-14 items-center justify-center gap-3 rounded-lg bg-blue-600 text-[16px] font-black text-white shadow-[0_16px_28px_rgba(37,99,235,0.26)] transition hover:bg-blue-700"
         >
-          Login & Start Taking Orders
+          {lo("Login & Start Taking Orders")}
           <ArrowRight className="h-5 w-5" />
         </Link>
         <button
           type="button"
-          onClick={() => showNotice("Staff QR scanner ready.")}
+          onClick={() => showNotice(lo("Staff QR scanner ready."))}
           className="mt-3 flex h-[52px] w-full items-center justify-center gap-3 rounded-lg border border-blue-200 bg-white text-[15px] font-black text-blue-600 hover:bg-blue-50"
         >
           <QrCode className="h-5 w-5" />
-          Scan Staff QR
+          {lo("Scan Staff QR")}
         </button>
       </StaffScrollArea>
     </StaffMobileShell>
@@ -177,8 +178,8 @@ function LoginRow({
     >
       <Icon className="h-5 w-5 text-slate-500" />
       <span>
-        <span className="block text-[11px] font-bold text-slate-500">{label}</span>
-        <span className="text-[14px] font-black text-slate-950">{value}</span>
+        <span className="block text-[11px] font-bold text-slate-500">{lo(label)}</span>
+        <span className="text-[14px] font-black text-slate-950">{lo(value)}</span>
       </span>
       {hasChevron ? (
         <ChevronDown className="h-5 w-5 text-slate-400" />
@@ -202,9 +203,9 @@ function SmallMeta({
     <div className="flex min-w-0 items-center gap-2 px-2">
       <Icon className="h-5 w-5 shrink-0 text-slate-500" />
       <span className="min-w-0">
-        <span className="block text-[10px] font-bold text-slate-500">{label}</span>
+        <span className="block text-[10px] font-bold text-slate-500">{lo(label)}</span>
         <span className="block truncate text-[12px] font-black text-slate-950">
-          {value}
+          {lo(value)}
         </span>
       </span>
     </div>

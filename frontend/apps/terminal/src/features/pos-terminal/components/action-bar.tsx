@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 import type { QuickAction } from "../types";
 import { getBusinessPath } from "../utils";
+import { lo } from "../utils/lao-labels";
 
 const toneClasses: Record<QuickAction["tone"], string> = {
   blue: "border-blue-200 bg-blue-50 text-blue-600 hover:bg-blue-100",
@@ -26,7 +27,7 @@ export function ActionBar({
         const body = (
           <>
             <Icon className="h-4 w-4" />
-            <span className="truncate">{action.label}</span>
+            <span className="truncate">{lo(action.label)}</span>
           </>
         );
         const className = `flex h-11 items-center justify-center gap-2 rounded-lg border px-3 text-[12px] font-black shadow-[0_8px_18px_rgba(15,23,42,0.03)] transition hover:-translate-y-0.5 ${toneClasses[action.tone]}`;

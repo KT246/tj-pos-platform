@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import type { CartLine, Discount, OrderType } from "../types";
 import { formatMoney, getBusinessPath, getCartSummary } from "../utils";
+import { lo } from "../utils/lao-labels";
 
 export function CartPanel({
   businessSlug,
@@ -38,10 +39,10 @@ export function CartPanel({
       <div className="flex items-center justify-between border-b border-blue-50 px-4 py-2.5">
         <div>
           <h2 className="text-[15px] font-black text-slate-950">
-            Cart ({summary.itemCount})
+            {lo("Cart")} ({summary.itemCount})
           </h2>
           <p className="text-[11px] font-bold text-slate-500">
-            {orderType} - {orderType === "Take Away" ? "Counter" : selectedTable ?? "No Table"}
+            {lo(orderType)} - {orderType === "Take Away" ? lo("Counter") : selectedTable ?? lo("No Table")}
           </p>
           {customerName ? (
             <p className="text-[10px] font-bold text-blue-600">{customerName}</p>
@@ -52,7 +53,7 @@ export function CartPanel({
           onClick={onClear}
           className="text-[12px] font-black text-blue-600 transition hover:text-blue-700"
         >
-          Clear
+          {lo("Clear")}
         </button>
       </div>
 
@@ -71,10 +72,10 @@ export function CartPanel({
           <div className="flex h-full min-h-52 items-center justify-center rounded-lg border border-dashed border-blue-100 bg-blue-50/30 text-center">
             <div>
               <p className="text-[13px] font-black text-slate-700">
-                Cart is empty
+                {lo("Cart is empty")}
               </p>
               <p className="mt-1 text-[11px] font-bold text-slate-500">
-                Add items from the product grid to start a sale.
+                {lo("Add items from the product grid to start a sale.")}
               </p>
             </div>
           </div>
@@ -89,7 +90,7 @@ export function CartPanel({
             className="flex h-9 items-center justify-center gap-2 rounded-md border border-blue-100 bg-blue-50/60 text-[12px] font-black text-blue-600 transition hover:border-blue-300 hover:bg-blue-50"
           >
             <UserRound className="h-4 w-4" />
-            Customer
+            {lo("Customer")}
           </button>
           <button
             type="button"
@@ -97,14 +98,14 @@ export function CartPanel({
             className="flex h-9 items-center justify-center gap-2 rounded-md border border-amber-100 bg-amber-50/70 text-[12px] font-black text-amber-700 transition hover:border-amber-300"
           >
             <Tag className="h-4 w-4" />
-            Discount
+            {lo("Discount")}
           </button>
         </div>
         <SummaryRow label="Subtotal" value={summary.subtotal} />
         <SummaryRow label="Discount" value={summary.discount} muted />
         <SummaryRow label="Tax (10%)" value={summary.tax} />
         <div className="mt-2 flex items-center justify-between border-t border-blue-50 pt-3">
-          <span className="text-[13px] font-black text-slate-950">Total</span>
+          <span className="text-[13px] font-black text-slate-950">{lo("Total")}</span>
           <span className="text-[20px] leading-6 font-black text-slate-950">
             {formatMoney(summary.total)}
           </span>
@@ -117,7 +118,7 @@ export function CartPanel({
               : "bg-blue-600 text-white hover:bg-blue-700"
           }`}
         >
-          Pay {formatMoney(summary.total)}
+          {lo("Pay")} {formatMoney(summary.total)}
         </Link>
       </div>
     </aside>
@@ -147,19 +148,19 @@ function CartLineRow({
           <div className="flex items-start justify-between gap-2">
             <div className="min-w-0">
               <p className="truncate text-[12px] leading-4 font-black text-slate-950">
-                {line.name}
+                {lo(line.name)}
               </p>
               <p className="text-[10px] leading-3 font-bold text-slate-500">
                 {line.quantity} x {formatMoney(line.price)}
               </p>
               {line.priceType && line.priceType !== "retail" ? (
                 <p className="mt-1 text-[10px] leading-3 font-black text-emerald-600">
-                  {line.priceType.toUpperCase()} price
-                  {line.priceList ? ` - ${line.priceList}` : ""}
+                  {lo(line.priceType)} {lo("price")}
+                  {line.priceList ? ` - ${lo(line.priceList)}` : ""}
                 </p>
               ) : line.minWholesaleQuantity ? (
                 <p className="mt-1 text-[10px] leading-3 font-bold text-slate-400">
-                  Wholesale at {line.minWholesaleQuantity}+ pcs
+                  {lo("Wholesale at")} {line.minWholesaleQuantity}+ {lo("pcs")}
                 </p>
               ) : null}
             </div>
@@ -170,7 +171,7 @@ function CartLineRow({
           {line.note ? (
             <p className="mt-1 flex items-center gap-1 text-[10px] leading-3 font-bold text-orange-500">
               <Pencil className="h-3 w-3" />
-              Note: {line.note}
+              {lo("Note")}: {lo(line.note)}
             </p>
           ) : null}
           <div className="mt-2 flex items-center justify-between">
@@ -236,7 +237,7 @@ function SummaryRow({
 }) {
   return (
     <div className="flex items-center justify-between py-1">
-      <span className="text-[12px] font-bold text-slate-500">{label}</span>
+      <span className="text-[12px] font-bold text-slate-500">{lo(label)}</span>
       <span
         className={`text-[12px] font-black ${
           muted ? "text-emerald-600" : "text-slate-800"

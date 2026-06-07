@@ -33,6 +33,7 @@ import {
   SummaryCard
 } from "../components/business-admin-primitives";
 import { BusinessAdminLink } from "../components/business-admin-link";
+import { toLaoText } from "../utils/lao-labels";
 import {
   branches,
   customers,
@@ -1076,7 +1077,7 @@ function CategoryDonut() {
         </div>
       </div>
       <div className="flex items-center justify-between border-t border-blue-50 px-4 py-3 text-sm font-black">
-        <span>Total</span>
+        <span>{toLaoText("Total")}</span>
         <span>342</span>
       </div>
     </Card>

@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
+import { lo } from "../utils/lao-labels";
 
 type PublicMenuItem = {
   slug: string;
@@ -287,7 +288,7 @@ function PublicMenuFrame({
       <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex-1">{children}</div>
         <div className="mt-6 rounded-2xl border border-blue-100 bg-white px-4 py-3 text-center text-[12px] font-bold text-blue-600 shadow-sm sm:text-[13px]">
-          {footerText}
+          {lo(footerText)}
         </div>
       </div>
     </main>
@@ -314,7 +315,7 @@ function BusinessHeader({
             {businessName(businessSlug)}
           </span>
           <span className="block text-[12px] font-bold text-slate-500 sm:text-[13px]">
-            {business.tagline}
+            {lo(business.tagline)}
           </span>
         </span>
       </Link>
@@ -324,28 +325,28 @@ function BusinessHeader({
           className="inline-flex h-10 items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 text-[12px] font-black text-blue-600 transition hover:border-blue-300 hover:bg-blue-100"
         >
           <Grid2X2 className="h-4 w-4" />
-          Menu
+          {lo("Menu")}
         </Link>
         <Link
           to={`/b/${businessSlug}/info`}
           className="inline-flex h-10 items-center gap-2 rounded-full border border-blue-100 bg-white px-4 text-[12px] font-black text-[#071633] transition hover:border-blue-300 hover:bg-blue-50"
         >
           <Info className="h-4 w-4" />
-          Info
+          {lo("Info")}
         </Link>
         <a
           href={`tel:${business.phone.replace(/\s/g, "")}`}
           className="inline-flex h-10 items-center gap-2 rounded-full border border-blue-100 bg-white px-4 text-[12px] font-black text-[#071633] transition hover:border-blue-300 hover:bg-blue-50"
         >
           <Phone className="h-4 w-4" />
-          Call
+          {lo("Call")}
         </a>
         {action ?? (
           <button
             type="button"
             className="inline-flex h-10 items-center gap-2 rounded-full border border-blue-100 bg-white px-4 text-[12px] font-black text-[#071633] transition hover:border-blue-300 hover:bg-blue-50"
           >
-            EN
+            ລາວ
             <ChevronRight className="h-3.5 w-3.5 rotate-90" strokeWidth={2.4} />
           </button>
         )}
@@ -382,14 +383,14 @@ function MenuSearch({
         <input
           name="search"
           defaultValue={value}
-          placeholder="Search menu..."
+          placeholder={lo("Search menu...")}
           className="h-12 w-full rounded-2xl border border-blue-100 bg-white pr-9 pl-10 text-[14px] font-bold text-[#071633] transition outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-50"
         />
         {value ? (
           <Link
             to={cancelHref}
             className="absolute top-1/2 right-3 -translate-y-1/2 text-slate-400"
-            aria-label="Clear search"
+            aria-label={lo("Clear search")}
           >
             <XCircle className="h-4 w-4" />
           </Link>
@@ -397,11 +398,11 @@ function MenuSearch({
       </label>
       {cancel ? (
         <Link to={cancelHref} className="text-[12px] font-black text-blue-600">
-          Cancel
+          {lo("Cancel")}
         </Link>
       ) : (
         <button type="submit" className="sr-only">
-          Search
+          {lo("Search")}
         </button>
       )}
     </form>
@@ -428,7 +429,7 @@ function CategoryTabs({
           }`}
         >
           <Icon className="mb-1 h-5 w-5" strokeWidth={2.35} />
-          {label}
+          {lo(label)}
         </Link>
       ))}
     </div>
@@ -454,7 +455,7 @@ function CoffeeTabs({
               : "border-blue-100 bg-white text-slate-600"
           }`}
         >
-          {tab.label}
+          {lo(tab.label)}
         </Link>
       ))}
     </div>
@@ -494,14 +495,14 @@ function SmallInfoCard({
         strokeWidth={2.35}
       />
       <div className="mt-2 text-[10px] font-bold text-slate-500 sm:text-[11px]">
-        {label}
+        {lo(label)}
       </div>
       <div
         className={`truncate text-[11px] font-black sm:text-[13px] ${
           tone === "green" ? "text-emerald-600" : "text-[#071633]"
         }`}
       >
-        {value}
+        {lo(value)}
       </div>
     </div>
   );
@@ -518,10 +519,10 @@ function HeroCard() {
       <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/25 to-transparent" />
       <div className="absolute top-8 left-6 max-w-[280px] text-white sm:top-10 sm:left-8 sm:max-w-[440px]">
         <h1 className="text-[30px] leading-tight font-black sm:text-[48px]">
-          Freshly brewed for you
+          {lo("Freshly brewed for you")}
         </h1>
         <p className="mt-3 text-[13px] leading-5 font-bold sm:text-[16px] sm:leading-7">
-          Quality ingredients, great taste.
+          {lo("Quality ingredients, great taste.")}
         </p>
       </div>
     </div>
@@ -550,22 +551,22 @@ function MenuListItem({
         />
         {item.unavailable ? (
           <div className="absolute inset-0 grid place-items-center bg-white/65 text-[11px] font-black text-red-600">
-            Out of Stock
+            {lo("Out of Stock")}
           </div>
         ) : null}
       </div>
       <div className="min-w-0 py-1">
         <div className="flex items-start justify-between gap-2">
           <h2 className="truncate text-[14px] font-black sm:text-[16px]">
-            {item.name}
+            {lo(item.name)}
           </h2>
           {item.unavailable ? (
             <span className="shrink-0 rounded-md bg-red-50 px-2 py-1 text-[9px] font-black text-red-600">
-              Out
+              {lo("Out")}
             </span>
           ) : item.badge ? (
             <span className="shrink-0 rounded-md bg-orange-50 px-2 py-1 text-[9px] font-black text-orange-500">
-              {item.badge}
+              {lo(item.badge)}
             </span>
           ) : null}
         </div>
@@ -574,7 +575,7 @@ function MenuListItem({
             compact ? "line-clamp-2" : ""
           }`}
         >
-          {item.description}
+          {lo(item.description)}
         </p>
         <p
           className={`mt-2 text-[13px] font-black sm:text-[15px] ${
@@ -596,21 +597,21 @@ function BottomActions({ businessSlug }: { businessSlug: string }) {
         className="flex h-10 items-center justify-center gap-2 rounded-xl bg-blue-50 text-[12px] font-black text-blue-600"
       >
         <Grid2X2 className="h-4 w-4" />
-        Photos
+        {lo("Photos")}
       </Link>
       <Link
         to={`/b/${businessSlug}/info`}
         className="flex h-10 items-center justify-center gap-2 rounded-xl bg-white text-[12px] font-black text-[#071633]"
       >
         <Info className="h-4 w-4" />
-        Info
+        {lo("Info")}
       </Link>
       <a
         href={`tel:${business.phone.replace(/\s/g, "")}`}
         className="flex h-10 items-center justify-center gap-2 rounded-xl bg-white text-[12px] font-black text-[#071633]"
       >
         <Phone className="h-4 w-4" />
-        Call Staff
+        {lo("Call Staff")}
       </a>
     </div>
   );
@@ -628,12 +629,12 @@ export function PublicBusinessLanding({ businessSlug }: { businessSlug: string }
         <aside className="space-y-4">
           <StoreContextCard />
           <div className="rounded-2xl border border-blue-100 bg-white p-4 shadow-sm">
-            <p className="text-[12px] font-black text-blue-600">Store Info</p>
+            <p className="text-[12px] font-black text-blue-600">{lo("Store Info")}</p>
             <h2 className="mt-2 text-[22px] font-black">
               {businessName(businessSlug)}
             </h2>
             <p className="mt-2 text-[13px] leading-6 font-semibold text-slate-600">
-              {business.branch}, {business.address}
+              {lo(business.branch)}, {lo(business.address)}
             </p>
             <BottomActions businessSlug={businessSlug} />
           </div>
@@ -641,18 +642,18 @@ export function PublicBusinessLanding({ businessSlug }: { businessSlug: string }
       </section>
       <section className="mt-6">
         <div className="flex items-center justify-between gap-4">
-          <h2 className="text-[18px] font-black sm:text-[22px]">Categories</h2>
+          <h2 className="text-[18px] font-black sm:text-[22px]">{lo("Categories")}</h2>
           <Link
             to={`/b/${businessSlug}/menu`}
             className="text-[12px] font-black text-blue-600 sm:text-[13px]"
           >
-            View all
+            {lo("View all")}
           </Link>
         </div>
         <CategoryTabs businessSlug={businessSlug} />
       </section>
       <section className="mt-6">
-        <h2 className="text-[18px] font-black sm:text-[22px]">Popular Picks</h2>
+        <h2 className="text-[18px] font-black sm:text-[22px]">{lo("Popular Picks")}</h2>
         <div className="mt-3 grid gap-3 lg:grid-cols-2 xl:grid-cols-3">
           {menuItems.slice(0, 6).map((item) => (
             <MenuListItem
@@ -697,10 +698,10 @@ export function PublicMenuPage({
             className="inline-flex items-center gap-2 text-[13px] font-black text-blue-600"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to store
+            {lo("Back to store")}
           </Link>
           <h1 className="mt-3 text-[28px] leading-tight font-black sm:text-[40px]">
-            {menuCategoryTitle(activeCategory)}
+            {lo(menuCategoryTitle(activeCategory))}
           </h1>
           {branchSlug ? (
             <p className="mt-1 text-[13px] font-bold text-slate-500">
@@ -708,7 +709,7 @@ export function PublicMenuPage({
             </p>
           ) : (
             <p className="mt-2 text-[14px] font-semibold text-slate-600">
-              Browse menu items, prices, availability and store details.
+              {lo("Browse menu items, prices, availability and store details.")}
             </p>
           )}
         </div>
@@ -735,9 +736,9 @@ export function PublicMenuPage({
         ))}
         {visibleItems.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-blue-200 bg-blue-50 px-4 py-8 text-center lg:col-span-2 xl:col-span-3">
-            <p className="text-[14px] font-black text-[#071633]">No items available</p>
+            <p className="text-[14px] font-black text-[#071633]">{lo("No items available")}</p>
             <p className="mt-2 text-[12px] font-bold text-slate-500">
-              Please choose another category.
+              {lo("Please choose another category.")}
             </p>
           </div>
         ) : null}
@@ -768,15 +769,15 @@ export function PublicMenuItemPage({
           className="inline-flex items-center gap-2 text-[13px] font-black text-blue-600"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to menu
+          {lo("Back to menu")}
         </Link>
         <button
           type="button"
           className="inline-flex h-10 items-center gap-2 rounded-full border border-blue-100 bg-white px-4 text-[12px] font-black text-[#071633] shadow-sm transition hover:border-blue-300 hover:bg-blue-50"
-          aria-label="Share item"
+          aria-label={lo("Share item")}
         >
           <Share2 className="h-4 w-4" />
-          Share
+          {lo("Share")}
         </button>
       </div>
 
@@ -789,21 +790,21 @@ export function PublicMenuItemPage({
           />
           {item.badge ? (
             <span className="absolute top-4 right-4 rounded-full bg-orange-50 px-3 py-1.5 text-[11px] font-black text-orange-500 shadow-sm">
-              {item.badge}
+              {lo(item.badge)}
             </span>
           ) : null}
         </div>
 
         <div className="rounded-[28px] border border-blue-100 bg-white p-5 shadow-sm sm:p-6">
           <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-[11px] font-black text-blue-600">
-            {item.category}
+            {lo(item.category)}
           </span>
           <h1 className="mt-4 text-[34px] leading-tight font-black sm:text-[44px]">
-            {item.name}
+            {lo(item.name)}
           </h1>
           <p className="mt-3 text-[24px] font-black text-blue-600">{item.price}</p>
           <p className="mt-4 text-[14px] leading-7 font-semibold text-slate-600 sm:text-[15px]">
-            {item.description} A perfect balance of bold and creamy.
+            {lo(item.description)} {lo("A perfect balance of bold and creamy.")}
           </p>
 
           <div className="mt-6 divide-y divide-blue-100 rounded-2xl border border-blue-100 bg-white">
@@ -814,7 +815,7 @@ export function PublicMenuItemPage({
           </div>
 
           <div className="mt-5 rounded-2xl border border-blue-100 bg-blue-50 px-4 py-4 text-[13px] leading-6 font-bold text-blue-600">
-            This is a digital menu item. Please place your order with our staff.
+            {lo("This is a digital menu item. Please place your order with our staff.")}
           </div>
         </div>
       </section>
@@ -838,15 +839,15 @@ function PublicUnavailableItemPage({
           className="inline-flex items-center gap-2 text-[13px] font-black text-blue-600"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to menu
+          {lo("Back to menu")}
         </Link>
         <button
           type="button"
           className="inline-flex h-10 items-center gap-2 rounded-full border border-blue-100 bg-white px-4 text-[12px] font-black text-[#071633] shadow-sm transition hover:border-blue-300 hover:bg-blue-50"
-          aria-label="Share item"
+          aria-label={lo("Share item")}
         >
           <Share2 className="h-4 w-4" />
-          Share
+          {lo("Share")}
         </button>
       </div>
 
@@ -860,26 +861,26 @@ function PublicUnavailableItemPage({
           <div className="absolute inset-0 grid place-items-center bg-white/62">
             <div className="grid place-items-center text-red-500">
               <XCircle className="h-12 w-12" strokeWidth={2.2} />
-              <span className="mt-2 text-[18px] font-black">Out of Stock</span>
+              <span className="mt-2 text-[18px] font-black">{lo("Out of Stock")}</span>
             </div>
           </div>
         </div>
 
         <div className="rounded-[28px] border border-red-100 bg-white p-5 shadow-sm sm:p-6">
           <span className="inline-flex rounded-full bg-red-50 px-3 py-1 text-[11px] font-black text-red-600">
-            Temporarily unavailable
+            {lo("Temporarily unavailable")}
           </span>
           <h1 className="mt-4 text-[34px] leading-tight font-black sm:text-[44px]">
-            {item.name}
+            {lo(item.name)}
           </h1>
           <p className="mt-3 text-[24px] font-black text-slate-400 line-through">
             {item.price}
           </p>
           <p className="mt-4 text-[14px] leading-7 font-semibold text-slate-600 sm:text-[15px]">
-            {item.description}
+            {lo(item.description)}
           </p>
           <div className="mt-6 rounded-2xl bg-red-50 px-4 py-4 text-[13px] leading-6 font-bold text-red-600">
-            Sorry, this item is currently out of stock. Please try another item.
+            {lo("Sorry, this item is currently out of stock. Please try another item.")}
           </div>
         </div>
       </section>
@@ -899,9 +900,9 @@ function DetailRow({
   return (
     <div className="grid grid-cols-[28px_minmax(80px,120px)_minmax(0,1fr)] items-center gap-2 px-4 py-3">
       <Icon className="h-4 w-4 text-slate-500" />
-      <span className="text-[12px] font-bold text-slate-500">{label}</span>
+      <span className="text-[12px] font-bold text-slate-500">{lo(label)}</span>
       <span className="text-right text-[12px] font-black break-words text-[#071633]">
-        {value}
+        {lo(value)}
       </span>
     </div>
   );
@@ -917,7 +918,7 @@ export function PublicInfoPage({ businessSlug }: { businessSlug: string }) {
           className="inline-flex items-center gap-2 text-[13px] font-black text-blue-600"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to store
+          {lo("Back to store")}
         </Link>
       </div>
       <section className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
@@ -932,13 +933,13 @@ export function PublicInfoPage({ businessSlug }: { businessSlug: string }) {
               <h1 className="text-[28px] leading-tight font-black sm:text-[36px]">
                 {businessName(businessSlug)}
               </h1>
-              <p className="text-[13px] font-bold text-slate-500">{business.tagline}</p>
+              <p className="text-[13px] font-bold text-slate-500">{lo(business.tagline)}</p>
             </div>
           </div>
           <div className="mt-6 space-y-4">
             <ContactRow
               icon={MapPin}
-              text={`${business.branch}, ${business.address}`}
+              text={`${lo(business.branch)}, ${lo(business.address)}`}
             />
             <ContactRow icon={Phone} text={business.phone} />
             <ContactRow icon={Mail} text={business.email} />
@@ -953,23 +954,22 @@ export function PublicInfoPage({ businessSlug }: { businessSlug: string }) {
 
         <div className="space-y-4">
           <div className="rounded-[28px] border border-blue-100 bg-white p-5 shadow-sm sm:p-6">
-            <h2 className="text-[20px] font-black">Opening Hours</h2>
+            <h2 className="text-[20px] font-black">{lo("Opening Hours")}</h2>
             <div className="mt-4 space-y-3 text-[13px] font-bold">
               <div className="flex justify-between gap-4">
-                <span>Monday - Friday</span>
+                <span>{lo("Monday - Friday")}</span>
                 <span>6:30 AM - 10:00 PM</span>
               </div>
               <div className="flex justify-between gap-4">
-                <span>Saturday - Sunday</span>
+                <span>{lo("Saturday - Sunday")}</span>
                 <span>6:30 AM - 11:00 PM</span>
               </div>
             </div>
           </div>
           <div className="rounded-[28px] border border-blue-100 bg-white p-5 shadow-sm sm:p-6">
-            <h2 className="text-[20px] font-black">About Us</h2>
+            <h2 className="text-[20px] font-black">{lo("About Us")}</h2>
             <p className="mt-2 text-[13px] leading-6 font-semibold text-slate-600">
-              TJ Cafe Vientiane serves quality coffee, delicious drinks, and tasty food
-              in a cozy and welcoming atmosphere.
+              {lo("TJ Cafe Vientiane serves quality coffee, delicious drinks, and tasty food in a cozy and welcoming atmosphere.")}
             </p>
             <img
               src={business.storeImage}
@@ -1037,9 +1037,9 @@ function InfoPanel({
       <div className="flex min-w-0 items-center gap-3">
         <Icon className="h-4 w-4 shrink-0 text-blue-600" />
         <span className="min-w-0">
-          <span className="block text-[12px] font-black">{title}</span>
+          <span className="block text-[12px] font-black">{lo(title)}</span>
           <span className="block truncate text-[11px] font-semibold text-slate-500">
-            {text}
+            {lo(text)}
           </span>
         </span>
       </div>
@@ -1058,17 +1058,16 @@ export function PublicBookingPage({ businessSlug }: { businessSlug: string }) {
           className="inline-flex items-center gap-2 text-[13px] font-black text-blue-600"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to store
+          {lo("Back to store")}
         </Link>
       </div>
       <div className="mt-5 rounded-[28px] border border-blue-100 bg-white p-6 shadow-sm sm:p-8 lg:max-w-3xl">
         <CalendarDays className="h-12 w-12 text-blue-600" />
         <h1 className="mt-5 text-[34px] leading-tight font-black sm:text-[44px]">
-          Booking Request
+          {lo("Booking Request")}
         </h1>
         <p className="mt-4 text-[14px] leading-7 font-semibold text-slate-600 sm:text-[15px]">
-          Booking can be enabled for supported businesses. This public menu stays
-          view-only and does not create orders or payments.
+          {lo("Booking can be enabled for supported businesses. This public menu stays view-only and does not create orders or payments.")}
         </p>
       </div>
     </PublicMenuFrame>
@@ -1086,13 +1085,13 @@ export function PublicQrPage({ qrCode }: { qrCode: string }) {
         <p className="mt-4 text-[12px] font-black text-blue-600">QR Code</p>
         <h1 className="mt-2 text-[34px] font-black sm:text-[44px]">{qrCode}</h1>
         <p className="mt-4 text-[14px] leading-7 font-semibold text-slate-600">
-          This QR opens the linked public menu for table {business.table}.
+          {lo("This QR opens the linked public menu for table")} {business.table}.
         </p>
         <Link
           to={`/b/${businessSlug}/menu`}
           className="mt-6 inline-flex h-12 items-center justify-center rounded-full bg-blue-600 px-6 text-[13px] font-black text-white transition hover:bg-blue-700"
         >
-          Open linked menu
+          {lo("Open linked menu")}
         </Link>
       </div>
     </PublicMenuFrame>
@@ -1123,7 +1122,7 @@ export function PublicSearchResultsPage({
           className="mt-0"
         />
         <p className="mt-4 text-[13px] font-bold text-slate-500">
-          {results.length} results found
+          {results.length} {lo("results found")}
         </p>
       </section>
       <div className="mt-5 grid gap-3 lg:grid-cols-2 xl:grid-cols-3">
@@ -1138,9 +1137,9 @@ export function PublicSearchResultsPage({
         {results.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-blue-200 bg-blue-50 px-4 py-10 text-center lg:col-span-2 xl:col-span-3">
             <Search className="mx-auto h-8 w-8 text-blue-500" />
-            <p className="mt-3 text-[14px] font-black text-[#071633]">No menu found</p>
+            <p className="mt-3 text-[14px] font-black text-[#071633]">{lo("No menu found")}</p>
             <p className="mt-2 text-[12px] font-bold text-slate-500">
-              Try another keyword or clear the search.
+              {lo("Try another keyword or clear the search.")}
             </p>
           </div>
         ) : null}

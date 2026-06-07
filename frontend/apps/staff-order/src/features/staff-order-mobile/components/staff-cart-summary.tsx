@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import type { StaffOrderLine } from "../types";
 import { formatMoney, getStaffCartSummary, getStaffOrderPath } from "../utils";
+import { lo } from "../utils/lao-labels";
 
 export function StaffCartSummary({
   businessSlug,
@@ -23,19 +24,19 @@ export function StaffCartSummary({
       </div>
       <div className="min-w-0">
         <p className="text-[15px] font-black text-slate-950">
-          Cart - {summary.itemCount} items
+          {lo("Cart")} - {summary.itemCount} {lo("items")}
         </p>
-        <p className="text-[12px] font-bold text-slate-500">View items</p>
+        <p className="text-[12px] font-bold text-slate-500">{lo("View items")}</p>
       </div>
       <Link
         to={getStaffOrderPath(businessSlug, "/review")}
         className="flex h-11 items-center gap-2 rounded-lg bg-blue-600 px-4 text-[13px] font-black text-white shadow-[0_12px_22px_rgba(37,99,235,0.22)] hover:bg-blue-700"
       >
-        Review Order
+        {lo("Review Order")}
         <ArrowRight className="h-4 w-4" />
       </Link>
       <div className="col-span-3 -mt-1 flex items-center justify-between border-t border-blue-50 px-1 pt-2">
-        <span className="text-[11px] font-bold text-slate-500">Subtotal</span>
+        <span className="text-[11px] font-bold text-slate-500">{lo("Subtotal")}</span>
         <span className="text-[15px] font-black text-slate-950">
           {formatMoney(summary.subtotal)}
         </span>

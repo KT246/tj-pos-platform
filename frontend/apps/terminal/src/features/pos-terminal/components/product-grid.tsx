@@ -2,6 +2,7 @@ import { Grid2X2, LayoutGrid, Plus, Search, ScanBarcode, X } from "lucide-react"
 
 import type { Product } from "../types";
 import { formatMoney } from "../utils";
+import { lo } from "../utils/lao-labels";
 
 export function ProductGrid({
   products,
@@ -27,7 +28,7 @@ export function ProductGrid({
             value={query}
             onChange={(event) => onQueryChange(event.target.value)}
             className="h-10 w-full rounded-lg border border-blue-100 bg-white pr-11 pl-11 text-[13px] font-bold text-slate-800 shadow-[0_8px_20px_rgba(15,23,42,0.03)] outline-none transition placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-            placeholder="Search item or scan barcode"
+            placeholder={lo("Search item or scan barcode")}
           />
           {query ? (
             <button
@@ -53,7 +54,7 @@ export function ProductGrid({
           type="button"
           className="flex h-10 items-center justify-between gap-2 rounded-lg border border-blue-100 bg-white px-3 text-[12px] font-black text-slate-800 shadow-[0_8px_20px_rgba(15,23,42,0.03)] transition hover:border-blue-300 hover:bg-blue-50"
         >
-          All Items
+          {lo("All Items")}
           <Grid2X2 className="h-4 w-4 text-blue-500" />
         </button>
         <div className="hidden items-center gap-2 lg:flex">
@@ -120,7 +121,7 @@ function ProductCard({
         <span className="flex items-start justify-between gap-2">
           <span className="min-w-0">
             <span className="block truncate text-[12px] font-black leading-4 text-slate-950">
-              {product.name}
+              {lo(product.name)}
             </span>
             <span className="mt-0.5 block text-[10px] font-bold leading-3 text-slate-400">
               {product.sku}

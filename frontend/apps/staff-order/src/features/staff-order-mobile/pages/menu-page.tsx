@@ -10,6 +10,7 @@ import { staffCategories, staffName, staffProducts } from "../data/staff-order-d
 import { useStaffOrderStore } from "../stores/staff-order-store";
 import type { StaffOrderProduct } from "../types";
 import { formatMoney, getStaffOrderPath } from "../utils";
+import { lo } from "../utils/lao-labels";
 
 export function StaffMenuPage({ businessSlug }: { businessSlug: string }) {
   const params = useParams();
@@ -63,7 +64,7 @@ export function StaffMenuPage({ businessSlug }: { businessSlug: string }) {
           branch={selectedBranch}
           staff={staffName}
           shift="Morning"
-          table={`${tableId} - ${guests} Guests`}
+          table={`${tableId} - ${guests} ${lo("Guests")}`}
         />
 
         <label className="relative mt-4 block">
@@ -72,7 +73,7 @@ export function StaffMenuPage({ businessSlug }: { businessSlug: string }) {
             value={query}
             onChange={(event) => setQuery(event.currentTarget.value)}
             className="h-[52px] w-full rounded-lg border border-blue-100 bg-white pr-14 pl-12 text-[14px] font-bold shadow-[0_8px_20px_rgba(15,23,42,0.03)] transition outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-            placeholder="Search menu items"
+            placeholder={lo("Search menu items")}
           />
           <button
             type="button"
@@ -98,7 +99,7 @@ export function StaffMenuPage({ businessSlug }: { businessSlug: string }) {
                     : "border border-blue-100 bg-white text-slate-500 hover:bg-blue-50"
                 }`}
               >
-                {category.label}
+                {lo(category.label)}
               </button>
             );
           })}
@@ -145,14 +146,14 @@ function MenuProductCard({
         <div className="min-w-0 pt-1">
           {product.label ? (
             <span className="mb-2 inline-flex rounded-md bg-blue-50 px-2 py-1 text-[10px] font-black text-blue-600">
-              {product.label}
+              {lo(product.label)}
             </span>
           ) : null}
           <p className="line-clamp-2 text-[13px] leading-4 font-black text-slate-950">
-            {product.name}
+            {lo(product.name)}
           </p>
           <p className="mt-1 truncate text-[11px] font-bold text-slate-500">
-            {product.category === "pastry" ? "Bakery" : product.category}
+            {lo(product.category === "pastry" ? "Bakery" : product.category)}
           </p>
         </div>
       </Link>

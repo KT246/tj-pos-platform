@@ -24,6 +24,7 @@ import {
   requests,
   tickets
 } from "../data/mock-platform-admin";
+import { toLaoText } from "../utils/lao-labels";
 
 export function DashboardPage() {
   return (
@@ -94,7 +95,7 @@ export function DashboardPage() {
           </div>
           <div className="border-t border-blue-100 pt-3 text-sm">
             <div className="flex justify-between">
-              <span>Total</span>
+              <span>{toLaoText("Total")}</span>
               <strong>1,102</strong>
             </div>
           </div>
@@ -113,7 +114,7 @@ export function DashboardPage() {
           </div>
           <div className="border-t border-blue-100 pt-3 text-sm">
             <div className="flex justify-between">
-              <span>Total</span>
+              <span>{toLaoText("Total")}</span>
               <strong>120</strong>
             </div>
           </div>

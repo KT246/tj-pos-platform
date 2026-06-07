@@ -31,6 +31,7 @@ import {
 } from "../components/business-admin-primitives";
 import { BusinessAdminShell } from "../layouts/business-admin-shell";
 import type { BusinessMenuKey, Kpi, Tone } from "../types";
+import { toLaoText } from "../utils/lao-labels";
 
 const coffeeImage =
   "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=420&q=80";
@@ -414,7 +415,7 @@ export function CoffeeModifiersPage() {
                   ].map(
                     (heading) => (
                       <th key={heading} className="px-4 py-3">
-                        {heading}
+                        {toLaoText(heading)}
                       </th>
                     )
                   )}
@@ -453,14 +454,18 @@ export function CoffeeModifiersPage() {
                 style={{ backgroundImage: `url(${latteImage})` }}
               />
               <span>
-                <span className="block text-sm font-black text-slate-950">Iced Latte</span>
+                <span className="block text-sm font-black text-slate-950">
+                  {toLaoText("Iced Latte")}
+                </span>
                 <span className="mt-1 block text-xs font-bold text-slate-500">LAK 28,000</span>
               </span>
             </div>
             <OptionGroup title="ປະເພດນົມ" required options={["Whole Milk", "Oat Milk", "Almond", "Soy"]} />
             <OptionGroup title="Sweetness Level" required options={["0%", "25%", "50%", "75%", "100%"]} active="50%" />
             <div>
-              <p className="mb-2 text-xs font-black text-slate-700">Add-ons</p>
+              <p className="mb-2 text-xs font-black text-slate-700">
+                {toLaoText("Add-ons")}
+              </p>
               <div className="space-y-2">
                 {["Extra Shot +3,000", "Vanilla Syrup +2,000", "Caramel Syrup +2,000"].map(
                   (item) => (
@@ -468,7 +473,7 @@ export function CoffeeModifiersPage() {
                       <span className="flex h-4 w-4 items-center justify-center rounded border border-blue-200 bg-blue-600 text-white">
                         <Check className="h-3 w-3" />
                       </span>
-                      {item}
+                      {toLaoText(item)}
                     </label>
                   )
                 )}
@@ -543,10 +548,16 @@ export function BaristaQueueDetailPage() {
                   <tr key={row.order} className="border-b border-blue-50 last:border-b-0">
                     <td className="px-4 py-3 font-bold text-slate-500">{index + 1}</td>
                     <td className="px-4 py-3 font-black text-blue-600">{row.order}</td>
-                    <td className="px-4 py-3 font-bold text-slate-700">{row.type}</td>
-                    <td className="px-4 py-3 font-bold text-slate-950">{row.items}</td>
+                    <td className="px-4 py-3 font-bold text-slate-700">
+                      {toLaoText(row.type)}
+                    </td>
+                    <td className="px-4 py-3 font-bold text-slate-950">
+                      {toLaoText(row.items)}
+                    </td>
                     <td className="px-4 py-3 font-bold text-slate-700">{row.time}</td>
-                    <td className="px-4 py-3 font-bold text-slate-700">{row.station}</td>
+                    <td className="px-4 py-3 font-bold text-slate-700">
+                      {toLaoText(row.station)}
+                    </td>
                     <td className="px-4 py-3">
                       <Badge tone={row.status === "Ready" ? "emerald" : "amber"}>
                         {row.status === "Ready" ? "ພ້ອມຮັບ" : "ກຳລັງຈັດກຽມ"}
@@ -657,7 +668,7 @@ export function HappyHourComboSetupPage() {
                           <span className="flex h-8 w-8 items-center justify-center rounded-md bg-amber-50 text-amber-500">
                             <Icon className="h-4 w-4" />
                           </span>
-                          {row.name}
+                          {toLaoText(row.name)}
                         </span>
                       </td>
                       <td className="px-4 py-3 font-bold text-slate-700">{row.schedule}</td>
@@ -692,9 +703,11 @@ export function HappyHourComboSetupPage() {
                 </span>
                 <span>
                   <span className="block text-lg font-black text-slate-950">
-                    Afternoon Delight
+                    {toLaoText("Afternoon Delight")}
                   </span>
-                  <span className="mt-1 block text-sm font-black text-blue-600">20% Off</span>
+                  <span className="mt-1 block text-sm font-black text-blue-600">
+                    {toLaoText("20% Off")}
+                  </span>
                 </span>
               </div>
               <p className="mt-3 text-xs leading-5 font-semibold text-slate-600">
@@ -766,7 +779,7 @@ export function CafeDailyQuickViewPage() {
                 />
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-sm font-black text-slate-950">
-                    {item.name}
+                    {toLaoText(item.name)}
                   </span>
                   <span className="block text-xs font-bold text-slate-500">
                     ຂາຍໄດ້ {item.qty}
@@ -785,7 +798,9 @@ export function CafeDailyQuickViewPage() {
             <div className="relative h-44 w-44 rounded-full bg-[conic-gradient(#2563eb_0_60%,#f59e0b_60%_76%,#10b981_76%_88%,#94a3b8_88%_100%)]">
               <div className="absolute inset-8 flex flex-col items-center justify-center rounded-full bg-white text-center shadow-inner">
                 <span className="text-xl font-black text-slate-950">LAK 6.42M</span>
-                <span className="text-[11px] font-bold text-slate-500">Total</span>
+                <span className="text-[11px] font-bold text-slate-500">
+                  {toLaoText("Total")}
+                </span>
               </div>
             </div>
             <div className="w-full space-y-2">
@@ -798,7 +813,7 @@ export function CafeDailyQuickViewPage() {
                 <div key={label} className="flex items-center justify-between text-xs font-black">
                   <span className="flex items-center gap-2 text-slate-600">
                     <span className={`h-2.5 w-2.5 rounded-full ${color}`} />
-                    {label}
+                    {toLaoText(label)}
                   </span>
                   <span className="text-slate-950">{value}</span>
                 </div>
@@ -869,7 +884,7 @@ function CafeFloorTable({
         table.wide ? "h-14 w-24" : "h-14 w-14"
       }`}
       style={{ top: table.top, left: table.left }}
-      title={`${table.id} - ${status.label}`}
+      title={`${table.id} - ${toLaoText(status.label)}`}
     >
       {table.id}
     </button>
@@ -883,7 +898,7 @@ function StatusBadge({ status }: { status: CafeTableStatus }) {
     <span
       className={`inline-flex rounded-md border px-2.5 py-1 text-[11px] font-black ${statusConfig.className}`}
     >
-      {statusConfig.label}
+      {toLaoText(statusConfig.label)}
     </span>
   );
 }
@@ -891,14 +906,16 @@ function StatusBadge({ status }: { status: CafeTableStatus }) {
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between gap-4 border-b border-blue-50 pb-2 last:border-b-0">
-      <span className="text-xs font-bold text-slate-500">{label}</span>
-      <span className="text-right text-xs font-black text-slate-950">{value}</span>
+      <span className="text-xs font-bold text-slate-500">{toLaoText(label)}</span>
+      <span className="text-right text-xs font-black text-slate-950">
+        {toLaoText(value)}
+      </span>
     </div>
   );
 }
 
 function OptionGroup({
-  title,
+  title: titleValue,
   required,
   options,
   active = options[0]
@@ -908,6 +925,8 @@ function OptionGroup({
   options: string[];
   active?: string;
 }) {
+  const title = toLaoText(titleValue);
+
   return (
     <div>
       <p className="mb-2 text-xs font-black text-slate-700">
@@ -924,7 +943,7 @@ function OptionGroup({
                 : "border-blue-100 bg-white text-slate-600 hover:border-blue-200 hover:bg-blue-50"
             }`}
           >
-            {option}
+            {toLaoText(option)}
           </button>
         ))}
       </div>
@@ -953,7 +972,7 @@ function Toggle({ enabled }: { enabled: boolean }) {
 function PaginationLite({ label }: { label: string }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 border-t border-blue-50 px-4 py-3">
-      <p className="text-[12px] font-semibold text-slate-500">{label}</p>
+      <p className="text-[12px] font-semibold text-slate-500">{toLaoText(label)}</p>
       <div className="flex items-center gap-2">
         {["<", "1", "2", ">"].map((item, index) => (
           <button

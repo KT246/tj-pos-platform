@@ -75,7 +75,7 @@ export function LoginPage() {
 
         <div className="flex items-center gap-4 text-sm text-slate-400">
           <span className="h-px flex-1 bg-blue-100" />
-          or
+          ຫຼື
           <span className="h-px flex-1 bg-blue-100" />
         </div>
 
@@ -192,7 +192,7 @@ function AuthLayout({
               className="font900 flex cursor-pointer items-center gap-2 text-sm text-slate-800"
             >
               <Globe className="h-5 w-5" />
-              EN
+              ລາວ
             </button>
             <Link
               href="/"
@@ -346,12 +346,12 @@ function AuthLayout({
             </div>
             <div>
               <p className="font900 mb-3 text-slate-950">Support</p>
-              <p className="leading-6">FAQ/Help</p>
-              <p className="leading-6">User Guide</p>
-              <p className="leading-6">Request Support</p>
+              <p className="leading-6">FAQ / ຊ່ວຍເຫຼືອ</p>
+              <p className="leading-6">ຄູ່ມືຜູ້ໃຊ້</p>
+              <p className="leading-6">ຂໍ Support</p>
             </div>
             <div>
-              <p className="font900 mb-3 text-slate-950">Contact Us</p>
+              <p className="font900 mb-3 text-slate-950">ຕິດຕໍ່ພວກເຮົາ</p>
               <p className="flex items-center gap-2 leading-6">
                 <Phone className="h-4 w-4" /> +856 20 55 888 999
               </p>
@@ -363,7 +363,7 @@ function AuthLayout({
               </p>
             </div>
             <div>
-              <p className="font900 mb-3 text-slate-950">Secure & Certified</p>
+              <p className="font900 mb-3 text-slate-950">ປອດໄພ & ມີມາດຕະຖານ</p>
               <div className="grid grid-cols-2 gap-3">
                 {["ISO 27001", "PCI DSS"].map((item) => (
                   <div
@@ -377,8 +377,8 @@ function AuthLayout({
             </div>
           </div>
           <div className="mx-auto mt-4 flex max-w-[1220px] justify-between border-t border-blue-50 pt-3 text-xs text-slate-500">
-            <span>(c) 2025 TJ POS Co., Ltd. All rights reserved.</span>
-            <span>Terms of Service | Privacy Policy</span>
+            <span>(c) 2025 TJ POS Co., Ltd. ສະຫງວນລິຂະສິດ.</span>
+            <span>ເງື່ອນໄຂການໃຊ້ງານ | ນະໂຍບາຍຄວາມລັບ</span>
           </div>
         </footer>
       ) : null}

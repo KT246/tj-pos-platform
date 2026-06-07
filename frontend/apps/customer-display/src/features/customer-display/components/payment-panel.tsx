@@ -10,6 +10,7 @@ import {
   formatDisplayMoney,
   formatDisplayMoneyCompact
 } from "../utils";
+import { lo } from "../utils/lao-labels";
 import { PaymentMethods } from "./payment-methods";
 
 export function OrderSummaryCard({
@@ -33,7 +34,7 @@ export function OrderSummaryCard({
             compact ? "text-[18px]" : "text-[20px]"
           }`}
         >
-          <span>Subtotal</span>
+          <span>{lo("Subtotal")}</span>
           <strong className="font-black text-[#071633]">
             {formatDisplayMoney(order.summary.subtotal)}
           </strong>
@@ -44,7 +45,7 @@ export function OrderSummaryCard({
           }`}
         >
           <span className="flex items-center gap-2">
-            Service Charge (5%)
+            {lo("Service Charge (5%)")}
             <Info className="h-5 w-5 text-slate-400" strokeWidth={2.4} />
           </span>
           <strong className="font-black text-[#071633]">
@@ -56,14 +57,14 @@ export function OrderSummaryCard({
             compact ? "text-[18px]" : "text-[20px]"
           }`}
         >
-          <span>Discount</span>
+          <span>{lo("Discount")}</span>
           <strong>-{formatDisplayMoney(order.summary.discount)}</strong>
         </div>
       </div>
 
       <div className={compact ? "mt-2.5 border-t border-blue-100 pt-2.5" : "mt-5 border-t border-blue-100 pt-5"}>
         <div className={`${compact ? "text-[20px]" : "text-[22px]"} font-black text-[#071633]`}>
-          Total Due
+          {lo("Total Due")}
         </div>
         <div className={`${compact ? "text-[44px]" : "text-[58px]"} text-right font-black leading-none text-blue-600`}>
           LAK {formatDisplayMoneyCompact(order.summary.total)}
@@ -89,7 +90,7 @@ export function BankDetailsCard({ bank }: { bank: CustomerBankDetails }) {
         </div>
         <div className="min-w-0 flex-1">
           <h3 className="text-[22px] font-black text-blue-600">
-            Bank Transfer Details
+            {lo("Bank Transfer Details")}
           </h3>
           <div className="mt-3 space-y-2">
             {rows.map(([label, value]) => (
@@ -97,7 +98,7 @@ export function BankDetailsCard({ bank }: { bank: CustomerBankDetails }) {
                 key={label}
                 className="grid grid-cols-[170px_minmax(0,1fr)] border-b border-dashed border-blue-100 pb-1.5 text-[17px] last:border-b-0 last:pb-0"
               >
-                <span className="font-medium text-slate-500">{label}</span>
+                <span className="font-medium text-slate-500">{lo(label)}</span>
                 <strong className="truncate text-right font-black text-[#071633]">
                   {value}
                 </strong>
@@ -128,7 +129,7 @@ export function PaymentMethodCard({
       <h3
         className={`${size === "small" ? "mb-2 text-[20px]" : "mb-3 text-[22px]"} font-black text-[#071633]`}
       >
-        Payment Method
+        {lo("Payment Method")}
       </h3>
       <PaymentMethods
         methods={customerPaymentMethods}
@@ -143,7 +144,7 @@ export function PaymentMethodCard({
             className={size === "small" ? "h-5 w-5" : "h-6 w-6"}
             strokeWidth={2.5}
           />
-          <span>{note}</span>
+          <span>{lo(note)}</span>
         </div>
       ) : null}
     </section>

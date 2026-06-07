@@ -69,19 +69,19 @@ function inferToastType(message: string): SystemToastType {
 function titleForToast(type: SystemToastType, message: string) {
   const normalized = message.toLowerCase();
 
-  if (normalized.includes("payment completed")) return "Payment completed";
-  if (normalized.includes("marked ready")) return "Order marked ready";
-  if (normalized.includes("settings saved")) return "Settings saved";
-  if (normalized.includes("settings reset")) return "Settings reset";
-  if (normalized.includes("refreshed")) return "Data refreshed";
-  if (normalized.includes("not found")) return "Not found";
-  if (normalized.includes("empty")) return "Please review";
-  if (normalized.includes("failed")) return "Action failed";
+  if (normalized.includes("payment completed")) return "ຊຳລະສຳເລັດ";
+  if (normalized.includes("marked ready")) return "ອໍເດີພ້ອມແລ້ວ";
+  if (normalized.includes("settings saved")) return "ບັນທຶກການຕັ້ງຄ່າແລ້ວ";
+  if (normalized.includes("settings reset")) return "ຣີເຊັດການຕັ້ງຄ່າແລ້ວ";
+  if (normalized.includes("refreshed")) return "ໂຫຼດຂໍ້ມູນໃໝ່ແລ້ວ";
+  if (normalized.includes("not found")) return "ບໍ່ພົບຂໍ້ມູນ";
+  if (normalized.includes("empty")) return "ກວດສອບກ່ອນ";
+  if (normalized.includes("failed")) return "ດຳເນີນການບໍ່ສຳເລັດ";
 
-  if (type === "success") return "Action completed";
-  if (type === "warning") return "Please review";
-  if (type === "error") return "Unable to complete action";
-  return "Information";
+  if (type === "success") return "ດຳເນີນການສຳເລັດ";
+  if (type === "warning") return "ກວດສອບກ່ອນ";
+  if (type === "error") return "ບໍ່ສາມາດດຳເນີນການ";
+  return "ຂໍ້ມູນ";
 }
 
 export const useStaffOrderToastStore = create<StaffOrderToastState>((set) => ({
@@ -94,7 +94,7 @@ export const useStaffOrderToastStore = create<StaffOrderToastState>((set) => ({
           type: toast.type ?? "info",
           title: toast.title,
           description: toast.description,
-          timestamp: "Just now",
+          timestamp: "ຕອນນີ້",
           durationMs: toast.durationMs ?? defaultDurationMs
         },
         ...state.toasts

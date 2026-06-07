@@ -10,6 +10,7 @@ import {
 
 import type { KitchenTicket } from "../types";
 import { getElapsedLabel } from "../utils";
+import { lo } from "../utils/lao-labels";
 
 type TicketCardProps = {
   ticket: KitchenTicket;
@@ -66,7 +67,7 @@ function TicketLocation({ ticket }: { ticket: KitchenTicket }) {
   return (
     <span className="flex items-center gap-2 text-[15px] font-bold text-[#0b1736]">
       <Icon className="h-5 w-5" strokeWidth={2.2} />
-      {ticket.table}
+      {lo(ticket.table)}
     </span>
   );
 }
@@ -95,7 +96,7 @@ export function TicketCard({
           <span
             className={`mt-2 inline-flex rounded-md px-3 py-1 text-[12px] font-black ${tone.badge}`}
           >
-            {ticket.priority}
+            {lo(ticket.priority)}
           </span>
         </div>
 
@@ -110,15 +111,15 @@ export function TicketCard({
             </div>
           ) : null}
           {showElapsedTime ? (
-            <div className="text-[12px] font-bold text-slate-500">elapsed</div>
+            <div className="text-[12px] font-bold text-slate-500">{lo("elapsed")}</div>
           ) : null}
         </div>
       </div>
 
       <div className="mt-5 flex items-center gap-2 text-[13px] font-bold text-[#0b1736]">
         <UserRound className="h-4 w-4" strokeWidth={2.3} />
-        <span>Assigned:</span>
-        <span className="font-semibold text-slate-600">{ticket.assignedTo}</span>
+        <span>{lo("Assigned:")}</span>
+        <span className="font-semibold text-slate-600">{lo(ticket.assignedTo)}</span>
       </div>
 
       <div className={`mt-4 flex-1 ${compact ? "space-y-2" : "space-y-3"}`}>
@@ -129,10 +130,10 @@ export function TicketCard({
           >
             <span>{item.quantity}</span>
             <div>
-              <div>{item.name}</div>
+              <div>{lo(item.name)}</div>
               {showItemNotes && item.note ? (
                 <div className="mt-1 text-[12px] font-semibold text-slate-500">
-                  {item.note}
+                  {lo(item.note)}
                 </div>
               ) : null}
             </div>
@@ -143,9 +144,9 @@ export function TicketCard({
       <div className="mt-5 border-t border-slate-100 pt-4">
         <div className="flex min-h-6 items-center gap-2 text-[13px] font-bold text-[#0b1736]">
           <MessageCircle className="h-4 w-4 text-slate-500" strokeWidth={2.2} />
-          <span>Note:</span>
+          <span>{lo("Note:")}</span>
           <span className="truncate font-semibold text-slate-600">
-            {ticket.kitchenNote}
+            {lo(ticket.kitchenNote)}
           </span>
         </div>
       </div>
@@ -158,7 +159,7 @@ export function TicketCard({
             className={`flex h-11 items-center justify-center gap-2 rounded-lg text-[14px] font-black transition ${tone.primary}`}
           >
             <Timer className="h-5 w-5" strokeWidth={2.4} />
-            Start Preparing
+            {lo("Start Preparing")}
           </button>
         ) : ticket.status === "preparing" ? (
           <button
@@ -167,7 +168,7 @@ export function TicketCard({
             className={`flex h-11 items-center justify-center gap-2 rounded-lg text-[14px] font-black transition ${tone.primary}`}
           >
             <CheckCircle2 className="h-5 w-5" strokeWidth={2.4} />
-            Mark Ready
+            {lo("Mark Ready")}
           </button>
         ) : (
           <button
@@ -176,7 +177,7 @@ export function TicketCard({
             className={`flex h-11 items-center justify-center gap-2 rounded-lg text-[14px] font-black transition ${tone.primary}`}
           >
             <CheckCircle2 className="h-5 w-5" strokeWidth={2.4} />
-            Complete Pickup
+            {lo("Complete Pickup")}
           </button>
         )}
 
@@ -186,7 +187,7 @@ export function TicketCard({
           className="flex h-11 items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white text-[14px] font-black text-[#0b1736] transition hover:border-blue-300 hover:bg-blue-50"
         >
           <MoreHorizontal className="h-5 w-5" strokeWidth={2.4} />
-          View Detail
+          {lo("View Detail")}
         </button>
       </div>
 
@@ -196,7 +197,7 @@ export function TicketCard({
           onClick={() => onRecall(ticket.id)}
           className="mt-3 h-10 rounded-lg border border-emerald-100 bg-emerald-50 text-[13px] font-black text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-100"
         >
-          Recall to Preparing
+          {lo("Recall to Preparing")}
         </button>
       ) : null}
     </article>

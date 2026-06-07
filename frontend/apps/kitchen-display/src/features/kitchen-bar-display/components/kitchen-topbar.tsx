@@ -11,6 +11,7 @@ import {
 
 import { kitchenBusiness } from "../data/kitchen-display-data";
 import type { KitchenBoardMode } from "../types";
+import { lo } from "../utils/lao-labels";
 
 type KitchenTopbarProps = {
   mode: KitchenBoardMode;
@@ -46,7 +47,7 @@ export function KitchenTopbar({
       <div className="ml-7 flex items-center gap-3 text-[#0b1736]">
         <ChefHat className="h-7 w-7 text-blue-600" strokeWidth={2.4} />
         <h1 className="text-[21px] font-black">
-          {mode === "bar" ? "Bar Display" : "Kitchen Dashboard"}
+          {mode === "bar" ? "ຈໍບາ" : "ແດຊບອດຄົວ"}
         </h1>
       </div>
 
@@ -84,7 +85,7 @@ export function KitchenTopbar({
           ) : (
             <VolumeX className="h-7 w-7 text-slate-500" strokeWidth={2.5} />
           )}
-          {soundEnabled ? "Sound ON" : "Sound OFF"}
+          {soundEnabled ? "ເປີດສຽງ" : "ປິດສຽງ"}
         </button>
 
         <button
@@ -104,9 +105,9 @@ export function KitchenTopbar({
         <div className="flex items-center gap-3 border-l border-blue-100 pl-5">
           <span className="h-3 w-3 rounded-full bg-emerald-500" />
           <div className="text-right">
-            <div className="text-[13px] font-black text-[#0b1736]">Connected</div>
+            <div className="text-[13px] font-black text-[#0b1736]">ເຊື່ອມຕໍ່ແລ້ວ</div>
             <div className="text-[12px] font-semibold text-slate-500">
-              Auto-refresh {autoRefreshSeconds}s
+              {lo("Auto Refresh")} {autoRefreshSeconds}s
             </div>
           </div>
         </div>

@@ -13,6 +13,7 @@ import type {
   Product
 } from "../types";
 import { getCartSummary, nowReceiptTime, nowTimeLabel } from "../utils";
+import { lo } from "../utils/lao-labels";
 
 const samplePaidSummary = getCartSummary(initialCart);
 const samplePaidOrder: OpenOrder = {
@@ -251,7 +252,7 @@ export const usePosTerminalStore = create<
   setQuery: (query) => set({ query }),
   addProduct: (product) =>
     set((state) => {
-      showTerminalNotice(`${product.name} added to cart.`, "success");
+      showTerminalNotice(`${lo(product.name)} ຖືກເພີ່ມເຂົ້າກະຕ່າແລ້ວ.`, "success");
 
       return {
         cart: addProductToCart(state.cart, product, state.customer)
@@ -269,7 +270,7 @@ export const usePosTerminalStore = create<
 
       if (!product) {
         showTerminalNotice(
-          `No item found for ${barcode || "this barcode"}.`,
+          `ບໍ່ພົບສິນຄ້າສຳລັບ ${barcode || "Barcode ນີ້"}.`,
           "error"
         );
 
@@ -278,7 +279,7 @@ export const usePosTerminalStore = create<
         };
       }
 
-      showTerminalNotice(`${product.name} scanned and added.`, "success");
+      showTerminalNotice(`${lo(product.name)} ຖືກສະແກນ ແລະ ເພີ່ມແລ້ວ.`, "success");
 
       return {
         cart: addProductToCart(state.cart, product, state.customer),
@@ -313,7 +314,7 @@ export const usePosTerminalStore = create<
     })),
   clearCart: () =>
     set(() => {
-      showTerminalNotice("Cart cleared.", "info");
+      showTerminalNotice("ລ້າງກະຕ່າແລ້ວ.", "info");
 
       return {
         cart: [],
@@ -323,7 +324,7 @@ export const usePosTerminalStore = create<
     }),
   startNewSale: () =>
     set(() => {
-      showTerminalNotice("New sale ready.", "info");
+      showTerminalNotice("ພ້ອມເລີ່ມການຂາຍໃໝ່.", "info");
 
       return {
         cart: [],
@@ -341,7 +342,7 @@ export const usePosTerminalStore = create<
     set((state) => {
       if (state.cart.length === 0) {
         showTerminalNotice(
-          "Cart is empty. Add items before holding an order.",
+          "ກະຕ່າຍັງວ່າງ. ເພີ່ມສິນຄ້າກ່ອນພັກອໍເດີ.",
           "warning"
         );
         return {};
@@ -357,7 +358,7 @@ export const usePosTerminalStore = create<
         status: "Held"
       });
 
-      showTerminalNotice(`${order.id} held for later checkout.`, "success");
+      showTerminalNotice(`${order.id} ຖືກພັກໄວ້ເພື່ອຊຳລະພາຍຫຼັງ.`, "success");
 
       return {
         orders: [order, ...state.orders.filter((item) => item.id !== order.id)],
@@ -374,11 +375,11 @@ export const usePosTerminalStore = create<
       const order = state.orders.find((item) => item.id === orderId);
 
       if (!order) {
-        showTerminalNotice("Order was not found.", "error");
+        showTerminalNotice("ບໍ່ພົບອໍເດີ.", "error");
         return {};
       }
 
-      showTerminalNotice(`${order.id} loaded into cart.`, "info");
+      showTerminalNotice(`${order.id} ໂຫຼດເຂົ້າກະຕ່າແລ້ວ.`, "info");
 
       return {
         activeOrderId: order.id,
@@ -396,7 +397,7 @@ export const usePosTerminalStore = create<
   setSelectedTable: (tableId) =>
     set(() => {
       showTerminalNotice(
-        tableId ? `${tableId} selected.` : "Take away selected.",
+        tableId ? `ເລືອກ ${tableId} ແລ້ວ.` : "ເລືອກສັ່ງກັບບ້ານແລ້ວ.",
         "info"
       );
 
@@ -410,8 +411,8 @@ export const usePosTerminalStore = create<
     set(() => {
       showTerminalNotice(
         orderType === "Take Away"
-          ? "Take away order selected."
-          : "Dine in order selected.",
+          ? "ເລືອກອໍເດີສັ່ງກັບບ້ານແລ້ວ."
+          : "ເລືອກອໍເດີນັ່ງກິນທີ່ຮ້ານແລ້ວ.",
         "info"
       );
 
@@ -423,7 +424,7 @@ export const usePosTerminalStore = create<
   setCustomer: (customer) =>
     set(() => {
       showTerminalNotice(
-        `${customer?.name ?? "Walk-in Customer"} selected.`,
+        `${lo(customer?.name ?? "Walk-in Customer")} ຖືກເລືອກແລ້ວ.`,
         "info"
       );
 
@@ -436,14 +437,14 @@ export const usePosTerminalStore = create<
   applyDiscount: (discount) =>
     set((state) => {
       if (state.cart.length === 0) {
-        showTerminalNotice("Cart is empty. Add items before discount.", "warning");
+        showTerminalNotice("ກະຕ່າຍັງວ່າງ. ເພີ່ມສິນຄ້າກ່ອນໃຊ້ສ່ວນຫຼຸດ.", "warning");
         return {};
       }
 
       showTerminalNotice(
         discount.mode === "percent"
-          ? `${discount.value}% discount applied.`
-          : `${discount.value.toLocaleString("en-US")} LAK discount applied.`,
+          ? `ໃຊ້ສ່ວນຫຼຸດ ${discount.value}% ແລ້ວ.`
+          : `ໃຊ້ສ່ວນຫຼຸດ ${discount.value.toLocaleString("en-US")} LAK ແລ້ວ.`,
         "success"
       );
 
@@ -454,7 +455,7 @@ export const usePosTerminalStore = create<
     }),
   clearDiscount: () =>
     set(() => {
-      showTerminalNotice("Discount removed.", "info");
+      showTerminalNotice("ລຶບສ່ວນຫຼຸດແລ້ວ.", "info");
       return { discount: null };
     }),
   setPaymentMethod: (method) => set({ paymentMethod: method }),
@@ -463,7 +464,7 @@ export const usePosTerminalStore = create<
   confirmPayment: () =>
     set((state) => {
       if (state.cart.length === 0) {
-        showTerminalNotice("Cart is empty. Add items before payment.", "warning");
+        showTerminalNotice("ກະຕ່າຍັງວ່າງ. ເພີ່ມສິນຄ້າກ່ອນຊຳລະ.", "warning");
         return {};
       }
 
@@ -489,10 +490,10 @@ export const usePosTerminalStore = create<
 
       showTerminalNotice(
         state.paymentStatus === "debt"
-          ? `${order.id} saved as customer debt.`
+          ? `${order.id} ຖືກບັນທຶກເປັນໜີ້ລູກຄ້າ.`
           : state.paymentStatus === "partial"
-            ? `${order.id} partial payment recorded.`
-            : `${order.id} payment completed.`,
+            ? `${order.id} ບັນທຶກການຈ່າຍບາງສ່ວນແລ້ວ.`
+            : `${order.id} ຊຳລະສຳເລັດແລ້ວ.`,
         "success"
       );
 
@@ -524,14 +525,14 @@ export const usePosTerminalStore = create<
       );
 
       if (!order) {
-        showTerminalNotice("No completed receipt found.", "error");
+        showTerminalNotice("ບໍ່ພົບບິນທີ່ສຳເລັດ.", "error");
         return {
           refundOrderId: null,
           refundSelectedLineIds: []
         };
       }
 
-      showTerminalNotice(`${order.id} ready for refund review.`, "info");
+      showTerminalNotice(`${order.id} ພ້ອມໃຫ້ກວດການຄືນເງິນ.`, "info");
 
       return {
         refundOrderId: order.id,
@@ -547,11 +548,11 @@ export const usePosTerminalStore = create<
   confirmRefund: () =>
     set((state) => {
       if (!state.refundOrderId || state.refundSelectedLineIds.length === 0) {
-        showTerminalNotice("Select at least one paid item to refund.", "warning");
+        showTerminalNotice("ເລືອກຢ່າງໜ້ອຍ 1 ລາຍການທີ່ຈ່າຍແລ້ວເພື່ອຄືນເງິນ.", "warning");
         return {};
       }
 
-      showTerminalNotice(`${state.refundOrderId} refund request created.`, "success");
+      showTerminalNotice(`${state.refundOrderId} ສ້າງຄຳຂໍຄືນເງິນແລ້ວ.`, "success");
 
       return {
         refundSelectedLineIds: []

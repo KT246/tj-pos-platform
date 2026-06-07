@@ -19,6 +19,7 @@ import { StaffMobileShell, StaffScrollArea } from "../components/staff-mobile-sh
 import { staffId, staffRole } from "../data/staff-order-data";
 import { useStaffOrderStore } from "../stores/staff-order-store";
 import { getStaffOrderPath } from "../utils";
+import { lo } from "../utils/lao-labels";
 
 export function StaffProfilePage({ businessSlug }: { businessSlug: string }) {
   const selectedBranch = useStaffOrderStore((state) => state.selectedBranch);
@@ -54,7 +55,7 @@ export function StaffProfilePage({ businessSlug }: { businessSlug: string }) {
           </div>
         </section>
 
-        <h3 className="mt-5 text-[15px] font-black text-slate-500">Settings</h3>
+        <h3 className="mt-5 text-[15px] font-black text-slate-500">{lo("Settings")}</h3>
         <section className="mt-3 overflow-hidden rounded-lg border border-blue-100 bg-white shadow-[0_10px_26px_rgba(15,23,42,0.045)]">
           <SettingsRow
             icon={Store}
@@ -77,12 +78,12 @@ export function StaffProfilePage({ businessSlug }: { businessSlug: string }) {
             title="Language"
             subtitle="Change app language"
             trailing={
-              <span className="text-[13px] font-bold text-slate-600">English</span>
+              <span className="text-[13px] font-bold text-slate-600">{lo("English")}</span>
             }
           />
         </section>
 
-        <h3 className="mt-5 text-[15px] font-black text-slate-500">System</h3>
+        <h3 className="mt-5 text-[15px] font-black text-slate-500">{lo("System")}</h3>
         <section className="mt-3 overflow-hidden rounded-lg border border-blue-100 bg-white shadow-[0_10px_26px_rgba(15,23,42,0.045)]">
           <SettingsRow
             icon={CircleHelp}
@@ -110,14 +111,14 @@ export function StaffProfilePage({ businessSlug }: { businessSlug: string }) {
           className="mt-5 flex h-[52px] items-center justify-center gap-3 rounded-lg border border-blue-200 bg-white text-[15px] font-black text-blue-600 shadow-sm transition hover:bg-blue-50"
         >
           <Repeat2 className="h-5 w-5" />
-          Switch Branch
+          {lo("Switch Branch")}
         </Link>
         <Link
           to={getStaffOrderPath(businessSlug, "")}
           className="mt-3 flex h-[52px] items-center justify-center gap-3 rounded-lg border border-red-200 bg-white text-[15px] font-black text-red-500 shadow-sm transition hover:bg-red-50"
         >
           <LogOut className="h-5 w-5" />
-          Logout
+          {lo("Logout")}
         </Link>
       </StaffScrollArea>
     </StaffMobileShell>
@@ -135,11 +136,11 @@ function ProfileMeta({
 }) {
   return (
     <div className="border-b border-blue-50 py-2 last:border-b-0">
-      <p className="text-[11px] font-bold text-slate-500">{label}</p>
+      <p className="text-[11px] font-bold text-slate-500">{lo(label)}</p>
       <p
         className={`text-[13px] font-black ${positive ? "text-emerald-600" : "text-slate-950"}`}
       >
-        {value}
+        {lo(value)}
       </p>
     </div>
   );
@@ -165,8 +166,8 @@ function SettingsRow({
         <Icon className="h-5 w-5" />
       </span>
       <span className="min-w-0">
-        <span className="block text-[14px] font-black text-slate-950">{title}</span>
-        <span className="text-[12px] font-bold text-slate-500">{subtitle}</span>
+        <span className="block text-[14px] font-black text-slate-950">{lo(title)}</span>
+        <span className="text-[12px] font-bold text-slate-500">{lo(subtitle)}</span>
       </span>
       <span className="flex items-center gap-2">
         {trailing}

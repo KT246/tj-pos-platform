@@ -2,6 +2,7 @@ import { Check, RotateCcw, Save, Settings, X } from "lucide-react";
 
 import { kitchenStations } from "../data/kitchen-display-data";
 import type { KitchenSettings, KitchenStationId } from "../types";
+import { lo } from "../utils/lao-labels";
 
 type SettingsDrawerProps = {
   settings: KitchenSettings;
@@ -28,9 +29,9 @@ function ToggleRow({
   return (
     <label className="flex cursor-pointer items-center justify-between gap-4 rounded-xl border border-blue-100 bg-white px-4 py-3 transition hover:border-blue-300 hover:bg-blue-50/50">
       <span>
-        <span className="block text-[14px] font-black text-[#0b1736]">{title}</span>
+        <span className="block text-[14px] font-black text-[#0b1736]">{lo(title)}</span>
         <span className="mt-1 block text-[12px] font-semibold text-slate-500">
-          {subtitle}
+          {lo(subtitle)}
         </span>
       </span>
       <input
@@ -63,10 +64,10 @@ export function SettingsDrawer({
             </div>
             <div>
               <h2 className="text-[22px] leading-none font-black text-[#0b1736]">
-                Kitchen Settings
+                {lo("Kitchen Settings")}
               </h2>
               <p className="mt-1 text-[12px] font-semibold text-slate-500">
-                Station filter and display behavior
+                {lo("Station filter and display behavior")}
               </p>
             </div>
           </div>
@@ -83,7 +84,7 @@ export function SettingsDrawer({
         <div className="min-h-0 flex-1 space-y-6 overflow-auto bg-[#f7faff] p-5">
           <section className="rounded-2xl border border-blue-100 bg-white p-5 shadow-sm">
             <h3 className="text-[15px] font-black tracking-wide text-[#0b1736] uppercase">
-              Station Filter
+              {lo("Station Filter")}
             </h3>
             <div className="mt-4 space-y-3">
               {kitchenStations
@@ -105,7 +106,7 @@ export function SettingsDrawer({
                     >
                       <span className="flex items-center gap-3 text-[14px] font-black">
                         <Icon className="h-5 w-5" strokeWidth={2.3} />
-                        {label}
+                        {lo(label)}
                       </span>
                       {checked ? <Check className="h-5 w-5" strokeWidth={2.4} /> : null}
                     </button>
@@ -137,7 +138,7 @@ export function SettingsDrawer({
 
           <section className="rounded-2xl border border-blue-100 bg-white p-5 shadow-sm">
             <h3 className="text-[15px] font-black tracking-wide text-[#0b1736] uppercase">
-              Auto Refresh
+              {lo("Auto Refresh")}
             </h3>
             <div className="mt-4 grid grid-cols-3 gap-3">
               {[5, 10, 15].map((seconds) => (
@@ -193,7 +194,7 @@ export function SettingsDrawer({
             className="flex h-12 items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white text-[14px] font-black text-[#0b1736] transition hover:border-blue-300 hover:bg-blue-50"
           >
             <RotateCcw className="h-5 w-5" strokeWidth={2.35} />
-            Reset
+            {lo("Reset")}
           </button>
           <button
             type="button"
@@ -201,7 +202,7 @@ export function SettingsDrawer({
             className="flex h-12 items-center justify-center gap-2 rounded-lg bg-blue-600 text-[14px] font-black text-white transition hover:bg-blue-700"
           >
             <Save className="h-5 w-5" strokeWidth={2.35} />
-            Save Settings
+            {lo("Save Settings")}
           </button>
         </footer>
       </aside>

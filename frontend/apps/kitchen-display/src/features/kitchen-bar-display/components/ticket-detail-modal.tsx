@@ -18,6 +18,7 @@ import {
   getTicketItemCount,
   getTicketSubtotal
 } from "../utils";
+import { lo } from "../utils/lao-labels";
 
 type TicketDetailModalProps = {
   ticket: KitchenTicket;
@@ -40,7 +41,7 @@ function DetailStat({
   return (
     <div className="rounded-xl border border-blue-100 bg-blue-50/40 px-4 py-3">
       <div className="text-[12px] font-black tracking-wide text-slate-500 uppercase">
-        {label}
+        {lo(label)}
       </div>
       <div
         className={`mt-1 text-[19px] font-black ${
@@ -51,7 +52,7 @@ function DetailStat({
               : "text-[#0b1736]"
         }`}
       >
-        {value}
+        {lo(value)}
       </div>
     </div>
   );
@@ -86,21 +87,21 @@ export function TicketDetailModal({
                     : "bg-blue-50 text-blue-600"
                 }`}
               >
-                {ticket.priority} Priority
+                {lo(ticket.priority)} Priority
               </span>
             </div>
             <div className="mt-3 flex items-center gap-5 text-[15px] font-bold text-slate-600">
               <span className="flex items-center gap-2">
                 <LocationIcon className="h-5 w-5 text-[#0b1736]" strokeWidth={2.2} />
-                {ticket.table}
+                {lo(ticket.table)}
               </span>
               <span className="flex items-center gap-2 text-red-500">
                 <Timer className="h-5 w-5" strokeWidth={2.2} />
-                {getElapsedLabel(ticket.elapsedMinutes)} elapsed
+                {getElapsedLabel(ticket.elapsedMinutes)} {lo("elapsed")}
               </span>
               <span className="flex items-center gap-2">
                 <Clock3 className="h-5 w-5 text-[#0b1736]" strokeWidth={2.2} />
-                Received {ticket.receivedAt}
+                ຮັບເມື່ອ {ticket.receivedAt}
               </span>
             </div>
           </div>
@@ -121,29 +122,29 @@ export function TicketDetailModal({
               <DetailStat label="Station" value={ticket.station} />
               <DetailStat
                 label="Status"
-                value={ticket.status}
+                value={lo(ticket.status)}
                 tone={ticket.status === "ready" ? "success" : "warning"}
               />
               <DetailStat label="Order Type" value={ticket.type} />
-              <DetailStat label="Items" value={`${getTicketItemCount(ticket)} items`} />
+              <DetailStat label="Items" value={`${getTicketItemCount(ticket)} ລາຍການ`} />
             </div>
 
             <div className="rounded-xl border border-blue-100 bg-white p-5 shadow-sm">
               <div className="flex items-center gap-3 text-[18px] font-black text-[#0b1736]">
                 <UserRound className="h-6 w-6 text-blue-600" strokeWidth={2.4} />
-                Order Information
+                ຂໍ້ມູນອໍເດີ
               </div>
               <dl className="mt-5 space-y-4 text-[14px]">
                 <div className="flex justify-between gap-4">
-                  <dt className="font-bold text-slate-500">Customer</dt>
-                  <dd className="font-black text-[#0b1736]">{ticket.customerName}</dd>
+                  <dt className="font-bold text-slate-500">ລູກຄ້າ</dt>
+                  <dd className="font-black text-[#0b1736]">{lo(ticket.customerName)}</dd>
                 </div>
                 <div className="flex justify-between gap-4">
-                  <dt className="font-bold text-slate-500">Assigned To</dt>
-                  <dd className="font-black text-[#0b1736]">{ticket.assignedTo}</dd>
+                  <dt className="font-bold text-slate-500">ມອບໝາຍໃຫ້</dt>
+                  <dd className="font-black text-[#0b1736]">{lo(ticket.assignedTo)}</dd>
                 </div>
                 <div className="flex justify-between gap-4">
-                  <dt className="font-bold text-slate-500">Ticket No.</dt>
+                  <dt className="font-bold text-slate-500">ເລກ Ticket</dt>
                   <dd className="font-black text-[#0b1736]">{ticket.orderNo}</dd>
                 </div>
               </dl>
@@ -152,23 +153,23 @@ export function TicketDetailModal({
             <div className="rounded-xl border border-blue-100 bg-white p-5 shadow-sm">
               <div className="flex items-center gap-3 text-[18px] font-black text-[#0b1736]">
                 <MessageCircle className="h-6 w-6 text-blue-600" strokeWidth={2.4} />
-                Notes
+                ໝາຍເຫດ
               </div>
               <div className="mt-4 space-y-3">
                 <div className="rounded-xl bg-blue-50 px-4 py-3">
                   <div className="text-[12px] font-black text-slate-500 uppercase">
-                    Customer Note
+                    ໝາຍເຫດລູກຄ້າ
                   </div>
                   <div className="mt-1 text-[14px] font-bold text-[#0b1736]">
-                    {ticket.customerNote}
+                    {lo(ticket.customerNote)}
                   </div>
                 </div>
                 <div className="rounded-xl bg-orange-50 px-4 py-3">
                   <div className="text-[12px] font-black text-orange-500 uppercase">
-                    Kitchen Note
+                    ໝາຍເຫດຄົວ
                   </div>
                   <div className="mt-1 text-[14px] font-bold text-[#0b1736]">
-                    {ticket.kitchenNote}
+                    {lo(ticket.kitchenNote)}
                   </div>
                 </div>
               </div>
@@ -177,7 +178,7 @@ export function TicketDetailModal({
 
           <section className="flex min-h-0 flex-col overflow-hidden rounded-xl border border-blue-100 bg-white shadow-sm">
             <div className="border-b border-blue-100 px-5 py-4">
-              <h3 className="text-[20px] font-black text-[#0b1736]">Ticket Items</h3>
+              <h3 className="text-[20px] font-black text-[#0b1736]">ລາຍການ Ticket</h3>
             </div>
             <div className="min-h-0 flex-1 overflow-auto px-5 py-2">
               {ticket.items.map((item) => (
@@ -190,7 +191,7 @@ export function TicketDetailModal({
                   </div>
                   <div>
                     <div className="text-[16px] font-black text-[#0b1736]">
-                      {item.name}
+                      {lo(item.name)}
                     </div>
                     {item.modifiers?.length ? (
                       <div className="mt-2 flex flex-wrap gap-2">
@@ -199,14 +200,14 @@ export function TicketDetailModal({
                             key={modifier}
                             className="rounded-md bg-slate-100 px-2 py-1 text-[12px] font-bold text-slate-600"
                           >
-                            {modifier}
+                            {lo(modifier)}
                           </span>
                         ))}
                       </div>
                     ) : null}
                     {item.note ? (
                       <div className="mt-2 text-[13px] font-semibold text-orange-600">
-                        Note: {item.note}
+                        {lo("Note:")} {lo(item.note)}
                       </div>
                     ) : null}
                   </div>
@@ -220,15 +221,15 @@ export function TicketDetailModal({
             <div className="border-t border-blue-100 bg-blue-50/45 px-5 py-4">
               <div className="space-y-2 text-[14px] font-bold">
                 <div className="flex justify-between text-slate-600">
-                  <span>Subtotal</span>
+                  <span>ຍອດກ່ອນຫຼຸດ</span>
                   <span>{formatKitchenMoney(subtotal)}</span>
                 </div>
                 <div className="flex justify-between text-slate-600">
-                  <span>Tax</span>
+                  <span>ອາກອນ</span>
                   <span>{formatKitchenMoney(tax)}</span>
                 </div>
                 <div className="flex justify-between text-[20px] font-black text-[#0b1736]">
-                  <span>Total</span>
+                  <span>ລວມທັງໝົດ</span>
                   <span>{formatKitchenMoney(total)}</span>
                 </div>
               </div>
@@ -240,14 +241,14 @@ export function TicketDetailModal({
                   className="flex h-12 items-center justify-center gap-2 rounded-lg border border-blue-200 bg-white text-[14px] font-black text-blue-600 transition hover:border-blue-400 hover:bg-blue-50"
                 >
                   <Printer className="h-5 w-5" strokeWidth={2.35} />
-                  Print Ticket
+                  ພິມ Ticket
                 </button>
                 <button
                   type="button"
                   className="flex h-12 items-center justify-center gap-2 rounded-lg border border-blue-200 bg-white text-[14px] font-black text-[#0b1736] transition hover:border-blue-400 hover:bg-blue-50"
                 >
                   <MoreHorizontal className="h-5 w-5" strokeWidth={2.35} />
-                  More Actions
+                  ການດຳເນີນການອື່ນ
                 </button>
                 {ticket.status === "new" ? (
                   <button
@@ -256,7 +257,7 @@ export function TicketDetailModal({
                     className="col-span-2 flex h-12 items-center justify-center gap-2 rounded-lg bg-blue-600 text-[15px] font-black text-white transition hover:bg-blue-700"
                   >
                     <Timer className="h-5 w-5" strokeWidth={2.35} />
-                    Start Preparing
+                    {lo("Start Preparing")}
                   </button>
                 ) : ticket.status === "preparing" ? (
                   <button
@@ -265,7 +266,7 @@ export function TicketDetailModal({
                     className="col-span-2 flex h-12 items-center justify-center gap-2 rounded-lg bg-orange-500 text-[15px] font-black text-white transition hover:bg-orange-600"
                   >
                     <CheckCircle2 className="h-5 w-5" strokeWidth={2.35} />
-                    Mark Ready
+                    {lo("Mark Ready")}
                   </button>
                 ) : (
                   <button
@@ -274,7 +275,7 @@ export function TicketDetailModal({
                     className="col-span-2 flex h-12 items-center justify-center gap-2 rounded-lg bg-emerald-500 text-[15px] font-black text-white transition hover:bg-emerald-600"
                   >
                     <CheckCircle2 className="h-5 w-5" strokeWidth={2.35} />
-                    Complete Pickup
+                    {lo("Complete Pickup")}
                   </button>
                 )}
               </div>

@@ -23,6 +23,7 @@ import {
   StatusBadge
 } from "../components/admin-primitives";
 import { businesses, businessStats, planCards } from "../data/mock-platform-admin";
+import { toLaoText } from "../utils/lao-labels";
 
 export function BusinessesPage() {
   return (
@@ -106,8 +107,8 @@ export function BusinessDetailPage() {
                 ["ສະຖານະ", "ໃຊ້ງານ"]
               ].map(([label, value]) => (
                 <div key={label} className="rounded-lg bg-blue-50/60 p-4">
-                  <p className="font800 text-xs text-slate-500">{label}</p>
-                  <p className="font900 mt-2 text-lg text-slate-950">{value}</p>
+                  <p className="font800 text-xs text-slate-500">{toLaoText(label)}</p>
+                  <p className="font900 mt-2 text-lg text-slate-950">{toLaoText(value)}</p>
                 </div>
               ))}
             </div>
@@ -138,7 +139,7 @@ export function BusinessDetailPage() {
                   className="flex items-center gap-3 rounded-lg border border-blue-100 p-3"
                 >
                   <CheckSquare className="h-5 w-5 text-blue-600" />
-                  <span className="font800 text-sm">{module}</span>
+                  <span className="font800 text-sm">{toLaoText(module)}</span>
                 </div>
               ))}
             </div>
@@ -157,8 +158,8 @@ export function BusinessDetailPage() {
               ["ລາຄາລາຍເດືອນ", "K 1,200,000"]
             ].map(([label, value]) => (
               <div key={label} className="flex justify-between gap-4">
-                <span className="text-slate-500">{label}</span>
-                <span className="font900 text-right text-slate-950">{value}</span>
+                <span className="text-slate-500">{toLaoText(label)}</span>
+                <span className="font900 text-right text-slate-950">{toLaoText(value)}</span>
               </div>
             ))}
             <div className="border-t border-blue-100 pt-4 text-center">
@@ -257,7 +258,7 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
                   </div>
                 ))}
                 <div className="font900 grid grid-cols-[1fr_1fr_34px] gap-2 pt-0.5 text-[11px] text-slate-700">
-                  <span>Total</span>
+                  <span>{toLaoText("Total")}</span>
                   <span>2 ສາຂາ</span>
                   <span />
                 </div>
@@ -282,7 +283,7 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
                       defaultChecked={index < 4}
                       className="h-3.5 w-3.5 accent-blue-600"
                     />
-                    {item}
+                    {toLaoText(item)}
                   </label>
                 ))}
               </div>
@@ -338,8 +339,8 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
                 ["ລາຄາລາຍເດືອນ", "K 1,200,000"]
               ].map(([label, value]) => (
                 <div key={label} className="flex justify-between gap-4">
-                  <span className="text-slate-500">{label}</span>
-                  <strong className="text-right text-slate-950">{value}</strong>
+                  <span className="text-slate-500">{toLaoText(label)}</span>
+                  <strong className="text-right text-slate-950">{toLaoText(value)}</strong>
                 </div>
               ))}
               <div className="border-t border-blue-100 pt-3 text-center">
@@ -374,9 +375,11 @@ export function AssignPlanPage() {
           <AdminCard key={plan.name} className="p-5">
             <p className="font900 text-xl text-slate-950">{plan.name}</p>
             <p className="font900 mt-3 text-3xl text-blue-600">{plan.price}</p>
-            <p className="mt-2 text-sm text-slate-500">{plan.businesses} businesses</p>
+            <p className="mt-2 text-sm text-slate-500">
+              {toLaoText(`${plan.businesses} businesses`)}
+            </p>
             <p className="mt-4 rounded-md bg-blue-50 px-3 py-2 text-sm font-bold text-blue-700">
-              {plan.modules}
+              {toLaoText(plan.modules)}
             </p>
             <button
               type="button"
@@ -403,8 +406,8 @@ function InfoTile({
   return (
     <div className="rounded-lg border border-blue-100 p-4">
       <Icon className="h-5 w-5 text-blue-600" />
-      <p className="font800 mt-3 text-xs text-slate-500">{label}</p>
-      <p className="font900 mt-1 text-slate-950">{value}</p>
+      <p className="font800 mt-3 text-xs text-slate-500">{toLaoText(label)}</p>
+      <p className="font900 mt-1 text-slate-950">{toLaoText(value)}</p>
     </div>
   );
 }
