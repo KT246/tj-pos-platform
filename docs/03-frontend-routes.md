@@ -639,6 +639,10 @@ Routes กลุ่มนี้จะแสดงเฉพาะเมื่อ 
 /business-admin/[businessSlug]/stock-in
 /business-admin/[businessSlug]/stock-adjustment
 /business-admin/[businessSlug]/stock-movements
+/business-admin/[businessSlug]/stock-count
+/business-admin/[businessSlug]/low-stock-expiry
+/business-admin/[businessSlug]/goods-receiving
+/business-admin/[businessSlug]/returns
 /business-admin/[businessSlug]/suppliers
 /business-admin/[businessSlug]/purchase-receipts
 /business-admin/[businessSlug]/barcode-labels
@@ -653,6 +657,10 @@ Inventory
 Stock In
 Stock Adjustment
 Stock Movements
+Stock Count
+Low Stock / Expiry
+Goods Receiving
+Returns / Exchange
 Suppliers
 Purchase Receipts
 Barcode Labels
