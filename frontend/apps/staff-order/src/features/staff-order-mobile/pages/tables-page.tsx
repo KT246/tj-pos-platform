@@ -22,6 +22,15 @@ export function StaffTablesPage({ businessSlug }: { businessSlug: string }) {
 
   return (
     <StaffMobileShell
+      fixedAction={
+        <TableActionPanel
+          businessSlug={businessSlug}
+          selectedTableId={selectedTableId}
+          guests={guests}
+          incrementGuests={incrementGuests}
+          decrementGuests={decrementGuests}
+        />
+      }
       bottomNav={
         <StaffBottomNav
           businessSlug={businessSlug}
@@ -31,18 +40,18 @@ export function StaffTablesPage({ businessSlug }: { businessSlug: string }) {
       }
     >
       <StaffOrderHeader title="Select Table" />
-      <StaffScrollArea>
+      <StaffScrollArea className="pb-3">
         <StaffContextCard branch={selectedBranch} staff={staffName} shift="Morning" />
 
-        <div className="mt-4 flex [scrollbar-width:none] gap-2 overflow-x-auto pb-1 [&::-webkit-scrollbar]:hidden">
+        <div className="mt-2.5 flex [scrollbar-width:none] gap-1.5 overflow-x-auto pb-1 [&::-webkit-scrollbar]:hidden">
           {areaFilters.map((area, index) => (
             <button
               key={area}
               type="button"
-              className={`h-11 shrink-0 rounded-full px-5 text-[14px] font-black transition ${
+              className={`h-8 shrink-0 cursor-pointer rounded-full border px-3 text-[12px] font-black transition ${
                 index === 0
-                  ? "bg-blue-600 text-white shadow-[0_10px_20px_rgba(37,99,235,0.18)]"
-                  : "border border-blue-100 bg-white text-slate-500 hover:bg-blue-50"
+                  ? "border-blue-600 bg-white text-blue-600"
+                  : "border-blue-100 bg-white text-slate-500 hover:border-blue-300 hover:text-blue-600"
               }`}
             >
               {lo(area)}
@@ -50,8 +59,8 @@ export function StaffTablesPage({ businessSlug }: { businessSlug: string }) {
           ))}
         </div>
 
-        <div className="mt-4 grid grid-cols-2 gap-3">
-          {staffTables.slice(0, 6).map((table) => (
+        <div className="mt-2.5 grid grid-cols-3 gap-1.5">
+          {staffTables.slice(0, 9).map((table) => (
             <TableCard
               key={table.id}
               table={table}
@@ -62,35 +71,59 @@ export function StaffTablesPage({ businessSlug }: { businessSlug: string }) {
           ))}
         </div>
 
-        <div className="mt-4 grid h-16 grid-cols-[1fr_auto] items-center rounded-lg border border-blue-100 bg-white px-4 shadow-[0_8px_22px_rgba(15,23,42,0.035)]">
-          <p className="text-[15px] font-black text-slate-950">{lo("Number of Guests")}</p>
-          <div className="flex items-center gap-4">
-            <StepperButton
-              label="Decrease guests"
-              onClick={decrementGuests}
-              icon={Minus}
-            />
-            <span className="min-w-5 text-center text-xl font-black text-slate-950">
-              {guests}
-            </span>
-            <StepperButton
-              label="Increase guests"
-              onClick={incrementGuests}
-              icon={Plus}
-              active
-            />
-          </div>
-        </div>
-
-        <Link
-          to={getStaffOrderPath(businessSlug, `/table/${selectedTableId}`)}
-          className="mt-4 flex h-14 items-center justify-center gap-3 rounded-lg bg-blue-600 text-[16px] font-black text-white shadow-[0_16px_28px_rgba(37,99,235,0.26)] transition hover:bg-blue-700"
-        >
-          {lo("Continue with")} {selectedTableId}
-          <ArrowRight className="h-5 w-5" />
-        </Link>
       </StaffScrollArea>
     </StaffMobileShell>
+  );
+}
+
+function TableActionPanel({
+  businessSlug,
+  selectedTableId,
+  guests,
+  incrementGuests,
+  decrementGuests
+}: {
+  businessSlug: string;
+  selectedTableId: string;
+  guests: number;
+  incrementGuests: () => void;
+  decrementGuests: () => void;
+}) {
+  return (
+    <div className="mx-3 my-2 grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 rounded-xl border border-blue-100 bg-white px-2.5 py-2 shadow-[0_12px_28px_rgba(15,23,42,0.09)]">
+      <div className="min-w-0">
+        <p className="truncate text-[10px] font-bold text-slate-500">
+          {lo("Number of Guests")}
+        </p>
+        <p className="truncate text-[13px] font-black text-slate-950">
+          {guests} {lo("Guests")}
+        </p>
+      </div>
+      <div className="flex items-center gap-1.5">
+        <StepperButton
+          label="Decrease guests"
+          onClick={decrementGuests}
+          icon={Minus}
+        />
+        <span className="min-w-4 text-center text-[16px] font-black text-slate-950">
+          {guests}
+        </span>
+        <StepperButton
+          label="Increase guests"
+          onClick={incrementGuests}
+          icon={Plus}
+          active
+        />
+      </div>
+      <Link
+        to={getStaffOrderPath(businessSlug, `/table/${selectedTableId}`)}
+        className="flex h-9 cursor-pointer items-center justify-center gap-1 rounded-lg bg-blue-600 px-2.5 text-[12px] font-black whitespace-nowrap text-white shadow-[0_10px_18px_rgba(37,99,235,0.2)] transition hover:bg-blue-700"
+      >
+        <span className="hidden min-[410px]:inline">{lo("Continue with")}</span>
+        {selectedTableId}
+        <ArrowRight className="h-3.5 w-3.5" />
+      </Link>
+    </div>
   );
 }
 
@@ -109,15 +142,15 @@ function TableCard({
     <button
       type="button"
       onClick={onClick}
-      className={`relative min-h-[172px] rounded-lg border bg-white p-3 text-left shadow-[0_10px_24px_rgba(15,23,42,0.04)] transition hover:-translate-y-0.5 hover:border-blue-200 ${
+      className={`relative min-h-[116px] cursor-pointer rounded-lg border bg-white p-1.5 text-left shadow-[0_7px_14px_rgba(15,23,42,0.035)] transition hover:-translate-y-0.5 hover:border-blue-200 ${
         selected
-          ? "border-blue-600 bg-blue-50/45 ring-2 ring-blue-100"
+          ? "border-blue-600 text-blue-600 ring-1 ring-blue-100"
           : "border-blue-100"
       }`}
     >
       {selected ? (
-        <span className="absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-white shadow-[0_8px_18px_rgba(37,99,235,0.24)]">
-          <Check className="h-5 w-5" />
+        <span className="absolute top-1.5 right-1.5 z-10 flex h-5 w-5 items-center justify-center rounded-full border border-blue-200 bg-white text-blue-600 shadow-sm">
+          <Check className="h-3 w-3" />
         </span>
       ) : null}
       <img
@@ -127,20 +160,20 @@ function TableCard({
             : "1533090481720-856c6e3c1fdc"
         }?auto=format&fit=crop&w=260&q=80`}
         alt=""
-        className="h-20 w-full rounded-lg object-cover"
+        className="h-12 w-full rounded-md object-cover"
       />
-      <div className="mt-3 flex items-start justify-between gap-2">
-        <div>
-          <p className="text-[27px] leading-7 font-black text-slate-950">{table.id}</p>
-          <p className="mt-1 flex items-center gap-1 text-[12px] font-bold text-slate-500">
-            <Users className="h-4 w-4" />
-            {table.seats} {lo("Seats")}
-          </p>
+      <div className="mt-1.5 min-w-0">
+        <div className="flex min-w-0 items-start justify-between gap-1">
+          <p className="truncate text-[20px] leading-6 font-black text-slate-950">{table.id}</p>
+          <StatusPill status={table.status} />
         </div>
-        <StatusPill status={table.status} />
+        <p className="mt-0.5 flex min-w-0 items-center gap-1 text-[10px] font-bold text-slate-500">
+          <Users className="h-3 w-3 shrink-0" />
+          {table.seats} {lo("Seats")}
+        </p>
       </div>
       {table.elapsed ? (
-        <p className="mt-2 text-right text-[12px] font-bold text-blue-600">
+        <p className="mt-0.5 truncate text-right text-[10px] font-bold text-blue-600">
           {table.id === "T03" ? `${guests} ${lo("Guests")}` : `2 ${lo("Guests")}`} - {table.elapsed}
         </p>
       ) : null}
@@ -163,14 +196,14 @@ function StepperButton({
     <button
       type="button"
       onClick={onClick}
-      className={`flex h-10 w-10 items-center justify-center rounded-lg border transition ${
+      className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border transition ${
         active
           ? "border-blue-100 text-blue-600 hover:bg-blue-50"
           : "border-blue-100 text-slate-600 hover:bg-blue-50"
       }`}
       aria-label={label}
     >
-      <Icon className="h-4 w-4" />
+      <Icon className="h-3.5 w-3.5" />
     </button>
   );
 }
@@ -184,7 +217,7 @@ function StatusPill({ status }: { status: string }) {
         : "bg-blue-50 text-blue-600";
 
   return (
-    <span className={`rounded-lg px-2 py-1 text-[11px] font-black ${className}`}>
+    <span className={`shrink-0 rounded-md px-1.5 py-0.5 text-[9px] font-black ${className}`}>
       {lo(status)}
     </span>
   );

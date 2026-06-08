@@ -21,7 +21,7 @@ export function StaffBottomNav({
   selectedTableId: string;
 }) {
   return (
-    <nav className="grid h-[76px] grid-cols-4 px-3 pt-2 pb-2">
+    <nav className="grid h-[62px] grid-cols-4 px-2 pt-1.5 pb-1">
       {navItems.map((item) => {
         const Icon = item.icon;
         const isActive = item.id === active;
@@ -31,23 +31,26 @@ export function StaffBottomNav({
           <Link
             key={item.id}
             to={getStaffOrderPath(businessSlug, path)}
-            className={`relative flex flex-col items-center justify-center gap-1 rounded-lg text-[11px] font-bold transition ${
+            className={`relative flex cursor-pointer flex-col items-center justify-center gap-0.5 rounded-lg text-[10px] font-bold transition ${
               isActive
                 ? "text-blue-600"
-                : "text-slate-500 hover:bg-blue-50/50 hover:text-blue-600"
+                : "text-slate-500 hover:text-blue-600"
             }`}
           >
+            {isActive ? (
+              <span className="absolute top-0 h-0.5 w-5 rounded-full bg-blue-600" />
+            ) : null}
             <span
-              className={`flex h-10 w-10 items-center justify-center rounded-lg transition ${
+              className={`flex h-8 w-8 items-center justify-center rounded-lg transition ${
                 isActive
-                  ? "bg-blue-50 text-blue-600 ring-1 ring-blue-200"
-                  : "text-slate-500"
+                  ? "text-blue-600"
+                  : "text-slate-500 hover:bg-blue-50/50"
               }`}
             >
-              <Icon className="h-5 w-5" />
+              <Icon className="h-[18px] w-[18px]" />
             </span>
             {item.id === "orders" ? (
-              <span className="absolute top-2 right-[34%] h-2.5 w-2.5 rounded-full bg-red-500" />
+              <span className="absolute top-2 right-[34%] h-2 w-2 rounded-full bg-red-500" />
             ) : null}
             {lo(item.label)}
           </Link>

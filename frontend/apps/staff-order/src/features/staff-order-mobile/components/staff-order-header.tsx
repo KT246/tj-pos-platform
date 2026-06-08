@@ -22,49 +22,56 @@ export function StaffOrderHeader({
   showFilter?: boolean;
 }) {
   return (
-    <header className="shrink-0 border-b border-blue-50 bg-white/96 px-4 py-3 shadow-[0_1px_0_rgba(219,234,254,0.85)] backdrop-blur supports-[backdrop-filter]:bg-white/90 sm:px-5">
-      <div className="grid h-11 grid-cols-[1fr_auto_1fr] items-center">
-        <div className="flex items-center gap-2">
+    <header className="shrink-0 border-b border-blue-50 bg-white/96 px-2.5 py-2 shadow-[0_1px_0_rgba(219,234,254,0.85)] backdrop-blur supports-[backdrop-filter]:bg-white/90">
+      <div className="grid h-10 grid-cols-[88px_minmax(0,1fr)_auto] items-center gap-1.5">
+        <div className="flex min-w-0 items-center">
           {backHref ? (
             <Link
               to={backHref}
-              className="flex h-10 w-10 items-center justify-center rounded-lg text-slate-600 transition hover:bg-blue-50 hover:text-blue-600"
+              className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg text-slate-700 transition hover:bg-blue-50 hover:text-blue-600"
               aria-label="Back"
             >
-              <ArrowLeft className="h-5 w-5" />
+              <ArrowLeft className="h-[18px] w-[18px]" />
             </Link>
           ) : (
-            <img
-              src="/terminal-logo.png"
-              alt="TJ POS"
-              className="h-9 w-auto object-contain"
-            />
+            <Link to="/" className="flex min-w-0 cursor-pointer items-center gap-1.5">
+              <img
+                src="/brand/tj-pos-mark.png"
+                alt=""
+                className="h-7 w-7 shrink-0 rounded-md object-contain"
+              />
+              <span className="truncate text-[12px] font-black text-slate-950">
+                TJ POS
+              </span>
+            </Link>
           )}
         </div>
-        <h1 className="text-center text-[17px] font-black text-slate-950">{lo(title)}</h1>
-        <div className="flex items-center justify-end gap-2">
-          <span className="hidden items-center gap-1 rounded-full bg-emerald-50 px-2 py-1 text-[10px] font-black text-emerald-600 min-[390px]:flex">
-            {lo("Online")}
-            <span className="h-2 w-2 rounded-full bg-emerald-500" />
+        <h1 className="min-w-0 truncate text-center text-[15px] font-black text-slate-950">
+          {lo(title)}
+        </h1>
+        <div className="flex items-center justify-end gap-1">
+          <span className="hidden h-7 items-center gap-1.5 whitespace-nowrap rounded-full bg-emerald-50 px-2 text-[9px] font-black leading-none text-emerald-600 min-[375px]:inline-flex">
+            <span>{lo("Online")}</span>
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
           </span>
           <button
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-lg text-slate-600 transition hover:bg-blue-50 hover:text-blue-600"
+            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg text-slate-700 transition hover:bg-blue-50 hover:text-blue-600"
             aria-label="Search"
           >
-            <Search className="h-5 w-5" />
+            <Search className="h-[18px] w-[18px]" strokeWidth={2.25} />
           </button>
           <button
             type="button"
-            className="relative flex h-10 w-10 items-center justify-center rounded-lg text-slate-600 transition hover:bg-blue-50 hover:text-blue-600"
+            className="relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg text-slate-700 transition hover:bg-blue-50 hover:text-blue-600"
             aria-label={showFilter ? "Filters" : "Notifications"}
           >
             {showFilter ? (
-              <SlidersHorizontal className="h-5 w-5" />
+              <SlidersHorizontal className="h-[18px] w-[18px]" strokeWidth={2.25} />
             ) : (
               <>
-                <Bell className="h-5 w-5" />
-                <span className="absolute top-0.5 right-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-black text-white ring-2 ring-white">
+                <Bell className="h-[18px] w-[18px]" strokeWidth={2.25} />
+                <span className="absolute -top-0.5 -right-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-black text-white ring-2 ring-white">
                   6
                 </span>
               </>
@@ -88,16 +95,16 @@ export function StaffContextCard({
   table?: string;
 }) {
   return (
-    <div className="mt-4 overflow-hidden rounded-lg border border-blue-100 bg-white shadow-[0_10px_26px_rgba(15,23,42,0.045)]">
+    <div className="mt-3 overflow-hidden rounded-lg border border-blue-100 bg-white shadow-[0_8px_18px_rgba(15,23,42,0.035)]">
       <div className="grid grid-cols-3 divide-x divide-blue-50">
         <ContextItem icon={Building2} label="Branch" value={branch} />
         <ContextItem icon={UserRound} label="Staff" value={staff} />
         <ContextItem icon={Sun} label="Shift" value={shift ?? "Morning"} />
       </div>
       {table ? (
-        <div className="border-t border-blue-50 px-3 py-2.5">
-          <span className="inline-flex max-w-full items-center gap-2 rounded-lg bg-blue-50 px-3 py-2 text-[12px] font-black text-blue-600">
-            <Table2 className="h-4 w-4 shrink-0" />
+        <div className="border-t border-blue-50 px-2.5 py-2">
+          <span className="inline-flex max-w-full items-center gap-1.5 rounded-lg bg-blue-50 px-2.5 py-1.5 text-[11px] font-black text-blue-600">
+            <Table2 className="h-3.5 w-3.5 shrink-0" />
             <span className="truncate">{table}</span>
           </span>
         </div>
@@ -116,8 +123,8 @@ function ContextItem({
   value: string;
 }) {
   return (
-    <div className="min-w-0 px-3 py-3">
-      <Icon className="mb-1 h-4 w-4 text-slate-500" />
+    <div className="min-w-0 px-2.5 py-2.5">
+      <Icon className="mb-1 h-3.5 w-3.5 text-slate-500" />
       <p className="text-[10px] font-bold text-slate-500">{lo(label)}</p>
       <p className="truncate text-[12px] font-black text-slate-950">{lo(value)}</p>
     </div>

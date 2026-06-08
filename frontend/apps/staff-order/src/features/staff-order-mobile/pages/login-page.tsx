@@ -38,21 +38,21 @@ export function StaffLoginPage({ businessSlug }: { businessSlug: string }) {
     <StaffMobileShell>
       <StaffOrderHeader title="Staff Login" />
       <StaffScrollArea>
-        <section className="mt-5 rounded-lg border border-blue-100 bg-white p-4 shadow-[0_12px_28px_rgba(15,23,42,0.045)]">
+        <section className="mt-3 rounded-lg border border-blue-100 bg-white p-3 shadow-[0_12px_28px_rgba(15,23,42,0.045)]">
           <div className="flex gap-4">
             <img
               src="https://i.pravatar.cc/160?img=47"
               alt=""
-              className="h-24 w-24 rounded-full bg-blue-50 object-cover"
+              className="h-20 w-20 rounded-full bg-blue-50 object-cover"
             />
             <div className="min-w-0 flex-1 py-1">
-              <h2 className="text-[20px] leading-6 font-black text-slate-950">
+              <h2 className="text-[17px] leading-5 font-black text-slate-950">
                 {lo("Welcome back, Somchai!")}
               </h2>
-              <p className="mt-1 text-[13px] font-bold text-slate-500">
+              <p className="mt-1 text-[12px] font-bold text-slate-500">
                 {lo("Let's get ready to take great orders.")}
               </p>
-              <div className="mt-4 grid grid-cols-2 divide-x divide-blue-50">
+              <div className="mt-3 grid grid-cols-2 divide-x divide-blue-50">
                 <SmallMeta icon={CalendarDays} label="Date" value="May 20, 2024" />
                 <SmallMeta icon={Clock} label="Time" value="9:41 AM" />
               </div>
@@ -60,23 +60,23 @@ export function StaffLoginPage({ businessSlug }: { businessSlug: string }) {
           </div>
         </section>
 
-        <div className="mt-4 space-y-3">
+        <div className="mt-3 space-y-2.5">
           <LoginRow icon={Store} label="Branch" value={selectedBranch} hasChevron />
           <LoginRow icon={UserRound} label="Role" value={staffRole} hasChevron />
           <LoginRow icon={IdCard} label="Employee ID" value={staffId} />
           <LoginRow icon={Lock} label="PIN" value="••••" trailingIcon={BadgeCheck} />
         </div>
 
-        <section className="mt-4 rounded-lg border border-blue-100 bg-blue-50/35 p-4">
-          <div className="flex items-center gap-4">
-            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white text-blue-600 shadow-sm">
-              <Sun className="h-8 w-8" />
+        <section className="mt-3 rounded-lg border border-blue-100 bg-blue-50/35 p-3">
+          <div className="flex items-center gap-3">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-blue-600 shadow-sm">
+              <Sun className="h-6 w-6" />
             </span>
             <div className="min-w-0">
-              <p className="text-[13px] font-bold text-slate-500">{lo("Today's Shift")}</p>
-              <h3 className="text-[19px] font-black text-slate-950">{lo("Morning Shift")}</h3>
-              <p className="mt-2 flex items-center gap-3 text-[12px] font-bold text-slate-500">
-                <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-emerald-600">
+              <p className="text-[12px] font-bold text-slate-500">{lo("Today's Shift")}</p>
+              <h3 className="text-[16px] font-black text-slate-950">{lo("Morning Shift")}</h3>
+              <p className="mt-1.5 flex items-center gap-2 text-[12px] font-bold text-slate-500">
+                <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] text-emerald-600">
                   {lo("Open")}
                 </span>
                 {lo("Main Floor")}
@@ -85,7 +85,7 @@ export function StaffLoginPage({ businessSlug }: { businessSlug: string }) {
           </div>
         </section>
 
-        <section className="mt-4 rounded-lg border border-blue-100 bg-white p-3">
+        <section className="mt-3 rounded-lg border border-blue-100 bg-white p-3">
           <div className="mb-2 flex items-center justify-between">
             <h3 className="text-[15px] font-black text-slate-950">
               {lo("Quick Branch Switch")}
@@ -93,7 +93,7 @@ export function StaffLoginPage({ businessSlug }: { businessSlug: string }) {
             <button
               type="button"
               onClick={() => showNotice(lo("Branch management opens in admin."))}
-              className="text-[12px] font-black text-blue-600"
+              className="cursor-pointer text-[12px] font-black text-blue-600"
             >
               {lo("Manage Branches")}
             </button>
@@ -104,7 +104,7 @@ export function StaffLoginPage({ businessSlug }: { businessSlug: string }) {
                 key={branch.name}
                 type="button"
                 onClick={() => setSelectedBranch(branch.name)}
-                className="grid w-full grid-cols-[auto_1fr_auto] items-center gap-3 border-b border-blue-50 px-3 py-3 text-left last:border-b-0 hover:bg-blue-50/60"
+                className="grid w-full cursor-pointer grid-cols-[auto_1fr_auto] items-center gap-3 border-b border-blue-50 px-3 py-2.5 text-left last:border-b-0 hover:bg-blue-50/60"
               >
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-50 text-blue-600">
                   <Building2 className="h-4 w-4" />
@@ -133,24 +133,24 @@ export function StaffLoginPage({ businessSlug }: { businessSlug: string }) {
           </div>
         </section>
 
-        <section className="mt-4 grid grid-cols-2 divide-x divide-blue-50 rounded-lg border border-blue-100 bg-white px-3 py-3">
+        <section className="mt-3 grid grid-cols-2 divide-x divide-blue-50 rounded-lg border border-blue-100 bg-white px-3 py-3">
           <SmallMeta icon={Smartphone} label="Device" value={staffDevice} />
           <SmallMeta icon={ScanLine} label="Connection" value="Online" />
         </section>
 
         <Link
           to={getStaffOrderPath(businessSlug, "/tables")}
-          className="mt-4 flex h-14 items-center justify-center gap-3 rounded-lg bg-blue-600 text-[16px] font-black text-white shadow-[0_16px_28px_rgba(37,99,235,0.26)] transition hover:bg-blue-700"
+          className="mt-3 flex h-11 cursor-pointer items-center justify-center gap-2 rounded-lg bg-blue-600 text-[13px] font-black text-white shadow-[0_14px_24px_rgba(37,99,235,0.22)] transition hover:bg-blue-700"
         >
           {lo("Login & Start Taking Orders")}
-          <ArrowRight className="h-5 w-5" />
+          <ArrowRight className="h-4 w-4" />
         </Link>
         <button
           type="button"
           onClick={() => showNotice(lo("Staff QR scanner ready."))}
-          className="mt-3 flex h-[52px] w-full items-center justify-center gap-3 rounded-lg border border-blue-200 bg-white text-[15px] font-black text-blue-600 hover:bg-blue-50"
+          className="mt-2 flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-lg border border-blue-200 bg-white text-[13px] font-black text-blue-600 hover:bg-blue-50"
         >
-          <QrCode className="h-5 w-5" />
+          <QrCode className="h-4 w-4" />
           {lo("Scan Staff QR")}
         </button>
       </StaffScrollArea>
@@ -174,12 +174,12 @@ function LoginRow({
   return (
     <button
       type="button"
-      className="grid h-16 w-full grid-cols-[auto_1fr_auto] items-center gap-3 rounded-lg border border-blue-100 bg-white px-4 text-left"
+      className="grid h-[52px] w-full cursor-pointer grid-cols-[auto_1fr_auto] items-center gap-3 rounded-lg border border-blue-100 bg-white px-3 text-left"
     >
-      <Icon className="h-5 w-5 text-slate-500" />
+      <Icon className="h-[18px] w-[18px] text-slate-500" />
       <span>
         <span className="block text-[11px] font-bold text-slate-500">{lo(label)}</span>
-        <span className="text-[14px] font-black text-slate-950">{lo(value)}</span>
+        <span className="text-[13px] font-black text-slate-950">{lo(value)}</span>
       </span>
       {hasChevron ? (
         <ChevronDown className="h-5 w-5 text-slate-400" />

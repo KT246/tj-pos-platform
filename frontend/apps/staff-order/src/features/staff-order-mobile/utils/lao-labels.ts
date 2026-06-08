@@ -14,6 +14,7 @@ const laoLabels: Record<string, string> = {
   "Meals": "ອາຫານ",
   "Add-ons": "ເພີ່ມເຕີມ",
   "Iced Latte": "ລາເຕ້ເຢັນ",
+  "Hot Latte": "ລາເຕ້ຮ້ອນ",
   "Americano": "ອາເມຣິກາໂນ",
   "Cappuccino": "ຄາປູຊິໂນ",
   "Thai Milk Tea": "ຊານົມໄທ",

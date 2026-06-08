@@ -50,19 +50,19 @@ export function StaffCustomizePage({ businessSlug }: { businessSlug: string }) {
         backHref={getStaffOrderPath(businessSlug, `/table/${tableId}`)}
       />
       <form onSubmit={handleSubmit} className="min-h-0 flex-1 overflow-hidden">
-        <StaffScrollArea>
-          <section className="mt-4 grid grid-cols-[128px_1fr] gap-4 rounded-lg border border-blue-100 bg-white p-4 shadow-[0_10px_26px_rgba(15,23,42,0.045)]">
+        <StaffScrollArea className="pb-3">
+          <section className="mt-3 grid grid-cols-[104px_1fr] gap-3 rounded-lg border border-blue-100 bg-white p-3 shadow-[0_10px_26px_rgba(15,23,42,0.045)]">
             <img
               src={product.image}
               alt=""
-              className="h-32 w-full rounded-lg object-cover"
+              className="h-[104px] w-full rounded-lg object-cover"
             />
-            <div className="min-w-0 py-3">
-              <h2 className="text-[22px] font-black text-slate-950">{lo(product.name)}</h2>
-              <p className="mt-1 text-[17px] font-black text-blue-600">
+            <div className="min-w-0 py-2">
+              <h2 className="text-[17px] font-black text-slate-950">{lo(product.name)}</h2>
+              <p className="mt-1 text-[14px] font-black text-blue-600">
                 {formatMoney(product.price)}
               </p>
-              <p className="mt-3 text-[13px] font-bold text-slate-500">
+              <p className="mt-2 text-[12px] font-bold text-slate-500">
                 {lo(product.category)}
               </p>
             </div>
@@ -111,7 +111,7 @@ export function StaffCustomizePage({ businessSlug }: { businessSlug: string }) {
             />
           </OptionSection>
 
-          <section className="mt-3 rounded-lg border border-blue-100 bg-white p-4 shadow-[0_8px_22px_rgba(15,23,42,0.035)]">
+          <section className="mt-3 rounded-lg border border-blue-100 bg-white p-3 shadow-[0_8px_22px_rgba(15,23,42,0.035)]">
             <h3 className="text-[15px] font-black text-slate-950">{lo("Add-ons")}</h3>
             {[
               ["Extra Shot", "+8,000"],
@@ -120,7 +120,7 @@ export function StaffCustomizePage({ businessSlug }: { businessSlug: string }) {
             ].map(([label, price]) => (
               <label
                 key={label}
-                className="mt-3 flex items-center justify-between text-[14px] font-bold text-slate-600"
+                className="mt-3 flex items-center justify-between text-[13px] font-bold text-slate-600"
               >
                 <span className="flex items-center gap-3">
                   <input type="checkbox" className="h-5 w-5 accent-blue-600" />
@@ -131,35 +131,35 @@ export function StaffCustomizePage({ businessSlug }: { businessSlug: string }) {
             ))}
           </section>
 
-          <label className="mt-3 block rounded-lg border border-blue-100 bg-white p-4 shadow-[0_8px_22px_rgba(15,23,42,0.035)]">
+          <label className="mt-3 block rounded-lg border border-blue-100 bg-white p-3 shadow-[0_8px_22px_rgba(15,23,42,0.035)]">
             <span className="text-[15px] font-black text-slate-950">{lo("Note")}</span>
             <textarea
               name="note"
-              className="mt-3 h-24 w-full resize-none rounded-lg border border-blue-100 p-3 text-[13px] font-bold outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
+              className="mt-3 h-20 w-full resize-none rounded-lg border border-blue-100 p-3 text-[12px] font-bold outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
               placeholder={lo("Add note for kitchen or bar...")}
             />
           </label>
         </StaffScrollArea>
 
-        <div className="grid shrink-0 grid-cols-[110px_1fr_auto] items-center gap-3 border-t border-blue-50 bg-white px-4 py-3 shadow-[0_-14px_34px_rgba(15,23,42,0.08)] sm:px-5">
-          <div className="flex h-11 items-center justify-between overflow-hidden rounded-lg border border-blue-200 bg-white text-blue-600">
+        <div className="grid shrink-0 grid-cols-[96px_1fr_auto] items-center gap-2 border-t border-blue-50 bg-white px-3 py-2 shadow-[0_-14px_34px_rgba(15,23,42,0.08)]">
+          <div className="flex h-10 items-center justify-between overflow-hidden rounded-lg border border-blue-200 bg-white text-blue-600">
             <span className="flex h-full w-9 items-center justify-center">
               <Minus className="h-4 w-4" />
             </span>
-            <span className="text-[16px] font-black text-slate-950">1</span>
+            <span className="text-[15px] font-black text-slate-950">1</span>
             <span className="flex h-full w-9 items-center justify-center">
               <Plus className="h-4 w-4" />
             </span>
           </div>
           <div>
             <p className="text-[11px] font-bold text-slate-500">{lo("Subtotal")}</p>
-            <p className="text-[16px] font-black text-slate-950">
+            <p className="text-[15px] font-black text-slate-950">
               {formatMoney(product.price)}
             </p>
           </div>
           <button
             type="submit"
-            className="flex h-11 items-center gap-2 rounded-lg bg-blue-600 px-4 text-[13px] font-black text-white shadow-[0_12px_22px_rgba(37,99,235,0.22)] transition hover:bg-blue-700"
+            className="flex h-10 cursor-pointer items-center gap-2 rounded-lg bg-blue-600 px-3 text-[13px] font-black text-white shadow-[0_12px_22px_rgba(37,99,235,0.22)] transition hover:bg-blue-700"
           >
             {lo("Add")}
             <ArrowRight className="h-4 w-4" />
@@ -172,7 +172,7 @@ export function StaffCustomizePage({ businessSlug }: { businessSlug: string }) {
 
 function OptionSection({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section className="mt-3 rounded-lg border border-blue-100 bg-white p-4 shadow-[0_8px_22px_rgba(15,23,42,0.035)]">
+    <section className="mt-3 rounded-lg border border-blue-100 bg-white p-3 shadow-[0_8px_22px_rgba(15,23,42,0.035)]">
       <h3 className="text-[15px] font-black text-slate-950">{lo(title)}</h3>
       <div className="mt-3 grid grid-cols-[repeat(auto-fit,minmax(76px,1fr))] gap-2">
         {children}
@@ -205,7 +205,7 @@ function OptionCard({
       />
       <span className="flex min-h-[76px] flex-col items-center justify-center rounded-lg border border-blue-100 bg-white px-2 text-center transition peer-checked:border-blue-600 peer-checked:bg-blue-50 hover:bg-blue-50">
         <span className="text-[13px] font-black text-slate-950">{lo(label)}</span>
-        <span className="mt-1 text-[11px] font-bold text-slate-500">{lo(helper)}</span>
+        <span className="mt-1 text-[10px] font-bold text-slate-500">{lo(helper)}</span>
       </span>
       <span className="absolute -top-1 -right-1 hidden h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-white peer-checked:flex">
         <Check className="h-3.5 w-3.5" />

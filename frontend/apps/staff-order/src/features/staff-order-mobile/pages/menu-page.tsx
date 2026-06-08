@@ -59,7 +59,7 @@ export function StaffMenuPage({ businessSlug }: { businessSlug: string }) {
       }
     >
       <StaffOrderHeader title="Take Order" />
-      <StaffScrollArea>
+      <StaffScrollArea className="pb-3">
         <StaffContextCard
           branch={selectedBranch}
           staff={staffName}
@@ -67,24 +67,24 @@ export function StaffMenuPage({ businessSlug }: { businessSlug: string }) {
           table={`${tableId} - ${guests} ${lo("Guests")}`}
         />
 
-        <label className="relative mt-4 block">
-          <Search className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-slate-400" />
+        <label className="relative mt-3 block">
+          <Search className="absolute top-1/2 left-3 h-[18px] w-[18px] -translate-y-1/2 text-slate-400" />
           <input
             value={query}
             onChange={(event) => setQuery(event.currentTarget.value)}
-            className="h-[52px] w-full rounded-lg border border-blue-100 bg-white pr-14 pl-12 text-[14px] font-bold shadow-[0_8px_20px_rgba(15,23,42,0.03)] transition outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
+            className="h-10 w-full rounded-lg border border-blue-100 bg-white pr-11 pl-10 text-[12px] font-bold shadow-[0_7px_16px_rgba(15,23,42,0.03)] transition outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
             placeholder={lo("Search menu items")}
           />
           <button
             type="button"
-            className="absolute top-1/2 right-3 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-lg text-slate-500 transition hover:bg-blue-50 hover:text-blue-600"
+            className="absolute top-1/2 right-2 flex h-8 w-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-lg text-slate-500 transition hover:bg-blue-50 hover:text-blue-600"
             aria-label="Filter menu"
           >
-            <SlidersHorizontal className="h-5 w-5" />
+            <SlidersHorizontal className="h-[18px] w-[18px]" />
           </button>
         </label>
 
-        <div className="mt-4 flex [scrollbar-width:none] gap-2 overflow-x-auto pb-1 [&::-webkit-scrollbar]:hidden">
+        <div className="mt-2.5 flex [scrollbar-width:none] gap-1.5 overflow-x-auto pb-1 [&::-webkit-scrollbar]:hidden">
           {staffCategories.map((category) => {
             const isActive = category.id === activeCategory;
 
@@ -93,10 +93,10 @@ export function StaffMenuPage({ businessSlug }: { businessSlug: string }) {
                 key={category.id}
                 type="button"
                 onClick={() => setActiveCategory(category.id)}
-                className={`h-11 shrink-0 rounded-full px-5 text-[14px] font-black transition ${
+                className={`h-8 shrink-0 cursor-pointer rounded-full border px-3 text-[12px] font-black transition ${
                   isActive
-                    ? "bg-blue-600 text-white shadow-[0_10px_20px_rgba(37,99,235,0.18)]"
-                    : "border border-blue-100 bg-white text-slate-500 hover:bg-blue-50"
+                    ? "border-blue-600 bg-white text-blue-600"
+                    : "border-blue-100 bg-white text-slate-500 hover:border-blue-300 hover:text-blue-600"
                 }`}
               >
                 {lo(category.label)}
@@ -105,7 +105,7 @@ export function StaffMenuPage({ businessSlug }: { businessSlug: string }) {
           })}
         </div>
 
-        <div className="mt-4 grid grid-cols-2 gap-3 pb-3">
+        <div className="mt-2.5 grid grid-cols-2 gap-2 pb-2">
           {filteredProducts.map((product) => (
             <MenuProductCard
               key={product.id}
@@ -133,41 +133,41 @@ function MenuProductCard({
   onAdd: () => void;
 }) {
   return (
-    <article className="min-h-[152px] rounded-lg border border-blue-100 bg-white p-2.5 shadow-[0_10px_24px_rgba(15,23,42,0.04)] transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-[0_16px_30px_rgba(37,99,235,0.11)]">
+    <article className="min-h-[132px] rounded-lg border border-blue-100 bg-white p-2 shadow-[0_8px_18px_rgba(15,23,42,0.035)] transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-[0_14px_26px_rgba(37,99,235,0.1)]">
       <Link
         to={getStaffOrderPath(businessSlug, `/table/${tableId}/item/${product.id}`)}
-        className="grid grid-cols-[76px_minmax(0,1fr)] gap-2.5"
+        className="grid cursor-pointer grid-cols-[64px_minmax(0,1fr)] gap-2"
       >
         <img
           src={product.image}
           alt=""
-          className="h-24 w-[76px] rounded-lg object-cover"
+          className="h-20 w-16 rounded-lg object-cover"
         />
         <div className="min-w-0 pt-1">
           {product.label ? (
-            <span className="mb-2 inline-flex rounded-md bg-blue-50 px-2 py-1 text-[10px] font-black text-blue-600">
+            <span className="mb-1.5 inline-flex rounded-md bg-blue-50 px-1.5 py-0.5 text-[9px] font-black text-blue-600">
               {lo(product.label)}
             </span>
           ) : null}
           <p className="line-clamp-2 text-[13px] leading-4 font-black text-slate-950">
             {lo(product.name)}
           </p>
-          <p className="mt-1 truncate text-[11px] font-bold text-slate-500">
+          <p className="mt-0.5 truncate text-[10px] font-bold text-slate-500">
             {lo(product.category === "pastry" ? "Bakery" : product.category)}
           </p>
         </div>
       </Link>
-      <div className="mt-3 flex items-center justify-between">
+      <div className="mt-2 flex items-center justify-between">
         <p className="text-[13px] font-black text-slate-950">
           {formatMoney(product.price)}
         </p>
         <button
           type="button"
           onClick={onAdd}
-          className="flex h-9 w-9 items-center justify-center rounded-lg border border-blue-100 bg-white text-blue-600 shadow-sm transition hover:border-blue-300 hover:bg-blue-50"
+          className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-blue-100 bg-white text-blue-600 shadow-sm transition hover:border-blue-300 hover:bg-blue-50"
           aria-label={`Add ${product.name}`}
         >
-          <Plus className="h-5 w-5" />
+          <Plus className="h-4 w-4" />
         </button>
       </div>
     </article>

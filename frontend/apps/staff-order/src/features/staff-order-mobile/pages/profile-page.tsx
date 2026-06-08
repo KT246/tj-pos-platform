@@ -1,7 +1,6 @@
 import {
   ChevronRight,
   CircleHelp,
-  Globe,
   Info,
   LogOut,
   Printer,
@@ -37,25 +36,34 @@ export function StaffProfilePage({ businessSlug }: { businessSlug: string }) {
       }
     >
       <StaffOrderHeader title="Profile" />
-      <StaffScrollArea>
-        <section className="mt-4 grid grid-cols-[96px_1fr] gap-4 rounded-lg border border-blue-100 bg-white p-4 shadow-[0_12px_28px_rgba(15,23,42,0.055)]">
-          <img
-            src="https://i.pravatar.cc/180?img=11"
-            alt=""
-            className="h-24 w-24 rounded-full object-cover"
-          />
-          <div className="min-w-0">
-            <h2 className="text-[20px] font-black text-slate-950">
-              Somchai Phommaseanh
-            </h2>
-            <ProfileMeta label="Role" value={staffRole} />
-            <ProfileMeta label="Branch" value={selectedBranch} />
-            <ProfileMeta label="Employee ID" value={staffId} />
-            <ProfileMeta label="Status" value="On Shift" positive />
+      <StaffScrollArea className="pb-3">
+        <section className="mt-3 rounded-lg border border-blue-100 bg-white p-3 shadow-[0_12px_28px_rgba(15,23,42,0.055)]">
+          <div className="grid grid-cols-[64px_1fr] items-center gap-3">
+            <img
+              src="https://i.pravatar.cc/180?img=11"
+              alt=""
+              className="h-16 w-16 rounded-full object-cover ring-4 ring-blue-50"
+            />
+            <div className="min-w-0">
+              <h2 className="truncate text-[16px] leading-5 font-black text-slate-950">
+                Somchai Phommaseanh
+              </h2>
+              <p className="mt-1 truncate text-[12px] font-bold text-slate-500">
+                {lo(staffRole)}
+              </p>
+              <span className="mt-2 inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-black text-emerald-600">
+                {lo("On Shift")}
+              </span>
+            </div>
+          </div>
+
+          <div className="mt-3 grid grid-cols-2 gap-2">
+            <ProfileInfoCard label="Branch" value={selectedBranch} />
+            <ProfileInfoCard label="Employee ID" value={staffId} />
           </div>
         </section>
 
-        <h3 className="mt-5 text-[15px] font-black text-slate-500">{lo("Settings")}</h3>
+        <h3 className="mt-4 text-[15px] font-black text-slate-500">{lo("Settings")}</h3>
         <section className="mt-3 overflow-hidden rounded-lg border border-blue-100 bg-white shadow-[0_10px_26px_rgba(15,23,42,0.045)]">
           <SettingsRow
             icon={Store}
@@ -73,17 +81,9 @@ export function StaffProfilePage({ businessSlug }: { businessSlug: string }) {
             subtitle="Configure sounds and alerts"
             trailing={<Toggle />}
           />
-          <SettingsRow
-            icon={Globe}
-            title="Language"
-            subtitle="Change app language"
-            trailing={
-              <span className="text-[13px] font-bold text-slate-600">{lo("English")}</span>
-            }
-          />
         </section>
 
-        <h3 className="mt-5 text-[15px] font-black text-slate-500">{lo("System")}</h3>
+        <h3 className="mt-4 text-[15px] font-black text-slate-500">{lo("System")}</h3>
         <section className="mt-3 overflow-hidden rounded-lg border border-blue-100 bg-white shadow-[0_10px_26px_rgba(15,23,42,0.045)]">
           <SettingsRow
             icon={CircleHelp}
@@ -101,23 +101,23 @@ export function StaffProfilePage({ businessSlug }: { businessSlug: string }) {
             title="About App"
             subtitle="App information and version"
             trailing={
-              <span className="text-[13px] font-bold text-slate-600">v1.0.8</span>
+              <span className="text-[12px] font-bold text-slate-600">v1.0.8</span>
             }
           />
         </section>
 
         <Link
           to={getStaffOrderPath(businessSlug, "")}
-          className="mt-5 flex h-[52px] items-center justify-center gap-3 rounded-lg border border-blue-200 bg-white text-[15px] font-black text-blue-600 shadow-sm transition hover:bg-blue-50"
+          className="mt-4 flex h-10 cursor-pointer items-center justify-center gap-2 rounded-lg border border-blue-200 bg-white text-[13px] font-black text-blue-600 shadow-sm transition hover:bg-blue-50"
         >
-          <Repeat2 className="h-5 w-5" />
+          <Repeat2 className="h-4 w-4" />
           {lo("Switch Branch")}
         </Link>
         <Link
           to={getStaffOrderPath(businessSlug, "")}
-          className="mt-3 flex h-[52px] items-center justify-center gap-3 rounded-lg border border-red-200 bg-white text-[15px] font-black text-red-500 shadow-sm transition hover:bg-red-50"
+          className="mt-2 flex h-10 cursor-pointer items-center justify-center gap-2 rounded-lg border border-red-200 bg-white text-[13px] font-black text-red-500 shadow-sm transition hover:bg-red-50"
         >
-          <LogOut className="h-5 w-5" />
+          <LogOut className="h-4 w-4" />
           {lo("Logout")}
         </Link>
       </StaffScrollArea>
@@ -125,21 +125,17 @@ export function StaffProfilePage({ businessSlug }: { businessSlug: string }) {
   );
 }
 
-function ProfileMeta({
+function ProfileInfoCard({
   label,
-  value,
-  positive = false
+  value
 }: {
   label: string;
   value: string;
-  positive?: boolean;
 }) {
   return (
-    <div className="border-b border-blue-50 py-2 last:border-b-0">
-      <p className="text-[11px] font-bold text-slate-500">{lo(label)}</p>
-      <p
-        className={`text-[13px] font-black ${positive ? "text-emerald-600" : "text-slate-950"}`}
-      >
+    <div className="min-w-0 rounded-lg bg-blue-50/55 px-3 py-2">
+      <p className="text-[10px] font-bold text-slate-500">{lo(label)}</p>
+      <p className="mt-0.5 truncate text-[12px] font-black text-slate-950">
         {lo(value)}
       </p>
     </div>
@@ -160,13 +156,13 @@ function SettingsRow({
   return (
     <button
       type="button"
-      className="grid w-full grid-cols-[auto_1fr_auto] items-center gap-3 border-b border-blue-50 px-4 py-4 text-left transition last:border-b-0 hover:bg-blue-50/50"
+      className="grid w-full cursor-pointer grid-cols-[auto_1fr_auto] items-center gap-3 border-b border-blue-50 px-3 py-3 text-left transition last:border-b-0 hover:bg-blue-50/50"
     >
-      <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
-        <Icon className="h-5 w-5" />
+      <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
+        <Icon className="h-[18px] w-[18px]" />
       </span>
       <span className="min-w-0">
-        <span className="block text-[14px] font-black text-slate-950">{lo(title)}</span>
+        <span className="block text-[13px] font-black text-slate-950">{lo(title)}</span>
         <span className="text-[12px] font-bold text-slate-500">{lo(subtitle)}</span>
       </span>
       <span className="flex items-center gap-2">
