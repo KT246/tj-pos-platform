@@ -1,6 +1,5 @@
 import {
   Banknote,
-  CreditCard,
   Landmark,
   QrCode
 } from "lucide-react";
@@ -22,7 +21,7 @@ export const customerBusinessBrand: CustomerBusinessBrand = {
 
 export const customerDisplayDevice: CustomerDisplayDevice = {
   id: "CD-COUNTER-01",
-  name: "Counter Display 01",
+  name: "Customer Display 01",
   cashier: "Somchai P.",
   time: "10:24 AM",
   pairCode: "824 519"
@@ -76,7 +75,7 @@ export const customerDisplayOrder: CustomerDisplayOrder = {
 };
 
 export const customerBankDetails: CustomerBankDetails = {
-  bankName: "TJ Business Bank",
+  bankName: "BCEL Bank",
   accountName: "TJ Cafe Vientiane",
   accountNo: "001-245-8899",
   reference: "ORD-1058",
@@ -87,6 +86,5 @@ export const customerBankDetails: CustomerBankDetails = {
 export const customerPaymentMethods: CustomerPaymentMethod[] = [
   { id: "cash", label: "Cash", icon: Banknote, tone: "green" },
   { id: "bank-transfer", label: "Bank Transfer", icon: Landmark, tone: "blue" },
-  { id: "qr-code", label: "QR Code", icon: QrCode, tone: "blue" },
-  { id: "card", label: "Card", icon: CreditCard, tone: "violet" }
+  { id: "qr-code", label: "Bank QR", icon: QrCode, tone: "blue" }
 ];
