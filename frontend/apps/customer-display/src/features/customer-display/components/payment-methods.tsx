@@ -26,24 +26,26 @@ export function PaymentMethods({
   const resolvedSize = size ?? (compact ? "small" : "large");
   const sizeClass = {
     large: {
-      box: "h-[150px] px-4",
-      icon: "h-12 w-12",
-      label: "mt-5 text-[18px]"
+      box: "h-[clamp(108px,15.5vh,150px)] px-[clamp(10px,1.3vw,16px)]",
+      icon: "h-[clamp(34px,4.7vh,48px)] w-[clamp(34px,4.7vh,48px)]",
+      label: "mt-[clamp(10px,1.8vh,20px)] text-[clamp(14px,1.18vw,18px)]"
     },
     medium: {
-      box: "h-[98px] px-3",
-      icon: "h-8 w-8",
-      label: "mt-2 text-[15px]"
+      box: "h-[clamp(74px,11vh,98px)] px-3",
+      icon: "h-[clamp(24px,3.6vh,32px)] w-[clamp(24px,3.6vh,32px)]",
+      label: "mt-2 text-[clamp(12px,1vw,15px)]"
     },
     small: {
-      box: "h-[64px] px-2",
-      icon: "h-6 w-6",
-      label: "mt-1 text-[12px]"
+      box: "h-[clamp(44px,6.8vh,58px)] px-2",
+      icon: "h-[clamp(18px,2.8vh,22px)] w-[clamp(18px,2.8vh,22px)]",
+      label: "mt-1 text-[clamp(9px,0.8vw,11px)]"
     }
   }[resolvedSize];
 
+  const gridClass = methods.length === 3 ? "grid-cols-3" : "grid-cols-4";
+
   return (
-    <div className={`grid grid-cols-4 ${resolvedSize === "large" ? "gap-5" : resolvedSize === "medium" ? "gap-3" : "gap-2"}`}>
+    <div className={`grid ${gridClass} ${resolvedSize === "large" ? "gap-[clamp(12px,1.6vw,20px)]" : resolvedSize === "medium" ? "gap-3" : "gap-2"}`}>
       {methods.map((method) => {
         const Icon = method.icon;
         const isSelected = method.id === selected;

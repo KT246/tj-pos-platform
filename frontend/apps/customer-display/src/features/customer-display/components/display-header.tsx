@@ -16,7 +16,7 @@ import { lo } from "../utils/lao-labels";
 
 function HeaderPill({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-[68px] items-center gap-4 rounded-[18px] border border-blue-100 bg-white px-7 text-[22px] font-bold text-slate-700 shadow-[0_8px_28px_rgba(13,91,255,0.08)]">
+    <div className="flex h-[clamp(52px,7vh,68px)] items-center gap-[clamp(10px,1.2vw,16px)] rounded-[18px] border border-blue-100 bg-white px-[clamp(16px,2vw,28px)] text-[clamp(17px,1.35vw,22px)] font-bold text-slate-700 shadow-[0_8px_28px_rgba(13,91,255,0.08)]">
       {children}
     </div>
   );
@@ -38,22 +38,22 @@ export function DisplayHeader({
   const isSuccess = screen === "success";
 
   return (
-    <header className="flex shrink-0 items-center justify-between gap-8">
-      <div className="flex min-w-0 items-center gap-6">
+    <header className="flex min-w-0 shrink-0 items-center justify-between gap-[clamp(16px,2vw,32px)]">
+      <div className="flex min-w-0 items-center gap-[clamp(14px,1.6vw,24px)]">
         <img
           src={brand.logo}
           alt="TJ POS"
-          className="h-[62px] w-[220px] shrink-0 object-contain object-left"
+          className="h-[clamp(44px,6.5vh,62px)] w-[clamp(155px,13vw,220px)] shrink-0 object-contain object-left"
         />
         <div className="h-11 w-px bg-blue-100" />
-        <div className="flex min-w-0 items-center gap-3 text-[24px] font-bold text-[#071633]">
+        <div className="flex min-w-0 items-center gap-3 text-[clamp(19px,1.55vw,24px)] font-bold text-[#071633]">
           <Store className="h-7 w-7 shrink-0 text-slate-600" strokeWidth={2.4} />
           <span className="truncate">{brand.branch}</span>
         </div>
       </div>
 
       {isSuccess ? (
-        <div className="h-[68px] w-[520px]" />
+        <div className="h-[clamp(52px,7vh,68px)] w-[clamp(360px,31vw,520px)]" />
       ) : isPair ? (
         <HeaderPill>
           <MonitorSmartphone className="h-7 w-7 text-blue-600" strokeWidth={2.5} />

@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Lao:wght@400;500;600;700;800;900&display=swap");
 @import "@workspace/ui/styles.css";
 
+@source ".";
+
 :root {
   --font-inter: "Inter";
   --font-noto-sans-lao: "Noto Sans Lao";

@@ -1,22 +1,22 @@
 import type { PickupTicket } from "../types";
 
 export const pickupPreparingTickets: PickupTicket[] = [
-  { code: "A012", item: "Iced Americano", wait: "2 mins", status: "preparing" },
-  { code: "A013", item: "Latte", wait: "3 mins", status: "preparing" },
-  { code: "A014", item: "Mocha", wait: "4 mins", status: "preparing" },
-  { code: "A015", item: "Caramel Macchiato", wait: "5 mins", status: "preparing" }
+  { code: "A012", item: "ອາເມຣິກາໂນເຢັນ", wait: "2 ນາທີ", status: "preparing" },
+  { code: "A013", item: "ລາເຕ້", wait: "3 ນາທີ", status: "preparing" },
+  { code: "A014", item: "ມອກຄ່າ", wait: "4 ນາທີ", status: "preparing" },
+  { code: "A015", item: "ຄາຣາເມວມັກຄີອາໂຕ", wait: "5 ນາທີ", status: "preparing" }
 ];
 
 export const pickupReadyTickets: PickupTicket[] = [
-  { code: "A008", item: "Iced Latte", wait: "ພ້ອມ", status: "ready" },
-  { code: "A009", item: "Flat White", wait: "ພ້ອມ", status: "ready" },
-  { code: "A010", item: "Cappuccino", wait: "ພ້ອມ", status: "ready" },
-  { code: "A011", item: "Chocolate Frappe", wait: "ພ້ອມ", status: "ready" }
+  { code: "A008", item: "ລາເຕ້ເຢັນ", wait: "ພ້ອມ", status: "ready" },
+  { code: "A009", item: "ແຟລັດໄວທ໌", wait: "ພ້ອມ", status: "ready" },
+  { code: "A010", item: "ຄາປູຊິໂນ", wait: "ພ້ອມ", status: "ready" },
+  { code: "A011", item: "ຊັອກໂກແລັດຟຣາບເປ້", wait: "ພ້ອມ", status: "ready" }
 ];
 
 export const pickupSteps = [
-  "ສັ່ງ Order ທີ່ counter",
-  "ທີມ Barista ຈັດກຽມເຄື່ອງດື່ມ",
+  "ສັ່ງອໍເດີທີ່ເຄົາເຕີ",
+  "Barista ຈັດກຽມເຄື່ອງດື່ມ",
   "ກວດເບິ່ງເລກຄິວໃນຈໍ",
-  "ຮັບເຄື່ອງດື່ມ ແລະ enjoy"
+  "ຮັບເຄື່ອງດື່ມທີ່ເຄົາເຕີ"
 ];
