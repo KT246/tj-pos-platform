@@ -3,6 +3,7 @@
   "private": true,
   "packageManager": "pnpm@10.24.0",
   "scripts": {
+    "dev": "turbo dev --filter=./apps/*",
     "dev:web": "pnpm --filter web dev",
     "dev:platform-admin": "pnpm --filter platform-admin dev",
     "dev:business-admin": "pnpm --filter business-admin dev",

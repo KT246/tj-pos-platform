@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   ArrowLeft,
   CalendarDays,
@@ -278,48 +278,51 @@ function menuHref(businessSlug: string, category?: string) {
 
 function PublicMenuFrame({
   children,
+  businessSlug,
   footerText = "This is a digital menu. Please order with our staff."
 }: {
   children: ReactNode;
+  businessSlug?: string;
   footerText?: string;
 }) {
   return (
-    <main className="min-h-screen bg-[#f4f8ff] text-[#071633]">
-      <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-4 sm:px-6 lg:px-8">
-        <div className="flex-1">{children}</div>
-        <div className="mt-6 rounded-2xl border border-blue-100 bg-white px-4 py-3 text-center text-[12px] font-bold text-blue-600 shadow-sm sm:text-[13px]">
-          {lo(footerText)}
+    <main className="h-screen overflow-hidden bg-[#eef4ff] text-[#071633]">
+      <div className="mx-auto flex h-screen w-full max-w-[430px] flex-col overflow-hidden bg-white shadow-[0_24px_80px_rgba(15,52,112,0.12)] sm:border-x sm:border-blue-100">
+        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-4 pt-4 pb-4">
+          {children}
+          <div className="mt-auto pt-5">
+            <div className="rounded-xl bg-blue-50 px-4 py-3 text-center text-[11px] leading-5 font-bold text-blue-600">
+            {lo(footerText)}
+            </div>
+          </div>
         </div>
+        {businessSlug ? <MobileBottomNav businessSlug={businessSlug} /> : null}
       </div>
     </main>
   );
 }
 
-function BusinessHeader({
-  businessSlug,
-  action
-}: {
-  businessSlug: string;
-  action?: ReactNode;
-}) {
+function BusinessHeader({ businessSlug }: { businessSlug: string }) {
+  const action: ReactNode | undefined = undefined;
+
   return (
-    <header className="flex flex-col gap-4 rounded-2xl border border-blue-100 bg-white px-4 py-4 shadow-sm sm:px-5 lg:flex-row lg:items-center lg:justify-between">
+    <header className="flex items-center justify-between gap-3">
       <Link to={`/b/${businessSlug}`} className="flex min-w-0 items-center gap-3">
         <img
           src={business.logo}
           alt={business.name}
-          className="h-12 w-12 rounded-full border border-blue-100 object-cover sm:h-14 sm:w-14"
+          className="h-[54px] w-[54px] shrink-0 rounded-full border border-blue-100 object-cover shadow-sm"
         />
         <span className="min-w-0">
-          <span className="block truncate text-[18px] font-black sm:text-[22px]">
+          <span className="block truncate text-[18px] leading-6 font-black">
             {businessName(businessSlug)}
           </span>
-          <span className="block text-[12px] font-bold text-slate-500 sm:text-[13px]">
+          <span className="block truncate text-[11px] font-bold text-slate-500">
             {lo(business.tagline)}
           </span>
         </span>
       </Link>
-      <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+      <div className="hidden">
         <Link
           to={`/b/${businessSlug}/menu`}
           className="inline-flex h-10 items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 text-[12px] font-black text-blue-600 transition hover:border-blue-300 hover:bg-blue-100"
@@ -355,6 +358,30 @@ function BusinessHeader({
   );
 }
 
+function MobilePageBar({
+  title,
+  backTo,
+  action
+}: {
+  title: string;
+  backTo: string;
+  action?: ReactNode;
+}) {
+  return (
+    <header className="grid h-10 grid-cols-[40px_minmax(0,1fr)_40px] items-center">
+      <Link
+        to={backTo}
+        className="grid h-10 w-10 place-items-center rounded-full text-[#071633] transition hover:bg-blue-50"
+        aria-label={lo("Back to store")}
+      >
+        <ArrowLeft className="h-4 w-4" strokeWidth={2.6} />
+      </Link>
+      <h1 className="truncate text-center text-[14px] font-black">{lo(title)}</h1>
+      {action ?? <span />}
+    </header>
+  );
+}
+
 function MenuSearch({
   businessSlug,
   value = "",
@@ -373,7 +400,7 @@ function MenuSearch({
   return (
     <form
       action={`/b/${businessSlug}/menu`}
-      className={`${className} flex w-full items-center gap-3`}
+      className={`${className} flex w-full items-center gap-2`}
     >
       {category && normalizeCategory(category) !== "all" ? (
         <input type="hidden" name="category" value={normalizeCategory(category)} />
@@ -384,7 +411,7 @@ function MenuSearch({
           name="search"
           defaultValue={value}
           placeholder={lo("Search menu...")}
-          className="h-12 w-full rounded-2xl border border-blue-100 bg-white pr-9 pl-10 text-[14px] font-bold text-[#071633] transition outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-50"
+          className="h-11 w-full rounded-xl border border-transparent bg-[#f5f7fb] pr-9 pl-10 text-[13px] font-bold text-[#071633] transition outline-none focus:border-blue-300 focus:bg-white focus:ring-4 focus:ring-blue-50"
         />
         {value ? (
           <Link
@@ -397,7 +424,7 @@ function MenuSearch({
         ) : null}
       </label>
       {cancel ? (
-        <Link to={cancelHref} className="text-[12px] font-black text-blue-600">
+        <Link to={cancelHref} className="shrink-0 text-[11px] font-black text-blue-600">
           {lo("Cancel")}
         </Link>
       ) : (
@@ -417,12 +444,12 @@ function CategoryTabs({
   businessSlug: string;
 }) {
   return (
-    <div className="mt-4 flex flex-nowrap gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible">
+    <div className="mt-3 flex flex-nowrap gap-2 overflow-x-auto pb-1">
       {categories.map(({ id, label, icon: Icon }) => (
         <Link
           key={id}
           to={menuHref(businessSlug, id)}
-          className={`grid min-w-[72px] place-items-center rounded-2xl border px-4 py-3 text-[11px] font-black transition hover:-translate-y-0.5 hover:shadow-md sm:min-w-[104px] sm:text-[12px] ${
+          className={`grid min-w-[64px] place-items-center rounded-xl border px-3 py-2 text-[10px] font-black transition hover:-translate-y-0.5 hover:shadow-md ${
             active === id
               ? "border-blue-600 bg-blue-50 text-blue-600"
               : "border-blue-100 bg-white text-[#071633]"
@@ -444,12 +471,12 @@ function CoffeeTabs({
   active?: string;
 }) {
   return (
-    <div className="mt-4 flex flex-nowrap gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible">
+    <div className="mt-3 flex flex-nowrap gap-2 overflow-x-auto pb-1">
       {coffeeTabs.map((tab) => (
         <Link
           key={tab.id}
           to={menuHref(businessSlug, tab.id)}
-          className={`inline-flex h-10 shrink-0 items-center justify-center rounded-full border px-4 text-[12px] font-black transition hover:-translate-y-0.5 hover:shadow-md sm:px-5 ${
+          className={`inline-flex h-9 shrink-0 items-center justify-center rounded-full border px-3 text-[11px] font-black transition hover:-translate-y-0.5 hover:shadow-md ${
             active === tab.id
               ? "border-blue-600 bg-blue-600 text-white"
               : "border-blue-100 bg-white text-slate-600"
@@ -464,7 +491,7 @@ function CoffeeTabs({
 
 function StoreContextCard() {
   return (
-    <div className="grid grid-cols-3 gap-2 sm:gap-3">
+    <div className="grid grid-cols-3 gap-1.5">
       <SmallInfoCard icon={Grid2X2} label="Table" value={business.table} />
       <SmallInfoCard icon={CalendarDays} label="Dine In" value="Today" />
       <SmallInfoCard
@@ -489,20 +516,24 @@ function SmallInfoCard({
   tone?: "blue" | "green";
 }) {
   return (
-    <div className="rounded-2xl border border-blue-100 bg-white px-3 py-3 shadow-sm sm:px-4 sm:py-4">
-      <Icon
-        className={`h-4 w-4 ${tone === "green" ? "text-emerald-500" : "text-blue-600"}`}
-        strokeWidth={2.35}
-      />
-      <div className="mt-2 text-[10px] font-bold text-slate-500 sm:text-[11px]">
-        {lo(label)}
-      </div>
-      <div
-        className={`truncate text-[11px] font-black sm:text-[13px] ${
-          tone === "green" ? "text-emerald-600" : "text-[#071633]"
-        }`}
-      >
-        {lo(value)}
+    <div className="min-w-0 rounded-full border border-blue-100 bg-white px-2.5 py-2 shadow-sm">
+      <div className="flex min-w-0 items-center gap-1.5">
+        <Icon
+          className={`h-3.5 w-3.5 shrink-0 ${tone === "green" ? "text-emerald-500" : "text-blue-600"}`}
+          strokeWidth={2.4}
+        />
+        <div className="min-w-0">
+          <div className="truncate text-[8px] leading-3 font-bold text-slate-500">
+            {lo(label)}
+          </div>
+          <div
+            className={`truncate text-[9.5px] leading-3 font-black ${
+              tone === "green" ? "text-emerald-600" : "text-[#071633]"
+            }`}
+          >
+            {lo(value)}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -510,18 +541,18 @@ function SmallInfoCard({
 
 function HeroCard() {
   return (
-    <div className="relative h-[220px] overflow-hidden rounded-[24px] shadow-[0_22px_70px_rgba(13,91,255,0.14)] sm:h-[300px] lg:h-[380px]">
+    <div className="relative h-[150px] overflow-hidden rounded-2xl shadow-[0_18px_50px_rgba(13,91,255,0.14)]">
       <img
         src={business.heroImage}
         alt="Freshly brewed coffee"
         className="h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/25 to-transparent" />
-      <div className="absolute top-8 left-6 max-w-[280px] text-white sm:top-10 sm:left-8 sm:max-w-[440px]">
-        <h1 className="text-[30px] leading-tight font-black sm:text-[48px]">
+      <div className="absolute top-6 left-4 max-w-[210px] text-white">
+        <h1 className="text-[22px] leading-tight font-black">
           {lo("Freshly brewed for you")}
         </h1>
-        <p className="mt-3 text-[13px] leading-5 font-bold sm:text-[16px] sm:leading-7">
+        <p className="mt-2 text-[11px] leading-4 font-bold">
           {lo("Quality ingredients, great taste.")}
         </p>
       </div>
@@ -541,9 +572,9 @@ function MenuListItem({
   return (
     <Link
       to={`/b/${businessSlug}/menu/${item.slug}`}
-      className="grid grid-cols-[96px_minmax(0,1fr)] gap-3 rounded-2xl border border-blue-100 bg-white p-2.5 shadow-sm transition hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg sm:grid-cols-[132px_minmax(0,1fr)] sm:gap-4 sm:p-3"
+      className="grid grid-cols-[94px_minmax(0,1fr)] gap-3 rounded-2xl border border-blue-100 bg-white p-2 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-lg"
     >
-      <div className="relative h-[88px] overflow-hidden rounded-xl bg-blue-50 sm:h-[124px]">
+      <div className="relative h-[86px] overflow-hidden rounded-xl bg-blue-50">
         <img
           src={item.image}
           alt={item.name}
@@ -557,7 +588,7 @@ function MenuListItem({
       </div>
       <div className="min-w-0 py-1">
         <div className="flex items-start justify-between gap-2">
-          <h2 className="truncate text-[14px] font-black sm:text-[16px]">
+          <h2 className="truncate text-[13px] font-black">
             {lo(item.name)}
           </h2>
           {item.unavailable ? (
@@ -571,14 +602,14 @@ function MenuListItem({
           ) : null}
         </div>
         <p
-          className={`mt-1 text-[12px] leading-5 font-semibold text-slate-500 sm:text-[13px] ${
+          className={`mt-1 text-[11px] leading-4 font-semibold text-slate-500 ${
             compact ? "line-clamp-2" : ""
           }`}
         >
           {lo(item.description)}
         </p>
         <p
-          className={`mt-2 text-[13px] font-black sm:text-[15px] ${
+          className={`mt-2 text-[12px] font-black ${
             item.unavailable ? "text-slate-400 line-through" : "text-blue-600"
           }`}
         >
@@ -589,73 +620,70 @@ function MenuListItem({
   );
 }
 
-function BottomActions({ businessSlug }: { businessSlug: string }) {
+function MobileBottomNav({ businessSlug }: { businessSlug: string }) {
+  const { pathname } = useLocation();
+  const isInfoActive = pathname.startsWith(`/b/${businessSlug}/info`);
+  const isMenuActive =
+    pathname === `/b/${businessSlug}` || pathname.startsWith(`/b/${businessSlug}/menu`);
+  const baseClass =
+    "flex h-12 items-center justify-center gap-2 rounded-xl text-[12px] font-black transition hover:bg-blue-50";
+  const activeClass = "bg-blue-50 text-blue-600";
+  const inactiveClass = "bg-white text-[#071633]";
+
   return (
-    <div className="mt-4 grid grid-cols-3 gap-2">
+    <nav className="shrink-0 border-t border-blue-100 bg-white px-4 pt-2 pb-[calc(8px+env(safe-area-inset-bottom))]">
+      <div className="grid grid-cols-3 gap-2">
       <Link
         to={`/b/${businessSlug}/menu`}
-        className="flex h-10 items-center justify-center gap-2 rounded-xl bg-blue-50 text-[12px] font-black text-blue-600"
+        className={`${baseClass} ${isMenuActive ? activeClass : inactiveClass}`}
       >
         <Grid2X2 className="h-4 w-4" />
-        {lo("Photos")}
+        {lo("Menu")}
       </Link>
       <Link
         to={`/b/${businessSlug}/info`}
-        className="flex h-10 items-center justify-center gap-2 rounded-xl bg-white text-[12px] font-black text-[#071633]"
+        className={`${baseClass} ${isInfoActive ? activeClass : inactiveClass}`}
       >
         <Info className="h-4 w-4" />
         {lo("Info")}
       </Link>
       <a
         href={`tel:${business.phone.replace(/\s/g, "")}`}
-        className="flex h-10 items-center justify-center gap-2 rounded-xl bg-white text-[12px] font-black text-[#071633]"
+        className={`${baseClass} ${inactiveClass}`}
       >
         <Phone className="h-4 w-4" />
         {lo("Call Staff")}
       </a>
-    </div>
+      </div>
+    </nav>
   );
 }
 
 export function PublicBusinessLanding({ businessSlug }: { businessSlug: string }) {
   return (
-    <PublicMenuFrame>
+    <PublicMenuFrame businessSlug={businessSlug}>
       <BusinessHeader businessSlug={businessSlug} />
-      <section className="mt-6 grid gap-5 lg:grid-cols-[minmax(0,1.45fr)_380px]">
-        <div className="min-w-0">
-          <HeroCard />
-          <MenuSearch businessSlug={businessSlug} />
-        </div>
-        <aside className="space-y-4">
-          <StoreContextCard />
-          <div className="rounded-2xl border border-blue-100 bg-white p-4 shadow-sm">
-            <p className="text-[12px] font-black text-blue-600">{lo("Store Info")}</p>
-            <h2 className="mt-2 text-[22px] font-black">
-              {businessName(businessSlug)}
-            </h2>
-            <p className="mt-2 text-[13px] leading-6 font-semibold text-slate-600">
-              {lo(business.branch)}, {lo(business.address)}
-            </p>
-            <BottomActions businessSlug={businessSlug} />
-          </div>
-        </aside>
+      <section className="mt-4 space-y-3">
+        <StoreContextCard />
+        <HeroCard />
+        <MenuSearch businessSlug={businessSlug} />
       </section>
-      <section className="mt-6">
+      <section className="mt-5">
         <div className="flex items-center justify-between gap-4">
-          <h2 className="text-[18px] font-black sm:text-[22px]">{lo("Categories")}</h2>
+          <h2 className="text-[14px] font-black">{lo("Categories")}</h2>
           <Link
             to={`/b/${businessSlug}/menu`}
-            className="text-[12px] font-black text-blue-600 sm:text-[13px]"
+            className="text-[10px] font-black text-blue-600"
           >
             {lo("View all")}
           </Link>
         </div>
         <CategoryTabs businessSlug={businessSlug} />
       </section>
-      <section className="mt-6">
-        <h2 className="text-[18px] font-black sm:text-[22px]">{lo("Popular Picks")}</h2>
-        <div className="mt-3 grid gap-3 lg:grid-cols-2 xl:grid-cols-3">
-          {menuItems.slice(0, 6).map((item) => (
+      <section className="mt-5">
+        <h2 className="text-[14px] font-black">{lo("Popular Picks")}</h2>
+        <div className="mt-3 grid gap-3">
+          {menuItems.slice(0, 3).map((item) => (
             <MenuListItem
               key={item.slug}
               item={item}
@@ -689,43 +717,32 @@ export function PublicMenuPage({
   const visibleItems = filterItemsByCategory(activeCategory);
 
   return (
-    <PublicMenuFrame>
-      <BusinessHeader businessSlug={businessSlug} />
-      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <div>
+    <PublicMenuFrame businessSlug={businessSlug}>
+      <MobilePageBar
+        title={menuCategoryTitle(activeCategory)}
+        backTo={`/b/${businessSlug}`}
+        action={
           <Link
-            to={`/b/${businessSlug}`}
-            className="inline-flex items-center gap-2 text-[13px] font-black text-blue-600"
+            to={`/b/${businessSlug}/menu?search=latte`}
+            className="grid h-10 w-10 place-items-center rounded-full bg-blue-50 text-[#071633] transition hover:bg-blue-100"
+            aria-label={lo("Search")}
           >
-            <ArrowLeft className="h-4 w-4" />
-            {lo("Back to store")}
+            <Search className="h-4 w-4" strokeWidth={2.4} />
           </Link>
-          <h1 className="mt-3 text-[28px] leading-tight font-black sm:text-[40px]">
-            {lo(menuCategoryTitle(activeCategory))}
-          </h1>
-          {branchSlug ? (
-            <p className="mt-1 text-[13px] font-bold text-slate-500">
-              {titleFromSlug(branchSlug)}
-            </p>
-          ) : (
-            <p className="mt-2 text-[14px] font-semibold text-slate-600">
-              {lo("Browse menu items, prices, availability and store details.")}
-            </p>
-          )}
-        </div>
-      </div>
-      <section className="mt-5 rounded-2xl border border-blue-100 bg-white p-4 shadow-sm sm:p-5">
-        <MenuSearch
-          businessSlug={businessSlug}
-          category={activeCategory}
-          className="mt-0"
-        />
+        }
+      />
+      {branchSlug ? (
+        <p className="mt-2 text-center text-[11px] font-bold text-slate-500">
+          {titleFromSlug(branchSlug)}
+        </p>
+      ) : null}
+      <section className="mt-4">
         <CategoryTabs businessSlug={businessSlug} active={activeTopCategory} />
         {activeTopCategory === "coffee" ? (
           <CoffeeTabs businessSlug={businessSlug} active={coffeeActive} />
         ) : null}
       </section>
-      <div className="mt-5 grid gap-3 lg:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-4 grid gap-3">
         {visibleItems.map((item) => (
           <MenuListItem
             key={item.slug}
@@ -735,7 +752,7 @@ export function PublicMenuPage({
           />
         ))}
         {visibleItems.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-blue-200 bg-blue-50 px-4 py-8 text-center lg:col-span-2 xl:col-span-3">
+          <div className="rounded-2xl border border-dashed border-blue-200 bg-blue-50 px-4 py-8 text-center">
             <p className="text-[14px] font-black text-[#071633]">{lo("No items available")}</p>
             <p className="mt-2 text-[12px] font-bold text-slate-500">
               {lo("Please choose another category.")}
@@ -761,28 +778,23 @@ export function PublicMenuItemPage({
   }
 
   return (
-    <PublicMenuFrame>
-      <BusinessHeader businessSlug={businessSlug} />
-      <div className="mt-6 flex items-center justify-between gap-4">
-        <Link
-          to={`/b/${businessSlug}/menu`}
-          className="inline-flex items-center gap-2 text-[13px] font-black text-blue-600"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          {lo("Back to menu")}
-        </Link>
-        <button
-          type="button"
-          className="inline-flex h-10 items-center gap-2 rounded-full border border-blue-100 bg-white px-4 text-[12px] font-black text-[#071633] shadow-sm transition hover:border-blue-300 hover:bg-blue-50"
-          aria-label={lo("Share item")}
-        >
-          <Share2 className="h-4 w-4" />
-          {lo("Share")}
-        </button>
-      </div>
+    <PublicMenuFrame businessSlug={businessSlug}>
+      <MobilePageBar
+        title={item.name}
+        backTo={`/b/${businessSlug}/menu`}
+        action={
+          <button
+            type="button"
+            className="grid h-10 w-10 place-items-center rounded-full text-[#071633] transition hover:bg-blue-50"
+            aria-label={lo("Share item")}
+          >
+            <Share2 className="h-4 w-4" strokeWidth={2.4} />
+          </button>
+        }
+      />
 
-      <section className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.08fr)_minmax(390px,0.92fr)] lg:items-start">
-        <div className="relative h-[300px] overflow-hidden rounded-[28px] bg-blue-50 shadow-[0_22px_70px_rgba(13,91,255,0.14)] sm:h-[420px] lg:h-[560px]">
+      <section className="mt-4 space-y-4">
+        <div className="relative h-[260px] overflow-hidden rounded-2xl bg-blue-50 shadow-[0_18px_50px_rgba(13,91,255,0.14)]">
           <img
             src={item.image}
             alt={item.name}
@@ -795,26 +807,26 @@ export function PublicMenuItemPage({
           ) : null}
         </div>
 
-        <div className="rounded-[28px] border border-blue-100 bg-white p-5 shadow-sm sm:p-6">
+        <div>
           <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-[11px] font-black text-blue-600">
             {lo(item.category)}
           </span>
-          <h1 className="mt-4 text-[34px] leading-tight font-black sm:text-[44px]">
+          <h1 className="mt-3 text-[24px] leading-tight font-black">
             {lo(item.name)}
           </h1>
-          <p className="mt-3 text-[24px] font-black text-blue-600">{item.price}</p>
-          <p className="mt-4 text-[14px] leading-7 font-semibold text-slate-600 sm:text-[15px]">
+          <p className="mt-2 text-[18px] font-black text-blue-600">{item.price}</p>
+          <p className="mt-3 text-[12px] leading-5 font-semibold text-slate-600">
             {lo(item.description)} {lo("A perfect balance of bold and creamy.")}
           </p>
 
-          <div className="mt-6 divide-y divide-blue-100 rounded-2xl border border-blue-100 bg-white">
+          <div className="mt-5 divide-y divide-blue-100 rounded-2xl border border-blue-100 bg-white">
             <DetailRow icon={Coffee} label="Category" value={item.category} />
             <DetailRow icon={CalendarDays} label="Size" value={item.size} />
             <DetailRow icon={Store} label="Ingredients" value={item.ingredients} />
             <DetailRow icon={Info} label="Allergens" value={item.allergens} />
           </div>
 
-          <div className="mt-5 rounded-2xl border border-blue-100 bg-blue-50 px-4 py-4 text-[13px] leading-6 font-bold text-blue-600">
+          <div className="mt-4 rounded-xl border border-blue-100 bg-blue-50 px-4 py-3 text-[11px] leading-5 font-bold text-blue-600">
             {lo("This is a digital menu item. Please place your order with our staff.")}
           </div>
         </div>
@@ -831,28 +843,23 @@ function PublicUnavailableItemPage({
   item: PublicMenuItem;
 }) {
   return (
-    <PublicMenuFrame>
-      <BusinessHeader businessSlug={businessSlug} />
-      <div className="mt-6 flex items-center justify-between gap-4">
-        <Link
-          to={`/b/${businessSlug}/menu`}
-          className="inline-flex items-center gap-2 text-[13px] font-black text-blue-600"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          {lo("Back to menu")}
-        </Link>
-        <button
-          type="button"
-          className="inline-flex h-10 items-center gap-2 rounded-full border border-blue-100 bg-white px-4 text-[12px] font-black text-[#071633] shadow-sm transition hover:border-blue-300 hover:bg-blue-50"
-          aria-label={lo("Share item")}
-        >
-          <Share2 className="h-4 w-4" />
-          {lo("Share")}
-        </button>
-      </div>
+    <PublicMenuFrame businessSlug={businessSlug}>
+      <MobilePageBar
+        title="Out of Stock"
+        backTo={`/b/${businessSlug}/menu`}
+        action={
+          <button
+            type="button"
+            className="grid h-10 w-10 place-items-center rounded-full text-[#071633] transition hover:bg-blue-50"
+            aria-label={lo("Share item")}
+          >
+            <Share2 className="h-4 w-4" strokeWidth={2.4} />
+          </button>
+        }
+      />
 
-      <section className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.08fr)_minmax(390px,0.92fr)] lg:items-start">
-        <div className="relative h-[300px] overflow-hidden rounded-[28px] bg-slate-100 shadow-[0_22px_70px_rgba(239,68,68,0.10)] sm:h-[420px] lg:h-[560px]">
+      <section className="mt-4 space-y-4">
+        <div className="relative h-[260px] overflow-hidden rounded-2xl bg-slate-100 shadow-[0_18px_50px_rgba(239,68,68,0.10)]">
           <img
             src={item.image}
             alt={item.name}
@@ -866,20 +873,20 @@ function PublicUnavailableItemPage({
           </div>
         </div>
 
-        <div className="rounded-[28px] border border-red-100 bg-white p-5 shadow-sm sm:p-6">
+        <div>
           <span className="inline-flex rounded-full bg-red-50 px-3 py-1 text-[11px] font-black text-red-600">
             {lo("Temporarily unavailable")}
           </span>
-          <h1 className="mt-4 text-[34px] leading-tight font-black sm:text-[44px]">
+          <h1 className="mt-3 text-[24px] leading-tight font-black">
             {lo(item.name)}
           </h1>
-          <p className="mt-3 text-[24px] font-black text-slate-400 line-through">
+          <p className="mt-2 text-[18px] font-black text-slate-400 line-through">
             {item.price}
           </p>
-          <p className="mt-4 text-[14px] leading-7 font-semibold text-slate-600 sm:text-[15px]">
+          <p className="mt-3 text-[12px] leading-5 font-semibold text-slate-600">
             {lo(item.description)}
           </p>
-          <div className="mt-6 rounded-2xl bg-red-50 px-4 py-4 text-[13px] leading-6 font-bold text-red-600">
+          <div className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-[11px] leading-5 font-bold text-red-600">
             {lo("Sorry, this item is currently out of stock. Please try another item.")}
           </div>
         </div>
@@ -910,19 +917,10 @@ function DetailRow({
 
 export function PublicInfoPage({ businessSlug }: { businessSlug: string }) {
   return (
-    <PublicMenuFrame footerText="Thank you for visiting us!">
-      <BusinessHeader businessSlug={businessSlug} />
-      <div className="mt-6 flex items-center justify-between">
-        <Link
-          to={`/b/${businessSlug}`}
-          className="inline-flex items-center gap-2 text-[13px] font-black text-blue-600"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          {lo("Back to store")}
-        </Link>
-      </div>
-      <section className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
-        <div className="rounded-[28px] border border-blue-100 bg-white p-5 shadow-sm sm:p-6">
+    <PublicMenuFrame businessSlug={businessSlug} footerText="Thank you for visiting us!">
+      <MobilePageBar title="Store Info" backTo={`/b/${businessSlug}`} />
+      <section className="mt-4 space-y-4">
+        <div className="rounded-2xl border border-blue-100 bg-white p-4 shadow-sm">
           <div className="flex items-center gap-4">
             <img
               src={business.logo}
@@ -930,13 +928,13 @@ export function PublicInfoPage({ businessSlug }: { businessSlug: string }) {
               className="h-[68px] w-[68px] rounded-full border border-blue-100 object-cover"
             />
             <div>
-              <h1 className="text-[28px] leading-tight font-black sm:text-[36px]">
+              <h1 className="text-[20px] leading-tight font-black">
                 {businessName(businessSlug)}
               </h1>
-              <p className="text-[13px] font-bold text-slate-500">{lo(business.tagline)}</p>
+              <p className="text-[11px] font-bold text-slate-500">{lo(business.tagline)}</p>
             </div>
           </div>
-          <div className="mt-6 space-y-4">
+          <div className="mt-5 space-y-3">
             <ContactRow
               icon={MapPin}
               text={`${lo(business.branch)}, ${lo(business.address)}`}
@@ -952,10 +950,10 @@ export function PublicInfoPage({ businessSlug }: { businessSlug: string }) {
           </div>
         </div>
 
-        <div className="space-y-4">
-          <div className="rounded-[28px] border border-blue-100 bg-white p-5 shadow-sm sm:p-6">
-            <h2 className="text-[20px] font-black">{lo("Opening Hours")}</h2>
-            <div className="mt-4 space-y-3 text-[13px] font-bold">
+        <div className="space-y-3">
+          <div className="rounded-2xl border border-blue-100 bg-white p-4 shadow-sm">
+            <h2 className="text-[15px] font-black">{lo("Opening Hours")}</h2>
+            <div className="mt-4 space-y-3 text-[11px] font-bold">
               <div className="flex justify-between gap-4">
                 <span>{lo("Monday - Friday")}</span>
                 <span>6:30 AM - 10:00 PM</span>
@@ -966,20 +964,20 @@ export function PublicInfoPage({ businessSlug }: { businessSlug: string }) {
               </div>
             </div>
           </div>
-          <div className="rounded-[28px] border border-blue-100 bg-white p-5 shadow-sm sm:p-6">
-            <h2 className="text-[20px] font-black">{lo("About Us")}</h2>
-            <p className="mt-2 text-[13px] leading-6 font-semibold text-slate-600">
+          <div className="rounded-2xl border border-blue-100 bg-white p-4 shadow-sm">
+            <h2 className="text-[15px] font-black">{lo("About Us")}</h2>
+            <p className="mt-2 text-[12px] leading-5 font-semibold text-slate-600">
               {lo("TJ Cafe Vientiane serves quality coffee, delicious drinks, and tasty food in a cozy and welcoming atmosphere.")}
             </p>
             <img
               src={business.storeImage}
               alt={business.name}
-              className="mt-4 h-[220px] w-full rounded-2xl object-cover"
+              className="mt-4 h-[150px] w-full rounded-xl object-cover"
             />
           </div>
         </div>
       </section>
-      <section className="mt-5 grid gap-3 md:grid-cols-3">
+      <section className="mt-3 grid gap-3">
         <InfoPanel
           icon={Wifi}
           title="Facilities"
@@ -1050,23 +1048,17 @@ function InfoPanel({
 
 export function PublicBookingPage({ businessSlug }: { businessSlug: string }) {
   return (
-    <PublicMenuFrame footerText="Please contact staff to confirm booking availability.">
-      <BusinessHeader businessSlug={businessSlug} />
-      <div className="mt-6 flex items-center justify-between">
-        <Link
-          to={`/b/${businessSlug}`}
-          className="inline-flex items-center gap-2 text-[13px] font-black text-blue-600"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          {lo("Back to store")}
-        </Link>
-      </div>
-      <div className="mt-5 rounded-[28px] border border-blue-100 bg-white p-6 shadow-sm sm:p-8 lg:max-w-3xl">
+    <PublicMenuFrame
+      businessSlug={businessSlug}
+      footerText="Please contact staff to confirm booking availability."
+    >
+      <MobilePageBar title="Booking Request" backTo={`/b/${businessSlug}`} />
+      <div className="mt-4 rounded-2xl border border-blue-100 bg-white p-5 shadow-sm">
         <CalendarDays className="h-12 w-12 text-blue-600" />
-        <h1 className="mt-5 text-[34px] leading-tight font-black sm:text-[44px]">
+        <h1 className="mt-5 text-[24px] leading-tight font-black">
           {lo("Booking Request")}
         </h1>
-        <p className="mt-4 text-[14px] leading-7 font-semibold text-slate-600 sm:text-[15px]">
+        <p className="mt-3 text-[12px] leading-5 font-semibold text-slate-600">
           {lo("Booking can be enabled for supported businesses. This public menu stays view-only and does not create orders or payments.")}
         </p>
       </div>
@@ -1078,13 +1070,13 @@ export function PublicQrPage({ qrCode }: { qrCode: string }) {
   const businessSlug = "tj-cafe-vientiane";
 
   return (
-    <PublicMenuFrame>
+    <PublicMenuFrame businessSlug={businessSlug}>
       <BusinessHeader businessSlug={businessSlug} />
-      <div className="mt-6 rounded-[28px] border border-blue-100 bg-white p-6 text-center shadow-sm sm:p-8 lg:mx-auto lg:max-w-2xl">
+      <div className="mt-5 rounded-2xl border border-blue-100 bg-white p-5 text-center shadow-sm">
         <Grid2X2 className="mx-auto h-12 w-12 text-blue-600" />
         <p className="mt-4 text-[12px] font-black text-blue-600">QR Code</p>
-        <h1 className="mt-2 text-[34px] font-black sm:text-[44px]">{qrCode}</h1>
-        <p className="mt-4 text-[14px] leading-7 font-semibold text-slate-600">
+        <h1 className="mt-2 text-[24px] font-black">{qrCode}</h1>
+        <p className="mt-3 text-[12px] leading-5 font-semibold text-slate-600">
           {lo("This QR opens the linked public menu for table")} {business.table}.
         </p>
         <Link
@@ -1111,9 +1103,8 @@ export function PublicSearchResultsPage({
   const results = filterItemsBySearch(filterItemsByCategory(activeCategory), query);
 
   return (
-    <PublicMenuFrame>
-      <BusinessHeader businessSlug={businessSlug} />
-      <section className="mt-6 rounded-2xl border border-blue-100 bg-white p-4 shadow-sm sm:p-5">
+    <PublicMenuFrame businessSlug={businessSlug}>
+      <section>
         <MenuSearch
           businessSlug={businessSlug}
           value={query}
@@ -1121,11 +1112,11 @@ export function PublicSearchResultsPage({
           category={activeCategory}
           className="mt-0"
         />
-        <p className="mt-4 text-[13px] font-bold text-slate-500">
+        <p className="mt-3 text-[11px] font-bold text-slate-500">
           {results.length} {lo("results found")}
         </p>
       </section>
-      <div className="mt-5 grid gap-3 lg:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-3 grid gap-3">
         {results.map((item) => (
           <MenuListItem
             key={item.slug}
@@ -1135,7 +1126,7 @@ export function PublicSearchResultsPage({
           />
         ))}
         {results.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-blue-200 bg-blue-50 px-4 py-10 text-center lg:col-span-2 xl:col-span-3">
+          <div className="rounded-2xl border border-dashed border-blue-200 bg-blue-50 px-4 py-10 text-center">
             <Search className="mx-auto h-8 w-8 text-blue-500" />
             <p className="mt-3 text-[14px] font-black text-[#071633]">{lo("No menu found")}</p>
             <p className="mt-2 text-[12px] font-bold text-slate-500">
