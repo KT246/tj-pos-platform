@@ -33,7 +33,6 @@ import {
 } from "../components/business-admin-primitives";
 import { BusinessAdminShell } from "../layouts/business-admin-shell";
 import type { BusinessMenuKey, Kpi, Tone } from "../types";
-import { toLaoNode, toLaoText } from "../utils/lao-labels";
 
 type RestaurantTableStatus = "available" | "occupied" | "reserved" | "cleaning" | "blocked";
 
@@ -74,21 +73,21 @@ const tableStatusStyles: Record<
 };
 
 const restaurantTables = [
-  { id: "T01", area: "Indoor", pax: 2, status: "available", top: "22%", left: "8%" },
-  { id: "T02", area: "Indoor", pax: 2, status: "available", top: "22%", left: "24%" },
-  { id: "T03", area: "Indoor", pax: 4, status: "available", top: "22%", left: "42%" },
-  { id: "T04", area: "Indoor", pax: 4, status: "occupied", top: "22%", left: "62%", time: "45m" },
-  { id: "T06", area: "Indoor", pax: 2, status: "available", top: "54%", left: "10%" },
-  { id: "T07", area: "Indoor", pax: 6, status: "reserved", top: "54%", left: "30%", time: "7:00 PM" },
-  { id: "T08", area: "Indoor", pax: 2, status: "available", top: "54%", left: "49%" },
-  { id: "T10", area: "Indoor", pax: 4, status: "occupied", top: "54%", left: "68%", time: "18m" },
-  { id: "T11", area: "Indoor", pax: 6, status: "cleaning", top: "78%", left: "28%" },
-  { id: "T12", area: "Terrace", pax: 4, status: "available", top: "28%", left: "22%" },
-  { id: "T13", area: "Terrace", pax: 4, status: "occupied", top: "28%", left: "58%", time: "30m" },
-  { id: "T14", area: "Terrace", pax: 2, status: "available", top: "64%", left: "28%" },
-  { id: "T15", area: "Terrace", pax: 2, status: "available", top: "64%", left: "58%" },
-  { id: "R01", area: "Private Room", pax: 8, status: "reserved", top: "24%", left: "28%", time: "6:30 PM" },
-  { id: "R02", area: "Private Room", pax: 8, status: "available", top: "64%", left: "38%" }
+  { id: "T01", area: "ໃນຮ້ານ", pax: 2, status: "available", top: "22%", left: "8%" },
+  { id: "T02", area: "ໃນຮ້ານ", pax: 2, status: "available", top: "22%", left: "24%" },
+  { id: "T03", area: "ໃນຮ້ານ", pax: 4, status: "available", top: "22%", left: "42%" },
+  { id: "T04", area: "ໃນຮ້ານ", pax: 4, status: "occupied", top: "22%", left: "62%", time: "45m" },
+  { id: "T06", area: "ໃນຮ້ານ", pax: 2, status: "available", top: "54%", left: "10%" },
+  { id: "T07", area: "ໃນຮ້ານ", pax: 6, status: "reserved", top: "54%", left: "30%", time: "7:00 PM" },
+  { id: "T08", area: "ໃນຮ້ານ", pax: 2, status: "available", top: "54%", left: "49%" },
+  { id: "T10", area: "ໃນຮ້ານ", pax: 4, status: "occupied", top: "54%", left: "68%", time: "18m" },
+  { id: "T11", area: "ໃນຮ້ານ", pax: 6, status: "cleaning", top: "78%", left: "28%" },
+  { id: "T12", area: "ລະບຽງ", pax: 4, status: "available", top: "28%", left: "22%" },
+  { id: "T13", area: "ລະບຽງ", pax: 4, status: "occupied", top: "28%", left: "58%", time: "30m" },
+  { id: "T14", area: "ລະບຽງ", pax: 2, status: "available", top: "64%", left: "28%" },
+  { id: "T15", area: "ລະບຽງ", pax: 2, status: "available", top: "64%", left: "58%" },
+  { id: "R01", area: "ຫ້ອງສ່ວນຕົວ", pax: 8, status: "reserved", top: "24%", left: "28%", time: "6:30 PM" },
+  { id: "R02", area: "ຫ້ອງສ່ວນຕົວ", pax: 8, status: "available", top: "64%", left: "38%" }
 ] satisfies Array<{
   id: string;
   area: string;
@@ -106,7 +105,7 @@ const reservations = [
     phone: "020 5155 1234",
     pax: 2,
     table: "T05",
-    area: "Indoor",
+    area: "ໃນຮ້ານ",
     status: "Seated",
     notes: "Window seat"
   },
@@ -116,7 +115,7 @@ const reservations = [
     phone: "020 9988 7766",
     pax: 4,
     table: "T02",
-    area: "Indoor",
+    area: "ໃນຮ້ານ",
     status: "Seated",
     notes: "Anniversary"
   },
@@ -126,7 +125,7 @@ const reservations = [
     phone: "020 5155 8999",
     pax: 6,
     table: "R01",
-    area: "Private Room",
+    area: "ຫ້ອງສ່ວນຕົວ",
     status: "Confirmed",
     notes: "Birthday"
   },
@@ -136,7 +135,7 @@ const reservations = [
     phone: "020 2244 5566",
     pax: 5,
     table: "T13",
-    area: "Terrace",
+    area: "ລະບຽງ",
     status: "Confirmed",
     notes: "High chair"
   },
@@ -146,18 +145,18 @@ const reservations = [
     phone: "020 1111 3344",
     pax: 3,
     table: "T10",
-    area: "Indoor",
+    area: "ໃນຮ້ານ",
     status: "Confirmed",
     notes: "-"
   },
   {
     time: "8:00 PM",
-    name: "Walk-in",
+    name: "ລູກຄ້າ Walk-in",
     phone: "-",
     pax: 2,
     table: "-",
     area: "-",
-    status: "Walk-in",
+    status: "ລູກຄ້າ Walk-in",
     notes: "-"
   }
 ];
@@ -175,7 +174,7 @@ const splitGuests = [
   { guest: "Guest 1", amount: "LAK 195,000", charge: "LAK 5,000" },
   { guest: "Guest 2", amount: "LAK 180,000", charge: "-" },
   { guest: "Guest 3", amount: "LAK 150,000", charge: "-" },
-  { guest: "Guest 4", amount: "LAK 60,000", charge: "Unpaid" }
+  { guest: "Guest 4", amount: "LAK 60,000", charge: "ຍັງບໍ່ຈ່າຍ" }
 ];
 
 const splitItems = [
@@ -198,7 +197,7 @@ const endDayItems = [
 export function RestaurantAreasTablesPage() {
   return (
     <RestaurantShell
-      active="Table Map"
+      active="ແຜນຜັງໂຕະ"
       title="ແຜນຜັງໂຕະ Restaurant"
       description="ຈັດການ area, table, ສະຖານະໂຕະ ແລະ order ຂອງຮ້ານອາຫານ."
       kpis={[
@@ -215,9 +214,9 @@ export function RestaurantAreasTablesPage() {
       }
     >
       <div className="grid gap-4 xl:grid-cols-[1.35fr_1fr_0.8fr]">
-        <RestaurantAreaCard title="Indoor Area" area="Indoor" />
-        <RestaurantAreaCard title="Terrace" area="Terrace" />
-        <RestaurantAreaCard title="Private Room" area="Private Room" />
+        <RestaurantAreaCard title="Indoor Area" area="ໃນຮ້ານ" />
+        <RestaurantAreaCard title="ລະບຽງ" area="ລະບຽງ" />
+        <RestaurantAreaCard title="ຫ້ອງສ່ວນຕົວ" area="ຫ້ອງສ່ວນຕົວ" />
       </div>
     </RestaurantShell>
   );
@@ -226,19 +225,19 @@ export function RestaurantAreasTablesPage() {
 export function ReservationBookPage() {
   return (
     <RestaurantShell
-      active="Reservations"
+      active="ການຈອງໂຕະ"
       title="ປື້ມຈອງໂຕະ"
       description="ຈັດການ reservation ປະຈຳວັນ, walk-in, confirmed ແລະ seated."
       kpis={[
         { label: "ຈອງທັງໝົດ", value: "22", change: "today", tone: "blue", icon: CalendarCheck },
         { label: "Confirmed", value: "16", change: "ready", tone: "emerald", icon: Check },
-        { label: "Walk-in", value: "6", change: "queue", tone: "amber", icon: Users },
+        { label: "ລູກຄ້າ Walk-in", value: "6", change: "queue", tone: "amber", icon: Users },
         { label: "No-show Risk", value: "1", change: "watch", tone: "red", icon: Clock3 }
       ]}
       actions={<Button icon={Plus}>ສ້າງ Reservation</Button>}
     >
       <div className="grid gap-4 xl:grid-cols-[250px_minmax(0,1fr)]">
-        <Card title="May 2025">
+        <Card title="ພຶດສະພາ 2025">
           <div className="p-4">
             <div className="grid grid-cols-7 gap-2 text-center text-[11px] font-black text-slate-500">
               {["S", "M", "T", "W", "T", "F", "S"].map((day, index) => (
@@ -262,10 +261,10 @@ export function ReservationBookPage() {
               {[
                 ["All Reservations", "22"],
                 ["Today", "22"],
-                ["Walk-in", "6"],
+                ["ລູກຄ້າ Walk-in", "6"],
                 ["Confirmed", "16"],
                 ["Seated", "8"],
-                ["Cancelled", "2"]
+                ["ຍົກເລີກ", "2"]
               ].map(([label, value], index) => (
                 <button
                   key={label}
@@ -296,7 +295,7 @@ export function ReservationBookPage() {
             <table className="min-w-full text-left text-[12px]">
               <thead>
                 <tr className="border-b border-blue-100 text-[11px] font-black text-slate-500">
-                  {["Time", "Name", "Phone", "Pax", "Table", "Area", "Status", "Notes", ""].map(
+                  {["ເວລາ", "Name", "Phone", "Pax", "Table", "Area", "ສະຖານະ", "ໝາຍເຫດ", ""].map(
                     (heading) => (
                       <th key={heading} className="px-4 py-3">{heading}</th>
                     )
@@ -313,13 +312,13 @@ export function ReservationBookPage() {
                     <td className="px-4 py-3 font-bold text-slate-700">{row.table}</td>
                     <td className="px-4 py-3 font-bold text-slate-700">{row.area}</td>
                     <td className="px-4 py-3">
-                      <Badge tone={row.status === "Walk-in" ? "amber" : row.status === "Seated" ? "emerald" : "blue"}>
+                      <Badge tone={row.status === "ລູກຄ້າ Walk-in" ? "amber" : row.status === "Seated" ? "emerald" : "blue"}>
                         {row.status}
                       </Badge>
                     </td>
                     <td className="px-4 py-3 font-bold text-slate-600">{row.notes}</td>
                     <td className="px-4 py-3 text-right">
-                      <IconButton icon={MoreHorizontal} label="More" tone="slate" />
+                      <IconButton icon={MoreHorizontal} label="ເພີ່ມເຕີມ" tone="slate" />
                     </td>
                   </tr>
                 ))}
@@ -336,7 +335,7 @@ export function ReservationBookPage() {
 export function KitchenCourseManagementPage() {
   return (
     <RestaurantShell
-      active="Kitchen Courses"
+      active="ລຳດັບຄົວ"
       title="ຈັດການ Course ອາຫານ"
       description="ກຳນົດລຳດັບ course, station ຄົວ ແລະ routing ໄປ KDS."
       kpis={[
@@ -352,7 +351,7 @@ export function KitchenCourseManagementPage() {
           <table className="min-w-full text-left text-[12px]">
             <thead>
               <tr className="border-b border-blue-100 text-[11px] font-black text-slate-500">
-                {["Course Name", "Sequence", "Display To Staff", "Stations", "Typical Items", "Status", "Actions"].map(
+                {["Course Name", "Sequence", "Display To Staff", "Stations", "Typical Items", "ສະຖານະ", "ການດຳເນີນການ"].map(
                   (heading) => (
                     <th key={heading} className="px-4 py-3">{heading}</th>
                   )
@@ -370,8 +369,8 @@ export function KitchenCourseManagementPage() {
                   <td className="px-4 py-3"><Badge tone="emerald">Active</Badge></td>
                   <td className="px-4 py-3">
                     <div className="flex justify-end gap-2">
-                      <IconButton icon={Settings2} label="Edit" />
-                      <IconButton icon={MoreHorizontal} label="More" tone="slate" />
+                      <IconButton icon={Settings2} label="ແກ້ໄຂ" />
+                      <IconButton icon={MoreHorizontal} label="ເພີ່ມເຕີມ" tone="slate" />
                     </div>
                   </td>
                 </tr>
@@ -388,20 +387,20 @@ export function KitchenCourseManagementPage() {
 export function SplitBillPage() {
   return (
     <RestaurantShell
-      active="Split Bill"
+      active="ແຍກບິນ"
       title="ແບ່ງ Bill ຕາມ Guest / Item"
       description="ແບ່ງຍອດຊຳລະຕາມແຂກ ຫຼືຕາມ item ສຳລັບ table service."
       kpis={[
         { label: "Table", value: "T04", change: "active", tone: "blue", icon: Table2 },
         { label: "Order", value: "ORD-00158", change: "4 guests", tone: "emerald", icon: ReceiptText },
         { label: "Total", value: "LAK 585,000", change: "before charge", tone: "amber", icon: WalletCards },
-        { label: "Unpaid", value: "1", change: "guest", tone: "red", icon: Users }
+        { label: "ຍັງບໍ່ຈ່າຍ", value: "1", change: "guest", tone: "red", icon: Users }
       ]}
       actions={<Button icon={ReceiptText}>Review & Pay</Button>}
     >
       <div className="grid gap-4 xl:grid-cols-[320px_minmax(0,1fr)]">
         <Card
-          title="Guests"
+          title="ແຂກ"
           action={
             <div className="flex gap-2">
               <Button variant="secondary" icon={Users}>By Guest</Button>
@@ -435,7 +434,7 @@ export function SplitBillPage() {
             <table className="min-w-full text-left text-[12px]">
               <thead>
                 <tr className="border-b border-blue-100 text-[11px] font-black text-slate-500">
-                  {["Item", "Qty", "Unit Price", "Assign To"].map((heading) => (
+                  {["ລາຍການ", "Qty", "Unit Price", "Assign To"].map((heading) => (
                     <th key={heading} className="px-4 py-3">{heading}</th>
                   ))}
                 </tr>
@@ -456,7 +455,7 @@ export function SplitBillPage() {
           </div>
           <div className="flex items-center justify-between border-t border-blue-50 px-4 py-3">
             <span className="text-sm font-bold text-slate-500">
-              {toLaoText("Total Amount")}
+              {"ຍອດລວມ"}
             </span>
             <span className="text-lg font-black text-slate-950">LAK 585,000</span>
           </div>
@@ -469,12 +468,12 @@ export function SplitBillPage() {
 export function ServiceChargeTaxPreviewPage() {
   return (
     <RestaurantShell
-      active="Service Charge"
+      active="ຄ່າບໍລິການ"
       title="Service Charge & Tax Preview"
       description="Preview ແລະຕັ້ງຄ່າ service charge, VAT, rounding ກ່ອນຊຳລະ."
       kpis={[
-        { label: "Subtotal", value: "LAK 585,000", change: "order", tone: "blue", icon: ReceiptText },
-        { label: "Service Charge", value: "10%", change: "enabled", tone: "emerald", icon: Percent },
+        { label: "ຍອດກ່ອນຄ່າບໍລິການ", value: "LAK 585,000", change: "order", tone: "blue", icon: ReceiptText },
+        { label: "ຄ່າບໍລິການ", value: "10%", change: "enabled", tone: "emerald", icon: Percent },
         { label: "VAT", value: "10%", change: "enabled", tone: "amber", icon: FileText },
         { label: "Payable", value: "LAK 708,000", change: "rounded", tone: "violet", icon: CreditCard }
       ]}
@@ -484,30 +483,30 @@ export function ServiceChargeTaxPreviewPage() {
         <Card title="Preview">
           <div className="space-y-5 p-5">
             {[
-              ["Subtotal", "LAK 585,000"],
-              ["Service Charge (10%)", "LAK 58,500"],
-              ["Tax (VAT 10%)", "LAK 64,350"],
-              ["Rounding", "LAK 150"]
+              ["ຍອດກ່ອນຄ່າບໍລິການ", "LAK 585,000"],
+              ["ຄ່າບໍລິການ (10%)", "LAK 58,500"],
+              ["ພາສີ (VAT 10%)", "LAK 64,350"],
+              ["ປັດເສດ", "LAK 150"]
             ].map(([label, value]) => (
               <InfoRow key={label} label={label} value={value} />
             ))}
             <div className="flex items-center justify-between rounded-lg bg-blue-50 p-4">
               <span className="text-sm font-black text-slate-700">
-                {toLaoText("Total Payable")}
+                {"ຍອດຕ້ອງຊຳລະ"}
               </span>
               <span className="text-2xl font-black text-blue-600">LAK 708,000</span>
             </div>
           </div>
         </Card>
-        <Card title="Settings">
+        <Card title="ຕັ້ງຄ່າ">
           <div className="space-y-4 p-5">
-            <ToggleRow title="Service Charge" enabled />
-            <SettingRow label="Type" value="Percentage" />
-            <SettingRow label="Rate" value="10%" />
+            <ToggleRow title="ຄ່າບໍລິການ" enabled />
+            <SettingRow label="ປະເພດ" value="ເປີເຊັນ" />
+            <SettingRow label="ອັດຕາ" value="10%" />
             <ToggleRow title="Tax (VAT)" enabled />
-            <SettingRow label="Type" value="VAT" />
-            <SettingRow label="Rate" value="10%" />
-            <SettingRow label="Rounding" value="Round to nearest 100 LAK" />
+            <SettingRow label="ປະເພດ" value="VAT" />
+            <SettingRow label="ອັດຕາ" value="10%" />
+            <SettingRow label="ປັດເສດ" value="ປັດໃກ້ສຸດ 100 LAK" />
             <div className="rounded-md bg-blue-50 p-3 text-xs font-black text-blue-700">
               Service charge is distributed to staff according to your configuration.
             </div>
@@ -521,14 +520,14 @@ export function ServiceChargeTaxPreviewPage() {
 export function MergeTransferTablePage() {
   return (
     <RestaurantShell
-      active="Merge / Transfer"
+      active="ລວມ / ຍ້າຍ"
       title="ຍ້າຍ / ລວມໂຕະ"
       description="ຍ້າຍ order ຈາກໂຕະໜຶ່ງໄປອີກໂຕະ ຫຼືລວມ table ໃຫ້ເປັນ group."
       kpis={[
-        { label: "Source Table", value: "T04", change: "occupied", tone: "amber", icon: Table2 },
-        { label: "Guests", value: "4", change: "current", tone: "blue", icon: Users },
-        { label: "Destination", value: "T12", change: "available", tone: "emerald", icon: GitMerge },
-        { label: "Order Amount", value: "LAK 585,000", change: "move", tone: "violet", icon: ReceiptText }
+        { label: "ໂຕະຕົ້ນທາງ", value: "T04", change: "occupied", tone: "amber", icon: Table2 },
+        { label: "ແຂກ", value: "4", change: "current", tone: "blue", icon: Users },
+        { label: "ປາຍທາງ", value: "T12", change: "available", tone: "emerald", icon: GitMerge },
+        { label: "ຍອດອໍເດີ", value: "LAK 585,000", change: "move", tone: "violet", icon: ReceiptText }
       ]}
       actions={<Button icon={GitMerge}>Transfer Table</Button>}
     >
@@ -537,18 +536,18 @@ export function MergeTransferTablePage() {
           <div className="space-y-4 p-4">
             <h3 className="text-2xl font-black text-slate-950">Table T04</h3>
             <Badge tone="amber">ມີລູກຄ້າ</Badge>
-            <InfoRow label="Guests" value="4" />
+            <InfoRow label="ແຂກ" value="4" />
             <InfoRow label="Order" value="ORD-00158" />
-            <InfoRow label="Duration" value="45m" />
+            <InfoRow label="ໄລຍະເວລາ" value="45m" />
             <InfoRow label="Total" value="LAK 585,000" />
           </div>
         </Card>
         <Card title="To (Destination Table)">
           <div className="space-y-2 p-4">
             {[
-              ["T06", "Indoor", "2 pax"],
-              ["T12", "Terrace", "4 pax"],
-              ["R02", "Private Room", "8 pax"]
+              ["T06", "ໃນຮ້ານ", "2 pax"],
+              ["T12", "ລະບຽງ", "4 pax"],
+              ["R02", "ຫ້ອງສ່ວນຕົວ", "8 pax"]
             ].map(([table, area, pax], index) => (
               <button
                 key={table}
@@ -562,7 +561,7 @@ export function MergeTransferTablePage() {
                 <span className={`h-4 w-4 rounded-full border ${index === 1 ? "border-blue-600 bg-blue-600" : "border-slate-300"}`} />
                 <span className="flex-1 text-sm font-black text-slate-950">{table}</span>
                 <span className="text-xs font-bold text-slate-500">
-                  {toLaoText(area)}
+                  {area}
                 </span>
                 <Badge tone="emerald">Available</Badge>
                 <span className="text-xs font-bold text-slate-500">{pax}</span>
@@ -572,11 +571,11 @@ export function MergeTransferTablePage() {
         </Card>
         <Card title="Transfer Summary">
           <div className="space-y-5 p-4">
-            <InfoRow label="From" value="T04 (Indoor)" />
+            <InfoRow label="ຈາກ" value="T04 (Indoor)" />
             <div className="flex justify-center text-blue-600"><ArrowDown className="h-8 w-8" /></div>
-            <InfoRow label="To" value="T12 (Terrace)" />
-            <InfoRow label="Guests" value="4" />
-            <InfoRow label="Order Amount" value="LAK 585,000" />
+            <InfoRow label="ໄປຫາ" value="T12 (Terrace)" />
+            <InfoRow label="ແຂກ" value="4" />
+            <InfoRow label="ຍອດອໍເດີ" value="LAK 585,000" />
             <Button icon={GitMerge}>Transfer Table</Button>
           </div>
         </Card>
@@ -588,12 +587,12 @@ export function MergeTransferTablePage() {
 export function RestaurantEndOfDaySummaryPage() {
   return (
     <RestaurantShell
-      active="End of Day"
+      active="ປິດຮອບມື້"
       title="ສະຫຼຸບປິດມື້ Restaurant"
       description="ສະຫຼຸບ sales, payment, void, discount ແລະ top items ກ່ອນ close day."
       kpis={[
         { label: "Total Sales", value: "LAK 8,450,000", change: "12.5%", tone: "blue", icon: ReceiptText },
-        { label: "Orders", value: "156", change: "8.2%", tone: "emerald", icon: FileText },
+        { label: "ອໍເດີ", value: "156", change: "8.2%", tone: "emerald", icon: FileText },
         { label: "Avg. Order Value", value: "LAK 54,167", change: "3.2%", tone: "amber", icon: WalletCards },
         { label: "Covers", value: "328", change: "7.9%", tone: "violet", icon: Users },
         { label: "Void Amount", value: "LAK 120,000", change: "5.1%", tone: "red", icon: ReceiptText },
@@ -610,15 +609,15 @@ export function RestaurantEndOfDaySummaryPage() {
         <Card title="Sales Summary">
           <div className="space-y-4 p-4">
             {[
-              ["Food Sales", "LAK 6,120,000"],
-              ["Beverage Sales", "LAK 1,990,000"],
-              ["Service Charge", "LAK 445,000"],
-              ["Tax (VAT 10%)", "LAK 645,000"]
+              ["ຍອດຂາຍອາຫານ", "LAK 6,120,000"],
+              ["ຍອດຂາຍເຄື່ອງດື່ມ", "LAK 1,990,000"],
+              ["ຄ່າບໍລິການ", "LAK 445,000"],
+              ["ພາສີ (VAT 10%)", "LAK 645,000"]
             ].map(([label, value]) => (
               <InfoRow key={label} label={label} value={value} />
             ))}
             <div className="flex items-center justify-between rounded-lg bg-slate-50 p-3">
-              <span className="font-black text-slate-700">{toLaoText("Total")}</span>
+              <span className="font-black text-slate-700">{"Total"}</span>
               <span className="text-xl font-black text-slate-950">LAK 8,450,000</span>
             </div>
           </div>
@@ -640,7 +639,7 @@ export function RestaurantEndOfDaySummaryPage() {
                 >
                   <span className="flex min-w-0 items-center gap-2 text-slate-600">
                     <span className={`h-2.5 w-2.5 rounded-full ${color}`} />
-                    {toLaoText(label)}
+                    {label}
                   </span>
                   <span className="text-right text-slate-950">
                     {value}
@@ -651,26 +650,26 @@ export function RestaurantEndOfDaySummaryPage() {
             </div>
           </div>
         </Card>
-        <Card title="Top Items Sold">
+        <Card title="ລາຍການຂາຍດີ">
           <div className="divide-y divide-blue-50">
             {endDayItems.map(([name, qty], index) => (
               <div key={name} className="flex items-center justify-between px-4 py-3 text-sm">
                 <span className="font-black text-slate-950">
-                  {index + 1}. {toLaoText(name)}
+                  {index + 1}. {name}
                 </span>
                 <span className="font-black text-slate-600">{qty}</span>
               </div>
             ))}
           </div>
         </Card>
-        <Card title="Notes" className="xl:col-span-2">
+        <Card title="ໝາຍເຫດ" className="xl:col-span-2">
           <div className="p-4 text-sm font-bold leading-7 text-slate-600">
-            <p>- {toLaoText("Restaurant closed at 11:30 PM")}</p>
-            <p>- {toLaoText("All cash deposited")}</p>
-            <p>- {toLaoText("One void order reviewed by manager")}</p>
+            <p>- {"ຮ້ານປິດເວລາ 11:30 PM"}</p>
+            <p>- {"ນຳເງິນສົດຝາກຄົບແລ້ວ"}</p>
+            <p>- {"ຜູ້ຈັດການກວດອໍເດີທີ່ void 1 ລາຍການແລ້ວ"}</p>
           </div>
         </Card>
-        <Card title="Closed By">
+        <Card title="ປິດໂດຍ">
           <div className="flex items-center gap-3 p-4">
             <span
               className="h-12 w-12 rounded-full bg-cover bg-center"
@@ -682,7 +681,7 @@ export function RestaurantEndOfDaySummaryPage() {
             <span>
               <span className="block text-sm font-black text-slate-950">Somchai Phommaseanh</span>
               <span className="block text-xs font-bold text-slate-500">
-                {toLaoText("Manager - 11:35 PM")}
+                {"ຜູ້ຈັດການ - 11:35 PM"}
               </span>
             </span>
           </div>
@@ -702,13 +701,13 @@ function RestaurantShell({
 }: {
   active: Extract<
     BusinessMenuKey,
-    | "Table Map"
-    | "Reservations"
-    | "Kitchen Courses"
-    | "Split Bill"
-    | "Service Charge"
-    | "Merge / Transfer"
-    | "End of Day"
+    | "ແຜນຜັງໂຕະ"
+    | "ການຈອງໂຕະ"
+    | "ລຳດັບຄົວ"
+    | "ແຍກບິນ"
+    | "ຄ່າບໍລິການ"
+    | "ລວມ / ຍ້າຍ"
+    | "ປິດຮອບມື້"
   >;
   title: string;
   description: string;
@@ -769,9 +768,9 @@ function RestaurantAreaCard({ title, area }: { title: string; area: string }) {
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between gap-4 border-b border-blue-50 pb-2 last:border-b-0">
-      <span className="text-xs font-bold text-slate-500">{toLaoText(label)}</span>
+      <span className="text-xs font-bold text-slate-500">{label}</span>
       <span className="text-right text-xs font-black text-slate-950">
-        {toLaoText(value)}
+        {value}
       </span>
     </div>
   );
@@ -780,7 +779,7 @@ function InfoRow({ label, value }: { label: string; value: string }) {
 function ToggleRow({ title, enabled }: { title: string; enabled: boolean }) {
   return (
     <div className="flex items-center justify-between">
-      <span className="text-sm font-black text-slate-700">{toLaoText(title)}</span>
+      <span className="text-sm font-black text-slate-700">{title}</span>
       <span className={`relative h-6 w-11 rounded-full ${enabled ? "bg-blue-600" : "bg-slate-200"}`}>
         <span className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow ${enabled ? "left-6" : "left-1"}`} />
       </span>
@@ -791,7 +790,7 @@ function ToggleRow({ title, enabled }: { title: string; enabled: boolean }) {
 function SettingRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="grid grid-cols-[110px_1fr] items-center gap-3">
-      <span className="text-xs font-black text-slate-500">{toLaoText(label)}</span>
+      <span className="text-xs font-black text-slate-500">{label}</span>
       <SelectPill>{value}</SelectPill>
     </div>
   );
@@ -803,7 +802,7 @@ function SelectPill({ children }: { children: ReactNode }) {
       type="button"
       className="flex h-9 w-full items-center justify-between rounded-md border border-blue-100 bg-white px-3 text-left text-[12px] font-black text-slate-700 transition hover:bg-blue-50"
     >
-      {toLaoNode(children)}
+      {children}
       <span className="text-slate-400">⌄</span>
     </button>
   );
@@ -815,7 +814,7 @@ function DonutChart({ center }: { center: string }) {
       <div className="absolute inset-8 flex flex-col items-center justify-center rounded-full bg-white text-center shadow-inner">
         <span className="text-sm font-black text-slate-950">{center}</span>
         <span className="text-[10px] font-bold text-slate-500">
-          {toLaoText("Total")}
+          {"Total"}
         </span>
       </div>
     </div>
@@ -825,7 +824,7 @@ function DonutChart({ center }: { center: string }) {
 function PaginationLite({ label }: { label: string }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 border-t border-blue-50 px-4 py-3">
-      <p className="text-[12px] font-semibold text-slate-500">{toLaoText(label)}</p>
+      <p className="text-[12px] font-semibold text-slate-500">{label}</p>
       <div className="flex items-center gap-2">
         {["<", "1", "2", ">"].map((item, index) => (
           <button

@@ -24,13 +24,12 @@ import {
   requests,
   tickets
 } from "../data/mock-platform-admin";
-import { toLaoText } from "../utils/lao-labels";
 
 export function DashboardPage() {
   return (
     <>
       <PageHeader
-        title="Platform Admin Dashboard"
+        title="ແດຊບອດ Platform Admin"
         description="ພາບລວມ performance ແລະກິດຈະກຳຂອງ Platform."
         action={<AdminButton variant="secondary">May 12 - May 18, 2025</AdminButton>}
       />
@@ -95,7 +94,7 @@ export function DashboardPage() {
           </div>
           <div className="border-t border-blue-100 pt-3 text-sm">
             <div className="flex justify-between">
-              <span>{toLaoText("Total")}</span>
+              <span>{"ລວມ"}</span>
               <strong>1,102</strong>
             </div>
           </div>
@@ -114,7 +113,7 @@ export function DashboardPage() {
           </div>
           <div className="border-t border-blue-100 pt-3 text-sm">
             <div className="flex justify-between">
-              <span>{toLaoText("Total")}</span>
+              <span>{"ລວມ"}</span>
               <strong>120</strong>
             </div>
           </div>
@@ -135,7 +134,7 @@ export function DashboardPage() {
             title="ສ້າງທຸລະກິດ"
             subtitle="ເພີ່ມທຸລະກິດໃໝ່"
             icon={FilePlus2}
-            href="/platform-admin/businesses/create"
+            href="/platform-admin/ທຸລະກິດ/create"
           />
           <QuickAction
             title="ເພີ່ມຜູ້ໃຊ້"

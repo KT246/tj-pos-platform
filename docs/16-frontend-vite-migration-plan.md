@@ -146,6 +146,8 @@ Route ใน docs หลักอาจยังใช้รูปแบบ [bus
 ใช้ route /q/:qrCode
 ใช้สำหรับลูกค้าสแกน QR ดูเมนูและข้อมูลร้าน
 ไม่ต้องใช้ i18n กลางของเว็บหลัก
+static UI text ให้เขียนเป็นภาษาลาวตรงใน component/config
+ไม่ใช้ English key แล้ว map ผ่าน i18n/helper
 ย้าย Public Menu / QR Menu ออกจาก frontend/apps/web
 สถานะปัจจุบัน: เสร็จแล้ว
 ```
@@ -155,6 +157,8 @@ Route ใน docs หลักอาจยังใช้รูปแบบ [bus
 ```text
 ถ้าต้องการแยก deploy ชัดเจน ให้แยก staff-order, kitchen-display, customer-display ออกจาก terminal
 ถ้ายังต้องการ dev เร็ว สามารถคงอยู่ใน terminal ชั่วคราวได้ แต่ route ownership ใน docs ให้ถือเป็นเป้าหมายใหม่
+static UI text ของ staff-order, kitchen-display และ customer-display ต้องเป็นภาษาลาวตรงใน component/config
+ไม่ใช้ i18n หรือ label map สำหรับ static UI
 สถานะปัจจุบัน: staff-order, kitchen-display และ customer-display แยกเสร็จแล้ว
 ```
 

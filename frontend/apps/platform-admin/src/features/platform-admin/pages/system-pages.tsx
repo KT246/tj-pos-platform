@@ -20,7 +20,6 @@ import {
   StatusBadge
 } from "../components/admin-primitives";
 import { adminUser, auditRows } from "../data/mock-platform-admin";
-import { toLaoText } from "../utils/lao-labels";
 
 export function SystemSettingsPage() {
   return (
@@ -36,7 +35,7 @@ export function SystemSettingsPage() {
           <div className="grid gap-4 md:grid-cols-2">
             <FormField label="ຊື່ Platform" value="TJ POS" />
             <FormField label="ສະກຸນເງິນຕັ້ງຕົ້ນ" value="LAK" />
-            <FormField label="ປະເທດຕັ້ງຕົ້ນ" value="Laos" />
+            <FormField label="ປະເທດຕັ້ງຕົ້ນ" value="ລາວ" />
             <FormField label="Support Email" value="support@tjpos.la" />
           </div>
         </AdminCard>
@@ -108,7 +107,7 @@ export function NotificationTemplatesPage() {
                 "ການກະທຳ"
               ].map((head) => (
                 <th key={head} className="font900 border-b border-blue-100 px-4 py-3">
-                  {toLaoText(head)}
+                  {head}
                 </th>
               ))}
             </tr>
@@ -123,13 +122,13 @@ export function NotificationTemplatesPage() {
               <tr key={row[0]} className="hover:bg-blue-50/40">
                 {row.map((cell) => (
                   <td key={cell} className="px-4 py-3">
-                    {toLaoText(cell)}
+                    {cell}
                   </td>
                 ))}
                 <td className="px-4 py-3">
                   <StatusBadge status="active" />
                 </td>
-                <td className="px-4 py-3">{toLaoText("May 18, 2025")}</td>
+                <td className="px-4 py-3">{"ພຶດສະພາ 18, 2025"}</td>
                 <td className="px-4 py-3">
                   <AdminButton variant="secondary">ແກ້ໄຂ</AdminButton>
                 </td>
@@ -162,7 +161,7 @@ export function AuditLogsPage() {
               {["ເວລາ", "ຜູ້ກະທຳ", "ການກະທຳ", "Resource", "ແຫຼ່ງທີ່ມາ", "ສະຖານະ"].map(
                 (head) => (
                   <th key={head} className="font900 border-b border-blue-100 px-4 py-3">
-                  {toLaoText(head)}
+                  {head}
                   </th>
                 )
               )}
@@ -173,7 +172,7 @@ export function AuditLogsPage() {
               <tr key={`${row[0]}-${row[2]}`} className="hover:bg-blue-50/40">
                 {row.map((cell) => (
                   <td key={cell} className="px-4 py-3 text-slate-700">
-                    {toLaoText(cell)}
+                    {cell}
                   </td>
                 ))}
                 <td className="px-4 py-3">
@@ -218,7 +217,7 @@ export function ProfileSecurityPage() {
             <div className="grid gap-4 md:grid-cols-2">
               <FormField label="ຊື່ເຕັມ" value={adminUser.name} />
               <FormField label="Email" value={adminUser.email} />
-              <FormField label="Phone" value="+856 20 5555 7890" />
+              <FormField label="ເບີໂທ" value="+856 20 5555 7890" />
               <FormField label="ບົດບາດ" value="Platform Admin" />
             </div>
           </AdminCard>

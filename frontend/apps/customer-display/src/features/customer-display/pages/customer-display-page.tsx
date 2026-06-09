@@ -25,7 +25,6 @@ import type {
 } from "../types";
 import { formatDisplayMoney } from "../utils";
 import { resolveDisplayScreen } from "../utils";
-import { lo } from "../utils/lao-labels";
 import {
   Banknote,
   BadgeCheck,
@@ -44,10 +43,10 @@ function IdleScreen() {
       <div className="grid h-full min-h-0 grid-cols-[minmax(0,1.28fr)_minmax(420px,0.82fr)] items-center gap-[clamp(24px,3vw,48px)] overflow-hidden">
         <section className="min-w-0">
           <h1 className="pt-1 pl-1 text-[clamp(52px,5.2vw,88px)] font-black leading-[1.05] tracking-normal text-[#071633]">
-            {lo("Welcome to TJ POS")}
+            {"ຍິນດີຕ້ອນຮັບສູ່ TJ POS"}
           </h1>
           <p className="mt-[clamp(14px,2.3vh,28px)] text-[clamp(21px,2vw,30px)] font-medium text-slate-600">
-            {lo("Your order details will appear here during checkout.")}
+            {"ລາຍລະອຽດອໍເດີຈະສະແດງຢູ່ນີ້ໃນເວລາຊຳລະ."}
           </p>
 
           <div className="relative mt-[clamp(18px,2.8vh,36px)] h-[clamp(220px,34vh,356px)] overflow-hidden rounded-[26px] border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-blue-50 shadow-[0_16px_42px_rgba(13,91,255,0.08)]">
@@ -68,10 +67,10 @@ function IdleScreen() {
             </div>
             <div>
               <h2 className="text-[clamp(30px,2.7vw,40px)] font-black leading-none text-[#071633]">
-                {lo("We Accept")}
+                {"ຮອງຮັບການຊຳລະ"}
               </h2>
               <p className="mt-[clamp(10px,1.6vh,16px)] text-[clamp(17px,1.45vw,22px)] font-medium text-slate-600">
-                {lo("Multiple payment options for your convenience.")}
+                {"ຊຳລະໄດ້ທັງເງິນສົດ ແລະ ໂອນຜ່ານ Bank QR."}
               </p>
             </div>
           </div>
@@ -80,15 +79,15 @@ function IdleScreen() {
           </div>
           <div className="mt-[clamp(18px,2.6vh,32px)] flex items-center gap-4 border-t border-blue-100 pt-[clamp(16px,2.4vh,28px)] text-[clamp(17px,1.4vw,21px)] font-medium text-slate-600">
             <ShieldCheck className="h-8 w-8 text-blue-600" strokeWidth={2.5} />
-            <span>{lo("All payments are secure and protected.")}</span>
+            <span>{"ການຊຳລະທຸກລາຍການປອດໄພ ແລະ ກວດສອບໄດ້."}</span>
           </div>
         </section>
       </div>
 
       <DisplayFooterNote
         icon={MonitorSmartphone}
-        title="Please review your order on this screen during payment."
-        subtitle="This customer display updates automatically from the cashier POS."
+        title="ກະລຸນາກວດອໍເດີໃນໜ້າຈໍນີ້ລະຫວ່າງການຊຳລະ."
+        subtitle="ຈໍລູກຄ້າຈະອັບເດດອັດຕະໂນມັດຈາກ POS ແຄັດເຊຍ."
       />
     </>
   );
@@ -105,10 +104,10 @@ function ReviewScreen() {
       <div className="grid h-full min-h-0 grid-cols-[minmax(0,1.12fr)_minmax(470px,0.72fr)] gap-[clamp(20px,2.4vw,36px)] overflow-hidden">
         <section className="flex min-h-0 min-w-0 flex-col">
           <h1 className="shrink-0 pt-1 pl-[clamp(12px,1.2vw,18px)] text-[clamp(36px,3.5vw,58px)] font-black leading-[1.1] text-[#071633]">
-            {lo("Review Your Order")}
+            {"ກວດອໍເດີຂອງທ່ານ"}
           </h1>
           <p className="mt-[clamp(6px,1.2vh,14px)] shrink-0 text-[clamp(17px,1.55vw,24px)] font-medium text-slate-600">
-            {lo("Please confirm your items before payment.")}
+            {"ກະລຸນາກວດລາຍການກ່ອນຊຳລະ."}
           </p>
           <div className="mt-[clamp(10px,1.8vh,20px)] min-h-0 flex-1">
             <OrderReview order={order} />
@@ -119,15 +118,15 @@ function ReviewScreen() {
           <OrderSummaryCard order={order} />
           <PaymentMethodCard
             selected={selectedPaymentMethod}
-            note="QR Code is available and ready"
+            note="Bank QR ພ້ອມສຳລັບຊຳລະ"
           />
         </aside>
       </div>
 
       <DisplayFooterNote
         icon={MonitorSmartphone}
-        title="Please review your order on the cashier screen"
-        subtitle="Tap nothing here - this display is for customer viewing only."
+        title="ກະລຸນາກວດອໍເດີໃນຈໍແຄັດເຊຍ"
+        subtitle="ຈໍນີ້ໃຊ້ສຳລັບໃຫ້ລູກຄ້າເບິ່ງເທົ່ານັ້ນ."
       />
     </>
   );
@@ -144,15 +143,15 @@ function PaymentScreen() {
       <div className="grid h-full min-h-0 grid-cols-[minmax(0,1.18fr)_minmax(500px,0.78fr)] gap-[clamp(20px,2.4vw,36px)] overflow-hidden">
         <section className="flex min-h-0 min-w-0 flex-col">
           <h1 className="shrink-0 pt-1 pl-[clamp(12px,1.2vw,18px)] text-[clamp(36px,3.5vw,58px)] font-black leading-[1.1] text-[#071633]">
-            {lo("Scan to Pay")}
+            {"ສະແກນເພື່ອຊຳລະ"}
           </h1>
           <p className="mt-[clamp(6px,1.2vh,14px)] shrink-0 text-[clamp(17px,1.55vw,24px)] font-medium text-slate-600">
-            {lo("Please complete your payment using QR code or bank transfer.")}
+            {"ກະລຸນາຊຳລະດ້ວຍ Bank QR ຫຼື ໂອນທະນາຄານ."}
           </p>
 
           <div className="mt-[clamp(8px,1.25vh,18px)] flex min-h-0 flex-1 flex-col items-center justify-center rounded-[24px] border border-blue-100 bg-white p-[clamp(10px,1.4vw,18px)] shadow-[0_18px_44px_rgba(13,91,255,0.1)]">
             <h2 className="text-[clamp(18px,1.6vw,24px)] font-black text-[#071633]">
-              {lo("Scan with your banking app")}
+              {"ສະແກນດ້ວຍແອັບທະນາຄານ"}
             </h2>
             <div className="relative mt-[clamp(6px,1vh,12px)]">
               <img
@@ -170,7 +169,7 @@ function PaymentScreen() {
             </div>
             <div className="mt-[clamp(6px,1vh,12px)] flex items-center gap-2 text-[clamp(12px,1vw,15px)] font-bold text-blue-600">
               <ShieldCheck className="h-7 w-7" strokeWidth={2.5} />
-              <span>{lo("Secure payment - Powered by TJ POS")}</span>
+              <span>{"ຊຳລະປອດໄພ - Powered by TJ POS"}</span>
             </div>
           </div>
         </section>
@@ -184,8 +183,8 @@ function PaymentScreen() {
 
       <DisplayFooterNote
         icon={Timer}
-        title="After payment, please wait for cashier confirmation."
-        subtitle="Thank you for your payment!"
+        title="ຫຼັງຈາກຊຳລະແລ້ວ ກະລຸນາລໍຖ້າແຄັດເຊຍຢືນຢັນ."
+        subtitle="ຂອບໃຈສຳລັບການຊຳລະ!"
       />
     </>
   );
@@ -195,10 +194,10 @@ function SuccessScreen() {
   const order = useCustomerDisplayStore((state) => state.order);
 
   const stats = [
-    { label: "Paid Amount", value: formatDisplayMoney(order.summary.total), icon: Banknote },
-    { label: "Payment Method", value: "QR Code", icon: QrCode },
-    { label: "Order No.", value: order.id, icon: ReceiptText },
-    { label: "Status", value: "Completed", icon: BadgeCheck }
+    { label: "ຈຳນວນທີ່ຊຳລະ", value: formatDisplayMoney(order.summary.total), icon: Banknote },
+    { label: "ວິທີຊຳລະ", value: "QR Code", icon: QrCode },
+    { label: "ເລກອໍເດີ", value: order.id, icon: ReceiptText },
+    { label: "ສະຖານະ", value: "ສຳເລັດ", icon: BadgeCheck }
   ];
 
   return (
@@ -209,10 +208,10 @@ function SuccessScreen() {
           <CheckCircle2 className="h-[clamp(76px,11.8vh,116px)] w-[clamp(76px,11.8vh,116px)]" strokeWidth={2.3} />
         </div>
         <h1 className="mt-[clamp(16px,2.6vh,28px)] pt-1 text-[clamp(50px,4.8vw,74px)] font-black leading-[1.08] text-[#071633]">
-          {lo("Payment Successful")}
+          {"ຊຳລະສຳເລັດ"}
         </h1>
         <p className="mt-[clamp(10px,2vh,24px)] text-[clamp(25px,2.7vw,38px)] font-medium text-slate-600">
-          {lo("Thank you for your purchase!")}
+          {"ຂອບໃຈສຳລັບການອຸດໜູນ!"}
         </p>
 
         <div className="mt-[clamp(18px,3vh,36px)] grid w-[min(1180px,84vw)] max-w-full grid-cols-4 rounded-[22px] border border-blue-100 bg-white px-[clamp(18px,2vw,32px)] py-[clamp(18px,2.6vh,28px)] shadow-[0_18px_44px_rgba(13,91,255,0.1)]">
@@ -223,14 +222,14 @@ function SuccessScreen() {
             >
               <Icon className="mx-auto h-9 w-9 text-blue-600" strokeWidth={2.4} />
               <div className="mt-[clamp(8px,1.4vh,12px)] text-[clamp(16px,1.35vw,21px)] font-medium text-slate-600">
-                {lo(label)}
+                {label}
               </div>
               <div
                 className={`mt-[clamp(10px,1.8vh,16px)] text-[clamp(20px,1.9vw,28px)] font-black ${
-                  label === "Status" ? "text-emerald-500" : "text-blue-600"
+                  label === "ສະຖານະ" ? "text-emerald-500" : "text-blue-600"
                 }`}
               >
-                {lo(value)}
+                {value}
               </div>
             </div>
           ))}
@@ -238,14 +237,14 @@ function SuccessScreen() {
 
         <div className="mt-[clamp(16px,2.6vh,32px)] flex items-center gap-4 text-[clamp(18px,1.7vw,24px)] font-medium text-slate-600">
           <ShieldCheck className="h-8 w-8 text-blue-600" strokeWidth={2.5} />
-          <span>{lo("Please keep your receipt and wait for your order.")}</span>
+          <span>{"ກະລຸນາເກັບໃບບິນ ແລະ ລໍຖ້າຮັບອໍເດີ."}</span>
         </div>
       </section>
 
       <DisplayFooterNote
         icon={Coffee}
-        title="Thank you and enjoy your meal!"
-        subtitle="We appreciate your visit and hope to see you again soon."
+        title="ຂອບໃຈ ແລະ ຂໍໃຫ້ມີຄວາມສຸກກັບອາຫານ!"
+        subtitle="ຂອບໃຈທີ່ມາໃຊ້ບໍລິການ ແລະ ຫວັງວ່າຈະໄດ້ພົບກັນອີກ."
       />
     </>
   );
@@ -260,19 +259,19 @@ function PairScreen() {
             <MonitorSmartphone className="h-[clamp(34px,4.4vh,44px)] w-[clamp(34px,4.4vh,44px)]" strokeWidth={2.5} />
           </div>
           <h1 className="mt-[clamp(16px,2.5vh,28px)] pt-1 text-[clamp(34px,3.5vw,52px)] font-black leading-[1.1] text-[#071633]">
-            {lo("Pair Customer Display")}
+            {"ຈັບຄູ່ຈໍລູກຄ້າ"}
           </h1>
           <p className="mt-[clamp(10px,1.6vh,16px)] max-w-[620px] text-[clamp(17px,1.5vw,23px)] font-medium leading-relaxed text-slate-600">
-            {lo("Connect this display to the cashier POS device for live order and payment updates.")}
+            {"ເຊື່ອມຈໍນີ້ກັບ POS ແຄັດເຊຍເພື່ອອັບເດດອໍເດີ ແລະ ການຊຳລະແບບສົດ."}
           </p>
 
           <div className="mt-[clamp(18px,3vh,32px)] grid grid-cols-3 gap-[clamp(10px,1.3vw,16px)]">
-            {["Counter Display", "Live POS Sync", "Secure Session"].map((item) => (
+            {["ຈໍເຄົາເຕີ", "Sync ກັບ POS ສົດ", "Session ປອດໄພ"].map((item) => (
               <div
                 key={item}
                 className="rounded-[18px] border border-blue-100 bg-blue-50/50 px-[clamp(12px,1.4vw,18px)] py-[clamp(10px,1.4vh,14px)] text-[clamp(13px,1.1vw,17px)] font-black text-blue-600"
               >
-                {lo(item)}
+                {item}
               </div>
             ))}
           </div>
@@ -280,7 +279,7 @@ function PairScreen() {
 
         <div className="rounded-[24px] border border-blue-100 bg-blue-50/45 p-[clamp(14px,1.8vw,24px)] text-center">
           <div className="text-[clamp(12px,1vw,15px)] font-black uppercase tracking-[0.16em] text-slate-500">
-            {lo("Pairing Code")}
+            {"ລະຫັດຈັບຄູ່"}
           </div>
           <div className="mt-[clamp(8px,1.2vh,14px)] rounded-[20px] bg-white px-[clamp(14px,1.6vw,24px)] py-[clamp(12px,1.8vh,18px)] text-[clamp(34px,3.4vw,46px)] font-black tracking-[0.16em] text-blue-600 shadow-[0_12px_30px_rgba(13,91,255,0.1)]">
             {customerDisplayDevice.pairCode}
@@ -291,7 +290,7 @@ function PairScreen() {
             className="mx-auto mt-[clamp(12px,2vh,20px)] h-[clamp(150px,23vh,190px)] w-[clamp(150px,23vh,190px)] rounded-[18px] bg-white p-3 shadow-[0_12px_30px_rgba(13,91,255,0.1)]"
           />
           <p className="mt-[clamp(10px,1.6vh,16px)] text-[clamp(13px,1.1vw,16px)] font-bold text-slate-600">
-            {lo("Waiting for POS device confirmation")}
+            {"ກຳລັງລໍຖ້າ POS ຢືນຢັນ"}
           </p>
         </div>
       </div>

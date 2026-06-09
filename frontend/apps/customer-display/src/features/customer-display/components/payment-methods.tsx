@@ -4,7 +4,6 @@ import type {
   CustomerPaymentMethod,
   CustomerPaymentMethodId
 } from "../types";
-import { lo } from "../utils/lao-labels";
 
 const toneClass = {
   green: "text-emerald-500",
@@ -72,7 +71,7 @@ export function PaymentMethods({
               strokeWidth={2.4}
             />
             <span className={`${sizeClass.label} font-semibold leading-tight`}>
-              {lo(method.label)}
+              {method.label}
             </span>
           </div>
         );

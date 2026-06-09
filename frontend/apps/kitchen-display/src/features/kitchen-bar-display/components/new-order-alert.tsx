@@ -2,7 +2,6 @@ import { BellRing, ChefHat, Eye, PackageCheck, Timer, VolumeX, X } from "lucide-
 
 import type { KitchenTicket } from "../types";
 import { getElapsedLabel, getTicketItemCount } from "../utils";
-import { lo } from "../utils/lao-labels";
 
 type NewOrderAlertProps = {
   ticket: KitchenTicket;
@@ -54,21 +53,21 @@ export function NewOrderAlert({
               <div>
                 <div className="text-[32px] font-black text-[#0b1736]">{ticket.id}</div>
                 <div className="mt-2 flex items-center gap-3 text-[15px] font-bold text-slate-600">
-                  <span>{lo(ticket.table)}</span>
+                  <span>{ticket.table}</span>
                   <span className="h-1.5 w-1.5 rounded-full bg-slate-300" />
-                  <span>{lo(ticket.type)}</span>
+                  <span>{ticket.type}</span>
                   <span className="h-1.5 w-1.5 rounded-full bg-slate-300" />
-                  <span>{lo(ticket.station)}</span>
+                  <span>{ticket.station}</span>
                 </div>
               </div>
               <span
                 className={`rounded-md px-3 py-1 text-[12px] font-black ${
-                  ticket.priority === "High"
+                  ticket.priority === "ດ່ວນ"
                     ? "bg-red-50 text-red-600"
                     : "bg-blue-50 text-blue-600"
                 }`}
               >
-                {lo(ticket.priority)}
+                {ticket.priority}
               </span>
             </div>
 
@@ -76,16 +75,16 @@ export function NewOrderAlert({
               <div className="rounded-xl bg-white px-4 py-3">
                 <div className="flex items-center gap-2 text-[12px] font-black text-slate-500 uppercase">
                   <ChefHat className="h-4 w-4" strokeWidth={2.2} />
-                  {lo("Station")}
+                  {"ສະຖານີ"}
                 </div>
                 <div className="mt-1 text-[18px] font-black text-[#0b1736] capitalize">
-                  {lo(ticket.station)}
+                  {ticket.station}
                 </div>
               </div>
               <div className="rounded-xl bg-white px-4 py-3">
                 <div className="flex items-center gap-2 text-[12px] font-black text-slate-500 uppercase">
                   <PackageCheck className="h-4 w-4" strokeWidth={2.2} />
-                  {lo("Items")}
+                  {"ລາຍການ"}
                 </div>
                 <div className="mt-1 text-[18px] font-black text-[#0b1736]">
                   {getTicketItemCount(ticket)}
@@ -109,11 +108,11 @@ export function NewOrderAlert({
                   className="flex items-center justify-between rounded-lg bg-white px-4 py-3 text-[15px] font-bold text-[#0b1736]"
                 >
                   <span>
-                    {item.quantity} x {lo(item.name)}
+                    {item.quantity} x {item.name}
                   </span>
                   {item.note ? (
                     <span className="text-[12px] font-semibold text-orange-500">
-                      {lo(item.note)}
+                      {item.note}
                     </span>
                   ) : null}
                 </div>
@@ -143,7 +142,7 @@ export function NewOrderAlert({
               className="flex h-12 items-center justify-center gap-2 rounded-lg bg-blue-600 text-[15px] font-black text-white transition hover:bg-blue-700"
             >
               <Timer className="h-5 w-5" strokeWidth={2.35} />
-              {lo("Start Preparing")}
+              {"ເລີ່ມກຽມ"}
             </button>
             <button
               type="button"

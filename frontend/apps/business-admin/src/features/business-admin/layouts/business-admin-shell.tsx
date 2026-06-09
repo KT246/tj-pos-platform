@@ -15,7 +15,6 @@ import { activeBranch, businessName, sidebarItems } from "../data/mock-business-
 import type { BusinessMenuKey } from "../types";
 import { BusinessAdminLink } from "../components/business-admin-link";
 import { TjLogo } from "../components/business-admin-primitives";
-import { toLaoText } from "../utils/lao-labels";
 
 export function BusinessAdminShell({
   active,
@@ -34,7 +33,7 @@ export function BusinessAdminShell({
           <button
             type="button"
             className="flex h-9 w-9 items-center justify-center rounded-md text-slate-500 transition hover:bg-blue-50 hover:text-blue-600"
-            aria-label={toLaoText("Collapse sidebar")}
+            aria-label={"Collapse sidebar"}
           >
             <Menu className="h-5 w-5" />
           </button>
@@ -45,25 +44,25 @@ export function BusinessAdminShell({
               const Icon = item.icon;
               const isActive = item.label === active;
               const isBeautyItem =
-                item.label === "Appointments" ||
-                item.label === "Calendar" ||
-                item.label === "Walk-in" ||
-                item.label === "Services" ||
-                item.label === "Staff Schedule" ||
-                item.label === "Packages" ||
-                item.label === "Deposit Policy" ||
-                item.label === "Beauty Daily";
+                item.label === "ນັດໝາຍ" ||
+                item.label === "ປະຕິທິນ" ||
+                item.label === "ລູກຄ້າ Walk-in" ||
+                item.label === "ບໍລິການ" ||
+                item.label === "ຕາຕະລາງພະນັກງານ" ||
+                item.label === "ແພັກເກດ" ||
+                item.label === "ນະໂຍບາຍມັດຈຳ" ||
+                item.label === "ພາບລວມຮ້ານຄວາມງາມ";
               const isHospitalityItem =
-                item.label === "Rooms" ||
-                item.label === "Room Calendar" ||
-                item.label === "Bookings" ||
-                item.label === "Front Desk" ||
+                item.label === "ຫ້ອງ" ||
+                item.label === "ປະຕິທິນຫ້ອງ" ||
+                item.label === "ການຈອງ" ||
+                item.label === "ຟຣອນດ໌ເດສກ໌" ||
                 item.label === "Check-in" ||
                 item.label === "Check-out" ||
-                item.label === "Guests" ||
-                item.label === "Room Settings" ||
-                item.label === "Housekeeping" ||
-                item.label === "Guest Folio";
+                item.label === "ແຂກ" ||
+                item.label === "ຕັ້ງຄ່າຫ້ອງ" ||
+                item.label === "ແມ່ບ້ານ" ||
+                item.label === "ບັນຊີແຂກ";
               const activeClass = isBeautyItem
                 ? "bg-pink-50 text-pink-600"
                 : isHospitalityItem
@@ -84,7 +83,7 @@ export function BusinessAdminShell({
                   }`}
                 >
                   <Icon className="h-4.5 w-4.5" />
-                  <span className="truncate">{toLaoText(item.label)}</span>
+                  <span className="truncate">{item.label}</span>
                 </BusinessAdminLink>
               );
             })}
@@ -95,17 +94,17 @@ export function BusinessAdminShell({
                 <HelpCircle className="h-5 w-5" />
               </span>
               <span className="text-[13px] font-black text-slate-950">
-                {toLaoText("Need Help?")}
+                {"ຕ້ອງການຊ່ວຍເຫຼືອ?"}
               </span>
             </div>
             <p className="text-xs leading-5 font-semibold text-slate-600">
-              {toLaoText("Visit our Help Center for guides and tutorials.")}
+              {"ເຂົ້າໄປສູນຊ່ວຍເຫຼືອເພື່ອອ່ານຄູ່ມື ແລະ ວິທີໃຊ້ງານ."}
             </p>
             <button
               type="button"
               className="mt-4 flex h-9 w-full items-center justify-between rounded-md bg-white px-3 text-xs font-black text-blue-600"
             >
-              {toLaoText("Go to Help Center")}
+              {"ໄປສູນຊ່ວຍເຫຼືອ"}
               <ChevronDown className="h-4 w-4 -rotate-90" />
             </button>
           </div>
@@ -131,13 +130,13 @@ export function BusinessAdminShell({
               className="hidden h-10 items-center gap-2 rounded-md bg-blue-600 px-4 text-sm font-black text-white shadow-[0_8px_18px_rgba(37,99,235,0.2)] transition hover:bg-blue-700 lg:flex"
             >
               <Monitor className="h-4 w-4" />
-              {toLaoText("Open POS")}
+              {"ເປີດ POS"}
             </BusinessAdminLink>
             <label className="relative hidden w-[330px] 2xl:flex">
               <Search className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-slate-400" />
               <input
                 className="h-10 w-full rounded-md border border-blue-100 bg-white px-12 text-sm font-semibold outline-none placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-                placeholder={toLaoText("Search items, orders, customers...")}
+                placeholder={"ຄົ້ນຫາສິນຄ້າ, ອໍເດີ, ລູກຄ້າ..."}
               />
               <span className="absolute top-1/2 right-3 flex h-6 -translate-y-1/2 items-center gap-0.5 rounded border border-blue-100 px-2 text-[11px] font-black text-slate-400">
                 <Command className="h-3 w-3" />K
@@ -170,7 +169,7 @@ export function BusinessAdminShell({
                   Somchai Phommaseanh
                 </span>
                 <span className="block truncate text-xs font-semibold text-slate-500">
-                  {toLaoText("Business Owner")}
+                  {"ເຈົ້າຂອງທຸລະກິດ"}
                 </span>
               </span>
               <ChevronDown className="h-4 w-4 text-slate-500" />
@@ -198,7 +197,7 @@ function TopSelect({
       className={`hidden h-10 min-w-[190px] items-center gap-3 rounded-md border border-blue-100 bg-white px-3 text-left text-sm font-black text-slate-950 transition hover:border-blue-200 hover:bg-blue-50/50 md:flex ${className}`}
     >
       <Icon className="h-5 w-5 text-blue-600" />
-      <span className="min-w-0 flex-1 truncate">{toLaoText(label)}</span>
+      <span className="min-w-0 flex-1 truncate">{label}</span>
       <ChevronDown className="h-4 w-4 text-slate-400" />
     </button>
   );

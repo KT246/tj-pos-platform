@@ -8,9 +8,8 @@ import { staffName, staffTables } from "../data/staff-order-data";
 import { useStaffOrderStore } from "../stores/staff-order-store";
 import type { DiningTable } from "../types";
 import { getStaffOrderPath } from "../utils";
-import { lo } from "../utils/lao-labels";
 
-const areaFilters = ["All Areas", "Indoor", "Outdoor", "VIP Room", "Terrace"];
+const areaFilters = ["ທຸກໂຊນ", "ພາຍໃນ", "ພາຍນອກ", "ຫ້ອງ VIP", "ລານນອກ"];
 
 export function StaffTablesPage({ businessSlug }: { businessSlug: string }) {
   const selectedBranch = useStaffOrderStore((state) => state.selectedBranch);
@@ -39,9 +38,9 @@ export function StaffTablesPage({ businessSlug }: { businessSlug: string }) {
         />
       }
     >
-      <StaffOrderHeader title="Select Table" />
+      <StaffOrderHeader title="ເລືອກໂຕະ" />
       <StaffScrollArea className="pb-3">
-        <StaffContextCard branch={selectedBranch} staff={staffName} shift="Morning" />
+        <StaffContextCard branch={selectedBranch} staff={staffName} shift="ກະເຊົ້າ" />
 
         <div className="mt-2.5 flex [scrollbar-width:none] gap-1.5 overflow-x-auto pb-1 [&::-webkit-scrollbar]:hidden">
           {areaFilters.map((area, index) => (
@@ -54,7 +53,7 @@ export function StaffTablesPage({ businessSlug }: { businessSlug: string }) {
                   : "border-blue-100 bg-white text-slate-500 hover:border-blue-300 hover:text-blue-600"
               }`}
             >
-              {lo(area)}
+              {area}
             </button>
           ))}
         </div>
@@ -93,10 +92,10 @@ function TableActionPanel({
     <div className="mx-3 my-2 grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 rounded-xl border border-blue-100 bg-white px-2.5 py-2 shadow-[0_12px_28px_rgba(15,23,42,0.09)]">
       <div className="min-w-0">
         <p className="truncate text-[10px] font-bold text-slate-500">
-          {lo("Number of Guests")}
+          {"ຈຳນວນລູກຄ້າ"}
         </p>
         <p className="truncate text-[13px] font-black text-slate-950">
-          {guests} {lo("Guests")}
+          {guests} {"ລູກຄ້າ"}
         </p>
       </div>
       <div className="flex items-center gap-1.5">
@@ -119,7 +118,7 @@ function TableActionPanel({
         to={getStaffOrderPath(businessSlug, `/table/${selectedTableId}`)}
         className="flex h-9 cursor-pointer items-center justify-center gap-1 rounded-lg bg-blue-600 px-2.5 text-[12px] font-black whitespace-nowrap text-white shadow-[0_10px_18px_rgba(37,99,235,0.2)] transition hover:bg-blue-700"
       >
-        <span className="hidden min-[410px]:inline">{lo("Continue with")}</span>
+        <span className="hidden min-[410px]:inline">{"ດຳເນີນຕໍ່ກັບ"}</span>
         {selectedTableId}
         <ArrowRight className="h-3.5 w-3.5" />
       </Link>
@@ -169,12 +168,12 @@ function TableCard({
         </div>
         <p className="mt-0.5 flex min-w-0 items-center gap-1 text-[10px] font-bold text-slate-500">
           <Users className="h-3 w-3 shrink-0" />
-          {table.seats} {lo("Seats")}
+          {table.seats} {"ບ່ອນນັ່ງ"}
         </p>
       </div>
       {table.elapsed ? (
         <p className="mt-0.5 truncate text-right text-[10px] font-bold text-blue-600">
-          {table.id === "T03" ? `${guests} ${lo("Guests")}` : `2 ${lo("Guests")}`} - {table.elapsed}
+          {table.id === "T03" ? `${guests} ${"ລູກຄ້າ"}` : `2 ${"ລູກຄ້າ"}`} - {table.elapsed}
         </p>
       ) : null}
     </button>
@@ -210,15 +209,15 @@ function StepperButton({
 
 function StatusPill({ status }: { status: string }) {
   const className =
-    status === "Available"
+    status === "ວ່າງ"
       ? "bg-emerald-50 text-emerald-600"
-      : status === "Reserved"
+      : status === "ຈອງໄວ້"
         ? "bg-amber-50 text-amber-600"
         : "bg-blue-50 text-blue-600";
 
   return (
     <span className={`shrink-0 rounded-md px-1.5 py-0.5 text-[9px] font-black ${className}`}>
-      {lo(status)}
+      {status}
     </span>
   );
 }

@@ -11,7 +11,6 @@ import {
   StatusBadge
 } from "../components/admin-primitives";
 import { requests, tickets } from "../data/mock-platform-admin";
-import { toLaoText } from "../utils/lao-labels";
 
 export function ContactRequestsPage() {
   return (
@@ -47,9 +46,9 @@ export function ContactRequestDetailPage() {
         left={[
           ["ຊື່", "Khampheng L."],
           ["Email", "khampheng@example.la"],
-          ["Phone", "+856 20 5555 7890"],
-          ["ປະເພດທຸລະກິດ", "Cafe"],
-          ["ແຂວງ", "Vientiane Capital"],
+          ["ເບີໂທ", "+856 20 5555 7890"],
+          ["ປະເພດທຸລະກິດ", "ຮ້ານກາເຟ"],
+          ["ແຂວງ", "ນະຄອນຫຼວງວຽງຈັນ"],
           ["ສ້າງເມື່ອ", record.meta]
         ]}
         message="ລູກຄ້າສົນໃຈ TJ POS ສຳລັບຮ້ານກາເຟໃໝ່ ແລະຕ້ອງການຄຳປຶກສາເລື່ອງ package."
@@ -83,7 +82,7 @@ export function SupportTicketDetailPage() {
     <>
       <PageHeader
         title={ticket.id}
-        description="Ticket detail, conversation, internal notes ແລະ resolution steps."
+        description="ລາຍລະອຽດ Ticket, ການສົນທະນາ, note ພາຍໃນ ແລະ ຂັ້ນຕອນແກ້ໄຂ."
         action={<AdminButton>ປິດ Ticket</AdminButton>}
       />
       <DetailLayout
@@ -94,8 +93,8 @@ export function SupportTicketDetailPage() {
           ["ຄວາມສຳຄັນ", "ສູງ"],
           ["ຜູ້ຮັບຜິດຊອບ", "Vannapha Support"],
           ["Channel", "Web Support"],
-          ["ສ້າງເມື່ອ", "May 18, 2025, 10:24 AM"],
-          ["ອັບເດດເມື່ອ", "May 18, 2025, 11:02 AM"]
+          ["ສ້າງເມື່ອ", "ພຶດສະພາ 18, 2025, 10:24 AM"],
+          ["ອັບເດດເມື່ອ", "ພຶດສະພາ 18, 2025, 11:02 AM"]
         ]}
         message="Printer ບໍ່ພິມບິນຫຼັງຈາກ update. ລູກຄ້າຕ້ອງການໃຫ້ກວດ configuration ແລະ paper size."
       />
@@ -121,7 +120,7 @@ function RecordsTable({ type }: { type: "request" | "ticket" }) {
                 "ການກະທຳ"
               ].map((head) => (
                 <th key={head} className="font900 border-b border-blue-100 px-4 py-3">
-                  {toLaoText(head)}
+                  {head}
                 </th>
               ))}
             </tr>
@@ -131,13 +130,13 @@ function RecordsTable({ type }: { type: "request" | "ticket" }) {
               <tr key={row.id} className="hover:bg-blue-50/40">
                 <td className="font900 px-4 py-3 text-blue-700">{row.id}</td>
                 <td className="font900 px-4 py-3 text-slate-950">
-                  {toLaoText(row.title)}
+                  {row.title}
                 </td>
-                <td className="px-4 py-3 text-slate-700">{toLaoText(row.subtitle)}</td>
+                <td className="px-4 py-3 text-slate-700">{row.subtitle}</td>
                 <td className="px-4 py-3">
                   <StatusBadge status={row.status} />
                 </td>
-                <td className="px-4 py-3 text-slate-600">{toLaoText(row.meta)}</td>
+                <td className="px-4 py-3 text-slate-600">{row.meta}</td>
                 <td className="px-4 py-3">
                   <AdminButton
                     variant="secondary"
@@ -186,8 +185,8 @@ function DetailLayout({
         <AdminCard className="p-5">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h2 className="font900 text-xl text-slate-950">{toLaoText(title)}</h2>
-              <p className="mt-2 text-sm leading-6 text-slate-600">{toLaoText(message)}</p>
+              <h2 className="font900 text-xl text-slate-950">{title}</h2>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{message}</p>
             </div>
             <StatusBadge status={status} />
           </div>
@@ -205,10 +204,10 @@ function DetailLayout({
             ].map(([who, text, time]) => (
               <div key={time} className="rounded-lg border border-blue-100 p-4">
                 <div className="mb-2 flex items-center justify-between">
-                  <span className="font900 text-sm text-slate-950">{toLaoText(who)}</span>
-                  <span className="text-xs text-slate-500">{toLaoText(time)}</span>
+                  <span className="font900 text-sm text-slate-950">{who}</span>
+                  <span className="text-xs text-slate-500">{time}</span>
                 </div>
-                <p className="text-sm leading-6 text-slate-600">{toLaoText(text)}</p>
+                <p className="text-sm leading-6 text-slate-600">{text}</p>
               </div>
             ))}
           </div>
@@ -222,8 +221,8 @@ function DetailLayout({
               <div key={label} className="flex items-start gap-3">
                 <IconDot label={label} />
                 <div>
-                  <p className="font800 text-xs text-slate-500">{toLaoText(label)}</p>
-                  <p className="font900 mt-1 text-slate-950">{toLaoText(value)}</p>
+                  <p className="font800 text-xs text-slate-500">{label}</p>
+                  <p className="font900 mt-1 text-slate-950">{value}</p>
                 </div>
               </div>
             ))}
@@ -236,19 +235,19 @@ function DetailLayout({
               {
                 title: "ມອບໝາຍຜູ້ຮັບຜິດຊອບ",
                 subtitle: "Vannapha Support",
-                meta: "Now",
+                meta: "ຕອນນີ້",
                 status: "active"
               },
               {
                 title: "ຕັ້ງການເຕືອນ",
                 subtitle: "ຕິດຕາມລູກຄ້າ",
-                meta: "Tomorrow",
+                meta: "ມື້ອື່ນ",
                 status: "pending"
               },
               {
                 title: "ເພີ່ມ note ພາຍໃນ",
                 subtitle: "ເຫັນໄດ້ໂດຍທີມ TJ POS",
-                meta: "Optional",
+                meta: "ບໍ່ບັງຄັບ",
                 status: "new"
               }
             ]}
@@ -270,7 +269,7 @@ function IconDot({ label }: { label: string }) {
   };
   const Icon = label.includes("Email")
     ? icons.Email
-    : label.includes("Phone")
+    : label.includes("ເບີໂທ")
       ? icons.Phone
       : label.includes("Created")
         ? icons.Created

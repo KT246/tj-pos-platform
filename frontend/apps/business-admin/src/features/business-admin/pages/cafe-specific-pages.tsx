@@ -31,7 +31,6 @@ import {
 } from "../components/business-admin-primitives";
 import { BusinessAdminShell } from "../layouts/business-admin-shell";
 import type { BusinessMenuKey, Kpi, Tone } from "../types";
-import { toLaoText } from "../utils/lao-labels";
 
 const coffeeImage =
   "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=420&q=80";
@@ -82,33 +81,33 @@ const cafeTables: {
   left: string;
   wide?: boolean;
 }[] = [
-  { id: "T01", seats: 2, status: "available", zone: "Indoor", top: "12%", left: "6%" },
-  { id: "T02", seats: 2, status: "available", zone: "Indoor", top: "12%", left: "24%" },
-  { id: "T03", seats: 4, status: "available", zone: "Indoor", top: "12%", left: "42%" },
+  { id: "T01", seats: 2, status: "available", zone: "ໃນຮ້ານ", top: "12%", left: "6%" },
+  { id: "T02", seats: 2, status: "available", zone: "ໃນຮ້ານ", top: "12%", left: "24%" },
+  { id: "T03", seats: 4, status: "available", zone: "ໃນຮ້ານ", top: "12%", left: "42%" },
   {
     id: "T04",
     seats: 2,
     status: "occupied",
-    zone: "Indoor",
+    zone: "ໃນຮ້ານ",
     order: "ORD-0018",
     amount: "LAK 85,000",
     time: "10:24 AM",
     top: "12%",
     left: "62%"
   },
-  { id: "T05", seats: 2, status: "available", zone: "Indoor", top: "12%", left: "80%" },
-  { id: "T06", seats: 2, status: "available", zone: "Indoor", top: "35%", left: "8%" },
-  { id: "T07", seats: 4, status: "reserved", zone: "Indoor", top: "35%", left: "29%" },
-  { id: "T08", seats: 2, status: "available", zone: "Indoor", top: "35%", left: "48%" },
-  { id: "T09", seats: 2, status: "available", zone: "Indoor", top: "35%", left: "70%" },
-  { id: "T10", seats: 2, status: "available", zone: "Indoor", top: "58%", left: "8%" },
-  { id: "T11", seats: 4, status: "cleaning", zone: "Indoor", top: "58%", left: "29%" },
-  { id: "T12", seats: 2, status: "available", zone: "Indoor", top: "58%", left: "48%" },
+  { id: "T05", seats: 2, status: "available", zone: "ໃນຮ້ານ", top: "12%", left: "80%" },
+  { id: "T06", seats: 2, status: "available", zone: "ໃນຮ້ານ", top: "35%", left: "8%" },
+  { id: "T07", seats: 4, status: "reserved", zone: "ໃນຮ້ານ", top: "35%", left: "29%" },
+  { id: "T08", seats: 2, status: "available", zone: "ໃນຮ້ານ", top: "35%", left: "48%" },
+  { id: "T09", seats: 2, status: "available", zone: "ໃນຮ້ານ", top: "35%", left: "70%" },
+  { id: "T10", seats: 2, status: "available", zone: "ໃນຮ້ານ", top: "58%", left: "8%" },
+  { id: "T11", seats: 4, status: "cleaning", zone: "ໃນຮ້ານ", top: "58%", left: "29%" },
+  { id: "T12", seats: 2, status: "available", zone: "ໃນຮ້ານ", top: "58%", left: "48%" },
   {
     id: "T13",
     seats: 6,
     status: "occupied",
-    zone: "Indoor",
+    zone: "ໃນຮ້ານ",
     order: "ORD-0021",
     amount: "LAK 142,000",
     time: "10:31 AM",
@@ -116,9 +115,9 @@ const cafeTables: {
     left: "70%",
     wide: true
   },
-  { id: "T14", seats: 2, status: "available", zone: "Indoor", top: "80%", left: "8%" },
-  { id: "T15", seats: 2, status: "available", zone: "Indoor", top: "80%", left: "30%" },
-  { id: "T16", seats: 4, status: "available", zone: "Indoor", top: "80%", left: "50%" }
+  { id: "T14", seats: 2, status: "available", zone: "ໃນຮ້ານ", top: "80%", left: "8%" },
+  { id: "T15", seats: 2, status: "available", zone: "ໃນຮ້ານ", top: "80%", left: "30%" },
+  { id: "T16", seats: 4, status: "available", zone: "ໃນຮ້ານ", top: "80%", left: "50%" }
 ];
 
 const modifierRows = [
@@ -128,27 +127,27 @@ const modifierRows = [
     required: "ແມ່ນ",
     multi: "ບໍ່",
     sort: "1",
-    status: "Active"
+    status: "ເປີດໃຊ້"
   },
   {
-    group: "Sweetness Level",
+    group: "ລະດັບຄວາມຫວານ",
     type: "ເລືອກໄດ້ 1",
     required: "ແມ່ນ",
     multi: "ບໍ່",
     sort: "2",
-    status: "Active"
+    status: "ເປີດໃຊ້"
   },
-  { group: "Shot", type: "ເລືອກໄດ້ 1", required: "ບໍ່", multi: "ບໍ່", sort: "3", status: "Active" },
+  { group: "Shot", type: "ເລືອກໄດ້ 1", required: "ບໍ່", multi: "ບໍ່", sort: "3", status: "ເປີດໃຊ້" },
   {
     group: "Temperature",
     type: "ເລືອກໄດ້ 1",
     required: "ບໍ່",
     multi: "ບໍ່",
     sort: "4",
-    status: "Active"
+    status: "ເປີດໃຊ້"
   },
-  { group: "Add-ons", type: "ເລືອກໄດ້ຫຼາຍ", required: "ບໍ່", multi: "ແມ່ນ", sort: "5", status: "Active" },
-  { group: "Toppings", type: "ເລືອກໄດ້ຫຼາຍ", required: "ບໍ່", multi: "ແມ່ນ", sort: "6", status: "Active" }
+  { group: "ຕົວເລືອກເພີ່ມ", type: "ເລືອກໄດ້ຫຼາຍ", required: "ບໍ່", multi: "ແມ່ນ", sort: "5", status: "ເປີດໃຊ້" },
+  { group: "Toppings", type: "ເລືອກໄດ້ຫຼາຍ", required: "ບໍ່", multi: "ແມ່ນ", sort: "6", status: "ເປີດໃຊ້" }
 ];
 
 const queueRows = [
@@ -157,7 +156,7 @@ const queueRows = [
     type: "ຮັບກັບບ້ານ",
     items: "Iced Americano, Croissant",
     time: "10:30 AM",
-    status: "Preparing",
+    status: "ກຳລັງກຽມ",
     station: "Bar 1"
   },
   {
@@ -165,7 +164,7 @@ const queueRows = [
     type: "ນັ່ງທີ່ຮ້ານ - T04",
     items: "Latte",
     time: "10:29 AM",
-    status: "Preparing",
+    status: "ກຳລັງກຽມ",
     station: "Bar 2"
   },
   {
@@ -173,7 +172,7 @@ const queueRows = [
     type: "ຮັບກັບບ້ານ",
     items: "Mocha, Chocolate Cake",
     time: "10:25 AM",
-    status: "Preparing",
+    status: "ກຳລັງກຽມ",
     station: "Bar 1"
   },
   {
@@ -181,7 +180,7 @@ const queueRows = [
     type: "ຮັບທີ່ counter",
     items: "Caramel Macchiato",
     time: "10:20 AM",
-    status: "Ready",
+    status: "ພ້ອມ",
     station: "Pickup"
   },
   {
@@ -189,7 +188,7 @@ const queueRows = [
     type: "ນັ່ງທີ່ຮ້ານ - T02",
     items: "Flat White",
     time: "10:21 AM",
-    status: "Ready",
+    status: "ພ້ອມ",
     station: "Bar 2"
   },
   {
@@ -197,7 +196,7 @@ const queueRows = [
     type: "ຮັບກັບບ້ານ",
     items: "Iced Latte, Brownie",
     time: "10:22 AM",
-    status: "Ready",
+    status: "ພ້ອມ",
     station: "Pickup"
   }
 ];
@@ -207,8 +206,8 @@ const happyHourRows = [
     name: "Afternoon Delight",
     schedule: "Mon - Fri",
     time: "2:00 PM - 5:00 PM",
-    discount: "20% Off",
-    status: "Active",
+    discount: "ຫຼຸດ 20%",
+    status: "ເປີດໃຊ້",
     icon: Flame,
     tone: "amber" as Tone
   },
@@ -217,7 +216,7 @@ const happyHourRows = [
     schedule: "Mon - Thu",
     time: "5:00 PM - 7:00 PM",
     discount: "Buy 1 Get 1 50%",
-    status: "Active",
+    status: "ເປີດໃຊ້",
     icon: Sparkles,
     tone: "red" as Tone
   },
@@ -226,7 +225,7 @@ const happyHourRows = [
     schedule: "Sat - Sun",
     time: "All Day",
     discount: "15% Off",
-    status: "Active",
+    status: "ເປີດໃຊ້",
     icon: Star,
     tone: "blue" as Tone
   },
@@ -235,17 +234,17 @@ const happyHourRows = [
     schedule: "Every Day",
     time: "9:00 PM - Close",
     discount: "10% Off",
-    status: "Inactive",
+    status: "ປິດໃຊ້",
     icon: Clock3,
     tone: "slate" as Tone
   }
 ];
 
 const topItems = [
-  { name: "Iced Latte", qty: 86, sales: "LAK 2,236,000", image: latteImage },
+  { name: "ລາເຕ້ເຢັນ", qty: 86, sales: "LAK 2,236,000", image: latteImage },
   { name: "Americano", qty: 72, sales: "LAK 1,512,000", image: coffeeImage },
   { name: "Cappuccino", qty: 48, sales: "LAK 1,104,000", image: coffeeImage },
-  { name: "Croissant", qty: 35, sales: "LAK 525,000", image: croissantImage },
+  { name: "ຄຣົວຊອງ", qty: 35, sales: "LAK 525,000", image: croissantImage },
   { name: "Chocolate Cake", qty: 28, sales: "LAK 476,000", image: croissantImage }
 ];
 
@@ -254,7 +253,7 @@ export function CafeFloorTableMapPage() {
 
   return (
     <CafeShell
-      active="Table Map"
+      active="ແຜນຜັງໂຕະ"
       title="ແຜນຜັງໂຕະ Cafe"
       description="ຕິດຕາມສະຖານະໂຕະ, Order ແລະການຈອງໃນແຕ່ລະພື້ນທີ່."
       kpis={[
@@ -276,10 +275,10 @@ export function CafeFloorTableMapPage() {
         <Card>
           <div className="space-y-2 p-3">
             {[
-              ["Indoor", "16"],
+              ["ໃນຮ້ານ", "16"],
               ["Outdoor", "8"],
-              ["Terrace", "6"],
-              ["VIP Room", "2"]
+              ["ລະບຽງ", "6"],
+              ["ຫ້ອງ VIP", "2"]
             ].map(([area, count], index) => (
               <button
                 key={area}
@@ -338,7 +337,7 @@ export function CafeFloorTableMapPage() {
               <span className="text-xs font-bold text-slate-500">ສະຖານະ</span>
               <StatusBadge status={selectedTable.status} />
             </div>
-            <InfoRow label="Order #" value={selectedTable.order ?? "ORD-0018"} />
+            <InfoRow label="ເລກອໍເດີ" value={selectedTable.order ?? "ORD-0018"} />
             <InfoRow label="ຈຳນວນແຂກ" value={`${selectedTable.seats} ຄົນ`} />
             <InfoRow label="ເວລາເຂົ້າ" value={selectedTable.time ?? "10:24 AM"} />
             <InfoRow label="ລວມຍອດ" value={selectedTable.amount ?? "LAK 85,000"} />
@@ -368,7 +367,7 @@ export function CafeFloorTableMapPage() {
 export function CoffeeModifiersPage() {
   return (
     <CafeShell
-      active="Modifiers"
+      active="ຕົວເລືອກເພີ່ມ"
       title="ຕົວເລືອກກາເຟ / Recipe"
       description="ຕັ້ງຄ່າ milk, sweetness, shot, temperature ແລະ add-ons ສຳລັບເມນູເຄື່ອງດື່ມ."
       kpis={[
@@ -415,7 +414,7 @@ export function CoffeeModifiersPage() {
                   ].map(
                     (heading) => (
                       <th key={heading} className="px-4 py-3">
-                        {toLaoText(heading)}
+                        {heading}
                       </th>
                     )
                   )}
@@ -455,25 +454,25 @@ export function CoffeeModifiersPage() {
               />
               <span>
                 <span className="block text-sm font-black text-slate-950">
-                  {toLaoText("Iced Latte")}
+                  {"ລາເຕ້ເຢັນ"}
                 </span>
                 <span className="mt-1 block text-xs font-bold text-slate-500">LAK 28,000</span>
               </span>
             </div>
-            <OptionGroup title="ປະເພດນົມ" required options={["Whole Milk", "Oat Milk", "Almond", "Soy"]} />
-            <OptionGroup title="Sweetness Level" required options={["0%", "25%", "50%", "75%", "100%"]} active="50%" />
+            <OptionGroup title="ປະເພດນົມ" required options={["ນົມສົດ", "ນົມໂອດ", "ອາມອນ", "ນົມຖົ່ວເຫຼືອງ"]} />
+            <OptionGroup title="ລະດັບຄວາມຫວານ" required options={["0%", "25%", "50%", "75%", "100%"]} active="50%" />
             <div>
               <p className="mb-2 text-xs font-black text-slate-700">
-                {toLaoText("Add-ons")}
+                {"ຕົວເລືອກເພີ່ມ"}
               </p>
               <div className="space-y-2">
-                {["Extra Shot +3,000", "Vanilla Syrup +2,000", "Caramel Syrup +2,000"].map(
+                {["ເພີ່ມ Shot +3,000", "ນ້ຳເຊື່ອມ Vanilla +2,000", "ນ້ຳເຊື່ອມ Caramel +2,000"].map(
                   (item) => (
                     <label key={item} className="flex items-center gap-2 text-xs font-bold text-slate-700">
                       <span className="flex h-4 w-4 items-center justify-center rounded border border-blue-200 bg-blue-600 text-white">
                         <Check className="h-3 w-3" />
                       </span>
-                      {toLaoText(item)}
+                      {item}
                     </label>
                   )
                 )}
@@ -489,7 +488,7 @@ export function CoffeeModifiersPage() {
 export function BaristaQueueDetailPage() {
   return (
     <CafeShell
-      active="Barista Queue"
+      active="ຄິວ Barista"
       title="ຄິວ Barista"
       description="ຕິດຕາມ order ເຄື່ອງດື່ມ, ເວລາລໍຖ້າ ແລະສະຖານະຮັບເຄື່ອງ."
       kpis={[
@@ -549,18 +548,18 @@ export function BaristaQueueDetailPage() {
                     <td className="px-4 py-3 font-bold text-slate-500">{index + 1}</td>
                     <td className="px-4 py-3 font-black text-blue-600">{row.order}</td>
                     <td className="px-4 py-3 font-bold text-slate-700">
-                      {toLaoText(row.type)}
+                      {row.type}
                     </td>
                     <td className="px-4 py-3 font-bold text-slate-950">
-                      {toLaoText(row.items)}
+                      {row.items}
                     </td>
                     <td className="px-4 py-3 font-bold text-slate-700">{row.time}</td>
                     <td className="px-4 py-3 font-bold text-slate-700">
-                      {toLaoText(row.station)}
+                      {row.station}
                     </td>
                     <td className="px-4 py-3">
-                      <Badge tone={row.status === "Ready" ? "emerald" : "amber"}>
-                        {row.status === "Ready" ? "ພ້ອມຮັບ" : "ກຳລັງຈັດກຽມ"}
+                      <Badge tone={row.status === "ພ້ອມ" ? "emerald" : "amber"}>
+                        {row.status === "ພ້ອມ" ? "ພ້ອມຮັບ" : "ກຳລັງຈັດກຽມ"}
                       </Badge>
                     </td>
                     <td className="px-4 py-3">
@@ -628,7 +627,7 @@ export function HappyHourComboSetupPage() {
           title="Rule Happy Hour"
           action={
             <div className="flex gap-2">
-              {["Happy Hour", "Combos", "Promotions"].map((tab, index) => (
+              {["Happy Hour", "Combos", "ໂປຣໂມຊັນ"].map((tab, index) => (
                 <button
                   key={tab}
                   type="button"
@@ -668,20 +667,20 @@ export function HappyHourComboSetupPage() {
                           <span className="flex h-8 w-8 items-center justify-center rounded-md bg-amber-50 text-amber-500">
                             <Icon className="h-4 w-4" />
                           </span>
-                          {toLaoText(row.name)}
+                          {row.name}
                         </span>
                       </td>
                       <td className="px-4 py-3 font-bold text-slate-700">{row.schedule}</td>
                       <td className="px-4 py-3 font-bold text-slate-700">{row.time}</td>
                       <td className="px-4 py-3 font-bold text-slate-950">{row.discount}</td>
                       <td className="px-4 py-3">
-                        <Badge tone={row.status === "Active" ? "emerald" : "slate"}>
-                          {row.status === "Active" ? "ເປີດໃຊ້" : "ປິດໃຊ້"}
+                        <Badge tone={row.status === "ເປີດໃຊ້" ? "emerald" : "slate"}>
+                          {row.status === "ເປີດໃຊ້" ? "ເປີດໃຊ້" : "ປິດໃຊ້"}
                         </Badge>
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex justify-end gap-2">
-                          <Toggle enabled={row.status === "Active"} />
+                          <Toggle enabled={row.status === "ເປີດໃຊ້"} />
                           <IconButton icon={Edit3} label="ແກ້ໄຂ" />
                         </div>
                       </td>
@@ -703,10 +702,10 @@ export function HappyHourComboSetupPage() {
                 </span>
                 <span>
                   <span className="block text-lg font-black text-slate-950">
-                    {toLaoText("Afternoon Delight")}
+                    {"Afternoon Delight"}
                   </span>
                   <span className="mt-1 block text-sm font-black text-blue-600">
-                    {toLaoText("20% Off")}
+                    {"ຫຼຸດ 20%"}
                   </span>
                 </span>
               </div>
@@ -731,7 +730,7 @@ export function HappyHourComboSetupPage() {
 export function CafeDailyQuickViewPage() {
   return (
     <CafeShell
-      active="Cafe Daily View"
+      active="ພາບລວມຮ້ານກາເຟ"
       title="ສະຫຼຸບຮ້ານ Cafe ປະຈຳວັນ"
       description="ພາບລວມຍອດຂາຍ, order, ຄິວ Barista, ໂຕະ ແລະສິນຄ້າຂາຍດີ."
       kpis={[
@@ -779,7 +778,7 @@ export function CafeDailyQuickViewPage() {
                 />
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-sm font-black text-slate-950">
-                    {toLaoText(item.name)}
+                    {item.name}
                   </span>
                   <span className="block text-xs font-bold text-slate-500">
                     ຂາຍໄດ້ {item.qty}
@@ -799,21 +798,21 @@ export function CafeDailyQuickViewPage() {
               <div className="absolute inset-8 flex flex-col items-center justify-center rounded-full bg-white text-center shadow-inner">
                 <span className="text-xl font-black text-slate-950">LAK 6.42M</span>
                 <span className="text-[11px] font-bold text-slate-500">
-                  {toLaoText("Total")}
+                  {"Total"}
                 </span>
               </div>
             </div>
             <div className="w-full space-y-2">
               {[
-                ["Beverages", "60%", "bg-blue-600"],
-                ["Pastries", "16%", "bg-amber-500"],
-                ["Food", "12%", "bg-emerald-500"],
-                ["Others", "12%", "bg-slate-400"]
+                ["ເຄື່ອງດື່ມ", "60%", "bg-blue-600"],
+                ["ເບເກີຣີ", "16%", "bg-amber-500"],
+                ["ອາຫານ", "12%", "bg-emerald-500"],
+                ["ອື່ນໆ", "12%", "bg-slate-400"]
               ].map(([label, value, color]) => (
                 <div key={label} className="flex items-center justify-between text-xs font-black">
                   <span className="flex items-center gap-2 text-slate-600">
                     <span className={`h-2.5 w-2.5 rounded-full ${color}`} />
-                    {toLaoText(label)}
+                    {label}
                   </span>
                   <span className="text-slate-950">{value}</span>
                 </div>
@@ -826,7 +825,7 @@ export function CafeDailyQuickViewPage() {
           {[
             ["ໂຕະກຳລັງໃຊ້", "8", "ໂຕະທີ່ໃຊ້ງານ"],
             ["Order ຮັບກັບບ້ານ", "12", "ລໍຖ້າຮັບ"],
-            ["Barista Queue", "3 / 3", "ກຳລັງຈັດກຽມ / ພ້ອມຮັບ"],
+            ["ຄິວ Barista", "3 / 3", "ກຳລັງຈັດກຽມ / ພ້ອມຮັບ"],
             ["Happy Hour", "ເປີດໃຊ້", "2:00 PM - 5:00 PM"]
           ].map(([title, value, desc]) => (
             <Card key={title}>
@@ -853,7 +852,7 @@ function CafeShell({
 }: {
   active: Extract<
     BusinessMenuKey,
-    "Table Map" | "Modifiers" | "Barista Queue" | "Happy Hour" | "Cafe Daily View"
+    "ແຜນຜັງໂຕະ" | "ຕົວເລືອກເພີ່ມ" | "ຄິວ Barista" | "Happy Hour" | "ພາບລວມຮ້ານກາເຟ"
   >;
   title: string;
   description: string;
@@ -884,7 +883,7 @@ function CafeFloorTable({
         table.wide ? "h-14 w-24" : "h-14 w-14"
       }`}
       style={{ top: table.top, left: table.left }}
-      title={`${table.id} - ${toLaoText(status.label)}`}
+      title={`${table.id} - ${status.label}`}
     >
       {table.id}
     </button>
@@ -898,7 +897,7 @@ function StatusBadge({ status }: { status: CafeTableStatus }) {
     <span
       className={`inline-flex rounded-md border px-2.5 py-1 text-[11px] font-black ${statusConfig.className}`}
     >
-      {toLaoText(statusConfig.label)}
+      {statusConfig.label}
     </span>
   );
 }
@@ -906,9 +905,9 @@ function StatusBadge({ status }: { status: CafeTableStatus }) {
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between gap-4 border-b border-blue-50 pb-2 last:border-b-0">
-      <span className="text-xs font-bold text-slate-500">{toLaoText(label)}</span>
+      <span className="text-xs font-bold text-slate-500">{label}</span>
       <span className="text-right text-xs font-black text-slate-950">
-        {toLaoText(value)}
+        {value}
       </span>
     </div>
   );
@@ -925,7 +924,7 @@ function OptionGroup({
   options: string[];
   active?: string;
 }) {
-  const title = toLaoText(titleValue);
+  const title = titleValue;
 
   return (
     <div>
@@ -943,7 +942,7 @@ function OptionGroup({
                 : "border-blue-100 bg-white text-slate-600 hover:border-blue-200 hover:bg-blue-50"
             }`}
           >
-            {toLaoText(option)}
+            {option}
           </button>
         ))}
       </div>
@@ -972,7 +971,7 @@ function Toggle({ enabled }: { enabled: boolean }) {
 function PaginationLite({ label }: { label: string }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 border-t border-blue-50 px-4 py-3">
-      <p className="text-[12px] font-semibold text-slate-500">{toLaoText(label)}</p>
+      <p className="text-[12px] font-semibold text-slate-500">{label}</p>
       <div className="flex items-center gap-2">
         {["<", "1", "2", ">"].map((item, index) => (
           <button

@@ -23,7 +23,6 @@ import {
   StatusBadge
 } from "../components/admin-primitives";
 import { businesses, businessStats, planCards } from "../data/mock-platform-admin";
-import { toLaoText } from "../utils/lao-labels";
 
 export function BusinessesPage() {
   return (
@@ -82,12 +81,12 @@ export function BusinessDetailPage() {
     <>
       <PageHeader
         title={business.name}
-        description="ລາຍລະອຽດ business, owner, plan, modules ແລະ payment preference."
+        description="ລາຍລະອຽດທຸລະກິດ, ເຈົ້າຂອງ, ແພັກເກດ, module ແລະ ຄ່າການຊຳລະ."
         action={
           <div className="flex gap-3">
             <AdminButton
               variant="secondary"
-              href="/platform-admin/businesses/BUS-001/edit"
+              href="/platform-admin/ທຸລະກິດ/BUS-001/edit"
             >
               ແກ້ໄຂ
             </AdminButton>
@@ -107,8 +106,8 @@ export function BusinessDetailPage() {
                 ["ສະຖານະ", "ໃຊ້ງານ"]
               ].map(([label, value]) => (
                 <div key={label} className="rounded-lg bg-blue-50/60 p-4">
-                  <p className="font800 text-xs text-slate-500">{toLaoText(label)}</p>
-                  <p className="font900 mt-2 text-lg text-slate-950">{toLaoText(value)}</p>
+                  <p className="font800 text-xs text-slate-500">{label}</p>
+                  <p className="font900 mt-2 text-lg text-slate-950">{value}</p>
                 </div>
               ))}
             </div>
@@ -127,19 +126,19 @@ export function BusinessDetailPage() {
             <PanelTitle title="ໂມດູນ / Add-ons ທີ່ເປີດໃຊ້" />
             <div className="grid gap-3 md:grid-cols-2">
               {[
-                "Point of Sale (POS)",
-                "Inventory Management",
-                "Customer Management",
-                "Sales & Reporting",
-                "Advanced Reporting",
-                "Loyalty Program"
+                "ຂາຍໜ້າຮ້ານ (POS)",
+                "ຈັດການສາງ",
+                "ຈັດການລູກຄ້າ",
+                "ການຂາຍ & ລາຍງານ",
+                "ລາຍງານຂັ້ນສູງ",
+                "ໂປຣແກຣມສະສົມແຕ້ມ"
               ].map((module) => (
                 <div
                   key={module}
                   className="flex items-center gap-3 rounded-lg border border-blue-100 p-3"
                 >
                   <CheckSquare className="h-5 w-5 text-blue-600" />
-                  <span className="font800 text-sm">{toLaoText(module)}</span>
+                  <span className="font800 text-sm">{module}</span>
                 </div>
               ))}
             </div>
@@ -152,14 +151,14 @@ export function BusinessDetailPage() {
               ["ຊື່ທຸລະກິດ", business.name],
               ["ປະເພດທຸລະກິດ", business.type],
               ["ເຈົ້າຂອງ", business.owner],
-              ["ແພັກເກດ", "Pro Plan"],
+              ["ແພັກເກດ", "ແພັກເກດ Pro"],
               ["ສາຂາ", "3"],
               ["ໂມດູນໃຊ້ງານ", "6"],
               ["ລາຄາລາຍເດືອນ", "K 1,200,000"]
             ].map(([label, value]) => (
               <div key={label} className="flex justify-between gap-4">
-                <span className="text-slate-500">{toLaoText(label)}</span>
-                <span className="font900 text-right text-slate-950">{toLaoText(value)}</span>
+                <span className="text-slate-500">{label}</span>
+                <span className="font900 text-right text-slate-950">{value}</span>
               </div>
             ))}
             <div className="border-t border-blue-100 pt-4 text-center">
@@ -177,7 +176,7 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
     <>
       <PageHeader
         title={mode === "create" ? "ສ້າງທຸລະກິດໃໝ່" : "ແກ້ໄຂທຸລະກິດ"}
-        description="ກຳນົດ business information, owner account, plan, branches ແລະ modules."
+        description="ກຳນົດຂໍ້ມູນທຸລະກິດ, ບັນຊີເຈົ້າຂອງ, ແພັກເກດ, ສາຂາ ແລະ module."
       />
       <div className="grid gap-4 xl:grid-cols-[1fr_320px]">
         <div className="space-y-2.5">
@@ -185,13 +184,13 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
             <div className="grid gap-2.5 md:grid-cols-3">
               <FormField label="ຊື່ທຸລະກິດ" value="ViengTiane Coffee" required />
               <FormField label="Business Slug" value="vientiane-coffee" required />
-              <FormField label="ປະເພດທຸລະກິດ" value="Cafe" required />
-              <FormField label="Phone" value="+856 20 5555 7890" required />
+              <FormField label="ປະເພດທຸລະກິດ" value="ຮ້ານກາເຟ" required />
+              <FormField label="ເບີໂທ" value="+856 20 5555 7890" required />
               <FormField label="Email" value="somkheo.phan@vtcoffee.la" required />
-              <FormField label="Website" value="https://vtcoffee.la" />
-              <FormField label="Address" value="Unit 15, Nongbone Road" required />
-              <FormField label="ເມືອງ" value="Vientiane Capital" required />
-              <FormField label="ປະເທດ" value="Laos" required />
+              <FormField label="ເວັບໄຊ" value="https://vtcoffee.la" />
+              <FormField label="ທີ່ຢູ່" value="Unit 15, Nongbone Road" required />
+              <FormField label="ເມືອງ" value="ນະຄອນຫຼວງວຽງຈັນ" required />
+              <FormField label="ປະເທດ" value="ລາວ" required />
               <FormField label="Timezone" value="(GMT+07:00) Indochina Time (ICT)" />
               <div className="rounded-lg border border-blue-50 px-3 md:col-span-2">
                 <SettingsRow
@@ -209,7 +208,7 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
                 value="somkheo.phan@vtcoffee.la"
                 required
               />
-              <FormField label="Phone" value="+856 20 5555 7890" required />
+              <FormField label="ເບີໂທ" value="+856 20 5555 7890" required />
               <FormField
                 label="ລະຫັດຜ່ານຊົ່ວຄາວ"
                 value="VtCoffee@2025!"
@@ -226,7 +225,7 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
           </FormSection>
           <FormSection index={3} title="ແພັກເກດ & ການສະໝັກໃຊ້">
             <div className="grid gap-2.5 md:grid-cols-4">
-              <FormField label="ເລືອກແພັກເກດ" value="Pro Plan" required />
+              <FormField label="ເລືອກແພັກເກດ" value="ແພັກເກດ Pro" required />
               <FormField label="ຮອບບິນ" value="ລາຍເດືອນ" required />
               <FormField label="ຕໍ່ອາຍຸຄັ້ງຕໍ່ໄປ" value="June 17, 2025" />
               <FormField label="ລາຄາລາຍເດືອນ" value="K 1,200,000" />
@@ -243,7 +242,7 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
                     />
                     <input
                       className="h-7 rounded-md border border-blue-100 px-2.5 text-xs"
-                      defaultValue="Vientiane Capital"
+                      defaultValue="ນະຄອນຫຼວງວຽງຈັນ"
                     />
                     <button
                       type="button"
@@ -258,7 +257,7 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
                   </div>
                 ))}
                 <div className="font900 grid grid-cols-[1fr_1fr_34px] gap-2 pt-0.5 text-[11px] text-slate-700">
-                  <span>{toLaoText("Total")}</span>
+                  <span>{"ລວມ"}</span>
                   <span>2 ສາຂາ</span>
                   <span />
                 </div>
@@ -267,11 +266,11 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
             <FormSection index={5} title="ໂມດູນ / Add-ons ທີ່ເປີດໃຊ້">
               <div className="grid gap-2 md:grid-cols-2">
                 {[
-                  "Point of Sale (POS)",
-                  "Inventory Management",
-                  "Customer Management",
-                  "Sales & Reporting",
-                  "Loyalty Program",
+                  "ຂາຍໜ້າຮ້ານ (POS)",
+                  "ຈັດການສາງ",
+                  "ຈັດການລູກຄ້າ",
+                  "ການຂາຍ & ລາຍງານ",
+                  "ໂປຣແກຣມສະສົມແຕ້ມ",
                   "Kitchen Display System"
                 ].map((item, index) => (
                   <label
@@ -283,7 +282,7 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
                       defaultChecked={index < 4}
                       className="h-3.5 w-3.5 accent-blue-600"
                     />
-                    {toLaoText(item)}
+                    {item}
                   </label>
                 ))}
               </div>
@@ -292,7 +291,7 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
           <div className="grid gap-2.5 xl:grid-cols-2">
             <FormSection index={6} title="ບິນ / ການຊຳລະ">
               <div className="grid gap-2.5 md:grid-cols-2">
-                <FormField label="ວິທີຊຳລະ" value="Bank Transfer" required />
+                <FormField label="ວິທີຊຳລະ" value="ໂອນທະນາຄານ" required />
                 <FormField label="ທະນາຄານ" value="LAOVIET Bank" required />
                 <FormField label="ເລກບັນຊີ" value="1234 5678 9012" required />
                 <FormField
@@ -311,7 +310,7 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
             </FormSection>
           </div>
           <div className="fixed right-0 bottom-0 left-0 z-30 flex justify-between border-t border-blue-100 bg-white/95 px-6 py-3 backdrop-blur xl:left-[230px]">
-            <AdminButton variant="secondary" href="/platform-admin/businesses">
+            <AdminButton variant="secondary" href="/platform-admin/ທຸລະກິດ">
               ຍົກເລີກ
             </AdminButton>
             <div className="flex gap-3">
@@ -331,16 +330,16 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
             <div className="space-y-3 text-xs">
               {[
                 ["ຊື່ທຸລະກິດ", "ViengTiane Coffee"],
-                ["ປະເພດທຸລະກິດ", "Cafe"],
+                ["ປະເພດທຸລະກິດ", "ຮ້ານກາເຟ"],
                 ["ເຈົ້າຂອງ", "Somkheo Phan"],
-                ["ແພັກເກດ", "Pro Plan"],
+                ["ແພັກເກດ", "ແພັກເກດ Pro"],
                 ["ສາຂາ", "2"],
                 ["ໂມດູນໃຊ້ງານ", "5"],
                 ["ລາຄາລາຍເດືອນ", "K 1,200,000"]
               ].map(([label, value]) => (
                 <div key={label} className="flex justify-between gap-4">
-                  <span className="text-slate-500">{toLaoText(label)}</span>
-                  <strong className="text-right text-slate-950">{toLaoText(value)}</strong>
+                  <span className="text-slate-500">{label}</span>
+                  <strong className="text-right text-slate-950">{value}</strong>
                 </div>
               ))}
               <div className="border-t border-blue-100 pt-3 text-center">
@@ -376,10 +375,10 @@ export function AssignPlanPage() {
             <p className="font900 text-xl text-slate-950">{plan.name}</p>
             <p className="font900 mt-3 text-3xl text-blue-600">{plan.price}</p>
             <p className="mt-2 text-sm text-slate-500">
-              {toLaoText(`${plan.businesses} businesses`)}
+              {`${plan.businesses} businesses`}
             </p>
             <p className="mt-4 rounded-md bg-blue-50 px-3 py-2 text-sm font-bold text-blue-700">
-              {toLaoText(plan.modules)}
+              {plan.modules}
             </p>
             <button
               type="button"
@@ -406,8 +405,8 @@ function InfoTile({
   return (
     <div className="rounded-lg border border-blue-100 p-4">
       <Icon className="h-5 w-5 text-blue-600" />
-      <p className="font800 mt-3 text-xs text-slate-500">{toLaoText(label)}</p>
-      <p className="font900 mt-1 text-slate-950">{toLaoText(value)}</p>
+      <p className="font800 mt-3 text-xs text-slate-500">{label}</p>
+      <p className="font900 mt-1 text-slate-950">{value}</p>
     </div>
   );
 }

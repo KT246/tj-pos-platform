@@ -25,21 +25,20 @@ import { BusinessAdminLink } from "../components/business-admin-link";
 import { PageHeader } from "../components/business-admin-primitives";
 import { BusinessAdminShell } from "../layouts/business-admin-shell";
 import type { BusinessMenuKey } from "../types";
-import { toLaoNode, toLaoText } from "../utils/lao-labels";
 
 const hotelName = "TJ Riverside Hotel";
 
 const rooms = [
-  ["101", "Standard King", "1st Floor", "Occupied", "Dirty", "HND"],
-  ["102", "Standard Twin", "1st Floor", "Occupied", "Clean", ""],
-  ["103", "Deluxe King", "1st Floor", "Vacant", "Clean", "Connecting room"],
-  ["104", "Deluxe Twin", "1st Floor", "Vacant", "Inspected", "VIP"],
-  ["201", "Superior King", "2nd Floor", "Occupied", "Stayover", ""],
-  ["202", "Superior Twin", "2nd Floor", "Occupied", "Clean", "King bed"],
-  ["203", "Family Room", "2nd Floor", "Vacant", "Dirty", ""],
-  ["204", "Suite", "2nd Floor", "Vacant", "Clean", ""],
-  ["301", "Suite", "3rd Floor", "Vacant", "Maintenance", "High floor"],
-  ["302", "Suite", "3rd Floor", "Vacant", "Clean", ""]
+  ["101", "ຫ້ອງ Standard King", "ຊັ້ນ 1", "ມີແຂກພັກ", "ຕ້ອງທຳຄວາມສະອາດ", "HND"],
+  ["102", "ຫ້ອງ Standard Twin", "ຊັ້ນ 1", "ມີແຂກພັກ", "ສະອາດ", ""],
+  ["103", "ຫ້ອງ Deluxe King", "ຊັ້ນ 1", "ວ່າງ", "ສະອາດ", "Connecting room"],
+  ["104", "ຫ້ອງ Deluxe Twin", "ຊັ້ນ 1", "ວ່າງ", "ກວດແລ້ວ", "VIP"],
+  ["201", "ຫ້ອງ Superior King", "ຊັ້ນ 2", "ມີແຂກພັກ", "ພັກຕໍ່", ""],
+  ["202", "ຫ້ອງ Superior Twin", "ຊັ້ນ 2", "ມີແຂກພັກ", "ສະອາດ", "King bed"],
+  ["203", "ຫ້ອງຄອບຄົວ", "ຊັ້ນ 2", "ວ່າງ", "ຕ້ອງທຳຄວາມສະອາດ", ""],
+  ["204", "ຫ້ອງ Suite", "ຊັ້ນ 2", "ວ່າງ", "ສະອາດ", ""],
+  ["301", "ຫ້ອງ Suite", "ຊັ້ນ 3", "ວ່າງ", "ສ້ອມບຳລຸງ", "High floor"],
+  ["302", "ຫ້ອງ Suite", "ຊັ້ນ 3", "ວ່າງ", "ສະອາດ", ""]
 ];
 
 const bookings = [
@@ -56,7 +55,7 @@ const bookings = [
   [
     "BK250516-002",
     "Somchai Keomany",
-    "May 18, 2025",
+    "18 ພຶດສະພາ 2025",
     "May 22, 2025",
     "104 / Deluxe Twin",
     "2",
@@ -66,7 +65,7 @@ const bookings = [
   [
     "BK250516-003",
     "Jennifer Anderson",
-    "May 18, 2025",
+    "18 ພຶດສະພາ 2025",
     "May 21, 2025",
     "204 / Suite",
     "2",
@@ -115,9 +114,9 @@ const bookings = [
   ],
   [
     "BK250515-004",
-    "Walk-in",
-    "May 18, 2025",
-    "May 18, 2025",
+    "ລູກຄ້າ Walk-in",
+    "18 ພຶດສະພາ 2025",
+    "18 ພຶດສະພາ 2025",
     "101 / Standard King",
     "1",
     "Checked Out",
@@ -151,7 +150,7 @@ const roomBlocks = [
   ],
   ["203", "Jennifer A.", "70%", "w-[38%]", "border-blue-200 bg-blue-50 text-blue-700"],
   ["301", "Mark O.", "24%", "w-[54%]", "border-blue-200 bg-blue-50 text-blue-700"],
-  ["302", "Maintenance", "8%", "w-[26%]", "border-rose-200 bg-rose-50 text-rose-700"]
+  ["302", "ສ້ອມບຳລຸງ", "8%", "w-[26%]", "border-rose-200 bg-rose-50 text-rose-700"]
 ] as const;
 
 const roomStats = [
@@ -164,14 +163,14 @@ const roomStats = [
 
 const guestCharges = [
   [
-    "May 18, 2025",
+    "18 ພຶດສະພາ 2025",
     "Room Charge",
     "Accommodation",
     "BK250516-002",
     "1,000,000",
     "Posted"
   ],
-  ["May 18, 2025", "Mini Bar", "F&B", "BK250516-003-01", "120,000", "Posted"],
+  ["18 ພຶດສະພາ 2025", "Mini Bar", "F&B", "BK250516-003-01", "120,000", "Posted"],
   [
     "May 19, 2025",
     "Room Charge",
@@ -238,7 +237,7 @@ function HotelButton({
   const body = (
     <>
       <Icon className="h-4 w-4" />
-      {toLaoNode(children)}
+      {children}
     </>
   );
 
@@ -282,7 +281,7 @@ function HotelCard({
         <div className="flex items-center justify-between gap-3 border-b border-blue-50 px-4 py-3">
           {title ? (
             <h2 className="text-[15px] font-black text-slate-950">
-              {toLaoText(title)}
+              {title}
             </h2>
           ) : (
             <span />
@@ -308,7 +307,7 @@ function HotelTabs({ tabs, active }: { tabs: string[]; active: string }) {
               : "bg-white text-slate-500 hover:bg-blue-50 hover:text-blue-600"
           }`}
         >
-          {toLaoText(tab)}
+          {tab}
         </button>
       ))}
     </div>
@@ -319,8 +318,8 @@ function HotelIconButton({ icon: Icon, label }: { icon: LucideIcon; label: strin
   return (
     <button
       type="button"
-      aria-label={toLaoText(label)}
-      title={toLaoText(label)}
+      aria-label={label}
+      title={label}
       className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-blue-100 bg-white text-slate-500 transition hover:-translate-y-0.5 hover:bg-blue-50 hover:text-blue-600 hover:shadow-sm"
     >
       <Icon className="h-4 w-4" />
@@ -333,7 +332,7 @@ function StatusPill({ status }: { status: string }) {
 
   return (
     <span className={`rounded-md border px-2 py-1 text-[10px] font-black ${className}`}>
-      {toLaoText(status)}
+      {status}
     </span>
   );
 }
@@ -363,9 +362,9 @@ function statusClass(status: string) {
 export function RoomCalendarPage() {
   return (
     <HospitalityPage
-      active="Room Calendar"
-      title="Room Calendar"
-      description="Track room stays and booking timelines."
+      active="ປະຕິທິນຫ້ອງ"
+      title="ປະຕິທິນຫ້ອງ"
+      description="ຕິດຕາມການພັກ ແລະ timeline ການຈອງຫ້ອງ."
       actions={
         <div className="flex items-center gap-2">
           <HotelButton variant="secondary" icon={Filter}>
@@ -384,7 +383,7 @@ export function RoomCalendarPage() {
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
-            {toLaoText("May 18 - May 24, 2025")}
+            {"18 - 24 ພຶດສະພາ 2025"}
             <button
               className="rounded-md border border-blue-100 p-2 text-slate-500"
               type="button"
@@ -392,25 +391,25 @@ export function RoomCalendarPage() {
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>
-          <HotelTabs tabs={["Day", "Week", "Month"]} active="Week" />
+          <HotelTabs tabs={["ມື້", "ອາທິດ", "Month"]} active="ອາທິດ" />
         </div>
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-blue-50 px-4 py-3">
           <HotelTabs
-            tabs={["All Rooms", "By Floor", "By Room Type"]}
-            active="All Rooms"
+            tabs={["ຫ້ອງທັງໝົດ", "ຕາມຊັ້ນ", "ຕາມປະເພດຫ້ອງ"]}
+            active="ຫ້ອງທັງໝົດ"
           />
           <div className="flex flex-wrap gap-4 text-[11px] font-black text-slate-500">
             {[
               ["Confirmed", "bg-emerald-400"],
               ["Checked In", "bg-blue-400"],
-              ["Booked", "bg-amber-400"],
+              ["ຈອງແລ້ວ", "bg-amber-400"],
               ["Check-out", "bg-orange-400"],
-              ["Maintenance", "bg-rose-400"],
-              ["Blocked", "bg-violet-400"]
+              ["ສ້ອມບຳລຸງ", "bg-rose-400"],
+              ["ບລັອກ", "bg-violet-400"]
             ].map(([label, dot]) => (
               <span key={label} className="flex items-center gap-2">
                 <span className={`h-2.5 w-2.5 rounded-full ${dot}`} />
-                {toLaoText(label)}
+                {label}
               </span>
             ))}
           </div>
@@ -418,38 +417,38 @@ export function RoomCalendarPage() {
         <div className="overflow-x-auto p-4">
           <div className="min-w-[1000px]">
             <div className="grid grid-cols-[150px_repeat(7,1fr)] gap-2 text-[11px] font-black text-slate-500">
-              <span>{toLaoText("Floor / Room")}</span>
+              <span>{"ຊັ້ນ / ຫ້ອງ"}</span>
               {[
-                "Sun 18",
-                "Mon 19",
-                "Tue 20",
-                "Wed 21",
-                "Thu 22",
-                "Fri 23",
-                "Sat 24"
+                "ອາ 18",
+                "ຈ 19",
+                "ອ 20",
+                "ພ 21",
+                "ພຫ 22",
+                "ສ 23",
+                "ສອ 24"
               ].map((day) => (
                 <span key={day} className="text-center">
-                  {toLaoText(day)}
+                  {day}
                 </span>
               ))}
             </div>
             <div className="mt-3 space-y-2">
               {[
-                "1st Floor",
+                "ຊັ້ນ 1",
                 "101 Standard King",
                 "102 Standard Twin",
                 "103 Deluxe King",
                 "104 Deluxe Twin",
-                "2nd Floor",
+                "ຊັ້ນ 2",
                 "201 Superior King",
                 "202 Superior Twin",
                 "203 Family Room",
                 "204 Suite",
-                "3rd Floor",
+                "ຊັ້ນ 3",
                 "301 Suite",
                 "302 Suite"
               ].map((label) => {
-                const isFloor = label.includes("Floor");
+                const isFloor = label.includes("ຊັ້ນ");
                 const roomNo = label.split(" ")[0];
                 const block = roomBlocks.find(([room]) => room === roomNo);
 
@@ -461,7 +460,7 @@ export function RoomCalendarPage() {
                     <span
                       className={`text-xs ${isFloor ? "font-black text-slate-950" : "font-bold text-slate-600"}`}
                     >
-                      {toLaoText(label)}
+                      {label}
                     </span>
                     {Array.from({ length: 7 }, (_, index) => (
                       <span
@@ -474,7 +473,7 @@ export function RoomCalendarPage() {
                         className={`absolute top-1 left-[170px] flex h-7 items-center rounded-md border px-3 text-[11px] font-black shadow-sm ${block[4]} ${block[3]}`}
                         style={{ marginLeft: block[2] }}
                       >
-                        {toLaoText(block[1])}
+                        {block[1]}
                       </span>
                     ) : null}
                   </div>
@@ -491,34 +490,34 @@ export function RoomCalendarPage() {
 export function RoomSettingsHousekeepingPage() {
   return (
     <HospitalityPage
-      active="Room Settings"
-      title="Room Settings & Housekeeping"
-      description="Manage rooms, room types, and housekeeping status."
+      active="ຕັ້ງຄ່າຫ້ອງ"
+      title="ຕັ້ງຄ່າຫ້ອງ & ແມ່ບ້ານ"
+      description="ຈັດການຫ້ອງ, ປະເພດຫ້ອງ ແລະ ສະຖານະແມ່ບ້ານ."
       actions={<HotelButton>Add Room</HotelButton>}
     >
       <HotelCard>
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-blue-50 p-4">
           <HotelTabs
-            tabs={["Room List", "Room Types", "Housekeeping"]}
-            active="Room List"
+            tabs={["ລາຍຊື່ຫ້ອງ", "ປະເພດຫ້ອງ", "ແມ່ບ້ານ"]}
+            active="ລາຍຊື່ຫ້ອງ"
           />
           <label className="relative w-full max-w-xs">
             <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input
               className="h-10 w-full rounded-md border border-blue-100 pr-3 pl-10 text-sm font-bold outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-              placeholder="Search room..."
+              placeholder="ຄົ້ນຫາຫ້ອງ..."
             />
           </label>
         </div>
         <HotelTable
           headers={[
-            "Room",
-            "Room Type",
-            "Floor",
-            "Status",
-            "Housekeeping",
-            "Notes",
-            "Actions"
+            "ຫ້ອງ",
+            "ປະເພດຫ້ອງ",
+            "ຊັ້ນ",
+            "ສະຖານະ",
+            "ແມ່ບ້ານ",
+            "ໝາຍເຫດ",
+            "ການດຳເນີນການ"
           ]}
           rows={rooms.map((room) => [
             <span className="font-black text-slate-950">{room[0]}</span>,
@@ -538,9 +537,9 @@ export function RoomSettingsHousekeepingPage() {
 export function BookingListPage() {
   return (
     <HospitalityPage
-      active="Bookings"
-      title="Booking List"
-      description="View and manage all bookings."
+      active="ການຈອງ"
+      title="ລາຍການຈອງ"
+      description="ເບິ່ງ ແລະ ຈັດການການຈອງທັງໝົດ."
       actions={
         <HotelButton href="/business-admin/bookings/create">New Booking</HotelButton>
       }
@@ -571,7 +570,7 @@ export function BookingListPage() {
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-blue-50 p-4">
             <div className="flex flex-wrap gap-2">
               <HotelSelect label="May 16 - May 31, 2025" />
-              <HotelSelect label="All Status" />
+              <HotelSelect label="ທຸກສະຖານະ" />
             </div>
             <label className="relative w-full max-w-xs">
               <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400" />
@@ -589,9 +588,9 @@ export function BookingListPage() {
               "Check-out",
               "Room / Type",
               "Pax",
-              "Status",
+              "ສະຖານະ",
               "Total (LAK)",
-              "Actions"
+              "ການດຳເນີນການ"
             ]}
             rows={bookings.map((booking) => [
               <span className="font-black text-blue-600">{booking[0]}</span>,
@@ -614,7 +613,7 @@ export function BookingListPage() {
 export function CreateBookingPage() {
   return (
     <HospitalityPage
-      active="Bookings"
+      active="ການຈອງ"
       title="Create Booking"
       description="Create a room booking with guest info and deposit estimate."
     >
@@ -626,11 +625,11 @@ export function CreateBookingPage() {
             <HotelField label="Check-out" value="May 22, 2025" />
             <HotelField label="Departure Time" value="12:00 PM" />
             <HotelField label="Nights" value="2" />
-            <HotelField label="Room Type" value="Deluxe King" />
-            <HotelField label="Room" value="103" />
+            <HotelField label="ປະເພດຫ້ອງ" value="ຫ້ອງ Deluxe King" />
+            <HotelField label="ຫ້ອງ" value="103" />
             <HotelField label="Adults" value="2" />
             <HotelField label="Children" value="0" />
-            <HotelField label="Source" value="Walk-in" />
+            <HotelField label="Source" value="ລູກຄ້າ Walk-in" />
             <HotelField
               label="Special Request"
               value="High floor, non-smoking room"
@@ -645,7 +644,7 @@ export function CreateBookingPage() {
             {[
               ["Room Rate", "LAK 1,400,000"],
               ["Nights", "2"],
-              ["Subtotal", "LAK 2,800,000"],
+              ["ຍອດກ່ອນຄ່າບໍລິການ", "LAK 2,800,000"],
               ["Tax & Service", "LAK 280,000"],
               ["Total (Estimate)", "LAK 3,080,000"]
             ].map(([label, value]) => (
@@ -691,8 +690,8 @@ export function CheckInPage() {
             <InfoLine label="Check-in" value="May 18, 2025 - 2:00 PM" />
             <InfoLine label="Check-out" value="May 22, 2025 - 12:00 PM" />
             <InfoLine label="Nights" value="4" />
-            <InfoLine label="Room Type" value="Deluxe Twin" />
-            <InfoLine label="Room" value="104 1st Floor" />
+            <InfoLine label="ປະເພດຫ້ອງ" value="ຫ້ອງ Deluxe Twin" />
+            <InfoLine label="ຫ້ອງ" value="104 1st Floor" />
           </div>
         </HotelCard>
         <HotelCard title="Guest Information">
@@ -734,9 +733,9 @@ export function CheckOutPage() {
           <div className="grid gap-5 p-4 lg:grid-cols-[260px_1fr]">
             <div className="space-y-3 text-sm">
               <InfoLine label="Guest" value="Somchai Keomany" />
-              <InfoLine label="Room" value="104 / Deluxe Twin" />
+              <InfoLine label="ຫ້ອງ" value="104 / Deluxe Twin" />
               <InfoLine label="Stay" value="May 18 - May 22, 2025 (4 Nights)" />
-              <InfoLine label="Guests" value="2 Adults" />
+              <InfoLine label="ແຂກ" value="2 Adults" />
             </div>
             <HotelTable
               compact
@@ -784,8 +783,8 @@ export function CheckOutPage() {
 export function GuestFolioPage() {
   return (
     <HospitalityPage
-      active="Guest Folio"
-      title="Guest Folio"
+      active="ບັນຊີແຂກ"
+      title="ບັນຊີແຂກ"
       description="View guest folio and post additional charges."
       actions={
         <div className="flex gap-2">
@@ -800,7 +799,7 @@ export function GuestFolioPage() {
         <HotelCard title="Guest Info">
           <div className="space-y-3 p-4 text-sm">
             <InfoLine label="Guest" value="Somchai Keomany" />
-            <InfoLine label="Room" value="104 / Deluxe Twin" />
+            <InfoLine label="ຫ້ອງ" value="104 / Deluxe Twin" />
             <InfoLine label="Stay" value="May 18 - May 22, 2025" />
             <InfoLine label="Booking No." value="BK250516-002" />
             <StatusPill status="Checked In" />
@@ -814,10 +813,10 @@ export function GuestFolioPage() {
             headers={[
               "Date",
               "Description",
-              "Type",
+              "ປະເພດ",
               "Ref No.",
               "Amount (LAK)",
-              "Status"
+              "ສະຖານະ"
             ]}
             rows={guestCharges.map((charge) => [
               charge[0],
@@ -858,13 +857,13 @@ export function GuestFolioPage() {
 export function DepositCancellationPolicyPage() {
   return (
     <HospitalityPage
-      active="Bookings"
+      active="ການຈອງ"
       title="Deposit & Cancellation Policy"
       description="Configure deposit requirements and cancellation rules."
       actions={<HotelButton icon={WalletCards}>Save Policy</HotelButton>}
     >
       <div className="grid gap-5 xl:grid-cols-2">
-        <HotelCard title="Deposit Policy">
+        <HotelCard title="ນະໂຍບາຍມັດຈຳ">
           <div className="space-y-5 p-5">
             <ToggleLine title="Require Deposit for Bookings" enabled />
             <div className="grid gap-4 md:grid-cols-2">
@@ -904,17 +903,17 @@ function HotelField({
   return (
     <label className={full ? "md:col-span-2" : ""}>
       <span className="mb-1.5 block text-xs font-black text-slate-600">
-        {toLaoText(label)}
+        {label}
       </span>
       {textarea ? (
         <textarea
           className="min-h-24 w-full resize-none rounded-md border border-blue-100 px-3 py-2 text-sm font-semibold text-slate-800 outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-          defaultValue={toLaoText(value)}
+          defaultValue={value}
         />
       ) : (
         <input
           className="h-10 w-full rounded-md border border-blue-100 px-3 text-sm font-semibold text-slate-800 outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-          defaultValue={toLaoText(value)}
+          defaultValue={value}
         />
       )}
     </label>
@@ -927,7 +926,7 @@ function HotelSelect({ label }: { label: string }) {
       type="button"
       className="h-10 rounded-md border border-blue-100 bg-white px-3 text-sm font-black text-slate-700 transition hover:bg-blue-50"
     >
-      {toLaoText(label)}
+      {label}
     </button>
   );
 }
@@ -935,8 +934,8 @@ function HotelSelect({ label }: { label: string }) {
 function InfoLine({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="text-[11px] font-black text-slate-400">{toLaoText(label)}</p>
-      <p className="mt-1 text-sm font-black text-slate-950">{toLaoText(value)}</p>
+      <p className="text-[11px] font-black text-slate-400">{label}</p>
+      <p className="mt-1 text-sm font-black text-slate-950">{value}</p>
     </div>
   );
 }
@@ -944,7 +943,7 @@ function InfoLine({ label, value }: { label: string; value: string }) {
 function ToggleLine({ title, enabled }: { title: string; enabled: boolean }) {
   return (
     <div className="flex items-center justify-between gap-4 rounded-lg border border-blue-100 bg-white p-3">
-      <span className="text-sm font-black text-slate-700">{toLaoText(title)}</span>
+      <span className="text-sm font-black text-slate-700">{title}</span>
       <span
         className={`relative h-6 w-11 rounded-full ${enabled ? "bg-blue-600" : "bg-slate-200"}`}
       >
@@ -959,8 +958,8 @@ function ToggleLine({ title, enabled }: { title: string; enabled: boolean }) {
 function ActionCell() {
   return (
     <div className="flex justify-end gap-2">
-      <HotelIconButton icon={Pencil} label="Edit" />
-      <HotelIconButton icon={MoreVertical} label="More" />
+      <HotelIconButton icon={Pencil} label="ແກ້ໄຂ" />
+      <HotelIconButton icon={MoreVertical} label="ເພີ່ມເຕີມ" />
     </div>
   );
 }
@@ -986,7 +985,7 @@ function HotelTable({
                   index === headers.length - 1 ? "text-right" : ""
                 }`}
               >
-                {toLaoText(header)}
+                {header}
               </th>
             ))}
           </tr>
@@ -1001,7 +1000,7 @@ function HotelTable({
                     cellIndex === row.length - 1 ? "text-right" : ""
                   }`}
                 >
-                  {toLaoNode(cell)}
+                  {cell}
                 </td>
               ))}
             </tr>
@@ -1017,7 +1016,7 @@ function HotelPagination() {
   return (
     <div className="flex items-center justify-between border-t border-blue-50 px-4 py-3">
       <p className="text-[13px] font-semibold text-slate-600">
-        {toLaoText("Showing 1 to 8 of 28 records")}
+        {"ສະແດງ 1 ຫາ 8 ຈາກ 28 ລາຍການ"}
       </p>
       <div className="flex items-center gap-2">
         {["<", "1", "2", ">"].map((item) => (

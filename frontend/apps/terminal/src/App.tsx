@@ -47,6 +47,18 @@ export function App() {
           element={<PosRoute screen="refund" />}
         />
         <Route
+          path="/terminal/b/:businessSlug/pos/open-shift"
+          element={<PosRoute screen="open-shift" />}
+        />
+        <Route
+          path="/terminal/b/:businessSlug/pos/close-shift"
+          element={<PosRoute screen="close-shift" />}
+        />
+        <Route
+          path="/terminal/b/:businessSlug/pos/offline"
+          element={<PosRoute screen="offline" />}
+        />
+        <Route
           path="*"
           element={<Navigate to={`/terminal/b/${defaultBusinessSlug}/pos`} replace />}
         />

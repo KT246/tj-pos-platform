@@ -20,19 +20,19 @@ export function App() {
         />
         <Route
           path="/kitchen/b/:businessSlug"
-          element={<KitchenDisplayRoute mode="kitchen" />}
+          element={<KitchenDisplayRoute mode="ຄົວ" />}
         />
         <Route
           path="/kitchen/b/:businessSlug/ticket/:ticketId"
-          element={<KitchenDisplayRoute mode="kitchen" />}
+          element={<KitchenDisplayRoute mode="ຄົວ" />}
         />
         <Route
           path="/bar/b/:businessSlug"
-          element={<KitchenDisplayRoute mode="bar" />}
+          element={<KitchenDisplayRoute mode="ບາ" />}
         />
         <Route
           path="/bar/b/:businessSlug/ticket/:ticketId"
-          element={<KitchenDisplayRoute mode="bar" />}
+          element={<KitchenDisplayRoute mode="ບາ" />}
         />
         <Route
           path="*"

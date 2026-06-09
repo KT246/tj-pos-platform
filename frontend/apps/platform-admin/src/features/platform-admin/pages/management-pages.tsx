@@ -23,14 +23,13 @@ import {
   StatusBadge
 } from "../components/admin-primitives";
 import { businesses, paymentMethods, planCards } from "../data/mock-platform-admin";
-import { toLaoNode, toLaoText } from "../utils/lao-labels";
 
 export function UsersPage() {
   return (
     <>
       <PageHeader
         title="ເຈົ້າຂອງ / ຜູ້ໃຊ້"
-        description="ຈັດການ owner, staff ແລະ platform user accounts."
+        description="ຈັດການເຈົ້າຂອງ, ພະນັກງານ ແລະ ບັນຊີຜູ້ໃຊ້ platform."
         action={<AdminButton>ເພີ່ມຜູ້ໃຊ້</AdminButton>}
       />
       <AdminCard className="overflow-hidden">
@@ -70,7 +69,7 @@ export function OwnerDetailPage() {
     <>
       <PageHeader
         title={business.owner}
-        description="User profile, business access, login history ແລະ security status."
+        description="Profile ຜູ້ໃຊ້, ສິດເຂົ້າເຖິງທຸລະກິດ, ປະຫວັດ login ແລະ ສະຖານະຄວາມປອດໄພ."
         action={<AdminButton variant="secondary">ຕັ້ງລະຫັດຜ່ານໃໝ່</AdminButton>}
       />
       <div className="grid gap-5 xl:grid-cols-[0.75fr_1.25fr]">
@@ -94,7 +93,7 @@ export function OwnerDetailPage() {
             {[
               ["ບົດບາດ", "ເຈົ້າຂອງທຸລະກິດ"],
               ["ທຸລະກິດ", business.name],
-              ["Phone", "+856 20 5555 7890"],
+              ["ເບີໂທ", "+856 20 5555 7890"],
               ["Last Login IP", "IP 10.0.2.18"],
               ["2FA", "ເປີດໃຊ້"],
               ["ສ້າງເມື່ອ", business.joinedOn]
@@ -114,19 +113,19 @@ export function OwnerDetailPage() {
             {
               title: "Login ສຳເລັດ",
               subtitle: "Platform Admin",
-              meta: "Today 10:24 AM",
+              meta: "ມື້ນີ້ 10:24 AM",
               status: "active"
             },
             {
               title: "ອັບເດດ profile ທຸລະກິດ",
               subtitle: business.name,
-              meta: "Yesterday",
+              meta: "ມື້ວານ",
               status: "resolved"
             },
             {
               title: "ປ່ຽນແພັກເກດ",
               subtitle: "Business -> Pro",
-              meta: "May 16, 2025",
+              meta: "ພຶດສະພາ 16, 2025",
               status: "inProgress"
             }
           ]}
@@ -141,7 +140,7 @@ export function PlansPage() {
     <>
       <PageHeader
         title="ແພັກເກດ"
-        description="ຈັດການ pricing plans, limits ແລະ subscription rules."
+        description="ຈັດການແພັກເກດລາຄາ, ຂໍ້ຈຳກັດ ແລະ ກົດການສະໝັກໃຊ້."
         action={<AdminButton>ສ້າງແພັກເກດ</AdminButton>}
       />
       <div className="grid gap-5 lg:grid-cols-4">
@@ -150,7 +149,7 @@ export function PlansPage() {
             <div className="flex items-start justify-between">
               <div>
                 <p className="font900 text-xl text-slate-950">{plan.name}</p>
-                <p className="mt-1 text-sm text-slate-500">{toLaoText(plan.modules)}</p>
+                <p className="mt-1 text-sm text-slate-500">{plan.modules}</p>
               </div>
               <CreditCard className="h-6 w-6 text-blue-600" />
             </div>
@@ -178,7 +177,7 @@ export function SubscriptionsPage() {
     <>
       <PageHeader
         title="ການສະໝັກໃຊ້"
-        description="ຕິດຕາມ plan, renewal date, payment status ແລະ lifecycle."
+        description="ຕິດຕາມແພັກເກດ, ວັນຕໍ່ອາຍຸ, ສະຖານະຊຳລະ ແລະ lifecycle."
       />
       <AdminCard className="overflow-hidden">
         <FilterBar
@@ -225,12 +224,12 @@ export function AddOnsPage() {
           ["Customer Display", "1,048 ທຸລະກິດ", "active"],
           ["Staff Order Mobile", "784 ທຸລະກິດ", "active"],
           ["Kitchen Display System", "512 ທຸລະກິດ", "active"],
-          ["Advanced Reporting", "388 ທຸລະກິດ", "active"]
+          ["ລາຍງານຂັ້ນສູງ", "388 ທຸລະກິດ", "active"]
         ].map(([title, subtitle, status]) => (
           <AdminCard key={title} className="p-5">
             <Puzzle className="h-8 w-8 text-blue-600" />
-            <h2 className="font900 mt-4 text-lg">{toLaoText(title)}</h2>
-            <p className="mt-2 text-sm text-slate-500">{toLaoText(subtitle)}</p>
+            <h2 className="font900 mt-4 text-lg">{title}</h2>
+            <p className="mt-2 text-sm text-slate-500">{subtitle}</p>
             <div className="mt-5">
               <StatusBadge status={status === "active" ? "active" : "inactive"} />
             </div>
@@ -269,7 +268,7 @@ export function AddOnsPage() {
               "ຕັ້ງຄ່າ"
             ],
             [
-              "Loyalty Program",
+              "ໂປຣແກຣມສະສົມແຕ້ມ",
               "CRM",
               "388",
               "K 20,000",
@@ -277,7 +276,7 @@ export function AddOnsPage() {
               "ຕັ້ງຄ່າ"
             ],
             [
-              "Online Ordering",
+              "ສັ່ງອອນລາຍ",
               "Public",
               "214",
               "K 120,000",
@@ -301,22 +300,22 @@ export function GlobalModulesCatalogPage() {
       />
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {[
-          ["Point of Sale (POS)", "Core", "ຈຳເປັນ"],
-          ["Inventory Management", "Core", "ຄ່າຕັ້ງຕົ້ນ"],
+          ["ຂາຍໜ້າຮ້ານ (POS)", "Core", "ຈຳເປັນ"],
+          ["ຈັດການສາງ", "Core", "ຄ່າຕັ້ງຕົ້ນ"],
           ["Customer Display", "Add-on", "ເລືອກໄດ້"],
           ["Kitchen Display System", "Add-on", "ເລືອກໄດ້"],
           ["QR Public Menu", "Add-on", "ເລືອກໄດ້"],
-          ["Advanced Reporting", "Add-on", "ເລືອກໄດ້"]
+          ["ລາຍງານຂັ້ນສູງ", "Add-on", "ເລືອກໄດ້"]
         ].map(([title, category, rule]) => (
           <AdminCard key={title} className="p-5">
             <Box className="h-8 w-8 text-blue-600" />
             <div className="mt-4 flex items-start justify-between">
               <div>
-                <h2 className="font900 text-lg">{toLaoText(title)}</h2>
-                <p className="mt-1 text-sm text-slate-500">{toLaoText(category)}</p>
+                <h2 className="font900 text-lg">{title}</h2>
+                <p className="mt-1 text-sm text-slate-500">{category}</p>
               </div>
               <span className="font800 rounded-md bg-blue-50 px-3 py-1 text-xs text-blue-700">
-                {toLaoText(rule)}
+                {rule}
               </span>
             </div>
             <div className="mt-5">
@@ -337,7 +336,7 @@ export function PaymentsPage() {
     <>
       <PageHeader
         title="ການຊຳລະເງິນ"
-        description="ຕິດຕາມ subscription payments, manual confirmation ແລະ transaction status."
+        description="ຕິດຕາມການຊຳລະ subscription, ການຢືນຢັນແບບ manual ແລະ ສະຖານະ transaction."
         action={
           <AdminButton href="/platform-admin/payments/settings">
             ຕັ້ງຄ່າການຊຳລະ
@@ -362,7 +361,7 @@ export function PaymentsPage() {
           rows={businesses.map((business, index) => [
             `PAY-2025-${118 - index}`,
             business.name,
-            index % 2 === 0 ? "BCEL One" : "Cash",
+            index % 2 === 0 ? "BCEL One" : "ເງິນສົດ",
             "K 1,200,000",
             <StatusBadge key="s" status={index === 5 ? "pending" : "active"} />,
             business.lastActivity,
@@ -387,7 +386,7 @@ export function PaymentSettingsPage() {
     <>
       <PageHeader
         title="ຕັ້ງຄ່າທະນາຄານ / ການຊຳລະຫຼັກ"
-        description="ຈັດການ payment methods, banks, accounts ແລະ settlement settings ຂອງ TJ POS Platform."
+        description="ຈັດການວິທີຊຳລະ, ທະນາຄານ, ບັນຊີ ແລະ settlement settings ຂອງ TJ POS Platform."
         action={<AdminButton>ເພີ່ມວິທີຊຳລະ</AdminButton>}
       />
       <div className="mb-4 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
@@ -413,7 +412,7 @@ export function PaymentSettingsPage() {
                   <Icon className="h-5 w-5" />
                 </span>
                 <div>
-                  <p className="font800 text-xs text-slate-500">{toLaoText(stat.label)}</p>
+                  <p className="font800 text-xs text-slate-500">{stat.label}</p>
                   <p className="font900 mt-1 text-2xl leading-7 text-slate-950">
                     {stat.value}
                   </p>
@@ -437,7 +436,7 @@ export function PaymentSettingsPage() {
               "ແມ່ແບບ QR Code",
               "ປະເພດ POS Payment",
               "Payment Gateways",
-              "Settlement & Fees",
+              "Settlement & ຄ່າທຳນຽມ",
               "ພາສີ & ຄ່າທຳນຽມ"
             ].map((tab, index) => (
               <button
@@ -449,7 +448,7 @@ export function PaymentSettingsPage() {
                     : "border-transparent text-slate-600 hover:text-blue-700"
                 }`}
               >
-                {toLaoText(tab)}
+                {tab}
               </button>
             ))}
           </div>
@@ -462,7 +461,7 @@ export function PaymentSettingsPage() {
               "ວິທີຊຳລະ",
               "ປະເພດ",
               "Channel",
-              "Provider / Bank",
+              "ຜູ້ໃຫ້ບໍລິການ / ທະນາຄານ",
               "ຮອງຮັບສຳລັບ",
               "ຄ່າຕັ້ງຕົ້ນ",
               "ສະຖານະ",
@@ -542,7 +541,7 @@ function GenericTable({
                   key={head}
                   className="font900 border-b border-blue-100 px-3.5 py-2.5 whitespace-nowrap"
                 >
-                  {toLaoText(head)}
+                  {head}
                 </th>
               ))}
             </tr>
@@ -556,9 +555,9 @@ function GenericTable({
                     className="px-3.5 py-2.5 whitespace-pre-line text-slate-700"
                   >
                     {cellIndex === 0 ? (
-                      <span className="font900 text-slate-950">{toLaoNode(cell)}</span>
+                      <span className="font900 text-slate-950">{cell}</span>
                     ) : (
-                      toLaoNode(cell)
+                      cell
                     )}
                   </td>
                 ))}

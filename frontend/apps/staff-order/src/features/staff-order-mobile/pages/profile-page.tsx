@@ -18,7 +18,6 @@ import { StaffMobileShell, StaffScrollArea } from "../components/staff-mobile-sh
 import { staffId, staffRole } from "../data/staff-order-data";
 import { useStaffOrderStore } from "../stores/staff-order-store";
 import { getStaffOrderPath } from "../utils";
-import { lo } from "../utils/lao-labels";
 
 export function StaffProfilePage({ businessSlug }: { businessSlug: string }) {
   const selectedBranch = useStaffOrderStore((state) => state.selectedBranch);
@@ -35,7 +34,7 @@ export function StaffProfilePage({ businessSlug }: { businessSlug: string }) {
         />
       }
     >
-      <StaffOrderHeader title="Profile" />
+      <StaffOrderHeader title="ໂປຣໄຟລ໌" />
       <StaffScrollArea className="pb-3">
         <section className="mt-3 rounded-lg border border-blue-100 bg-white p-3 shadow-[0_12px_28px_rgba(15,23,42,0.055)]">
           <div className="grid grid-cols-[64px_1fr] items-center gap-3">
@@ -49,57 +48,57 @@ export function StaffProfilePage({ businessSlug }: { businessSlug: string }) {
                 Somchai Phommaseanh
               </h2>
               <p className="mt-1 truncate text-[12px] font-bold text-slate-500">
-                {lo(staffRole)}
+                {staffRole}
               </p>
               <span className="mt-2 inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-black text-emerald-600">
-                {lo("On Shift")}
+                {"ຢູ່ໃນກະ"}
               </span>
             </div>
           </div>
 
           <div className="mt-3 grid grid-cols-2 gap-2">
-            <ProfileInfoCard label="Branch" value={selectedBranch} />
-            <ProfileInfoCard label="Employee ID" value={staffId} />
+            <ProfileInfoCard label="ສາຂາ" value={selectedBranch} />
+            <ProfileInfoCard label="ລະຫັດພະນັກງານ" value={staffId} />
           </div>
         </section>
 
-        <h3 className="mt-4 text-[15px] font-black text-slate-500">{lo("Settings")}</h3>
+        <h3 className="mt-4 text-[15px] font-black text-slate-500">{"ຕັ້ງຄ່າ"}</h3>
         <section className="mt-3 overflow-hidden rounded-lg border border-blue-100 bg-white shadow-[0_10px_26px_rgba(15,23,42,0.045)]">
           <SettingsRow
             icon={Store}
-            title="Branch & Device"
-            subtitle="View branch details and device info"
+            title="ສາຂາ ແລະ ອຸປະກອນ"
+            subtitle="ເບິ່ງລາຍລະອຽດສາຂາ ແລະ ອຸປະກອນ"
           />
           <SettingsRow
             icon={Printer}
-            title="Printer Settings"
-            subtitle="Manage printers and print options"
+            title="ຕັ້ງຄ່າ Printer"
+            subtitle="ຈັດການ Printer ແລະ ຕົວເລືອກພິມ"
           />
           <SettingsRow
             icon={Volume2}
-            title="Sound & Notifications"
-            subtitle="Configure sounds and alerts"
+            title="ສຽງ ແລະ ແຈ້ງເຕືອນ"
+            subtitle="ຕັ້ງຄ່າສຽງ ແລະ alert"
             trailing={<Toggle />}
           />
         </section>
 
-        <h3 className="mt-4 text-[15px] font-black text-slate-500">{lo("System")}</h3>
+        <h3 className="mt-4 text-[15px] font-black text-slate-500">{"ລະບົບ"}</h3>
         <section className="mt-3 overflow-hidden rounded-lg border border-blue-100 bg-white shadow-[0_10px_26px_rgba(15,23,42,0.045)]">
           <SettingsRow
             icon={CircleHelp}
-            title="Help Center"
-            subtitle="FAQs and support"
+            title="ສູນຊ່ວຍເຫຼືອ"
+            subtitle="FAQ ແລະ support"
           />
           <SettingsRow
             icon={RefreshCw}
-            title="Sync Status"
-            subtitle="Keep data in sync across devices"
+            title="ສະຖານະ Sync"
+            subtitle="ຮັກສາຂໍ້ມູນໃຫ້ Sync ຂ້າມອຸປະກອນ"
             trailing={<Toggle />}
           />
           <SettingsRow
             icon={Info}
-            title="About App"
-            subtitle="App information and version"
+            title="ກ່ຽວກັບແອັບ"
+            subtitle="ຂໍ້ມູນແອັບ ແລະ version"
             trailing={
               <span className="text-[12px] font-bold text-slate-600">v1.0.8</span>
             }
@@ -111,14 +110,14 @@ export function StaffProfilePage({ businessSlug }: { businessSlug: string }) {
           className="mt-4 flex h-10 cursor-pointer items-center justify-center gap-2 rounded-lg border border-blue-200 bg-white text-[13px] font-black text-blue-600 shadow-sm transition hover:bg-blue-50"
         >
           <Repeat2 className="h-4 w-4" />
-          {lo("Switch Branch")}
+          {"ປ່ຽນສາຂາ"}
         </Link>
         <Link
           to={getStaffOrderPath(businessSlug, "")}
           className="mt-2 flex h-10 cursor-pointer items-center justify-center gap-2 rounded-lg border border-red-200 bg-white text-[13px] font-black text-red-500 shadow-sm transition hover:bg-red-50"
         >
           <LogOut className="h-4 w-4" />
-          {lo("Logout")}
+          {"ອອກຈາກລະບົບ"}
         </Link>
       </StaffScrollArea>
     </StaffMobileShell>
@@ -134,9 +133,9 @@ function ProfileInfoCard({
 }) {
   return (
     <div className="min-w-0 rounded-lg bg-blue-50/55 px-3 py-2">
-      <p className="text-[10px] font-bold text-slate-500">{lo(label)}</p>
+      <p className="text-[10px] font-bold text-slate-500">{label}</p>
       <p className="mt-0.5 truncate text-[12px] font-black text-slate-950">
-        {lo(value)}
+        {value}
       </p>
     </div>
   );
@@ -162,8 +161,8 @@ function SettingsRow({
         <Icon className="h-[18px] w-[18px]" />
       </span>
       <span className="min-w-0">
-        <span className="block text-[13px] font-black text-slate-950">{lo(title)}</span>
-        <span className="text-[12px] font-bold text-slate-500">{lo(subtitle)}</span>
+        <span className="block text-[13px] font-black text-slate-950">{title}</span>
+        <span className="text-[12px] font-bold text-slate-500">{subtitle}</span>
       </span>
       <span className="flex items-center gap-2">
         {trailing}

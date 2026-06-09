@@ -27,11 +27,11 @@ export type StaffOrderRecord = {
   id: string;
   tableId: string;
   guests: number;
-  status: "Preparing" | "Sent" | "Ready to Serve" | "Waiting Bill";
+  status: "ກຳລັງກຽມ" | "ສົ່ງແລ້ວ" | "ພ້ອມເສີບ" | "ລໍຖ້າອອກບິນ";
   items: number;
   total: number;
   elapsed: string;
-  type: "Dine In" | "Take Away";
+  type: "ນັ່ງກິນທີ່ຮ້ານ" | "ສັ່ງກັບບ້ານ";
   lines: StaffOrderLine[];
 };
 
@@ -49,7 +49,7 @@ export type StaffOrderProduct = {
 export type DiningTable = {
   id: string;
   seats: number;
-  area: "Indoor" | "Outdoor" | "VIP Room" | "Terrace";
-  status: "Available" | "Occupied" | "Reserved";
+  area: "ພາຍໃນ" | "ພາຍນອກ" | "ຫ້ອງ VIP" | "ລານນອກ";
+  status: "ວ່າງ" | "ມີລູກຄ້າ" | "ຈອງໄວ້";
   elapsed?: string;
 };

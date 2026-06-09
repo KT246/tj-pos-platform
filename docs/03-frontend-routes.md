@@ -168,6 +168,23 @@ en
 ไม่ใช้เป็น i18n กลางของระบบ
 ```
 
+กฎสำหรับ static UI text ของทุก app ยกเว้น `apps/web`:
+
+```text
+ให้เขียน static UI เป็นภาษาลาวตรงใน component/config
+เช่น navbar, tab, button, title, badge, empty state, toast, modal, table heading
+ห้ามใช้ English key แล้วค่อย map ผ่าน lo(), t(), dictionary หรือ i18n helper
+```
+
+กฎสำหรับ mock data / enum:
+
+```text
+ถ้า field นั้นถูก render เป็น UI text ให้เขียนค่าภาษาลาวไว้ใน mock data/config โดยตรง
+ห้ามสร้าง helper หรือ dictionary เพื่อ map English -> Lao ใน app อื่น
+technical id เช่น route, slug, permission key, enum key เป็น English ได้ แต่ต้องมี display label ภาษาลาวแยกไว้ก่อน render
+ห้ามใช้ชื่อไฟล์ lao-labels.ts, mock-label-formatters.ts หรือ legacy-ui-text.ts
+```
+
 Section `/#pos-types` แนะนำ POS ทั้ง 5 ประเภท:
 
 ```text

@@ -2,7 +2,6 @@ import { Check, RotateCcw, Save, Settings, X } from "lucide-react";
 
 import { kitchenStations } from "../data/kitchen-display-data";
 import type { KitchenSettings, KitchenStationId } from "../types";
-import { lo } from "../utils/lao-labels";
 
 type SettingsDrawerProps = {
   settings: KitchenSettings;
@@ -29,9 +28,9 @@ function ToggleRow({
   return (
     <label className="flex cursor-pointer items-center justify-between gap-4 rounded-xl border border-blue-100 bg-white px-4 py-3 transition hover:border-blue-300 hover:bg-blue-50/50">
       <span>
-        <span className="block text-[14px] font-black text-[#0b1736]">{lo(title)}</span>
+        <span className="block text-[14px] font-black text-[#0b1736]">{title}</span>
         <span className="mt-1 block text-[12px] font-semibold text-slate-500">
-          {lo(subtitle)}
+          {subtitle}
         </span>
       </span>
       <input
@@ -64,10 +63,10 @@ export function SettingsDrawer({
             </div>
             <div>
               <h2 className="text-[22px] leading-none font-black text-[#0b1736]">
-                {lo("Kitchen Settings")}
+                {"ຕັ້ງຄ່າຄົວ"}
               </h2>
               <p className="mt-1 text-[12px] font-semibold text-slate-500">
-                {lo("Station filter and display behavior")}
+                {"ກັ່ນຕອງສະຖານີ ແລະ ຮູບແບບການສະແດງ"}
               </p>
             </div>
           </div>
@@ -84,7 +83,7 @@ export function SettingsDrawer({
         <div className="min-h-0 flex-1 space-y-6 overflow-auto bg-[#f7faff] p-5">
           <section className="rounded-2xl border border-blue-100 bg-white p-5 shadow-sm">
             <h3 className="text-[15px] font-black tracking-wide text-[#0b1736] uppercase">
-              {lo("Station Filter")}
+              {"ກັ່ນຕອງສະຖານີ"}
             </h3>
             <div className="mt-4 space-y-3">
               {kitchenStations
@@ -106,7 +105,7 @@ export function SettingsDrawer({
                     >
                       <span className="flex items-center gap-3 text-[14px] font-black">
                         <Icon className="h-5 w-5" strokeWidth={2.3} />
-                        {lo(label)}
+                        {label}
                       </span>
                       {checked ? <Check className="h-5 w-5" strokeWidth={2.4} /> : null}
                     </button>
@@ -117,20 +116,20 @@ export function SettingsDrawer({
 
           <section className="space-y-3">
             <ToggleRow
-              title="Sound Alerts"
-              subtitle="Play sound for every new order"
+              title="ສຽງແຈ້ງເຕືອນ"
+              subtitle="ເປີດສຽງສຳລັບອໍເດີໃໝ່ທຸກຄັ້ງ"
               checked={soundEnabled}
               onChange={onToggleSound}
             />
             <ToggleRow
-              title="Show Item Notes"
-              subtitle="Display modifiers and preparation notes"
+              title="ສະແດງໝາຍເຫດລາຍການ"
+              subtitle="ສະແດງ modifiers ແລະ ໝາຍເຫດການກຽມ"
               checked={settings.showItemNotes}
               onChange={(checked) => onUpdateSettings({ showItemNotes: checked })}
             />
             <ToggleRow
-              title="Show Elapsed Time"
-              subtitle="Highlight waiting time on tickets"
+              title="ສະແດງເວລາລໍຖ້າ"
+              subtitle="ເນັ້ນເວລາລໍຖ້າໃນ ticket"
               checked={settings.showElapsedTime}
               onChange={(checked) => onUpdateSettings({ showElapsedTime: checked })}
             />
@@ -138,7 +137,7 @@ export function SettingsDrawer({
 
           <section className="rounded-2xl border border-blue-100 bg-white p-5 shadow-sm">
             <h3 className="text-[15px] font-black tracking-wide text-[#0b1736] uppercase">
-              {lo("Auto Refresh")}
+              {"ໂຫຼດໃໝ່ອັດຕະໂນມັດ"}
             </h3>
             <div className="mt-4 grid grid-cols-3 gap-3">
               {[5, 10, 15].map((seconds) => (
@@ -165,22 +164,22 @@ export function SettingsDrawer({
 
           <section className="space-y-3">
             <ToggleRow
-              title="Compact Ticket Cards"
-              subtitle="Show denser cards for busy service"
+              title="ບັດອໍເດີແບບກະທັດຮັດ"
+              subtitle="ສະແດງບັດແບບແໜ້ນໃນຊ່ວງວຽກຫຼາຍ"
               checked={settings.density === "compact"}
               onChange={(checked) =>
                 onUpdateSettings({ density: checked ? "compact" : "comfortable" })
               }
             />
             <ToggleRow
-              title="Auto Print Tickets"
-              subtitle="Send tickets to station printer automatically"
+              title="ພິມບິນຄົວອັດຕະໂນມັດ"
+              subtitle="ສົ່ງບິນຄົວໄປ Printer ຂອງສະຖານີອັດຕະໂນມັດ"
               checked={settings.autoPrintTickets}
               onChange={(checked) => onUpdateSettings({ autoPrintTickets: checked })}
             />
             <ToggleRow
-              title="Large Print Text"
-              subtitle="Use larger text on printed kitchen tickets"
+              title="ຕົວອັກສອນພິມຂະໜາດໃຫຍ່"
+              subtitle="ໃຊ້ຕົວອັກສອນໃຫຍ່ໃນ ticket ຄົວທີ່ພິມ"
               checked={settings.largePrintText}
               onChange={(checked) => onUpdateSettings({ largePrintText: checked })}
             />
@@ -194,7 +193,7 @@ export function SettingsDrawer({
             className="flex h-12 items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white text-[14px] font-black text-[#0b1736] transition hover:border-blue-300 hover:bg-blue-50"
           >
             <RotateCcw className="h-5 w-5" strokeWidth={2.35} />
-            {lo("Reset")}
+            {"ຣີເຊັດ"}
           </button>
           <button
             type="button"
@@ -202,7 +201,7 @@ export function SettingsDrawer({
             className="flex h-12 items-center justify-center gap-2 rounded-lg bg-blue-600 text-[14px] font-black text-white transition hover:bg-blue-700"
           >
             <Save className="h-5 w-5" strokeWidth={2.35} />
-            {lo("Save Settings")}
+            {"ບັນທຶກການຕັ້ງຄ່າ"}
           </button>
         </footer>
       </aside>

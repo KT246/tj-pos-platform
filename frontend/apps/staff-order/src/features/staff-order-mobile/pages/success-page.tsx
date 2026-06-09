@@ -14,7 +14,6 @@ import { StaffBottomNav } from "../components/staff-bottom-nav";
 import { StaffMobileShell, StaffScrollArea } from "../components/staff-mobile-shell";
 import { useStaffOrderStore } from "../stores/staff-order-store";
 import { formatMoney, getStaffOrderPath } from "../utils";
-import { lo } from "../utils/lao-labels";
 
 export function StaffSuccessPage({ businessSlug }: { businessSlug: string }) {
   const selectedTableId = useStaffOrderStore((state) => state.selectedTableId);
@@ -45,10 +44,10 @@ export function StaffSuccessPage({ businessSlug }: { businessSlug: string }) {
           </span>
           <span className="min-w-0">
             <span className="block truncate text-[12px] font-black text-slate-950">
-              {lo("Order sent successfully")}
+              {"ສົ່ງອໍເດີສຳເລັດ"}
             </span>
             <span className="mt-0.5 block truncate text-[10px] font-bold text-slate-500">
-              {order.id} {lo("The kitchen and bar have received the order for Table")}{" "}
+              {order.id} {"ຄົວ ແລະ ບາໄດ້ຮັບອໍເດີສຳລັບໂຕະ"}{" "}
               {order.tableId}.
             </span>
           </span>
@@ -68,24 +67,24 @@ export function StaffSuccessPage({ businessSlug }: { businessSlug: string }) {
             </span>
           </div>
           <h2 className="mt-4 text-[21px] font-black text-emerald-600">
-            {lo("Order sent successfully")}
+            {"ສົ່ງອໍເດີສຳເລັດ"}
           </h2>
           <p className="mt-2 max-w-[300px] text-[13px] leading-5 font-bold text-slate-500">
-            {lo("The kitchen and bar have received the order for Table")}{" "}
+            {"ຄົວ ແລະ ບາໄດ້ຮັບອໍເດີສຳລັບໂຕະ"}{" "}
             <span className="font-black text-blue-600">{order.tableId}</span>.
           </p>
         </section>
 
         <section className="rounded-lg border border-blue-100 bg-white px-3 py-2 shadow-[0_9px_22px_rgba(15,23,42,0.045)]">
-          <SuccessRow icon={ReceiptText} label="Order No." value={order.id} />
-          <SuccessRow icon={Table2} label="Table" value={order.tableId} />
-          <SuccessRow icon={ClipboardList} label="items" value={String(order.items)} />
+          <SuccessRow icon={ReceiptText} label="ເລກອໍເດີ" value={order.id} />
+          <SuccessRow icon={Table2} label="ໂຕະ" value={order.tableId} />
+          <SuccessRow icon={ClipboardList} label="ລາຍການ" value={String(order.items)} />
           <SuccessRow
             icon={WalletCards}
-            label="Total"
+            label="ລວມທັງໝົດ"
             value={formatMoney(order.total)}
           />
-          <SuccessRow icon={Clock} label="Sent Time" value="10:24 AM" />
+          <SuccessRow icon={Clock} label="ເວລາສົ່ງ" value="10:24 AM" />
         </section>
 
         <Link
@@ -93,21 +92,21 @@ export function StaffSuccessPage({ businessSlug }: { businessSlug: string }) {
           className="mt-4 flex h-11 cursor-pointer items-center justify-center gap-2 rounded-lg bg-blue-600 text-[13px] font-black text-white shadow-[0_14px_24px_rgba(37,99,235,0.22)] hover:bg-blue-700"
         >
           <BookOpen className="h-4 w-4" />
-          {lo("Back to Menu")}
+          {"ກັບໄປເມນູ"}
         </Link>
         <Link
           to={getStaffOrderPath(businessSlug, "/orders")}
           className="mt-2 flex h-10 cursor-pointer items-center justify-center gap-2 rounded-lg border border-blue-200 text-[13px] font-black text-blue-600 hover:bg-blue-50"
         >
           <ClipboardList className="h-4 w-4" />
-          {lo("View Active Orders")}
+          {"ເບິ່ງອໍເດີທີ່ເປີດຢູ່"}
         </Link>
         <button
           type="button"
           onClick={startNewOrder}
           className="mt-2 flex h-9 w-full cursor-pointer items-center justify-center text-[12px] font-black text-blue-600"
         >
-          {lo("Start New Order")}
+          {"ເລີ່ມອໍເດີໃໝ່"}
         </button>
       </StaffScrollArea>
     </StaffMobileShell>
@@ -127,7 +126,7 @@ function SuccessRow({
     <div className="flex items-center justify-between border-b border-blue-50 py-2.5 last:border-b-0">
       <span className="flex items-center gap-2 text-[12px] font-bold text-slate-500">
         <Icon className="h-4 w-4 text-emerald-600" />
-        {lo(label)}
+        {label}
       </span>
       <span className="text-[13px] font-black text-blue-600">{value}</span>
     </div>

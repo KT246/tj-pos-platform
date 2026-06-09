@@ -47,10 +47,10 @@ type KitchenDisplayActions = {
 };
 
 function assignStaff(ticket: KitchenTicket) {
-  if (ticket.assignedTo !== "Unassigned") return ticket.assignedTo;
-  if (ticket.station === "bar") return "Khamphou V.";
-  if (ticket.station === "bakery") return "Souvanna L.";
-  if (ticket.station === "pass") return "Pass Station";
+  if (ticket.assignedTo !== "ຍັງບໍ່ມອບໝາຍ") return ticket.assignedTo;
+  if (ticket.station === "ບາ") return "Khamphou V.";
+  if (ticket.station === "ເບເກີຣີ") return "Souvanna L.";
+  if (ticket.station === "ຈຸດສົ່ງອາຫານ") return "ສະຖານີສົ່ງອາຫານ";
   return "Sone K.";
 }
 
@@ -69,8 +69,8 @@ function updateTicketStatus(
 export const useKitchenDisplayStore = create<
   KitchenDisplayState & KitchenDisplayActions
 >((set) => ({
-  boardMode: "kitchen",
-  activeStatus: "pending",
+  boardMode: "ຄົວ",
+  activeStatus: "ໃໝ່",
   selectedStation: "all",
   sortMode: "longest",
   soundEnabled: true,
@@ -118,11 +118,11 @@ export const useKitchenDisplayStore = create<
 
       return {
         tickets: updateTicketStatus(state.tickets, ticketId, {
-          status: "preparing",
+          status: "ກຳລັງກຽມ",
           assignedTo: assignStaff(ticket),
-          items: ticket.items.map((item) => ({ ...item, status: "preparing" }))
+          items: ticket.items.map((item) => ({ ...item, status: "ກຳລັງກຽມ" }))
         }),
-        activeStatus: "preparing",
+        activeStatus: "ກຳລັງກຽມ",
         alertOpen: state.alertTicketId === ticketId ? false : state.alertOpen
       };
     }),
@@ -138,10 +138,10 @@ export const useKitchenDisplayStore = create<
 
       return {
         tickets: updateTicketStatus(state.tickets, ticketId, {
-          status: "ready",
+          status: "ພ້ອມ",
           items: ticket.items.map((item) => ({ ...item, status: "done" }))
         }),
-        activeStatus: "ready"
+        activeStatus: "ພ້ອມ"
       };
     }),
   completePickup: (ticketId) =>
@@ -168,11 +168,11 @@ export const useKitchenDisplayStore = create<
 
       return {
         tickets: updateTicketStatus(state.tickets, ticketId, {
-          status: "preparing",
+          status: "ກຳລັງກຽມ",
           completedAt: null,
-          items: ticket.items.map((item) => ({ ...item, status: "preparing" }))
+          items: ticket.items.map((item) => ({ ...item, status: "ກຳລັງກຽມ" }))
         }),
-        activeStatus: "preparing"
+        activeStatus: "ກຳລັງກຽມ"
       };
     }),
   dismissAlert: () => set({ alertOpen: false }),

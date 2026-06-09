@@ -50,7 +50,7 @@ type StockCountRow = {
   name: string;
   branch: string;
   location: string;
-  status: "In Progress" | "Completed" | "Cancelled";
+  status: "ກຳລັງດຳເນີນ" | "ສຳເລັດ" | "ຍົກເລີກ";
   progress: number;
   counted: string;
   countedAt: string;
@@ -65,7 +65,7 @@ type AlertRow = {
   location: string;
   onHand: number;
   minimum: number;
-  status: "Low Stock" | "Critical" | "Expiry Soon" | "Expired";
+  status: "Low Stock" | "ວິກິດ" | "Expiry Soon" | "Expired";
   delta?: string;
   expiryDate?: string;
   daysLeft?: string;
@@ -112,7 +112,7 @@ const retailImages = [
 
 const stockCountKpis: Kpi[] = [
   {
-    label: "In Progress",
+    label: "ກຳລັງດຳເນີນ",
     value: "3",
     change: "Counts",
     tone: "blue",
@@ -121,14 +121,14 @@ const stockCountKpis: Kpi[] = [
   {
     label: "To Count",
     value: "1,245",
-    change: "Items",
+    change: "ສິນຄ້າ",
     tone: "cyan",
     icon: FileText
   },
   {
     label: "Counted",
     value: "865",
-    change: "Items",
+    change: "ສິນຄ້າ",
     tone: "emerald",
     icon: CheckCircle2
   },
@@ -188,7 +188,7 @@ const receivingKpis: Kpi[] = [
     icon: PackageCheck
   },
   {
-    label: "Total Amount",
+    label: "ຍອດລວມ",
     value: "LAK 2,456,000",
     change: "Before discounts",
     tone: "violet",
@@ -269,9 +269,9 @@ const stockCounts: StockCountRow[] = [
   {
     countNo: "SC-250518-001",
     name: "Monthly Count - May 2025",
-    branch: "Main Branch",
-    location: "All Locations",
-    status: "In Progress",
+    branch: "ສາຂາຫຼັກ",
+    location: "ທຸກຕຳແໜ່ງ",
+    status: "ກຳລັງດຳເນີນ",
     progress: 65,
     counted: "845 / 1,300",
     countedAt: "May 18, 2025 10:30 AM",
@@ -281,9 +281,9 @@ const stockCounts: StockCountRow[] = [
   {
     countNo: "SC-250515-002",
     name: "Beverage Section",
-    branch: "Main Branch",
+    branch: "ສາຂາຫຼັກ",
     location: "Aisle 02 - Drinks",
-    status: "Completed",
+    status: "ສຳເລັດ",
     progress: 100,
     counted: "210 / 210",
     countedAt: "May 15, 2025 04:15 PM",
@@ -293,9 +293,9 @@ const stockCounts: StockCountRow[] = [
   {
     countNo: "SC-250510-001",
     name: "Snacks & Confectionery",
-    branch: "Main Branch",
+    branch: "ສາຂາຫຼັກ",
     location: "Aisle 04",
-    status: "Completed",
+    status: "ສຳເລັດ",
     progress: 100,
     counted: "185 / 185",
     countedAt: "May 10, 2025 02:40 PM",
@@ -305,9 +305,9 @@ const stockCounts: StockCountRow[] = [
   {
     countNo: "SC-250508-001",
     name: "Daily Quick Count",
-    branch: "Main Branch",
-    location: "All Locations",
-    status: "Cancelled",
+    branch: "ສາຂາຫຼັກ",
+    location: "ທຸກຕຳແໜ່ງ",
+    status: "ຍົກເລີກ",
     progress: 0,
     counted: "0 / 980",
     countedAt: "May 8, 2025 09:10 AM",
@@ -335,7 +335,7 @@ const lowStockAlerts: AlertRow[] = [
     location: "Aisle 04 - Snacks",
     onHand: 5,
     minimum: 20,
-    status: "Critical",
+    status: "ວິກິດ",
     delta: "-15",
     image: retailImages[1]
   },
@@ -357,7 +357,7 @@ const lowStockAlerts: AlertRow[] = [
     location: "Aisle 01 - Dairy",
     onHand: 6,
     minimum: 15,
-    status: "Critical",
+    status: "ວິກິດ",
     delta: "-9",
     image: retailImages[3]
   },
@@ -495,8 +495,8 @@ const labelItems: LabelItem[] = [
 export function StockCountPage() {
   return (
     <RetailShell
-      active="Stock Count"
-      title="Stock Count"
+      active="ນັບສະຕັອກ"
+      title="ນັບສະຕັອກ"
       description="Create and manage your physical stock counts."
       kpis={stockCountKpis}
       actions={
@@ -531,7 +531,7 @@ export function StockCountPage() {
 export function LowStockExpiryPage() {
   return (
     <RetailShell
-      active="Low Stock / Expiry"
+      active="ສະຕັອກຕ່ຳ / ໃກ້ໝົດອາຍຸ"
       title="Low Stock / Expiry Alerts"
       description="Monitor items that are running low or nearing expiry."
       kpis={alertKpis}
@@ -582,8 +582,8 @@ export function LowStockExpiryPage() {
 export function GoodsReceivingPage() {
   return (
     <RetailShell
-      active="Goods Receiving"
-      title="Goods Receiving"
+      active="ຮັບສິນຄ້າ"
+      title="ຮັບສິນຄ້າ"
       description="Receive purchased goods into your inventory."
       kpis={receivingKpis}
       actions={
@@ -608,8 +608,8 @@ export function GoodsReceivingPage() {
           <div className="grid gap-4 p-4 md:grid-cols-2 xl:grid-cols-4">
             <Field label="PO / Reference" value="PO-250516-007" />
             <Field label="Supplier" value="Lao Beverage Co., Ltd." type="select" />
-            <Field label="Delivery Date" value="May 18, 2025" />
-            <Field label="Expected Date" value="May 18, 2025" />
+            <Field label="Delivery Date" value="18 ພຶດສະພາ 2025" />
+            <Field label="Expected Date" value="18 ພຶດສະພາ 2025" />
           </div>
         </Card>
         <Card title="Received Items">
@@ -618,7 +618,7 @@ export function GoodsReceivingPage() {
               <thead>
                 <tr className="border-b border-blue-100 text-[11px] font-black text-slate-600">
                   {[
-                    "Item",
+                    "ລາຍການ",
                     "SKU / Barcode",
                     "Ordered",
                     "Received",
@@ -668,7 +668,7 @@ export function GoodsReceivingPage() {
             <div className="grid gap-3 p-4 sm:grid-cols-3">
               <TotalTile label="Total Items Received" value="260" />
               <TotalTile label="Total Quantity" value="260" />
-              <TotalTile label="Total Amount" value="LAK 2,456,000" />
+              <TotalTile label="ຍອດລວມ" value="LAK 2,456,000" />
             </div>
           </Card>
           <div className="flex items-center justify-end gap-3">
@@ -687,18 +687,18 @@ export function GoodsReceivingPage() {
 export function ReturnExchangeCounterPage() {
   return (
     <RetailShell
-      active="Returns"
+      active="ຄືນສິນຄ້າ"
       title="Return / Exchange Counter"
       description="Process product returns or exchanges."
       kpis={returnKpis}
-      actions={<Tabs tabs={["Return", "Exchange"]} active="Return" />}
+      actions={<Tabs tabs={["ຄືນສິນຄ້າ", "Exchange"]} active="ຄືນສິນຄ້າ" />}
     >
       <div className="space-y-4">
         <Card>
           <div className="grid gap-4 p-4 md:grid-cols-2 xl:grid-cols-4">
             <Field label="Receipt / Invoice" value="INV-250517-1256" />
-            <Field label="Date" value="May 18, 2025" />
-            <Field label="Customer" value="Khamla Vongsa" />
+            <Field label="Date" value="18 ພຶດສະພາ 2025" />
+            <Field label="ລູກຄ້າ" value="Khamla Vongsa" />
             <Field label="Phone" value="020 5565 1234" />
           </div>
         </Card>
@@ -708,13 +708,13 @@ export function ReturnExchangeCounterPage() {
               <thead>
                 <tr className="border-b border-blue-100 text-[11px] font-black text-slate-600">
                   {[
-                    "Item",
+                    "ລາຍການ",
                     "SKU / Barcode",
                     "Purchased",
                     "Return Qty",
                     "Unit Price",
                     "Reason",
-                    "Amount"
+                    "ຈຳນວນເງິນ"
                   ].map((heading) => (
                     <th key={heading} className="px-3 py-2.5">
                       {heading}
@@ -754,7 +754,7 @@ export function ReturnExchangeCounterPage() {
             <div className="grid gap-4 p-4 md:grid-cols-2">
               <Field label="Return Reason" value="Customer Return" type="select" />
               <Field
-                label="Notes"
+                label="ໝາຍເຫດ"
                 value="Customer requested return."
                 type="textarea"
               />
@@ -763,7 +763,7 @@ export function ReturnExchangeCounterPage() {
           <SummaryCard
             title="Refund Summary"
             items={[
-              { label: "Subtotal", value: "LAK 1,070,000", tone: "slate" },
+              { label: "ຍອດກ່ອນຄ່າບໍລິການ", value: "LAK 1,070,000", tone: "slate" },
               { label: "Discount", value: "LAK 0", tone: "slate" },
               { label: "Total Refund", value: "LAK 1,070,000", tone: "red" }
             ]}
@@ -782,7 +782,7 @@ export function ReturnExchangeCounterPage() {
 export function BarcodeLabelsPage() {
   return (
     <RetailShell
-      active="Barcode Labels"
+      active="ປ້າຍ Barcode"
       title="Shelf Label / Barcode Print"
       description="Generate and print shelf labels with barcodes."
       kpis={labelKpis}
@@ -888,11 +888,11 @@ function RetailShell({
   children
 }: {
   active:
-    | "Stock Count"
-    | "Low Stock / Expiry"
-    | "Goods Receiving"
-    | "Returns"
-    | "Barcode Labels";
+    | "ນັບສະຕັອກ"
+    | "ສະຕັອກຕ່ຳ / ໃກ້ໝົດອາຍຸ"
+    | "ຮັບສິນຄ້າ"
+    | "ຄືນສິນຄ້າ"
+    | "ປ້າຍ Barcode";
   title: string;
   description: string;
   kpis: Kpi[];
@@ -915,11 +915,11 @@ const stockCountColumns: TableColumn<StockCountRow>[] = [
     render: (row) => <span className="text-blue-600">{row.countNo}</span>
   },
   { key: "name", label: "Count Name", render: (row) => row.name },
-  { key: "branch", label: "Branch", render: (row) => row.branch },
+  { key: "branch", label: "ສາຂາ", render: (row) => row.branch },
   { key: "location", label: "Location", render: (row) => row.location },
   {
     key: "status",
-    label: "Status",
+    label: "ສະຖານະ",
     render: (row) => <Badge tone={stockStatusTone(row.status)}>{row.status}</Badge>
   },
   {
@@ -937,16 +937,16 @@ const stockCountColumns: TableColumn<StockCountRow>[] = [
   },
   {
     key: "actions",
-    label: "Actions",
+    label: "ການດຳເນີນການ",
     align: "right",
-    render: () => <IconButton icon={MoreVertical} label="More" tone="slate" />
+    render: () => <IconButton icon={MoreVertical} label="ເພີ່ມເຕີມ" tone="slate" />
   }
 ];
 
 const lowStockColumns: TableColumn<AlertRow>[] = [
   {
     key: "item",
-    label: "Item",
+    label: "ລາຍການ",
     render: (row) => <ItemIdentity title={row.item} image={row.image} size="sm" />
   },
   {
@@ -966,7 +966,7 @@ const lowStockColumns: TableColumn<AlertRow>[] = [
   { key: "minimum", label: "Min. Stock", render: (row) => row.minimum },
   {
     key: "status",
-    label: "Status",
+    label: "ສະຖານະ",
     render: (row) => <Badge tone={alertTone(row.status)}>{row.status}</Badge>
   },
   {
@@ -980,7 +980,7 @@ const lowStockColumns: TableColumn<AlertRow>[] = [
 const expiryColumns: TableColumn<AlertRow>[] = [
   {
     key: "item",
-    label: "Item",
+    label: "ລາຍການ",
     render: (row) => <ItemIdentity title={row.item} image={row.image} size="sm" />
   },
   { key: "sku", label: "SKU / Barcode", render: (row) => row.sku },
@@ -989,7 +989,7 @@ const expiryColumns: TableColumn<AlertRow>[] = [
   { key: "days", label: "Days Left", render: (row) => row.daysLeft },
   {
     key: "status",
-    label: "Status",
+    label: "ສະຖານະ",
     align: "right",
     render: (row) => <Badge tone={alertTone(row.status)}>{row.status}</Badge>
   }
@@ -1110,13 +1110,13 @@ function RetailPagination({ label }: { label: string }) {
 }
 
 function stockStatusTone(status: StockCountRow["status"]) {
-  if (status === "Completed") return "emerald";
-  if (status === "In Progress") return "blue";
+  if (status === "ສຳເລັດ") return "emerald";
+  if (status === "ກຳລັງດຳເນີນ") return "blue";
   return "slate";
 }
 
 function alertTone(status: AlertRow["status"]) {
-  if (status === "Critical" || status === "Expired") return "red";
+  if (status === "ວິກິດ" || status === "Expired") return "red";
   if (status === "Expiry Soon") return "amber";
   return "amber";
 }

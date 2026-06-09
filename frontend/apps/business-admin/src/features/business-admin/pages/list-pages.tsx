@@ -33,7 +33,6 @@ import {
   SummaryCard
 } from "../components/business-admin-primitives";
 import { BusinessAdminLink } from "../components/business-admin-link";
-import { toLaoText } from "../utils/lao-labels";
 import {
   branches,
   customers,
@@ -55,17 +54,17 @@ type Row = string[];
 export function ItemsListPage() {
   return (
     <ListShell
-      active="Items"
-      title="Items"
+      active="ສິນຄ້າ"
+      title="ສິນຄ້າ"
       description="Manage your products, menu items, and services."
       kpis={pageKpis.items}
       search="Search items by name, SKU, or barcode..."
       filters={[
-        "All Categories",
-        "All Statuses",
-        "All Branches",
-        "All Price Types",
-        "All Price Lists"
+        "ທຸກໝວດໝູ່",
+        "ທຸກສະຖານະ",
+        "ທຸກສາຂາ",
+        "ທຸກປະເພດລາຄາ",
+        "ທຸກລາຍການລາຄາ"
       ]}
       primaryAction={
         <CreateButton href="/business-admin/items/create" label="Add Item" />
@@ -92,7 +91,7 @@ export function ItemsListPage() {
 const itemColumns: TableColumn<Row>[] = [
   {
     key: "item",
-    label: "Item",
+    label: "ລາຍການ",
     render: (row) => <ItemIdentity title={row[0]} subtitle={row[1]} image={row[8]} />
   },
   {
@@ -110,7 +109,7 @@ const itemColumns: TableColumn<Row>[] = [
   },
   {
     key: "category",
-    label: "Category",
+    label: "ໝວດໝູ່",
     render: (row) => <Badge tone={categoryTone(row[3])}>{row[3]}</Badge>
   },
   {
@@ -153,11 +152,11 @@ const itemColumns: TableColumn<Row>[] = [
       </span>
     )
   },
-  { key: "status", label: "Status", render: (row) => <Badge>{row[6]}</Badge> },
-  { key: "branch", label: "Branch", render: (row) => row[7] },
+  { key: "status", label: "ສະຖານະ", render: (row) => <Badge>{row[6]}</Badge> },
+  { key: "branch", label: "ສາຂາ", render: (row) => row[7] },
   {
     key: "actions",
-    label: "Actions",
+    label: "ການດຳເນີນການ",
     align: "right",
     render: () => <ActionButtons editHref="/business-admin/items/create" />
   }
@@ -166,17 +165,17 @@ const itemColumns: TableColumn<Row>[] = [
 export function CustomersListPage() {
   return (
     <ListShell
-      active="Customers"
-      title="Customers"
+      active="ລູກຄ້າ"
+      title="ລູກຄ້າ"
       description="Manage retail customers, wholesale customers, resellers, members, and debt balances."
       kpis={pageKpis.customers}
       search="Search customers by name, phone, email or code..."
       filters={[
-        "All Status",
-        "All Customer Types",
-        "All Branches",
-        "All Debt Status",
-        "All Price Lists"
+        "ທຸກສະຖານະ",
+        "ທຸກປະເພດລູກຄ້າ",
+        "ທຸກສາຂາ",
+        "ທຸກສະຖານະໜີ້",
+        "ທຸກລາຍການລາຄາ"
       ]}
       primaryAction={
         <CreateButton href="/business-admin/customers/new" label="Add Customer" />
@@ -198,7 +197,7 @@ const customerColumns: TableColumn<Row>[] = [
   { key: "index", label: "#", render: (_, index) => index + 1 },
   {
     key: "customer",
-    label: "Customer",
+    label: "ລູກຄ້າ",
     render: (row) => <ItemIdentity title={row[0]} subtitle={row[1]} />
   },
   { key: "phone", label: "Phone", render: (row) => row[2] },
@@ -241,7 +240,7 @@ const customerColumns: TableColumn<Row>[] = [
   },
   { key: "points", label: "Points", render: (row) => row[4] },
   { key: "spend", label: "Total Spend", render: (row) => row[5] },
-  { key: "orders", label: "Orders", render: (row) => row[6] },
+  { key: "orders", label: "ອໍເດີ", render: (row) => row[6] },
   {
     key: "lastOrder",
     label: "Last Order",
@@ -249,13 +248,13 @@ const customerColumns: TableColumn<Row>[] = [
   },
   {
     key: "status",
-    label: "Status",
+    label: "ສະຖານະ",
     render: (row, index) => {
       const profile = getCustomerWholesaleProfile(index);
 
       return (
         <div className="space-y-1">
-          <Badge tone={row[7] === "Inactive" ? "slate" : "emerald"}>{row[7]}</Badge>
+          <Badge tone={row[7] === "ປິດໃຊ້" ? "slate" : "emerald"}>{row[7]}</Badge>
           <Badge tone={debtTone(profile.debtStatus)}>{profile.debtStatus}</Badge>
         </div>
       );
@@ -263,7 +262,7 @@ const customerColumns: TableColumn<Row>[] = [
   },
   {
     key: "actions",
-    label: "Actions",
+    label: "ການດຳເນີນການ",
     align: "right",
     render: (_, index) => (
       <ActionButtons viewHref={`/business-admin/customers/${index + 1}`} />
@@ -274,16 +273,16 @@ const customerColumns: TableColumn<Row>[] = [
 export function PromotionsListPage() {
   return (
     <ListShell
-      active="Promotions"
-      title="Promotions"
+      active="ໂປຣໂມຊັນ"
+      title="ໂປຣໂມຊັນ"
       description="Create, manage, and track your promotional campaigns."
       kpis={pageKpis.promotions}
       search="Search by promotion name, code..."
       filters={[
-        "All Types",
-        "All Statuses",
-        "May 12 - May 18, 2025",
-        "All Branches",
+        "ທຸກປະເພດ",
+        "ທຸກສະຖານະ",
+        "12 - 18 ພຶດສະພາ 2025",
+        "ທຸກສາຂາ",
         "All Audiences"
       ]}
       primaryAction={
@@ -317,36 +316,36 @@ const promotionColumns: TableColumn<Row>[] = [
   },
   {
     key: "type",
-    label: "Type",
+    label: "ປະເພດ",
     render: (row) => <Badge tone={categoryTone(row[1])}>{row[1]}</Badge>
   },
   { key: "target", label: "Target", render: (row) => row[2] },
   { key: "discount", label: "Discount", render: (row) => row[3] },
-  { key: "range", label: "Date Range", render: (row) => row[4] },
+  { key: "range", label: "ຊ່ວງວັນທີ", render: (row) => row[4] },
   { key: "usage", label: "Usage", render: (row) => row[5] },
   {
     key: "status",
-    label: "Status",
+    label: "ສະຖານະ",
     render: (row) => <Badge tone={statusTone(row[6])}>{row[6]}</Badge>
   },
-  { key: "branch", label: "Branch", render: (row) => row[7] },
+  { key: "branch", label: "ສາຂາ", render: (row) => row[7] },
   {
     key: "updated",
     label: "Updated At",
     render: (_, index) => `May ${16 - index}, 2025`
   },
-  { key: "actions", label: "Actions", align: "right", render: () => <ActionButtons /> }
+  { key: "actions", label: "ການດຳເນີນການ", align: "right", render: () => <ActionButtons /> }
 ];
 
 export function BranchesListPage() {
   return (
     <ListShell
-      active="Branches"
-      title="Branches"
+      active="ສາຂາ"
+      title="ສາຂາ"
       description="Manage business branches, opening hours, and branch staff."
       kpis={pageKpis.branches}
       search="Search branches by name, city, or manager..."
-      filters={["All Cities", "All Statuses", "All Branch Types"]}
+      filters={["All Cities", "ທຸກສະຖານະ", "All Branch Types"]}
       primaryAction={
         <CreateButton href="/business-admin/branches/create" label="Add Branch" />
       }
@@ -361,23 +360,23 @@ export function BranchesListPage() {
 const branchColumns: TableColumn<Row>[] = [
   {
     key: "branch",
-    label: "Branch",
+    label: "ສາຂາ",
     render: (row) => <ItemIdentity title={row[0]} subtitle={row[1]} />
   },
   { key: "address", label: "Address", render: (row) => row[2] },
   { key: "phone", label: "Phone", render: (row) => row[3] },
   {
     key: "status",
-    label: "Status",
+    label: "ສະຖານະ",
     render: (row) => (
       <Badge tone={row[4] === "Closed" ? "slate" : "emerald"}>{row[4]}</Badge>
     )
   },
   { key: "sales", label: "Weekly Sales", render: (row) => row[5] },
-  { key: "staff", label: "Staff", render: (row) => row[6] },
+  { key: "staff", label: "ພະນັກງານ", render: (row) => row[6] },
   {
     key: "actions",
-    label: "Actions",
+    label: "ການດຳເນີນການ",
     align: "right",
     render: () => <ActionButtons editHref="/business-admin/branches/create" />
   }
@@ -386,12 +385,12 @@ const branchColumns: TableColumn<Row>[] = [
 export function SuppliersListPage() {
   return (
     <ListShell
-      active="Suppliers"
-      title="Suppliers"
+      active="ຜູ້ສະໜອງ"
+      title="ຜູ້ສະໜອງ"
       description="Manage vendors, supplier contacts, balances, and purchase history."
       kpis={pageKpis.suppliers}
       search="Search suppliers by name, phone, or category..."
-      filters={["All Categories", "All Statuses", "All Branches"]}
+      filters={["ທຸກໝວດໝູ່", "ທຸກສະຖານະ", "ທຸກສາຂາ"]}
       primaryAction={
         <CreateButton href="/business-admin/suppliers/create" label="Add Supplier" />
       }
@@ -413,13 +412,13 @@ const supplierColumns: TableColumn<Row>[] = [
   { key: "balance", label: "Open Balance", render: (row) => row[3] },
   {
     key: "status",
-    label: "Status",
+    label: "ສະຖານະ",
     render: (row) => <Badge tone={statusTone(row[4])}>{row[4]}</Badge>
   },
   { key: "last", label: "Last Delivery", render: (row) => row[5] },
   {
     key: "actions",
-    label: "Actions",
+    label: "ການດຳເນີນການ",
     align: "right",
     render: () => <ActionButtons editHref="/business-admin/suppliers/create" />
   }
@@ -428,12 +427,12 @@ const supplierColumns: TableColumn<Row>[] = [
 export function StaffListPage() {
   return (
     <ListShell
-      active="Staff"
-      title="Staff"
+      active="ພະນັກງານ"
+      title="ພະນັກງານ"
       description="Manage employees, roles, shifts, and access permissions."
       kpis={pageKpis.staff}
       search="Search staff by name, role, or branch..."
-      filters={["All Roles", "All Branches", "All Statuses"]}
+      filters={["All Roles", "ທຸກສາຂາ", "ທຸກສະຖານະ"]}
       primaryAction={
         <CreateButton href="/business-admin/staff/new" label="Add Staff" />
       }
@@ -448,10 +447,10 @@ export function StaffListPage() {
 const staffColumns: TableColumn<Row>[] = [
   {
     key: "staff",
-    label: "Staff",
+    label: "ພະນັກງານ",
     render: (row) => <ItemIdentity title={row[0]} subtitle={row[1]} />
   },
-  { key: "branch", label: "Branch", render: (row) => row[2] },
+  { key: "branch", label: "ສາຂາ", render: (row) => row[2] },
   {
     key: "access",
     label: "Access",
@@ -461,7 +460,7 @@ const staffColumns: TableColumn<Row>[] = [
   },
   {
     key: "status",
-    label: "Status",
+    label: "ສະຖານະ",
     render: (row) => (
       <Badge tone={row[4] === "Offline" ? "slate" : "emerald"}>{row[4]}</Badge>
     )
@@ -469,7 +468,7 @@ const staffColumns: TableColumn<Row>[] = [
   { key: "last", label: "Last Active", render: (row) => row[5] },
   {
     key: "actions",
-    label: "Actions",
+    label: "ການດຳເນີນການ",
     align: "right",
     render: (_, index) => (
       <ActionButtons viewHref={`/business-admin/staff/${index + 1}`} />
@@ -480,12 +479,12 @@ const staffColumns: TableColumn<Row>[] = [
 export function StockMovementsPage() {
   return (
     <ListShell
-      active="Stock Movements"
-      title="Stock Movements"
+      active="ການເຄື່ອນໄຫວສະຕັອກ"
+      title="ການເຄື່ອນໄຫວສະຕັອກ"
       description="Track stock in, stock out, transfers, and adjustments."
       kpis={pageKpis.stock}
       search="Search movements by item, reference, or note..."
-      filters={["All Movement Types", "All Branches", "All Statuses"]}
+      filters={["All Movement Types", "ທຸກສາຂາ", "ທຸກສະຖານະ"]}
       primaryAction={<CreateButton href="/business-admin/stock-in" label="Stock In" />}
       rows={stockMovements}
       columns={stockColumns}
@@ -501,28 +500,28 @@ const stockColumns: TableColumn<Row>[] = [
     label: "Reference",
     render: (row) => <span className="text-blue-600">{row[0]}</span>
   },
-  { key: "item", label: "Item", render: (row) => row[1] },
+  { key: "item", label: "ລາຍການ", render: (row) => row[1] },
   {
     key: "type",
-    label: "Type",
+    label: "ປະເພດ",
     render: (row) => <Badge tone={categoryTone(row[2])}>{row[2]}</Badge>
   },
   { key: "qty", label: "Qty", render: (row) => row[3] },
-  { key: "branch", label: "Branch", render: (row) => row[4] },
+  { key: "branch", label: "ສາຂາ", render: (row) => row[4] },
   { key: "note", label: "Note", render: (row) => row[5] },
   { key: "date", label: "Date", render: (row) => row[6] },
-  { key: "actions", label: "Actions", align: "right", render: () => <ActionButtons /> }
+  { key: "actions", label: "ການດຳເນີນການ", align: "right", render: () => <ActionButtons /> }
 ];
 
 export function PurchaseReceiptsPage() {
   return (
     <ListShell
-      active="Suppliers"
+      active="ຜູ້ສະໜອງ"
       title="Purchase Receipts"
       description="Review received supplier orders, costs, and inventory updates."
       kpis={pageKpis.suppliers}
       search="Search purchase receipt number, supplier, or item..."
-      filters={["All Suppliers", "All Statuses", "All Branches"]}
+      filters={["ທຸກຜູ້ສະໜອງ", "ທຸກສະຖານະ", "ທຸກສາຂາ"]}
       primaryAction={
         <CreateButton
           href="/business-admin/purchase-receipts/new"
@@ -551,48 +550,48 @@ const purchaseColumns: TableColumn<Row>[] = [
     )
   },
   { key: "supplier", label: "Supplier", render: (row) => row[1] },
-  { key: "amount", label: "Amount", render: (row) => row[2] },
-  { key: "items", label: "Items", render: (row) => row[3] },
+  { key: "amount", label: "ຈຳນວນເງິນ", render: (row) => row[2] },
+  { key: "items", label: "ສິນຄ້າ", render: (row) => row[3] },
   {
     key: "status",
-    label: "Status",
+    label: "ສະຖານະ",
     render: (row) => <Badge tone={statusTone(row[4])}>{row[4]}</Badge>
   },
   { key: "date", label: "Date", render: (row) => row[5] },
-  { key: "actions", label: "Actions", align: "right", render: () => <ActionButtons /> }
+  { key: "actions", label: "ການດຳເນີນການ", align: "right", render: () => <ActionButtons /> }
 ];
 
 export function CategoriesListPage() {
   return (
     <ListShell
-      active="Categories"
-      title="Categories"
+      active="ໝວດໝູ່"
+      title="ໝວດໝູ່"
       description="Organize menu items and retail products into clear groups."
       kpis={pageKpis.items}
       search="Search categories..."
-      filters={["All Departments", "All Statuses", "All Branches"]}
+      filters={["All Departments", "ທຸກສະຖານະ", "ທຸກສາຂາ"]}
       primaryAction={
         <CreateButton href="/business-admin/categories/create" label="Add Category" />
       }
       rows={[
-        ["Coffee", "82 items", "Active", "All Branches"],
-        ["Food", "96 items", "Active", "All Branches"],
-        ["Drinks", "76 items", "Active", "All Branches"],
-        ["Bakery", "48 items", "Active", "All Branches"],
-        ["Merchandise", "28 items", "Active", "Main Branch"]
+        ["Coffee", "82 items", "ເປີດໃຊ້", "ທຸກສາຂາ"],
+        ["ອາຫານ", "96 items", "ເປີດໃຊ້", "ທຸກສາຂາ"],
+        ["Drinks", "76 items", "ເປີດໃຊ້", "ທຸກສາຂາ"],
+        ["Bakery", "48 items", "ເປີດໃຊ້", "ທຸກສາຂາ"],
+        ["Merchandise", "28 items", "ເປີດໃຊ້", "ສາຂາຫຼັກ"]
       ]}
       columns={[
         {
           key: "name",
-          label: "Category",
+          label: "ໝວດໝູ່",
           render: (row) => <ItemIdentity title={row[0]} />
         },
-        { key: "count", label: "Items", render: (row) => row[1] },
-        { key: "status", label: "Status", render: (row) => <Badge>{row[2]}</Badge> },
-        { key: "branch", label: "Branch", render: (row) => row[3] },
+        { key: "count", label: "ສິນຄ້າ", render: (row) => row[1] },
+        { key: "status", label: "ສະຖານະ", render: (row) => <Badge>{row[2]}</Badge> },
+        { key: "branch", label: "ສາຂາ", render: (row) => row[3] },
         {
           key: "actions",
-          label: "Actions",
+          label: "ການດຳເນີນການ",
           align: "right",
           render: () => <ActionButtons />
         }
@@ -606,18 +605,18 @@ export function CategoriesListPage() {
 export function InventoryOverviewPage() {
   return (
     <ListShell
-      active="Inventory"
+      active="ສະຕັອກ"
       title="Inventory Overview"
       description="Monitor stock value, low stock alerts, and inventory movements."
       kpis={pageKpis.stock}
       search="Search inventory by item or SKU..."
-      filters={["All Categories", "All Branches", "Stock Status"]}
+      filters={["ທຸກໝວດໝູ່", "ທຸກສາຂາ", "Stock Status"]}
       primaryAction={
         <CreateButton href="/business-admin/stock-adjustment" label="Adjust Stock" />
       }
       rows={items}
       columns={itemColumns}
-      right={<GenericRightRail title="Inventory Alerts" icon={Warehouse} />}
+      right={<GenericRightRail title="ແຈ້ງເຕືອນສະຕັອກ" icon={Warehouse} />}
       footerLabel="Showing 1 to 8 of 342 inventory items"
     />
   );
@@ -739,12 +738,12 @@ function ItemsRightRail() {
 function ItemsTopSellingCard() {
   return (
     <Card
-      title="Top Selling Items"
+      title="ສິນຄ້າຂາຍດີ"
       action={<span className="text-xs font-black text-blue-600">View All</span>}
     >
       <div className="space-y-3 p-4">
         {[
-          ["Iced Latte", "K 375,000", "1,250 sold", items[0][8]],
+          ["ລາເຕ້ເຢັນ", "K 375,000", "1,250 sold", items[0][8]],
           ["Hot Cappuccino", "K 286,000", "1,030 sold", items[1][8]],
           ["Larb Chicken", "K 240,000", "890 sold", items[4][8]],
           ["Butter Croissant", "K 198,000", "780 sold", items[2][8]],
@@ -850,8 +849,8 @@ function CustomerOverviewChart() {
         </div>
         <div className="space-y-3 text-xs font-bold text-slate-600">
           {[
-            ["Active", "842 (67.6%)", "bg-emerald-500"],
-            ["Inactive", "248 (19.9%)", "bg-slate-400"],
+            ["ເປີດໃຊ້", "842 (67.6%)", "bg-emerald-500"],
+            ["ປິດໃຊ້", "248 (19.9%)", "bg-slate-400"],
             ["New This Month", "36 (2.9%)", "bg-blue-500"],
             ["VIP Gold", "258 (20.7%)", "bg-orange-500"]
           ].map((item) => (
@@ -935,10 +934,10 @@ function PromotionPerformanceChart() {
         <div className="space-y-3 text-xs font-bold text-slate-600">
           {[
             ["Time-based", "35.2%", "bg-emerald-500"],
-            ["Percentage", "24.7%", "bg-blue-500"],
+            ["ເປີເຊັນ", "24.7%", "bg-blue-500"],
             ["BOGO", "15.3%", "bg-violet-500"],
             ["Fixed Amount", "13.1%", "bg-orange-500"],
-            ["Others", "11.7%", "bg-slate-400"]
+            ["ອື່ນໆ", "11.7%", "bg-slate-400"]
           ].map((item) => (
             <p key={item[0]} className="flex items-center justify-between gap-3">
               <span className="flex items-center gap-2">
@@ -960,8 +959,8 @@ function GenericRightRail({ title, icon: Icon }: { title: string; icon: LucideIc
       <SummaryCard
         title={title}
         items={[
-          { label: "Main Branch", value: "Healthy", tone: "emerald" },
-          { label: "Sihom Branch", value: "Needs review", tone: "amber" },
+          { label: "ສາຂາຫຼັກ", value: "Healthy", tone: "emerald" },
+          { label: "ສາຂາສີຫອມ", value: "Needs review", tone: "amber" },
           { label: "Pakse Branch", value: "Stable", tone: "blue" },
           { label: "Last Sync", value: "10:24 AM", tone: "slate" }
         ]}
@@ -1061,7 +1060,7 @@ function CategoryDonut() {
         <div className="space-y-2 text-xs font-bold text-slate-600">
           {[
             ["Coffee", "24% (82)", "bg-amber-700"],
-            ["Food", "28% (96)", "bg-emerald-500"],
+            ["ອາຫານ", "28% (96)", "bg-emerald-500"],
             ["Drinks", "22% (76)", "bg-blue-500"],
             ["Bakery", "14% (48)", "bg-amber-500"],
             ["Other", "12% (40)", "bg-slate-400"]
@@ -1077,7 +1076,7 @@ function CategoryDonut() {
         </div>
       </div>
       <div className="flex items-center justify-between border-t border-blue-50 px-4 py-3 text-sm font-black">
-        <span>{toLaoText("Total")}</span>
+        <span>{"Total"}</span>
         <span>342</span>
       </div>
     </Card>
@@ -1093,23 +1092,23 @@ function getCustomerWholesaleProfile(index: number) {
 }
 
 function customerTypeTone(value: string) {
-  if (value.includes("Wholesale")) return "emerald";
-  if (value.includes("Reseller")) return "violet";
+  if (value.includes("ຂາຍສົ່ງ")) return "emerald";
+  if (value.includes("ຜູ້ຂາຍຕໍ່")) return "violet";
   if (value.includes("VIP")) return "amber";
   return "blue";
 }
 
 function debtTone(value: string) {
-  if (value === "Debt") return "red";
-  if (value === "Partial") return "amber";
+  if (value === "ຕິດໜີ້") return "red";
+  if (value === "ຈ່າຍບາງສ່ວນ") return "amber";
   return "emerald";
 }
 
 function categoryTone(value: string) {
-  if (value.includes("Coffee") || value.includes("Time")) return "blue";
+  if (value.includes("Coffee") || value.includes("ເວລາ")) return "blue";
   if (
-    value.includes("Food") ||
-    value.includes("Percentage") ||
+    value.includes("ອາຫານ") ||
+    value.includes("ເປີເຊັນ") ||
     value.includes("Stock In")
   )
     return "emerald";
@@ -1130,9 +1129,9 @@ function levelTone(value: string) {
 }
 
 function statusTone(value: string) {
-  if (value.includes("Active") || value.includes("Received")) return "emerald";
-  if (value.includes("Scheduled") || value.includes("Pending")) return "blue";
+  if (value.includes("ເປີດໃຊ້") || value.includes("Received")) return "emerald";
+  if (value.includes("Scheduled") || value.includes("ລໍຖ້າ")) return "blue";
   if (value.includes("Expired") || value.includes("Paused")) return "red";
-  if (value.includes("Partial")) return "amber";
+  if (value.includes("ຈ່າຍບາງສ່ວນ")) return "amber";
   return "slate";
 }

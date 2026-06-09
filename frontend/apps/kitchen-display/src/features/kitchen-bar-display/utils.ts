@@ -74,7 +74,7 @@ export function getVisibleKitchenTickets({
     }
 
     if (sortMode === "priority") {
-      const priorityScore = { High: 2, Normal: 1 };
+      const priorityScore = { ດ່ວນ: 2, ປົກກະຕິ: 1 };
       return (
         priorityScore[right.priority] - priorityScore[left.priority] ||
         right.elapsedMinutes - left.elapsedMinutes
@@ -87,8 +87,8 @@ export function getVisibleKitchenTickets({
 
 export function getKitchenStatusCounts(tickets: KitchenTicket[]) {
   return {
-    pending: tickets.filter((ticket) => ticket.status === "pending").length,
-    preparing: tickets.filter((ticket) => ticket.status === "preparing").length,
-    ready: tickets.filter((ticket) => ticket.status === "ready").length
+    ໃໝ່: tickets.filter((ticket) => ticket.status === "ໃໝ່").length,
+    ກຳລັງກຽມ: tickets.filter((ticket) => ticket.status === "ກຳລັງກຽມ").length,
+    ພ້ອມ: tickets.filter((ticket) => ticket.status === "ພ້ອມ").length
   };
 }

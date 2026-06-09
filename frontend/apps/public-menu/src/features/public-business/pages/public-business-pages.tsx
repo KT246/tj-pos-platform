@@ -23,7 +23,6 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
-import { lo } from "../utils/lao-labels";
 
 type PublicMenuItem = {
   slug: string;
@@ -47,15 +46,15 @@ type PublicCategory = {
 
 const business = {
   name: "TJ Cafe Vientiane",
-  tagline: "Good Coffee, Good Day",
+  tagline: "ກາເຟດີ ມື້ດີ",
   logo: "/brand/tj-pos-mark.png",
   table: "T03",
-  branch: "Lane Xang Avenue",
-  address: "Vientiane Capital, Laos",
+  branch: "ຖະໜົນລ້ານຊ້າງ",
+  address: "ນະຄອນຫຼວງວຽງຈັນ, ລາວ",
   phone: "020 5555 1234",
   email: "info@tjcafe.la",
   website: "www.tjcafe.la",
-  openHours: "Closes 10:00 PM",
+  openHours: "ປິດ 22:00",
   heroImage:
     "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=85",
   storeImage:
@@ -63,130 +62,130 @@ const business = {
 };
 
 const categories: PublicCategory[] = [
-  { id: "all", label: "All", icon: Grid2X2 },
-  { id: "coffee", label: "Coffee", icon: Coffee },
-  { id: "signature", label: "Signature", icon: Star },
-  { id: "tea", label: "Tea", icon: CupSoda },
-  { id: "food", label: "Food", icon: Utensils }
+  { id: "all", label: "ທັງໝົດ", icon: Grid2X2 },
+  { id: "coffee", label: "ກາເຟ", icon: Coffee },
+  { id: "signature", label: "ເມນູແນະນຳ", icon: Star },
+  { id: "tea", label: "ຊາ", icon: CupSoda },
+  { id: "food", label: "ອາຫານ", icon: Utensils }
 ];
 
 const coffeeTabs = [
-  { id: "coffee", label: "All Coffee" },
-  { id: "hot", label: "Hot Coffee" },
-  { id: "iced", label: "Iced Coffee" },
-  { id: "frappe", label: "Frappe" }
+  { id: "coffee", label: "ກາເຟທັງໝົດ" },
+  { id: "hot", label: "ກາເຟຮ້ອນ" },
+  { id: "iced", label: "ກາເຟເຢັນ" },
+  { id: "frappe", label: "ປັ່ນ" }
 ];
 
 const menuItems: PublicMenuItem[] = [
   {
     slug: "iced-latte",
-    name: "Iced Latte",
+    name: "ລາເຕ້ເຢັນ",
     price: "LAK 26,000",
-    description: "Smooth espresso with fresh milk over ice.",
-    category: "Iced Coffee",
+    description: "Espresso ນຸ່ມກັບນົມສົດແລະນ້ຳແຂງ.",
+    category: "ກາເຟເຢັນ",
     image:
       "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=420&q=85",
-    badge: "Best Seller",
+    badge: "ຂາຍດີ",
     size: "16 oz",
-    ingredients: "Espresso, Fresh Milk, Ice",
-    allergens: "Milk"
+    ingredients: "Espresso, ນົມສົດ, ນ້ຳແຂງ",
+    allergens: "ນົມ"
   },
   {
     slug: "americano",
-    name: "Americano",
+    name: "ອາເມຣິກາໂນ",
     price: "LAK 22,000",
-    description: "Rich and bold espresso diluted with hot water.",
-    category: "Hot Coffee",
+    description: "Espresso ເຂັ້ມຂົ້ນຜະສົມນ້ຳຮ້ອນ.",
+    category: "ກາເຟຮ້ອນ",
     image:
       "https://images.unsplash.com/photo-1521302080334-4bebac2763a6?auto=format&fit=crop&w=420&q=85",
     size: "12 oz",
-    ingredients: "Espresso, Hot Water",
-    allergens: "None"
+    ingredients: "Espresso, ນ້ຳຮ້ອນ",
+    allergens: "ບໍ່ມີ"
   },
   {
     slug: "cappuccino",
-    name: "Cappuccino",
+    name: "ຄາປູຊິໂນ",
     price: "LAK 25,000",
-    description: "Espresso with steamed milk and milk foam.",
-    category: "Hot Coffee",
+    description: "Espresso ກັບນົມຮ້ອນ ແລະ ໂຟມນົມ.",
+    category: "ກາເຟຮ້ອນ",
     image:
       "https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=420&q=85",
     size: "12 oz",
-    ingredients: "Espresso, Steamed Milk, Foam",
-    allergens: "Milk"
+    ingredients: "Espresso, ນົມຮ້ອນ, ໂຟມ",
+    allergens: "ນົມ"
   },
   {
     slug: "caramel-macchiato",
-    name: "Caramel Macchiato",
+    name: "ຄາຣາເມວ ມັກຄີອາໂຕ",
     price: "LAK 28,000",
-    description: "Vanilla milk with espresso and caramel drizzle.",
-    category: "Signature",
+    description: "ນົມວານິລາກັບ Espresso ແລະ ຄາຣາເມວ.",
+    category: "ເມນູແນະນຳ",
     image:
       "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=420&q=85",
     size: "16 oz",
-    ingredients: "Espresso, Milk, Vanilla, Caramel",
-    allergens: "Milk"
+    ingredients: "Espresso, ນົມ, ວານິລາ, ຄາຣາເມວ",
+    allergens: "ນົມ"
   },
   {
     slug: "mocha",
-    name: "Mocha",
+    name: "ໂມຄາ",
     price: "LAK 28,000",
-    description: "Chocolate and espresso with steamed milk.",
-    category: "Signature",
+    description: "ຊັອກໂກແລັດ ແລະ Espresso ກັບນົມຮ້ອນ.",
+    category: "ເມນູແນະນຳ",
     image:
       "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=420&q=85",
     size: "16 oz",
-    ingredients: "Espresso, Cocoa, Milk",
-    allergens: "Milk"
+    ingredients: "Espresso, Cocoa, ນົມ",
+    allergens: "ນົມ"
   },
   {
     slug: "matcha-latte",
-    name: "Matcha Latte",
+    name: "ມັດຊະ ລາເຕ້",
     price: "LAK 28,000",
-    description: "Premium matcha with steamed milk.",
-    category: "Tea",
+    description: "Matcha ຄຸນນະພາບກັບນົມຮ້ອນ.",
+    category: "ຊາ",
     image:
       "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=420&q=85",
     size: "16 oz",
-    ingredients: "Matcha, Milk",
-    allergens: "Milk"
+    ingredients: "Matcha, ນົມ",
+    allergens: "ນົມ"
   },
   {
     slug: "hot-latte",
-    name: "Hot Latte",
+    name: "ລາເຕ້ຮ້ອນ",
     price: "LAK 24,000",
-    description: "Espresso with steamed milk.",
-    category: "Hot Coffee",
+    description: "Espresso ກັບນົມຮ້ອນ.",
+    category: "ກາເຟຮ້ອນ",
     image:
       "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=420&q=85",
     size: "12 oz",
-    ingredients: "Espresso, Steamed Milk",
-    allergens: "Milk"
+    ingredients: "Espresso, ນົມຮ້ອນ",
+    allergens: "ນົມ"
   },
   {
     slug: "strawberry-frappe",
-    name: "Strawberry Frappe",
+    name: "ສະຕໍເບີຣີປັ່ນ",
     price: "LAK 30,000",
-    description: "Blended strawberry with milk and ice, topped with whipped cream.",
-    category: "Frappe",
+    description: "ສະຕໍເບີຣີປັ່ນກັບນົມ ແລະ ນ້ຳແຂງ ພ້ອມ whipped cream.",
+    category: "ປັ່ນ",
     image:
       "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=420&q=85",
     size: "16 oz",
-    ingredients: "Strawberry, Milk, Ice, Whipped Cream",
-    allergens: "Milk",
+    ingredients: "ສະຕໍເບີຣີ, ນົມ, ນ້ຳແຂງ, whipped cream",
+    allergens: "ນົມ",
     unavailable: true
   },
   {
     slug: "butter-croissant",
-    name: "Butter Croissant",
+    name: "ຄຣົວຊອງເນີຍ",
     price: "LAK 22,000",
-    description: "Flaky butter croissant baked fresh for coffee pairing.",
-    category: "Food",
+    description: "ຄຣົວຊອງເນີຍອົບສົດ ເໝາະກັບກາເຟ.",
+    category: "ອາຫານ",
     image:
       "https://images.unsplash.com/photo-1623334044303-241021148842?auto=format&fit=crop&w=420&q=85",
-    size: "1 piece",
-    ingredients: "Flour, Butter, Milk, Egg",
-    allergens: "Milk, Egg, Gluten"
+    size: "1 ອັນ",
+    ingredients: "ແປ້ງ, ເນີຍ, ນົມ, ໄຂ່",
+    allergens: "ນົມ, ໄຂ່, Gluten"
   }
 ];
 
@@ -220,26 +219,26 @@ function filterItemsByCategory(category?: string) {
   if (normalized === "all") return menuItems;
   if (normalized === "coffee") {
     return menuItems.filter(
-      (item) => item.category.includes("Coffee") || item.category === "Frappe"
+      (item) => item.category.includes("ກາເຟ") || item.category === "ປັ່ນ"
     );
   }
   if (normalized === "hot") {
-    return menuItems.filter((item) => item.category === "Hot Coffee");
+    return menuItems.filter((item) => item.category === "ກາເຟຮ້ອນ");
   }
   if (normalized === "iced") {
-    return menuItems.filter((item) => item.category === "Iced Coffee");
+    return menuItems.filter((item) => item.category === "ກາເຟເຢັນ");
   }
   if (normalized === "frappe") {
-    return menuItems.filter((item) => item.category === "Frappe");
+    return menuItems.filter((item) => item.category === "ປັ່ນ");
   }
   if (normalized === "tea") {
-    return menuItems.filter((item) => item.category === "Tea");
+    return menuItems.filter((item) => item.category === "ຊາ");
   }
   if (normalized === "signature") {
-    return menuItems.filter((item) => item.category === "Signature");
+    return menuItems.filter((item) => item.category === "ເມນູແນະນຳ");
   }
   if (normalized === "food") {
-    return menuItems.filter((item) => item.category === "Food");
+    return menuItems.filter((item) => item.category === "ອາຫານ");
   }
 
   return menuItems;
@@ -261,12 +260,12 @@ function filterItemsBySearch(items: PublicMenuItem[], query?: string) {
 function menuCategoryTitle(category?: string) {
   const normalized = normalizeCategory(category);
 
-  if (normalized === "all") return "All Menu";
-  if (normalized === "hot") return "Hot Coffee";
-  if (normalized === "iced") return "Iced Coffee";
-  if (normalized === "frappe") return "Frappe";
+  if (normalized === "all") return "ເມນູທັງໝົດ";
+  if (normalized === "hot") return "ກາເຟຮ້ອນ";
+  if (normalized === "iced") return "ກາເຟເຢັນ";
+  if (normalized === "frappe") return "ປັ່ນ";
 
-  return categories.find((item) => item.id === normalized)?.label ?? "Menu";
+  return categories.find((item) => item.id === normalized)?.label ?? "ເມນູ";
 }
 
 function menuHref(businessSlug: string, category?: string) {
@@ -279,7 +278,7 @@ function menuHref(businessSlug: string, category?: string) {
 function PublicMenuFrame({
   children,
   businessSlug,
-  footerText = "This is a digital menu. Please order with our staff."
+  footerText = "ນີ້ແມ່ນເມນູດິຈິຕອນ. ກະລຸນາສັ່ງກັບພະນັກງານ."
 }: {
   children: ReactNode;
   businessSlug?: string;
@@ -292,7 +291,7 @@ function PublicMenuFrame({
           {children}
           <div className="mt-auto pt-5">
             <div className="rounded-xl bg-blue-50 px-4 py-3 text-center text-[11px] leading-5 font-bold text-blue-600">
-            {lo(footerText)}
+            {footerText}
             </div>
           </div>
         </div>
@@ -318,7 +317,7 @@ function BusinessHeader({ businessSlug }: { businessSlug: string }) {
             {businessName(businessSlug)}
           </span>
           <span className="block truncate text-[11px] font-bold text-slate-500">
-            {lo(business.tagline)}
+            {business.tagline}
           </span>
         </span>
       </Link>
@@ -328,21 +327,21 @@ function BusinessHeader({ businessSlug }: { businessSlug: string }) {
           className="inline-flex h-10 items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 text-[12px] font-black text-blue-600 transition hover:border-blue-300 hover:bg-blue-100"
         >
           <Grid2X2 className="h-4 w-4" />
-          {lo("Menu")}
+          {"ເມນູ"}
         </Link>
         <Link
           to={`/b/${businessSlug}/info`}
           className="inline-flex h-10 items-center gap-2 rounded-full border border-blue-100 bg-white px-4 text-[12px] font-black text-[#071633] transition hover:border-blue-300 hover:bg-blue-50"
         >
           <Info className="h-4 w-4" />
-          {lo("Info")}
+          {"ຂໍ້ມູນ"}
         </Link>
         <a
           href={`tel:${business.phone.replace(/\s/g, "")}`}
           className="inline-flex h-10 items-center gap-2 rounded-full border border-blue-100 bg-white px-4 text-[12px] font-black text-[#071633] transition hover:border-blue-300 hover:bg-blue-50"
         >
           <Phone className="h-4 w-4" />
-          {lo("Call")}
+          {"ໂທ"}
         </a>
         {action ?? (
           <button
@@ -372,11 +371,11 @@ function MobilePageBar({
       <Link
         to={backTo}
         className="grid h-10 w-10 place-items-center rounded-full text-[#071633] transition hover:bg-blue-50"
-        aria-label={lo("Back to store")}
+        aria-label={"ກັບໄປໜ້າຮ້ານ"}
       >
         <ArrowLeft className="h-4 w-4" strokeWidth={2.6} />
       </Link>
-      <h1 className="truncate text-center text-[14px] font-black">{lo(title)}</h1>
+      <h1 className="truncate text-center text-[14px] font-black">{title}</h1>
       {action ?? <span />}
     </header>
   );
@@ -410,14 +409,14 @@ function MenuSearch({
         <input
           name="search"
           defaultValue={value}
-          placeholder={lo("Search menu...")}
+          placeholder={"ຄົ້ນຫາເມນູ..."}
           className="h-11 w-full rounded-xl border border-transparent bg-[#f5f7fb] pr-9 pl-10 text-[13px] font-bold text-[#071633] transition outline-none focus:border-blue-300 focus:bg-white focus:ring-4 focus:ring-blue-50"
         />
         {value ? (
           <Link
             to={cancelHref}
             className="absolute top-1/2 right-3 -translate-y-1/2 text-slate-400"
-            aria-label={lo("Clear search")}
+            aria-label={"ລ້າງການຄົ້ນຫາ"}
           >
             <XCircle className="h-4 w-4" />
           </Link>
@@ -425,11 +424,11 @@ function MenuSearch({
       </label>
       {cancel ? (
         <Link to={cancelHref} className="shrink-0 text-[11px] font-black text-blue-600">
-          {lo("Cancel")}
+          {"ຍົກເລີກ"}
         </Link>
       ) : (
         <button type="submit" className="sr-only">
-          {lo("Search")}
+          {"ຄົ້ນຫາ"}
         </button>
       )}
     </form>
@@ -456,7 +455,7 @@ function CategoryTabs({
           }`}
         >
           <Icon className="mb-1 h-5 w-5" strokeWidth={2.35} />
-          {lo(label)}
+          {label}
         </Link>
       ))}
     </div>
@@ -482,7 +481,7 @@ function CoffeeTabs({
               : "border-blue-100 bg-white text-slate-600"
           }`}
         >
-          {lo(tab.label)}
+          {tab.label}
         </Link>
       ))}
     </div>
@@ -492,11 +491,11 @@ function CoffeeTabs({
 function StoreContextCard() {
   return (
     <div className="grid grid-cols-3 gap-1.5">
-      <SmallInfoCard icon={Grid2X2} label="Table" value={business.table} />
-      <SmallInfoCard icon={CalendarDays} label="Dine In" value="Today" />
+      <SmallInfoCard icon={Grid2X2} label="ໂຕະ" value={business.table} />
+      <SmallInfoCard icon={CalendarDays} label="ນັ່ງກິນທີ່ຮ້ານ" value="ມື້ນີ້" />
       <SmallInfoCard
         icon={Clock}
-        label="Open"
+        label="ເປີດ"
         value={business.openHours}
         tone="green"
       />
@@ -524,14 +523,14 @@ function SmallInfoCard({
         />
         <div className="min-w-0">
           <div className="truncate text-[8px] leading-3 font-bold text-slate-500">
-            {lo(label)}
+            {label}
           </div>
           <div
             className={`truncate text-[9.5px] leading-3 font-black ${
               tone === "green" ? "text-emerald-600" : "text-[#071633]"
             }`}
           >
-            {lo(value)}
+            {value}
           </div>
         </div>
       </div>
@@ -550,10 +549,10 @@ function HeroCard() {
       <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/25 to-transparent" />
       <div className="absolute top-6 left-4 max-w-[210px] text-white">
         <h1 className="text-[22px] leading-tight font-black">
-          {lo("Freshly brewed for you")}
+          {"ຊົງສົດໃໝ່ເພື່ອທ່ານ"}
         </h1>
         <p className="mt-2 text-[11px] leading-4 font-bold">
-          {lo("Quality ingredients, great taste.")}
+          {"ວັດຖຸດິບດີ ລົດຊາດດີ."}
         </p>
       </div>
     </div>
@@ -582,22 +581,22 @@ function MenuListItem({
         />
         {item.unavailable ? (
           <div className="absolute inset-0 grid place-items-center bg-white/65 text-[11px] font-black text-red-600">
-            {lo("Out of Stock")}
+            {"ສິນຄ້າໝົດ"}
           </div>
         ) : null}
       </div>
       <div className="min-w-0 py-1">
         <div className="flex items-start justify-between gap-2">
           <h2 className="truncate text-[13px] font-black">
-            {lo(item.name)}
+            {item.name}
           </h2>
           {item.unavailable ? (
             <span className="shrink-0 rounded-md bg-red-50 px-2 py-1 text-[9px] font-black text-red-600">
-              {lo("Out")}
+              {"ໝົດ"}
             </span>
           ) : item.badge ? (
             <span className="shrink-0 rounded-md bg-orange-50 px-2 py-1 text-[9px] font-black text-orange-500">
-              {lo(item.badge)}
+              {item.badge}
             </span>
           ) : null}
         </div>
@@ -606,7 +605,7 @@ function MenuListItem({
             compact ? "line-clamp-2" : ""
           }`}
         >
-          {lo(item.description)}
+          {item.description}
         </p>
         <p
           className={`mt-2 text-[12px] font-black ${
@@ -638,21 +637,21 @@ function MobileBottomNav({ businessSlug }: { businessSlug: string }) {
         className={`${baseClass} ${isMenuActive ? activeClass : inactiveClass}`}
       >
         <Grid2X2 className="h-4 w-4" />
-        {lo("Menu")}
+        {"ເມນູ"}
       </Link>
       <Link
         to={`/b/${businessSlug}/info`}
         className={`${baseClass} ${isInfoActive ? activeClass : inactiveClass}`}
       >
         <Info className="h-4 w-4" />
-        {lo("Info")}
+        {"ຂໍ້ມູນ"}
       </Link>
       <a
         href={`tel:${business.phone.replace(/\s/g, "")}`}
         className={`${baseClass} ${inactiveClass}`}
       >
         <Phone className="h-4 w-4" />
-        {lo("Call Staff")}
+        {"ເອີ້ນພະນັກງານ"}
       </a>
       </div>
     </nav>
@@ -670,18 +669,18 @@ export function PublicBusinessLanding({ businessSlug }: { businessSlug: string }
       </section>
       <section className="mt-5">
         <div className="flex items-center justify-between gap-4">
-          <h2 className="text-[14px] font-black">{lo("Categories")}</h2>
+          <h2 className="text-[14px] font-black">{"ໝວດໝູ່"}</h2>
           <Link
             to={`/b/${businessSlug}/menu`}
             className="text-[10px] font-black text-blue-600"
           >
-            {lo("View all")}
+            {"ເບິ່ງທັງໝົດ"}
           </Link>
         </div>
         <CategoryTabs businessSlug={businessSlug} />
       </section>
       <section className="mt-5">
-        <h2 className="text-[14px] font-black">{lo("Popular Picks")}</h2>
+        <h2 className="text-[14px] font-black">{"ເມນູຍອດນິຍົມ"}</h2>
         <div className="mt-3 grid gap-3">
           {menuItems.slice(0, 3).map((item) => (
             <MenuListItem
@@ -725,7 +724,7 @@ export function PublicMenuPage({
           <Link
             to={`/b/${businessSlug}/menu?search=latte`}
             className="grid h-10 w-10 place-items-center rounded-full bg-blue-50 text-[#071633] transition hover:bg-blue-100"
-            aria-label={lo("Search")}
+            aria-label={"ຄົ້ນຫາ"}
           >
             <Search className="h-4 w-4" strokeWidth={2.4} />
           </Link>
@@ -753,9 +752,9 @@ export function PublicMenuPage({
         ))}
         {visibleItems.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-blue-200 bg-blue-50 px-4 py-8 text-center">
-            <p className="text-[14px] font-black text-[#071633]">{lo("No items available")}</p>
+            <p className="text-[14px] font-black text-[#071633]">{"ບໍ່ມີລາຍການ"}</p>
             <p className="mt-2 text-[12px] font-bold text-slate-500">
-              {lo("Please choose another category.")}
+              {"ກະລຸນາເລືອກໝວດໝູ່ອື່ນ."}
             </p>
           </div>
         ) : null}
@@ -786,7 +785,7 @@ export function PublicMenuItemPage({
           <button
             type="button"
             className="grid h-10 w-10 place-items-center rounded-full text-[#071633] transition hover:bg-blue-50"
-            aria-label={lo("Share item")}
+            aria-label={"ແຊຣ໌ລາຍການ"}
           >
             <Share2 className="h-4 w-4" strokeWidth={2.4} />
           </button>
@@ -802,32 +801,32 @@ export function PublicMenuItemPage({
           />
           {item.badge ? (
             <span className="absolute top-4 right-4 rounded-full bg-orange-50 px-3 py-1.5 text-[11px] font-black text-orange-500 shadow-sm">
-              {lo(item.badge)}
+              {item.badge}
             </span>
           ) : null}
         </div>
 
         <div>
           <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-[11px] font-black text-blue-600">
-            {lo(item.category)}
+            {item.category}
           </span>
           <h1 className="mt-3 text-[24px] leading-tight font-black">
-            {lo(item.name)}
+            {item.name}
           </h1>
           <p className="mt-2 text-[18px] font-black text-blue-600">{item.price}</p>
           <p className="mt-3 text-[12px] leading-5 font-semibold text-slate-600">
-            {lo(item.description)} {lo("A perfect balance of bold and creamy.")}
+            {item.description} {"ສົມດຸນລົດຊາດເຂັ້ມແລະນຸ່ມ."}
           </p>
 
           <div className="mt-5 divide-y divide-blue-100 rounded-2xl border border-blue-100 bg-white">
-            <DetailRow icon={Coffee} label="Category" value={item.category} />
-            <DetailRow icon={CalendarDays} label="Size" value={item.size} />
-            <DetailRow icon={Store} label="Ingredients" value={item.ingredients} />
-            <DetailRow icon={Info} label="Allergens" value={item.allergens} />
+            <DetailRow icon={Coffee} label="ໝວດໝູ່" value={item.category} />
+            <DetailRow icon={CalendarDays} label="ຂະໜາດ" value={item.size} />
+            <DetailRow icon={Store} label="ສ່ວນປະກອບ" value={item.ingredients} />
+            <DetailRow icon={Info} label="ສານກໍ່ແພ້" value={item.allergens} />
           </div>
 
           <div className="mt-4 rounded-xl border border-blue-100 bg-blue-50 px-4 py-3 text-[11px] leading-5 font-bold text-blue-600">
-            {lo("This is a digital menu item. Please place your order with our staff.")}
+            {"ນີ້ແມ່ນເມນູດິຈິຕອນ. ກະລຸນາສັ່ງກັບພະນັກງານ."}
           </div>
         </div>
       </section>
@@ -845,13 +844,13 @@ function PublicUnavailableItemPage({
   return (
     <PublicMenuFrame businessSlug={businessSlug}>
       <MobilePageBar
-        title="Out of Stock"
+        title="ສິນຄ້າໝົດ"
         backTo={`/b/${businessSlug}/menu`}
         action={
           <button
             type="button"
             className="grid h-10 w-10 place-items-center rounded-full text-[#071633] transition hover:bg-blue-50"
-            aria-label={lo("Share item")}
+            aria-label={"ແຊຣ໌ລາຍການ"}
           >
             <Share2 className="h-4 w-4" strokeWidth={2.4} />
           </button>
@@ -868,26 +867,26 @@ function PublicUnavailableItemPage({
           <div className="absolute inset-0 grid place-items-center bg-white/62">
             <div className="grid place-items-center text-red-500">
               <XCircle className="h-12 w-12" strokeWidth={2.2} />
-              <span className="mt-2 text-[18px] font-black">{lo("Out of Stock")}</span>
+              <span className="mt-2 text-[18px] font-black">{"ສິນຄ້າໝົດ"}</span>
             </div>
           </div>
         </div>
 
         <div>
           <span className="inline-flex rounded-full bg-red-50 px-3 py-1 text-[11px] font-black text-red-600">
-            {lo("Temporarily unavailable")}
+            {"ຍັງບໍ່ພ້ອມຂາຍຊົ່ວຄາວ"}
           </span>
           <h1 className="mt-3 text-[24px] leading-tight font-black">
-            {lo(item.name)}
+            {item.name}
           </h1>
           <p className="mt-2 text-[18px] font-black text-slate-400 line-through">
             {item.price}
           </p>
           <p className="mt-3 text-[12px] leading-5 font-semibold text-slate-600">
-            {lo(item.description)}
+            {item.description}
           </p>
           <div className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-[11px] leading-5 font-bold text-red-600">
-            {lo("Sorry, this item is currently out of stock. Please try another item.")}
+            {"ຂໍອະໄພ, ລາຍການນີ້ໝົດຊົ່ວຄາວ. ກະລຸນາເລືອກລາຍການອື່ນ."}
           </div>
         </div>
       </section>
@@ -907,9 +906,9 @@ function DetailRow({
   return (
     <div className="grid grid-cols-[28px_minmax(80px,120px)_minmax(0,1fr)] items-center gap-2 px-4 py-3">
       <Icon className="h-4 w-4 text-slate-500" />
-      <span className="text-[12px] font-bold text-slate-500">{lo(label)}</span>
+      <span className="text-[12px] font-bold text-slate-500">{label}</span>
       <span className="text-right text-[12px] font-black break-words text-[#071633]">
-        {lo(value)}
+        {value}
       </span>
     </div>
   );
@@ -917,8 +916,8 @@ function DetailRow({
 
 export function PublicInfoPage({ businessSlug }: { businessSlug: string }) {
   return (
-    <PublicMenuFrame businessSlug={businessSlug} footerText="Thank you for visiting us!">
-      <MobilePageBar title="Store Info" backTo={`/b/${businessSlug}`} />
+    <PublicMenuFrame businessSlug={businessSlug} footerText="ຂອບໃຈທີ່ມາໃຊ້ບໍລິການ!">
+      <MobilePageBar title="ຂໍ້ມູນຮ້ານ" backTo={`/b/${businessSlug}`} />
       <section className="mt-4 space-y-4">
         <div className="rounded-2xl border border-blue-100 bg-white p-4 shadow-sm">
           <div className="flex items-center gap-4">
@@ -931,13 +930,13 @@ export function PublicInfoPage({ businessSlug }: { businessSlug: string }) {
               <h1 className="text-[20px] leading-tight font-black">
                 {businessName(businessSlug)}
               </h1>
-              <p className="text-[11px] font-bold text-slate-500">{lo(business.tagline)}</p>
+              <p className="text-[11px] font-bold text-slate-500">{business.tagline}</p>
             </div>
           </div>
           <div className="mt-5 space-y-3">
             <ContactRow
               icon={MapPin}
-              text={`${lo(business.branch)}, ${lo(business.address)}`}
+              text={`${business.branch}, ${business.address}`}
             />
             <ContactRow icon={Phone} text={business.phone} />
             <ContactRow icon={Mail} text={business.email} />
@@ -952,22 +951,22 @@ export function PublicInfoPage({ businessSlug }: { businessSlug: string }) {
 
         <div className="space-y-3">
           <div className="rounded-2xl border border-blue-100 bg-white p-4 shadow-sm">
-            <h2 className="text-[15px] font-black">{lo("Opening Hours")}</h2>
+            <h2 className="text-[15px] font-black">{"ເວລາເປີດຮ້ານ"}</h2>
             <div className="mt-4 space-y-3 text-[11px] font-bold">
               <div className="flex justify-between gap-4">
-                <span>{lo("Monday - Friday")}</span>
+                <span>{"ຈັນ - ສຸກ"}</span>
                 <span>6:30 AM - 10:00 PM</span>
               </div>
               <div className="flex justify-between gap-4">
-                <span>{lo("Saturday - Sunday")}</span>
+                <span>{"ເສົາ - ອາທິດ"}</span>
                 <span>6:30 AM - 11:00 PM</span>
               </div>
             </div>
           </div>
           <div className="rounded-2xl border border-blue-100 bg-white p-4 shadow-sm">
-            <h2 className="text-[15px] font-black">{lo("About Us")}</h2>
+            <h2 className="text-[15px] font-black">{"ກ່ຽວກັບຮ້ານ"}</h2>
             <p className="mt-2 text-[12px] leading-5 font-semibold text-slate-600">
-              {lo("TJ Cafe Vientiane serves quality coffee, delicious drinks, and tasty food in a cozy and welcoming atmosphere.")}
+              {"TJ Cafe Vientiane ໃຫ້ບໍລິການກາເຟຄຸນນະພາບ, ເຄື່ອງດື່ມອະລ່ອຍ ແລະ ອາຫານລົດຊາດດີ ໃນບັນຍາກາດອົບອຸ່ນ."}
             </p>
             <img
               src={business.storeImage}
@@ -980,11 +979,11 @@ export function PublicInfoPage({ businessSlug }: { businessSlug: string }) {
       <section className="mt-3 grid gap-3">
         <InfoPanel
           icon={Wifi}
-          title="Facilities"
-          text="Free Wi-Fi, Power Outlets, Air Condition"
+          title="ສິ່ງອຳນວຍຄວາມສະດວກ"
+          text="Wi-Fi ຟຣີ, ປັກໄຟ, ແອເຢັນ"
         />
-        <InfoPanel icon={Store} title="Payment" text="Cash, Card, LAK QR" />
-        <InfoPanel icon={Info} title="Note" text="Prices are inclusive of VAT." />
+        <InfoPanel icon={Store} title="ການຊຳລະ" text="ເງິນສົດ, ບັດ, LAK QR" />
+        <InfoPanel icon={Info} title="ໝາຍເຫດ" text="ລາຄາລວມ VAT ແລ້ວ." />
       </section>
     </PublicMenuFrame>
   );
@@ -1035,9 +1034,9 @@ function InfoPanel({
       <div className="flex min-w-0 items-center gap-3">
         <Icon className="h-4 w-4 shrink-0 text-blue-600" />
         <span className="min-w-0">
-          <span className="block text-[12px] font-black">{lo(title)}</span>
+          <span className="block text-[12px] font-black">{title}</span>
           <span className="block truncate text-[11px] font-semibold text-slate-500">
-            {lo(text)}
+            {text}
           </span>
         </span>
       </div>
@@ -1050,16 +1049,16 @@ export function PublicBookingPage({ businessSlug }: { businessSlug: string }) {
   return (
     <PublicMenuFrame
       businessSlug={businessSlug}
-      footerText="Please contact staff to confirm booking availability."
+      footerText="ກະລຸນາຕິດຕໍ່ພະນັກງານເພື່ອຢືນຢັນການຈອງ."
     >
-      <MobilePageBar title="Booking Request" backTo={`/b/${businessSlug}`} />
+      <MobilePageBar title="ຄຳຂໍຈອງ" backTo={`/b/${businessSlug}`} />
       <div className="mt-4 rounded-2xl border border-blue-100 bg-white p-5 shadow-sm">
         <CalendarDays className="h-12 w-12 text-blue-600" />
         <h1 className="mt-5 text-[24px] leading-tight font-black">
-          {lo("Booking Request")}
+          {"ຄຳຂໍຈອງ"}
         </h1>
         <p className="mt-3 text-[12px] leading-5 font-semibold text-slate-600">
-          {lo("Booking can be enabled for supported businesses. This public menu stays view-only and does not create orders or payments.")}
+          {"ການຈອງສາມາດເປີດໃຊ້ສຳລັບທຸລະກິດທີ່ຮອງຮັບ. ເມນູ public ນີ້ໃຊ້ເບິ່ງເທົ່ານັ້ນ ບໍ່ສ້າງອໍເດີ ຫຼື ການຊຳລະ."}
         </p>
       </div>
     </PublicMenuFrame>
@@ -1077,13 +1076,13 @@ export function PublicQrPage({ qrCode }: { qrCode: string }) {
         <p className="mt-4 text-[12px] font-black text-blue-600">QR Code</p>
         <h1 className="mt-2 text-[24px] font-black">{qrCode}</h1>
         <p className="mt-3 text-[12px] leading-5 font-semibold text-slate-600">
-          {lo("This QR opens the linked public menu for table")} {business.table}.
+          {"QR ນີ້ເປີດເມນູ public ທີ່ຜູກກັບໂຕະ"} {business.table}.
         </p>
         <Link
           to={`/b/${businessSlug}/menu`}
           className="mt-6 inline-flex h-12 items-center justify-center rounded-full bg-blue-600 px-6 text-[13px] font-black text-white transition hover:bg-blue-700"
         >
-          {lo("Open linked menu")}
+          {"ເປີດເມນູທີ່ຜູກໄວ້"}
         </Link>
       </div>
     </PublicMenuFrame>
@@ -1113,7 +1112,7 @@ export function PublicSearchResultsPage({
           className="mt-0"
         />
         <p className="mt-3 text-[11px] font-bold text-slate-500">
-          {results.length} {lo("results found")}
+          {results.length} {"ຜົນການຄົ້ນຫາ"}
         </p>
       </section>
       <div className="mt-3 grid gap-3">
@@ -1128,9 +1127,9 @@ export function PublicSearchResultsPage({
         {results.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-blue-200 bg-blue-50 px-4 py-10 text-center">
             <Search className="mx-auto h-8 w-8 text-blue-500" />
-            <p className="mt-3 text-[14px] font-black text-[#071633]">{lo("No menu found")}</p>
+            <p className="mt-3 text-[14px] font-black text-[#071633]">{"ບໍ່ພົບເມນູ"}</p>
             <p className="mt-2 text-[12px] font-bold text-slate-500">
-              {lo("Try another keyword or clear the search.")}
+              {"ລອງຄຳຄົ້ນຫາອື່ນ ຫຼື ລ້າງການຄົ້ນຫາ."}
             </p>
           </div>
         ) : null}
