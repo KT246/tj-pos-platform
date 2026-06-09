@@ -2,13 +2,12 @@ import { ClipboardList, Table2, UserCircle, ClipboardCheck } from "lucide-react"
 import { Link } from "react-router-dom";
 
 import { getStaffOrderPath } from "../utils";
-import { lo } from "../utils/lao-labels";
 
 const navItems = [
-  { id: "tables", label: "Tables", icon: Table2, path: "/tables" },
-  { id: "menu", label: "Menu", icon: ClipboardCheck, path: "/table/T03" },
-  { id: "orders", label: "Orders", icon: ClipboardList, path: "/orders" },
-  { id: "profile", label: "Profile", icon: UserCircle, path: "/profile" }
+  { id: "tables", label: "ໂຕະ", icon: Table2, path: "/tables" },
+  { id: "menu", label: "ເມນູ", icon: ClipboardCheck, path: "/table/T03" },
+  { id: "orders", label: "ອໍເດີ", icon: ClipboardList, path: "/orders" },
+  { id: "profile", label: "ໂປຣໄຟລ໌", icon: UserCircle, path: "/profile" }
 ];
 
 export function StaffBottomNav({
@@ -52,7 +51,7 @@ export function StaffBottomNav({
             {item.id === "orders" ? (
               <span className="absolute top-2 right-[34%] h-2 w-2 rounded-full bg-red-500" />
             ) : null}
-            {lo(item.label)}
+            {item.label}
           </Link>
         );
       })}

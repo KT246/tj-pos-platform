@@ -63,7 +63,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
               </span>
             </button>
             <Link
-              href="/platform-admin/businesses/create"
+              href="/platform-admin/ທຸລະກິດ/create"
               className="font900 hidden h-10 items-center gap-2 rounded-md bg-blue-600 px-5 text-sm text-white shadow-[0_8px_20px_rgba(13,91,255,0.22)] hover:bg-blue-700 md:inline-flex"
             >
               <Plus className="h-4 w-4" />

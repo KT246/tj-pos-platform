@@ -9,7 +9,6 @@ import {
 } from "../data/staff-order-data";
 import type { StaffOrderLine, StaffOrderProduct, StaffOrderRecord } from "../types";
 import { getStaffCartSummary } from "../utils";
-import { lo } from "../utils/lao-labels";
 
 type StaffOrderState = {
   selectedBranch: string;
@@ -61,11 +60,11 @@ function createLine(product: StaffOrderProduct): StaffOrderLine {
     price: product.price,
     quantity: 1,
     image: product.image,
-    size: "Regular Size",
-    milk: product.category === "coffee" ? "Full Cream Milk" : "-",
-    sugar: product.category === "coffee" || product.category === "tea" ? "Normal" : "-",
+    size: "ຂະໜາດປົກກະຕິ",
+    milk: product.category === "ກາເຟ" ? "ນົມ Full Cream" : "-",
+    sugar: product.category === "ກາເຟ" || product.category === "ຊາ" ? "ປົກກະຕິ" : "-",
     ice:
-      product.category === "coffee" || product.category === "tea" ? "Regular Ice" : "-"
+      product.category === "ກາເຟ" || product.category === "ຊາ" ? "ນ້ຳກ້ອນປົກກະຕິ" : "-"
   };
 }
 
@@ -101,7 +100,7 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
         const existing = state.cart.find((line) => line.productId === product.id);
 
         if (existing) {
-          showStaffOrderNotice(`${lo(product.name)} ຖືກເພີ່ມແລ້ວ.`, "success");
+          showStaffOrderNotice(`${product.name} ຖືກເພີ່ມແລ້ວ.`, "success");
 
           return {
             cart: state.cart.map((line) =>
@@ -110,7 +109,7 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
           };
         }
 
-        showStaffOrderNotice(`${lo(product.name)} ຖືກເພີ່ມແລ້ວ.`, "success");
+        showStaffOrderNotice(`${product.name} ຖືກເພີ່ມແລ້ວ.`, "success");
 
         return {
           cart: [...state.cart, createLine(product)]
@@ -118,7 +117,7 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
       }),
     addCustomizedProduct: (product, options) =>
       set((state) => {
-        showStaffOrderNotice(`${lo(product.name)} ຖືກປັບແຕ່ງ ແລະ ເພີ່ມແລ້ວ.`, "success");
+        showStaffOrderNotice(`${product.name} ຖືກປັບແຕ່ງ ແລະ ເພີ່ມແລ້ວ.`, "success");
 
         return {
           cart: [...state.cart, { ...createLine(product), ...options }]
@@ -160,11 +159,11 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
           id: createOrderId(state.activeOrders),
           tableId: state.selectedTableId,
           guests: state.guests,
-          status: "Sent",
+          status: "ສົ່ງແລ້ວ",
           items: summary.itemCount,
           total: summary.total,
           elapsed: "Just now",
-          type: "Dine In",
+          type: "ນັ່ງກິນທີ່ຮ້ານ",
           lines: cloneLines(state.cart)
         };
 
@@ -193,7 +192,7 @@ export const useStaffOrderStore = create<StaffOrderState & StaffOrderActions>(
 
         return {
           activeOrders: state.activeOrders.map((order) =>
-            order.id === orderId ? { ...order, status: "Waiting Bill" } : order
+            order.id === orderId ? { ...order, status: "ລໍຖ້າອອກບິນ" } : order
           )
         };
       }),

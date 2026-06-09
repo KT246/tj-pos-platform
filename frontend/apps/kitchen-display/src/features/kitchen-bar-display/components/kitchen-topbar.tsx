@@ -12,7 +12,6 @@ import {
 
 import { kitchenBusiness, kitchenStations } from "../data/kitchen-display-data";
 import type { KitchenBoardMode, KitchenStationId } from "../types";
-import { lo } from "../utils/lao-labels";
 
 type KitchenTopbarProps = {
   mode: KitchenBoardMode;
@@ -51,7 +50,7 @@ export function KitchenTopbar({
           <div className="hidden shrink-0 items-center gap-3 text-[#0b1736] lg:flex">
             <ChefHat className="h-6 w-6 text-blue-600" strokeWidth={2.4} />
             <h1 className="whitespace-nowrap text-[18px] font-black 2xl:text-[19px]">
-              {mode === "bar" ? "ຈໍບາ" : "ແດຊບອດຄົວ"}
+              {mode === "ບາ" ? "ຈໍບາ" : "ແດຊບອດຄົວ"}
             </h1>
           </div>
         </div>
@@ -94,7 +93,7 @@ export function KitchenTopbar({
             >
               {kitchenStations.map((station) => (
                 <option key={station.id} value={station.id}>
-                  {lo(station.label)}
+                  {station.label}
                 </option>
               ))}
             </select>
@@ -142,7 +141,7 @@ export function KitchenTopbar({
                 ເຊື່ອມຕໍ່ແລ້ວ
               </div>
               <div className="text-[11px] font-semibold text-slate-500">
-                {lo("Auto Refresh")} {autoRefreshSeconds}s
+                {"ໂຫຼດໃໝ່ອັດຕະໂນມັດ"} {autoRefreshSeconds}s
               </div>
             </div>
           </div>

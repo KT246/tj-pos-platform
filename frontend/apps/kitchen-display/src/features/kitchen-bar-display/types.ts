@@ -1,21 +1,21 @@
 import type { LucideIcon } from "lucide-react";
 
-export type KitchenBoardMode = "kitchen" | "bar";
+export type KitchenBoardMode = "ຄົວ" | "ບາ";
 
 export type KitchenTicketStatus =
-  | "pending"
-  | "preparing"
-  | "ready"
+  | "ໃໝ່"
+  | "ກຳລັງກຽມ"
+  | "ພ້ອມ"
   | "done"
   | "cancelled";
 
 export type KitchenVisibleStatus = Exclude<KitchenTicketStatus, "done" | "cancelled">;
 
-export type KitchenStationId = "all" | "kitchen" | "bar" | "bakery" | "pass";
+export type KitchenStationId = "all" | "ຄົວ" | "ບາ" | "ເບເກີຣີ" | "ຈຸດສົ່ງອາຫານ";
 
-export type KitchenPriority = "High" | "Normal";
+export type KitchenPriority = "ດ່ວນ" | "ປົກກະຕິ";
 
-export type KitchenOrderType = "Dine In" | "Take Away";
+export type KitchenOrderType = "ນັ່ງກິນທີ່ຮ້ານ" | "ສັ່ງກັບບ້ານ";
 
 export type KitchenSortMode = "longest" | "newest" | "priority";
 
@@ -43,7 +43,7 @@ export type KitchenTicketItem = {
   note?: string;
   modifiers?: string[];
   unitPrice: number;
-  status: "pending" | "preparing" | "done" | "cancelled";
+  status: "ໃໝ່" | "ກຳລັງກຽມ" | "done" | "cancelled";
 };
 
 export type KitchenTicket = {

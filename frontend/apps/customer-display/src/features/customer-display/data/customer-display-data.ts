@@ -16,7 +16,7 @@ export const customerBusinessBrand: CustomerBusinessBrand = {
   name: "TJ POS",
   logo: "/terminal-logo.png",
   branch: "TJ Cafe Vientiane",
-  status: "Ready"
+  status: "ພ້ອມ"
 };
 
 export const customerDisplayDevice: CustomerDisplayDevice = {
@@ -30,12 +30,12 @@ export const customerDisplayDevice: CustomerDisplayDevice = {
 export const customerDisplayOrder: CustomerDisplayOrder = {
   id: "#ORD-1058",
   customer: "Somchai P.",
-  table: "Counter",
+  table: "ເຄົາເຕີ",
   paymentMethod: "qr-code",
   lines: [
     {
       id: "line-iced-latte",
-      name: "Iced Latte",
+      name: "ລາເຕ້ເຢັນ",
       quantity: 1,
       unitPrice: 28000,
       image:
@@ -43,7 +43,7 @@ export const customerDisplayOrder: CustomerDisplayOrder = {
     },
     {
       id: "line-hot-latte",
-      name: "Hot Latte",
+      name: "ລາເຕ້ຮ້ອນ",
       quantity: 1,
       unitPrice: 27000,
       image:
@@ -51,7 +51,7 @@ export const customerDisplayOrder: CustomerDisplayOrder = {
     },
     {
       id: "line-croissant",
-      name: "Croissant",
+      name: "ຄຣົວຊອງ",
       quantity: 1,
       unitPrice: 18000,
       image:
@@ -59,7 +59,7 @@ export const customerDisplayOrder: CustomerDisplayOrder = {
     },
     {
       id: "line-club-sandwich",
-      name: "Club Sandwich",
+      name: "ແຊນວິດຄລັບ",
       quantity: 1,
       unitPrice: 38000,
       image:
@@ -84,7 +84,7 @@ export const customerBankDetails: CustomerBankDetails = {
 };
 
 export const customerPaymentMethods: CustomerPaymentMethod[] = [
-  { id: "cash", label: "Cash", icon: Banknote, tone: "green" },
-  { id: "bank-transfer", label: "Bank Transfer", icon: Landmark, tone: "blue" },
+  { id: "cash", label: "ເງິນສົດ", icon: Banknote, tone: "green" },
+  { id: "bank-transfer", label: "ໂອນທະນາຄານ", icon: Landmark, tone: "blue" },
   { id: "qr-code", label: "Bank QR", icon: QrCode, tone: "blue" }
 ];

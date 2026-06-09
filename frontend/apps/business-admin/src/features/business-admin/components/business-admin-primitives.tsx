@@ -15,7 +15,6 @@ import type { ReactNode } from "react";
 
 import { toneClasses } from "../data/mock-business-admin";
 import type { Kpi, QuickAction, SummaryItem, TableColumn, Tone } from "../types";
-import { toLaoNode, toLaoText } from "../utils/lao-labels";
 import { BusinessAdminLink } from "./business-admin-link";
 
 export function TjLogo() {
@@ -48,10 +47,10 @@ export function PageHeader({
       <div>
         {breadcrumb ? <div className="mb-3">{breadcrumb}</div> : null}
         <h1 className="text-[26px] leading-tight font-black text-slate-950">
-          {toLaoText(title)}
+          {title}
         </h1>
         <p className="mt-1 text-[13px] leading-5 font-medium text-slate-600">
-          {toLaoText(description)}
+          {description}
         </p>
       </div>
       {actions ? <div className="flex items-center gap-3">{actions}</div> : null}
@@ -79,7 +78,7 @@ export function Button({
   const content = (
     <>
       {Icon ? <Icon className="h-4 w-4" /> : null}
-      {toLaoNode(children)}
+      {children}
     </>
   );
 
@@ -128,7 +127,7 @@ function KpiCard({ kpi }: { kpi: Kpi }) {
         </span>
         <div className="min-w-0">
           <p className="text-[12px] font-bold text-slate-500">
-            {toLaoText(kpi.label)}
+            {kpi.label}
           </p>
           <p className="mt-1 text-[19px] leading-6 font-black whitespace-nowrap text-slate-950">
             {kpi.value}
@@ -139,7 +138,7 @@ function KpiCard({ kpi }: { kpi: Kpi }) {
                 kpi.tone === "red" ? "text-red-500" : "text-emerald-600"
               }`}
             >
-              + {toLaoText(kpi.change)}
+              + {kpi.change}
             </p>
           ) : null}
         </div>
@@ -167,7 +166,7 @@ export function Card({
         <div className="flex items-center justify-between gap-3 border-b border-blue-50 px-4 py-3">
           {title ? (
             <h2 className="shrink-0 text-[15px] font-black whitespace-nowrap text-slate-950">
-              {toLaoText(title)}
+              {title}
             </h2>
           ) : (
             <span />
@@ -198,13 +197,13 @@ export function FilterBar({
       <div className="grid gap-3 p-4 xl:grid-cols-[minmax(260px,1.4fr)_repeat(3,minmax(150px,0.6fr))_auto]">
         <label>
           <span className="mb-1.5 block text-[11px] font-black text-slate-600">
-            {toLaoText("Search")}
+            {"ຄົ້ນຫາ"}
           </span>
           <span className="relative block">
             <Search className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input
               className="h-10 w-full rounded-md border border-blue-100 bg-white pr-4 pl-11 text-[13px] font-semibold text-slate-800 transition outline-none placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-              placeholder={toLaoText(searchPlaceholder)}
+              placeholder={searchPlaceholder}
             />
           </span>
         </label>
@@ -219,7 +218,7 @@ export function FilterBar({
         <div className="flex items-end justify-end gap-2">
           {showFilterButton ? (
             <Button icon={Filter} variant="primary">
-              {toLaoText("Filter")}
+              {"ກັ່ນຕອງ"}
             </Button>
           ) : null}
           {actions}
@@ -241,7 +240,7 @@ function LabeledSelect({ label, children }: { label: string; children: ReactNode
   return (
     <label>
       <span className="mb-1.5 block text-[11px] font-black text-slate-600">
-        {toLaoText(label)}
+        {label}
       </span>
       <SelectButton>{children}</SelectButton>
     </label>
@@ -251,14 +250,14 @@ function LabeledSelect({ label, children }: { label: string; children: ReactNode
 function defaultFilterLabel(value: string) {
   const normalized = value.toLowerCase();
 
-  if (normalized.includes("categor")) return toLaoText("Category");
-  if (normalized.includes("status")) return toLaoText("Status");
-  if (normalized.includes("branch")) return toLaoText("Branch");
-  if (normalized.includes("type")) return toLaoText("Type");
-  if (normalized.includes("audience")) return toLaoText("Target Audience");
-  if (normalized.includes("may")) return toLaoText("Date Range");
+  if (normalized.includes("categor")) return "ໝວດໝູ່";
+  if (normalized.includes("status")) return "ສະຖານະ";
+  if (normalized.includes("branch")) return "ສາຂາ";
+  if (normalized.includes("type")) return "ປະເພດ";
+  if (normalized.includes("audience")) return "ກຸ່ມເປົ້າໝາຍ";
+  if (normalized.includes("may")) return "ຊ່ວງວັນທີ";
 
-  return toLaoText("Filter");
+  return "ກັ່ນຕອງ";
 }
 
 export function SelectButton({
@@ -275,7 +274,7 @@ export function SelectButton({
     >
       <span className="flex min-w-0 items-center gap-2 truncate">
         {Icon ? <Icon className="h-4 w-4 text-blue-500" /> : null}
-        <span className="truncate">{toLaoNode(children)}</span>
+        <span className="truncate">{children}</span>
       </span>
       <ChevronDown className="h-4 w-4 shrink-0 text-slate-400" />
     </button>
@@ -299,7 +298,7 @@ export function Badge({
     <span
       className={`inline-flex rounded-md border px-2 py-1 text-[11px] font-extrabold ${toneClass.soft} ${toneClass.text} ${toneClass.border}`}
     >
-      {toLaoNode(children)}
+      {children}
     </span>
   );
 }
@@ -313,9 +312,9 @@ export function ActionButtons({
 }) {
   return (
     <div className="flex items-center justify-end gap-2">
-      {viewHref ? <IconButton href={viewHref} icon={Eye} label={toLaoText("View")} /> : null}
-      {editHref ? <IconButton href={editHref} icon={Pencil} label={toLaoText("Edit")} /> : null}
-      <IconButton icon={MoreVertical} label={toLaoText("More")} tone="slate" />
+      {viewHref ? <IconButton href={viewHref} icon={Eye} label={"ເບິ່ງ"} /> : null}
+      {editHref ? <IconButton href={editHref} icon={Pencil} label={"ແກ້ໄຂ"} /> : null}
+      <IconButton icon={MoreVertical} label={"ເພີ່ມເຕີມ"} tone="slate" />
     </div>
   );
 }
@@ -392,7 +391,7 @@ export function DataTable<T>({
                         : ""
                   }`}
                 >
-                  {toLaoText(column.label)}
+                  {column.label}
                 </th>
               ))}
             </tr>
@@ -425,13 +424,13 @@ export function DataTable<T>({
 }
 
 export function Pagination({
-  label = "Showing 1 to 8 of 342 records"
+  label = "ສະແດງ 1 ຫາ 8 ຈາກ 342 ລາຍການ"
 }: {
   label?: string;
 }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 border-t border-blue-50 px-4 py-3">
-      <p className="text-[13px] font-semibold text-slate-600">{toLaoText(label)}</p>
+      <p className="text-[13px] font-semibold text-slate-600">{label}</p>
       <div className="flex flex-wrap items-center gap-2">
         {["<", "1", "2", "3", "...", "43", ">"].map((item, index) => (
           <button
@@ -450,7 +449,7 @@ export function Pagination({
           type="button"
           className="flex h-8 min-w-[92px] items-center justify-between gap-2 rounded-md border border-blue-100 bg-white px-3 text-[12px] font-extrabold text-slate-700 transition hover:bg-blue-50"
         >
-          {toLaoText("10 / page")}
+          {"10 / ໜ້າ"}
           <ChevronDown className="h-3.5 w-3.5 text-slate-400" />
         </button>
       </div>
@@ -487,10 +486,10 @@ export function ItemIdentity({
         </span>
       )}
       <span className="min-w-0">
-        <span className="block font-black text-slate-950">{toLaoText(title)}</span>
+        <span className="block font-black text-slate-950">{title}</span>
         {subtitle ? (
           <span className="mt-0.5 block text-xs font-semibold text-slate-500">
-            {toLaoText(subtitle)}
+            {subtitle}
           </span>
         ) : null}
       </span>
@@ -517,14 +516,14 @@ export function SummaryCard({
         {items.map((item) => (
           <div key={item.label} className="flex items-center justify-between gap-4">
             <span className="text-[13px] font-semibold text-slate-600">
-              {toLaoText(item.label)}
+              {item.label}
             </span>
             <span
               className={`text-right text-[13px] font-black ${
                 item.tone ? toneClasses[item.tone].text : "text-slate-950"
               }`}
             >
-            {toLaoText(item.value)}
+            {item.value}
             </span>
           </div>
         ))}
@@ -534,14 +533,14 @@ export function SummaryCard({
 }
 
 export function QuickActionsCard({
-  title = "Quick Actions",
+  title = "ການດຳເນີນການດ່ວນ",
   actions
 }: {
   title?: string;
   actions: QuickAction[];
 }) {
   return (
-    <Card title={toLaoText(title)}>
+    <Card title={title}>
       <div className="space-y-2 p-4">
         {actions.map((action) => {
           const Icon = action.icon;
@@ -555,11 +554,11 @@ export function QuickActionsCard({
               </span>
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-[13px] font-black text-slate-950">
-                  {toLaoText(action.label)}
+                  {action.label}
                 </span>
                 {action.description ? (
                   <span className="mt-0.5 block truncate text-xs font-semibold text-slate-500">
-                    {toLaoText(action.description)}
+                    {action.description}
                   </span>
                 ) : null}
               </span>
@@ -607,7 +606,7 @@ export function Tabs({ tabs, active }: { tabs: string[]; active: string }) {
               : "text-slate-600 hover:bg-blue-50 hover:text-blue-600"
           }`}
         >
-          {toLaoText(tab)}
+          {tab}
         </button>
       ))}
     </div>
@@ -626,10 +625,10 @@ export function FormCard({
   return (
     <Card>
       <div className="border-b border-blue-50 px-4 py-3">
-        <h2 className="text-[15px] font-black text-slate-950">{toLaoText(title)}</h2>
+        <h2 className="text-[15px] font-black text-slate-950">{title}</h2>
         {description ? (
           <p className="mt-1 text-xs font-semibold text-slate-500">
-            {toLaoText(description)}
+            {description}
           </p>
         ) : null}
       </div>
@@ -652,25 +651,25 @@ export function Field({
   return (
     <label className={full ? "md:col-span-2" : ""}>
       <span className="mb-1.5 block text-xs font-black text-slate-600">
-        {toLaoText(label)}
+        {label}
       </span>
       {type === "textarea" ? (
         <textarea
           className="min-h-24 w-full resize-none rounded-md border border-blue-100 bg-white px-3 py-2 text-sm font-semibold text-slate-800 outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-          defaultValue={toLaoText(value)}
+          defaultValue={value}
         />
       ) : type === "select" ? (
         <button
           type="button"
           className="flex h-10 w-full items-center justify-between rounded-md border border-blue-100 bg-white px-3 text-left text-sm font-extrabold text-slate-900"
         >
-          {toLaoText(value)}
+          {value}
           <ChevronDown className="h-4 w-4 text-slate-400" />
         </button>
       ) : (
         <input
           className="h-10 w-full rounded-md border border-blue-100 bg-white px-3 text-sm font-semibold text-slate-800 outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-          defaultValue={toLaoText(value)}
+          defaultValue={value}
         />
       )}
     </label>
@@ -680,7 +679,7 @@ export function Field({
 export function ExportButton() {
   return (
     <Button icon={Download} variant="secondary">
-      {toLaoText("Export")}
+      {"ສົ່ງອອກ"}
     </Button>
   );
 }
@@ -688,7 +687,7 @@ export function ExportButton() {
 export function CreateButton({ href, label }: { href: string; label: string }) {
   return (
     <Button href={href} icon={Plus}>
-      {toLaoText(label)}
+      {label}
     </Button>
   );
 }

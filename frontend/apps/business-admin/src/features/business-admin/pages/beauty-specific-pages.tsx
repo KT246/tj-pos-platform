@@ -25,43 +25,42 @@ import { BusinessAdminLink } from "../components/business-admin-link";
 import { PageHeader } from "../components/business-admin-primitives";
 import { BusinessAdminShell } from "../layouts/business-admin-shell";
 import type { BusinessMenuKey } from "../types";
-import { toLaoNode, toLaoText } from "../utils/lao-labels";
 
 const beautyBusiness = "TJ Beauty & Spa";
 
 const appointmentStats = [
   ["Total Appointments", "28", CalendarCheck, "bg-pink-50 text-pink-600"],
   ["Confirmed", "24", CheckCircle2, "bg-emerald-50 text-emerald-600"],
-  ["In Progress", "5", Timer, "bg-amber-50 text-amber-600"],
-  ["Completed", "12", CheckCircle2, "bg-emerald-50 text-emerald-600"],
+  ["ກຳລັງດຳເນີນ", "5", Timer, "bg-amber-50 text-amber-600"],
+  ["ສຳເລັດ", "12", CheckCircle2, "bg-emerald-50 text-emerald-600"],
   ["No Show", "1", Users, "bg-rose-50 text-rose-600"]
 ] as const;
 
 const staffMembers = [
   {
     name: "Nina",
-    role: "Nail Tech",
+    role: "ຊ່າງເລັບ",
     image:
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=80",
     appointments: 6
   },
   {
     name: "Mali",
-    role: "Hair Stylist",
+    role: "ຊ່າງຜົມ",
     image:
       "https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?auto=format&fit=crop&w=96&q=80",
     appointments: 8
   },
   {
     name: "Pim",
-    role: "Therapist",
+    role: "ນັກບຳບັດ",
     image:
       "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=96&q=80",
     appointments: 7
   },
   {
     name: "Aommin",
-    role: "Therapist",
+    role: "ນັກບຳບັດ",
     image:
       "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=96&q=80",
     appointments: 5
@@ -73,7 +72,7 @@ const appointmentBlocks = [
     staff: "Nina",
     time: "09:50",
     customer: "Somchay K.",
-    service: "Manicure",
+    service: "ແຕ່ງເລັບມື",
     top: "22%",
     color: "border-amber-200 bg-amber-50 text-amber-700"
   },
@@ -81,7 +80,7 @@ const appointmentBlocks = [
     staff: "Mali",
     time: "10:00",
     customer: "Kanya L.",
-    service: "Hair Cut & Blow",
+    service: "ຕັດຜົມ & ເປົ່າຜົມ",
     top: "32%",
     color: "border-pink-200 bg-pink-50 text-pink-700"
   },
@@ -89,15 +88,15 @@ const appointmentBlocks = [
     staff: "Aommin",
     time: "10:30",
     customer: "Natthavone P.",
-    service: "Facial Treatment",
+    service: "ບຳລຸງໜ້າ",
     top: "36%",
     color: "border-fuchsia-200 bg-fuchsia-50 text-fuchsia-700"
   },
   {
     staff: "Nina",
     time: "12:20",
-    customer: "Walk-in",
-    service: "Gel Polish",
+    customer: "ລູກຄ້າ Walk-in",
+    service: "ທາສີເລັບ Gel",
     top: "56%",
     color: "border-violet-200 bg-violet-50 text-violet-700"
   },
@@ -105,7 +104,7 @@ const appointmentBlocks = [
     staff: "Mali",
     time: "13:00",
     customer: "Phutsada M.",
-    service: "Hair Coloring",
+    service: "ຍ້ອມຜົມ",
     top: "66%",
     color: "border-sky-200 bg-sky-50 text-sky-700"
   },
@@ -113,7 +112,7 @@ const appointmentBlocks = [
     staff: "Pim",
     time: "13:00",
     customer: "Phanousa S.",
-    service: "Thai Massage",
+    service: "ນວດໄທ",
     top: "66%",
     color: "border-emerald-200 bg-emerald-50 text-emerald-700"
   },
@@ -121,7 +120,7 @@ const appointmentBlocks = [
     staff: "Nina",
     time: "15:20",
     customer: "Thida K.",
-    service: "Acrylic Extension",
+    service: "ຕໍ່ເລັບ Acrylic",
     top: "84%",
     color: "border-orange-200 bg-orange-50 text-orange-700"
   },
@@ -129,75 +128,75 @@ const appointmentBlocks = [
     staff: "Aommin",
     time: "16:00",
     customer: "Kritsana J.",
-    service: "Hair Treatment",
+    service: "ບຳລຸງຜົມ",
     top: "90%",
     color: "border-pink-300 bg-pink-100 text-pink-800"
   }
 ];
 
 const services = [
-  ["Hair Cut", "Hair", "45 min", "120,000", "Active"],
-  ["Hair Cut & Blow Dry", "Hair", "60 min", "180,000", "Active"],
-  ["Hair Coloring", "Hair", "120 min", "350,000", "Active"],
-  ["Hair Treatment", "Hair", "60 min", "200,000", "Active"],
-  ["Acrylic Extension", "Nail", "120 min", "250,000", "Active"],
-  ["Gel Polish", "Nail", "60 min", "120,000", "Active"],
-  ["Manicure", "Nail", "45 min", "80,000", "Active"],
-  ["Pedicure", "Nail", "60 min", "100,000", "Active"],
-  ["Thai Massage", "Spa & Body", "90 min", "220,000", "Active"],
-  ["Aroma Massage", "Spa & Body", "60 min", "180,000", "Active"],
-  ["Facial Treatment", "Face", "60 min", "200,000", "Active"],
-  ["Eye Brow Shaping", "Face", "20 min", "50,000", "Active"]
+  ["ຕັດຜົມ", "ຜົມ", "45 min", "120,000", "ເປີດໃຊ້"],
+  ["ຕັດຜົມ & ເປົ່າຜົມ", "ຜົມ", "60 min", "180,000", "ເປີດໃຊ້"],
+  ["ຍ້ອມຜົມ", "ຜົມ", "120 min", "350,000", "ເປີດໃຊ້"],
+  ["ບຳລຸງຜົມ", "ຜົມ", "60 min", "200,000", "ເປີດໃຊ້"],
+  ["ຕໍ່ເລັບ Acrylic", "ເລັບ", "120 min", "250,000", "ເປີດໃຊ້"],
+  ["ທາສີເລັບ Gel", "ເລັບ", "60 min", "120,000", "ເປີດໃຊ້"],
+  ["ແຕ່ງເລັບມື", "ເລັບ", "45 min", "80,000", "ເປີດໃຊ້"],
+  ["ແຕ່ງເລັບຕີນ", "ເລັບ", "60 min", "100,000", "ເປີດໃຊ້"],
+  ["ນວດໄທ", "ສະປາ & ຮ່າງກາຍ", "90 min", "220,000", "ເປີດໃຊ້"],
+  ["ນວດ Aroma", "ສະປາ & ຮ່າງກາຍ", "60 min", "180,000", "ເປີດໃຊ້"],
+  ["ບຳລຸງໜ້າ", "ໃບໜ້າ", "60 min", "200,000", "ເປີດໃຊ້"],
+  ["ແຕ່ງຄິ້ວ", "ໃບໜ້າ", "20 min", "50,000", "ເປີດໃຊ້"]
 ];
 
 const packages = [
-  ["Hair Care Package", "Hair", "1,200,000", "5", "90 days", "Active"],
-  ["Nail Lover Package", "Nail", "800,000", "5", "60 days", "Active"],
-  ["Thai Massage Package", "Spa & Body", "1,500,000", "5", "90 days", "Active"],
-  ["Facial Glow Package", "Face", "1,000,000", "5", "60 days", "Active"]
+  ["ແພັກເກດດູແລຜົມ", "ຜົມ", "1,200,000", "5", "90 days", "ເປີດໃຊ້"],
+  ["ແພັກເກດຄົນຮັກເລັບ", "ເລັບ", "800,000", "5", "60 days", "ເປີດໃຊ້"],
+  ["ແພັກເກດນວດໄທ", "ສະປາ & ຮ່າງກາຍ", "1,500,000", "5", "90 days", "ເປີດໃຊ້"],
+  ["ແພັກເກດໜ້າໃສ", "ໃບໜ້າ", "1,000,000", "5", "60 days", "ເປີດໃຊ້"]
 ];
 
 const packageSessions = [
   [
     "Kanya Phongsavath",
-    "Hair Care Package",
+    "ແພັກເກດດູແລຜົມ",
     "2 / 5",
     "May 10, 2025",
     "May 24, 2025",
-    "Active"
+    "ເປີດໃຊ້"
   ],
   [
     "Somchay Keomany",
-    "Thai Massage Package",
+    "ແພັກເກດນວດໄທ",
     "1 / 5",
     "May 02, 2025",
     "May 23, 2025",
-    "Active"
+    "ເປີດໃຊ້"
   ],
   [
     "Natthavone Phommala",
-    "Facial Glow Package",
+    "ແພັກເກດໜ້າໃສ",
     "3 / 5",
     "May 14, 2025",
     "May 28, 2025",
-    "Active"
+    "ເປີດໃຊ້"
   ]
 ];
 
 const customerHistory = [
-  ["May 10, 2025", "Hair Cut & Blow Dry", "Mali", "LAK 180,000"],
-  ["May 02, 2025", "Hair Coloring", "Mali", "LAK 350,000"],
-  ["Apr 20, 2025", "Acrylic Extension", "Nina", "LAK 250,000"],
-  ["Apr 12, 2025", "Thai Massage", "Pim", "LAK 220,000"],
-  ["Mar 25, 2025", "Facial Treatment", "Aommin", "LAK 200,000"]
+  ["May 10, 2025", "ຕັດຜົມ & ເປົ່າຜົມ", "Mali", "LAK 180,000"],
+  ["May 02, 2025", "ຍ້ອມຜົມ", "Mali", "LAK 350,000"],
+  ["Apr 20, 2025", "ຕໍ່ເລັບ Acrylic", "Nina", "LAK 250,000"],
+  ["Apr 12, 2025", "ນວດໄທ", "Pim", "LAK 220,000"],
+  ["Mar 25, 2025", "ບຳລຸງໜ້າ", "Aommin", "LAK 200,000"]
 ];
 
 const upcomingAppointments = [
-  ["10:30 AM", "Kanya Phongsavath", "Hair Cut & Blow Dry", "Mali"],
-  ["11:30 AM", "Somchay Keomany", "Hair Coloring", "Mali"],
-  ["01:00 PM", "Natthavone Phommala", "Facial Treatment", "Aommin"],
-  ["02:30 PM", "Walk-in", "Gel Polish", "Nina"],
-  ["03:30 PM", "Thida Review", "Thai Massage", "Pim"]
+  ["10:30 AM", "Kanya Phongsavath", "ຕັດຜົມ & ເປົ່າຜົມ", "Mali"],
+  ["11:30 AM", "Somchay Keomany", "ຍ້ອມຜົມ", "Mali"],
+  ["01:00 PM", "Natthavone Phommala", "ບຳລຸງໜ້າ", "Aommin"],
+  ["02:30 PM", "ລູກຄ້າ Walk-in", "ທາສີເລັບ Gel", "Nina"],
+  ["03:30 PM", "Thida Review", "ນວດໄທ", "Pim"]
 ];
 
 function BeautyPage({
@@ -239,7 +238,7 @@ function BeautyButton({
   const body = (
     <>
       <Icon className="h-4 w-4" />
-      {toLaoNode(children)}
+      {children}
     </>
   );
 
@@ -283,7 +282,7 @@ function BeautyCard({
         <div className="flex items-center justify-between gap-3 border-b border-pink-50 px-4 py-3">
           {title ? (
             <h2 className="text-[15px] font-black text-slate-950">
-              {toLaoText(title)}
+              {title}
             </h2>
           ) : (
             <span />
@@ -309,7 +308,7 @@ function BeautyTabs({ tabs, active }: { tabs: string[]; active: string }) {
               : "bg-white text-slate-500 hover:bg-pink-50 hover:text-pink-600"
           }`}
         >
-          {toLaoText(tab)}
+          {tab}
         </button>
       ))}
     </div>
@@ -320,8 +319,8 @@ function BeautyIconButton({ icon: Icon, label }: { icon: LucideIcon; label: stri
   return (
     <button
       type="button"
-      aria-label={toLaoText(label)}
-      title={toLaoText(label)}
+      aria-label={label}
+      title={label}
       className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-pink-100 bg-white text-slate-500 transition hover:-translate-y-0.5 hover:bg-pink-50 hover:text-pink-600 hover:shadow-sm"
     >
       <Icon className="h-4 w-4" />
@@ -340,7 +339,7 @@ function StaffAvatar({ staff }: { staff: (typeof staffMembers)[number] }) {
       <span>
         <span className="block text-xs font-black text-slate-950">{staff.name}</span>
         <span className="block text-[10px] font-bold text-slate-400">
-          {toLaoText(staff.role)}
+          {staff.role}
         </span>
       </span>
     </div>
@@ -350,7 +349,7 @@ function StaffAvatar({ staff }: { staff: (typeof staffMembers)[number] }) {
 function StatusPill({ children }: { children: ReactNode }) {
   return (
     <span className="rounded-md border border-emerald-100 bg-emerald-50 px-2 py-1 text-[10px] font-black text-emerald-600">
-      {toLaoNode(children)}
+      {children}
     </span>
   );
 }
@@ -366,15 +365,15 @@ function MiniCalendar() {
             <ChevronLeft className="h-4 w-4" />
           </button>
           <span className="text-sm font-black text-slate-950">
-            {toLaoText("May 2025")}
+            {"ພຶດສະພາ 2025"}
           </span>
           <button type="button" className="text-slate-400">
             <ChevronRight className="h-4 w-4" />
           </button>
         </div>
         <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-black text-slate-400">
-          {["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].map((day) => (
-            <span key={day}>{toLaoText(day)}</span>
+          {["ຈ", "ອ", "ພ", "ພຫ", "ສ", "ສອ", "ອາ"].map((day) => (
+            <span key={day}>{day}</span>
           ))}
           {days.map((day) => (
             <span
@@ -401,12 +400,12 @@ function AreaSummary() {
     <BeautyCard>
       <div className="space-y-3 p-4">
         {[
-          ["All Areas", "3", "bg-pink-500"],
-          ["Nail Zone", "3", "bg-emerald-400"],
-          ["Hair Station", "4", "bg-sky-400"],
-          ["Spa Room 1", "2", "bg-emerald-300"],
-          ["Spa Room 2", "1", "bg-rose-300"],
-          ["VIP Room", "1", "bg-pink-300"]
+          ["ທຸກໂຊນ", "3", "bg-pink-500"],
+          ["ໂຊນເລັບ", "3", "bg-emerald-400"],
+          ["ສະຖານີຜົມ", "4", "bg-sky-400"],
+          ["ຫ້ອງສະປາ 1", "2", "bg-emerald-300"],
+          ["ຫ້ອງສະປາ 2", "1", "bg-rose-300"],
+          ["ຫ້ອງ VIP", "1", "bg-pink-300"]
         ].map(([label, count, dot]) => (
           <div
             key={label}
@@ -414,7 +413,7 @@ function AreaSummary() {
           >
             <span className="flex items-center gap-2">
               <span className={`h-2.5 w-2.5 rounded-full ${dot}`} />
-              {toLaoText(label)}
+              {label}
             </span>
             <span>{count}</span>
           </div>
@@ -427,9 +426,9 @@ function AreaSummary() {
 export function AppointmentCalendarPage() {
   return (
     <BeautyPage
-      active="Calendar"
-      title="Appointment Calendar"
-      description="Manage your salon appointments and schedule."
+      active="ປະຕິທິນ"
+      title="ປະຕິທິນນັດໝາຍ"
+      description="ຈັດການນັດໝາຍ ແລະ ຕາຕະລາງຂອງຮ້ານ."
       actions={
         <div className="flex items-center gap-2">
           <BeautyButton variant="secondary" icon={CalendarDays}>
@@ -457,7 +456,7 @@ export function AppointmentCalendarPage() {
                   <ChevronLeft className="h-4 w-4" />
                 </button>
                 <span className="text-sm font-black text-slate-950">
-                  {toLaoText("May 18, 2025")}
+                  {"18 ພຶດສະພາ 2025"}
                 </span>
                 <button
                   className="rounded-md border border-pink-100 p-2 text-slate-500"
@@ -466,14 +465,14 @@ export function AppointmentCalendarPage() {
                   <ChevronRight className="h-4 w-4" />
                 </button>
               </div>
-              <BeautyTabs tabs={["Day", "Week", "Month", "Today"]} active="Week" />
+              <BeautyTabs tabs={["ມື້", "ອາທິດ", "Month", "Today"]} active="ອາທິດ" />
             </div>
           </div>
           <div className="overflow-x-auto">
             <div className="min-w-[880px]">
               <div className="grid grid-cols-[76px_repeat(4,1fr)] border-b border-pink-50">
                 <span className="px-4 py-3 text-xs font-black text-slate-400">
-                  {toLaoText("Time")}
+                  {"ເວລາ"}
                 </span>
                 {staffMembers.slice(0, 4).map((staff) => (
                   <div key={staff.name} className="px-4 py-3">
@@ -524,7 +523,7 @@ export function AppointmentCalendarPage() {
                           </div>
                           <p className="mt-1">{block.customer}</p>
                           <p className="font-bold opacity-75">
-                            {toLaoText(block.service)}
+                            {block.service}
                           </p>
                         </div>
                       ))}
@@ -537,14 +536,14 @@ export function AppointmentCalendarPage() {
             {[
               ["Confirmed", "bg-emerald-400"],
               ["Arrived", "bg-violet-400"],
-              ["In Progress", "bg-amber-400"],
-              ["Completed", "bg-sky-400"],
-              ["Cancelled", "bg-pink-400"],
+              ["ກຳລັງດຳເນີນ", "bg-amber-400"],
+              ["ສຳເລັດ", "bg-sky-400"],
+              ["ຍົກເລີກ", "bg-pink-400"],
               ["No Show", "bg-slate-300"]
             ].map(([label, dot]) => (
               <span key={label} className="flex items-center gap-2">
                 <span className={`h-2.5 w-2.5 rounded-full ${dot}`} />
-                {toLaoText(label)}
+                {label}
               </span>
             ))}
           </div>
@@ -557,13 +556,13 @@ export function AppointmentCalendarPage() {
 export function CreateAppointmentPage() {
   return (
     <BeautyPage
-      active="Calendar"
-      title="New Appointment"
+      active="ປະຕິທິນ"
+      title="ສ້າງນັດໝາຍ"
       description="Create an appointment with customer, service, staff, and deposit details."
     >
       <div className="mx-auto grid max-w-5xl gap-5 lg:grid-cols-[minmax(0,1fr)_330px]">
         <div className="space-y-4">
-          <BeautyCard title="Customer">
+          <BeautyCard title="ລູກຄ້າ">
             <div className="flex items-center gap-4 p-4">
               <span className="flex h-16 w-16 items-center justify-center rounded-full bg-pink-100 text-xl font-black text-pink-600">
                 KP
@@ -586,24 +585,24 @@ export function CreateAppointmentPage() {
           <BeautyCard title="Appointment Details">
             <div className="grid gap-4 p-4 md:grid-cols-2">
               <BeautyField label="Date" value="May 20, 2025" />
-              <BeautyField label="Time" value="10:30 AM" />
-              <BeautyField label="Service" value="Hair Cut & Blow Dry" />
-              <BeautyField label="Duration" value="60 min" />
-              <BeautyField label="Staff" value="Mali (Hair Stylist)" />
+              <BeautyField label="ເວລາ" value="10:30 AM" />
+              <BeautyField label="Service" value="ຕັດຜົມ & ເປົ່າຜົມ" />
+              <BeautyField label="ໄລຍະເວລາ" value="60 min" />
+              <BeautyField label="ພະນັກງານ" value="Mali (Hair Stylist)" />
               <BeautyField label="Room / Area" value="Hair Station 1" />
               <BeautyField
-                label="Notes"
+                label="ໝາຍເຫດ"
                 value="Customer prefers layered cut."
                 full
                 textarea
               />
             </div>
           </BeautyCard>
-          <BeautyCard title="Deposit Policy">
+          <BeautyCard title="ນະໂຍບາຍມັດຈຳ">
             <div className="grid gap-4 p-4 md:grid-cols-3">
-              <ToggleLine title="Deposit Required" enabled />
+              <ToggleLine title="ຕ້ອງມັດຈຳ" enabled />
               <BeautyField label="Deposit Type" value="Percentage (%)" />
-              <BeautyField label="Amount" value="20% (LAK 36,000)" />
+              <BeautyField label="ຈຳນວນເງິນ" value="20% (LAK 36,000)" />
             </div>
           </BeautyCard>
         </div>
@@ -650,15 +649,15 @@ export function CreateAppointmentPage() {
 export function BeautyServicesPage() {
   return (
     <BeautyPage
-      active="Services"
-      title="Services"
+      active="ບໍລິການ"
+      title="ບໍລິການ"
       description="Manage your salon services and durations."
       actions={<BeautyButton>Add Service</BeautyButton>}
     >
       <BeautyCard>
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-pink-50 p-4">
           <BeautyTabs
-            tabs={["All Service", "Hair", "Nail", "Spa & Body", "Face", "Children"]}
+            tabs={["All Service", "ຜົມ", "ເລັບ", "ສະປາ & ຮ່າງກາຍ", "ໃບໜ້າ", "Children"]}
             active="All Service"
           />
           <label className="relative w-full max-w-xs">
@@ -672,11 +671,11 @@ export function BeautyServicesPage() {
         <BeautyTable
           headers={[
             "Service Name",
-            "Category",
-            "Duration",
+            "ໝວດໝູ່",
+            "ໄລຍະເວລາ",
             "Price (LAK)",
-            "Status",
-            "Actions"
+            "ສະຖານະ",
+            "ການດຳເນີນການ"
           ]}
           rows={services.map((service) => [
             <span className="font-black text-slate-950">{service[0]}</span>,
@@ -695,8 +694,8 @@ export function BeautyServicesPage() {
 export function BeautyStaffSchedulePage() {
   return (
     <BeautyPage
-      active="Staff Schedule"
-      title="Staff Schedule"
+      active="ຕາຕະລາງພະນັກງານ"
+      title="ຕາຕະລາງພະນັກງານ"
       description="Manage staff working hours and availability."
       actions={<BeautyButton>Add Shift</BeautyButton>}
     >
@@ -709,7 +708,7 @@ export function BeautyStaffSchedulePage() {
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
-            {toLaoText("May 18 - May 24, 2025")}
+            {"18 - 24 ພຶດສະພາ 2025"}
             <button
               className="rounded-md border border-pink-100 p-2 text-slate-500"
               type="button"
@@ -717,23 +716,23 @@ export function BeautyStaffSchedulePage() {
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>
-          <BeautyTabs tabs={["Week", "Month"]} active="Week" />
+          <BeautyTabs tabs={["ອາທິດ", "Month"]} active="ອາທິດ" />
         </div>
         <div className="overflow-x-auto p-4">
           <div className="min-w-[920px]">
             <div className="grid grid-cols-[170px_repeat(7,1fr)] gap-2 text-xs font-black text-slate-500">
-              <span>{toLaoText("Staff")}</span>
+              <span>{"ພະນັກງານ"}</span>
               {[
-                "Sun 18",
-                "Mon 19",
-                "Tue 20",
-                "Wed 21",
-                "Thu 22",
-                "Fri 23",
-                "Sat 24"
+                "ອາ 18",
+                "ຈ 19",
+                "ອ 20",
+                "ພ 21",
+                "ພຫ 22",
+                "ສ 23",
+                "ສອ 24"
               ].map((day) => (
                 <span key={day} className="text-center">
-                  {toLaoText(day)}
+                  {day}
                 </span>
               ))}
             </div>
@@ -742,14 +741,14 @@ export function BeautyStaffSchedulePage() {
                 .concat([
                   {
                     name: "May",
-                    role: "Nail Tech",
+                    role: "ຊ່າງເລັບ",
                     image:
                       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=96&q=80",
                     appointments: 3
                   },
                   {
                     name: "Bounlie",
-                    role: "Hair Stylist",
+                    role: "ຊ່າງຜົມ",
                     image:
                       "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?auto=format&fit=crop&w=96&q=80",
                     appointments: 4
@@ -773,7 +772,7 @@ export function BeautyStaffSchedulePage() {
                           }`}
                         >
                           {off
-                            ? toLaoText("Day Off")
+                            ? "ມື້ພັກ"
                             : dayIndex % 2 === 0
                               ? "08:00 - 18:00"
                               : "10:00 - 19:00"}
@@ -788,15 +787,15 @@ export function BeautyStaffSchedulePage() {
         <div className="flex justify-center gap-6 border-t border-pink-50 p-4 text-xs font-black text-slate-500">
           <span className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-pink-500" />{" "}
-            {toLaoText("Working")}
+            {"ກຳລັງເຮັດວຽກ"}
           </span>
           <span className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />{" "}
-            {toLaoText("Day Off")}
+            {"ມື້ພັກ"}
           </span>
           <span className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-sky-400" />{" "}
-            {toLaoText("Time Off")}
+            {"ພັກຊົ່ວຄາວ"}
           </span>
         </div>
       </BeautyCard>
@@ -807,8 +806,8 @@ export function BeautyStaffSchedulePage() {
 export function BeautyPackagesPage() {
   return (
     <BeautyPage
-      active="Packages"
-      title="Packages"
+      active="ແພັກເກດ"
+      title="ແພັກເກດ"
       description="Manage treatment packages and customer sessions."
       actions={<BeautyButton>New Package</BeautyButton>}
     >
@@ -823,12 +822,12 @@ export function BeautyPackagesPage() {
           <BeautyTable
             headers={[
               "Package Name",
-              "Category",
+              "ໝວດໝູ່",
               "Price (LAK)",
               "Sessions",
               "Validity",
-              "Status",
-              "Actions"
+              "ສະຖານະ",
+              "ການດຳເນີນການ"
             ]}
             rows={packages.map((pkg) => [
               <span className="font-black text-slate-950">{pkg[0]}</span>,
@@ -844,12 +843,12 @@ export function BeautyPackagesPage() {
         <BeautyCard title="Recent Package Sessions">
           <BeautyTable
             headers={[
-              "Customer",
+              "ລູກຄ້າ",
               "Package",
               "Used / Total",
               "Last Session",
               "Next Session",
-              "Status"
+              "ສະຖານະ"
             ]}
             rows={packageSessions.map((row) => [
               <span className="font-black text-slate-950">{row[0]}</span>,
@@ -869,7 +868,7 @@ export function BeautyPackagesPage() {
 export function BeautyCustomerHistoryPage() {
   return (
     <BeautyPage
-      active="Customers"
+      active="ລູກຄ້າ"
       title="Customer Profile"
       description="Review beauty service history, notes, packages, and preferences."
     >
@@ -911,12 +910,12 @@ export function BeautyCustomerHistoryPage() {
           </div>
           <div className="border-y border-pink-50 px-4 py-3">
             <BeautyTabs
-              tabs={["History", "Notes", "Package", "Preferences"]}
+              tabs={["History", "ໝາຍເຫດ", "Package", "Preferences"]}
               active="History"
             />
           </div>
           <BeautyTable
-            headers={["Date", "Service", "Staff", "Amount"]}
+            headers={["Date", "Service", "ພະນັກງານ", "ຈຳນວນເງິນ"]}
             rows={customerHistory.map((row) => [row[0], row[1], row[2], row[3]])}
           />
         </BeautyCard>
@@ -947,7 +946,7 @@ export function BeautyCustomerHistoryPage() {
 export function DepositPolicyPage() {
   return (
     <BeautyPage
-      active="Deposit Policy"
+      active="ນະໂຍບາຍມັດຈຳ"
       title="Deposit & Cancellation Policy"
       description="Configure deposit requirements and cancellation rules."
       actions={<BeautyButton icon={WalletCards}>Save Deposit Policy</BeautyButton>}
@@ -956,8 +955,8 @@ export function DepositPolicyPage() {
         <BeautyCard>
           <div className="border-b border-pink-50 p-4">
             <BeautyTabs
-              tabs={["Deposit Policy", "Cancellation Policy"]}
-              active="Deposit Policy"
+              tabs={["ນະໂຍບາຍມັດຈຳ", "Cancellation Policy"]}
+              active="ນະໂຍບາຍມັດຈຳ"
             />
           </div>
           <div className="space-y-5 p-5">
@@ -1002,7 +1001,7 @@ export function DepositPolicyPage() {
 export function BeautyDailySchedulePage() {
   return (
     <BeautyPage
-      active="Beauty Daily"
+      active="ພາບລວມຮ້ານຄວາມງາມ"
       title="Daily Schedule"
       description="Overview of today's appointments and walk-ins."
       actions={
@@ -1040,7 +1039,7 @@ export function BeautyDailySchedulePage() {
                 .concat([
                   {
                     name: "May",
-                    role: "Nail Tech",
+                    role: "ຊ່າງເລັບ",
                     image:
                       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=96&q=80",
                     appointments: 3
@@ -1091,9 +1090,9 @@ export function BeautyDailySchedulePage() {
           <BeautyCard title="Top Services Today">
             <div className="space-y-3 p-4">
               {[
-                ["Hair Cut & Blow Dry", "8"],
-                ["Thai Massage", "6"],
-                ["Hair Coloring", "4"]
+                ["ຕັດຜົມ & ເປົ່າຜົມ", "8"],
+                ["ນວດໄທ", "6"],
+                ["ຍ້ອມຜົມ", "4"]
               ].map(([label, value], index) => (
                 <div key={label} className="flex items-center justify-between text-sm">
                   <span className="font-black text-slate-700">
@@ -1127,20 +1126,20 @@ export function BeautyDailySchedulePage() {
 export function BeautyCommissionPage() {
   return (
     <BeautyPage
-      active="Staff"
+      active="ພະນັກງານ"
       title="Commission"
       description="Track staff commission by service, package, and payment status."
     >
       <BeautyCard>
         <BeautyTable
           headers={[
-            "Staff",
+            "ພະນັກງານ",
             "Role",
-            "Services",
+            "ບໍລິການ",
             "Sales",
             "Commission",
-            "Status",
-            "Actions"
+            "ສະຖານະ",
+            "ການດຳເນີນການ"
           ]}
           rows={staffMembers.map((staff) => [
             <StaffAvatar key={staff.name} staff={staff} />,
@@ -1171,17 +1170,17 @@ function BeautyField({
   return (
     <label className={full ? "md:col-span-2" : ""}>
       <span className="mb-1.5 block text-xs font-black text-slate-600">
-        {toLaoText(label)}
+        {label}
       </span>
       {textarea ? (
         <textarea
           className="min-h-24 w-full resize-none rounded-md border border-pink-100 px-3 py-2 text-sm font-semibold text-slate-800 outline-none focus:border-pink-300 focus:ring-4 focus:ring-pink-50"
-          defaultValue={toLaoText(value)}
+          defaultValue={value}
         />
       ) : (
         <input
           className="h-10 w-full rounded-md border border-pink-100 px-3 text-sm font-semibold text-slate-800 outline-none focus:border-pink-300 focus:ring-4 focus:ring-pink-50"
-          defaultValue={toLaoText(value)}
+          defaultValue={value}
         />
       )}
     </label>
@@ -1191,7 +1190,7 @@ function BeautyField({
 function ToggleLine({ title, enabled }: { title: string; enabled: boolean }) {
   return (
     <div className="flex items-center justify-between gap-4 rounded-lg border border-pink-100 bg-white p-3">
-      <span className="text-sm font-black text-slate-700">{toLaoText(title)}</span>
+      <span className="text-sm font-black text-slate-700">{title}</span>
       <span
         className={`relative h-6 w-11 rounded-full ${enabled ? "bg-blue-600" : "bg-slate-200"}`}
       >
@@ -1206,8 +1205,8 @@ function ToggleLine({ title, enabled }: { title: string; enabled: boolean }) {
 function ActionCell() {
   return (
     <div className="flex justify-end gap-2">
-      <BeautyIconButton icon={Pencil} label="Edit" />
-      <BeautyIconButton icon={MoreVertical} label="More" />
+      <BeautyIconButton icon={Pencil} label="ແກ້ໄຂ" />
+      <BeautyIconButton icon={MoreVertical} label="ເພີ່ມເຕີມ" />
     </div>
   );
 }
@@ -1225,7 +1224,7 @@ function BeautyTable({ headers, rows }: { headers: string[]; rows: ReactNode[][]
                   index === headers.length - 1 ? "text-right" : ""
                 }`}
               >
-                {toLaoText(header)}
+                {header}
               </th>
             ))}
           </tr>
@@ -1240,7 +1239,7 @@ function BeautyTable({ headers, rows }: { headers: string[]; rows: ReactNode[][]
                     cellIndex === row.length - 1 ? "text-right" : ""
                   }`}
                 >
-                  {toLaoNode(cell)}
+                  {cell}
                 </td>
               ))}
             </tr>

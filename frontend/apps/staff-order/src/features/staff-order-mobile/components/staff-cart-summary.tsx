@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 import type { StaffOrderLine } from "../types";
 import { formatMoney, getStaffCartSummary, getStaffOrderPath } from "../utils";
-import { lo } from "../utils/lao-labels";
 
 export function StaffCartSummary({
   businessSlug,
@@ -24,19 +23,19 @@ export function StaffCartSummary({
       </div>
       <div className="min-w-0">
         <p className="truncate text-[13px] font-black text-slate-950">
-          {lo("Cart")} - {summary.itemCount} {lo("items")}
+          {"ກະຕ່າ"} - {summary.itemCount} {"ລາຍການ"}
         </p>
-        <p className="text-[10px] font-bold text-slate-500">{lo("View items")}</p>
+        <p className="text-[10px] font-bold text-slate-500">{"ເບິ່ງລາຍການ"}</p>
       </div>
       <Link
         to={getStaffOrderPath(businessSlug, "/review")}
         className="flex h-9 cursor-pointer items-center gap-1.5 rounded-lg bg-blue-600 px-3 text-[12px] font-black whitespace-nowrap text-white shadow-[0_10px_18px_rgba(37,99,235,0.2)] hover:bg-blue-700"
       >
-        {lo("Review Order")}
+        {"ກວດອໍເດີ"}
         <ArrowRight className="h-3.5 w-3.5" />
       </Link>
       <div className="col-span-3 -mt-0.5 flex items-center justify-between border-t border-blue-50 px-1 pt-1.5">
-        <span className="text-[10px] font-bold text-slate-500">{lo("Subtotal")}</span>
+        <span className="text-[10px] font-bold text-slate-500">{"ຍອດກ່ອນຫຼຸດ"}</span>
         <span className="text-[13px] font-black text-slate-950">
           {formatMoney(summary.subtotal)}
         </span>

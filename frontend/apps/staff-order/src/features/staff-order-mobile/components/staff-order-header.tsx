@@ -10,8 +10,6 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import { lo } from "../utils/lao-labels";
-
 export function StaffOrderHeader({
   title,
   backHref,
@@ -29,7 +27,7 @@ export function StaffOrderHeader({
             <Link
               to={backHref}
               className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg text-slate-700 transition hover:bg-blue-50 hover:text-blue-600"
-              aria-label="Back"
+              aria-label="ກັບຄືນ"
             >
               <ArrowLeft className="h-[18px] w-[18px]" />
             </Link>
@@ -47,24 +45,24 @@ export function StaffOrderHeader({
           )}
         </div>
         <h1 className="min-w-0 truncate text-center text-[15px] font-black text-slate-950">
-          {lo(title)}
+          {title}
         </h1>
         <div className="flex items-center justify-end gap-1">
           <span className="hidden h-7 items-center gap-1.5 whitespace-nowrap rounded-full bg-emerald-50 px-2 text-[9px] font-black leading-none text-emerald-600 min-[375px]:inline-flex">
-            <span>{lo("Online")}</span>
+            <span>{"ອອນລາຍ"}</span>
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
           </span>
           <button
             type="button"
             className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg text-slate-700 transition hover:bg-blue-50 hover:text-blue-600"
-            aria-label="Search"
+            aria-label="ຄົ້ນຫາ"
           >
             <Search className="h-[18px] w-[18px]" strokeWidth={2.25} />
           </button>
           <button
             type="button"
             className="relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg text-slate-700 transition hover:bg-blue-50 hover:text-blue-600"
-            aria-label={showFilter ? "Filters" : "Notifications"}
+            aria-label={showFilter ? "ຕົວກອງ" : "ແຈ້ງເຕືອນ"}
           >
             {showFilter ? (
               <SlidersHorizontal className="h-[18px] w-[18px]" strokeWidth={2.25} />
@@ -97,9 +95,9 @@ export function StaffContextCard({
   return (
     <div className="mt-3 overflow-hidden rounded-lg border border-blue-100 bg-white shadow-[0_8px_18px_rgba(15,23,42,0.035)]">
       <div className="grid grid-cols-3 divide-x divide-blue-50">
-        <ContextItem icon={Building2} label="Branch" value={branch} />
-        <ContextItem icon={UserRound} label="Staff" value={staff} />
-        <ContextItem icon={Sun} label="Shift" value={shift ?? "Morning"} />
+        <ContextItem icon={Building2} label="ສາຂາ" value={branch} />
+        <ContextItem icon={UserRound} label="ພະນັກງານ" value={staff} />
+        <ContextItem icon={Sun} label="ກະ" value={shift ?? "ກະເຊົ້າ"} />
       </div>
       {table ? (
         <div className="border-t border-blue-50 px-2.5 py-2">
@@ -125,8 +123,8 @@ function ContextItem({
   return (
     <div className="min-w-0 px-2.5 py-2.5">
       <Icon className="mb-1 h-3.5 w-3.5 text-slate-500" />
-      <p className="text-[10px] font-bold text-slate-500">{lo(label)}</p>
-      <p className="truncate text-[12px] font-black text-slate-950">{lo(value)}</p>
+      <p className="text-[10px] font-bold text-slate-500">{label}</p>
+      <p className="truncate text-[12px] font-black text-slate-950">{value}</p>
     </div>
   );
 }

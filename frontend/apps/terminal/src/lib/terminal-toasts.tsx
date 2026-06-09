@@ -21,7 +21,12 @@ type TerminalToastState = {
   clearToasts: () => void;
 };
 
-const defaultDurationMs = 4200;
+const toastDurationByType: Record<SystemToastType, number> = {
+  success: 1500,
+  info: 1500,
+  warning: 1500,
+  error: 1500
+};
 let toastSequence = 0;
 
 function createToastId() {
@@ -95,7 +100,7 @@ export const useTerminalToastStore = create<TerminalToastState>((set) => ({
           title: toast.title,
           description: toast.description,
           timestamp: "ຕອນນີ້",
-          durationMs: toast.durationMs ?? defaultDurationMs
+          durationMs: toast.durationMs ?? toastDurationByType[toast.type ?? "info"]
         },
         ...state.toasts
       ].slice(0, 5)

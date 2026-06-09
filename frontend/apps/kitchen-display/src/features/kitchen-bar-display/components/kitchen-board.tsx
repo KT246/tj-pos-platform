@@ -23,7 +23,7 @@ type KitchenBoardProps = {
 };
 
 function getDetailBasePath(businessSlug: string, mode: KitchenBoardMode) {
-  return mode === "bar" ? `/bar/b/${businessSlug}` : `/kitchen/b/${businessSlug}`;
+  return mode === "ບາ" ? `/bar/b/${businessSlug}` : `/kitchen/b/${businessSlug}`;
 }
 
 export function KitchenBoard({ mode, businessSlug, ticketRouteId }: KitchenBoardProps) {
@@ -72,7 +72,7 @@ export function KitchenBoard({ mode, businessSlug, ticketRouteId }: KitchenBoard
   const counts = useMemo(() => getKitchenStatusCounts(tickets), [tickets]);
   const routeTicket = findTicketByRouteId(tickets, ticketRouteId);
   const alertTicket =
-    tickets.find((ticket) => ticket.id === alertTicketId && ticket.status === "pending") ??
+    tickets.find((ticket) => ticket.id === alertTicketId && ticket.status === "ໃໝ່") ??
     null;
 
   function openTicketDetail(ticketId: string) {

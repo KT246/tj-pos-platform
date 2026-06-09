@@ -106,7 +106,7 @@ All Tasks Old
 | Description / `ຄຳອະທິບາຍ`          | Lao                    |
 | Status / `ສະຖານະ`                  | Lao                    |
 | AI Prompt                          | English                |
-| UI labels inside generated mockups | English                |
+| UI labels inside generated mockups | Lao for product/admin/customer apps; lo/en only for public website |
 | Sample business data               | Realistic Laos context |
 
 ### Font Rule
@@ -187,7 +187,13 @@ Inter, "Noto Sans Lao", sans-serif
 
 ### AI Mockup Text Rule
 
-Generated UI mockups should use realistic **English UI labels** even if the Sheet description is Lao.
+Generated UI mockups should follow the current frontend language rule:
+
+```text
+Public website (`frontend/apps/web`) can show lo/en content.
+All admin/customer/POS apps should show static UI labels in Lao.
+Screen names, route names, component names, and AI prompts can remain English.
+```
 
 ---
 
@@ -212,7 +218,8 @@ Each prompt should include:
 ### Universal Prompt Requirements
 
 ```text
-Use realistic English UI labels and realistic sample data from Laos.
+Use realistic Lao UI labels for admin/customer/POS apps and realistic sample data from Laos.
+Use English only for screen names, route names, component names, AI prompts, and system/domain identifiers where needed.
 Keep brand, colors, spacing, cards, buttons, sidebar/topbar rules consistent with the related approved screens.
 No watermark.
 ```
@@ -1031,7 +1038,7 @@ Before marking any UI as done, check:
 8. List/detail/form relationship is clear
 9. Realistic Laos sample data
 10. No watermark
-11. UI labels are English
+11. UI labels are Lao for admin/customer/POS apps
 12. Layout can be implemented by frontend developer
 ```
 

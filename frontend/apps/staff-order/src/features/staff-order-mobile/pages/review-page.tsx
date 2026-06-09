@@ -16,7 +16,6 @@ import { staffName } from "../data/staff-order-data";
 import { useStaffOrderStore } from "../stores/staff-order-store";
 import type { StaffOrderLine } from "../types";
 import { formatMoney, getStaffCartSummary, getStaffOrderPath } from "../utils";
-import { lo } from "../utils/lao-labels";
 
 export function StaffReviewPage({ businessSlug }: { businessSlug: string }) {
   const navigate = useNavigate();
@@ -45,15 +44,15 @@ export function StaffReviewPage({ businessSlug }: { businessSlug: string }) {
       }
     >
       <StaffOrderHeader
-        title="Review Order"
+        title="ກວດອໍເດີ"
         backHref={getStaffOrderPath(businessSlug, `/table/${selectedTableId}`)}
       />
       <StaffScrollArea className="pb-3">
         <section className="mt-3 grid grid-cols-4 divide-x divide-blue-50 rounded-lg border border-blue-100 bg-white px-2 py-2.5 shadow-[0_8px_22px_rgba(15,23,42,0.035)]">
-          <ReviewMeta label="Table" value={selectedTableId} />
-          <ReviewMeta label="Guests" value={String(guests)} />
-          <ReviewMeta label="Staff" value={staffName} />
-          <ReviewMeta label="Type" value="Dine In" />
+          <ReviewMeta label="ໂຕະ" value={selectedTableId} />
+          <ReviewMeta label="ລູກຄ້າ" value={String(guests)} />
+          <ReviewMeta label="ພະນັກງານ" value={staffName} />
+          <ReviewMeta label="ປະເພດ" value="ນັ່ງກິນທີ່ຮ້ານ" />
         </section>
 
         <section className="mt-3 overflow-hidden rounded-lg border border-blue-100 bg-white shadow-[0_10px_26px_rgba(15,23,42,0.045)]">
@@ -70,16 +69,16 @@ export function StaffReviewPage({ businessSlug }: { businessSlug: string }) {
             ))
           ) : (
             <div className="p-6 text-center text-[13px] font-bold text-slate-500">
-              {lo("No items in this order yet.")}
+              {"ຍັງບໍ່ມີລາຍການໃນອໍເດີນີ້."}
             </div>
           )}
 
           <div className="border-t border-blue-50 p-3">
-            <SummaryRow label="Subtotal" value={summary.subtotal} />
-            <SummaryRow label="Service Charge (5%)" value={summary.serviceCharge} />
-            <SummaryRow label="Discount" value={summary.discount} discount />
+            <SummaryRow label="ຍອດກ່ອນຫຼຸດ" value={summary.subtotal} />
+            <SummaryRow label="ຄ່າບໍລິການ (5%)" value={summary.serviceCharge} />
+            <SummaryRow label="ສ່ວນຫຼຸດ" value={summary.discount} discount />
             <div className="mt-2.5 flex items-center justify-between border-t border-blue-50 pt-2.5">
-              <span className="text-[16px] font-black text-slate-950">{lo("Total")}</span>
+              <span className="text-[16px] font-black text-slate-950">{"ລວມທັງໝົດ"}</span>
               <span className="text-[18px] font-black text-slate-950">
                 {formatMoney(summary.total)}
               </span>
@@ -94,10 +93,10 @@ export function StaffReviewPage({ businessSlug }: { businessSlug: string }) {
             </span>
             <span className="min-w-0">
               <span className="block truncate text-[13px] font-black text-slate-950">
-                {lo("Walk-in Customer")}
+                {"ລູກຄ້າທົ່ວໄປ"}
               </span>
               <span className="text-[12px] font-bold text-slate-500">
-                {lo("No member attached")}
+                {"ບໍ່ມີສະມາຊິກຜູກໄວ້"}
               </span>
             </span>
           </span>
@@ -106,7 +105,7 @@ export function StaffReviewPage({ businessSlug }: { businessSlug: string }) {
             className="flex h-9 cursor-pointer items-center gap-1.5 rounded-lg border border-blue-100 px-3 text-[12px] font-black text-blue-600 transition hover:bg-blue-50"
           >
             <Plus className="h-4 w-4" />
-            {lo("Add")}
+            {"ເພີ່ມ"}
           </button>
         </section>
 
@@ -117,7 +116,7 @@ export function StaffReviewPage({ businessSlug }: { businessSlug: string }) {
             className="flex h-10 cursor-pointer items-center justify-center gap-2 rounded-lg border border-blue-200 bg-white text-[13px] font-black text-blue-600 transition hover:bg-blue-50"
           >
             <FileText className="h-4 w-4" />
-            {lo("Save Draft")}
+            {"ບັນທຶກຮ່າງ"}
           </button>
           <button
             type="button"
@@ -126,7 +125,7 @@ export function StaffReviewPage({ businessSlug }: { businessSlug: string }) {
             className="flex h-10 cursor-pointer items-center justify-center gap-2 rounded-lg bg-blue-600 text-[13px] font-black text-white shadow-[0_14px_24px_rgba(37,99,235,0.22)] transition hover:bg-blue-700 disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
           >
             <ChefHat className="h-4 w-4" />
-            {lo("Send Order")}
+            {"ສົ່ງອໍເດີ"}
             <ArrowRight className="h-4 w-4" />
           </button>
         </div>
@@ -138,8 +137,8 @@ export function StaffReviewPage({ businessSlug }: { businessSlug: string }) {
 function ReviewMeta({ label, value }: { label: string; value: string }) {
   return (
     <div className="min-w-0 px-2">
-      <p className="text-[10px] font-bold text-slate-500">{lo(label)}</p>
-      <p className="truncate text-[12px] font-black text-slate-950">{lo(value)}</p>
+      <p className="text-[10px] font-bold text-slate-500">{label}</p>
+      <p className="truncate text-[12px] font-black text-slate-950">{value}</p>
     </div>
   );
 }
@@ -161,13 +160,13 @@ function ReviewLine({
     <div className="grid grid-cols-[64px_1fr_auto] gap-3 border-b border-blue-50 p-3 last:border-b-0">
       <img src={line.image} alt="" className="h-[72px] w-16 rounded-lg object-cover" />
       <div className="min-w-0">
-        <p className="text-[13px] font-black text-slate-950">{lo(line.name)}</p>
+        <p className="text-[13px] font-black text-slate-950">{line.name}</p>
         <p className="mt-1 text-[12px] font-bold text-slate-500">
-          {lo(line.size)} - {lo(line.milk)}
+          {line.size} - {line.milk}
         </p>
         {line.note ? (
           <p className="mt-2 inline-flex max-w-full rounded-md bg-blue-50 px-2 py-1 text-[11px] font-bold text-blue-600">
-            <span className="truncate">{lo("Note")}: {lo(line.note)}</span>
+            <span className="truncate">{"ໝາຍເຫດ"}: {line.note}</span>
           </p>
         ) : null}
         <p className="mt-2 text-[13px] font-black text-slate-950">
@@ -222,7 +221,7 @@ function SummaryRow({
 }) {
   return (
     <div className="flex items-center justify-between py-1 text-[12px] font-bold">
-      <span className="text-slate-500">{lo(label)}</span>
+      <span className="text-slate-500">{label}</span>
       <span className={discount ? "text-emerald-600" : "text-slate-950"}>
         {discount && value > 0 ? "-" : ""}
         {formatMoney(value)}

@@ -54,108 +54,108 @@ import {
 import type { BusinessMenuKey, Kpi, QuickAction, SummaryItem, Tone } from "../types";
 
 export const businessName = "TJ Cafe Vientiane";
-export const activeBranch = "Main Branch";
+export const activeBranch = "ສາຂາຫຼັກ";
 
 export const sidebarItems: {
   label: BusinessMenuKey;
   href: string;
   icon: typeof LayoutDashboard;
 }[] = [
-  { label: "Dashboard", href: "/business-admin", icon: LayoutDashboard },
+  { label: "ແດຊບອດ", href: "/business-admin", icon: LayoutDashboard },
   { label: "POS", href: "/business-admin/pos", icon: Monitor },
-  { label: "Orders", href: "/business-admin/orders", icon: ClipboardList },
-  { label: "Appointments", href: "/business-admin/appointments", icon: CalendarCheck },
-  { label: "Calendar", href: "/business-admin/calendar", icon: CalendarDays },
-  { label: "Bookings", href: "/business-admin/bookings", icon: ClipboardList },
-  { label: "Walk-in", href: "/business-admin/walk-in", icon: UserPlus },
-  { label: "Items", href: "/business-admin/items", icon: Package },
-  { label: "Services", href: "/business-admin/services", icon: Sparkles },
-  { label: "Categories", href: "/business-admin/categories", icon: Boxes },
-  { label: "Table Map", href: "/business-admin/tables", icon: Map },
-  { label: "Modifiers", href: "/business-admin/modifiers", icon: SlidersHorizontal },
-  { label: "Barista Queue", href: "/business-admin/barista-queue", icon: Coffee },
+  { label: "ອໍເດີ", href: "/business-admin/orders", icon: ClipboardList },
+  { label: "ນັດໝາຍ", href: "/business-admin/appointments", icon: CalendarCheck },
+  { label: "ປະຕິທິນ", href: "/business-admin/calendar", icon: CalendarDays },
+  { label: "ການຈອງ", href: "/business-admin/bookings", icon: ClipboardList },
+  { label: "ລູກຄ້າ Walk-in", href: "/business-admin/walk-in", icon: UserPlus },
+  { label: "ສິນຄ້າ", href: "/business-admin/items", icon: Package },
+  { label: "ບໍລິການ", href: "/business-admin/services", icon: Sparkles },
+  { label: "ໝວດໝູ່", href: "/business-admin/categories", icon: Boxes },
+  { label: "ແຜນຜັງໂຕະ", href: "/business-admin/tables", icon: Map },
+  { label: "ຕົວເລືອກເພີ່ມ", href: "/business-admin/modifiers", icon: SlidersHorizontal },
+  { label: "ຄິວ Barista", href: "/business-admin/barista-queue", icon: Coffee },
   {
-    label: "Pickup Display",
+    label: "ຈໍຮັບອໍເດີ",
     href: "/terminal/b/[businessSlug]/pickup-display",
     icon: Monitor
   },
   { label: "Happy Hour", href: "/business-admin/happy-hour", icon: Clock3 },
   {
-    label: "Cafe Daily View",
+    label: "ພາບລວມຮ້ານກາເຟ",
     href: "/business-admin/cafe-daily-view",
     icon: ChartNoAxesCombined
   },
-  { label: "Reservations", href: "/business-admin/reservations", icon: CalendarCheck },
-  { label: "Kitchen Courses", href: "/business-admin/kitchen-courses", icon: ChefHat },
-  { label: "Split Bill", href: "/business-admin/split-bill", icon: Split },
-  { label: "Service Charge", href: "/business-admin/service-charge", icon: Percent },
+  { label: "ການຈອງໂຕະ", href: "/business-admin/reservations", icon: CalendarCheck },
+  { label: "ລຳດັບຄົວ", href: "/business-admin/kitchen-courses", icon: ChefHat },
+  { label: "ແຍກບິນ", href: "/business-admin/split-bill", icon: Split },
+  { label: "ຄ່າບໍລິການ", href: "/business-admin/service-charge", icon: Percent },
   {
-    label: "Merge / Transfer",
+    label: "ລວມ / ຍ້າຍ",
     href: "/business-admin/merge-transfer-table",
     icon: GitMerge
   },
-  { label: "End of Day", href: "/business-admin/end-of-day", icon: ReceiptText },
+  { label: "ປິດຮອບມື້", href: "/business-admin/end-of-day", icon: ReceiptText },
   {
-    label: "Staff Schedule",
+    label: "ຕາຕະລາງພະນັກງານ",
     href: "/business-admin/staff-schedule",
     icon: CalendarDays
   },
-  { label: "Packages", href: "/business-admin/packages", icon: Sparkles },
-  { label: "Deposit Policy", href: "/business-admin/deposit-policy", icon: HandCoins },
+  { label: "ແພັກເກດ", href: "/business-admin/packages", icon: Sparkles },
+  { label: "ນະໂຍບາຍມັດຈຳ", href: "/business-admin/deposit-policy", icon: HandCoins },
   {
-    label: "Beauty Daily",
+    label: "ພາບລວມຮ້ານຄວາມງາມ",
     href: "/business-admin/beauty-daily-schedule",
     icon: HeartPulse
   },
-  { label: "Rooms", href: "/business-admin/rooms", icon: BedDouble },
-  { label: "Room Calendar", href: "/business-admin/room-calendar", icon: CalendarDays },
-  { label: "Front Desk", href: "/business-admin/front-desk", icon: Hotel },
+  { label: "ຫ້ອງ", href: "/business-admin/rooms", icon: BedDouble },
+  { label: "ປະຕິທິນຫ້ອງ", href: "/business-admin/room-calendar", icon: CalendarDays },
+  { label: "ຟຣອນດ໌ເດສກ໌", href: "/business-admin/front-desk", icon: Hotel },
   { label: "Check-in", href: "/business-admin/check-in", icon: DoorOpen },
   { label: "Check-out", href: "/business-admin/check-out", icon: CreditCard },
-  { label: "Guests", href: "/business-admin/guests", icon: Users },
-  { label: "Room Settings", href: "/business-admin/room-settings", icon: Settings },
-  { label: "Housekeeping", href: "/business-admin/housekeeping", icon: ClipboardCheck },
-  { label: "Guest Folio", href: "/business-admin/guest-folio", icon: ReceiptText },
-  { label: "Inventory", href: "/business-admin/inventory", icon: Warehouse },
-  { label: "Stock Movements", href: "/business-admin/stock-movements", icon: History },
-  { label: "Stock Count", href: "/business-admin/stock-count", icon: ClipboardCheck },
+  { label: "ແຂກ", href: "/business-admin/guests", icon: Users },
+  { label: "ຕັ້ງຄ່າຫ້ອງ", href: "/business-admin/room-settings", icon: Settings },
+  { label: "ແມ່ບ້ານ", href: "/business-admin/housekeeping", icon: ClipboardCheck },
+  { label: "ບັນຊີແຂກ", href: "/business-admin/guest-folio", icon: ReceiptText },
+  { label: "ສະຕັອກ", href: "/business-admin/inventory", icon: Warehouse },
+  { label: "ການເຄື່ອນໄຫວສະຕັອກ", href: "/business-admin/stock-movements", icon: History },
+  { label: "ນັບສະຕັອກ", href: "/business-admin/stock-count", icon: ClipboardCheck },
   {
-    label: "Goods Receiving",
+    label: "ຮັບສິນຄ້າ",
     href: "/business-admin/goods-receiving",
     icon: PackagePlus
   },
-  { label: "Returns", href: "/business-admin/returns", icon: RefreshCcw },
+  { label: "ຄືນສິນຄ້າ", href: "/business-admin/returns", icon: RefreshCcw },
   {
-    label: "Low Stock / Expiry",
+    label: "ສະຕັອກຕ່ຳ / ໃກ້ໝົດອາຍຸ",
     href: "/business-admin/low-stock-expiry",
     icon: BellRing
   },
-  { label: "Barcode Labels", href: "/business-admin/barcode-labels", icon: ScanLine },
-  { label: "Suppliers", href: "/business-admin/suppliers", icon: Building2 },
-  { label: "Customers", href: "/business-admin/customers", icon: Users },
-  { label: "Loyalty", href: "/business-admin/loyalty", icon: Gift },
-  { label: "Promotions", href: "/business-admin/promotions", icon: BadgePercent },
-  { label: "Staff", href: "/business-admin/staff", icon: UserPlus },
+  { label: "ປ້າຍ Barcode", href: "/business-admin/barcode-labels", icon: ScanLine },
+  { label: "ຜູ້ສະໜອງ", href: "/business-admin/suppliers", icon: Building2 },
+  { label: "ລູກຄ້າ", href: "/business-admin/customers", icon: Users },
+  { label: "ສະສົມແຕ້ມ", href: "/business-admin/loyalty", icon: Gift },
+  { label: "ໂປຣໂມຊັນ", href: "/business-admin/promotions", icon: BadgePercent },
+  { label: "ພະນັກງານ", href: "/business-admin/staff", icon: UserPlus },
   {
-    label: "Roles & Permissions",
+    label: "ບົດບາດ ແລະ ສິດ",
     href: "/business-admin/roles-permissions",
     icon: ShieldCheck
   },
-  { label: "Branches", href: "/business-admin/branches", icon: Store },
-  { label: "Reports", href: "/business-admin/reports", icon: ChartNoAxesCombined },
-  { label: "Receipt/Bill", href: "/business-admin/receipt-bill", icon: ReceiptText },
-  { label: "Branding", href: "/business-admin/branding", icon: Sparkles },
+  { label: "ສາຂາ", href: "/business-admin/branches", icon: Store },
+  { label: "ລາຍງານ", href: "/business-admin/reports", icon: ChartNoAxesCombined },
+  { label: "ໃບຮັບເງິນ / ບິນ", href: "/business-admin/receipt-bill", icon: ReceiptText },
+  { label: "ແບຣນດ໌", href: "/business-admin/branding", icon: Sparkles },
   {
-    label: "Payment Methods",
+    label: "ວິທີຊຳລະ",
     href: "/business-admin/payment-methods",
     icon: CreditCard
   },
-  { label: "Devices", href: "/business-admin/devices", icon: Printer },
-  { label: "Modules", href: "/business-admin/modules", icon: ScanLine },
-  { label: "Import/Export", href: "/business-admin/import", icon: Upload },
-  { label: "Support", href: "/business-admin/support", icon: BellRing },
-  { label: "Audit Logs", href: "/business-admin/audit-logs", icon: ClipboardCheck },
-  { label: "Settings", href: "/business-admin/settings", icon: Settings }
+  { label: "ອຸປະກອນ", href: "/business-admin/devices", icon: Printer },
+  { label: "ໂມດູນ", href: "/business-admin/modules", icon: ScanLine },
+  { label: "ນຳເຂົ້າ / ສົ່ງອອກ", href: "/business-admin/import", icon: Upload },
+  { label: "ຊ່ວຍເຫຼືອ", href: "/business-admin/support", icon: BellRing },
+  { label: "ບັນທຶກກວດສອບ", href: "/business-admin/audit-logs", icon: ClipboardCheck },
+  { label: "ຕັ້ງຄ່າ", href: "/business-admin/settings", icon: Settings }
 ];
 
 export const toneClasses: Record<
@@ -528,14 +528,14 @@ export const pageKpis: Record<string, Kpi[]> = {
 
 export const items = [
   [
-    "Iced Latte",
+    "ລາເຕ້ເຢັນ",
     "ກາເຟລາເຕ້",
     "CF-1001",
     "Coffee",
     "LAK 25,000",
     "48",
-    "Active",
-    "Main Branch",
+    "ເປີດໃຊ້",
+    "ສາຂາຫຼັກ",
     itemImages[0]
   ],
   [
@@ -545,8 +545,8 @@ export const items = [
     "Coffee",
     "LAK 22,000",
     "36",
-    "Active",
-    "All Branches",
+    "ເປີດໃຊ້",
+    "ທຸກສາຂາ",
     itemImages[1]
   ],
   [
@@ -556,29 +556,29 @@ export const items = [
     "Bakery",
     "LAK 18,000",
     "22",
-    "Active",
-    "All Branches",
+    "ເປີດໃຊ້",
+    "ທຸກສາຂາ",
     itemImages[2]
   ],
   [
     "Ham & Cheese Sandwich",
     "ແຊນວິດແຮມຊີສ",
     "FD-3001",
-    "Food",
+    "ອາຫານ",
     "LAK 32,000",
     "15",
-    "Active",
-    "All Branches",
+    "ເປີດໃຊ້",
+    "ທຸກສາຂາ",
     itemImages[3]
   ],
   [
     "Larb Chicken",
     "ລາບໄກ່",
     "FD-3002",
-    "Food",
+    "ອາຫານ",
     "LAK 30,000",
     "9",
-    "Active",
+    "ເປີດໃຊ້",
     "TJ Cafe Vientiane",
     itemImages[4]
   ],
@@ -589,8 +589,8 @@ export const items = [
     "Drinks",
     "LAK 20,000",
     "0",
-    "Active",
-    "All Branches",
+    "ເປີດໃຊ້",
+    "ທຸກສາຂາ",
     itemImages[5]
   ],
   [
@@ -600,8 +600,8 @@ export const items = [
     "Drinks",
     "LAK 7,000",
     "120",
-    "Active",
-    "All Branches",
+    "ເປີດໃຊ້",
+    "ທຸກສາຂາ",
     itemImages[6]
   ],
   [
@@ -611,7 +611,7 @@ export const items = [
     "Drinks",
     "LAK 26,000",
     "8",
-    "Active",
+    "ເປີດໃຊ້",
     "TJ Cafe Pakse",
     itemImages[7]
   ]
@@ -626,7 +626,7 @@ export const customers = [
     "12,450",
     "LAK 8,450,000",
     "28",
-    "Active",
+    "ເປີດໃຊ້",
     "PS"
   ],
   [
@@ -637,7 +637,7 @@ export const customers = [
     "6,820",
     "LAK 4,230,000",
     "16",
-    "Active",
+    "ເປີດໃຊ້",
     "NT"
   ],
   [
@@ -648,7 +648,7 @@ export const customers = [
     "15,200",
     "LAK 12,680,000",
     "42",
-    "Active",
+    "ເປີດໃຊ້",
     "KP"
   ],
   [
@@ -659,7 +659,7 @@ export const customers = [
     "1,250",
     "LAK 980,000",
     "5",
-    "Active",
+    "ເປີດໃຊ້",
     "SV"
   ],
   [
@@ -670,7 +670,7 @@ export const customers = [
     "7,560",
     "LAK 5,120,000",
     "18",
-    "Active",
+    "ເປີດໃຊ້",
     "BL"
   ],
   [
@@ -681,7 +681,7 @@ export const customers = [
     "10,300",
     "LAK 7,430,000",
     "24",
-    "Active",
+    "ເປີດໃຊ້",
     "MP"
   ],
   [
@@ -692,7 +692,7 @@ export const customers = [
     "850",
     "LAK 620,000",
     "3",
-    "Inactive",
+    "ປິດໃຊ້",
     "TL"
   ],
   [
@@ -703,7 +703,7 @@ export const customers = [
     "5,600",
     "LAK 3,980,000",
     "11",
-    "Active",
+    "ເປີດໃຊ້",
     "PI"
   ]
 ];
@@ -714,14 +714,14 @@ export const itemPriceProfiles = [
     wholesalePrice: "LAK 21,000",
     resellerPrice: "LAK 20,000",
     minWholesaleQty: "12",
-    priceList: "Cafe Wholesale"
+    priceList: "ລາຄາສົ່ງຮ້ານກາເຟ"
   },
   {
     retailPrice: "LAK 22,000",
     wholesalePrice: "LAK 18,500",
     resellerPrice: "LAK 17,800",
     minWholesaleQty: "12",
-    priceList: "Cafe Wholesale"
+    priceList: "ລາຄາສົ່ງຮ້ານກາເຟ"
   },
   {
     retailPrice: "LAK 18,000",
@@ -763,74 +763,74 @@ export const itemPriceProfiles = [
     wholesalePrice: "LAK 22,000",
     resellerPrice: "LAK 21,000",
     minWholesaleQty: "12",
-    priceList: "Cafe Wholesale"
+    priceList: "ລາຄາສົ່ງຮ້ານກາເຟ"
   }
 ];
 
 export const customerWholesaleProfiles = [
   {
     customerType: "VIP",
-    priceList: "VIP Retail",
+    priceList: "ລາຄາ VIP",
     debtBalance: "LAK 0",
     creditLimit: "LAK 2,000,000",
     paymentTerm: "Pay now",
-    debtStatus: "Clear"
+    debtStatus: "ປົກກະຕິ"
   },
   {
-    customerType: "Retail Customer",
-    priceList: "Default Retail",
+    customerType: "ລູກຄ້າຂາຍຍ່ອຍ",
+    priceList: "ລາຄາຂາຍຍ່ອຍພື້ນຖານ",
     debtBalance: "LAK 0",
     creditLimit: "LAK 0",
     paymentTerm: "Pay now",
-    debtStatus: "Clear"
+    debtStatus: "ປົກກະຕິ"
   },
   {
-    customerType: "Wholesale Customer",
-    priceList: "Cafe Wholesale",
+    customerType: "ລູກຄ້າຂາຍສົ່ງ",
+    priceList: "ລາຄາສົ່ງຮ້ານກາເຟ",
     debtBalance: "LAK 1,850,000",
     creditLimit: "LAK 8,000,000",
     paymentTerm: "Net 15",
-    debtStatus: "Partial"
+    debtStatus: "ຈ່າຍບາງສ່ວນ"
   },
   {
-    customerType: "Reseller",
-    priceList: "Beverage Reseller",
+    customerType: "ຜູ້ຂາຍຕໍ່",
+    priceList: "ລາຄາຜູ້ຂາຍຕໍ່ເຄື່ອງດື່ມ",
     debtBalance: "LAK 920,000",
     creditLimit: "LAK 5,000,000",
     paymentTerm: "Net 7",
-    debtStatus: "Debt"
+    debtStatus: "ຕິດໜີ້"
   },
   {
-    customerType: "Wholesale Customer",
-    priceList: "Bakery Wholesale",
+    customerType: "ລູກຄ້າຂາຍສົ່ງ",
+    priceList: "ລາຄາສົ່ງເບເກີຣີ",
     debtBalance: "LAK 0",
     creditLimit: "LAK 6,000,000",
     paymentTerm: "Net 15",
-    debtStatus: "Clear"
+    debtStatus: "ປົກກະຕິ"
   },
   {
     customerType: "VIP",
-    priceList: "VIP Retail",
+    priceList: "ລາຄາ VIP",
     debtBalance: "LAK 0",
     creditLimit: "LAK 2,000,000",
     paymentTerm: "Pay now",
-    debtStatus: "Clear"
+    debtStatus: "ປົກກະຕິ"
   },
   {
-    customerType: "Retail Customer",
-    priceList: "Default Retail",
+    customerType: "ລູກຄ້າຂາຍຍ່ອຍ",
+    priceList: "ລາຄາຂາຍຍ່ອຍພື້ນຖານ",
     debtBalance: "LAK 0",
     creditLimit: "LAK 0",
     paymentTerm: "Pay now",
-    debtStatus: "Clear"
+    debtStatus: "ປົກກະຕິ"
   },
   {
-    customerType: "Reseller",
+    customerType: "ຜູ້ຂາຍຕໍ່",
     priceList: "Retail Partner",
     debtBalance: "LAK 420,000",
     creditLimit: "LAK 3,000,000",
     paymentTerm: "Net 7",
-    debtStatus: "Partial"
+    debtStatus: "ຈ່າຍບາງສ່ວນ"
   }
 ];
 
@@ -842,8 +842,8 @@ export const promotions = [
     "15% off",
     "May 1 - May 31, 2025",
     "342 / 1,000",
-    "Active",
-    "All Branches"
+    "ເປີດໃຊ້",
+    "ທຸກສາຂາ"
   ],
   [
     "Buy 1 Get 1 Free Coffee",
@@ -852,18 +852,18 @@ export const promotions = [
     "BOGO",
     "May 10 - May 24, 2025",
     "128 / 300",
-    "Active",
-    "All Branches"
+    "ເປີດໃຊ້",
+    "ທຸກສາຂາ"
   ],
   [
     "Student 10% Discount",
-    "Percentage",
+    "ເປີເຊັນ",
     "Students",
     "10% off",
     "Apr 20 - May 31, 2025",
     "256 / ∞",
-    "Active",
-    "All Branches"
+    "ເປີດໃຊ້",
+    "ທຸກສາຂາ"
   ],
   [
     "Mother's Day Special",
@@ -873,7 +873,7 @@ export const promotions = [
     "May 8 - May 12, 2025",
     "215 / 250",
     "Expired",
-    "All Branches"
+    "ທຸກສາຂາ"
   ],
   [
     "Weekend Combo Deal",
@@ -882,18 +882,18 @@ export const promotions = [
     "15% off set menu",
     "May 3 - May 31, 2025",
     "89 / 500",
-    "Active",
-    "Main Branch"
+    "ເປີດໃຊ້",
+    "ສາຂາຫຼັກ"
   ],
   [
     "New Customer 20% Off",
-    "Percentage",
+    "ເປີເຊັນ",
     "New Customers",
     "20% off",
     "May 1 - May 31, 2025",
     "178 / 400",
-    "Active",
-    "All Branches"
+    "ເປີດໃຊ້",
+    "ທຸກສາຂາ"
   ],
   [
     "Iced Latte Day",
@@ -903,7 +903,7 @@ export const promotions = [
     "May 20, 2025",
     "0 / 200",
     "Scheduled",
-    "Main Branch"
+    "ສາຂາຫຼັກ"
   ],
   [
     "VIP Members Double Points",
@@ -913,13 +913,13 @@ export const promotions = [
     "May 18 - May 25, 2025",
     "-",
     "Scheduled",
-    "All Branches"
+    "ທຸກສາຂາ"
   ]
 ];
 
 export const branches = [
   [
-    "Main Branch",
+    "ສາຂາຫຼັກ",
     "Vientiane Center",
     "Sisattanak, Vientiane",
     "020 5555 1234",
@@ -928,7 +928,7 @@ export const branches = [
     "18 staff"
   ],
   [
-    "Sihom Branch",
+    "ສາຂາສີຫອມ",
     "Sihom Cafe",
     "Chanthabouly, Vientiane",
     "020 5599 7788",
@@ -946,7 +946,7 @@ export const branches = [
     "7 staff"
   ],
   [
-    "Tha Dong Branch",
+    "ສາຂາທ່າດົງ",
     "TJ Mini Cafe",
     "Xaysettha, Vientiane",
     "020 5577 3311",
@@ -959,18 +959,18 @@ export const branches = [
 export const suppliers = [
   [
     "Lao Coffee Supply",
-    "Coffee Beans",
+    "ເມັດກາເຟ",
     "020 5588 1212",
     "LAK 4,200,000",
-    "Active",
-    "May 18, 2025"
+    "ເປີດໃຊ້",
+    "18 ພຶດສະພາ 2025"
   ],
   [
     "Vientiane Fresh Milk",
     "Dairy",
     "020 5521 4455",
     "LAK 1,850,000",
-    "Active",
+    "ເປີດໃຊ້",
     "May 17, 2025"
   ],
   [
@@ -978,7 +978,7 @@ export const suppliers = [
     "Bakery",
     "020 5533 9988",
     "LAK 3,120,000",
-    "Active",
+    "ເປີດໃຊ້",
     "May 16, 2025"
   ],
   [
@@ -986,7 +986,7 @@ export const suppliers = [
     "Payment",
     "021 222 222",
     "LAK 0",
-    "Active",
+    "ເປີດໃຊ້",
     "May 15, 2025"
   ],
   [
@@ -1003,7 +1003,7 @@ export const staff = [
   [
     "Somchai Phommaseanh",
     "Owner",
-    "Main Branch",
+    "ສາຂາຫຼັກ",
     "Full Access",
     "Online",
     "Today 10:24 AM"
@@ -1011,7 +1011,7 @@ export const staff = [
   [
     "Ketsana Vongdala",
     "Manager",
-    "Sihom Branch",
+    "ສາຂາສີຫອມ",
     "Manager",
     "Online",
     "Today 10:18 AM"
@@ -1019,7 +1019,7 @@ export const staff = [
   [
     "Anousone Keomany",
     "Cashier",
-    "Main Branch",
+    "ສາຂາຫຼັກ",
     "POS Only",
     "On Shift",
     "Today 09:58 AM"
@@ -1027,16 +1027,16 @@ export const staff = [
   [
     "Mayphone Souliyavong",
     "Barista",
-    "Main Branch",
-    "Staff",
+    "ສາຂາຫຼັກ",
+    "ພະນັກງານ",
     "On Shift",
     "Today 09:40 AM"
   ],
   [
     "Daovone Phanthavong",
-    "Inventory",
+    "ສະຕັອກ",
     "Pakse Branch",
-    "Inventory",
+    "ສະຕັອກ",
     "Offline",
     "Yesterday 06:12 PM"
   ]
@@ -1045,46 +1045,46 @@ export const staff = [
 export const stockMovements = [
   [
     "SM-50018",
-    "Iced Latte",
+    "ລາເຕ້ເຢັນ",
     "Stock In",
     "+120",
-    "Main Branch",
+    "ສາຂາຫຼັກ",
     "Lao Coffee Supply",
-    "May 18, 2025"
+    "18 ພຶດສະພາ 2025"
   ],
   [
     "SM-50017",
-    "Fresh Milk 1L",
+    "ນົມສົດ 1L",
     "Adjustment",
     "-6",
-    "Main Branch",
+    "ສາຂາຫຼັກ",
     "Damaged",
-    "May 18, 2025"
+    "18 ພຶດສະພາ 2025"
   ],
   [
     "SM-50016",
-    "Croissant",
+    "ຄຣົວຊອງ",
     "Stock Out",
     "-42",
-    "Sihom Branch",
+    "ສາຂາສີຫອມ",
     "Sales",
     "May 17, 2025"
   ],
   [
     "SM-50015",
-    "Paper Cup 12oz",
+    "ຈອກເຈ້ຍ 12oz",
     "Stock In",
     "+500",
-    "All Branches",
+    "ທຸກສາຂາ",
     "Mekong Packaging",
     "May 17, 2025"
   ],
   [
     "SM-50014",
-    "Brown Sugar Syrup",
+    "ນ້ຳເຊື່ອມນ້ຳຕານແດງ",
     "Adjustment",
     "-2",
-    "Main Branch",
+    "ສາຂາຫຼັກ",
     "Expired",
     "May 16, 2025"
   ]
@@ -1097,7 +1097,7 @@ export const purchaseReceipts = [
     "LAK 4,200,000",
     "8 items",
     "Received",
-    "May 18, 2025"
+    "18 ພຶດສະພາ 2025"
   ],
   [
     "PR-00217",
@@ -1120,17 +1120,17 @@ export const purchaseReceipts = [
     "Pakse Produce Market",
     "LAK 2,950,000",
     "9 items",
-    "Pending",
+    "ລໍຖ້າ",
     "May 15, 2025"
   ]
 ];
 
 export const dashboardSummary: SummaryItem[] = [
-  { label: "Gross Sales (This Week)", value: "LAK 56,420,000", tone: "blue" },
-  { label: "Taxes Collected", value: "LAK 3,985,000", tone: "emerald" },
-  { label: "Discounts Given", value: "LAK 1,125,000", tone: "amber" },
-  { label: "Refunds", value: "LAK 320,000", tone: "red" },
-  { label: "Net Sales", value: "LAK 51,310,000", tone: "blue" }
+  { label: "ຍອດຂາຍລວມ (ອາທິດນີ້)", value: "LAK 56,420,000", tone: "blue" },
+  { label: "ພາສີທີ່ເກັບໄດ້", value: "LAK 3,985,000", tone: "emerald" },
+  { label: "ສ່ວນຫຼຸດທີ່ໃຫ້", value: "LAK 1,125,000", tone: "amber" },
+  { label: "ການຄືນເງິນ", value: "LAK 320,000", tone: "red" },
+  { label: "ຍອດຂາຍສຸດທິ", value: "LAK 51,310,000", tone: "blue" }
 ];
 
 export const defaultQuickActions: QuickAction[] = [
@@ -1142,7 +1142,7 @@ export const defaultQuickActions: QuickAction[] = [
     tone: "blue"
   },
   {
-    label: "Create Order",
+    label: "ສ້າງ Order",
     description: "Create a new order",
     icon: ReceiptText,
     href: "/business-admin/orders",

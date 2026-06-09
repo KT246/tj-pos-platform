@@ -7,9 +7,9 @@ import type {
 
 export const staffName = "Somchai P.";
 export const staffId = "STF-0021";
-export const staffRole = "Service Staff";
+export const staffRole = "ພະນັກງານບໍລິການ";
 export const selectedBranch = "TJ Cafe Vientiane";
-export const staffDevice = "Order Device 03";
+export const staffDevice = "ອຸປະກອນຮັບອໍເດີ 03";
 
 export const branchOptions = [
   { name: "TJ Cafe Vientiane", location: "Vientiane, Laos" },
@@ -18,19 +18,19 @@ export const branchOptions = [
 ];
 
 export const staffCategories = [
-  { id: "all", label: "All" },
-  { id: "coffee", label: "Coffee" },
-  { id: "tea", label: "Tea" },
-  { id: "pastry", label: "Bakery" },
-  { id: "snacks", label: "Meals" },
-  { id: "add-ons", label: "Add-ons" }
+  { id: "all", label: "ທັງໝົດ" },
+  { id: "ກາເຟ", label: "ກາເຟ" },
+  { id: "ຊາ", label: "ຊາ" },
+  { id: "ເບເກີຣີ", label: "ເບເກີຣີ" },
+  { id: "ອາຫານ", label: "ອາຫານ" },
+  { id: "add-ons", label: "ເພີ່ມເຕີມ" }
 ];
 
 const staffBaseProducts: StaffOrderProduct[] = [
   {
     id: "iced-latte",
-    name: "Iced Latte",
-    category: "coffee",
+    name: "ລາເຕ້ເຢັນ",
+    category: "ກາເຟ",
     sku: "CF-1001",
     price: 26000,
     image:
@@ -38,8 +38,8 @@ const staffBaseProducts: StaffOrderProduct[] = [
   },
   {
     id: "americano",
-    name: "Americano",
-    category: "coffee",
+    name: "ອາເມຣິກາໂນ",
+    category: "ກາເຟ",
     sku: "CF-1002",
     price: 22000,
     image:
@@ -47,8 +47,8 @@ const staffBaseProducts: StaffOrderProduct[] = [
   },
   {
     id: "cappuccino",
-    name: "Cappuccino",
-    category: "coffee",
+    name: "ຄາປູຊິໂນ",
+    category: "ກາເຟ",
     sku: "CF-1003",
     price: 25000,
     image:
@@ -56,8 +56,8 @@ const staffBaseProducts: StaffOrderProduct[] = [
   },
   {
     id: "thai-milk-tea",
-    name: "Thai Milk Tea",
-    category: "tea",
+    name: "ຊານົມໄທ",
+    category: "ຊາ",
     sku: "TE-2001",
     price: 22000,
     image:
@@ -65,8 +65,8 @@ const staffBaseProducts: StaffOrderProduct[] = [
   },
   {
     id: "croissant",
-    name: "Croissant",
-    category: "pastry",
+    name: "ຄຣົວຊອງ",
+    category: "ເບເກີຣີ",
     sku: "BK-3001",
     price: 18000,
     image:
@@ -74,8 +74,8 @@ const staffBaseProducts: StaffOrderProduct[] = [
   },
   {
     id: "chocolate-cake",
-    name: "Chocolate Cake",
-    category: "pastry",
+    name: "ເຄັກຊັອກໂກແລັດ",
+    category: "ເບເກີຣີ",
     sku: "BK-3002",
     price: 28000,
     image:
@@ -83,8 +83,8 @@ const staffBaseProducts: StaffOrderProduct[] = [
   },
   {
     id: "club-sandwich",
-    name: "Club Sandwich",
-    category: "snacks",
+    name: "ແຊນວິດຄລັບ",
+    category: "ອາຫານ",
     sku: "FD-4001",
     price: 32000,
     image:
@@ -92,8 +92,8 @@ const staffBaseProducts: StaffOrderProduct[] = [
   },
   {
     id: "mineral-water",
-    name: "Mineral Water",
-    category: "beverages",
+    name: "ນ້ຳດື່ມ",
+    category: "ເຄື່ອງດື່ມ",
     sku: "BV-5001",
     price: 10000,
     image:
@@ -101,8 +101,8 @@ const staffBaseProducts: StaffOrderProduct[] = [
   },
   {
     id: "cola-can",
-    name: "Cola Can",
-    category: "beverages",
+    name: "ໂຄລາກະປ໋ອງ",
+    category: "ເຄື່ອງດື່ມ",
     sku: "BV-5002",
     price: 12000,
     image:
@@ -110,8 +110,8 @@ const staffBaseProducts: StaffOrderProduct[] = [
   },
   {
     id: "sprite-can",
-    name: "Sprite Can",
-    category: "beverages",
+    name: "ສະໄປຣທ໌ກະປ໋ອງ",
+    category: "ເຄື່ອງດື່ມ",
     sku: "BV-5003",
     price: 12000,
     image:
@@ -119,8 +119,8 @@ const staffBaseProducts: StaffOrderProduct[] = [
   },
   {
     id: "orange-juice",
-    name: "Orange Juice",
-    category: "non-coffee",
+    name: "ນ້ຳສົ້ມ",
+    category: "ບໍ່ແມ່ນກາເຟ",
     sku: "NC-6001",
     price: 20000,
     image:
@@ -128,8 +128,8 @@ const staffBaseProducts: StaffOrderProduct[] = [
   },
   {
     id: "green-tea",
-    name: "Green Tea",
-    category: "tea",
+    name: "ຊາຂຽວ",
+    category: "ຊາ",
     sku: "TE-2002",
     price: 18000,
     image:
@@ -140,70 +140,70 @@ const staffBaseProducts: StaffOrderProduct[] = [
 export const staffProducts: StaffOrderProduct[] = staffBaseProducts.map(
   (product, index) => ({
     ...product,
-    category: product.category === "pastry" ? "pastry" : product.category,
+    category: product.category === "ເບເກີຣີ" ? "ເບເກີຣີ" : product.category,
     label:
       index === 0 || index === 1
-        ? "Popular"
+        ? "ນິຍົມ"
         : index === 2
-          ? "New"
+          ? "ໃໝ່"
           : index === 4
-            ? "Bakery"
+            ? "ເບເກີຣີ"
             : index === 6
-              ? "Top Pick"
+              ? "ແນະນຳ"
               : undefined
   })
 );
 
 export const staffTables: DiningTable[] = [
-  { id: "T01", seats: 2, area: "Indoor", status: "Available" },
-  { id: "T02", seats: 4, area: "Indoor", status: "Available" },
-  { id: "T03", seats: 4, area: "Indoor", status: "Occupied", elapsed: "00:45" },
-  { id: "T04", seats: 2, area: "Indoor", status: "Available" },
-  { id: "T05", seats: 6, area: "Indoor", status: "Occupied", elapsed: "01:15" },
-  { id: "T06", seats: 4, area: "Outdoor", status: "Available" },
-  { id: "T07", seats: 2, area: "Outdoor", status: "Available" },
-  { id: "T08", seats: 4, area: "VIP Room", status: "Available" },
-  { id: "T09", seats: 2, area: "VIP Room", status: "Reserved", elapsed: "15:30" },
-  { id: "T10", seats: 6, area: "Terrace", status: "Available" }
+  { id: "T01", seats: 2, area: "ພາຍໃນ", status: "ວ່າງ" },
+  { id: "T02", seats: 4, area: "ພາຍໃນ", status: "ວ່າງ" },
+  { id: "T03", seats: 4, area: "ພາຍໃນ", status: "ມີລູກຄ້າ", elapsed: "00:45" },
+  { id: "T04", seats: 2, area: "ພາຍໃນ", status: "ວ່າງ" },
+  { id: "T05", seats: 6, area: "ພາຍໃນ", status: "ມີລູກຄ້າ", elapsed: "01:15" },
+  { id: "T06", seats: 4, area: "ພາຍນອກ", status: "ວ່າງ" },
+  { id: "T07", seats: 2, area: "ພາຍນອກ", status: "ວ່າງ" },
+  { id: "T08", seats: 4, area: "ຫ້ອງ VIP", status: "ວ່າງ" },
+  { id: "T09", seats: 2, area: "ຫ້ອງ VIP", status: "ຈອງໄວ້", elapsed: "15:30" },
+  { id: "T10", seats: 6, area: "ລານນອກ", status: "ວ່າງ" }
 ];
 
 export const starterStaffCart: StaffOrderLine[] = [
   {
     id: "staff-line-iced-latte",
     productId: "iced-latte",
-    name: "Iced Latte",
-    category: "Coffee",
+    name: "ລາເຕ້ເຢັນ",
+    category: "ກາເຟ",
     price: 28000,
     quantity: 1,
     image: staffProducts[0].image,
-    size: "Regular Size",
-    milk: "Full Cream Milk",
-    sugar: "Less Sugar",
-    ice: "Regular Ice",
-    note: "Less sugar, extra shot"
+    size: "ຂະໜາດປົກກະຕິ",
+    milk: "ນົມ Full Cream",
+    sugar: "ຫວານນ້ອຍ",
+    ice: "ນ້ຳກ້ອນປົກກະຕິ",
+    note: "ຫວານນ້ອຍ, ເພີ່ມ shot"
   },
   {
     id: "staff-line-hot-latte",
     productId: "hot-latte",
-    name: "Hot Latte",
-    category: "Coffee",
+    name: "ລາເຕ້ຮ້ອນ",
+    category: "ກາເຟ",
     price: 27000,
     quantity: 1,
     image: staffProducts[1].image,
-    size: "Regular Size",
-    milk: "Full Cream Milk",
-    sugar: "Normal",
-    ice: "No Ice"
+    size: "ຂະໜາດປົກກະຕິ",
+    milk: "ນົມ Full Cream",
+    sugar: "ປົກກະຕິ",
+    ice: "ບໍ່ໃສ່ນ້ຳກ້ອນ"
   },
   {
     id: "staff-line-croissant",
     productId: "croissant",
-    name: "Croissant",
-    category: "Bakery",
+    name: "ຄຣົວຊອງ",
+    category: "ເບເກີຣີ",
     price: 18000,
     quantity: 1,
     image: staffProducts[4].image,
-    size: "Buttery",
+    size: "ຫອມເນີຍ",
     milk: "-",
     sugar: "-",
     ice: "-"
@@ -215,44 +215,44 @@ export const activeStaffOrders: StaffOrderRecord[] = [
     id: "#SO-1056",
     tableId: "T03",
     guests: 3,
-    status: "Preparing",
+    status: "ກຳລັງກຽມ",
     items: 3,
     total: 72000,
     elapsed: "12 min",
-    type: "Dine In",
+    type: "ນັ່ງກິນທີ່ຮ້ານ",
     lines: starterStaffCart
   },
   {
     id: "#SO-1055",
     tableId: "T05",
     guests: 2,
-    status: "Sent",
+    status: "ສົ່ງແລ້ວ",
     items: 4,
     total: 96000,
     elapsed: "18 min",
-    type: "Dine In",
+    type: "ນັ່ງກິນທີ່ຮ້ານ",
     lines: starterStaffCart.slice(0, 2)
   },
   {
     id: "#SO-1054",
     tableId: "T08",
     guests: 1,
-    status: "Ready to Serve",
+    status: "ພ້ອມເສີບ",
     items: 2,
     total: 45000,
     elapsed: "22 min",
-    type: "Take Away",
+    type: "ສັ່ງກັບບ້ານ",
     lines: starterStaffCart.slice(1, 3)
   },
   {
     id: "#SO-1053",
     tableId: "T10",
     guests: 5,
-    status: "Waiting Bill",
+    status: "ລໍຖ້າອອກບິນ",
     items: 5,
     total: 118000,
     elapsed: "35 min",
-    type: "Dine In",
+    type: "ນັ່ງກິນທີ່ຮ້ານ",
     lines: starterStaffCart
   }
 ];

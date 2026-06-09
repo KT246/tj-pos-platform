@@ -37,10 +37,10 @@ export const adminNavItems: AdminNavItem[] = [
     match: ["/platform-admin", "/platform-admin/dashboard"]
   },
   {
-    href: "/platform-admin/businesses",
+    href: "/platform-admin/ທຸລະກິດ",
     label: "ທຸລະກິດ",
     icon: Building2,
-    match: ["/platform-admin/businesses"]
+    match: ["/platform-admin/ທຸລະກິດ"]
   },
   {
     href: "/platform-admin/users",
@@ -176,7 +176,7 @@ export const businesses: Business[] = [
   {
     id: "BUS-001",
     name: "Joma Bakery Cafe",
-    location: "Vientiane Capital",
+    location: "ນະຄອນຫຼວງວຽງຈັນ",
     type: "ຮ້ານກາເຟ",
     owner: "Khamla Vongsa",
     ownerEmail: "khamla@jomabakery.la",
@@ -187,13 +187,13 @@ export const businesses: Business[] = [
     branches: 3,
     plan: "Pro",
     status: "active",
-    lastActivity: "10:24 AM\nMay 18, 2025",
-    joinedOn: "May 18, 2025"
+    lastActivity: "10:24 AM\nພຶດສະພາ 18, 2025",
+    joinedOn: "ພຶດສະພາ 18, 2025"
   },
   {
     id: "BUS-002",
     name: "ViengTiane Coffee",
-    location: "Vientiane Capital",
+    location: "ນະຄອນຫຼວງວຽງຈັນ",
     type: "ຮ້ານກາເຟ",
     owner: "Somkheo Phan",
     ownerEmail: "somkheo@vtcoffee.la",
@@ -204,8 +204,8 @@ export const businesses: Business[] = [
     branches: 2,
     plan: "Business",
     status: "active",
-    lastActivity: "9:41 AM\nMay 18, 2025",
-    joinedOn: "May 17, 2025"
+    lastActivity: "9:41 AM\nພຶດສະພາ 18, 2025",
+    joinedOn: "ພຶດສະພາ 17, 2025"
   },
   {
     id: "BUS-003",
@@ -221,13 +221,13 @@ export const businesses: Business[] = [
     branches: 1,
     plan: "Enterprise",
     status: "active",
-    lastActivity: "Yesterday\n8:15 PM",
-    joinedOn: "May 17, 2025"
+    lastActivity: "ມື້ວານ\n8:15 PM",
+    joinedOn: "ພຶດສະພາ 17, 2025"
   },
   {
     id: "BUS-004",
     name: "BFL Group",
-    location: "Vientiane Capital",
+    location: "ນະຄອນຫຼວງວຽງຈັນ",
     type: "ຮ້ານຄ້າ",
     owner: "Pheng Phetsouvanh",
     ownerEmail: "pheng@bflgroup.la",
@@ -238,13 +238,13 @@ export const businesses: Business[] = [
     branches: 8,
     plan: "Pro",
     status: "active",
-    lastActivity: "May 16, 2025\n5:32 PM",
-    joinedOn: "May 16, 2025"
+    lastActivity: "ພຶດສະພາ 16, 2025\n5:32 PM",
+    joinedOn: "ພຶດສະພາ 16, 2025"
   },
   {
     id: "BUS-005",
     name: "Sabai Dee Hotel",
-    location: "Vientiane Capital",
+    location: "ນະຄອນຫຼວງວຽງຈັນ",
     type: "ໂຮງແຮມ / ບໍລິການ",
     owner: "Vilaykham S.",
     ownerEmail: "vilaykham@sabaideehotel.la",
@@ -255,13 +255,13 @@ export const businesses: Business[] = [
     branches: 2,
     plan: "Business",
     status: "trial",
-    lastActivity: "May 16, 2025\n11:02 AM",
-    joinedOn: "May 16, 2025"
+    lastActivity: "ພຶດສະພາ 16, 2025\n11:02 AM",
+    joinedOn: "ພຶດສະພາ 16, 2025"
   },
   {
     id: "BUS-006",
     name: "Beauty Up Salon",
-    location: "Savannakhet Province",
+    location: "ແຂວງສະຫວັນນະເຂດ",
     type: "ຄວາມງາມ",
     owner: "Nittaya Khamphou",
     ownerEmail: "nittaya@beautyup.la",
@@ -272,8 +272,8 @@ export const businesses: Business[] = [
     branches: 1,
     plan: "Starter",
     status: "suspended",
-    lastActivity: "May 15, 2025\n4:20 PM",
-    joinedOn: "May 14, 2025"
+    lastActivity: "ພຶດສະພາ 15, 2025\n4:20 PM",
+    joinedOn: "ພຶດສະພາ 14, 2025"
   }
 ];
 
@@ -281,23 +281,23 @@ export const requests: SimpleRecord[] = [
   {
     id: "REQ-2025-118",
     title: "ສົນໃຈລະບົບສຳລັບທຸລະກິດໃໝ່",
-    subtitle: "Vientiane Capital",
+    subtitle: "ນະຄອນຫຼວງວຽງຈັນ",
     status: "new",
-    meta: "May 18, 2025, 10:24 AM"
+    meta: "ພຶດສະພາ 18, 2025, 10:24 AM"
   },
   {
     id: "REQ-2025-117",
     title: "ສອບຖາມເລື່ອງລາຄາ",
-    subtitle: "Savannakhet Province",
+    subtitle: "ແຂວງສະຫວັນນະເຂດ",
     status: "new",
-    meta: "May 18, 2025, 09:03 AM"
+    meta: "ພຶດສະພາ 18, 2025, 09:03 AM"
   },
   {
     id: "REQ-2025-116",
     title: "ຂໍເພີ່ມຟີເຈີ",
-    subtitle: "Luang Prabang Province",
+    subtitle: "ແຂວງຫຼວງພະບາງ",
     status: "inProgress",
-    meta: "May 17, 2025, 03:25 PM"
+    meta: "ພຶດສະພາ 17, 2025, 03:25 PM"
   }
 ];
 
@@ -357,11 +357,11 @@ export const planCards = [
 ];
 
 export const paymentMethods = [
-  ["BCEL One", "Bank / QR", "Mobile Banking", "BCEL", "ທຸລະກິດທັງໝົດ", "active"],
-  ["LaoViet QR", "Bank / QR", "QR Code", "LaoViet Bank", "ທຸລະກິດທັງໝົດ", "active"],
+  ["BCEL One", "ທະນາຄານ / QR", "Mobile Banking", "BCEL", "ທຸລະກິດທັງໝົດ", "active"],
+  ["LaoViet QR", "ທະນາຄານ / QR", "QR Code", "LaoViet Bank", "ທຸລະກິດທັງໝົດ", "active"],
   [
     "BIDV SmartBanking",
-    "Bank / QR",
+    "ທະນາຄານ / QR",
     "Mobile Banking",
     "BIDV Laos",
     "ທຸລະກິດທັງໝົດ",
@@ -369,22 +369,22 @@ export const paymentMethods = [
   ],
   [
     "ACLEDA iPay",
-    "Bank / QR",
+    "ທະນາຄານ / QR",
     "Mobile Banking",
     "ACLEDA Bank",
     "ທຸລະກິດທັງໝົດ",
     "active"
   ],
-  ["Cash", "Cash", "In-Store", "ຊຳລະເງິນສົດ", "ທຸລະກິດທັງໝົດ", "active"],
+  ["ເງິນສົດ", "ເງິນສົດ", "ທີ່ຮ້ານ", "ຊຳລະເງິນສົດ", "ທຸລະກິດທັງໝົດ", "active"],
   [
     "VISA / MasterCard",
-    "Card",
+    "ບັດ",
     "POS Terminal",
     "Card Network",
     "ທຸລະກິດທັງໝົດ",
     "active"
   ],
-  ["UnionPay", "Card", "POS Terminal", "UnionPay", "ທຸລະກິດທັງໝົດ", "active"],
+  ["UnionPay", "ບັດ", "POS Terminal", "UnionPay", "ທຸລະກິດທັງໝົດ", "active"],
   ["PromptPay QR", "QR", "QR Code", "PromptPay (TH)", "ທຸລະກິດທີ່ເລືອກ", "active"],
   ["WeChat Pay", "QR", "QR Code", "WeChat Pay", "ທຸລະກິດທີ່ເລືອກ", "inactive"],
   ["AliPay", "QR", "QR Code", "AliPay", "ທຸລະກິດທີ່ເລືອກ", "inactive"]
@@ -393,6 +393,6 @@ export const paymentMethods = [
 export const auditRows = [
   ["10:24 AM", "Somchai Phommasenh", "ສ້າງທຸລະກິດ", "Joma Bakery Cafe", "IP 10.0.2.18"],
   ["9:41 AM", "Vannapha Support", "ອັບເດດ Ticket", "TK-2025-118", "IP 10.0.2.21"],
-  ["Yesterday", "System", "ຮັບການຊຳລະ", "ViengTiane Coffee", "API"],
-  ["May 16, 2025", "Somchai Phommasenh", "ກຳນົດແພັກເກດ", "Paksan Laos", "IP 10.0.2.18"]
+  ["ມື້ວານ", "System", "ຮັບການຊຳລະ", "ViengTiane Coffee", "API"],
+  ["ພຶດສະພາ 16, 2025", "Somchai Phommasenh", "ກຳນົດແພັກເກດ", "Paksan Laos", "IP 10.0.2.18"]
 ];

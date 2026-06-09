@@ -10,7 +10,6 @@ import { staffCategories, staffName, staffProducts } from "../data/staff-order-d
 import { useStaffOrderStore } from "../stores/staff-order-store";
 import type { StaffOrderProduct } from "../types";
 import { formatMoney, getStaffOrderPath } from "../utils";
-import { lo } from "../utils/lao-labels";
 
 export function StaffMenuPage({ businessSlug }: { businessSlug: string }) {
   const params = useParams();
@@ -58,13 +57,13 @@ export function StaffMenuPage({ businessSlug }: { businessSlug: string }) {
         </>
       }
     >
-      <StaffOrderHeader title="Take Order" />
+      <StaffOrderHeader title="ຮັບອໍເດີ" />
       <StaffScrollArea className="pb-3">
         <StaffContextCard
           branch={selectedBranch}
           staff={staffName}
-          shift="Morning"
-          table={`${tableId} - ${guests} ${lo("Guests")}`}
+          shift="ກະເຊົ້າ"
+          table={`${tableId} - ${guests} ${"ລູກຄ້າ"}`}
         />
 
         <label className="relative mt-3 block">
@@ -73,7 +72,7 @@ export function StaffMenuPage({ businessSlug }: { businessSlug: string }) {
             value={query}
             onChange={(event) => setQuery(event.currentTarget.value)}
             className="h-10 w-full rounded-lg border border-blue-100 bg-white pr-11 pl-10 text-[12px] font-bold shadow-[0_7px_16px_rgba(15,23,42,0.03)] transition outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-            placeholder={lo("Search menu items")}
+            placeholder={"ຄົ້ນຫາລາຍການເມນູ"}
           />
           <button
             type="button"
@@ -99,7 +98,7 @@ export function StaffMenuPage({ businessSlug }: { businessSlug: string }) {
                     : "border-blue-100 bg-white text-slate-500 hover:border-blue-300 hover:text-blue-600"
                 }`}
               >
-                {lo(category.label)}
+                {category.label}
               </button>
             );
           })}
@@ -146,14 +145,14 @@ function MenuProductCard({
         <div className="min-w-0 pt-1">
           {product.label ? (
             <span className="mb-1.5 inline-flex rounded-md bg-blue-50 px-1.5 py-0.5 text-[9px] font-black text-blue-600">
-              {lo(product.label)}
+              {product.label}
             </span>
           ) : null}
           <p className="line-clamp-2 text-[13px] leading-4 font-black text-slate-950">
-            {lo(product.name)}
+            {product.name}
           </p>
           <p className="mt-0.5 truncate text-[10px] font-bold text-slate-500">
-            {lo(product.category === "pastry" ? "Bakery" : product.category)}
+            {product.category === "ເບເກີຣີ" ? "ເບເກີຣີ" : product.category}
           </p>
         </div>
       </Link>

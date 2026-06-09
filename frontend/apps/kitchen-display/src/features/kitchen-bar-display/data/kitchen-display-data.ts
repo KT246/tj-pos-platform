@@ -38,7 +38,7 @@ const branchId = "branch-vientiane-center";
 function createKitchenTicket(seed: KitchenTicketSeed): KitchenTicket {
   const ticketNumber = seed.orderNo.replace(/^#/, "");
   const tableId =
-    seed.type === "Dine In"
+    seed.type === "ນັ່ງກິນທີ່ຮ້ານ"
       ? seed.table.toLowerCase().replace(/\s+/g, "-")
       : null;
 
@@ -53,7 +53,7 @@ function createKitchenTicket(seed: KitchenTicketSeed): KitchenTicket {
     ...seed,
     items: seed.items.map((item, index) => ({
       orderItemId: item.orderItemId ?? `${seed.orderNo}-${index + 1}`,
-      status: item.status ?? (seed.status === "ready" ? "done" : seed.status),
+      status: item.status ?? (seed.status === "ພ້ອມ" ? "done" : seed.status),
       ...item
     }))
   };
@@ -68,15 +68,15 @@ export const kitchenBusiness: KitchenBusiness = {
 };
 
 export const kitchenStations: KitchenStation[] = [
-  { id: "all", label: "All Stations", icon: ChefHat },
-  { id: "kitchen", label: "Kitchen", icon: CookingPot },
-  { id: "bar", label: "Bar", icon: Wine },
-  { id: "bakery", label: "Bakery", icon: Coffee },
-  { id: "pass", label: "Pass", icon: PackageCheck }
+  { id: "all", label: "ທຸກສະຖານີ", icon: ChefHat },
+  { id: "ຄົວ", label: "ຄົວ", icon: CookingPot },
+  { id: "ບາ", label: "ບາ", icon: Wine },
+  { id: "ເບເກີຣີ", label: "ເບເກີຣີ", icon: Coffee },
+  { id: "ຈຸດສົ່ງອາຫານ", label: "ຈຸດສົ່ງອາຫານ", icon: PackageCheck }
 ];
 
 export const defaultKitchenSettings: KitchenSettings = {
-  enabledStationIds: ["kitchen", "bar", "bakery", "pass"],
+  enabledStationIds: ["ຄົວ", "ບາ", "ເບເກີຣີ", "ຈຸດສົ່ງອາຫານ"],
   autoRefreshSeconds: 5,
   density: "comfortable",
   showItemNotes: true,
@@ -90,37 +90,37 @@ const kitchenTicketSeeds: KitchenTicketSeed[] = [
     id: "#ORD-05029",
     orderNo: "ORD-05029",
     table: "Table 06",
-    type: "Dine In",
-    station: "kitchen",
-    status: "pending",
-    priority: "High",
+    type: "ນັ່ງກິນທີ່ຮ້ານ",
+    station: "ຄົວ",
+    status: "ໃໝ່",
+    priority: "ດ່ວນ",
     elapsedMinutes: 2,
-    assignedTo: "Unassigned",
+    assignedTo: "ຍັງບໍ່ມອບໝາຍ",
     receivedAt: "10:22 AM",
     customerName: "Khampheng L.",
-    customerNote: "Guest asked for quick service.",
-    kitchenNote: "Fire mains together. Hold dessert until called.",
+    customerNote: "ລູກຄ້າຂໍໃຫ້ເຮັດໄວ.",
+    kitchenNote: "ເຮັດອາຫານຫຼັກພ້ອມກັນ ແລະ ລໍຖ້າເອີ້ນກ່ອນສົ່ງຂອງຫວານ.",
     items: [
       {
         id: "item-05029-1",
         quantity: 2,
-        name: "Pad Thai (Chicken)",
-        modifiers: ["No peanuts", "Medium spice"],
+        name: "ຜັດໄທໄກ່",
+        modifiers: ["ບໍ່ໃສ່ຖົ່ວດິນ", "ເຜັດປານກາງ"],
         note: "One plate no bean sprouts",
         unitPrice: 45000
       },
       {
         id: "item-05029-2",
         quantity: 1,
-        name: "Fresh Spring Roll (Pork)",
+        name: "ປໍເປີຍສົດໝູ",
         note: "Extra dipping sauce",
         unitPrice: 32000
       },
       {
         id: "item-05029-3",
         quantity: 1,
-        name: "Lime Soda",
-        modifiers: ["Less ice"],
+        name: "ໂຊດາໝາກນາວ",
+        modifiers: ["ນ້ຳກ້ອນໜ້ອຍ"],
         unitPrice: 18000
       }
     ]
@@ -129,51 +129,51 @@ const kitchenTicketSeeds: KitchenTicketSeed[] = [
     id: "#ORD-05018",
     orderNo: "ORD-05018",
     table: "Table 12",
-    type: "Dine In",
-    station: "kitchen",
-    status: "pending",
-    priority: "High",
+    type: "ນັ່ງກິນທີ່ຮ້ານ",
+    station: "ຄົວ",
+    status: "ໃໝ່",
+    priority: "ດ່ວນ",
     elapsedMinutes: 11,
-    assignedTo: "Unassigned",
+    assignedTo: "ຍັງບໍ່ມອບໝາຍ",
     receivedAt: "10:13 AM",
-    customerName: "Walk-in Customer",
+    customerName: "ລູກຄ້າທົ່ວໄປ",
     customerNote: "Birthday table.",
-    kitchenNote: "Extra spicy please",
+    kitchenNote: "ຂໍເຜັດພິເສດ.",
     items: [
-      { id: "item-05018-1", quantity: 1, name: "Tom Yum Goong", unitPrice: 55000 },
+      { id: "item-05018-1", quantity: 1, name: "ຕົ້ມຍຳກຸ້ງ", unitPrice: 55000 },
       {
         id: "item-05018-2",
         quantity: 1,
-        name: "Green Tea Matcha Latte",
+        name: "ມັດຊະລາເຕ້ຊາຂຽວ",
         note: "Less sugar",
         unitPrice: 30000
       },
-      { id: "item-05018-3", quantity: 1, name: "Steamed Rice", unitPrice: 10000 },
-      { id: "item-05018-4", quantity: 1, name: "Mango Sticky Rice", unitPrice: 28000 }
+      { id: "item-05018-3", quantity: 1, name: "ເຂົ້າສວຍ", unitPrice: 10000 },
+      { id: "item-05018-4", quantity: 1, name: "ເຂົ້າໜຽວມ່ວງ", unitPrice: 28000 }
     ]
   },
   {
     id: "#ORD-05017",
     orderNo: "ORD-05017",
-    table: "Take Away",
-    type: "Take Away",
-    station: "bakery",
-    status: "pending",
-    priority: "Normal",
+    table: "ສັ່ງກັບບ້ານ",
+    type: "ສັ່ງກັບບ້ານ",
+    station: "ເບເກີຣີ",
+    status: "ໃໝ່",
+    priority: "ປົກກະຕິ",
     elapsedMinutes: 9,
-    assignedTo: "Unassigned",
+    assignedTo: "ຍັງບໍ່ມອບໝາຍ",
     receivedAt: "10:15 AM",
     customerName: "Vilayphone S.",
     customerNote: "Packing for takeaway.",
-    kitchenNote: "No straw",
+    kitchenNote: "ບໍ່ເອົາຫຼອດ.",
     items: [
-      { id: "item-05017-1", quantity: 2, name: "Croissant", unitPrice: 18000 },
-      { id: "item-05017-2", quantity: 1, name: "Chocolate Muffin", unitPrice: 22000 },
+      { id: "item-05017-1", quantity: 2, name: "ຄຣົວຊອງ", unitPrice: 18000 },
+      { id: "item-05017-2", quantity: 1, name: "ມັບຟິນຊັອກໂກແລັດ", unitPrice: 22000 },
       {
         id: "item-05017-3",
         quantity: 1,
-        name: "Iced Americano",
-        modifiers: ["Less ice"],
+        name: "ອາເມຣິກາໂນເຢັນ",
+        modifiers: ["ນ້ຳກ້ອນໜ້ອຍ"],
         unitPrice: 25000
       }
     ]
@@ -182,181 +182,181 @@ const kitchenTicketSeeds: KitchenTicketSeed[] = [
     id: "#ORD-05016",
     orderNo: "ORD-05016",
     table: "Table 09",
-    type: "Dine In",
-    station: "bar",
-    status: "pending",
-    priority: "Normal",
+    type: "ນັ່ງກິນທີ່ຮ້ານ",
+    station: "ບາ",
+    status: "ໃໝ່",
+    priority: "ປົກກະຕິ",
     elapsedMinutes: 7,
-    assignedTo: "Unassigned",
+    assignedTo: "ຍັງບໍ່ມອບໝາຍ",
     receivedAt: "10:17 AM",
     customerName: "Souvanna L.",
     customerNote: "Two guests waiting.",
-    kitchenNote: "1 cup no ice",
+    kitchenNote: "1 ຈອກບໍ່ໃສ່ນ້ຳກ້ອນ.",
     items: [
-      { id: "item-05016-1", quantity: 2, name: "Iced Latte", unitPrice: 28000 },
+      { id: "item-05016-1", quantity: 2, name: "ລາເຕ້ເຢັນ", unitPrice: 28000 },
       {
         id: "item-05016-2",
         quantity: 1,
-        name: "Blueberry Cheesecake",
+        name: "ຊີສເຄັກບລູເບີຣີ",
         unitPrice: 34000
       },
-      { id: "item-05016-3", quantity: 1, name: "Paper Cup 12oz", unitPrice: 0 }
+      { id: "item-05016-3", quantity: 1, name: "ຈອກເຈ້ຍ 12oz", unitPrice: 0 }
     ]
   },
   {
     id: "#ORD-05021",
     orderNo: "ORD-05021",
     table: "Table 03",
-    type: "Dine In",
-    station: "kitchen",
-    status: "pending",
-    priority: "Normal",
+    type: "ນັ່ງກິນທີ່ຮ້ານ",
+    station: "ຄົວ",
+    status: "ໃໝ່",
+    priority: "ປົກກະຕິ",
     elapsedMinutes: 6,
-    assignedTo: "Unassigned",
+    assignedTo: "ຍັງບໍ່ມອບໝາຍ",
     receivedAt: "10:18 AM",
-    customerName: "Walk-in Customer",
+    customerName: "ລູກຄ້າທົ່ວໄປ",
     customerNote: "Family table.",
-    kitchenNote: "No onions in soup",
+    kitchenNote: "ບໍ່ໃສ່ຫົວບົ່ວໃນແກງ.",
     items: [
-      { id: "item-05021-1", quantity: 1, name: "Khao Piak Sen", unitPrice: 42000 },
-      { id: "item-05021-2", quantity: 1, name: "Iced Latte", unitPrice: 28000 },
-      { id: "item-05021-3", quantity: 1, name: "Fresh Spring Roll (Pork)", unitPrice: 32000 }
+      { id: "item-05021-1", quantity: 1, name: "ເຂົ້າປຽກເສັ້ນ", unitPrice: 42000 },
+      { id: "item-05021-2", quantity: 1, name: "ລາເຕ້ເຢັນ", unitPrice: 28000 },
+      { id: "item-05021-3", quantity: 1, name: "ປໍເປີຍສົດໝູ", unitPrice: 32000 }
     ]
   },
   {
     id: "#ORD-05022",
     orderNo: "ORD-05022",
-    table: "Take Away",
-    type: "Take Away",
-    station: "bar",
-    status: "pending",
-    priority: "Normal",
+    table: "ສັ່ງກັບບ້ານ",
+    type: "ສັ່ງກັບບ້ານ",
+    station: "ບາ",
+    status: "ໃໝ່",
+    priority: "ປົກກະຕິ",
     elapsedMinutes: 7,
-    assignedTo: "Unassigned",
+    assignedTo: "ຍັງບໍ່ມອບໝາຍ",
     receivedAt: "10:17 AM",
-    customerName: "Online Order",
+    customerName: "ອໍເດີ Online",
     customerNote: "Pickup at counter.",
-    kitchenNote: "Less ice please",
+    kitchenNote: "ຂໍນ້ຳກ້ອນໜ້ອຍ.",
     items: [
-      { id: "item-05022-1", quantity: 2, name: "Iced Americano", unitPrice: 25000 },
-      { id: "item-05022-2", quantity: 1, name: "Croissant", unitPrice: 18000 },
-      { id: "item-05022-3", quantity: 1, name: "Chocolate Muffin", unitPrice: 22000 }
+      { id: "item-05022-1", quantity: 2, name: "ອາເມຣິກາໂນເຢັນ", unitPrice: 25000 },
+      { id: "item-05022-2", quantity: 1, name: "ຄຣົວຊອງ", unitPrice: 18000 },
+      { id: "item-05022-3", quantity: 1, name: "ມັບຟິນຊັອກໂກແລັດ", unitPrice: 22000 }
     ]
   },
   {
     id: "#ORD-05024",
     orderNo: "ORD-05024",
-    table: "Take Away",
-    type: "Take Away",
-    station: "bar",
-    status: "pending",
-    priority: "Normal",
+    table: "ສັ່ງກັບບ້ານ",
+    type: "ສັ່ງກັບບ້ານ",
+    station: "ບາ",
+    status: "ໃໝ່",
+    priority: "ປົກກະຕິ",
     elapsedMinutes: 11,
-    assignedTo: "Unassigned",
+    assignedTo: "ຍັງບໍ່ມອບໝາຍ",
     receivedAt: "10:13 AM",
-    customerName: "Delivery Partner",
+    customerName: "ຄູ່ຄ້າຈັດສົ່ງ",
     customerNote: "Driver waiting near counter.",
-    kitchenNote: "No straw",
+    kitchenNote: "ບໍ່ເອົາຫຼອດ.",
     items: [
-      { id: "item-05024-1", quantity: 1, name: "Caramel Macchiato", unitPrice: 30000 },
-      { id: "item-05024-2", quantity: 1, name: "Banana Cake", unitPrice: 22000 },
-      { id: "item-05024-3", quantity: 1, name: "Bottled Water", unitPrice: 8000 }
+      { id: "item-05024-1", quantity: 1, name: "ຄາຣາເມວມັກຄີອາໂຕ", unitPrice: 30000 },
+      { id: "item-05024-2", quantity: 1, name: "ເຄັກກ້ວຍ", unitPrice: 22000 },
+      { id: "item-05024-3", quantity: 1, name: "ນ້ຳດື່ມຂວດ", unitPrice: 8000 }
     ]
   },
   {
     id: "#ORD-05025",
     orderNo: "ORD-05025",
     table: "Table 12",
-    type: "Dine In",
-    station: "kitchen",
-    status: "pending",
-    priority: "High",
+    type: "ນັ່ງກິນທີ່ຮ້ານ",
+    station: "ຄົວ",
+    status: "ໃໝ່",
+    priority: "ດ່ວນ",
     elapsedMinutes: 12,
-    assignedTo: "Unassigned",
+    assignedTo: "ຍັງບໍ່ມອບໝາຍ",
     receivedAt: "10:12 AM",
-    customerName: "Walk-in Customer",
-    customerNote: "Guest has allergy.",
-    kitchenNote: "Allergic to peanuts",
+    customerName: "ລູກຄ້າທົ່ວໄປ",
+    customerNote: "ລູກຄ້າມີອາການແພ້.",
+    kitchenNote: "ແພ້ຖົ່ວດິນ",
     items: [
-      { id: "item-05025-1", quantity: 1, name: "Pad Thai (Chicken)", unitPrice: 45000 },
-      { id: "item-05025-2", quantity: 1, name: "Thai Iced Tea", unitPrice: 25000 },
-      { id: "item-05025-3", quantity: 1, name: "Lime Soda", unitPrice: 18000 }
+      { id: "item-05025-1", quantity: 1, name: "ຜັດໄທໄກ່", unitPrice: 45000 },
+      { id: "item-05025-2", quantity: 1, name: "ຊາໄທເຢັນ", unitPrice: 25000 },
+      { id: "item-05025-3", quantity: 1, name: "ໂຊດາໝາກນາວ", unitPrice: 18000 }
     ]
   },
   {
     id: "#ORD-05019",
     orderNo: "ORD-05019",
     table: "Table 02",
-    type: "Dine In",
-    station: "kitchen",
-    status: "preparing",
-    priority: "High",
+    type: "ນັ່ງກິນທີ່ຮ້ານ",
+    station: "ຄົວ",
+    status: "ກຳລັງກຽມ",
+    priority: "ດ່ວນ",
     elapsedMinutes: 18,
     assignedTo: "Sone K.",
     receivedAt: "10:06 AM",
     customerName: "Phonephip P.",
     customerNote: "Regular guest.",
-    kitchenNote: "Extra spicy please",
+    kitchenNote: "ຂໍເຜັດພິເສດ.",
     items: [
-      { id: "item-05019-1", quantity: 1, name: "Tom Yum Goong", unitPrice: 55000 },
+      { id: "item-05019-1", quantity: 1, name: "ຕົ້ມຍຳກຸ້ງ", unitPrice: 55000 },
       {
         id: "item-05019-2",
         quantity: 1,
-        name: "Green Tea Matcha Latte",
+        name: "ມັດຊະລາເຕ້ຊາຂຽວ",
         unitPrice: 30000
       },
-      { id: "item-05019-3", quantity: 1, name: "Steamed Rice", unitPrice: 10000 },
-      { id: "item-05019-4", quantity: 1, name: "Mango Sticky Rice", unitPrice: 28000 }
+      { id: "item-05019-3", quantity: 1, name: "ເຂົ້າສວຍ", unitPrice: 10000 },
+      { id: "item-05019-4", quantity: 1, name: "ເຂົ້າໜຽວມ່ວງ", unitPrice: 28000 }
     ]
   },
   {
     id: "#ORD-05012",
     orderNo: "ORD-05012",
-    table: "Take Away",
-    type: "Take Away",
-    station: "bar",
-    status: "preparing",
-    priority: "Normal",
+    table: "ສັ່ງກັບບ້ານ",
+    type: "ສັ່ງກັບບ້ານ",
+    station: "ບາ",
+    status: "ກຳລັງກຽມ",
+    priority: "ປົກກະຕິ",
     elapsedMinutes: 16,
     assignedTo: "Souvanna L.",
     receivedAt: "10:08 AM",
-    customerName: "Online Order",
+    customerName: "ອໍເດີ Online",
     customerNote: "Pickup counter.",
-    kitchenNote: "Less ice please",
+    kitchenNote: "ຂໍນ້ຳກ້ອນໜ້ອຍ.",
     items: [
-      { id: "item-05012-1", quantity: 2, name: "Iced Americano", unitPrice: 25000 },
-      { id: "item-05012-2", quantity: 1, name: "Croissant", unitPrice: 18000 },
-      { id: "item-05012-3", quantity: 1, name: "Chocolate Muffin", unitPrice: 22000 }
+      { id: "item-05012-1", quantity: 2, name: "ອາເມຣິກາໂນເຢັນ", unitPrice: 25000 },
+      { id: "item-05012-2", quantity: 1, name: "ຄຣົວຊອງ", unitPrice: 18000 },
+      { id: "item-05012-3", quantity: 1, name: "ມັບຟິນຊັອກໂກແລັດ", unitPrice: 22000 }
     ]
   },
   {
     id: "#ORD-05023",
     orderNo: "ORD-05023",
     table: "Table 07",
-    type: "Dine In",
-    station: "kitchen",
-    status: "preparing",
-    priority: "High",
+    type: "ນັ່ງກິນທີ່ຮ້ານ",
+    station: "ຄົວ",
+    status: "ກຳລັງກຽມ",
+    priority: "ດ່ວນ",
     elapsedMinutes: 14,
     assignedTo: "Phonephip P.",
     receivedAt: "10:10 AM",
-    customerName: "Walk-in Customer",
+    customerName: "ລູກຄ້າທົ່ວໄປ",
     customerNote: "Family table.",
-    kitchenNote: "No onions in soup",
+    kitchenNote: "ບໍ່ໃສ່ຫົວບົ່ວໃນແກງ.",
     items: [
       {
         id: "item-05023-1",
         quantity: 1,
-        name: "Pad Thai (Chicken)",
-        modifiers: ["No onions"],
+        name: "ຜັດໄທໄກ່",
+        modifiers: ["ບໍ່ໃສ່ຫົວບົ່ວ"],
         unitPrice: 45000
       },
-      { id: "item-05023-2", quantity: 1, name: "Thai Iced Tea", unitPrice: 25000 },
-      { id: "item-05023-3", quantity: 1, name: "Lime Soda", unitPrice: 18000 },
+      { id: "item-05023-2", quantity: 1, name: "ຊາໄທເຢັນ", unitPrice: 25000 },
+      { id: "item-05023-3", quantity: 1, name: "ໂຊດາໝາກນາວ", unitPrice: 18000 },
       {
         id: "item-05023-4",
         quantity: 1,
-        name: "Fresh Spring Roll (Pork)",
+        name: "ປໍເປີຍສົດໝູ",
         unitPrice: 32000
       }
     ]
@@ -364,57 +364,57 @@ const kitchenTicketSeeds: KitchenTicketSeed[] = [
   {
     id: "#ORD-05027",
     orderNo: "ORD-05027",
-    table: "Take Away",
-    type: "Take Away",
-    station: "bar",
-    status: "preparing",
-    priority: "Normal",
+    table: "ສັ່ງກັບບ້ານ",
+    type: "ສັ່ງກັບບ້ານ",
+    station: "ບາ",
+    status: "ກຳລັງກຽມ",
+    priority: "ປົກກະຕິ",
     elapsedMinutes: 13,
     assignedTo: "Khamphou V.",
     receivedAt: "10:11 AM",
-    customerName: "Delivery Partner",
+    customerName: "ຄູ່ຄ້າຈັດສົ່ງ",
     customerNote: "Driver waiting near counter.",
-    kitchenNote: "1 cup no ice",
+    kitchenNote: "1 ຈອກບໍ່ໃສ່ນ້ຳກ້ອນ.",
     items: [
-      { id: "item-05027-1", quantity: 2, name: "Iced Latte", unitPrice: 28000 },
+      { id: "item-05027-1", quantity: 2, name: "ລາເຕ້ເຢັນ", unitPrice: 28000 },
       {
         id: "item-05027-2",
         quantity: 1,
-        name: "Blueberry Cheesecake",
+        name: "ຊີສເຄັກບລູເບີຣີ",
         unitPrice: 34000
       },
-      { id: "item-05027-3", quantity: 1, name: "Paper Cup 12oz", unitPrice: 0 }
+      { id: "item-05027-3", quantity: 1, name: "ຈອກເຈ້ຍ 12oz", unitPrice: 0 }
     ]
   },
   {
     id: "#ORD-05031",
     orderNo: "ORD-05031",
     table: "Table 03",
-    type: "Dine In",
-    station: "pass",
-    status: "ready",
-    priority: "Normal",
+    type: "ນັ່ງກິນທີ່ຮ້ານ",
+    station: "ຈຸດສົ່ງອາຫານ",
+    status: "ພ້ອມ",
+    priority: "ປົກກະຕິ",
     elapsedMinutes: 5,
-    assignedTo: "Pass Station",
+    assignedTo: "ສະຖານີສົ່ງອາຫານ",
     receivedAt: "10:19 AM",
-    customerName: "Walk-in Customer",
+    customerName: "ລູກຄ້າທົ່ວໄປ",
     customerNote: "Runner should confirm table.",
     kitchenNote: "Ready for pickup",
     items: [
-      { id: "item-05031-1", quantity: 1, name: "Khao Piak Sen", unitPrice: 42000 },
-      { id: "item-05031-2", quantity: 1, name: "Iced Latte", unitPrice: 28000 }
+      { id: "item-05031-1", quantity: 1, name: "ເຂົ້າປຽກເສັ້ນ", unitPrice: 42000 },
+      { id: "item-05031-2", quantity: 1, name: "ລາເຕ້ເຢັນ", unitPrice: 28000 }
     ]
   },
   {
     id: "#ORD-05030",
     orderNo: "ORD-05030",
-    table: "Counter",
-    type: "Take Away",
-    station: "pass",
-    status: "ready",
-    priority: "High",
+    table: "ເຄົາເຕີ",
+    type: "ສັ່ງກັບບ້ານ",
+    station: "ຈຸດສົ່ງອາຫານ",
+    status: "ພ້ອມ",
+    priority: "ດ່ວນ",
     elapsedMinutes: 8,
-    assignedTo: "Pass Station",
+    assignedTo: "ສະຖານີສົ່ງອາຫານ",
     receivedAt: "10:16 AM",
     customerName: "Noy M.",
     customerNote: "Call customer name clearly.",
@@ -423,11 +423,11 @@ const kitchenTicketSeeds: KitchenTicketSeed[] = [
       {
         id: "item-05030-1",
         quantity: 1,
-        name: "Massaman Curry (Chicken)",
+        name: "ແກງມັດສະມັນໄກ່",
         unitPrice: 52000
       },
-      { id: "item-05030-2", quantity: 1, name: "Jasmine Rice", unitPrice: 10000 },
-      { id: "item-05030-3", quantity: 1, name: "Coconut Smoothie", unitPrice: 24000 }
+      { id: "item-05030-2", quantity: 1, name: "ເຂົ້າຫອມມະລິ", unitPrice: 10000 },
+      { id: "item-05030-3", quantity: 1, name: "ນ້ຳປັ່ນມະພ້າວ", unitPrice: 24000 }
     ]
   }
 ];

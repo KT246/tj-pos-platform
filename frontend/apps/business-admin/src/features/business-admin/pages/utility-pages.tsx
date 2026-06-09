@@ -57,30 +57,30 @@ const utilityRows: UtilityRow[] = [
   {
     name: "Main POS Terminal",
     type: "POS Terminal",
-    branch: "Main Branch",
+    branch: "ສາຂາຫຼັກ",
     status: "Online",
     updated: "Today 10:24 AM"
   },
   {
     name: "Receipt Printer 01",
     type: "Printer",
-    branch: "Main Branch",
+    branch: "ສາຂາຫຼັກ",
     status: "Online",
     updated: "Today 10:18 AM"
   },
   {
     name: "Kitchen Display",
     type: "Display",
-    branch: "Sihom Branch",
+    branch: "ສາຂາສີຫອມ",
     status: "Offline",
     updated: "Yesterday 8:30 PM"
   },
   {
     name: "BCEL QR Counter",
     type: "Payment",
-    branch: "All Branches",
-    status: "Active",
-    updated: "May 18, 2025"
+    branch: "ທຸກສາຂາ",
+    status: "ເປີດໃຊ້",
+    updated: "18 ພຶດສະພາ 2025"
   }
 ];
 
@@ -88,33 +88,33 @@ const wholesaleOrderRows: OrderRow[] = [
   {
     order: "ORD-2025-1188",
     customer: "Khamla Distribution",
-    customerType: "Wholesale Customer",
-    orderType: "Wholesale",
-    priceList: "Cafe Wholesale",
-    paymentStatus: "Partial",
-    debtStatus: "Debt",
-    deliveryStatus: "Pending",
+    customerType: "ລູກຄ້າຂາຍສົ່ງ",
+    orderType: "ຂາຍສົ່ງ",
+    priceList: "ລາຄາສົ່ງຮ້ານກາເຟ",
+    paymentStatus: "ຈ່າຍບາງສ່ວນ",
+    debtStatus: "ຕິດໜີ້",
+    deliveryStatus: "ລໍຖ້າ",
     amount: "LAK 4,850,000"
   },
   {
     order: "ORD-2025-1187",
     customer: "Vientiane Mini Mart",
-    customerType: "Reseller",
-    orderType: "Wholesale",
-    priceList: "Beverage Reseller",
-    paymentStatus: "Paid",
-    debtStatus: "Clear",
+    customerType: "ຜູ້ຂາຍຕໍ່",
+    orderType: "ຂາຍສົ່ງ",
+    priceList: "ລາຄາຜູ້ຂາຍຕໍ່ເຄື່ອງດື່ມ",
+    paymentStatus: "ຈ່າຍແລ້ວ",
+    debtStatus: "ປົກກະຕິ",
     deliveryStatus: "Delivered",
     amount: "LAK 2,420,000"
   },
   {
     order: "ORD-2025-1186",
-    customer: "Walk-in Customer",
-    customerType: "Retail Customer",
-    orderType: "Retail",
-    priceList: "Default Retail",
-    paymentStatus: "Paid",
-    debtStatus: "Clear",
+    customer: "ລູກຄ້າທົ່ວໄປ",
+    customerType: "ລູກຄ້າຂາຍຍ່ອຍ",
+    orderType: "ຂາຍຍ່ອຍ",
+    priceList: "ລາຄາຂາຍຍ່ອຍພື້ນຖານ",
+    paymentStatus: "ຈ່າຍແລ້ວ",
+    debtStatus: "ປົກກະຕິ",
     deliveryStatus: "Not required",
     amount: "LAK 185,000"
   },
@@ -122,11 +122,11 @@ const wholesaleOrderRows: OrderRow[] = [
     order: "ORD-2025-1185",
     customer: "Sabaidee Hotel",
     customerType: "VIP",
-    orderType: "Wholesale",
-    priceList: "VIP Retail",
-    paymentStatus: "Unpaid",
-    debtStatus: "Debt",
-    deliveryStatus: "Pending",
+    orderType: "ຂາຍສົ່ງ",
+    priceList: "ລາຄາ VIP",
+    paymentStatus: "ຍັງບໍ່ຈ່າຍ",
+    debtStatus: "ຕິດໜີ້",
+    deliveryStatus: "ລໍຖ້າ",
     amount: "LAK 1,760,000"
   }
 ];
@@ -164,17 +164,17 @@ const reportRows: ReportRow[] = [
 
 const utilityColumns: TableColumn<UtilityRow>[] = [
   { key: "name", label: "Name", render: (row) => row.name },
-  { key: "type", label: "Type", render: (row) => row.type },
-  { key: "branch", label: "Branch", render: (row) => row.branch },
+  { key: "type", label: "ປະເພດ", render: (row) => row.type },
+  { key: "branch", label: "ສາຂາ", render: (row) => row.branch },
   {
     key: "status",
-    label: "Status",
+    label: "ສະຖານະ",
     render: (row) => (
       <Badge tone={row.status === "Offline" ? "red" : "emerald"}>{row.status}</Badge>
     )
   },
   { key: "updated", label: "Last Updated", render: (row) => row.updated },
-  { key: "actions", label: "Actions", align: "right", render: () => <ActionButtons /> }
+  { key: "actions", label: "ການດຳເນີນການ", align: "right", render: () => <ActionButtons /> }
 ];
 
 const orderColumns: TableColumn<OrderRow>[] = [
@@ -196,10 +196,10 @@ const orderColumns: TableColumn<OrderRow>[] = [
     label: "Payment / Debt",
     render: (row) => (
       <div className="space-y-1">
-        <Badge tone={row.paymentStatus === "Paid" ? "emerald" : "amber"}>
+        <Badge tone={row.paymentStatus === "ຈ່າຍແລ້ວ" ? "emerald" : "amber"}>
           {row.paymentStatus}
         </Badge>
-        <Badge tone={row.debtStatus === "Debt" ? "red" : "emerald"}>
+        <Badge tone={row.debtStatus === "ຕິດໜີ້" ? "red" : "emerald"}>
           {row.debtStatus}
         </Badge>
       </div>
@@ -207,16 +207,16 @@ const orderColumns: TableColumn<OrderRow>[] = [
   },
   {
     key: "delivery",
-    label: "Delivery",
-    render: (row) => <Badge tone={row.deliveryStatus === "Pending" ? "amber" : "slate"}>{row.deliveryStatus}</Badge>
+    label: "ຈັດສົ່ງ",
+    render: (row) => <Badge tone={row.deliveryStatus === "ລໍຖ້າ" ? "amber" : "slate"}>{row.deliveryStatus}</Badge>
   },
-  { key: "amount", label: "Amount", align: "right", render: (row) => row.amount },
-  { key: "actions", label: "Actions", align: "right", render: () => <ActionButtons /> }
+  { key: "amount", label: "ຈຳນວນເງິນ", align: "right", render: (row) => row.amount },
+  { key: "actions", label: "ການດຳເນີນການ", align: "right", render: () => <ActionButtons /> }
 ];
 
 const reportColumns: TableColumn<ReportRow>[] = [
   { key: "report", label: "Report", render: (row) => row.report },
-  { key: "filter", label: "Filter", render: (row) => row.filter },
+  { key: "filter", label: "ກັ່ນຕອງ", render: (row) => row.filter },
   { key: "metric", label: "Metric", render: (row) => row.metric },
   { key: "value", label: "Value", render: (row) => row.value },
   { key: "trend", label: "Trend", align: "right", render: (row) => <Badge tone="emerald">{row.trend}</Badge> }
@@ -225,7 +225,7 @@ const reportColumns: TableColumn<ReportRow>[] = [
 export function DevicesPage() {
   return (
     <UtilityPage
-      active="Devices"
+      active="ອຸປະກອນ"
       title="Device Management"
       description="Manage POS terminals, printers, cash drawers, online status, pairing, and sync health."
       icon={Printer}
@@ -235,9 +235,9 @@ export function DevicesPage() {
 
 export function ReportsPage() {
   return (
-    <BusinessAdminShell active="Reports">
+    <BusinessAdminShell active="ລາຍງານ">
       <PageHeader
-        title="Reports"
+        title="ລາຍງານ"
         description="Review sales, wholesale, customer balance, debt, bank payment, and profit reports."
       />
       <KpiGrid kpis={dashboardKpis.slice(0, 4)} />
@@ -246,10 +246,10 @@ export function ReportsPage() {
           <FilterBar
             searchPlaceholder="Search reports, customer type, order type..."
             filters={[
-              "All Customer Types",
+              "ທຸກປະເພດລູກຄ້າ",
               "All Order Types",
-              "All Price Types",
-              "All Debt Status"
+              "ທຸກປະເພດລາຄາ",
+              "ທຸກສະຖານະໜີ້"
             ]}
           />
           <DataTable columns={reportColumns} rows={reportRows} />
@@ -288,8 +288,8 @@ export function ReportsPage() {
 export function SettingsPage() {
   return (
     <UtilityPage
-      active="Settings"
-      title="Settings"
+      active="ຕັ້ງຄ່າ"
+      title="ຕັ້ງຄ່າ"
       description="Manage business preferences, security, notifications, and workspace defaults."
       icon={Settings}
     />
@@ -309,9 +309,9 @@ export function PosPlaceholderPage() {
 
 export function OrdersPage() {
   return (
-    <BusinessAdminShell active="Orders">
+    <BusinessAdminShell active="ອໍເດີ">
       <PageHeader
-        title="Orders"
+        title="ອໍເດີ"
         description="Track retail, wholesale, purchase, return, payment, debt, and delivery status."
       />
       <KpiGrid kpis={dashboardKpis.slice(0, 4)} />
@@ -321,10 +321,10 @@ export function OrdersPage() {
             searchPlaceholder="Search order, customer, reseller, invoice..."
             filters={[
               "All Order Types",
-              "All Customer Types",
-              "All Payment Status",
-              "All Debt Status",
-              "All Delivery Status"
+              "ທຸກປະເພດລູກຄ້າ",
+              "ທຸກສະຖານະຊຳລະ",
+              "ທຸກສະຖານະໜີ້",
+              "ທຸກສະຖານະຈັດສົ່ງ"
             ]}
           />
           <DataTable columns={orderColumns} rows={wholesaleOrderRows} />
@@ -336,7 +336,7 @@ export function OrdersPage() {
               { label: "Wholesale Orders", value: "18", tone: "emerald" },
               { label: "Debt Balance", value: "LAK 7.92M", tone: "amber" },
               { label: "Pending Delivery", value: "6 orders", tone: "blue" },
-              { label: "Top Price List", value: "Cafe Wholesale", tone: "violet" }
+              { label: "Top Price List", value: "ລາຄາສົ່ງຮ້ານກາເຟ", tone: "violet" }
             ]}
           />
           <QuickActionsCard
@@ -370,8 +370,8 @@ export function OrdersPage() {
 export function SupportPage() {
   return (
     <UtilityPage
-      active="Support"
-      title="Support"
+      active="ຊ່ວຍເຫຼືອ"
+      title="ຊ່ວຍເຫຼືອ"
       description="View help center resources, support tickets, and product updates."
       icon={BellRing}
     />
@@ -381,8 +381,8 @@ export function SupportPage() {
 export function AuditLogsPage() {
   return (
     <UtilityPage
-      active="Audit Logs"
-      title="Audit Logs"
+      active="ບັນທຶກກວດສອບ"
+      title="ບັນທຶກກວດສອບ"
       description="Review important business account activity and staff actions."
       icon={ShieldCheck}
     />
@@ -404,13 +404,13 @@ function UtilityPage({
     <BusinessAdminShell active={active}>
       <PageHeader title={title} description={description} />
       <KpiGrid
-        kpis={active === "Devices" ? pageKpis.stock : dashboardKpis.slice(0, 4)}
+        kpis={active === "ອຸປະກອນ" ? pageKpis.stock : dashboardKpis.slice(0, 4)}
       />
       <div className="grid gap-4 xl:grid-cols-[1fr_340px]">
         <div>
           <FilterBar
             searchPlaceholder={`Search ${title.toLowerCase()}...`}
-            filters={["All Branches", "All Statuses", "May 12 - May 18, 2025"]}
+            filters={["ທຸກສາຂາ", "ທຸກສະຖານະ", "12 - 18 ພຶດສະພາ 2025"]}
           />
           <DataTable columns={utilityColumns} rows={utilityRows} />
         </div>
@@ -418,8 +418,8 @@ function UtilityPage({
           <SummaryCard
             title={`${title} Overview`}
             items={[
-              { label: "Main Branch", value: "Healthy", tone: "emerald" },
-              { label: "Sihom Branch", value: "Review", tone: "amber" },
+              { label: "ສາຂາຫຼັກ", value: "Healthy", tone: "emerald" },
+              { label: "ສາຂາສີຫອມ", value: "Review", tone: "amber" },
               { label: "Pakse Branch", value: "Stable", tone: "blue" },
               { label: "Last Sync", value: "10:24 AM", tone: "slate" }
             ]}

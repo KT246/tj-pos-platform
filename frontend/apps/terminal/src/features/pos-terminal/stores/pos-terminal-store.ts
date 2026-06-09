@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 import { showTerminalNotice } from "../../../lib/terminal-toasts";
-import { initialCart, openOrders, products } from "../data/mock-pos-data";
+import { defaultTerminalBusiness } from "../data/mock-pos-data";
 import type {
   CartLine,
   Customer,
@@ -10,29 +10,34 @@ import type {
   OrderType,
   PaymentMethodId,
   PaymentStatus,
-  Product
+  Product,
+  TerminalBusinessProfile
 } from "../types";
 import { getCartSummary, nowReceiptTime, nowTimeLabel } from "../utils";
-import { lo } from "../utils/lao-labels";
+import { getTerminalCopy } from "../utils/terminal-copy";
 
-const samplePaidSummary = getCartSummary(initialCart);
+const samplePaidSummary = getCartSummary(defaultTerminalBusiness.initialCart);
 const samplePaidOrder: OpenOrder = {
   id: "#ORD-0050",
   table: "T01",
-  type: "Dine In",
-  customer: "Souksavanh Phommachanh",
+  type: "ນັ່ງກິນທີ່ຮ້ານ",
+  customer: "ສຸກສະຫວັນ ພົມມະຈັນ",
   items: samplePaidSummary.itemCount,
   amount: samplePaidSummary.total,
   time: "09:58 AM",
-  status: "Completed",
-  cart: initialCart,
+  status: "ສຳເລັດ",
+  cart: defaultTerminalBusiness.initialCart,
   paymentMethod: "cash",
-  paymentStatus: "paid",
+  paymentStatus: "ຈ່າຍແລ້ວ",
   receivedAmount: 100000,
   createdAt: "Mar 18, 2025, 09:58 AM"
 };
 
 type PosTerminalState = {
+  businessSlug: string;
+  posType: TerminalBusinessProfile["posType"];
+  defaultOrderType: OrderType;
+  products: Product[];
   activeCategory: string;
   query: string;
   cart: CartLine[];
@@ -57,6 +62,7 @@ type PosTerminalState = {
 };
 
 type PosTerminalActions = {
+  configureBusiness: (profile: TerminalBusinessProfile) => void;
   setActiveCategory: (categoryId: string) => void;
   setQuery: (query: string) => void;
   addProduct: (product: Product) => void;
@@ -93,35 +99,74 @@ function cloneCart(cart: CartLine[]) {
   return cart.map((line) => ({ ...line }));
 }
 
+function createPaidSampleOrder(profile: TerminalBusinessProfile): OpenOrder {
+  const summary = getCartSummary(profile.initialCart);
+  const paidId =
+    profile.posType === "retail"
+      ? "#RT-0103"
+      : profile.posType === "restaurant"
+        ? "#RS-0210"
+        : profile.posType === "beauty"
+          ? "#BT-0036"
+          : profile.posType === "hospitality"
+            ? "#HT-0087"
+            : "#ORD-0050";
+
+  return {
+    id: paidId,
+    posType: profile.posType,
+    orderType: profile.defaultOrderType,
+    table:
+      profile.defaultOrderType === "ນັ່ງກິນທີ່ຮ້ານ"
+        ? profile.tables?.[0]?.id ?? "T01"
+        : profile.defaultOrderType === "ຫ້ອງ"
+          ? "ໜ້າເຄົາເຕີ"
+          : profile.defaultOrderType === "ບໍລິການ"
+            ? "ນັດໝາຍ"
+            : "ເຄົາເຕີ",
+    type: profile.defaultOrderType,
+    customer: profile.posType === "beauty" ? "Ms. Vilayphone" : "ລູກຄ້າທົ່ວໄປ",
+    items: summary.itemCount,
+    amount: summary.total,
+    time: "09:58 AM",
+    status: "ສຳເລັດ",
+    cart: cloneCart(profile.initialCart),
+    paymentMethod: "cash",
+    paymentStatus: "ຈ່າຍແລ້ວ",
+    receivedAmount: summary.total,
+    createdAt: "Mar 18, 2025, 09:58 AM"
+  };
+}
+
 function resolveLinePricing(product: Product, customer: Customer | null, quantity: number) {
   const minQuantity = product.minWholesaleQuantity ?? 1;
   const base = {
     price: product.price,
     retailPrice: product.price,
-    priceType: "retail" as const,
+    priceType: "ຂາຍຍ່ອຍ" as const,
     priceList: product.priceList,
     minWholesaleQuantity: product.minWholesaleQuantity
   };
 
   if (!customer || quantity < minQuantity) return base;
 
-  if (customer.customerType === "reseller" && product.resellerPrice) {
+  if (customer.customerType === "ຜູ້ຂາຍຕໍ່" && product.resellerPrice) {
     return {
       ...base,
       price: product.resellerPrice,
-      priceType: "reseller" as const,
+      priceType: "ຜູ້ຂາຍຕໍ່" as const,
       priceList: customer.priceList
     };
   }
 
   if (
-    (customer.customerType === "wholesale" || customer.customerType === "vip") &&
+    (customer.customerType === "ຂາຍສົ່ງ" || customer.customerType === "VIP") &&
     product.wholesalePrice
   ) {
     return {
       ...base,
       price: product.wholesalePrice,
-      priceType: "wholesale" as const,
+      priceType: "ຂາຍສົ່ງ" as const,
       priceList: customer.priceList
     };
   }
@@ -129,7 +174,11 @@ function resolveLinePricing(product: Product, customer: Customer | null, quantit
   return base;
 }
 
-function repriceCart(cart: CartLine[], customer: Customer | null) {
+function repriceCart(
+  cart: CartLine[],
+  customer: Customer | null,
+  products: Product[]
+) {
   return cart.map((line) => {
     const product = products.find((item) => item.id === line.productId);
     if (!product) return line;
@@ -153,6 +202,7 @@ function createOrderId(orders: OpenOrder[]) {
 
 function createOrderSnapshot({
   id,
+  posType,
   cart,
   selectedTable,
   orderType,
@@ -164,6 +214,7 @@ function createOrderSnapshot({
   receivedAmount
 }: {
   id: string;
+  posType: TerminalBusinessProfile["posType"];
   cart: CartLine[];
   selectedTable: string | null;
   orderType: OrderType;
@@ -175,12 +226,27 @@ function createOrderSnapshot({
   receivedAmount?: number;
 }): OpenOrder {
   const summary = getCartSummary(cart, discount);
+  const place =
+    orderType === "ສັ່ງກັບບ້ານ"
+      ? "ສັ່ງກັບບ້ານ"
+      : orderType === "ຂາຍປີກ" || orderType === "ຂາຍສົ່ງ" || orderType === "ຄືນສິນຄ້າ"
+        ? "ເຄົາເຕີ"
+        : orderType === "ບໍລິການ"
+          ? "ນັດໝາຍ"
+          : orderType === "ຫ້ອງ"
+            ? "ໜ້າເຄົາເຕີ"
+            : selectedTable ?? "ບໍ່ເລືອກໂຕະ";
 
   return {
     id,
-    table: orderType === "Take Away" ? "Take Away" : selectedTable ?? "No Table",
+    posType,
+    orderType,
+    table: place,
     type: orderType,
-    customer: customer?.name ?? "Walk-in Customer",
+    tableId: orderType === "ນັ່ງກິນທີ່ຮ້ານ" ? selectedTable : null,
+    roomId: orderType === "ຫ້ອງ" ? selectedTable : null,
+    appointmentId: orderType === "ບໍລິການ" ? selectedTable : null,
+    customer: customer?.name ?? "ລູກຄ້າທົ່ວໄປ",
     items: summary.itemCount,
     amount: summary.total,
     time: nowTimeLabel(),
@@ -227,19 +293,25 @@ function addProductToCart(cart: CartLine[], product: Product, customer: Customer
 export const usePosTerminalStore = create<
   PosTerminalState & PosTerminalActions
 >((set, get) => ({
+  businessSlug: defaultTerminalBusiness.slug,
+  posType: defaultTerminalBusiness.posType,
+  defaultOrderType: defaultTerminalBusiness.defaultOrderType,
+  products: defaultTerminalBusiness.products,
   activeCategory: "all",
   query: "",
-  cart: initialCart,
+  cart: defaultTerminalBusiness.initialCart,
   activeOrderId: null,
-  selectedTable: "T03",
-  orderType: "Dine In",
+  selectedTable:
+    defaultTerminalBusiness.tables?.find((table) => table.status === "ມີລູກຄ້າ")
+      ?.id ?? null,
+  orderType: defaultTerminalBusiness.defaultOrderType,
   customer: null,
   discount: null,
-  orders: [...openOrders, samplePaidOrder],
+  orders: [...defaultTerminalBusiness.openOrders, samplePaidOrder],
   orderSearch: "",
   lastPaidOrder: samplePaidOrder,
   paymentMethod: "cash",
-  paymentStatus: "paid",
+  paymentStatus: "ຈ່າຍແລ້ວ",
   receivedAmount: 100000,
   refundSearch: "#ORD-0050",
   refundOrderId: samplePaidOrder.id,
@@ -248,11 +320,52 @@ export const usePosTerminalStore = create<
   discountOpen: false,
   customerOpen: false,
   tableOpen: false,
+  configureBusiness: (profile) =>
+    set((state) => {
+      if (state.businessSlug === profile.slug) return {};
+
+      const nextPaidOrder = createPaidSampleOrder(profile);
+
+      return {
+        businessSlug: profile.slug,
+        posType: profile.posType,
+        defaultOrderType: profile.defaultOrderType,
+        products: profile.products,
+        activeCategory: profile.categories[0]?.id ?? "all",
+        query: "",
+        cart: cloneCart(profile.initialCart),
+        activeOrderId: null,
+        selectedTable:
+          profile.defaultOrderType === "ນັ່ງກິນທີ່ຮ້ານ"
+            ? profile.openOrders[0]?.tableId ?? profile.tables?.[0]?.id ?? null
+            : null,
+        orderType: profile.defaultOrderType,
+        customer: null,
+        discount: null,
+        orders: [...profile.openOrders, nextPaidOrder],
+        orderSearch: "",
+        lastPaidOrder: nextPaidOrder,
+        paymentMethod: "cash",
+        paymentStatus: "ຈ່າຍແລ້ວ",
+        receivedAmount: nextPaidOrder.amount,
+        refundSearch: nextPaidOrder.id,
+        refundOrderId: nextPaidOrder.id,
+        refundSelectedLineIds: nextPaidOrder.cart?.map((line) => line.id) ?? [],
+        scanOpen: false,
+        discountOpen: false,
+        customerOpen: false,
+        tableOpen: false
+      };
+    }),
   setActiveCategory: (categoryId) => set({ activeCategory: categoryId }),
   setQuery: (query) => set({ query }),
   addProduct: (product) =>
     set((state) => {
-      showTerminalNotice(`${lo(product.name)} ຖືກເພີ່ມເຂົ້າກະຕ່າແລ້ວ.`, "success");
+      const copy = getTerminalCopy(state.posType);
+      showTerminalNotice(
+        `${product.name} ${copy.addedToCartNotice}`,
+        "success"
+      );
 
       return {
         cart: addProductToCart(state.cart, product, state.customer)
@@ -261,9 +374,10 @@ export const usePosTerminalStore = create<
   scanBarcode: (barcode) =>
     set((state) => {
       const normalized = barcode.trim().toLowerCase();
-      const product = products.find(
+      const product = state.products.find(
         (item) =>
           item.sku.toLowerCase() === normalized ||
+          item.barcode?.toLowerCase() === normalized ||
           item.id.toLowerCase() === normalized ||
           item.name.toLowerCase() === normalized
       );
@@ -279,7 +393,7 @@ export const usePosTerminalStore = create<
         };
       }
 
-      showTerminalNotice(`${lo(product.name)} ຖືກສະແກນ ແລະ ເພີ່ມແລ້ວ.`, "success");
+      showTerminalNotice(`${product.name} ຖືກສະແກນ ແລະ ເພີ່ມແລ້ວ.`, "success");
 
       return {
         cart: addProductToCart(state.cart, product, state.customer),
@@ -292,7 +406,8 @@ export const usePosTerminalStore = create<
         state.cart.map((line) =>
           line.id === lineId ? { ...line, quantity: line.quantity + 1 } : line
         ),
-        state.customer
+        state.customer,
+        state.products
       )
     })),
   decrementLine: (lineId) =>
@@ -305,7 +420,8 @@ export const usePosTerminalStore = create<
               : line
           )
           .filter((line) => line.quantity > 0),
-        state.customer
+        state.customer,
+        state.products
       )
     })),
   removeLine: (lineId) =>
@@ -313,8 +429,9 @@ export const usePosTerminalStore = create<
       cart: state.cart.filter((line) => line.id !== lineId)
     })),
   clearCart: () =>
-    set(() => {
-      showTerminalNotice("ລ້າງກະຕ່າແລ້ວ.", "info");
+    set((state) => {
+      const copy = getTerminalCopy(state.posType);
+      showTerminalNotice(copy.clearedCartNotice, "info");
 
       return {
         cart: [],
@@ -323,73 +440,75 @@ export const usePosTerminalStore = create<
       };
     }),
   startNewSale: () =>
-    set(() => {
-      showTerminalNotice("ພ້ອມເລີ່ມການຂາຍໃໝ່.", "info");
+    set((state) => {
+      const copy = getTerminalCopy(state.posType);
+      showTerminalNotice(copy.startNewNotice, "info");
 
       return {
         cart: [],
         activeOrderId: null,
         selectedTable: null,
-        orderType: "Dine In",
+        orderType: state.defaultOrderType,
         customer: null,
         discount: null,
         paymentMethod: "cash",
-        paymentStatus: "paid",
+        paymentStatus: "ຈ່າຍແລ້ວ",
         receivedAmount: 0
       };
     }),
   holdOrder: () =>
     set((state) => {
+      const copy = getTerminalCopy(state.posType);
+
       if (state.cart.length === 0) {
-        showTerminalNotice(
-          "ກະຕ່າຍັງວ່າງ. ເພີ່ມສິນຄ້າກ່ອນພັກອໍເດີ.",
-          "warning"
-        );
+        showTerminalNotice(copy.emptyHoldWarning, "warning");
         return {};
       }
 
       const order = createOrderSnapshot({
         id: state.activeOrderId ?? createOrderId(state.orders),
+        posType: state.posType,
         cart: state.cart,
         selectedTable: state.selectedTable,
         orderType: state.orderType,
         customer: state.customer,
         discount: state.discount,
-        status: "Held"
+        status: "ພັກໄວ້"
       });
 
-      showTerminalNotice(`${order.id} ຖືກພັກໄວ້ເພື່ອຊຳລະພາຍຫຼັງ.`, "success");
+      showTerminalNotice(`${order.id} ${copy.heldNotice}`, "success");
 
       return {
         orders: [order, ...state.orders.filter((item) => item.id !== order.id)],
         cart: [],
         activeOrderId: null,
         selectedTable: null,
-        orderType: "Dine In",
+        orderType: state.defaultOrderType,
         customer: null,
         discount: null
       };
     }),
   resumeOrder: (orderId) =>
     set((state) => {
+      const copy = getTerminalCopy(state.posType);
       const order = state.orders.find((item) => item.id === orderId);
 
       if (!order) {
-        showTerminalNotice("ບໍ່ພົບອໍເດີ.", "error");
+        showTerminalNotice(copy.notFoundNotice, "error");
         return {};
       }
 
-      showTerminalNotice(`${order.id} ໂຫຼດເຂົ້າກະຕ່າແລ້ວ.`, "info");
+      showTerminalNotice(`${order.id} ${copy.loadedNotice}`, "info");
 
       return {
         activeOrderId: order.id,
         cart: cloneCart(order.cart ?? []),
-        selectedTable: order.type === "Dine In" ? order.table : null,
+        selectedTable: order.type === "ນັ່ງກິນທີ່ຮ້ານ" ? order.table : null,
         orderType: order.type,
         customer: order.customerRecord ?? null,
         discount: order.discount ?? null,
         paymentMethod: order.paymentMethod ?? "cash",
-        paymentStatus: order.paymentStatus ?? "paid",
+        paymentStatus: order.paymentStatus ?? "ຈ່າຍແລ້ວ",
         receivedAmount: order.receivedAmount ?? order.amount
       };
     }),
@@ -403,14 +522,14 @@ export const usePosTerminalStore = create<
 
       return {
         selectedTable: tableId,
-        orderType: tableId ? "Dine In" : "Take Away",
+        orderType: tableId ? "ນັ່ງກິນທີ່ຮ້ານ" : "ສັ່ງກັບບ້ານ",
         tableOpen: false
       };
     }),
   setOrderType: (orderType) =>
     set(() => {
       showTerminalNotice(
-        orderType === "Take Away"
+        orderType === "ສັ່ງກັບບ້ານ"
           ? "ເລືອກອໍເດີສັ່ງກັບບ້ານແລ້ວ."
           : "ເລືອກອໍເດີນັ່ງກິນທີ່ຮ້ານແລ້ວ.",
         "info"
@@ -418,26 +537,29 @@ export const usePosTerminalStore = create<
 
       return {
         orderType,
-        selectedTable: orderType === "Take Away" ? null : get().selectedTable
+        selectedTable: orderType === "ສັ່ງກັບບ້ານ" ? null : get().selectedTable
       };
     }),
   setCustomer: (customer) =>
-    set(() => {
+    set((state) => {
+      const copy = getTerminalCopy(state.posType);
       showTerminalNotice(
-        `${lo(customer?.name ?? "Walk-in Customer")} ຖືກເລືອກແລ້ວ.`,
+        `${customer?.name ?? copy.walkInLabel} ${"ຖືກເລືອກແລ້ວ."}`,
         "info"
       );
 
       return {
         customer,
-        cart: repriceCart(get().cart, customer),
+        cart: repriceCart(get().cart, customer, get().products),
         customerOpen: false
       };
     }),
   applyDiscount: (discount) =>
     set((state) => {
+      const copy = getTerminalCopy(state.posType);
+
       if (state.cart.length === 0) {
-        showTerminalNotice("ກະຕ່າຍັງວ່າງ. ເພີ່ມສິນຄ້າກ່ອນໃຊ້ສ່ວນຫຼຸດ.", "warning");
+        showTerminalNotice(copy.emptyDiscountWarning, "warning");
         return {};
       }
 
@@ -463,37 +585,40 @@ export const usePosTerminalStore = create<
   setReceivedAmount: (amount) => set({ receivedAmount: Math.max(amount, 0) }),
   confirmPayment: () =>
     set((state) => {
+      const copy = getTerminalCopy(state.posType);
+
       if (state.cart.length === 0) {
-        showTerminalNotice("ກະຕ່າຍັງວ່າງ. ເພີ່ມສິນຄ້າກ່ອນຊຳລະ.", "warning");
+        showTerminalNotice(copy.emptyPaymentWarning, "warning");
         return {};
       }
 
       const summary = getCartSummary(state.cart, state.discount);
       const paidAmount =
-        state.paymentStatus === "debt"
+        state.paymentStatus === "ຕິດໜີ້"
           ? 0
-          : state.paymentStatus === "partial"
+          : state.paymentStatus === "ຈ່າຍບາງສ່ວນ"
             ? Math.min(state.receivedAmount, summary.total)
             : summary.total;
       const order = createOrderSnapshot({
         id: state.activeOrderId ?? createOrderId(state.orders),
+        posType: state.posType,
         cart: state.cart,
         selectedTable: state.selectedTable,
         orderType: state.orderType,
         customer: state.customer,
         discount: state.discount,
-        status: "Completed",
+        status: "ສຳເລັດ",
         paymentMethod: state.paymentMethod,
         paymentStatus: state.paymentStatus,
         receivedAmount: paidAmount
       });
 
       showTerminalNotice(
-        state.paymentStatus === "debt"
-          ? `${order.id} ຖືກບັນທຶກເປັນໜີ້ລູກຄ້າ.`
-          : state.paymentStatus === "partial"
-            ? `${order.id} ບັນທຶກການຈ່າຍບາງສ່ວນແລ້ວ.`
-            : `${order.id} ຊຳລະສຳເລັດແລ້ວ.`,
+        state.paymentStatus === "ຕິດໜີ້"
+          ? `${order.id} ${copy.debtSavedNotice}`
+          : state.paymentStatus === "ຈ່າຍບາງສ່ວນ"
+            ? `${order.id} ${copy.partialPaymentSavedNotice}`
+            : `${order.id} ${copy.paymentSuccessNotice}`,
         "success"
       );
 
@@ -503,10 +628,10 @@ export const usePosTerminalStore = create<
         cart: [],
         activeOrderId: null,
         selectedTable: null,
-        orderType: "Dine In",
+        orderType: state.defaultOrderType,
         customer: null,
         discount: null,
-        paymentStatus: "paid",
+        paymentStatus: "ຈ່າຍແລ້ວ",
         receivedAmount: 0,
         refundSearch: order.id,
         refundOrderId: order.id,
@@ -519,7 +644,7 @@ export const usePosTerminalStore = create<
       const query = state.refundSearch.trim().toLowerCase();
       const order = state.orders.find(
         (item) =>
-          item.status === "Completed" &&
+          item.status === "ສຳເລັດ" &&
           (item.id.toLowerCase().includes(query) ||
             item.customer.toLowerCase().includes(query))
       );

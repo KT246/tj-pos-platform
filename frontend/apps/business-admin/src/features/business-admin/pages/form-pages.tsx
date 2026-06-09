@@ -38,7 +38,7 @@ import type { BusinessMenuKey, Kpi } from "../types";
 
 export function BranchFormPage() {
   return (
-    <BusinessAdminShell active="Branches">
+    <BusinessAdminShell active="ສາຂາ">
       <PageHeader
         title="Edit Branch"
         description="Update branch details, settings and assignments."
@@ -73,7 +73,7 @@ export function BranchFormPage() {
               <Field label="Branch Name" value="Thadluang Branch" />
               <Field label="Branch Code" value="VTE-THDT" />
               <Field label="Branch Type" value="Flagship" type="select" />
-              <Field label="Status" value="Active" type="select" />
+              <Field label="ສະຖານະ" value="ເປີດໃຊ້" type="select" />
               <Field label="Manager" value="Latsamy Phdeng" type="select" />
               <Field label="Phone" value="+856 20 5555 1234" />
               <Field label="Email" value="thadluang@tjcafe.la" />
@@ -195,7 +195,7 @@ export function BranchFormPage() {
               <div className="grid gap-4 border-t border-blue-50 pt-4 md:grid-cols-4">
                 <SwitchSetting label="Service Types Available" enabled />
                 <SwitchSetting label="Takeaway" enabled />
-                <SwitchSetting label="Delivery" enabled />
+                <SwitchSetting label="ຈັດສົ່ງ" enabled />
                 <Field label="Default Order Type" value="Dine-in" type="select" />
               </div>
             </div>
@@ -245,7 +245,7 @@ export function BranchFormPage() {
                 )}
               </div>
               <Field
-                label="Notes"
+                label="ໝາຍເຫດ"
                 value="Main flagship branch located near Thatluang Stupa. High foot traffic area. Offers dine-in, takeaway and delivery services."
                 type="textarea"
               />
@@ -313,7 +313,7 @@ export function BranchFormPage() {
 export function BusinessProfilePage() {
   return (
     <FormShell
-      active="Settings"
+      active="ຕັ້ງຄ່າ"
       title="Business Profile"
       description="Manage business identity, contact details, tax information, and default preferences."
       kpis={pageKpis.branches}
@@ -343,18 +343,18 @@ export function BusinessProfilePage() {
 export function ItemFormPage() {
   return (
     <FormShell
-      active="Items"
+      active="ສິນຄ້າ"
       title="Item Form"
       description="Create or edit item details, pricing, SKU, inventory, modifiers, and branch availability."
       kpis={pageKpis.items}
       right={<ValidationRail title="Item Preview" />}
     >
       <FormCard title="Basic Information">
-        <Field label="Item Name" value="Iced Latte" />
+        <Field label="Item Name" value="ລາເຕ້ເຢັນ" />
         <Field label="Lao Name" value="ກາເຟລາເຕ້" />
         <Field label="SKU" value="CF-1001" />
         <Field label="Barcode" value="8850001001" />
-        <Field label="Category" value="Coffee" type="select" />
+        <Field label="ໝວດໝູ່" value="Coffee" type="select" />
         <Field
           label="Description"
           value="Cold espresso with fresh milk and ice."
@@ -367,9 +367,9 @@ export function ItemFormPage() {
         <Field label="Wholesale Price" value="LAK 21,000" />
         <Field label="Reseller Price" value="LAK 20,000" />
         <Field label="Min Wholesale Quantity" value="12" />
-        <Field label="Price List" value="Cafe Wholesale" type="select" />
+        <Field label="Price List" value="ລາຄາສົ່ງຮ້ານກາເຟ" type="select" />
         <Field label="Cost Price" value="LAK 11,500" />
-        <Field label="Current Stock" value="48" />
+        <Field label="ສະຕັອກປັດຈຸບັນ" value="48" />
         <Field label="Low Stock Alert" value="12" />
       </FormCard>
     </FormShell>
@@ -379,7 +379,7 @@ export function ItemFormPage() {
 export function ItemVariantsPage() {
   return (
     <FormShell
-      active="Items"
+      active="ສິນຄ້າ"
       title="Item Variants & Options"
       description="Manage sizes, modifiers, add-ons, option groups, and branch-specific item variations."
       kpis={pageKpis.items}
@@ -402,7 +402,7 @@ export function ItemVariantsPage() {
 export function CategoryFormPage() {
   return (
     <FormShell
-      active="Categories"
+      active="ໝວດໝູ່"
       title="Category Form"
       description="Create or edit product and menu categories, branch visibility, and ordering rules."
       kpis={pageKpis.items}
@@ -412,7 +412,7 @@ export function CategoryFormPage() {
         <Field label="Category Name" value="Coffee" />
         <Field label="Lao Name" value="ກາເຟ" />
         <Field label="Department" value="Beverage" type="select" />
-        <Field label="Status" value="Active" type="select" />
+        <Field label="ສະຖານະ" value="ເປີດໃຊ້" type="select" />
         <Field
           label="Description"
           value="Coffee drinks, espresso-based drinks, and iced coffee menu items."
@@ -421,7 +421,7 @@ export function CategoryFormPage() {
         />
       </FormCard>
       <FormCard title="Display Settings">
-        <Field label="Branch Visibility" value="All Branches" type="select" />
+        <Field label="Branch Visibility" value="ທຸກສາຂາ" type="select" />
         <Field label="Public Menu Visibility" value="Visible" type="select" />
         <Field label="Sort Order" value="1" />
         <Field label="Icon" value="Coffee Cup" type="select" />
@@ -439,7 +439,7 @@ export function CategoryFormPage() {
 export function StockInPage() {
   return (
     <FormShell
-      active="Stock Movements"
+      active="ການເຄື່ອນໄຫວສະຕັອກ"
       title="Stock In"
       description="Record received stock from suppliers and update inventory quantities."
       kpis={pageKpis.stock}
@@ -447,8 +447,8 @@ export function StockInPage() {
     >
       <FormCard title="Receipt Information">
         <Field label="Supplier" value="Lao Coffee Supply" type="select" />
-        <Field label="Branch" value="Main Branch" type="select" />
-        <Field label="Receipt Date" value="May 18, 2025" />
+        <Field label="ສາຂາ" value="ສາຂາຫຼັກ" type="select" />
+        <Field label="Receipt Date" value="18 ພຶດສະພາ 2025" />
         <Field label="Reference" value="PR-00218" />
       </FormCard>
       <Card title="Stock Lines">
@@ -474,15 +474,15 @@ export function StockInPage() {
 export function StockAdjustmentPage() {
   return (
     <FormShell
-      active="Stock Movements"
+      active="ການເຄື່ອນໄຫວສະຕັອກ"
       title="Stock Adjustment"
       description="Adjust inventory for damaged, expired, counted, or corrected stock."
       kpis={pageKpis.stock}
       right={<ValidationRail title="Adjustment Check" />}
     >
       <FormCard title="Adjustment Details">
-        <Field label="Item" value="Fresh Milk 1L" type="select" />
-        <Field label="Branch" value="Main Branch" type="select" />
+        <Field label="ລາຍການ" value="ນົມສົດ 1L" type="select" />
+        <Field label="ສາຂາ" value="ສາຂາຫຼັກ" type="select" />
         <Field label="Adjustment Type" value="Damaged" type="select" />
         <Field label="Quantity" value="-6" />
         <Field
@@ -499,7 +499,7 @@ export function StockAdjustmentPage() {
 export function LoyaltySettingsPage() {
   return (
     <FormShell
-      active="Loyalty"
+      active="ສະສົມແຕ້ມ"
       title="Loyalty Settings"
       description="Configure points, tiers, rewards, and member benefits."
       kpis={pageKpis.loyalty}
@@ -524,15 +524,15 @@ export function LoyaltySettingsPage() {
 export function RolesPermissionsPage() {
   return (
     <FormShell
-      active="Roles & Permissions"
-      title="Roles & Permissions"
+      active="ບົດບາດ ແລະ ສິດ"
+      title="ບົດບາດ ແລະ ສິດ"
       description="Control staff access for POS, inventory, reports, settings, and payments."
       kpis={pageKpis.staff}
       right={<ValidationRail title="Security Checklist" />}
     >
       <Card title="Role Matrix">
         <div className="grid gap-3 p-4 md:grid-cols-2 xl:grid-cols-3">
-          {["Owner", "Manager", "Cashier", "Inventory", "Barista", "Accountant"].map(
+          {["Owner", "Manager", "Cashier", "ສະຕັອກ", "Barista", "Accountant"].map(
             (role) => (
               <div key={role} className="rounded-lg border border-blue-100 p-4">
                 <div className="mb-3 flex items-center justify-between">
@@ -562,7 +562,7 @@ export function RolesPermissionsPage() {
 export function ReceiptBillSettingsPage() {
   return (
     <SettingsPage
-      active="Receipt/Bill"
+      active="ໃບຮັບເງິນ / ບິນ"
       title="Receipt / Bill Settings"
       description="Configure receipt layout, tax display, print settings, QR info, and live preview."
       icon={Printer}
@@ -580,7 +580,7 @@ export function ReceiptBillSettingsPage() {
 export function BrandingThemePage() {
   return (
     <SettingsPage
-      active="Branding"
+      active="ແບຣນດ໌"
       title="Branding / Theme"
       description="Manage logo, colors, typography, POS theme, receipt branding, and customer display."
       icon={Palette}
@@ -592,12 +592,12 @@ export function BrandingThemePage() {
 export function PaymentMethodsPage() {
   return (
     <SettingsPage
-      active="Payment Methods"
-      title="Payment Methods"
+      active="ວິທີຊຳລະ"
+      title="ວິທີຊຳລະ"
       description="Configure cash, card, bank transfer, BCEL One, LaoViet QR, settlements, and fees."
       icon={CreditCard}
       tabs={[
-        "Payment Methods",
+        "ວິທີຊຳລະ",
         "Bank Accounts",
         "QR Templates",
         "Debt Terms",
@@ -611,11 +611,11 @@ export function PaymentMethodsPage() {
 export function ModuleSettingsPage() {
   return (
     <SettingsPage
-      active="Modules"
+      active="ໂມດູນ"
       title="Module Settings"
       description="Enable modules, manage add-ons, plan locks, branch availability, and dependencies."
       icon={Settings}
-      tabs={["Enabled Modules", "Available Modules", "Add-ons", "Locked by Plan"]}
+      tabs={["Enabled Modules", "Available Modules", "ຕົວເລືອກເພີ່ມ", "Locked by Plan"]}
     />
   );
 }
@@ -623,7 +623,7 @@ export function ModuleSettingsPage() {
 export function ImportCenterPage() {
   return (
     <ImportExportPage
-      active="Import/Export"
+      active="ນຳເຂົ້າ / ສົ່ງອອກ"
       title="Import Center"
       description="Import items, stock, customers, suppliers, categories, staff, and promotions from XLSX or CSV."
       mode="import"
@@ -634,7 +634,7 @@ export function ImportCenterPage() {
 export function ExportCenterPage() {
   return (
     <ImportExportPage
-      active="Import/Export"
+      active="ນຳເຂົ້າ / ສົ່ງອອກ"
       title="Export Center"
       description="Export datasets, schedule exports, and download XLSX, CSV, or PDF files."
       mode="export"
@@ -645,7 +645,7 @@ export function ExportCenterPage() {
 export function StaffDetailPage() {
   return (
     <FormShell
-      active="Staff"
+      active="ພະນັກງານ"
       title="Staff Form / Detail"
       description="Manage staff profile, assigned branch, role, permissions, and login status."
       kpis={pageKpis.staff}
@@ -654,10 +654,10 @@ export function StaffDetailPage() {
       <FormCard title="Staff Profile">
         <Field label="Full Name" value="Ketsana Vongdala" />
         <Field label="Role" value="Manager" type="select" />
-        <Field label="Branch" value="Sihom Branch" type="select" />
+        <Field label="ສາຂາ" value="ສາຂາສີຫອມ" type="select" />
         <Field label="Phone" value="020 5544 8899" />
         <Field label="Email" value="ketsana@tjcafe.la" />
-        <Field label="Status" value="Active" type="select" />
+        <Field label="ສະຖານະ" value="ເປີດໃຊ້" type="select" />
       </FormCard>
     </FormShell>
   );
@@ -666,7 +666,7 @@ export function StaffDetailPage() {
 export function CustomerDetailPage() {
   return (
     <FormShell
-      active="Customers"
+      active="ລູກຄ້າ"
       title="Customer Detail"
       description="View customer profile, purchase history, loyalty points, notes, and promotion eligibility."
       kpis={pageKpis.customers}
@@ -674,8 +674,8 @@ export function CustomerDetailPage() {
     >
       <FormCard title="Customer Profile">
         <Field label="Customer Name" value="Khamla Philavong" />
-        <Field label="Customer Type" value="Wholesale Customer" type="select" />
-        <Field label="Price List" value="Cafe Wholesale" type="select" />
+        <Field label="Customer Type" value="ລູກຄ້າຂາຍສົ່ງ" type="select" />
+        <Field label="Price List" value="ລາຄາສົ່ງຮ້ານກາເຟ" type="select" />
         <Field label="Member Level" value="Gold" type="select" />
         <Field label="Phone" value="020 2233 4455" />
         <Field label="Points" value="15,200" />
@@ -685,7 +685,7 @@ export function CustomerDetailPage() {
         <Field label="Purchase History" value="42 orders / LAK 12,680,000" />
         <Field label="Wholesale Order History" value="8 wholesale orders this quarter" />
         <Field
-          label="Notes"
+          label="ໝາຍເຫດ"
           value="Prefers iced drinks. Uses Cafe Wholesale price list. Manager approval required when debt exceeds limit."
           type="textarea"
           full
@@ -698,7 +698,7 @@ export function CustomerDetailPage() {
 export function PurchaseReceiptDetailPage() {
   return (
     <FormShell
-      active="Suppliers"
+      active="ຜູ້ສະໜອງ"
       title="Purchase Receipt Detail / Form"
       description="Review supplier receipt lines, costs, received quantities, and stock update result."
       kpis={pageKpis.suppliers}
@@ -707,10 +707,10 @@ export function PurchaseReceiptDetailPage() {
       <FormCard title="Purchase Receipt">
         <Field label="Receipt Number" value="PR-00218" />
         <Field label="Supplier" value="Lao Coffee Supply" type="select" />
-        <Field label="Branch" value="Main Branch" type="select" />
-        <Field label="Status" value="Received" type="select" />
+        <Field label="ສາຂາ" value="ສາຂາຫຼັກ" type="select" />
+        <Field label="ສະຖານະ" value="Received" type="select" />
         <Field
-          label="Notes"
+          label="ໝາຍເຫດ"
           value="Coffee beans and paper supplies received in good condition."
           type="textarea"
           full
@@ -723,7 +723,7 @@ export function PurchaseReceiptDetailPage() {
 export function SupplierFormPage() {
   return (
     <FormShell
-      active="Suppliers"
+      active="ຜູ້ສະໜອງ"
       title="Supplier Form"
       description="Create or update supplier contact, category, payment terms, and delivery notes."
       kpis={pageKpis.suppliers}
@@ -731,7 +731,7 @@ export function SupplierFormPage() {
     >
       <FormCard title="Supplier Details">
         <Field label="Supplier Name" value="Lao Coffee Supply" />
-        <Field label="Category" value="Coffee Beans" type="select" />
+        <Field label="ໝວດໝູ່" value="ເມັດກາເຟ" type="select" />
         <Field label="Phone" value="020 5588 1212" />
         <Field label="Payment Terms" value="Net 15" />
         <Field
@@ -769,7 +769,7 @@ function SettingsPage({
         <div className="space-y-4">
           <FormCard title={tabs[0]} description="Business-specific configuration">
             <Field label="Display Name" value="TJ Cafe Vientiane" />
-            <Field label="Branch Scope" value="All Branches" type="select" />
+            <Field label="Branch Scope" value="ທຸກສາຂາ" type="select" />
             <Field label="Default Option" value="Enabled" type="select" />
             <Field label="Updated By" value="Somchai Phommaseanh" />
           </FormCard>
@@ -809,14 +809,14 @@ function SettingsPage({
             title="Setup Checklist"
             items={[
               { label: "Business Info", value: "Complete", tone: "emerald" },
-              { label: "Branch Scope", value: "All Branches", tone: "blue" },
+              { label: "Branch Scope", value: "ທຸກສາຂາ", tone: "blue" },
               { label: "Last Updated", value: "Today", tone: "slate" },
               { label: "Validation", value: "Passed", tone: "emerald" }
             ]}
           />
           <QuickActionsCard
             actions={[
-              { label: "Save Settings", icon: Save, tone: "blue" },
+              { label: "ບັນທຶກການຕັ້ງຄ່າ", icon: Save, tone: "blue" },
               { label: "Upload Asset", icon: Upload, tone: "emerald" },
               { label: "Preview", icon: CheckCircle2, tone: "violet" },
               { label: "Reset Template", icon: Settings, tone: "amber" }
@@ -887,13 +887,13 @@ function ImportExportPage({
           <Card title={mode === "import" ? "Import Types" : "Export Datasets"}>
             <div className="grid gap-3 p-4 md:grid-cols-2 xl:grid-cols-3">
               {[
-                "Items",
+                "ສິນຄ້າ",
                 "Stock",
-                "Customers",
-                "Suppliers",
-                "Categories",
-                "Staff",
-                "Promotions",
+                "ລູກຄ້າ",
+                "ຜູ້ສະໜອງ",
+                "ໝວດໝູ່",
+                "ພະນັກງານ",
+                "ໂປຣໂມຊັນ",
                 "Wholesale Price List",
                 "Customer Debt Opening Balance",
                 "Wholesale Orders"
@@ -916,14 +916,14 @@ function ImportExportPage({
           <FormCard
             title={mode === "import" ? "Upload & Validation" : "Export Options"}
           >
-            <Field label="Dataset" value="Items" type="select" />
-            <Field label="Branch" value="All Branches" type="select" />
+            <Field label="Dataset" value="ສິນຄ້າ" type="select" />
+            <Field label="ສາຂາ" value="ທຸກສາຂາ" type="select" />
             <Field
               label="Format"
               value={mode === "import" ? "XLSX" : "XLSX, CSV, PDF"}
               type="select"
             />
-            <Field label="Date Range" value="May 12 - May 18, 2025" />
+            <Field label="ຊ່ວງວັນທີ" value="12 - 18 ພຶດສະພາ 2025" />
           </FormCard>
         </div>
         <RightRail>
@@ -1013,12 +1013,12 @@ function ValidationRail({ title }: { title: string }) {
           { label: "Required Fields", value: "Complete", tone: "emerald" },
           { label: "Branch Scope", value: "Main + Sihom", tone: "blue" },
           { label: "Permissions", value: "Valid", tone: "violet" },
-          { label: "Last Updated", value: "May 18, 2025", tone: "slate" }
+          { label: "Last Updated", value: "18 ພຶດສະພາ 2025", tone: "slate" }
         ]}
       />
       <QuickActionsCard
         actions={[
-          { label: "Save Changes", icon: Save, tone: "blue" },
+          { label: "ບັນທຶກການແກ້ໄຂ", icon: Save, tone: "blue" },
           { label: "Preview", icon: CheckCircle2, tone: "emerald" },
           { label: "Apply to Branches", icon: Building2, tone: "violet" },
           { label: "Advanced Rules", icon: Percent, tone: "amber" }

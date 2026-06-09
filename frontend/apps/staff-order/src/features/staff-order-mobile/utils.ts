@@ -19,15 +19,15 @@ export function getStaffCartSummary(lines: StaffOrderLine[]) {
 }
 
 export function statusColor(status: string) {
-  if (status === "Ready to Serve") {
+  if (status === "ພ້ອມເສີບ") {
     return "bg-emerald-50 text-emerald-600";
   }
 
-  if (status === "Waiting Bill") {
+  if (status === "ລໍຖ້າອອກບິນ") {
     return "bg-violet-50 text-violet-600";
   }
 
-  if (status === "Sent") {
+  if (status === "ສົ່ງແລ້ວ") {
     return "bg-orange-50 text-orange-600";
   }
 

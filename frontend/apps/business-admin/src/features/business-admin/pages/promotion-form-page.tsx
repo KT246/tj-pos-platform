@@ -22,7 +22,7 @@ import { BusinessAdminShell } from "../layouts/business-admin-shell";
 
 export function PromotionFormPage() {
   return (
-    <BusinessAdminShell active="Promotions">
+    <BusinessAdminShell active="ໂປຣໂມຊັນ">
       <PageHeader
         title="Promotion Form"
         description="Create or edit promotion rules, target customers, schedule, limits, and preview."
@@ -40,7 +40,7 @@ export function PromotionFormPage() {
             <Field label="Promotion Name" value="Happy Hour 15% Off Drinks" />
             <Field label="Promotion Code" value="HAPPY15" />
             <Field label="Promotion Type" value="Time-based Discount" type="select" />
-            <Field label="Status" value="Active" type="select" />
+            <Field label="ສະຖານະ" value="ເປີດໃຊ້" type="select" />
             <Field
               label="Description"
               value="15% off selected drinks during afternoon slow hours."
@@ -49,7 +49,7 @@ export function PromotionFormPage() {
             />
           </FormCard>
           <FormCard title="Discount Rules">
-            <Field label="Discount Method" value="Percentage" type="select" />
+            <Field label="Discount Method" value="ເປີເຊັນ" type="select" />
             <Field label="Discount Value" value="15%" />
             <Field label="Minimum Order Amount" value="LAK 50,000" />
             <Field label="Maximum Discount" value="LAK 30,000" />
@@ -94,7 +94,7 @@ export function PromotionFormPage() {
           />
           <QuickActionsCard
             actions={[
-              { label: "Save Promotion", icon: Save, tone: "blue" },
+              { label: "ບັນທຶກໂປຣໂມຊັນ", icon: Save, tone: "blue" },
               { label: "Create Coupon", icon: TicketPercent, tone: "violet" },
               { label: "Preview POS", icon: BadgePercent, tone: "emerald" },
               { label: "Advanced Rules", icon: Settings, tone: "amber" }

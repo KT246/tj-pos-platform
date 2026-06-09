@@ -1,12 +1,16 @@
 import { Minus, Pencil, Plus, Tag, Trash2, UserRound } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import type { CartLine, Discount, OrderType } from "../types";
+import type { CartLine, Discount, OrderType, PosType } from "../types";
 import { formatMoney, getBusinessPath, getCartSummary } from "../utils";
-import { lo } from "../utils/lao-labels";
+import {
+  getTerminalCopy,
+  getTerminalLocationValue
+} from "../utils/terminal-copy";
 
 export function CartPanel({
   businessSlug,
+  posType,
   cart,
   discount,
   selectedTable,
@@ -20,6 +24,7 @@ export function CartPanel({
   onCustomer
 }: {
   businessSlug: string;
+  posType: PosType;
   cart: CartLine[];
   discount: Discount | null;
   selectedTable: string | null;
@@ -33,19 +38,23 @@ export function CartPanel({
   onCustomer: () => void;
 }) {
   const summary = getCartSummary(cart, discount);
+  const copy = getTerminalCopy(posType);
+  const locationValue = getTerminalLocationValue(posType, orderType, selectedTable);
 
   return (
-    <aside className="flex h-full min-h-0 flex-col rounded-lg border border-blue-100 bg-white shadow-[0_10px_24px_rgba(15,23,42,0.045)]">
-      <div className="flex items-center justify-between border-b border-blue-50 px-4 py-2.5">
+    <aside className="flex h-full min-h-0 flex-col overflow-hidden rounded-lg border border-blue-100 bg-white shadow-[0_10px_24px_rgba(15,23,42,0.045)]">
+      <div className="flex items-center justify-between border-b border-blue-50 px-3 py-2">
         <div>
-          <h2 className="text-[15px] font-black text-slate-950">
-            {lo("Cart")} ({summary.itemCount})
+          <h2 className="text-[14px] font-black text-slate-950">
+            {copy.cartTitle} ({summary.itemCount})
           </h2>
-          <p className="text-[11px] font-bold text-slate-500">
-            {lo(orderType)} - {orderType === "Take Away" ? lo("Counter") : selectedTable ?? lo("No Table")}
+          <p className="text-[10px] font-bold text-slate-500">
+            {orderType} - {locationValue}
           </p>
           {customerName ? (
-            <p className="text-[10px] font-bold text-blue-600">{customerName}</p>
+            <p className="max-w-44 truncate text-[10px] font-bold text-blue-600">
+              {customerName}
+            </p>
           ) : null}
         </div>
         <button
@@ -53,11 +62,11 @@ export function CartPanel({
           onClick={onClear}
           className="text-[12px] font-black text-blue-600 transition hover:text-blue-700"
         >
-          {lo("Clear")}
+          {"ລ້າງ"}
         </button>
       </div>
 
-      <div className="min-h-0 flex-1 space-y-2 overflow-y-auto p-3 [scrollbar-width:thin]">
+      <div className="min-h-0 flex-1 space-y-2 overflow-y-auto p-2 [scrollbar-width:thin]">
         {cart.length > 0 ? (
           cart.map((line) => (
             <CartLineRow
@@ -72,53 +81,54 @@ export function CartPanel({
           <div className="flex h-full min-h-52 items-center justify-center rounded-lg border border-dashed border-blue-100 bg-blue-50/30 text-center">
             <div>
               <p className="text-[13px] font-black text-slate-700">
-                {lo("Cart is empty")}
+                {copy.cartEmptyTitle}
               </p>
               <p className="mt-1 text-[11px] font-bold text-slate-500">
-                {lo("Add items from the product grid to start a sale.")}
+                {copy.cartEmptyDescription}
               </p>
             </div>
           </div>
         )}
       </div>
 
-      <div className="border-t border-blue-50 p-3">
-        <div className="mb-3 grid grid-cols-2 gap-2">
+      <div className="border-t border-blue-50 p-2">
+        <div className="mb-2 grid grid-cols-2 gap-2">
           <button
             type="button"
             onClick={onCustomer}
-            className="flex h-9 items-center justify-center gap-2 rounded-md border border-blue-100 bg-blue-50/60 text-[12px] font-black text-blue-600 transition hover:border-blue-300 hover:bg-blue-50"
+            className="flex h-8 items-center justify-center gap-1.5 rounded-md border border-blue-100 bg-blue-50/60 text-[11px] font-black text-blue-600 transition hover:border-blue-300 hover:bg-blue-50"
           >
             <UserRound className="h-4 w-4" />
-            {lo("Customer")}
+            {copy.customerLabel}
           </button>
           <button
             type="button"
             onClick={onDiscount}
-            className="flex h-9 items-center justify-center gap-2 rounded-md border border-amber-100 bg-amber-50/70 text-[12px] font-black text-amber-700 transition hover:border-amber-300"
+            className="flex h-8 items-center justify-center gap-1.5 rounded-md border border-amber-100 bg-amber-50/70 text-[11px] font-black text-amber-700 transition hover:border-amber-300"
           >
             <Tag className="h-4 w-4" />
-            {lo("Discount")}
+            {"ສ່ວນຫຼຸດ"}
           </button>
         </div>
-        <SummaryRow label="Subtotal" value={summary.subtotal} />
-        <SummaryRow label="Discount" value={summary.discount} muted />
-        <SummaryRow label="Tax (10%)" value={summary.tax} />
-        <div className="mt-2 flex items-center justify-between border-t border-blue-50 pt-3">
-          <span className="text-[13px] font-black text-slate-950">{lo("Total")}</span>
-          <span className="text-[20px] leading-6 font-black text-slate-950">
+        <SummaryRow label="ຍອດກ່ອນຫຼຸດ" value={summary.subtotal} />
+        <SummaryRow label="ສ່ວນຫຼຸດ" value={summary.discount} muted />
+        <SummaryRow label="ອາກອນ (10%)" value={summary.tax} />
+        <div className="mt-1.5 flex items-center justify-between border-t border-blue-50 pt-2">
+          <span className="text-[13px] font-black text-slate-950">{"ລວມທັງໝົດ"}</span>
+          <span className="text-[18px] leading-6 font-black text-slate-950">
             {formatMoney(summary.total)}
           </span>
         </div>
         <Link
           to={getBusinessPath(businessSlug, "/checkout")}
-          className={`mt-3 flex h-[52px] items-center justify-center rounded-lg text-[15px] font-black shadow-[0_12px_24px_rgba(37,99,235,0.24)] transition ${
+          className={`mt-2 flex h-11 items-center justify-center gap-1.5 rounded-lg text-[14px] font-black shadow-[0_12px_24px_rgba(37,99,235,0.24)] transition ${
             cart.length === 0
               ? "pointer-events-none bg-slate-200 text-slate-400 shadow-none"
               : "bg-blue-600 text-white hover:bg-blue-700"
           }`}
         >
-          {lo("Pay")} {formatMoney(summary.total)}
+          <span>{"ຊຳລະ"}</span>
+          <span>{formatMoney(summary.total)}</span>
         </Link>
       </div>
     </aside>
@@ -137,51 +147,51 @@ function CartLineRow({
   onRemove: (lineId: string) => void;
 }) {
   return (
-    <div className="rounded-lg border border-blue-50 bg-[#fbfdff] p-2.5 transition hover:border-blue-200">
-      <div className="flex gap-2.5">
+    <div className="rounded-lg border border-blue-50 bg-[#fbfdff] p-2 transition hover:border-blue-200">
+      <div className="flex gap-2">
         <img
           src={line.image}
           alt=""
-          className="h-11 w-11 rounded-md border border-blue-100 object-cover"
+          className="h-10 w-10 rounded-md border border-blue-100 object-cover"
         />
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-2">
             <div className="min-w-0">
-              <p className="truncate text-[12px] leading-4 font-black text-slate-950">
-                {lo(line.name)}
+              <p className="truncate text-[11px] leading-4 font-black text-slate-950">
+                {line.name}
               </p>
               <p className="text-[10px] leading-3 font-bold text-slate-500">
                 {line.quantity} x {formatMoney(line.price)}
               </p>
-              {line.priceType && line.priceType !== "retail" ? (
+              {line.priceType && line.priceType !== "ຂາຍຍ່ອຍ" ? (
                 <p className="mt-1 text-[10px] leading-3 font-black text-emerald-600">
-                  {lo(line.priceType)} {lo("price")}
-                  {line.priceList ? ` - ${lo(line.priceList)}` : ""}
+                  {line.priceType} {"ລາຄາ"}
+                  {line.priceList ? ` - ${line.priceList}` : ""}
                 </p>
               ) : line.minWholesaleQuantity ? (
                 <p className="mt-1 text-[10px] leading-3 font-bold text-slate-400">
-                  {lo("Wholesale at")} {line.minWholesaleQuantity}+ {lo("pcs")}
+                  {"ລາຄາສົ່ງເມື່ອຊື້"} {line.minWholesaleQuantity}+ {"ອັນ"}
                 </p>
               ) : null}
             </div>
-            <p className="text-[12px] leading-4 font-black text-slate-950">
+            <p className="text-[11px] leading-4 font-black text-slate-950">
               {formatMoney(line.price * line.quantity)}
             </p>
           </div>
           {line.note ? (
             <p className="mt-1 flex items-center gap-1 text-[10px] leading-3 font-bold text-orange-500">
               <Pencil className="h-3 w-3" />
-              {lo("Note")}: {lo(line.note)}
+              {"ໝາຍເຫດ"}: {line.note}
             </p>
           ) : null}
-          <div className="mt-2 flex items-center justify-between">
+          <div className="mt-1.5 flex items-center justify-between">
             <div className="flex items-center rounded-md border border-blue-100 bg-white">
               <QtyButton
                 label="Decrease quantity"
                 onClick={() => onDecrement(line.id)}
                 icon={Minus}
               />
-              <span className="min-w-8 text-center text-[12px] font-black">
+              <span className="min-w-7 text-center text-[12px] font-black">
                 {line.quantity}
               </span>
               <QtyButton
@@ -218,7 +228,7 @@ function QtyButton({
     <button
       type="button"
       onClick={onClick}
-      className="flex h-8 w-8 items-center justify-center rounded-md text-blue-600 transition hover:bg-blue-50"
+      className="flex h-7 w-7 items-center justify-center rounded-md text-blue-600 transition hover:bg-blue-50"
       aria-label={label}
     >
       <Icon className="h-3.5 w-3.5" />
@@ -236,10 +246,10 @@ function SummaryRow({
   muted?: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between py-1">
-      <span className="text-[12px] font-bold text-slate-500">{lo(label)}</span>
+    <div className="flex items-center justify-between py-0.5">
+      <span className="text-[11px] font-bold text-slate-500">{label}</span>
       <span
-        className={`text-[12px] font-black ${
+        className={`text-[11px] font-black ${
           muted ? "text-emerald-600" : "text-slate-800"
         }`}
       >

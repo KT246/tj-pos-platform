@@ -14,7 +14,7 @@ export type CustomerBusinessBrand = {
   name: string;
   logo: string;
   branch: string;
-  status: "Ready" | "Pairing" | "Connected";
+  status: string;
 };
 
 export type CustomerDisplayDevice = {

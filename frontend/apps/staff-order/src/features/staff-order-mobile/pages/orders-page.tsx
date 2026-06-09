@@ -17,14 +17,13 @@ import { StaffMobileShell, StaffScrollArea } from "../components/staff-mobile-sh
 import { useStaffOrderStore } from "../stores/staff-order-store";
 import type { StaffOrderRecord } from "../types";
 import { formatMoney, getStaffOrderPath, statusColor } from "../utils";
-import { lo } from "../utils/lao-labels";
 
 type OrdersTab = "tables" | "orders" | "ready";
 
 const orderTabs: { id: OrdersTab; label: string }[] = [
-  { id: "tables", label: "Tables" },
-  { id: "orders", label: "Orders" },
-  { id: "ready", label: "Ready" }
+  { id: "tables", label: "ໂຕະ" },
+  { id: "orders", label: "ອໍເດີ" },
+  { id: "ready", label: "ພ້ອມ" }
 ];
 
 export function StaffOrdersPage({ businessSlug }: { businessSlug: string }) {
@@ -35,18 +34,18 @@ export function StaffOrdersPage({ businessSlug }: { businessSlug: string }) {
   const setSelectedTable = useStaffOrderStore((state) => state.setSelectedTable);
   const showNotice = useStaffOrderStore((state) => state.showNotice);
   const readyCount = activeOrders.filter(
-    (order) => order.status === "Ready to Serve"
+    (order) => order.status === "ພ້ອມເສີບ"
   ).length;
   const openBills = activeOrders.filter(
-    (order) => order.status === "Waiting Bill"
+    (order) => order.status === "ລໍຖ້າອອກບິນ"
   ).length;
   const displayedOrders = activeOrders.filter((order) => {
     if (activeTab === "ready") {
-      return order.status === "Ready to Serve";
+      return order.status === "ພ້ອມເສີບ";
     }
 
     if (activeTab === "orders") {
-      return order.status === "Preparing" || order.status === "Sent";
+      return order.status === "ກຳລັງກຽມ" || order.status === "ສົ່ງແລ້ວ";
     }
 
     return true;
@@ -71,12 +70,12 @@ export function StaffOrdersPage({ businessSlug }: { businessSlug: string }) {
         />
       }
     >
-      <StaffOrderHeader title="Active Orders" showFilter />
+      <StaffOrderHeader title="ອໍເດີທີ່ກຳລັງເປີດ" showFilter />
       <StaffScrollArea className="pb-3">
         <section className="mt-3 grid grid-cols-3 divide-x divide-blue-50 rounded-lg border border-blue-100 bg-white p-2 shadow-[0_8px_18px_rgba(15,23,42,0.035)]">
-          <StatBlock label="Active" value={String(activeOrders.length)} />
-          <StatBlock label="Ready" value={String(readyCount)} tone="green" />
-          <StatBlock label="Open Bills" value={String(openBills)} tone="orange" />
+          <StatBlock label="ກຳລັງເປີດ" value={String(activeOrders.length)} />
+          <StatBlock label="ພ້ອມ" value={String(readyCount)} tone="green" />
+          <StatBlock label="ບິນທີ່ຍັງເປີດ" value={String(openBills)} tone="orange" />
         </section>
 
         <div className="mt-2.5 grid grid-cols-3 rounded-lg border border-blue-100 bg-white p-1 shadow-[0_7px_16px_rgba(15,23,42,0.03)]">
@@ -89,7 +88,7 @@ export function StaffOrdersPage({ businessSlug }: { businessSlug: string }) {
                 activeTab === item.id ? "bg-blue-600 text-white" : "text-slate-500"
               }`}
             >
-              {lo(item.label)}
+              {item.label}
             </button>
           ))}
         </div>
@@ -98,7 +97,7 @@ export function StaffOrdersPage({ businessSlug }: { businessSlug: string }) {
           <Search className="absolute top-1/2 left-3 h-[18px] w-[18px] -translate-y-1/2 text-slate-400" />
           <input
             className="h-10 w-full rounded-lg border border-blue-100 bg-white pr-10 pl-10 text-[12px] font-bold shadow-[0_7px_16px_rgba(15,23,42,0.03)] transition outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
-            placeholder={lo("Search table or order")}
+            placeholder={"ຄົ້ນຫາໂຕະ ຫຼື ອໍເດີ"}
           />
           <Filter className="absolute top-1/2 right-3 h-[18px] w-[18px] -translate-y-1/2 text-slate-500" />
         </label>
@@ -144,7 +143,7 @@ function StatBlock({
         <ClipboardCheck className="h-4 w-4" />
       </span>
       <span className="min-w-0">
-        <span className="block truncate text-[10px] font-bold text-slate-500">{lo(label)}</span>
+        <span className="block truncate text-[10px] font-bold text-slate-500">{label}</span>
         <span className="text-[16px] leading-5 font-black text-slate-950">{value}</span>
       </span>
     </div>
@@ -165,11 +164,11 @@ function OrderCard({
   onMarkServed: () => void;
 }) {
   const actionLabel =
-    order.status === "Ready to Serve"
-      ? "Mark Served"
-      : order.status === "Waiting Bill"
-        ? "Generate Bill"
-        : "Add Item";
+    order.status === "ພ້ອມເສີບ"
+      ? "ໝາຍວ່າເສີບແລ້ວ"
+      : order.status === "ລໍຖ້າອອກບິນ"
+        ? "ສ້າງບິນ"
+        : "ເພີ່ມສິນຄ້າ";
 
   return (
     <article className="rounded-lg border border-blue-100 bg-white p-2.5 shadow-[0_9px_22px_rgba(15,23,42,0.045)] transition hover:-translate-y-0.5 hover:border-blue-200">
@@ -183,13 +182,13 @@ function OrderCard({
               {order.tableId}
             </h3>
             <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[9px] font-black text-blue-600">
-              {lo(order.type)}
+              {order.type}
             </span>
           </div>
           <div className="mt-1.5 flex items-center gap-3 text-[10px] font-bold text-slate-500">
             <span className="flex items-center gap-1">
               <ClipboardCheck className="h-3.5 w-3.5" />
-              {order.items} {lo("items")}
+              {order.items} {"ລາຍການ"}
             </span>
             <span className="flex items-center gap-1">
               <Timer className="h-3.5 w-3.5" />
@@ -201,7 +200,7 @@ function OrderCard({
           <span
             className={`rounded-full px-2 py-0.5 text-[9px] font-black ${statusColor(order.status)}`}
           >
-            {lo(order.status)}
+            {order.status}
           </span>
           <p className="mt-3 text-[13px] font-black text-slate-950">
             {formatMoney(order.total)}
@@ -215,25 +214,25 @@ function OrderCard({
           className="flex h-9 cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-blue-100 text-[12px] font-black text-blue-600 hover:bg-blue-50"
         >
           <ClipboardCheck className="h-3.5 w-3.5" />
-          {lo("Open")}
+          {"ເປີດ"}
         </Link>
-        {order.status === "Ready to Serve" ? (
+        {order.status === "ພ້ອມເສີບ" ? (
           <button
             type="button"
             onClick={onMarkServed}
             className="flex h-9 cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 text-[12px] font-black text-emerald-600"
           >
             <CheckCircle2 className="h-3.5 w-3.5" />
-            {lo(actionLabel)}
+            {actionLabel}
           </button>
-        ) : order.status === "Waiting Bill" ? (
+        ) : order.status === "ລໍຖ້າອອກບິນ" ? (
           <button
             type="button"
             onClick={onGenerateBill}
             className="flex h-9 cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-violet-200 bg-violet-50 text-[12px] font-black text-violet-600"
           >
             <WalletCards className="h-3.5 w-3.5" />
-            {lo(actionLabel)}
+            {actionLabel}
           </button>
         ) : (
           <Link
@@ -242,7 +241,7 @@ function OrderCard({
             className="flex h-9 cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-blue-100 text-[12px] font-black text-blue-600 hover:bg-blue-50"
           >
             <Plus className="h-3.5 w-3.5" />
-            {lo(actionLabel)}
+            {actionLabel}
           </Link>
         )}
       </div>
