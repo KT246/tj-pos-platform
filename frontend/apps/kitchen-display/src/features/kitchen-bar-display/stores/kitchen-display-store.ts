@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import type { SystemToastType } from "@workspace/ui";
 
 import { showKitchenDisplayNotice } from "../../../lib/kitchen-display-toasts";
 import { defaultKitchenSettings, kitchenTickets } from "../data/kitchen-display-data";
@@ -42,7 +43,7 @@ type KitchenDisplayActions = {
   completePickup: (ticketId: string) => void;
   recallTicket: (ticketId: string) => void;
   dismissAlert: () => void;
-  showNotice: (message: string) => void;
+  showNotice: (message: string, type?: SystemToastType) => void;
 };
 
 function assignStaff(ticket: KitchenTicket) {
@@ -69,7 +70,7 @@ export const useKitchenDisplayStore = create<
   KitchenDisplayState & KitchenDisplayActions
 >((set) => ({
   boardMode: "kitchen",
-  activeStatus: "new",
+  activeStatus: "pending",
   selectedStation: "all",
   sortMode: "longest",
   soundEnabled: true,
@@ -79,16 +80,7 @@ export const useKitchenDisplayStore = create<
   selectedTicketId: null,
   tickets: kitchenTickets,
   settings: defaultKitchenSettings,
-  setBoardMode: (mode) =>
-    set((state) => ({
-      boardMode: mode,
-      selectedStation:
-        mode === "bar" && state.selectedStation === "all"
-          ? "bar"
-          : mode === "kitchen" && state.selectedStation === "bar"
-            ? "all"
-            : state.selectedStation
-    })),
+  setBoardMode: (mode) => set({ boardMode: mode, selectedStation: "all" }),
   setActiveStatus: (status) => set({ activeStatus: status }),
   setSelectedStation: (stationId) => set({ selectedStation: stationId }),
   setSortMode: (sortMode) => set({ sortMode }),
@@ -118,7 +110,7 @@ export const useKitchenDisplayStore = create<
     set((state) => {
       const ticket = state.tickets.find((item) => item.id === ticketId);
       if (!ticket) {
-        showKitchenDisplayNotice("ບໍ່ພົບ Ticket.", "error");
+        showKitchenDisplayNotice("ບໍ່ພົບອໍເດີ.", "error");
         return {};
       }
 
@@ -127,7 +119,8 @@ export const useKitchenDisplayStore = create<
       return {
         tickets: updateTicketStatus(state.tickets, ticketId, {
           status: "preparing",
-          assignedTo: assignStaff(ticket)
+          assignedTo: assignStaff(ticket),
+          items: ticket.items.map((item) => ({ ...item, status: "preparing" }))
         }),
         activeStatus: "preparing",
         alertOpen: state.alertTicketId === ticketId ? false : state.alertOpen
@@ -135,36 +128,53 @@ export const useKitchenDisplayStore = create<
     }),
   markReady: (ticketId) =>
     set((state) => {
-      showKitchenDisplayNotice(`${ticketId} ຖືກໝາຍວ່າພ້ອມແລ້ວ.`, "success");
+      const ticket = state.tickets.find((item) => item.id === ticketId);
+      if (!ticket) {
+        showKitchenDisplayNotice("ບໍ່ພົບອໍເດີ.", "error");
+        return {};
+      }
+
+      showKitchenDisplayNotice(`${ticketId} ພ້ອມແລ້ວ.`, "success");
 
       return {
-        tickets: updateTicketStatus(state.tickets, ticketId, { status: "ready" }),
+        tickets: updateTicketStatus(state.tickets, ticketId, {
+          status: "ready",
+          items: ticket.items.map((item) => ({ ...item, status: "done" }))
+        }),
         activeStatus: "ready"
       };
     }),
   completePickup: (ticketId) =>
     set((state) => {
-      showKitchenDisplayNotice(
-        `${ticketId} ສຳເລັດ ແລະ ຖືກຍ້າຍອອກຈາກຄິວພ້ອມ.`,
-        "success"
-      );
+      showKitchenDisplayNotice(`${ticketId} ສຳເລັດແລ້ວ.`, "success");
 
       return {
-        tickets: updateTicketStatus(state.tickets, ticketId, { status: "done" }),
+        tickets: updateTicketStatus(state.tickets, ticketId, {
+          status: "done",
+          completedAt: new Date().toISOString()
+        }),
         selectedTicketId: null
       };
     }),
   recallTicket: (ticketId) =>
     set((state) => {
+      const ticket = state.tickets.find((item) => item.id === ticketId);
+      if (!ticket) {
+        showKitchenDisplayNotice("ບໍ່ພົບອໍເດີ.", "error");
+        return {};
+      }
+
       showKitchenDisplayNotice(`${ticketId} ຖືກດຶງກັບໄປກຳລັງກຽມ.`, "info");
 
       return {
         tickets: updateTicketStatus(state.tickets, ticketId, {
-          status: "preparing"
+          status: "preparing",
+          completedAt: null,
+          items: ticket.items.map((item) => ({ ...item, status: "preparing" }))
         }),
         activeStatus: "preparing"
       };
     }),
   dismissAlert: () => set({ alertOpen: false }),
-  showNotice: (message) => showKitchenDisplayNotice(message)
+  showNotice: (message, type) => showKitchenDisplayNotice(message, type)
 }));

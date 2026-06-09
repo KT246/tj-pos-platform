@@ -31,6 +31,10 @@ export function App() {
           element={<KitchenDisplayRoute mode="bar" />}
         />
         <Route
+          path="/bar/b/:businessSlug/ticket/:ticketId"
+          element={<KitchenDisplayRoute mode="bar" />}
+        />
+        <Route
           path="*"
           element={<Navigate to={`/kitchen/b/${defaultBusinessSlug}`} replace />}
         />

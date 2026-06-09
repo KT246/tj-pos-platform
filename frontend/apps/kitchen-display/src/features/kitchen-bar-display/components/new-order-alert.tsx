@@ -42,7 +42,7 @@ export function NewOrderAlert({
                 ມີອໍເດີໃໝ່
               </h2>
               <p className="mt-2 text-[16px] font-semibold text-blue-100">
-                ກວດ Ticket ນີ້ກ່ອນສົ່ງໄປການກຽມ.
+                ກວດອໍເດີນີ້ກ່ອນສົ່ງໄປການກຽມ.
               </p>
             </div>
           </div>
@@ -135,7 +135,7 @@ export function NewOrderAlert({
               className="flex h-12 items-center justify-center gap-2 rounded-lg border border-blue-200 bg-white text-[15px] font-black text-blue-600 transition hover:border-blue-400 hover:bg-blue-50"
             >
               <Eye className="h-5 w-5" strokeWidth={2.35} />
-              ເບິ່ງ Ticket
+              ເບິ່ງອໍເດີ
             </button>
             <button
               type="button"

@@ -65,7 +65,7 @@ function TicketLocation({ ticket }: { ticket: KitchenTicket }) {
   const Icon = ticket.type === "Take Away" ? ShoppingBag : Utensils;
 
   return (
-    <span className="flex items-center gap-2 text-[15px] font-bold text-[#0b1736]">
+    <span className="flex items-center gap-2 text-[14px] font-bold text-[#0b1736] 2xl:text-[15px]">
       <Icon className="h-5 w-5" strokeWidth={2.2} />
       {lo(ticket.table)}
     </span>
@@ -88,13 +88,15 @@ export function TicketCard({
 
   return (
     <article
-      className={`flex min-h-[314px] flex-col rounded-xl border bg-white p-5 shadow-[0_3px_12px_rgba(15,23,42,0.06)] transition hover:-translate-y-1 hover:shadow-[0_18px_38px_rgba(37,99,235,0.12)] ${tone.border}`}
+      className={`flex min-h-[292px] flex-col rounded-xl border bg-white p-3.5 shadow-[0_3px_12px_rgba(15,23,42,0.06)] transition hover:-translate-y-1 hover:shadow-[0_18px_38px_rgba(37,99,235,0.12)] 2xl:min-h-[306px] 2xl:p-4 ${tone.border}`}
     >
       <div className="flex items-start justify-between gap-4">
         <div>
-          <div className={`text-[21px] font-black ${tone.accent}`}>{ticket.id}</div>
+          <div className={`text-[20px] leading-none font-black 2xl:text-[21px] ${tone.accent}`}>
+            {ticket.id}
+          </div>
           <span
-            className={`mt-2 inline-flex rounded-md px-3 py-1 text-[12px] font-black ${tone.badge}`}
+            className={`mt-3 inline-flex rounded-md px-3 py-1 text-[12px] font-black ${tone.badge}`}
           >
             {lo(ticket.priority)}
           </span>
@@ -116,32 +118,39 @@ export function TicketCard({
         </div>
       </div>
 
-      <div className="mt-5 flex items-center gap-2 text-[13px] font-bold text-[#0b1736]">
-        <UserRound className="h-4 w-4" strokeWidth={2.3} />
-        <span>{lo("Assigned:")}</span>
-        <span className="font-semibold text-slate-600">{lo(ticket.assignedTo)}</span>
-      </div>
+      {ticket.status === "preparing" ? (
+        <div className="mt-4 flex items-center gap-2 text-[13px] font-bold text-[#0b1736]">
+          <UserRound className="h-4 w-4" strokeWidth={2.3} />
+          <span>{lo("Assigned:")}</span>
+          <span className="font-semibold text-slate-600">{lo(ticket.assignedTo)}</span>
+        </div>
+      ) : null}
 
-      <div className={`mt-4 flex-1 ${compact ? "space-y-2" : "space-y-3"}`}>
-        {ticket.items.slice(0, compact ? 3 : 4).map((item) => (
+      <div className={`mt-3 flex-1 2xl:mt-4 ${compact ? "space-y-1.5" : "space-y-2"}`}>
+        {ticket.items.slice(0, 3).map((item) => (
           <div
             key={item.id}
-            className="grid grid-cols-[30px_minmax(0,1fr)] gap-2 text-[14px] leading-snug font-bold text-[#0b1736]"
+            className="grid grid-cols-[26px_minmax(0,1fr)] gap-2 text-[14px] leading-snug font-bold text-[#0b1736]"
           >
             <span>{item.quantity}</span>
             <div>
               <div>{lo(item.name)}</div>
-              {showItemNotes && item.note ? (
-                <div className="mt-1 text-[12px] font-semibold text-slate-500">
+              {showItemNotes && item.note && compact ? (
+                <div className="mt-0.5 truncate text-[12px] font-semibold text-slate-500">
                   {lo(item.note)}
                 </div>
               ) : null}
             </div>
           </div>
         ))}
+        {ticket.items.length > 3 ? (
+          <div className="text-[12px] font-black text-slate-500">
+            +{ticket.items.length - 3} {lo("Items")}
+          </div>
+        ) : null}
       </div>
 
-      <div className="mt-5 border-t border-slate-100 pt-4">
+      <div className="mt-4 border-t border-slate-100 pt-3">
         <div className="flex min-h-6 items-center gap-2 text-[13px] font-bold text-[#0b1736]">
           <MessageCircle className="h-4 w-4 text-slate-500" strokeWidth={2.2} />
           <span>{lo("Note:")}</span>
@@ -151,12 +160,12 @@ export function TicketCard({
         </div>
       </div>
 
-      <div className="mt-4 grid grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] gap-3">
-        {ticket.status === "new" ? (
+      <div className="mt-3 grid grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] gap-3">
+        {ticket.status === "pending" ? (
           <button
             type="button"
             onClick={() => onStartPreparing(ticket.id)}
-            className={`flex h-11 items-center justify-center gap-2 rounded-lg text-[14px] font-black transition ${tone.primary}`}
+            className={`flex h-10 cursor-pointer items-center justify-center gap-2 rounded-lg text-[14px] font-black transition ${tone.primary}`}
           >
             <Timer className="h-5 w-5" strokeWidth={2.4} />
             {lo("Start Preparing")}
@@ -165,7 +174,7 @@ export function TicketCard({
           <button
             type="button"
             onClick={() => onMarkReady(ticket.id)}
-            className={`flex h-11 items-center justify-center gap-2 rounded-lg text-[14px] font-black transition ${tone.primary}`}
+            className={`flex h-10 cursor-pointer items-center justify-center gap-2 rounded-lg text-[14px] font-black transition ${tone.primary}`}
           >
             <CheckCircle2 className="h-5 w-5" strokeWidth={2.4} />
             {lo("Mark Ready")}
@@ -174,7 +183,7 @@ export function TicketCard({
           <button
             type="button"
             onClick={() => onCompletePickup(ticket.id)}
-            className={`flex h-11 items-center justify-center gap-2 rounded-lg text-[14px] font-black transition ${tone.primary}`}
+            className={`flex h-10 cursor-pointer items-center justify-center gap-2 rounded-lg text-[14px] font-black transition ${tone.primary}`}
           >
             <CheckCircle2 className="h-5 w-5" strokeWidth={2.4} />
             {lo("Complete Pickup")}
@@ -184,7 +193,7 @@ export function TicketCard({
         <button
           type="button"
           onClick={() => onViewDetail(ticket.id)}
-          className="flex h-11 items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white text-[14px] font-black text-[#0b1736] transition hover:border-blue-300 hover:bg-blue-50"
+          className="flex h-10 cursor-pointer items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white text-[14px] font-black text-[#0b1736] transition hover:border-blue-300 hover:bg-blue-50"
         >
           <MoreHorizontal className="h-5 w-5" strokeWidth={2.4} />
           {lo("View Detail")}
@@ -195,7 +204,7 @@ export function TicketCard({
         <button
           type="button"
           onClick={() => onRecall(ticket.id)}
-          className="mt-3 h-10 rounded-lg border border-emerald-100 bg-emerald-50 text-[13px] font-black text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-100"
+          className="mt-3 h-9 cursor-pointer rounded-lg border border-emerald-100 bg-emerald-50 text-[13px] font-black text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-100"
         >
           {lo("Recall to Preparing")}
         </button>

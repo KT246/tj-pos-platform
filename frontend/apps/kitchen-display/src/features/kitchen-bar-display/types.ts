@@ -2,9 +2,14 @@ import type { LucideIcon } from "lucide-react";
 
 export type KitchenBoardMode = "kitchen" | "bar";
 
-export type KitchenTicketStatus = "new" | "preparing" | "ready" | "done";
+export type KitchenTicketStatus =
+  | "pending"
+  | "preparing"
+  | "ready"
+  | "done"
+  | "cancelled";
 
-export type KitchenVisibleStatus = Exclude<KitchenTicketStatus, "done">;
+export type KitchenVisibleStatus = Exclude<KitchenTicketStatus, "done" | "cancelled">;
 
 export type KitchenStationId = "all" | "kitchen" | "bar" | "bakery" | "pass";
 
@@ -32,16 +37,23 @@ export type KitchenStation = {
 
 export type KitchenTicketItem = {
   id: string;
+  orderItemId: string;
   quantity: number;
   name: string;
   note?: string;
   modifiers?: string[];
   unitPrice: number;
+  status: "pending" | "preparing" | "done" | "cancelled";
 };
 
 export type KitchenTicket = {
   id: string;
+  businessId: string;
+  branchId: string;
+  ticketNumber: string;
+  orderId: string;
   orderNo: string;
+  tableId?: string | null;
   table: string;
   type: KitchenOrderType;
   station: Exclude<KitchenStationId, "all">;
@@ -50,6 +62,8 @@ export type KitchenTicket = {
   elapsedMinutes: number;
   assignedTo: string;
   receivedAt: string;
+  createdAt: string;
+  completedAt?: string | null;
   customerName: string;
   customerNote: string;
   kitchenNote: string;

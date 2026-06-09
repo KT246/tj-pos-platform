@@ -72,11 +72,11 @@ export function KitchenBoard({ mode, businessSlug, ticketRouteId }: KitchenBoard
   const counts = useMemo(() => getKitchenStatusCounts(tickets), [tickets]);
   const routeTicket = findTicketByRouteId(tickets, ticketRouteId);
   const alertTicket =
-    tickets.find((ticket) => ticket.id === alertTicketId && ticket.status === "new") ??
+    tickets.find((ticket) => ticket.id === alertTicketId && ticket.status === "pending") ??
     null;
 
   function openTicketDetail(ticketId: string) {
-    navigate(`/kitchen/b/${businessSlug}/ticket/${getTicketRouteId(ticketId)}`);
+    navigate(`${getDetailBasePath(businessSlug, mode)}/ticket/${getTicketRouteId(ticketId)}`);
   }
 
   function closeTicketDetail() {
@@ -92,7 +92,7 @@ export function KitchenBoard({ mode, businessSlug, ticketRouteId }: KitchenBoard
 
   function handleOpenAlert() {
     if (!alertTicket) {
-      showNotice("No new order alert is waiting.");
+      showNotice("ບໍ່ມີແຈ້ງເຕືອນອໍເດີໃໝ່.", "warning");
       return;
     }
 
@@ -101,27 +101,29 @@ export function KitchenBoard({ mode, businessSlug, ticketRouteId }: KitchenBoard
 
   function handleSaveSettings() {
     setSettingsOpen(false);
-    showNotice("Kitchen display settings saved.");
+    showNotice("ບັນທຶກການຕັ້ງຄ່າຈໍຄົວແລ້ວ.", "success");
   }
 
   function handleRefresh() {
-    showNotice("Kitchen board refreshed.");
+    showNotice("ໂຫຼດຂໍ້ມູນໜ້າຈໍຄົວໃໝ່ແລ້ວ.", "info");
   }
 
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-[#f7faff] text-[#0b1736]">
       <KitchenTopbar
         mode={mode}
+        selectedStation={selectedStation}
         soundEnabled={soundEnabled}
         alertCount={alertTicket ? 1 : 0}
         autoRefreshSeconds={settings.autoRefreshSeconds}
+        onStationChange={setSelectedStation}
         onToggleSound={() => setSoundEnabled(!soundEnabled)}
         onOpenAlert={handleOpenAlert}
         onOpenSettings={() => setSettingsOpen(true)}
         onRefresh={handleRefresh}
       />
 
-      <main className="grid min-h-0 flex-1 grid-rows-[auto_minmax(0,1fr)] gap-5 overflow-hidden p-6">
+      <main className="grid min-h-0 flex-1 grid-rows-[auto_minmax(0,1fr)] gap-3 overflow-hidden p-3 sm:p-4 2xl:gap-4 2xl:p-6">
         <StatusAndFilters
           activeStatus={activeStatus}
           selectedStation={selectedStation}
@@ -132,7 +134,7 @@ export function KitchenBoard({ mode, businessSlug, ticketRouteId }: KitchenBoard
           onSortChange={setSortMode}
         />
 
-        <section className="min-h-0 overflow-auto pr-1">
+        <section className="min-h-0 overflow-auto pr-0 [scrollbar-gutter:stable] 2xl:pr-1">
           <TicketGrid
             tickets={visibleTickets}
             showItemNotes={settings.showItemNotes}
@@ -154,7 +156,9 @@ export function KitchenBoard({ mode, businessSlug, ticketRouteId }: KitchenBoard
           onStartPreparing={startPreparing}
           onMarkReady={markReady}
           onCompletePickup={handleCompletePickup}
-          onPrint={(ticketId) => showNotice(`${ticketId} sent to station printer.`)}
+          onPrint={(ticketId) =>
+            showNotice(`${ticketId} ຖືກສົ່ງໄປ printer ຂອງສະຖານີແລ້ວ.`, "info")
+          }
         />
       ) : null}
 
@@ -180,7 +184,7 @@ export function KitchenBoard({ mode, businessSlug, ticketRouteId }: KitchenBoard
           onSave={handleSaveSettings}
           onReset={() => {
             resetSettings();
-            showNotice("Kitchen display settings reset.");
+            showNotice("ຣີເຊັດການຕັ້ງຄ່າຈໍຄົວແລ້ວ.", "info");
           }}
           onToggleSound={setSoundEnabled}
           onUpdateSettings={updateSettings}

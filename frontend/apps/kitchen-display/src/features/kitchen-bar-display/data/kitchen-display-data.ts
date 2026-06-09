@@ -11,8 +11,53 @@ import type {
   KitchenBusiness,
   KitchenSettings,
   KitchenStation,
-  KitchenTicket
+  KitchenTicket,
+  KitchenTicketItem
 } from "../types";
+
+type KitchenTicketSeed = Omit<
+  KitchenTicket,
+  | "businessId"
+  | "branchId"
+  | "ticketNumber"
+  | "orderId"
+  | "tableId"
+  | "createdAt"
+  | "completedAt"
+  | "items"
+> & {
+  items: Array<
+    Omit<KitchenTicketItem, "orderItemId" | "status"> &
+      Partial<Pick<KitchenTicketItem, "orderItemId" | "status">>
+  >;
+};
+
+const businessId = "biz-tj-cafe-vientiane";
+const branchId = "branch-vientiane-center";
+
+function createKitchenTicket(seed: KitchenTicketSeed): KitchenTicket {
+  const ticketNumber = seed.orderNo.replace(/^#/, "");
+  const tableId =
+    seed.type === "Dine In"
+      ? seed.table.toLowerCase().replace(/\s+/g, "-")
+      : null;
+
+  return {
+    businessId,
+    branchId,
+    ticketNumber,
+    orderId: `order-${ticketNumber.toLowerCase()}`,
+    tableId,
+    createdAt: `2025-05-18T${seed.receivedAt.replace(" AM", ":00+07:00")}`,
+    completedAt: seed.status === "done" ? "2025-05-18T10:35:00+07:00" : null,
+    ...seed,
+    items: seed.items.map((item, index) => ({
+      orderItemId: item.orderItemId ?? `${seed.orderNo}-${index + 1}`,
+      status: item.status ?? (seed.status === "ready" ? "done" : seed.status),
+      ...item
+    }))
+  };
+}
 
 export const kitchenBusiness: KitchenBusiness = {
   name: "TJ POS",
@@ -40,14 +85,14 @@ export const defaultKitchenSettings: KitchenSettings = {
   largePrintText: true
 };
 
-export const kitchenTickets: KitchenTicket[] = [
+const kitchenTicketSeeds: KitchenTicketSeed[] = [
   {
     id: "#ORD-05029",
     orderNo: "ORD-05029",
     table: "Table 06",
     type: "Dine In",
     station: "kitchen",
-    status: "new",
+    status: "pending",
     priority: "High",
     elapsedMinutes: 2,
     assignedTo: "Unassigned",
@@ -86,7 +131,7 @@ export const kitchenTickets: KitchenTicket[] = [
     table: "Table 12",
     type: "Dine In",
     station: "kitchen",
-    status: "new",
+    status: "pending",
     priority: "High",
     elapsedMinutes: 11,
     assignedTo: "Unassigned",
@@ -113,7 +158,7 @@ export const kitchenTickets: KitchenTicket[] = [
     table: "Take Away",
     type: "Take Away",
     station: "bakery",
-    status: "new",
+    status: "pending",
     priority: "Normal",
     elapsedMinutes: 9,
     assignedTo: "Unassigned",
@@ -139,7 +184,7 @@ export const kitchenTickets: KitchenTicket[] = [
     table: "Table 09",
     type: "Dine In",
     station: "bar",
-    status: "new",
+    status: "pending",
     priority: "Normal",
     elapsedMinutes: 7,
     assignedTo: "Unassigned",
@@ -156,6 +201,86 @@ export const kitchenTickets: KitchenTicket[] = [
         unitPrice: 34000
       },
       { id: "item-05016-3", quantity: 1, name: "Paper Cup 12oz", unitPrice: 0 }
+    ]
+  },
+  {
+    id: "#ORD-05021",
+    orderNo: "ORD-05021",
+    table: "Table 03",
+    type: "Dine In",
+    station: "kitchen",
+    status: "pending",
+    priority: "Normal",
+    elapsedMinutes: 6,
+    assignedTo: "Unassigned",
+    receivedAt: "10:18 AM",
+    customerName: "Walk-in Customer",
+    customerNote: "Family table.",
+    kitchenNote: "No onions in soup",
+    items: [
+      { id: "item-05021-1", quantity: 1, name: "Khao Piak Sen", unitPrice: 42000 },
+      { id: "item-05021-2", quantity: 1, name: "Iced Latte", unitPrice: 28000 },
+      { id: "item-05021-3", quantity: 1, name: "Fresh Spring Roll (Pork)", unitPrice: 32000 }
+    ]
+  },
+  {
+    id: "#ORD-05022",
+    orderNo: "ORD-05022",
+    table: "Take Away",
+    type: "Take Away",
+    station: "bar",
+    status: "pending",
+    priority: "Normal",
+    elapsedMinutes: 7,
+    assignedTo: "Unassigned",
+    receivedAt: "10:17 AM",
+    customerName: "Online Order",
+    customerNote: "Pickup at counter.",
+    kitchenNote: "Less ice please",
+    items: [
+      { id: "item-05022-1", quantity: 2, name: "Iced Americano", unitPrice: 25000 },
+      { id: "item-05022-2", quantity: 1, name: "Croissant", unitPrice: 18000 },
+      { id: "item-05022-3", quantity: 1, name: "Chocolate Muffin", unitPrice: 22000 }
+    ]
+  },
+  {
+    id: "#ORD-05024",
+    orderNo: "ORD-05024",
+    table: "Take Away",
+    type: "Take Away",
+    station: "bar",
+    status: "pending",
+    priority: "Normal",
+    elapsedMinutes: 11,
+    assignedTo: "Unassigned",
+    receivedAt: "10:13 AM",
+    customerName: "Delivery Partner",
+    customerNote: "Driver waiting near counter.",
+    kitchenNote: "No straw",
+    items: [
+      { id: "item-05024-1", quantity: 1, name: "Caramel Macchiato", unitPrice: 30000 },
+      { id: "item-05024-2", quantity: 1, name: "Banana Cake", unitPrice: 22000 },
+      { id: "item-05024-3", quantity: 1, name: "Bottled Water", unitPrice: 8000 }
+    ]
+  },
+  {
+    id: "#ORD-05025",
+    orderNo: "ORD-05025",
+    table: "Table 12",
+    type: "Dine In",
+    station: "kitchen",
+    status: "pending",
+    priority: "High",
+    elapsedMinutes: 12,
+    assignedTo: "Unassigned",
+    receivedAt: "10:12 AM",
+    customerName: "Walk-in Customer",
+    customerNote: "Guest has allergy.",
+    kitchenNote: "Allergic to peanuts",
+    items: [
+      { id: "item-05025-1", quantity: 1, name: "Pad Thai (Chicken)", unitPrice: 45000 },
+      { id: "item-05025-2", quantity: 1, name: "Thai Iced Tea", unitPrice: 25000 },
+      { id: "item-05025-3", quantity: 1, name: "Lime Soda", unitPrice: 18000 }
     ]
   },
   {
@@ -306,3 +431,5 @@ export const kitchenTickets: KitchenTicket[] = [
     ]
   }
 ];
+
+export const kitchenTickets: KitchenTicket[] = kitchenTicketSeeds.map(createKitchenTicket);

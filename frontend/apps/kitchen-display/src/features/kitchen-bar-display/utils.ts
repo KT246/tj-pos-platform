@@ -87,7 +87,7 @@ export function getVisibleKitchenTickets({
 
 export function getKitchenStatusCounts(tickets: KitchenTicket[]) {
   return {
-    new: tickets.filter((ticket) => ticket.status === "new").length,
+    pending: tickets.filter((ticket) => ticket.status === "pending").length,
     preparing: tickets.filter((ticket) => ticket.status === "preparing").length,
     ready: tickets.filter((ticket) => ticket.status === "ready").length
   };

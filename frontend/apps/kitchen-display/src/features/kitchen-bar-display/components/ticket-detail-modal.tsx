@@ -72,12 +72,12 @@ export function TicketDetailModal({
   const LocationIcon = ticket.type === "Take Away" ? ShoppingBag : Utensils;
 
   return (
-    <div className="fixed inset-0 z-40 flex items-center justify-center bg-[#071633]/50 p-6 backdrop-blur-[2px]">
-      <section className="flex h-[min(860px,calc(100vh-48px))] w-[min(1160px,calc(100vw-48px))] flex-col overflow-hidden rounded-2xl bg-white shadow-[0_28px_90px_rgba(7,22,51,0.28)]">
-        <header className="flex items-center justify-between border-b border-blue-100 px-7 py-5">
+    <div className="fixed inset-0 z-40 flex items-center justify-center bg-[#071633]/50 p-3 backdrop-blur-[2px] sm:p-4 lg:p-6">
+      <section className="flex h-[min(860px,calc(100vh-24px))] w-[min(1160px,calc(100vw-24px))] flex-col overflow-hidden rounded-2xl bg-white shadow-[0_28px_90px_rgba(7,22,51,0.28)] sm:h-[min(860px,calc(100vh-32px))] sm:w-[min(1160px,calc(100vw-32px))] lg:h-[min(860px,calc(100vh-48px))] lg:w-[min(1160px,calc(100vw-48px))]">
+        <header className="flex items-center justify-between border-b border-blue-100 px-4 py-4 lg:px-7 lg:py-5">
           <div>
             <div className="flex items-center gap-3">
-              <h2 className="text-[32px] leading-none font-black text-[#0b1736]">
+              <h2 className="text-[26px] leading-none font-black text-[#0b1736] lg:text-[32px]">
                 {ticket.id}
               </h2>
               <span
@@ -87,10 +87,10 @@ export function TicketDetailModal({
                     : "bg-blue-50 text-blue-600"
                 }`}
               >
-                {lo(ticket.priority)} Priority
+                {lo(ticket.priority)}
               </span>
             </div>
-            <div className="mt-3 flex items-center gap-5 text-[15px] font-bold text-slate-600">
+            <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-[14px] font-bold text-slate-600 lg:text-[15px]">
               <span className="flex items-center gap-2">
                 <LocationIcon className="h-5 w-5 text-[#0b1736]" strokeWidth={2.2} />
                 {lo(ticket.table)}
@@ -116,8 +116,8 @@ export function TicketDetailModal({
           </button>
         </header>
 
-        <div className="grid min-h-0 flex-1 grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] gap-6 overflow-hidden bg-[#f7faff] p-6">
-          <aside className="min-h-0 space-y-5 overflow-auto pr-1">
+        <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 overflow-auto bg-[#f7faff] p-4 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-6 lg:overflow-hidden lg:p-6">
+          <aside className="min-h-0 space-y-4 overflow-visible pr-0 lg:space-y-5 lg:overflow-auto lg:pr-1">
             <div className="grid grid-cols-2 gap-4">
               <DetailStat label="Station" value={ticket.station} />
               <DetailStat
@@ -144,7 +144,7 @@ export function TicketDetailModal({
                   <dd className="font-black text-[#0b1736]">{lo(ticket.assignedTo)}</dd>
                 </div>
                 <div className="flex justify-between gap-4">
-                  <dt className="font-bold text-slate-500">ເລກ Ticket</dt>
+                  <dt className="font-bold text-slate-500">ເລກອໍເດີ</dt>
                   <dd className="font-black text-[#0b1736]">{ticket.orderNo}</dd>
                 </div>
               </dl>
@@ -176,9 +176,9 @@ export function TicketDetailModal({
             </div>
           </aside>
 
-          <section className="flex min-h-0 flex-col overflow-hidden rounded-xl border border-blue-100 bg-white shadow-sm">
+          <section className="flex min-h-[520px] flex-col overflow-hidden rounded-xl border border-blue-100 bg-white shadow-sm lg:min-h-0">
             <div className="border-b border-blue-100 px-5 py-4">
-              <h3 className="text-[20px] font-black text-[#0b1736]">ລາຍການ Ticket</h3>
+              <h3 className="text-[20px] font-black text-[#0b1736]">ລາຍການອໍເດີ</h3>
             </div>
             <div className="min-h-0 flex-1 overflow-auto px-5 py-2">
               {ticket.items.map((item) => (
@@ -241,7 +241,7 @@ export function TicketDetailModal({
                   className="flex h-12 items-center justify-center gap-2 rounded-lg border border-blue-200 bg-white text-[14px] font-black text-blue-600 transition hover:border-blue-400 hover:bg-blue-50"
                 >
                   <Printer className="h-5 w-5" strokeWidth={2.35} />
-                  ພິມ Ticket
+                  ພິມບິນຄົວ
                 </button>
                 <button
                   type="button"
@@ -250,7 +250,7 @@ export function TicketDetailModal({
                   <MoreHorizontal className="h-5 w-5" strokeWidth={2.35} />
                   ການດຳເນີນການອື່ນ
                 </button>
-                {ticket.status === "new" ? (
+                {ticket.status === "pending" ? (
                   <button
                     type="button"
                     onClick={() => onStartPreparing(ticket.id)}
