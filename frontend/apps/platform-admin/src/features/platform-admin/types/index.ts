@@ -16,6 +16,12 @@ export type AdminNavItem = {
   label: string;
   icon: LucideIcon;
   match: string[];
+  allowedRoles?: string[];
+};
+
+export type AdminNavGroup = {
+  label: string;
+  items: AdminNavItem[];
 };
 
 export type StatCard = {
@@ -49,3 +55,19 @@ export type SimpleRecord = {
   status: AdminStatus;
   meta: string;
 };
+
+export type Plan = {
+  id: string;
+  name: string;
+  price: string;
+  businesses: number;
+  modules: string;
+  color: "blue" | "green" | "purple" | "orange" | "red";
+  limitBranches: number | string;
+  limitDevices: number | string;
+  limitStaffs: number | string;
+  description?: string;
+  features?: string;
+  isPopular?: boolean;
+};
+

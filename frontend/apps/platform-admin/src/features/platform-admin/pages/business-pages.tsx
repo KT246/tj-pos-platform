@@ -178,21 +178,25 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
         title={mode === "create" ? "ສ້າງທຸລະກິດໃໝ່" : "ແກ້ໄຂທຸລະກິດ"}
         description="ກຳນົດຂໍ້ມູນທຸລະກິດ, ບັນຊີເຈົ້າຂອງ, ແພັກເກດ, ສາຂາ ແລະ module."
       />
-      <div className="grid gap-4 xl:grid-cols-[1fr_320px]">
-        <div className="space-y-2.5">
+      <div className="grid gap-5 xl:grid-cols-[1fr_360px]">
+        <div className="space-y-5 pb-24">
           <FormSection index={1} title="ຂໍ້ມູນທຸລະກິດ">
-            <div className="grid gap-2.5 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2">
               <FormField label="ຊື່ທຸລະກິດ" value="ViengTiane Coffee" required />
               <FormField label="Business Slug" value="vientiane-coffee" required />
               <FormField label="ປະເພດທຸລະກິດ" value="ຮ້ານກາເຟ" required />
               <FormField label="ເບີໂທ" value="+856 20 5555 7890" required />
               <FormField label="Email" value="somkheo.phan@vtcoffee.la" required />
               <FormField label="ເວັບໄຊ" value="https://vtcoffee.la" />
-              <FormField label="ທີ່ຢູ່" value="Unit 15, Nongbone Road" required />
+              <FormField label="ທີ່ຢູ່" value="Unit 15, Nongbone Road" required wide />
               <FormField label="ເມືອງ" value="ນະຄອນຫຼວງວຽງຈັນ" required />
               <FormField label="ປະເທດ" value="ລາວ" required />
-              <FormField label="Timezone" value="(GMT+07:00) Indochina Time (ICT)" />
-              <div className="rounded-lg border border-blue-50 px-3 md:col-span-2">
+              <FormField
+                label="Timezone"
+                value="(GMT+07:00) Indochina Time (ICT)"
+                wide
+              />
+              <div className="rounded-lg border border-blue-100 p-4 md:col-span-2">
                 <SettingsRow
                   title="ສະຖານະໃຊ້ງານ"
                   description="ທຸລະກິດຈະເປີດໃຊ້ຫຼັງສ້າງສຳເລັດ."
@@ -200,8 +204,9 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
               </div>
             </div>
           </FormSection>
+
           <FormSection index={2} title="ບັນຊີເຈົ້າຂອງ">
-            <div className="grid gap-2.5 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2">
               <FormField label="ຊື່ເຈົ້າຂອງ" value="Somkheo Phan" required />
               <FormField
                 label="Email ເຈົ້າຂອງ"
@@ -209,13 +214,8 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
                 required
               />
               <FormField label="ເບີໂທ" value="+856 20 5555 7890" required />
-              <FormField
-                label="ລະຫັດຜ່ານຊົ່ວຄາວ"
-                value="VtCoffee@2025!"
-                wide
-                required
-              />
-              <div className="rounded-lg border border-blue-50 px-3">
+              <FormField label="ລະຫັດຜ່ານຊົ່ວຄາວ" value="VtCoffee@2025!" required />
+              <div className="rounded-lg border border-blue-100 p-4 md:col-span-2">
                 <SettingsRow
                   title="ສົ່ງ Email ຕ້ອນຮັບ"
                   description="ສົ່ງລາຍລະອຽດ login ໄປຫາເຈົ້າຂອງ."
@@ -223,30 +223,34 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
               </div>
             </div>
           </FormSection>
+
           <FormSection index={3} title="ແພັກເກດ & ການສະໝັກໃຊ້">
-            <div className="grid gap-2.5 md:grid-cols-4">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               <FormField label="ເລືອກແພັກເກດ" value="ແພັກເກດ Pro" required />
               <FormField label="ຮອບບິນ" value="ລາຍເດືອນ" required />
               <FormField label="ຕໍ່ອາຍຸຄັ້ງຕໍ່ໄປ" value="June 17, 2025" />
               <FormField label="ລາຄາລາຍເດືອນ" value="K 1,200,000" />
             </div>
           </FormSection>
-          <div className="grid gap-2.5 xl:grid-cols-[0.95fr_1.05fr]">
+
+          <div className="grid gap-5 xl:grid-cols-2">
             <FormSection index={4} title="ຕັ້ງຄ່າສາຂາ">
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {["VTC Downtown", "VTC Thatluang"].map((branch, index) => (
-                  <div key={branch} className="grid grid-cols-[1fr_1fr_34px] gap-2">
+                  <div key={branch} className="grid grid-cols-[1fr_1fr_40px] gap-3">
                     <input
-                      className="h-7 rounded-md border border-blue-100 px-2.5 text-xs"
+                      className="h-9 rounded-md border border-blue-100 px-3 text-sm outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
                       defaultValue={branch}
+                      placeholder="ຊື່ສາຂາ"
                     />
                     <input
-                      className="h-7 rounded-md border border-blue-100 px-2.5 text-xs"
+                      className="h-9 rounded-md border border-blue-100 px-3 text-sm outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
                       defaultValue="ນະຄອນຫຼວງວຽງຈັນ"
+                      placeholder="ສະຖານທີ່"
                     />
                     <button
                       type="button"
-                      className="flex h-7 cursor-pointer items-center justify-center rounded-md border border-blue-100 text-slate-500 transition hover:bg-blue-50 hover:text-blue-700"
+                      className="flex h-9 w-10 cursor-pointer items-center justify-center rounded-md border border-blue-100 text-slate-500 transition hover:bg-blue-50 hover:text-blue-700"
                     >
                       {index === 0 ? (
                         <Plus className="h-4 w-4" />
@@ -256,15 +260,15 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
                     </button>
                   </div>
                 ))}
-                <div className="font900 grid grid-cols-[1fr_1fr_34px] gap-2 pt-0.5 text-[11px] text-slate-700">
-                  <span>{"ລວມ"}</span>
+                <div className="font800 flex items-center justify-between rounded-lg bg-blue-50 px-4 py-2 text-sm text-blue-700">
+                  <span>ລວມທັງໝົດ</span>
                   <span>2 ສາຂາ</span>
-                  <span />
                 </div>
               </div>
             </FormSection>
+
             <FormSection index={5} title="ໂມດູນ / Add-ons ທີ່ເປີດໃຊ້">
-              <div className="grid gap-2 md:grid-cols-2">
+              <div className="space-y-2">
                 {[
                   "ຂາຍໜ້າຮ້ານ (POS)",
                   "ຈັດການສາງ",
@@ -275,12 +279,12 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
                 ].map((item, index) => (
                   <label
                     key={item}
-                    className="font800 flex items-center gap-2 text-[11px] leading-4 text-slate-800"
+                    className="font800 flex items-center gap-3 rounded-lg border border-blue-100 p-3 text-sm text-slate-800 transition hover:bg-blue-50"
                   >
                     <input
                       type="checkbox"
                       defaultChecked={index < 4}
-                      className="h-3.5 w-3.5 accent-blue-600"
+                      className="h-4 w-4 accent-blue-600"
                     />
                     {item}
                   </label>
@@ -288,9 +292,10 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
               </div>
             </FormSection>
           </div>
-          <div className="grid gap-2.5 xl:grid-cols-2">
+
+          <div className="grid gap-5 xl:grid-cols-2">
             <FormSection index={6} title="ບິນ / ການຊຳລະ">
-              <div className="grid gap-2.5 md:grid-cols-2">
+              <div className="grid gap-4 md:grid-cols-2">
                 <FormField label="ວິທີຊຳລະ" value="ໂອນທະນາຄານ" required />
                 <FormField label="ທະນາຄານ" value="LAOVIET Bank" required />
                 <FormField label="ເລກບັນຊີ" value="1234 5678 9012" required />
@@ -301,33 +306,25 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
                 />
               </div>
             </FormSection>
+
             <FormSection index={7} title="Notes (ບໍ່ບັງຄັບ)">
               <textarea
-                className="min-h-16 w-full rounded-md border border-blue-100 p-2.5 text-xs outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
+                className="min-h-32 w-full rounded-md border border-blue-100 p-3 text-sm outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
+                placeholder="ໝາຍເຫດເພີ່ມເຕີມກ່ຽວກັບທຸລະກິດນີ້..."
                 defaultValue="ຮ້ານກາເຟໃໝ່ໃນນະຄອນຫຼວງວຽງຈັນ. ເຈົ້າຂອງມີປະສົບການໃຊ້ retail POS."
               />
-              <p className="mt-1 text-right text-xs text-slate-400">100 / 500</p>
+              <p className="mt-2 text-right text-xs text-slate-400">100 / 500</p>
             </FormSection>
           </div>
-          <div className="fixed right-0 bottom-0 left-0 z-30 flex justify-between border-t border-blue-100 bg-white/95 px-6 py-3 backdrop-blur xl:left-[230px]">
-            <AdminButton variant="secondary" href="/platform-admin/ທຸລະກິດ">
-              ຍົກເລີກ
-            </AdminButton>
-            <div className="flex gap-3">
-              <AdminButton variant="secondary">ບັນທຶກເປັນ Draft</AdminButton>
-              <AdminButton icon={ArrowRight}>
-                {mode === "create" ? "ສ້າງທຸລະກິດ" : "ບັນທຶກການແກ້ໄຂ"}
-              </AdminButton>
-            </div>
-          </div>
         </div>
-        <aside className="sticky top-24 h-fit space-y-4">
-          <AdminCard className="p-4">
+
+        <aside className="sticky top-24 h-fit space-y-5">
+          <AdminCard className="p-5">
             <PanelTitle title="ສະຫຼຸບທຸລະກິດ" />
-            <p className="mb-4 text-xs leading-5 text-slate-500">
+            <p className="mb-4 text-sm leading-5 text-slate-500">
               ກວດລາຍລະອຽດກ່ອນສ້າງທຸລະກິດໃໝ່.
             </p>
-            <div className="space-y-3 text-xs">
+            <div className="space-y-3 text-sm">
               {[
                 ["ຊື່ທຸລະກິດ", "ViengTiane Coffee"],
                 ["ປະເພດທຸລະກິດ", "ຮ້ານກາເຟ"],
@@ -339,7 +336,7 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
               ].map(([label, value]) => (
                 <div key={label} className="flex justify-between gap-4">
                   <span className="text-slate-500">{label}</span>
-                  <strong className="text-right text-slate-950">{value}</strong>
+                  <strong className="font900 text-right text-slate-950">{value}</strong>
                 </div>
               ))}
               <div className="border-t border-blue-100 pt-3 text-center">
@@ -347,9 +344,10 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
               </div>
             </div>
           </AdminCard>
-          <AdminCard className="p-4">
+
+          <AdminCard className="p-5">
             <PanelTitle title="ຕ້ອງການຊ່ວຍເຫຼືອ?" />
-            <p className="text-xs leading-5 text-slate-500">
+            <p className="text-sm leading-5 text-slate-500">
               ສາມາດແກ້ໄຂການຕັ້ງຄ່າໄດ້ພາຍຫຼັງຈາກໜ້າລາຍລະອຽດທຸລະກິດ.
             </p>
             <AdminButton variant="ghost" icon={ArrowRight}>
@@ -357,6 +355,19 @@ export function BusinessFormPage({ mode }: { mode: "create" | "edit" }) {
             </AdminButton>
           </AdminCard>
         </aside>
+      </div>
+
+      {/* Fixed Bottom Action Bar */}
+      <div className="fixed right-0 bottom-0 left-0 z-30 flex justify-between border-t border-blue-100 bg-white/95 px-6 py-4 backdrop-blur xl:left-[230px]">
+        <AdminButton variant="secondary" href="/platform-admin/businesses">
+          ຍົກເລີກ
+        </AdminButton>
+        <div className="flex gap-3">
+          <AdminButton variant="secondary">ບັນທຶກເປັນ Draft</AdminButton>
+          <AdminButton icon={ArrowRight}>
+            {mode === "create" ? "ສ້າງທຸລະກິດ" : "ບັນທຶກການແກ້ໄຂ"}
+          </AdminButton>
+        </div>
       </div>
     </>
   );

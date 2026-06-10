@@ -10,11 +10,23 @@ import {
   Store
 } from "lucide-react";
 import type { ReactNode } from "react";
+import { useParams } from "react-router-dom";
 
 import { activeBranch, businessName, sidebarItems } from "../data/mock-business-admin";
 import type { BusinessMenuKey } from "../types";
-import { BusinessAdminLink } from "../components/business-admin-link";
+import { BusinessAdminLink, defaultBusinessSlug } from "../components/business-admin-link";
 import { TjLogo } from "../components/business-admin-primitives";
+
+type StoreType = "all" | "cafe" | "restaurant" | "retail" | "beauty" | "hospitality";
+
+function getStoreType(slug: string): StoreType {
+  const s = slug.toLowerCase();
+  if (s.includes("restaurant")) return "restaurant";
+  if (s.includes("retail") || s.includes("shop") || s.includes("mart")) return "retail";
+  if (s.includes("beauty") || s.includes("spa") || s.includes("salon")) return "beauty";
+  if (s.includes("hotel") || s.includes("resort") || s.includes("hostel")) return "hospitality";
+  return "cafe";
+}
 
 export function BusinessAdminShell({
   active,
@@ -25,6 +37,13 @@ export function BusinessAdminShell({
   businessLabel?: string;
   children: ReactNode;
 }) {
+  const { businessSlug = defaultBusinessSlug } = useParams<{ businessSlug: string }>();
+  const storeType = getStoreType(businessSlug);
+
+  const filtered = sidebarItems.filter(
+    (item) => item.storeTypes.includes("all") || item.storeTypes.includes(storeType)
+  );
+
   return (
     <div className="min-h-screen bg-[#f8fbff] text-slate-950">
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-[256px] border-r border-blue-100 bg-white xl:block">
@@ -39,52 +58,46 @@ export function BusinessAdminShell({
           </button>
         </div>
         <nav className="h-[calc(100vh-68px)] overflow-y-auto px-3.5 py-4">
-          <div className="space-y-1">
-            {sidebarItems.map((item) => {
+          <div className="space-y-0.5">
+            {filtered.map((item, idx) => {
               const Icon = item.icon;
               const isActive = item.label === active;
-              const isBeautyItem =
-                item.label === "ນັດໝາຍ" ||
-                item.label === "ປະຕິທິນ" ||
-                item.label === "ລູກຄ້າ Walk-in" ||
-                item.label === "ບໍລິການ" ||
-                item.label === "ຕາຕະລາງພະນັກງານ" ||
-                item.label === "ແພັກເກດ" ||
-                item.label === "ນະໂຍບາຍມັດຈຳ" ||
-                item.label === "ພາບລວມຮ້ານຄວາມງາມ";
-              const isHospitalityItem =
-                item.label === "ຫ້ອງ" ||
-                item.label === "ປະຕິທິນຫ້ອງ" ||
-                item.label === "ການຈອງ" ||
-                item.label === "ຟຣອນດ໌ເດສກ໌" ||
-                item.label === "Check-in" ||
-                item.label === "Check-out" ||
-                item.label === "ແຂກ" ||
-                item.label === "ຕັ້ງຄ່າຫ້ອງ" ||
-                item.label === "ແມ່ບ້ານ" ||
-                item.label === "ບັນຊີແຂກ";
-              const activeClass = isBeautyItem
-                ? "bg-pink-50 text-pink-600"
-                : isHospitalityItem
-                  ? "bg-blue-50 text-blue-600"
-                  : "bg-blue-50 text-blue-600";
-              const idleClass = isBeautyItem
-                ? "text-slate-800 hover:bg-pink-50 hover:text-pink-600"
-                : isHospitalityItem
-                  ? "text-slate-800 hover:bg-blue-50 hover:text-blue-600"
-                  : "text-slate-800 hover:bg-slate-50 hover:text-blue-600";
+              const prevItem = filtered[idx - 1];
+              // Show a thin divider when the store-type group changes
+              const showDivider =
+                idx > 0 &&
+                prevItem &&
+                !prevItem.storeTypes.includes("all") &&
+                !item.storeTypes.includes("all") &&
+                prevItem.storeTypes[0] !== item.storeTypes[0];
+              const showTopDivider =
+                idx > 0 &&
+                prevItem &&
+                prevItem.storeTypes.includes("all") &&
+                !item.storeTypes.includes("all");
+              const showBottomDivider =
+                idx > 0 &&
+                prevItem &&
+                !prevItem.storeTypes.includes("all") &&
+                item.storeTypes.includes("all");
 
               return (
-                <BusinessAdminLink
-                  key={item.label}
-                  href={item.href}
-                  className={`flex h-9 items-center gap-2.5 rounded-md px-2.5 text-[12px] font-extrabold transition ${
-                    isActive ? activeClass : idleClass
-                  }`}
-                >
-                  <Icon className="h-4.5 w-4.5" />
-                  <span className="truncate">{item.label}</span>
-                </BusinessAdminLink>
+                <div key={item.label}>
+                  {(showDivider || showTopDivider || showBottomDivider) && (
+                    <div className="my-2 border-t border-blue-50" />
+                  )}
+                  <BusinessAdminLink
+                    href={item.href}
+                    className={`flex h-9 items-center gap-2.5 rounded-md px-2.5 text-[12px] font-extrabold transition ${
+                      isActive
+                        ? "bg-blue-50 text-blue-600"
+                        : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
+                    }`}
+                  >
+                    <Icon className="h-4.5 w-4.5 shrink-0" />
+                    <span className="truncate">{item.label}</span>
+                  </BusinessAdminLink>
+                </div>
               );
             })}
           </div>

@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes, useParams } from "react-router-dom";
 
 import {
+  AppointmentCalendarMonthPage,
   AppointmentCalendarPage,
   BeautyCommissionPage,
   BeautyCustomerHistoryPage,
@@ -67,6 +68,7 @@ import {
   CreateBookingPage,
   DepositCancellationPolicyPage,
   GuestFolioPage,
+  HousekeepingPage,
   RoomCalendarPage,
   RoomSettingsHousekeepingPage
 } from "./features/business-admin/pages/hospitality-specific-pages";
@@ -88,6 +90,11 @@ import {
   SettingsPage,
   SupportPage
 } from "./features/business-admin/pages/utility-pages";
+import {
+  ForgotPasswordPage,
+  LoginPage,
+  ResetPasswordPage
+} from "./features/business-admin/pages/auth-pages";
 
 const defaultBusinessSlug = "tj-cafe-vientiane";
 
@@ -97,12 +104,15 @@ export function App() {
       <Routes>
         <Route
           path="/"
-          element={<Navigate to={`/business-admin/${defaultBusinessSlug}`} replace />}
+          element={<Navigate to="/business-admin/login" replace />}
         />
         <Route
           path="/business-admin"
-          element={<Navigate to={`/business-admin/${defaultBusinessSlug}`} replace />}
+          element={<Navigate to="/business-admin/login" replace />}
         />
+        <Route path="/business-admin/login" element={<LoginPage />} />
+        <Route path="/business-admin/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/business-admin/reset-password" element={<ResetPasswordPage />} />
         <Route
           path="/business-admin/:businessSlug"
           element={<BusinessDashboardPage />}
@@ -122,11 +132,7 @@ export function App() {
         />
         <Route
           path="/business-admin/:businessSlug/calendar"
-          element={<AppointmentCalendarPage />}
-        />
-        <Route
-          path="/business-admin/:businessSlug/bookings"
-          element={<AppointmentCalendarPage />}
+          element={<AppointmentCalendarMonthPage />}
         />
         <Route
           path="/business-admin/:businessSlug/walk-in"
@@ -170,7 +176,7 @@ export function App() {
         />
         <Route
           path="/business-admin/:businessSlug/bookings"
-          element={<BookingListPage />}
+          element={<SmartBookingsPage />}
         />
         <Route
           path="/business-admin/:businessSlug/bookings/create"
@@ -194,7 +200,7 @@ export function App() {
         />
         <Route
           path="/business-admin/:businessSlug/housekeeping"
-          element={<RoomSettingsHousekeepingPage />}
+          element={<HousekeepingPage />}
         />
         <Route
           path="/business-admin/:businessSlug/room-settings"
@@ -414,4 +420,16 @@ function RestaurantOrCafeTables() {
   }
 
   return <CafeFloorTableMapPage />;
+}
+
+// SmartBookingsPage: hospitality → hotel booking list, beauty → appointment calendar
+function SmartBookingsPage() {
+  const { businessSlug = "" } = useParams<{ businessSlug: string }>();
+  const s = businessSlug.toLowerCase();
+
+  if (s.includes("hotel") || s.includes("resort") || s.includes("hostel")) {
+    return <BookingListPage />;
+  }
+  // Default beauty / salon bookings
+  return <AppointmentCalendarPage />;
 }

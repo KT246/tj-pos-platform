@@ -56,106 +56,88 @@ import type { BusinessMenuKey, Kpi, QuickAction, SummaryItem, Tone } from "../ty
 export const businessName = "TJ Cafe Vientiane";
 export const activeBranch = "ສາຂາຫຼັກ";
 
+type StoreType = "all" | "cafe" | "restaurant" | "retail" | "beauty" | "hospitality";
+
 export const sidebarItems: {
   label: BusinessMenuKey;
   href: string;
   icon: typeof LayoutDashboard;
+  storeTypes: StoreType[];
 }[] = [
-  { label: "ແດຊບອດ", href: "/business-admin", icon: LayoutDashboard },
-  { label: "POS", href: "/business-admin/pos", icon: Monitor },
-  { label: "ອໍເດີ", href: "/business-admin/orders", icon: ClipboardList },
-  { label: "ນັດໝາຍ", href: "/business-admin/appointments", icon: CalendarCheck },
-  { label: "ປະຕິທິນ", href: "/business-admin/calendar", icon: CalendarDays },
-  { label: "ການຈອງ", href: "/business-admin/bookings", icon: ClipboardList },
-  { label: "ລູກຄ້າ Walk-in", href: "/business-admin/walk-in", icon: UserPlus },
-  { label: "ສິນຄ້າ", href: "/business-admin/items", icon: Package },
-  { label: "ບໍລິການ", href: "/business-admin/services", icon: Sparkles },
-  { label: "ໝວດໝູ່", href: "/business-admin/categories", icon: Boxes },
-  { label: "ແຜນຜັງໂຕະ", href: "/business-admin/tables", icon: Map },
-  { label: "ຕົວເລືອກເພີ່ມ", href: "/business-admin/modifiers", icon: SlidersHorizontal },
-  { label: "ຄິວ Barista", href: "/business-admin/barista-queue", icon: Coffee },
-  {
-    label: "ຈໍຮັບອໍເດີ",
-    href: "/terminal/b/[businessSlug]/pickup-display",
-    icon: Monitor
-  },
-  { label: "Happy Hour", href: "/business-admin/happy-hour", icon: Clock3 },
-  {
-    label: "ພາບລວມຮ້ານກາເຟ",
-    href: "/business-admin/cafe-daily-view",
-    icon: ChartNoAxesCombined
-  },
-  { label: "ການຈອງໂຕະ", href: "/business-admin/reservations", icon: CalendarCheck },
-  { label: "ລຳດັບຄົວ", href: "/business-admin/kitchen-courses", icon: ChefHat },
-  { label: "ແຍກບິນ", href: "/business-admin/split-bill", icon: Split },
-  { label: "ຄ່າບໍລິການ", href: "/business-admin/service-charge", icon: Percent },
-  {
-    label: "ລວມ / ຍ້າຍ",
-    href: "/business-admin/merge-transfer-table",
-    icon: GitMerge
-  },
-  { label: "ປິດຮອບມື້", href: "/business-admin/end-of-day", icon: ReceiptText },
-  {
-    label: "ຕາຕະລາງພະນັກງານ",
-    href: "/business-admin/staff-schedule",
-    icon: CalendarDays
-  },
-  { label: "ແພັກເກດ", href: "/business-admin/packages", icon: Sparkles },
-  { label: "ນະໂຍບາຍມັດຈຳ", href: "/business-admin/deposit-policy", icon: HandCoins },
-  {
-    label: "ພາບລວມຮ້ານຄວາມງາມ",
-    href: "/business-admin/beauty-daily-schedule",
-    icon: HeartPulse
-  },
-  { label: "ຫ້ອງ", href: "/business-admin/rooms", icon: BedDouble },
-  { label: "ປະຕິທິນຫ້ອງ", href: "/business-admin/room-calendar", icon: CalendarDays },
-  { label: "ຟຣອນດ໌ເດສກ໌", href: "/business-admin/front-desk", icon: Hotel },
-  { label: "Check-in", href: "/business-admin/check-in", icon: DoorOpen },
-  { label: "Check-out", href: "/business-admin/check-out", icon: CreditCard },
-  { label: "ແຂກ", href: "/business-admin/guests", icon: Users },
-  { label: "ຕັ້ງຄ່າຫ້ອງ", href: "/business-admin/room-settings", icon: Settings },
-  { label: "ແມ່ບ້ານ", href: "/business-admin/housekeeping", icon: ClipboardCheck },
-  { label: "ບັນຊີແຂກ", href: "/business-admin/guest-folio", icon: ReceiptText },
-  { label: "ສະຕັອກ", href: "/business-admin/inventory", icon: Warehouse },
-  { label: "ການເຄື່ອນໄຫວສະຕັອກ", href: "/business-admin/stock-movements", icon: History },
-  { label: "ນັບສະຕັອກ", href: "/business-admin/stock-count", icon: ClipboardCheck },
-  {
-    label: "ຮັບສິນຄ້າ",
-    href: "/business-admin/goods-receiving",
-    icon: PackagePlus
-  },
-  { label: "ຄືນສິນຄ້າ", href: "/business-admin/returns", icon: RefreshCcw },
-  {
-    label: "ສະຕັອກຕ່ຳ / ໃກ້ໝົດອາຍຸ",
-    href: "/business-admin/low-stock-expiry",
-    icon: BellRing
-  },
-  { label: "ປ້າຍ Barcode", href: "/business-admin/barcode-labels", icon: ScanLine },
-  { label: "ຜູ້ສະໜອງ", href: "/business-admin/suppliers", icon: Building2 },
-  { label: "ລູກຄ້າ", href: "/business-admin/customers", icon: Users },
-  { label: "ສະສົມແຕ້ມ", href: "/business-admin/loyalty", icon: Gift },
-  { label: "ໂປຣໂມຊັນ", href: "/business-admin/promotions", icon: BadgePercent },
-  { label: "ພະນັກງານ", href: "/business-admin/staff", icon: UserPlus },
-  {
-    label: "ບົດບາດ ແລະ ສິດ",
-    href: "/business-admin/roles-permissions",
-    icon: ShieldCheck
-  },
-  { label: "ສາຂາ", href: "/business-admin/branches", icon: Store },
-  { label: "ລາຍງານ", href: "/business-admin/reports", icon: ChartNoAxesCombined },
-  { label: "ໃບຮັບເງິນ / ບິນ", href: "/business-admin/receipt-bill", icon: ReceiptText },
-  { label: "ແບຣນດ໌", href: "/business-admin/branding", icon: Sparkles },
-  {
-    label: "ວິທີຊຳລະ",
-    href: "/business-admin/payment-methods",
-    icon: CreditCard
-  },
-  { label: "ອຸປະກອນ", href: "/business-admin/devices", icon: Printer },
-  { label: "ໂມດູນ", href: "/business-admin/modules", icon: ScanLine },
-  { label: "ນຳເຂົ້າ / ສົ່ງອອກ", href: "/business-admin/import", icon: Upload },
-  { label: "ຊ່ວຍເຫຼືອ", href: "/business-admin/support", icon: BellRing },
-  { label: "ບັນທຶກກວດສອບ", href: "/business-admin/audit-logs", icon: ClipboardCheck },
-  { label: "ຕັ້ງຄ່າ", href: "/business-admin/settings", icon: Settings }
+  // ─── Shared (all store types) ───────────────────────────────────────────────
+  { label: "ແດຊບອດ", href: "/business-admin", icon: LayoutDashboard, storeTypes: ["all"] },
+  { label: "POS", href: "/business-admin/pos", icon: Monitor, storeTypes: ["all"] },
+  { label: "ອໍເດີ", href: "/business-admin/orders", icon: ClipboardList, storeTypes: ["all"] },
+  { label: "ສິນຄ້າ", href: "/business-admin/items", icon: Package, storeTypes: ["all"] },
+  { label: "ໝວດໝູ່", href: "/business-admin/categories", icon: Boxes, storeTypes: ["all"] },
+
+  // ─── Cafe ───────────────────────────────────────────────────────────────────
+  { label: "ແຜນຜັງໂຕະ", href: "/business-admin/tables", icon: Map, storeTypes: ["cafe", "restaurant"] },
+  { label: "ຕົວເລືອກເພີ່ມ", href: "/business-admin/modifiers", icon: SlidersHorizontal, storeTypes: ["cafe"] },
+  { label: "ຄິວ Barista", href: "/business-admin/barista-queue", icon: Coffee, storeTypes: ["cafe"] },
+  { label: "ຈໍຮັບອໍເດີ", href: "/terminal/b/[businessSlug]/pickup-display", icon: Monitor, storeTypes: ["cafe", "restaurant"] },
+  { label: "Happy Hour", href: "/business-admin/happy-hour", icon: Clock3, storeTypes: ["cafe"] },
+  { label: "ພາບລວມຮ້ານກາເຟ", href: "/business-admin/cafe-daily-view", icon: ChartNoAxesCombined, storeTypes: ["cafe"] },
+
+  // ─── Restaurant ─────────────────────────────────────────────────────────────
+  { label: "ການຈອງໂຕະ", href: "/business-admin/reservations", icon: CalendarCheck, storeTypes: ["restaurant"] },
+  { label: "ລຳດັບຄົວ", href: "/business-admin/kitchen-courses", icon: ChefHat, storeTypes: ["restaurant"] },
+  { label: "ແຍກບິນ", href: "/business-admin/split-bill", icon: Split, storeTypes: ["restaurant"] },
+  { label: "ຄ່າບໍລິການ", href: "/business-admin/service-charge", icon: Percent, storeTypes: ["restaurant"] },
+  { label: "ລວມ / ຍ້າຍ", href: "/business-admin/merge-transfer-table", icon: GitMerge, storeTypes: ["restaurant"] },
+  { label: "ປິດຮອບມື້", href: "/business-admin/end-of-day", icon: ReceiptText, storeTypes: ["restaurant"] },
+
+  // ─── Beauty / Salon ─────────────────────────────────────────────────────────
+  { label: "ນັດໝາຍ", href: "/business-admin/appointments", icon: CalendarCheck, storeTypes: ["beauty"] },
+  { label: "ປະຕິທິນ", href: "/business-admin/calendar", icon: CalendarDays, storeTypes: ["beauty"] },
+  { label: "ລູກຄ້າ Walk-in", href: "/business-admin/walk-in", icon: UserPlus, storeTypes: ["beauty"] },
+  { label: "ບໍລິການ", href: "/business-admin/services", icon: Sparkles, storeTypes: ["beauty"] },
+  { label: "ຕາຕະລາງພະນັກງານ", href: "/business-admin/staff-schedule", icon: CalendarDays, storeTypes: ["beauty"] },
+  { label: "ແພັກເກດ", href: "/business-admin/packages", icon: Sparkles, storeTypes: ["beauty"] },
+  { label: "ນະໂຍບາຍມັດຈຳ", href: "/business-admin/deposit-policy", icon: HandCoins, storeTypes: ["beauty"] },
+  { label: "ພາບລວມຮ້ານຄວາມງາມ", href: "/business-admin/beauty-daily-schedule", icon: HeartPulse, storeTypes: ["beauty"] },
+
+  // ─── Hospitality / Hotel ────────────────────────────────────────────────────
+  { label: "ການຈອງ", href: "/business-admin/bookings", icon: ClipboardList, storeTypes: ["hospitality"] },
+  { label: "ຫ້ອງ", href: "/business-admin/rooms", icon: BedDouble, storeTypes: ["hospitality"] },
+  { label: "ປະຕິທິນຫ້ອງ", href: "/business-admin/room-calendar", icon: CalendarDays, storeTypes: ["hospitality"] },
+  { label: "ຟຣອນດ໌ເດສກ໌", href: "/business-admin/front-desk", icon: Hotel, storeTypes: ["hospitality"] },
+  { label: "Check-in", href: "/business-admin/check-in", icon: DoorOpen, storeTypes: ["hospitality"] },
+  { label: "Check-out", href: "/business-admin/check-out", icon: CreditCard, storeTypes: ["hospitality"] },
+  { label: "ແຂກ", href: "/business-admin/guests", icon: Users, storeTypes: ["hospitality"] },
+  { label: "ຕັ້ງຄ່າຫ້ອງ", href: "/business-admin/room-settings", icon: Settings, storeTypes: ["hospitality"] },
+  { label: "ແມ່ບ້ານ", href: "/business-admin/housekeeping", icon: ClipboardCheck, storeTypes: ["hospitality"] },
+  { label: "ບັນຊີແຂກ", href: "/business-admin/guest-folio", icon: ReceiptText, storeTypes: ["hospitality"] },
+
+  // ─── Retail & Inventory ────────────────────────────────────────────────────
+  { label: "ສະຕັອກ", href: "/business-admin/inventory", icon: Warehouse, storeTypes: ["retail", "cafe", "restaurant"] },
+  { label: "ການເຄື່ອນໄຫວສະຕັອກ", href: "/business-admin/stock-movements", icon: History, storeTypes: ["retail"] },
+  { label: "ນັບສະຕັອກ", href: "/business-admin/stock-count", icon: ClipboardCheck, storeTypes: ["retail"] },
+  { label: "ຮັບສິນຄ້າ", href: "/business-admin/goods-receiving", icon: PackagePlus, storeTypes: ["retail"] },
+  { label: "ຄືນສິນຄ້າ", href: "/business-admin/returns", icon: RefreshCcw, storeTypes: ["retail"] },
+  { label: "ສະຕັອກຕ່ຳ / ໃກ້ໝົດອາຍຸ", href: "/business-admin/low-stock-expiry", icon: BellRing, storeTypes: ["retail"] },
+  { label: "ປ້າຍ Barcode", href: "/business-admin/barcode-labels", icon: ScanLine, storeTypes: ["retail"] },
+
+  // ─── CRM / Marketing ────────────────────────────────────────────────────────
+  { label: "ຜູ້ສະໜອງ", href: "/business-admin/suppliers", icon: Building2, storeTypes: ["retail", "cafe", "restaurant"] },
+  { label: "ລູກຄ້າ", href: "/business-admin/customers", icon: Users, storeTypes: ["all"] },
+  { label: "ສະສົມແຕ້ມ", href: "/business-admin/loyalty", icon: Gift, storeTypes: ["all"] },
+  { label: "ໂປຣໂມຊັນ", href: "/business-admin/promotions", icon: BadgePercent, storeTypes: ["all"] },
+
+  // ─── HR & Settings ──────────────────────────────────────────────────────────
+  { label: "ພະນັກງານ", href: "/business-admin/staff", icon: UserPlus, storeTypes: ["all"] },
+  { label: "ບົດບາດ ແລະ ສິດ", href: "/business-admin/roles-permissions", icon: ShieldCheck, storeTypes: ["all"] },
+  { label: "ສາຂາ", href: "/business-admin/branches", icon: Store, storeTypes: ["all"] },
+  { label: "ລາຍງານ", href: "/business-admin/reports", icon: ChartNoAxesCombined, storeTypes: ["all"] },
+  { label: "ໃບຮັບເງິນ / ບິນ", href: "/business-admin/receipt-bill", icon: ReceiptText, storeTypes: ["all"] },
+  { label: "ແບຣນດ໌", href: "/business-admin/branding", icon: Sparkles, storeTypes: ["all"] },
+  { label: "ວິທີຊຳລະ", href: "/business-admin/payment-methods", icon: CreditCard, storeTypes: ["all"] },
+  { label: "ອຸປະກອນ", href: "/business-admin/devices", icon: Printer, storeTypes: ["all"] },
+  { label: "ໂມດູນ", href: "/business-admin/modules", icon: ScanLine, storeTypes: ["all"] },
+  { label: "ນຳເຂົ້າ / ສົ່ງອອກ", href: "/business-admin/import", icon: Upload, storeTypes: ["all"] },
+  { label: "ຊ່ວຍເຫຼືອ", href: "/business-admin/support", icon: BellRing, storeTypes: ["all"] },
+  { label: "ບັນທຶກກວດສອບ", href: "/business-admin/audit-logs", icon: ClipboardCheck, storeTypes: ["all"] },
+  { label: "ຕັ້ງຄ່າ", href: "/business-admin/settings", icon: Settings, storeTypes: ["all"] }
 ];
 
 export const toneClasses: Record<

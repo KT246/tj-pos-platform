@@ -1,118 +1,166 @@
 import {
-  Bell,
   Building2,
   CalendarDays,
   CheckCircle2,
+  Bell,
   CreditCard,
   FileCheck2,
   LayoutDashboard,
   LifeBuoy,
   Mail,
+  MessageSquare,
   Package,
   Puzzle,
-  ReceiptText,
   Settings,
   ShieldCheck,
-  SlidersHorizontal,
-  Ticket,
   Users,
   WalletCards
 } from "lucide-react";
 
-import type { AdminNavItem, Business, SimpleRecord, StatCard } from "../types";
+import type {
+  AdminNavGroup,
+  AdminNavItem,
+  Business,
+  SimpleRecord,
+  StatCard
+} from "../types";
 
-export const adminUser = {
-  name: "Somchai Phommasenh",
-  role: "Platform Admin",
-  email: "somchai@tjpos.la",
-  avatarUrl:
-    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=96&q=80"
-};
+export const demoPlatformUsers = [
+  {
+    name: "Somchai Phommasenh",
+    role: "Platform Admin",
+    email: "admin@tjpos.la",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=96&q=80"
+  },
+  {
+    name: "Phaphone Keomany",
+    role: "Platform Staff",
+    email: "staff@tjpos.la",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=80"
+  },
+  {
+    name: "Sengaloun Saysana",
+    role: "Platform Finance",
+    email: "finance@tjpos.la",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=96&q=80"
+  }
+];
 
-export const adminNavItems: AdminNavItem[] = [
+export const adminUser = demoPlatformUsers[0];
+
+
+export const adminNavGroups: AdminNavGroup[] = [
   {
-    href: "/platform-admin/dashboard",
-    label: "ແດຊບອດ",
-    icon: LayoutDashboard,
-    match: ["/platform-admin", "/platform-admin/dashboard"]
+    label: "ພາບລວມ",
+    items: [
+      {
+        href: "/platform-admin/dashboard",
+        label: "ແດຊບອດ",
+        icon: LayoutDashboard,
+        match: ["/platform-admin", "/platform-admin/dashboard"],
+        allowedRoles: ["Platform Admin", "Platform Staff", "Platform Finance"]
+      },
+      {
+        href: "/platform-admin/businesses",
+        label: "ທຸລະກິດ",
+        icon: Building2,
+        match: ["/platform-admin/businesses"],
+        allowedRoles: ["Platform Admin", "Platform Staff"]
+      },
+      {
+        href: "/platform-admin/owners",
+        label: "ເຈົ້າຂອງ",
+        icon: Users,
+        match: ["/platform-admin/owners"],
+        allowedRoles: ["Platform Admin", "Platform Staff"]
+      },
+      {
+        href: "/platform-admin/users",
+        label: "ຜູ້ໃຊ້",
+        icon: ShieldCheck,
+        match: ["/platform-admin/users"],
+        allowedRoles: ["Platform Admin"]
+      }
+    ]
   },
   {
-    href: "/platform-admin/ທຸລະກິດ",
-    label: "ທຸລະກິດ",
-    icon: Building2,
-    match: ["/platform-admin/ທຸລະກິດ"]
+    label: "ການບໍລິການ ແລະ ລາຍຮັບ",
+    items: [
+      {
+        href: "/platform-admin/plans",
+        label: "ແພັກເກດ",
+        icon: WalletCards,
+        match: ["/platform-admin/plans"],
+        allowedRoles: ["Platform Admin", "Platform Finance"]
+      },
+      {
+        href: "/platform-admin/subscriptions",
+        label: "ການສະໝັກໃຊ້",
+        icon: FileCheck2,
+        match: ["/platform-admin/subscriptions"],
+        allowedRoles: ["Platform Admin", "Platform Finance"]
+      },
+      {
+        href: "/platform-admin/payments",
+        label: "ການຊຳລະເງິນ",
+        icon: CreditCard,
+        match: ["/platform-admin/payments"],
+        allowedRoles: ["Platform Admin", "Platform Finance"]
+      }
+    ]
   },
   {
-    href: "/platform-admin/users",
-    label: "ເຈົ້າຂອງ / ຜູ້ໃຊ້",
-    icon: Users,
-    match: ["/platform-admin/users"]
+    label: "ສ່ວນເສີມ",
+    items: [
+      {
+        href: "/platform-admin/add-ons",
+        label: "ໂມດູນເສີມ",
+        icon: Puzzle,
+        match: ["/platform-admin/add-ons", "/platform-admin/add-ons/catalog"],
+        allowedRoles: ["Platform Admin", "Platform Staff", "Platform Finance"]
+      }
+    ]
   },
   {
-    href: "/platform-admin/plans",
-    label: "ແພັກເກດ",
-    icon: WalletCards,
-    match: ["/platform-admin/plans"]
+    label: "ການຊ່ວຍເຫຼືອ",
+    items: [
+      {
+        href: "/platform-admin/support-tickets",
+        label: "Feedback",
+        icon: MessageSquare,
+        match: ["/platform-admin/support-tickets"],
+        allowedRoles: ["Platform Admin", "Platform Staff"]
+      },
+      {
+        href: "/platform-admin/contact-requests",
+        label: "ຄຳຂໍຕິດຕໍ່",
+        icon: Mail,
+        match: ["/platform-admin/contact-requests"],
+        allowedRoles: ["Platform Admin", "Platform Staff"]
+      }
+    ]
   },
   {
-    href: "/platform-admin/subscriptions",
-    label: "ການສະໝັກໃຊ້",
-    icon: FileCheck2,
-    match: ["/platform-admin/subscriptions"]
-  },
-  {
-    href: "/platform-admin/add-ons",
-    label: "ໂມດູນເສີມ",
-    icon: Puzzle,
-    match: ["/platform-admin/add-ons"]
-  },
-  {
-    href: "/platform-admin/payments",
-    label: "ການຊຳລະເງິນ",
-    icon: CreditCard,
-    match: ["/platform-admin/payments"]
-  },
-  {
-    href: "/platform-admin/contact-requests",
-    label: "ຄຳຂໍຕິດຕໍ່",
-    icon: Mail,
-    match: ["/platform-admin/contact-requests"]
-  },
-  {
-    href: "/platform-admin/support-tickets",
-    label: "ຕິດຕາມການຊ່ວຍເຫຼືອ",
-    icon: Ticket,
-    match: ["/platform-admin/support-tickets"]
-  },
-  {
-    href: "/platform-admin/add-ons/catalog",
-    label: "ໂມດູນກາງ",
-    icon: SlidersHorizontal,
-    match: ["/platform-admin/add-ons/catalog"]
-  },
-  {
-    href: "/platform-admin/payments/settings",
-    label: "ຕັ້ງຄ່າການຊຳລະຫຼັກ",
-    icon: ReceiptText,
-    match: ["/platform-admin/payments/settings"]
-  },
-  {
-    href: "/platform-admin/system-settings/notification-templates",
-    label: "ແມ່ແບບແຈ້ງເຕືອນ",
-    icon: Bell,
-    match: ["/platform-admin/system-settings/notification-templates"]
-  },
-  {
-    href: "/platform-admin/audit-logs",
-    label: "ບັນທຶກການກວດສອບ",
-    icon: ShieldCheck,
-    match: ["/platform-admin/audit-logs"]
-  },
-  {
-    href: "/platform-admin/system-settings",
-    label: "ຕັ້ງຄ່າ Platform",
-    icon: Settings,
-    match: ["/platform-admin/system-settings", "/platform-admin/profile-security"]
+    label: "ການຕັ້ງຄ່າລະບົບ",
+    items: [
+      {
+        href: "/platform-admin/audit-logs",
+        label: "ບັນທຶກການກວດສອບ",
+        icon: ShieldCheck,
+        match: ["/platform-admin/audit-logs"],
+        allowedRoles: ["Platform Admin"]
+      },
+      {
+        href: "/platform-admin/system-settings",
+        label: "ຕັ້ງຄ່າ Platform",
+        icon: Settings,
+        match: ["/platform-admin/system-settings"],
+        allowedRoles: ["Platform Admin"]
+      }
+    ]
   }
 ];
 
@@ -327,32 +375,60 @@ export const tickets: SimpleRecord[] = [
 
 export const planCards = [
   {
+    id: "PLAN-001",
     name: "Starter",
     price: "K 120,000",
     businesses: 47,
     modules: "Core POS",
-    color: "blue"
+    color: "blue" as const,
+    limitBranches: 1,
+    limitDevices: 2,
+    limitStaffs: 5,
+    description: "ເໝາະສຳລັບຮ້ານເລີ່ມຕົ້ນ, ຄຸ້ມຄອງສະດວກ",
+    features: "ລະບົບ POS ພື້ນຖານ, ບົດລາຍງານຍອດຂາຍ, ຈັດການສິນຄ້າພື້ນຖານ",
+    isPopular: false
   },
   {
+    id: "PLAN-002",
     name: "Pro",
     price: "K 250,000",
     businesses: 523,
     modules: "POS + ລາຍງານ",
-    color: "green"
+    color: "green" as const,
+    limitBranches: 3,
+    limitDevices: 5,
+    limitStaffs: 15,
+    description: "ເໝາະສຳລັບຮ້ານທີ່ຕ້ອງການເຕີບໂຕ ແລະ ຈັດການສາງ",
+    features: "ຈັດການສາງສິນຄ້າລະອຽດ, ບົດລາຍງານຂັ້ນສູງ, ສະໜັບສະໜູນ QR Payment, ລະບົບສະມາຊິກ CRM",
+    isPopular: true
   },
   {
+    id: "PLAN-003",
     name: "Business",
     price: "K 500,000",
     businesses: 388,
     modules: "ຫຼາຍສາຂາ",
-    color: "purple"
+    color: "purple" as const,
+    limitBranches: 10,
+    limitDevices: 15,
+    limitStaffs: 50,
+    description: "ເໝາະສຳລັບທຸລະກິດຂະໜາດກາງ ທີ່ມີຫຼາຍສາຂາ",
+    features: "ຈັດການຫຼາຍສາຂາພ້ອມກັນ, ໂອນສິນຄ້າລະຫວ່າງສາຂາ, ລະບົບໂໂປຣໂມຊັນຂັ້ນສູງ, API Integration",
+    isPopular: false
   },
   {
+    id: "PLAN-004",
     name: "Enterprise",
     price: "Custom",
     businesses: 178,
     modules: "Support ສະເພາະ",
-    color: "orange"
+    color: "orange" as const,
+    limitBranches: "ບໍ່ຈຳກັດ",
+    limitDevices: "ບໍ່ຈຳກັດ",
+    limitStaffs: "ບໍ່ຈຳກັດ",
+    description: "ແພັກເກດປັບແຕ່ງພິເສດ ສຳລັບອົງກອນຂະໜາດໃຫຍ່",
+    features: "ປັບແຕ່ງລະບົບຕາມຄວາມຕ້ອງການ, ລະບົບເຊີເວີສ່ວນຕົວ (Dedicated Server), SLA Support 24/7, Custom Analytics",
+    isPopular: false
   }
 ];
 
@@ -394,5 +470,11 @@ export const auditRows = [
   ["10:24 AM", "Somchai Phommasenh", "ສ້າງທຸລະກິດ", "Joma Bakery Cafe", "IP 10.0.2.18"],
   ["9:41 AM", "Vannapha Support", "ອັບເດດ Ticket", "TK-2025-118", "IP 10.0.2.21"],
   ["ມື້ວານ", "System", "ຮັບການຊຳລະ", "ViengTiane Coffee", "API"],
-  ["ພຶດສະພາ 16, 2025", "Somchai Phommasenh", "ກຳນົດແພັກເກດ", "Paksan Laos", "IP 10.0.2.18"]
+  [
+    "ພຶດສະພາ 16, 2025",
+    "Somchai Phommasenh",
+    "ກຳນົດແພັກເກດ",
+    "Paksan Laos",
+    "IP 10.0.2.18"
+  ]
 ];

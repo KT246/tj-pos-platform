@@ -3,14 +3,16 @@
 import Image from "../../../compat/image";
 import Link from "../../../compat/link";
 import { usePathname } from "../../../compat/navigation";
-import type { ReactNode } from "react";
-import { Bell, ChevronDown, Headphones, Plus, Search } from "lucide-react";
+import { type ReactNode, useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { Bell, ChevronDown, Plus, Search, LogOut, User, Settings } from "lucide-react";
 
-import { adminNavItems, adminUser } from "../data/mock-platform-admin";
+import { adminNavGroups, adminUser } from "../data/mock-platform-admin";
 import { Logo } from "../../../components/layout/logo";
 
 function getActiveHref(pathname: string) {
-  const matches = adminNavItems
+  const allItems = adminNavGroups.flatMap((g) => g.items);
+  const matches = allItems
     .filter((item) =>
       item.match.some((match) => pathname === match || pathname.startsWith(`${match}/`))
     )
@@ -26,6 +28,34 @@ function getActiveHref(pathname: string) {
 export function AdminShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const activeHref = getActiveHref(pathname);
+  const navigate = useNavigate();
+  const [user, setUser] = useState(adminUser);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("active_platform_user");
+    if (stored) {
+      try {
+        setUser(JSON.parse(stored));
+      } catch (e) {
+        // ignore
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsProfileOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,#f8fbff_0%,#ffffff_42%)] text-slate-900">
@@ -63,73 +93,153 @@ export function AdminShell({ children }: { children: ReactNode }) {
               </span>
             </button>
             <Link
-              href="/platform-admin/ທຸລະກິດ/create"
+              href="/platform-admin/businesses/create"
               className="font900 hidden h-10 items-center gap-2 rounded-md bg-blue-600 px-5 text-sm text-white shadow-[0_8px_20px_rgba(13,91,255,0.22)] hover:bg-blue-700 md:inline-flex"
             >
               <Plus className="h-4 w-4" />
               ສ້າງທຸລະກິດ
             </Link>
-            <button type="button" className="flex items-center gap-3">
-              <Image
-                src={adminUser.avatarUrl}
-                alt={adminUser.name}
-                width={48}
-                height={48}
-                className="h-10 w-10 rounded-full object-cover ring-4 ring-emerald-50"
-              />
-              <span className="hidden text-left xl:block">
-                <span className="font900 block text-sm text-slate-950">
-                  {adminUser.name}
+            
+            <div className="relative" ref={dropdownRef}>
+              <button
+                type="button"
+                onClick={() => setIsProfileOpen(!isProfileOpen)}
+                className="flex items-center gap-3 rounded-lg p-1.5 transition hover:bg-blue-50/50"
+              >
+                <Image
+                  src={user.avatarUrl}
+                  alt={user.name}
+                  width={48}
+                  height={48}
+                  className="h-10 w-10 rounded-full object-cover ring-4 ring-emerald-50"
+                />
+                <span className="hidden text-left xl:block">
+                  <span className="font900 block text-sm text-slate-950">
+                    {user.name}
+                  </span>
+                  <span className="block text-xs text-slate-500">{user.role}</span>
                 </span>
-                <span className="block text-xs text-slate-500">{adminUser.role}</span>
-              </span>
-              <ChevronDown className="hidden h-4 w-4 text-slate-500 xl:block" />
-            </button>
+                <ChevronDown className={`hidden h-4 w-4 text-slate-500 transition-transform xl:block ${isProfileOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {/* Profile Dropdown Menu */}
+              {isProfileOpen && (
+                <div className="absolute right-0 mt-2 w-[280px] rounded-xl border border-blue-100 bg-white p-4 shadow-[0_12px_30px_rgba(15,23,42,0.12)] backdrop-blur z-50">
+                  {/* User info head */}
+                  <div className="mb-3 flex items-center gap-3">
+                    <img
+                      src={user.avatarUrl}
+                      alt={user.name}
+                      className="h-12 w-12 rounded-full object-cover ring-2 ring-blue-50"
+                    />
+                    <div className="min-w-0 flex-1">
+                      <span className="font900 block text-sm text-slate-950 truncate leading-tight">
+                        {user.name}
+                      </span>
+                      <span className="block text-[11px] text-slate-500 font-bold mt-0.5">
+                        {user.role}
+                      </span>
+                      <span className="block text-[10px] text-slate-400 truncate">
+                        {user.email}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="my-2 border-t border-slate-100" />
+
+                  {/* Actions list */}
+                  <div className="space-y-1">
+                    <Link
+                      href="/platform-admin/profile-security"
+                      onClick={() => setIsProfileOpen(false)}
+                      className="font800 flex h-9 items-center gap-2.5 rounded-md px-2.5 text-xs text-slate-700 transition hover:bg-blue-50 hover:text-blue-600"
+                    >
+                      <User className="h-4 w-4 text-slate-400 animate-pulse" />
+                      <span>ແກ້ໄຂ Profile / ຄວາມປອດໄພ</span>
+                    </Link>
+
+                    {user.role === "Platform Admin" && (
+                      <Link
+                        href="/platform-admin/system-settings"
+                        onClick={() => setIsProfileOpen(false)}
+                        className="font800 flex h-9 items-center gap-2.5 rounded-md px-2.5 text-xs text-slate-700 transition hover:bg-blue-50 hover:text-blue-600"
+                      >
+                        <Settings className="h-4 w-4 text-slate-400" />
+                        <span>ຕັ້ງຄ່າ Platform</span>
+                      </Link>
+                    )}
+                  </div>
+
+                  <div className="my-2 border-t border-slate-100" />
+
+                  {/* Logout action */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsProfileOpen(false);
+                      navigate("/login");
+                    }}
+                    className="font800 flex h-9 w-full items-center gap-2.5 rounded-md px-2.5 text-xs text-red-500 transition hover:bg-red-50 hover:text-red-600"
+                  >
+                    <LogOut className="h-4 w-4 shrink-0" />
+                    <span>ອອກຈາກລະບົບ (Logout)</span>
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </header>
 
       <aside className="fixed top-[64px] bottom-0 left-0 z-30 hidden w-[230px] border-r border-blue-100 bg-white xl:block">
         <nav className="flex h-full flex-col px-3 py-4">
-          <div className="space-y-1">
-            {adminNavItems.map((item) => {
-              const Icon = item.icon;
-              const active = activeHref === item.href;
+          <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto overflow-x-hidden pr-1 space-y-5">
+            {adminNavGroups
+              .map((group) => {
+                const filteredItems = group.items.filter(
+                  (item) => !item.allowedRoles || item.allowedRoles.includes(user.role)
+                );
+                return { ...group, items: filteredItems };
+              })
+              .filter((group) => group.items.length > 0)
+              .map((group, groupIdx) => (
+                <div key={groupIdx} className="space-y-0.5">
+                  {group.label && (
+                    <h4 className="px-3 mb-1.5 text-[10px] font-bold uppercase tracking-widest text-slate-400 select-none">
+                      {group.label}
+                    </h4>
+                  )}
+                  {group.items.map((item) => {
+                    const Icon = item.icon;
+                    const active = activeHref === item.href;
 
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`font800 flex h-[43px] items-center gap-4 rounded-lg px-4 text-[13px] transition ${
-                    active
-                      ? "bg-blue-50 text-blue-700"
-                      : "text-slate-800 hover:bg-blue-50 hover:text-blue-700"
-                  }`}
-                >
-                  <Icon className="h-5 w-5 shrink-0" />
-                  <span className="truncate">{item.label}</span>
-                </Link>
-              );
-            })}
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={`font800 flex h-[40px] items-center gap-3 rounded-lg px-3 text-[13px] transition-all duration-150 ${
+                          active
+                            ? "bg-blue-50 text-blue-700 shadow-[inset_2px_0_0_#3b82f6]"
+                            : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                        }`}
+                      >
+                        <Icon className={`h-[18px] w-[18px] shrink-0 ${active ? "text-blue-600" : "text-slate-400"}`} />
+                        <span className="truncate">{item.label}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              ))}
           </div>
 
-          <div className="mt-auto rounded-xl border border-blue-100 bg-white p-4 shadow-[0_8px_24px_rgba(15,23,42,0.04)]">
-            <div className="flex gap-3">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-blue-600">
-                <Headphones className="h-7 w-7" />
-              </span>
-              <div>
-                <p className="font900 text-sm text-slate-950">ຕ້ອງການຊ່ວຍເຫຼືອ?</p>
-                <p className="mt-1 text-xs leading-5 text-slate-500">
-                  ທີມ support ຂອງພວກເຮົາພ້ອມຊ່ວຍ.
-                </p>
-              </div>
-            </div>
+          <div className="mt-3 pt-3 border-t border-slate-100">
             <button
               type="button"
-              className="font900 mt-4 flex h-11 w-full items-center justify-center gap-2 rounded-md border border-blue-100 text-sm text-blue-700 hover:bg-blue-50"
+              onClick={() => navigate("/login")}
+              className="font800 flex h-[40px] w-full items-center gap-3 rounded-lg px-3 text-[13px] text-red-500 transition-all duration-150 hover:bg-red-50 hover:text-red-600"
             >
-              ຕິດຕໍ່ Support
+              <LogOut className="h-[18px] w-[18px] shrink-0" />
+              <span className="truncate">ອອກຈາກລະບົບ</span>
             </button>
           </div>
         </nav>

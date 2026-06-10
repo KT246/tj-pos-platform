@@ -1,5 +1,5 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import type { ReactNode } from "react";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { type ReactNode, useState, useEffect } from "react";
 
 import { AdminShell } from "./features/platform-admin/layouts/admin-shell";
 import {
@@ -17,6 +17,7 @@ import { DashboardPage } from "./features/platform-admin/pages/dashboard-page";
 import {
   AddOnsPage,
   GlobalModulesCatalogPage,
+  OwnersPage,
   OwnerDetailPage,
   PaymentSettingsPage,
   PaymentsPage,
@@ -36,8 +37,38 @@ import {
   ProfileSecurityPage,
   SystemSettingsPage
 } from "./features/platform-admin/pages/system-pages";
+import { adminNavGroups, adminUser } from "./features/platform-admin/data/mock-platform-admin";
 
 function AdminRoute({ children }: { children: ReactNode }) {
+  const { pathname } = useLocation();
+  const [user, setUser] = useState(adminUser);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("active_platform_user");
+    if (stored) {
+      try {
+        setUser(JSON.parse(stored));
+      } catch (e) {
+        // ignore
+      }
+    }
+    setLoading(false);
+  }, [pathname]);
+
+  if (loading) return null;
+
+  // Find if this path belongs to a restricted item
+  const allItems = adminNavGroups.flatMap((g) => g.items);
+  const matchedItem = allItems.find((item) =>
+    item.match.some((match) => pathname === match || pathname.startsWith(`${match}/`))
+  );
+
+  if (matchedItem && matchedItem.allowedRoles && !matchedItem.allowedRoles.includes(user.role)) {
+    // Redirect to dashboard if they don't have access to this route
+    return <Navigate to="/platform-admin/dashboard" replace />;
+  }
+
   return <AdminShell>{children}</AdminShell>;
 }
 
@@ -114,18 +145,26 @@ export function App() {
           }
         />
         <Route
-          path="/platform-admin/users"
+          path="/platform-admin/owners"
           element={
             <AdminRoute>
-              <UsersPage />
+              <OwnersPage />
             </AdminRoute>
           }
         />
         <Route
-          path="/platform-admin/users/:userId"
+          path="/platform-admin/owners/:ownerId"
           element={
             <AdminRoute>
               <OwnerDetailPage />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/platform-admin/users"
+          element={
+            <AdminRoute>
+              <UsersPage />
             </AdminRoute>
           }
         />

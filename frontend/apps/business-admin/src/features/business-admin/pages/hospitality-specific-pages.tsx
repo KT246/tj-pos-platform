@@ -1036,3 +1036,129 @@ function HotelPagination() {
     </div>
   );
 }
+
+// ─── Housekeeping Page (separate from Room Settings) ─────────────────────────
+const housekeepingTasks = [
+  { room: "101", type: "Standard King", floor: "1", status: "ຕ້ອງທຳຄວາມສະອາດ", cleaner: "Bounmee", priority: "ດ່ວນ", notes: "VIP guest arriving 2PM" },
+  { room: "102", type: "Standard Twin", floor: "1", status: "ສະອາດ", cleaner: "Naly", priority: "ປົກກະຕິ", notes: "" },
+  { room: "103", type: "Deluxe King", floor: "1", status: "ກວດແລ້ວ", cleaner: "Bounmee", priority: "ສຳເລັດ", notes: "" },
+  { room: "104", type: "Deluxe Twin", floor: "1", status: "ກຳລັງທຳຄວາມສະອາດ", cleaner: "Malin", priority: "ປົກກະຕິ", notes: "Deep clean requested" },
+  { room: "201", type: "Superior King", floor: "2", status: "ສ້ອມບຳລຸງ", cleaner: "—", priority: "ລໍຖ້າ", notes: "AC repair needed" },
+  { room: "202", type: "Superior Twin", floor: "2", status: "ຕ້ອງທຳຄວາມສະອາດ", cleaner: "Naly", priority: "ດ່ວນ", notes: "" },
+  { room: "203", type: "Family Room", floor: "2", status: "ສະອາດ", cleaner: "Malin", priority: "ສຳເລັດ", notes: "" },
+  { room: "204", type: "Suite", floor: "2", status: "ກວດແລ້ວ", cleaner: "Bounmee", priority: "ສຳເລັດ", notes: "VIP" }
+];
+
+const hkStats = [
+  { label: "ທັງໝົດ", value: "24", color: "bg-blue-50 text-blue-600" },
+  { label: "ຕ້ອງທຳຄວາມສະອາດ", value: "8", color: "bg-amber-50 text-amber-600" },
+  { label: "ກຳລັງດຳເນີນ", value: "3", color: "bg-sky-50 text-sky-600" },
+  { label: "ສຳເລັດ", value: "11", color: "bg-emerald-50 text-emerald-600" },
+  { label: "ສ້ອມບຳລຸງ", value: "2", color: "bg-rose-50 text-rose-600" }
+];
+
+function hkStatusClass(status: string) {
+  if (status.includes("ສຳເລັດ") || status.includes("ກວດ")) return "border-emerald-100 bg-emerald-50 text-emerald-700";
+  if (status.includes("ກຳລັງ")) return "border-sky-100 bg-sky-50 text-sky-700";
+  if (status.includes("ຕ້ອງ")) return "border-amber-100 bg-amber-50 text-amber-700";
+  if (status.includes("ສ້ອມ")) return "border-rose-100 bg-rose-50 text-rose-700";
+  return "border-slate-100 bg-slate-50 text-slate-600";
+}
+
+function priorityClass(p: string) {
+  if (p === "ດ່ວນ") return "border-red-100 bg-red-50 text-red-600";
+  if (p === "ສຳເລັດ") return "border-emerald-100 bg-emerald-50 text-emerald-600";
+  if (p === "ລໍຖ້າ") return "border-slate-100 bg-slate-50 text-slate-500";
+  return "border-blue-100 bg-blue-50 text-blue-600";
+}
+
+export function HousekeepingPage() {
+  return (
+    <HospitalityPage
+      active="ແມ່ບ້ານ"
+      title="ແມ່ບ້ານ"
+      description="ຈັດການຄວາມສະອາດຫ້ອງ ແລະ ມອບໝາຍຕຳແໜ່ງໃຫ້ທີມ."
+      actions={
+        <div className="flex items-center gap-2">
+          <HotelButton variant="secondary" icon={ClipboardCheck}>ລາຍງານ</HotelButton>
+          <HotelButton>ມອບໝາຍໃໝ່</HotelButton>
+        </div>
+      }
+    >
+      <div className="space-y-5">
+        {/* KPI strip */}
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
+          {hkStats.map((stat) => (
+            <HotelCard key={stat.label}>
+              <div className={`flex flex-col items-center justify-center gap-1 p-4 ${stat.color} rounded-lg`}>
+                <span className="text-2xl font-black">{stat.value}</span>
+                <span className="text-center text-[11px] font-bold">{stat.label}</span>
+              </div>
+            </HotelCard>
+          ))}
+        </div>
+
+        {/* Task board */}
+        <HotelCard>
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-blue-50 p-4">
+            <HotelTabs
+              tabs={["ຫ້ອງທັງໝົດ", "ຊັ້ນ 1", "ຊັ້ນ 2", "ຊັ້ນ 3"]}
+              active="ຫ້ອງທັງໝົດ"
+            />
+            <HotelTabs
+              tabs={["ທຸກສະຖານະ", "ຕ້ອງທຳຄວາມສະອາດ", "ກຳລັງດຳເນີນ", "ສຳເລັດ"]}
+              active="ທຸກສະຖານະ"
+            />
+          </div>
+          <HotelTable
+            headers={["ຫ້ອງ", "ປະເພດ", "ຊັ້ນ", "ສະຖານະ", "ແມ່ບ້ານ", "ຄວາມດ່ວນ", "ໝາຍເຫດ", "ການດຳເນີນການ"]}
+            rows={housekeepingTasks.map((task) => [
+              <span key="room" className="font-black text-slate-950">{task.room}</span>,
+              task.type,
+              `ຊັ້ນ ${task.floor}`,
+              <span key="status" className={`rounded-md border px-2 py-1 text-[10px] font-black ${hkStatusClass(task.status)}`}>{task.status}</span>,
+              task.cleaner,
+              <span key="priority" className={`rounded-md border px-2 py-1 text-[10px] font-black ${priorityClass(task.priority)}`}>{task.priority}</span>,
+              <span key="notes" className="max-w-[160px] truncate text-xs text-slate-500">{task.notes || "—"}</span>,
+              <ActionCell key="action" />
+            ])}
+          />
+        </HotelCard>
+
+        {/* Cleaner assignments */}
+        <HotelCard title="ທີມແມ່ບ້ານ">
+          <div className="grid gap-4 p-4 md:grid-cols-3">
+            {[
+              { name: "Bounmee", rooms: ["101", "103", "204"], done: 2, total: 3 },
+              { name: "Naly", rooms: ["102", "202"], done: 1, total: 2 },
+              { name: "Malin", rooms: ["104", "203"], done: 1, total: 2 }
+            ].map((cleaner) => (
+              <div key={cleaner.name} className="rounded-lg border border-blue-100 p-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-black text-slate-950">{cleaner.name}</span>
+                  <span className="text-xs font-bold text-slate-500">
+                    {cleaner.done}/{cleaner.total} ຫ້ອງ
+                  </span>
+                </div>
+                <div className="mt-3 h-2 rounded-full bg-blue-50">
+                  <div
+                    className="h-2 rounded-full bg-blue-500 transition-all"
+                    style={{ width: `${(cleaner.done / cleaner.total) * 100}%` }}
+                  />
+                </div>
+                <div className="mt-3 flex flex-wrap gap-1">
+                  {cleaner.rooms.map((r) => (
+                    <span key={r} className="rounded border border-blue-100 px-2 py-0.5 text-[11px] font-black text-blue-600">
+                      {r}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </HotelCard>
+      </div>
+    </HospitalityPage>
+  );
+}
+

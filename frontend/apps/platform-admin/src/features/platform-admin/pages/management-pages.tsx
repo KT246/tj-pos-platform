@@ -22,19 +22,19 @@ import {
   SimpleList,
   StatusBadge
 } from "../components/admin-primitives";
-import { businesses, paymentMethods, planCards } from "../data/mock-platform-admin";
+import { businesses, demoPlatformUsers, paymentMethods, planCards } from "../data/mock-platform-admin";
 
-export function UsersPage() {
+export function OwnersPage() {
   return (
     <>
       <PageHeader
-        title="ເຈົ້າຂອງ / ຜູ້ໃຊ້"
-        description="ຈັດການເຈົ້າຂອງ, ພະນັກງານ ແລະ ບັນຊີຜູ້ໃຊ້ platform."
-        action={<AdminButton>ເພີ່ມຜູ້ໃຊ້</AdminButton>}
+        title="ເຈົ້າຂອງທຸລະກິດ"
+        description="ຈັດການເຈົ້າຂອງທຸລະກິດ, ບັນຊີ ແລະ ຂໍ້ມູນການຕິດຕໍ່."
+        action={<AdminButton>ເພີ່ມເຈົ້າຂອງ</AdminButton>}
       />
       <AdminCard className="overflow-hidden">
         <FilterBar
-          searchPlaceholder="ຄົ້ນຫາຜູ້ໃຊ້..."
+          searchPlaceholder="ຄົ້ນຫາເຈົ້າຂອງ..."
           filters={["ບົດບາດທັງໝົດ", "ສະຖານະທັງໝົດ", "ທຸລະກິດທັງໝົດ"]}
         />
         <GenericTable
@@ -54,7 +54,43 @@ export function UsersPage() {
             business.ownerEmail,
             <StatusBadge key="status" status={business.status} />,
             business.lastActivity,
-            "ເບິ່ງລາຍລະອຽດ"
+            <a href={`/platform-admin/owners/${business.id}`} className="text-blue-600 hover:underline">ເບິ່ງລາຍລະອຽດ</a>
+          ])}
+        />
+      </AdminCard>
+    </>
+  );
+}
+
+export function UsersPage() {
+  return (
+    <>
+      <PageHeader
+        title="ຜູ້ໃຊ້ Platform"
+        description="ຈັດການບັນຊີຜູ້ໃຊ້ພາຍໃນຂອງລະບົບ TJ POS Platform (Admin, Staff, Finance)."
+        action={<AdminButton>ເພີ່ມຜູ້ໃຊ້</AdminButton>}
+      />
+      <AdminCard className="overflow-hidden">
+        <FilterBar
+          searchPlaceholder="ຄົ້ນຫາຜູ້ໃຊ້..."
+          filters={["ບົດບາດທັງໝົດ", "ສະຖານະທັງໝົດ"]}
+        />
+        <GenericTable
+          headers={[
+            "ຜູ້ໃຊ້",
+            "Email",
+            "ບົດບາດ",
+            "ສະຖານະ",
+            "Login ຫຼ້າສຸດ",
+            "ການກະທຳ"
+          ]}
+          rows={demoPlatformUsers.map((user) => [
+            user.name,
+            user.email,
+            user.role,
+            <StatusBadge key="status" status="active" />,
+            "ມື້ນີ້",
+            "ຈັດການ"
           ])}
         />
       </AdminCard>

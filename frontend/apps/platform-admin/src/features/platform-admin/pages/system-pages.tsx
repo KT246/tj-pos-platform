@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   Database,
   Download,
@@ -26,55 +27,69 @@ export function SystemSettingsPage() {
     <>
       <PageHeader
         title="ຕັ້ງຄ່າ Platform"
-        description="ກຳນົດ platform defaults, security policy, backup ແລະ operational settings."
+        description="ກຳນົດຂໍ້ມູນພື້ນຖານ, subscription defaults, ຄວາມປອດໄພ ແລະ maintenance mode."
         action={<AdminButton>ບັນທຶກການແກ້ໄຂ</AdminButton>}
       />
       <div className="grid gap-5 xl:grid-cols-2">
+        {/* 1. General Settings */}
         <AdminCard className="p-5">
           <PanelTitle title="ຕັ້ງຄ່າທົ່ວໄປ" />
           <div className="grid gap-4 md:grid-cols-2">
-            <FormField label="ຊື່ Platform" value="TJ POS" />
-            <FormField label="ສະກຸນເງິນຕັ້ງຕົ້ນ" value="LAK" />
-            <FormField label="ປະເທດຕັ້ງຕົ້ນ" value="ລາວ" />
+            <FormField label="Platform Name" value="TJ POS" />
+            <FormField label="Company Name" value="TJ Group" />
             <FormField label="Support Email" value="support@tjpos.la" />
+            <FormField label="Support Phone" value="+856 21 123456" />
+            <FormField label="Default Language" value="Lao" />
+            <FormField label="Timezone" value="Asia/Vientiane" />
           </div>
         </AdminCard>
+
+        {/* 2. Subscription Settings */}
         <AdminCard className="p-5">
-          <PanelTitle title="ຄວາມປອດໄພ & ການດຳເນີນງານ" />
-          <SettingsRow
-            title="ບັງຄັບໃຊ້ 2FA"
-            description="Platform Admin ຕ້ອງໃຊ້ 2FA."
-          />
-          <SettingsRow title="Audit Log" description="ບັນທຶກການກະທຳສຳຄັນຂອງ admin." />
-          <SettingsRow
-            title="API Rate Limit"
-            description="ປ້ອງກັນ API ຈາກການໃຊ້ງານເກີນ."
-          />
-        </AdminCard>
-        <AdminCard className="p-5">
-          <PanelTitle title="ສຳຮອງຂໍ້ມູນ" />
-          <SettingsRow title="ສຳຮອງຂໍ້ມູນທຸກມື້" description="ສຳຮອງ database ທຸກຄືນ." />
-          <SettingsRow
-            title="ແຈ້ງເຕືອນ Backup"
-            description="ແຈ້ງທີມ TJ POS ຖ້າ backup ລົ້ມເຫຼວ."
-          />
-        </AdminCard>
-        <AdminCard className="p-5">
-          <PanelTitle title="ສະຖານະ System" />
-          {[
-            ["API", "ໃຊ້ງານປົກກະຕິ"],
-            ["Database", "ໃຊ້ງານປົກກະຕິ"],
-            ["Queue Worker", "ພ້ອມ"],
-            ["Redis", "ພ້ອມ"]
-          ].map(([label, value]) => (
-            <div
-              key={label}
-              className="flex items-center justify-between border-b border-blue-50 py-4 last:border-b-0"
-            >
-              <span className="font900 text-sm">{label}</span>
-              <span className="font800 text-sm text-emerald-700">{value}</span>
+          <PanelTitle title="Subscription Settings" />
+          <div className="grid gap-4 md:grid-cols-2">
+            <FormField label="Default Trial Days" value="14" />
+            <FormField label="Grace Period Days" value="7" />
+            <FormField label="Invoice Prefix" value="TJP" />
+            <div className="md:col-span-2">
+              <SettingsRow
+                title="Auto Suspend Expired Business"
+                description="ປິດການເຂົ້າເຖິງອັດຕະໂນມັດຫຼັງໝົດອາຍຸແລ້ວ."
+              />
             </div>
-          ))}
+          </div>
+        </AdminCard>
+
+        {/* 3. Security Settings */}
+        <AdminCard className="p-5">
+          <PanelTitle title="Security Settings" />
+          <SettingsRow
+            title="Require 2FA for Platform Admin"
+            description="Platform Admin ຕ້ອງໃຊ້ two-factor authentication."
+          />
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            <FormField label="Session Timeout (minutes)" value="60" />
+            <FormField label="Password Minimum Length" value="8" />
+          </div>
+        </AdminCard>
+
+        {/* 4. Maintenance Mode */}
+        <AdminCard className="p-5">
+          <PanelTitle title="Maintenance Mode" />
+          <SettingsRow
+            title="Maintenance Mode"
+            description="บັງຄັບໃຊ້ maintenance mode ສຳລັບທັງລະບົບ."
+          />
+          <div className="mt-4 space-y-4">
+            <FormField
+              label="Maintenance Message"
+              value="ລະບົບກຳລັງອັບເດດ. ກະລຸນາລໍຖ້າ..."
+            />
+            <div className="grid gap-4 md:grid-cols-2">
+              <FormField label="Start Time" value="2025-05-20 02:00" />
+              <FormField label="End Time" value="2025-05-20 04:00" />
+            </div>
+          </div>
         </AdminCard>
       </div>
     </>
@@ -161,7 +176,7 @@ export function AuditLogsPage() {
               {["ເວລາ", "ຜູ້ກະທຳ", "ການກະທຳ", "Resource", "ແຫຼ່ງທີ່ມາ", "ສະຖານະ"].map(
                 (head) => (
                   <th key={head} className="font900 border-b border-blue-100 px-4 py-3">
-                  {head}
+                    {head}
                   </th>
                 )
               )}
@@ -189,6 +204,19 @@ export function AuditLogsPage() {
 }
 
 export function ProfileSecurityPage() {
+  const [user, setUser] = useState(adminUser);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("active_platform_user");
+    if (stored) {
+      try {
+        setUser(JSON.parse(stored));
+      } catch (e) {
+        // ignore
+      }
+    }
+  }, []);
+
   return (
     <>
       <PageHeader
@@ -199,14 +227,14 @@ export function ProfileSecurityPage() {
       <div className="grid gap-5 xl:grid-cols-[360px_1fr]">
         <AdminCard className="p-6 text-center">
           <Image
-            src={adminUser.avatarUrl}
-            alt={adminUser.name}
+            src={user.avatarUrl}
+            alt={user.name}
             width={112}
             height={112}
             className="mx-auto h-24 w-24 rounded-full object-cover ring-8 ring-emerald-50"
           />
-          <h2 className="font900 mt-5 text-2xl">{adminUser.name}</h2>
-          <p className="text-sm text-slate-500">Platform Admin</p>
+          <h2 className="font900 mt-5 text-2xl">{user.name}</h2>
+          <p className="text-sm text-slate-500">{user.role}</p>
           <div className="mt-5 flex justify-center">
             <StatusBadge status="active" />
           </div>
@@ -215,10 +243,10 @@ export function ProfileSecurityPage() {
           <AdminCard className="p-5">
             <PanelTitle title="ຂໍ້ມູນ Profile" />
             <div className="grid gap-4 md:grid-cols-2">
-              <FormField label="ຊື່ເຕັມ" value={adminUser.name} />
-              <FormField label="Email" value={adminUser.email} />
+              <FormField label="ຊື່ເຕັມ" value={user.name} />
+              <FormField label="Email" value={user.email} />
               <FormField label="ເບີໂທ" value="+856 20 5555 7890" />
-              <FormField label="ບົດບາດ" value="Platform Admin" />
+              <FormField label="ບົດບາດ" value={user.role} />
             </div>
           </AdminCard>
           <AdminCard className="p-5">

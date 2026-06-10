@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { demoPlatformUsers } from "../data/mock-platform-admin";
 import Link from "../../../compat/link";
 import {
   ArrowRight,
@@ -17,6 +20,16 @@ import {
 import { Logo } from "../../../components/layout/logo";
 
 export function LoginPage() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("admin@tjpos.la");
+  const [password, setPassword] = useState("VtCoffee@2025!");
+
+  const handleLogin = (selectedEmail: string) => {
+    const matched = demoPlatformUsers.find((u) => u.email === selectedEmail) || demoPlatformUsers[0];
+    localStorage.setItem("active_platform_user", JSON.stringify(matched));
+    navigate("/platform-admin/dashboard");
+  };
+
   return (
     <AuthLayout hideChrome>
       <div className="mb-7 text-center">
@@ -31,13 +44,48 @@ export function LoginPage() {
         </p>
       </div>
 
+      <div className="mb-6 rounded-xl border border-blue-100 bg-blue-50/20 p-4">
+        <p className="font900 mb-3 text-xs uppercase tracking-wider text-slate-400">
+          ເລືອກບັນຊີທົດລອງ (Demo Accounts)
+        </p>
+        <div className="grid gap-2">
+          {demoPlatformUsers.map((user) => (
+            <button
+              key={user.email}
+              type="button"
+              onClick={() => {
+                setEmail(user.email);
+                handleLogin(user.email);
+              }}
+              className="flex items-center gap-3 rounded-lg border border-blue-100 bg-white p-3 text-left transition hover:border-blue-300 hover:bg-blue-50/50"
+            >
+              <img
+                src={user.avatarUrl}
+                alt={user.name}
+                className="h-9 w-9 rounded-full object-cover ring-2 ring-blue-50"
+              />
+              <div className="min-w-0 flex-1">
+                <span className="font900 block text-sm text-slate-950 leading-tight">
+                  {user.name}
+                </span>
+                <span className="block text-[11px] text-slate-500 font-bold">
+                  {user.role} • {user.email}
+                </span>
+              </div>
+              <ArrowRight className="h-4 w-4 text-blue-600 shrink-0 opacity-60" />
+            </button>
+          ))}
+        </div>
+      </div>
+
       <div className="space-y-5">
         <label>
           <span className="font800 mb-2 block text-sm text-slate-700">Email</span>
           <span className="relative block">
             <Mail className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-slate-500" />
             <input
-              defaultValue="admin@tjpos.la"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="h-14 w-full rounded-md border border-blue-100 pr-4 pl-12 text-base outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
             />
           </span>
@@ -47,7 +95,8 @@ export function LoginPage() {
           <span className="relative block">
             <Lock className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-slate-500" />
             <input
-              defaultValue="VtCoffee@2025!"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               type="password"
               className="h-14 w-full rounded-md border border-blue-100 pr-12 pl-12 text-base outline-none focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
             />
@@ -65,13 +114,14 @@ export function LoginPage() {
           </Link>
         </div>
 
-        <Link
-          href="/platform-admin/dashboard"
+        <button
+          type="button"
+          onClick={() => handleLogin(email)}
           className="font900 flex h-14 w-full cursor-pointer items-center justify-center gap-3 rounded-md bg-blue-600 text-base text-white shadow-[0_10px_24px_rgba(13,91,255,0.2)] transition hover:bg-blue-700"
         >
           <ArrowRight className="h-5 w-5" />
           ເຂົ້າ Platform Admin
-        </Link>
+        </button>
 
         <div className="flex items-center gap-4 text-sm text-slate-400">
           <span className="h-px flex-1 bg-blue-100" />

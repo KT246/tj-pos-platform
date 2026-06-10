@@ -1,14 +1,13 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import Image from "../../../compat/image";
 import Link from "../../../compat/link";
 import {
   ArrowRight,
-  CalendarDays,
   ChevronDown,
-  Download,
   MoreVertical,
   Plus,
   Search,
+  Settings,
   Star,
   type LucideIcon
 } from "lucide-react";
@@ -58,12 +57,8 @@ export function PageHeader({
           <ArrowRight className="h-3.5 w-3.5" />
           <span className="font800 text-slate-700">{title}</span>
         </div>
-        <h1 className="font900 text-[26px] leading-tight text-slate-950">
-          {title}
-        </h1>
-        <p className="mt-1.5 text-sm leading-5 text-slate-600">
-          {description}
-        </p>
+        <h1 className="font900 text-[26px] leading-tight text-slate-950">{title}</h1>
+        <p className="mt-1.5 text-sm leading-5 text-slate-600">{description}</p>
       </div>
       {action}
     </div>
@@ -74,12 +69,14 @@ export function AdminButton({
   children,
   href,
   variant = "primary",
-  icon: Icon
+  icon: Icon,
+  onClick
 }: {
   children: ReactNode;
   href?: string;
   variant?: "primary" | "secondary" | "ghost";
   icon?: LucideIcon;
+  onClick?: () => void;
 }) {
   const className =
     variant === "primary"
@@ -109,6 +106,7 @@ export function AdminButton({
   return (
     <button
       type="button"
+      onClick={onClick}
       className={`font800 inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md px-4 text-sm transition ${className}`}
     >
       {content}
@@ -139,9 +137,7 @@ function StatCard({ stat }: { stat: StatCardType }) {
             <Icon className="h-6 w-6" />
           </div>
           <div className="min-w-0">
-            <p className="font700 text-[13px] leading-4 text-slate-600">
-              {stat.label}
-            </p>
+            <p className="font700 text-[13px] leading-4 text-slate-600">{stat.label}</p>
             <p className="font900 mt-1 text-[23px] leading-7 text-slate-950">
               {stat.value}
             </p>
@@ -195,14 +191,32 @@ export function StatusBadge({ status }: { status: AdminStatus }) {
 export function FilterBar({
   searchPlaceholder = "ຄົ້ນຫາ...",
   filters = ["ປະເພດທັງໝົດ", "ແພັກເກດທັງໝົດ", "ສະຖານະທັງໝົດ"],
-  showExport = true,
-  showCreate = false
+  showCreate = false,
+  searchValue = "",
+  onSearchChange,
+  statusCounts,
+  categoryFilter,
+  onCategoryChange,
+  categories
 }: {
   searchPlaceholder?: string;
   filters?: string[];
-  showExport?: boolean;
   showCreate?: boolean;
+  searchValue?: string;
+  onSearchChange?: (value: string) => void;
+  statusCounts?: Array<{
+    label: string;
+    count: number;
+    active?: boolean;
+    onClick?: () => void;
+  }>;
+  categoryFilter?: string;
+  onCategoryChange?: (category: string) => void;
+  categories?: string[];
 }) {
+  const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
+  const [showStatusDropdown, setShowStatusDropdown] = useState(false);
+
   return (
     <div className="flex flex-col gap-2.5 border-b border-blue-100 p-3">
       <div className="flex flex-wrap items-center gap-2.5">
@@ -211,55 +225,133 @@ export function FilterBar({
           <input
             className="h-9 w-full rounded-md border border-blue-100 bg-white pr-3 pl-10 text-sm transition outline-none placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-50"
             placeholder={searchPlaceholder}
+            value={searchValue}
+            onChange={(e) => onSearchChange?.(e.target.value)}
           />
         </label>
-        {filters.map((filter) => (
-          <button
-            key={filter}
-            type="button"
-            className="font800 flex h-9 min-w-[145px] cursor-pointer items-center justify-between gap-3 rounded-md border border-blue-100 bg-white px-3 text-left text-sm text-slate-700 transition hover:border-blue-200 hover:bg-blue-50/50"
-          >
-            {filter}
-            <ChevronDown className="h-4 w-4 text-slate-400" />
-          </button>
-        ))}
-        <button
-          type="button"
-          className="font800 flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md border border-blue-100 bg-white px-3 text-sm text-slate-700 transition hover:border-blue-200 hover:bg-blue-50/50"
-        >
-          <CalendarDays className="h-4 w-4 text-blue-500" />
-          {"ພຶດສະພາ 12 - ພຶດສະພາ 18, 2025"}
-        </button>
-        {showExport ? (
-          <AdminButton variant="secondary" icon={Download}>
-            ສົ່ງອອກ
-          </AdminButton>
-        ) : null}
+        {filters.map((filter, idx) => {
+          const isCategory = filter.includes("ໝວດໝູ່");
+          const isStatus = filter.includes("ສະຖານະ");
+          const showDropdown = isCategory
+            ? showCategoryDropdown
+            : isStatus
+              ? showStatusDropdown
+              : false;
+          const setDropdown = isCategory
+            ? setShowCategoryDropdown
+            : isStatus
+              ? setShowStatusDropdown
+              : () => {};
+
+          if (isCategory && categories) {
+            return (
+              <div key={filter} className="relative">
+                <button
+                  type="button"
+                  onClick={() => setDropdown(!showDropdown)}
+                  className="font800 flex h-9 min-w-[145px] cursor-pointer items-center justify-between gap-3 rounded-md border border-blue-100 bg-white px-3 text-left text-sm text-slate-700 transition hover:border-blue-200 hover:bg-blue-50/50"
+                >
+                  {categoryFilter || filter}
+                  <ChevronDown className="h-4 w-4 text-slate-400" />
+                </button>
+                {showDropdown && (
+                  <div className="absolute top-full left-0 z-50 mt-1 w-full min-w-[200px] rounded-md border border-blue-100 bg-white shadow-lg">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        onCategoryChange?.("ໝວດໝູ່ທັງໝົດ");
+                        setDropdown(false);
+                      }}
+                      className="w-full px-3 py-2 text-left text-sm transition hover:bg-blue-50"
+                    >
+                      ໝວດໝູ່ທັງໝົດ
+                    </button>
+                    {categories.map((cat) => (
+                      <button
+                        key={cat}
+                        type="button"
+                        onClick={() => {
+                          onCategoryChange?.(cat);
+                          setDropdown(false);
+                        }}
+                        className="w-full px-3 py-2 text-left text-sm transition hover:bg-blue-50"
+                      >
+                        {cat}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          }
+
+          return (
+            <button
+              key={filter}
+              type="button"
+              className="font800 flex h-9 min-w-[145px] cursor-pointer items-center justify-between gap-3 rounded-md border border-blue-100 bg-white px-3 text-left text-sm text-slate-700 transition hover:border-blue-200 hover:bg-blue-50/50"
+            >
+              {filter}
+              <ChevronDown className="h-4 w-4 text-slate-400" />
+            </button>
+          );
+        })}
         {showCreate ? (
-          <AdminButton href="/platform-admin/ທຸລະກິດ/create" icon={Plus}>
+          <AdminButton href="/platform-admin/businesses/create" icon={Plus}>
             ສ້າງທຸລະກິດ
           </AdminButton>
         ) : null}
       </div>
       <div className="flex flex-wrap gap-2.5">
-        {["ທັງໝົດ (1,256)", "ໃຊ້ງານ (1,102)", "ທົດລອງ (98)", "ຖືກລະງັບ (56)"].map(
-          (item, index) => (
-            <span
-              key={item}
-              className={`font800 rounded-full px-3.5 py-1.5 text-xs ${
-                index === 0
-                  ? "bg-blue-50 text-blue-700"
-                  : index === 1
-                    ? "bg-emerald-50 text-emerald-700"
-                    : index === 2
-                      ? "bg-violet-50 text-violet-700"
-                      : "bg-orange-50 text-orange-700"
-              }`}
-            >
-              {item}
-            </span>
-          )
-        )}
+        {statusCounts
+          ? statusCounts.map((item, index) => (
+              <button
+                key={item.label}
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  console.log("Button clicked:", item.label);
+                  item.onClick?.();
+                }}
+                className={`font800 cursor-pointer rounded-full px-3.5 py-1.5 text-xs transition hover:opacity-80 ${
+                  item.active
+                    ? index === 0
+                      ? "bg-blue-600 text-white"
+                      : index === 1
+                        ? "bg-emerald-600 text-white"
+                        : index === 2
+                          ? "bg-violet-600 text-white"
+                          : "bg-orange-600 text-white"
+                    : index === 0
+                      ? "bg-blue-50 text-blue-700"
+                      : index === 1
+                        ? "bg-emerald-50 text-emerald-700"
+                        : index === 2
+                          ? "bg-violet-50 text-violet-700"
+                          : "bg-orange-50 text-orange-700"
+                }`}
+              >
+                {item.label} ({item.count})
+              </button>
+            ))
+          : ["ທັງໝົດ (1,256)", "ໃຊ້ງານ (1,102)", "ທົດລອງ (98)", "ຖືກລະງັບ (56)"].map(
+              (item, index) => (
+                <span
+                  key={item}
+                  className={`font800 rounded-full px-3.5 py-1.5 text-xs ${
+                    index === 0
+                      ? "bg-blue-50 text-blue-700"
+                      : index === 1
+                        ? "bg-emerald-50 text-emerald-700"
+                        : index === 2
+                          ? "bg-violet-50 text-violet-700"
+                          : "bg-orange-50 text-orange-700"
+                  }`}
+                >
+                  {item}
+                </span>
+              )
+            )}
       </div>
     </div>
   );
@@ -328,16 +420,15 @@ export function BusinessTable({ rows = [] }: { rows: Business[] }) {
                 <td className="px-3.5 py-2.5 whitespace-pre-line text-slate-700">
                   {row.lastActivity}
                 </td>
-                <td className="px-3.5 py-2.5 text-slate-700">
-                  {row.joinedOn}
-                </td>
+                <td className="px-3.5 py-2.5 text-slate-700">{row.joinedOn}</td>
                 <td className="px-3.5 py-2.5">
                   <div className="flex items-center gap-2">
                     <Link
                       href={`/platform-admin/businesses/${row.id}`}
-                      className="font800 rounded-md border border-blue-100 px-3 py-1.5 text-xs text-blue-700 hover:bg-blue-50"
+                      className="flex h-8 w-8 items-center justify-center rounded-md border border-blue-100 text-slate-500 transition hover:bg-blue-50 hover:text-blue-700"
+                      title="ເບິ່ງລາຍລະອຽດ"
                     >
-                      ເບິ່ງລາຍລະອຽດ
+                      <Settings className="h-4 w-4" />
                     </Link>
                     <button
                       type="button"
@@ -357,31 +448,149 @@ export function BusinessTable({ rows = [] }: { rows: Business[] }) {
   );
 }
 
-export function Pagination() {
+export function Pagination({
+  currentPage = 1,
+  totalItems = 0,
+  itemsPerPage = 10,
+  onPageChange,
+  onItemsPerPageChange
+}: {
+  currentPage?: number;
+  totalItems?: number;
+  itemsPerPage?: number;
+  onPageChange?: (page: number) => void;
+  onItemsPerPageChange?: (items: number) => void;
+}) {
+  const [showPerPageDropdown, setShowPerPageDropdown] = useState(false);
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const startItem = (currentPage - 1) * itemsPerPage + 1;
+  const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+
+  const perPageOptions = [10, 20, 50, 100];
+
+  // Generate page numbers to display
+  const getPageNumbers = () => {
+    const pages: (number | string)[] = [];
+
+    if (totalPages <= 7) {
+      // Show all pages if 7 or fewer
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      // Always show first page
+      pages.push(1);
+
+      if (currentPage > 3) {
+        pages.push("...");
+      }
+
+      // Show pages around current page
+      const start = Math.max(2, currentPage - 1);
+      const end = Math.min(totalPages - 1, currentPage + 1);
+
+      for (let i = start; i <= end; i++) {
+        pages.push(i);
+      }
+
+      if (currentPage < totalPages - 2) {
+        pages.push("...");
+      }
+
+      // Always show last page
+      pages.push(totalPages);
+    }
+
+    return pages;
+  };
+
+  const pageNumbers = getPageNumbers();
+
   return (
     <div className="flex flex-col gap-3 border-t border-blue-100 px-4 py-2.5 text-sm text-slate-600 md:flex-row md:items-center md:justify-between">
-      <span>ສະແດງ 1 ຫາ 10 ຈາກ 1,256 ລາຍການ</span>
+      <span>
+        ສະແດງ {startItem} ຫາ {endItem} ຈາກ {totalItems.toLocaleString()} ລາຍການ
+      </span>
       <div className="flex items-center gap-2">
-        {["‹", "1", "2", "3", "...", "126", "›"].map((item) => (
+        {/* Previous button */}
+        <button
+          type="button"
+          onClick={() => onPageChange?.(Math.max(1, currentPage - 1))}
+          disabled={currentPage === 1}
+          className={`font800 flex h-8 min-w-8 cursor-pointer items-center justify-center rounded-md border px-2.5 text-sm transition ${
+            currentPage === 1
+              ? "cursor-not-allowed border-blue-100 bg-gray-50 text-gray-400"
+              : "border-blue-100 bg-white text-slate-700 hover:bg-blue-50"
+          }`}
+        >
+          ‹
+        </button>
+
+        {/* Page numbers */}
+        {pageNumbers.map((item, index) => (
           <button
-            key={item}
+            key={`${item}-${index}`}
             type="button"
+            onClick={() => typeof item === "number" && onPageChange?.(item)}
+            disabled={item === "..."}
             className={`font800 flex h-8 min-w-8 cursor-pointer items-center justify-center rounded-md border px-2.5 text-sm transition ${
-              item === "1"
+              item === currentPage
                 ? "border-blue-600 bg-blue-600 text-white"
-                : "border-blue-100 bg-white text-slate-700"
+                : item === "..."
+                  ? "cursor-default border-transparent bg-transparent text-slate-400"
+                  : "border-blue-100 bg-white text-slate-700 hover:bg-blue-50"
             }`}
           >
             {item}
           </button>
         ))}
+
+        {/* Next button */}
         <button
           type="button"
-          className="font800 flex h-8 cursor-pointer items-center gap-2 rounded-md border border-blue-100 px-3 text-sm transition hover:bg-blue-50"
+          onClick={() => onPageChange?.(Math.min(totalPages, currentPage + 1))}
+          disabled={currentPage === totalPages}
+          className={`font800 flex h-8 min-w-8 cursor-pointer items-center justify-center rounded-md border px-2.5 text-sm transition ${
+            currentPage === totalPages
+              ? "cursor-not-allowed border-blue-100 bg-gray-50 text-gray-400"
+              : "border-blue-100 bg-white text-slate-700 hover:bg-blue-50"
+          }`}
         >
-          10 / ໜ້າ
-          <ChevronDown className="h-4 w-4" />
+          ›
         </button>
+
+        {/* Items per page dropdown */}
+        <div className="relative">
+          <button
+            type="button"
+            onClick={() => setShowPerPageDropdown(!showPerPageDropdown)}
+            className="font800 flex h-8 cursor-pointer items-center gap-2 rounded-md border border-blue-100 bg-white px-3 text-sm transition hover:bg-blue-50"
+          >
+            {itemsPerPage} / ໜ້າ
+            <ChevronDown className="h-4 w-4" />
+          </button>
+          {showPerPageDropdown && (
+            <div className="absolute right-0 bottom-full mb-1 w-32 rounded-md border border-blue-100 bg-white shadow-lg">
+              {perPageOptions.map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => {
+                    onItemsPerPageChange?.(option);
+                    setShowPerPageDropdown(false);
+                  }}
+                  className={`w-full px-3 py-2 text-left text-sm transition hover:bg-blue-50 ${
+                    option === itemsPerPage
+                      ? "bg-blue-50 font-semibold text-blue-700"
+                      : ""
+                  }`}
+                >
+                  {option} / ໜ້າ
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -586,9 +795,7 @@ export function SettingsRow({
     <div className="flex items-center justify-between gap-3 border-b border-blue-50 py-1.5 last:border-b-0">
       <div>
         <p className="font900 text-xs text-slate-950">{title}</p>
-        <p className="mt-0.5 text-[11px] leading-4 text-slate-500">
-          {description}
-        </p>
+        <p className="mt-0.5 text-[11px] leading-4 text-slate-500">{description}</p>
       </div>
       <button
         type="button"

@@ -426,9 +426,9 @@ function AreaSummary() {
 export function AppointmentCalendarPage() {
   return (
     <BeautyPage
-      active="ປະຕິທິນ"
-      title="ປະຕິທິນນັດໝາຍ"
-      description="ຈັດການນັດໝາຍ ແລະ ຕາຕະລາງຂອງຮ້ານ."
+      active="ນັດໝາຍ"
+      title="ນັດໝາຍ — ປະຈຳມື້"
+      description="ຕາຕະລາງນັດໝາຍຂອງພະນັກງານ ແລະ ລູກຄ້າ."
       actions={
         <div className="flex items-center gap-2">
           <BeautyButton variant="secondary" icon={CalendarDays}>
@@ -549,6 +549,135 @@ export function AppointmentCalendarPage() {
           </div>
         </BeautyCard>
       </div>
+    </BeautyPage>
+  );
+}
+
+// ── Monthly calendar view — used by /calendar route (ປະຕິທິນ menu)
+export function AppointmentCalendarMonthPage() {
+  const days = Array.from({ length: 31 }, (_, i) => i + 1);
+  const startOffset = 2; // May 2025 starts on Thursday (index 2)
+  // sample appointments scattered around the month
+  const apptDots: Record<number, { color: string; label: string }[]> = {
+    2: [{ color: "bg-pink-400", label: "Kanya - Hair" }],
+    5: [{ color: "bg-violet-400", label: "Somchay - Nails" }],
+    8: [{ color: "bg-amber-400", label: "Natthavone - Facial" }],
+    10: [
+      { color: "bg-pink-400", label: "Mali - Walk-in" },
+      { color: "bg-emerald-400", label: "Pim - Massage" }
+    ],
+    14: [{ color: "bg-sky-400", label: "Thida - Nails" }],
+    18: [
+      { color: "bg-pink-400", label: "Kanya - Dye" },
+      { color: "bg-fuchsia-400", label: "Walk-in - Nail" },
+      { color: "bg-violet-400", label: "Bounlie - Cut" }
+    ],
+    19: [{ color: "bg-emerald-400", label: "Kritsana - Spa" }],
+    22: [{ color: "bg-amber-400", label: "Phanousa - Facial" }],
+    24: [
+      { color: "bg-pink-400", label: "Mali - Blow" },
+      { color: "bg-sky-400", label: "Nina - Gel" }
+    ],
+    28: [{ color: "bg-rose-400", label: "Natthavone - Wax" }],
+    30: [{ color: "bg-pink-400", label: "Kanya - Trim" }]
+  };
+
+  const totalCells = startOffset + 31;
+  const gridSize = Math.ceil(totalCells / 7) * 7;
+
+  return (
+    <BeautyPage
+      active="ປະຕິທິນ"
+      title="ປະຕິທິນ"
+      description="ພາບລວມນັດໝາຍ ແລະ ຖ້ຽວວຽກທຸກວັນໃນເດືອນ."
+      actions={
+        <div className="flex items-center gap-2">
+          <BeautyButton variant="secondary" icon={ChevronLeft}>Prev</BeautyButton>
+          <span className="min-w-[150px] text-center text-sm font-black text-slate-950">
+            ພຶດສະພາ 2025
+          </span>
+          <BeautyButton variant="secondary" icon={ChevronRight}>Next</BeautyButton>
+          <BeautyButton href="/business-admin/appointments/create">+ ນັດໝາຍ</BeautyButton>
+        </div>
+      }
+    >
+      <BeautyCard>
+        {/* stats strip */}
+        <div className="grid grid-cols-2 gap-4 border-b border-pink-50 p-4 md:grid-cols-4">
+          {[
+            ["ທັງໝົດ", "86", "text-slate-950"],
+            ["Confirmed", "72", "text-emerald-600"],
+            ["ກຳລັງດຳເນີນ", "8", "text-amber-600"],
+            ["No Show", "6", "text-rose-500"]
+          ].map(([label, val, color]) => (
+            <div key={label as string} className="text-center">
+              <p className={`text-2xl font-black ${color}`}>{val}</p>
+              <p className="mt-0.5 text-[11px] font-bold text-slate-400">{label}</p>
+            </div>
+          ))}
+        </div>
+        {/* weekday headers */}
+        <div className="grid grid-cols-7 border-b border-pink-50">
+          {["ຈ", "ອ", "ພ", "ພຫ", "ສ", "ສອ", "ອາ"].map((d) => (
+            <div
+              key={d}
+              className="py-3 text-center text-[11px] font-black text-slate-400"
+            >
+              {d}
+            </div>
+          ))}
+        </div>
+        {/* day grid */}
+        <div className="grid grid-cols-7">
+          {Array.from({ length: gridSize }, (_, idx) => {
+            const dayNum = idx - startOffset + 1;
+            const isCurrentMonth = dayNum >= 1 && dayNum <= 31;
+            const isToday = dayNum === 18;
+            const appts = apptDots[dayNum] ?? [];
+            const isWeekend = idx % 7 >= 5;
+
+            return (
+              <div
+                key={idx}
+                className={`relative min-h-[100px] border-b border-r border-pink-50 p-2 transition hover:bg-pink-50/40 ${
+                  isWeekend && isCurrentMonth ? "bg-pink-50/20" : ""
+                } ${!isCurrentMonth ? "bg-slate-50/40" : ""}`}
+              >
+                <span
+                  className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-black ${
+                    isToday
+                      ? "bg-pink-500 text-white"
+                      : isCurrentMonth
+                        ? "text-slate-700"
+                        : "text-slate-300"
+                  }`}
+                >
+                  {isCurrentMonth ? dayNum : ""}
+                </span>
+                {isCurrentMonth && appts.length > 0 && (
+                  <div className="mt-1 space-y-1">
+                    {appts.slice(0, 2).map((a, ai) => (
+                      <div
+                        key={ai}
+                        className={`flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] font-black ${a.color.replace("bg-", "bg-")}`}
+                        style={{ color: "inherit" }}
+                      >
+                        <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${a.color}`} />
+                        <span className="truncate text-slate-700">{a.label}</span>
+                      </div>
+                    ))}
+                    {appts.length > 2 && (
+                      <p className="pl-1 text-[10px] font-black text-pink-500">
+                        +{appts.length - 2} ເພີ່ມ
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </BeautyCard>
     </BeautyPage>
   );
 }
