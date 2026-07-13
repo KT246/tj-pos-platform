@@ -16,6 +16,7 @@ import {
   normalizeOptionGroupPriceMode,
   type OptionGroup,
 } from "@/features/pos/components/products/product-options"
+import { formatKipAmount } from "@/features/pos/lib/format"
 import type { PosCategory } from "@/features/pos/types"
 
 type ProductDetailEditorProps = {
@@ -343,7 +344,7 @@ function MoneyField({
       </span>
       <span className="mt-2 flex h-10 items-center rounded-md border border-[#ded4c8] bg-white px-3 focus-within:border-[#8d7157] focus-within:ring-2 focus-within:ring-[#e5d7c7]">
         <input
-          value={value ? value.toLocaleString("vi-VN") : ""}
+          value={value ? formatKipAmount(value) : ""}
           onChange={(event) => onChange(Number(event.target.value.replace(/\D/g, "")))}
           inputMode="numeric"
           className="min-w-0 flex-1 bg-transparent text-sm font-medium text-[#2f2419] outline-none"

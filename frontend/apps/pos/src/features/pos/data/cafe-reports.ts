@@ -55,7 +55,7 @@ export const reportKpis: ReportKpi[] = [
   {
     id: "today-revenue",
     title: "Doanh thu hôm nay",
-    value: "5.820.000 ກີບ",
+    value: "5,820,000 ກີບ",
     change: "12.5% so với hôm qua",
   },
   {
@@ -73,7 +73,7 @@ export const reportKpis: ReportKpi[] = [
   {
     id: "average-order",
     title: "Giá trị đơn trung bình",
-    value: "45.469 ກີບ",
+    value: "45,469 ກີບ",
     change: "3.7% so với hôm qua",
   },
 ]

@@ -15,7 +15,7 @@ import { cafeProductCatalog } from "@/features/pos/data/cafe-product-catalog"
 import { uploadPosItemImage } from "@/features/pos/api/pos-items-api"
 import { showPosToast } from "@/features/pos/components/notifications/pos-toast-store"
 import { validateImageFile } from "@/features/pos/components/products/product-image-utils"
-import { formatVnd } from "@/features/pos/lib/format"
+import { formatKipAmount, formatVnd } from "@/features/pos/lib/format"
 import {
   canUseReplacementPrice,
   defaultCafeOptionGroups,
@@ -599,7 +599,7 @@ function OptionGroupEditor({
               className="h-10 min-w-0 rounded-md border border-[#ded4c8] bg-white px-3 text-sm font-semibold text-[#2f2419] outline-none focus:border-[#8d7157] focus:ring-2 focus:ring-[#e5d7c7]"
             />
             <input
-              value={choice.price ? choice.price.toLocaleString("vi-VN") : "0"}
+              value={choice.price ? formatKipAmount(choice.price) : "0"}
               onChange={(event) =>
                 onUpdateChoice(choice.id, {
                   price: Number(event.target.value.replace(/\D/g, "")),
@@ -792,7 +792,7 @@ function MoneyField({
       </span>
       <span className="mt-2 flex h-10 items-center rounded-md border border-[#ded4c8] bg-white px-3 focus-within:border-[#8d7157] focus-within:ring-2 focus-within:ring-[#e5d7c7]">
         <input
-          value={value ? value.toLocaleString("vi-VN") : ""}
+          value={value ? formatKipAmount(value) : ""}
           onChange={(event) => onChange(Number(event.target.value.replace(/\D/g, "")))}
           inputMode="numeric"
           className="min-w-0 flex-1 bg-transparent text-sm font-medium text-[#2f2419] outline-none"

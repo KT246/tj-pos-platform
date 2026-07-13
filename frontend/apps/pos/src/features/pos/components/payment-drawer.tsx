@@ -11,7 +11,7 @@ import {
 import type { ReactNode } from "react"
 import { useEffect, useMemo, useState } from "react"
 
-import { formatVnd } from "@/features/pos/lib/format"
+import { formatKipAmount, formatVnd } from "@/features/pos/lib/format"
 import { calculateOrderTotals } from "@/features/pos/lib/order-totals"
 import type { CartLine, OrderDiscount } from "@/features/pos/stores/pos-store"
 import type { PosCafeCustomer } from "@/features/pos/api/pos-customers-api"
@@ -342,7 +342,7 @@ export function PaymentDrawer({
                           <input
                             value={
                               payment.amount
-                                ? payment.amount.toLocaleString("vi-VN")
+                                ? formatKipAmount(payment.amount)
                                 : ""
                             }
                             onChange={(event) =>

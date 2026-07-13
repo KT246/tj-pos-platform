@@ -68,7 +68,7 @@ export const stockKpis: StockKpi[] = [
   {
     id: "value",
     title: "Tổng giá trị tồn kho",
-    value: "234.560.000 ກີບ",
+    value: "234,560,000 ກີບ",
     subtitle: "so với tháng trước",
     tone: "brown",
     helper: "↑ 8.5%",

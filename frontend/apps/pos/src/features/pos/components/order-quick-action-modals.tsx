@@ -5,7 +5,7 @@ import { useMemo, useState } from "react"
 
 import type { CafePromotion } from "@/features/pos/api/pos-promotions-api"
 import type { CafeCombo } from "@/features/pos/api/pos-combos-api"
-import { formatVnd } from "@/features/pos/lib/format"
+import { formatKipAmount, formatVnd } from "@/features/pos/lib/format"
 import type { OrderDiscount } from "@/features/pos/stores/pos-store"
 import { cn } from "@/lib/utils"
 
@@ -236,7 +236,13 @@ export function ManualDiscountModal({
         </span>
         <span className="mt-2 flex h-12 items-center rounded-xl border border-[#eadfce] bg-white px-4 focus-within:border-[#b98b56] focus-within:ring-4 focus-within:ring-[#f4dec2]">
           <input
-            value={value ? numericValue.toLocaleString("vi-VN") : ""}
+            value={
+              value
+                ? mode === "amount"
+                  ? formatKipAmount(numericValue)
+                  : numericValue.toLocaleString("en-US")
+                : ""
+            }
             onChange={(event) => setValue(event.target.value)}
             inputMode="numeric"
             className="min-w-0 flex-1 bg-transparent text-base font-black text-[#3b2511] outline-none"

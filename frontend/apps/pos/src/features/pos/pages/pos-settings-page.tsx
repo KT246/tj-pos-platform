@@ -53,6 +53,7 @@ import { showPosToast } from "@/features/pos/components/notifications/pos-toast-
 import { validateImageFile } from "@/features/pos/components/products/product-image-utils"
 import { SettingsTopbar } from "@/features/pos/components/settings/settings-topbar"
 import { PosAccountsSettingsPanel } from "@/features/pos/components/settings/pos-accounts-settings-panel"
+import { formatKip, formatKipAmount } from "@/features/pos/lib/format"
 import { cafePosConfig } from "@/features/pos/pos-types/cafe/config"
 import { cn } from "@/lib/utils"
 
@@ -963,7 +964,7 @@ export function PosSettingsPage() {
                           options={[
                             ["none", "ບໍ່ປັດ"],
                             ["nearest-500", "ໃກ້ສຸດ 500 ກີບ"],
-                            ["nearest-1000", "ໃກ້ສຸດ 1.000 ກີບ"],
+                            ["nearest-1000", "ໃກ້ສຸດ 1,000 ກີບ"],
                           ]}
                         />
                       </div>
@@ -1634,11 +1635,11 @@ function ReceiptPreviewItem({
 }
 
 function formatPreviewKip(value: number) {
-  return `${value.toLocaleString("vi-VN")} ກີບ`
+  return formatKip(value)
 }
 
 function formatNumber(value: number) {
-  return new Intl.NumberFormat("lo-LA").format(value || 0)
+  return formatKipAmount(value)
 }
 
 function formatMoneyInput(value: number) {
