@@ -20,3 +20,11 @@ test-results/
 dev-server*.log
 package-lock.json
 yarn.lock
+
+# Keep source documentation text-only; product images belong in app assets or external storage.
+docs/**/*.png
+docs/**/*.jpg
+docs/**/*.jpeg
+docs/**/*.gif
+docs/**/*.webp
+docs/**/*.svg
