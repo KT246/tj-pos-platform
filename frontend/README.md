@@ -19,6 +19,6 @@ PNPM_VERSION=10.25.0
 
 `VITE_API_BASE_URL` is embedded in the browser bundle, so it must be the public HTTPS URL of the backend API. Do not add secret values with a `VITE_` prefix.
 
-`wrangler.jsonc` publishes `apps/pos/dist` as Worker static assets. It also configures SPA fallback, so deep links such as `/pos/staff` load the React application after a refresh.
+`wrangler.jsonc` publishes `apps/pos/dist` as Worker static assets. It also configures SPA fallback, so deep links such as `/pos/staff` load the React application after a refresh. Do not add a Pages `_redirects` file to `apps/pos/public`; Worker SPA routing is already handled by Wrangler.
 
 `.nvmrc` pins the Cloudflare build to Node.js 22.16.0. The backend must be deployed separately and accept requests from the Pages domain.
