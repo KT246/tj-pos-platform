@@ -1,72 +1,24 @@
-# TJ POS Frontend
+# Deploy to Cloudflare Pages
 
-Frontend workspace for TJ POS.
+This frontend is a Vite monorepo. Configure the Cloudflare Pages project with:
 
-## Package Manager
+| Setting | Value |
+| --- | --- |
+| Root directory | `frontend` |
+| Build command | `pnpm build` |
+| Build output directory | `apps/pos/dist` |
+| Production branch | Your production branch |
 
-Use `pnpm` only.
-
-```bash
-pnpm install
-pnpm dev:web
-pnpm dev:platform-admin
-pnpm dev:business-admin
-pnpm dev:public-menu
-pnpm dev:staff-order
-pnpm dev:customer-display
-pnpm dev:kitchen-display
-pnpm dev:terminal
-pnpm lint
-pnpm typecheck
-pnpm test
-pnpm build
-```
-
-## Structure
+Set these environment variables for both Preview and Production:
 
 ```text
-frontend/
-+- apps/
-|  +- web              # Next.js public website
-|  +- platform-admin   # Vite React platform admin
-|  +- business-admin   # Vite React business admin
-|  +- terminal         # Vite React POS terminal
-|  +- public-menu      # Vite React public menu / QR menu
-|  +- staff-order      # Vite React staff order mobile
-|  +- customer-display # Vite React customer display
-|  +- kitchen-display  # Vite React kitchen / bar display
-+- packages/
-   +- ui
-   +- shared
-   +- i18n
-   +- config
+VITE_API_BASE_URL=https://api.example.com
+VITE_POS_BUSINESS_SLUG=tj-cafe-vientiane
+PNPM_VERSION=10.25.0
 ```
 
-Only `apps/web` uses Next.js. Admin, customer-facing, and shop operation apps
-use Vite React.
+`VITE_API_BASE_URL` is embedded in the browser bundle, so it must be the public HTTPS URL of the backend API. Do not add secret values with a `VITE_` prefix.
 
-The frontend should use mock data until the API contract is agreed with backend.
+The POS uses browser routing. `apps/pos/public/_redirects` is copied into the build output and sends deep links such as `/pos/staff` to the React application.
 
-## Stack
-
-Installed stack:
-
-```text
-Next.js
-Vite React
-Tailwind CSS
-Radix UI primitives
-lucide-react
-TanStack Query
-TanStack Table
-Zustand
-React Hook Form
-Zod
-Vitest
-Testing Library
-Playwright
-```
-
-i18n is scoped to public website `lo` and `en` content. Do not make it a
-system-wide requirement for admin, terminal, or display apps unless the docs
-explicitly change that rule.
+`.nvmrc` pins the Cloudflare build to Node.js 22.16.0. The backend must be deployed separately and accept requests from the Pages domain.

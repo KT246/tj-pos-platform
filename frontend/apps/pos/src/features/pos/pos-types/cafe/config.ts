@@ -1,0 +1,93 @@
+import {
+  BarChart3,
+  Beef,
+  BadgePercent,
+  Coffee,
+  CupSoda,
+  FolderTree,
+  Grid2X2,
+  IceCreamBowl,
+  LayoutGrid,
+  Layers3,
+  LogOut,
+  Package,
+  ReceiptText,
+  Settings,
+  ShoppingBag,
+  Store,
+  Tag,
+  Undo2,
+  UserCog,
+  Users,
+  Warehouse,
+} from "lucide-react"
+
+import type { PosTypeConfig } from "@/features/pos/types"
+
+export const cafePosConfig: PosTypeConfig = {
+  type: "cafe",
+  brandName: "Coffee Time",
+  brandSubtitle: "POS",
+  cashierName: "Nguy\u1ec5n Minh",
+  cashierRole: "ຜູ້ຈັດການກະ",
+  tableLabel: "ໂຕະ 03",
+  sidebarItems: [
+    { id: "sales", label: "ຂາຍສິນຄ້າ", icon: LayoutGrid, href: "/pos" },
+    { id: "orders", label: "ອໍເດີ", icon: ReceiptText, href: "/pos/orders" },
+    { id: "customers", label: "ລູກຄ້າ", icon: Users, href: "/pos/customers" },
+    { id: "products", label: "ສິນຄ້າ", icon: ShoppingBag, href: "/pos/products" },
+    { id: "categories", label: "ໝວດໝູ່", icon: FolderTree, href: "/pos/categories" },
+    { id: "combos", label: "ຄອມໂບ", icon: Layers3, href: "/pos/combos" },
+    { id: "promotions", label: "ໂປຣໂມຊັນ", icon: BadgePercent, href: "/pos/promotions" },
+    { id: "stock", label: "ສາງສິນຄ້າ", icon: Warehouse, href: "/pos/stock" },
+    { id: "reports", label: "ລາຍງານ", icon: BarChart3, href: "/pos/reports" },
+    { id: "staff", label: "ພະນັກງານ", icon: UserCog, href: "/pos/staff" },
+    { id: "settings", label: "ຕັ້ງຄ່າ", icon: Settings, href: "/pos/settings" },
+  ],
+  sidebarGroups: [
+    {
+      id: "sales",
+      label: "ຂາຍສິນຄ້າ",
+      items: [
+        { id: "sales", label: "ຂາຍສິນຄ້າ", icon: LayoutGrid, href: "/pos" },
+        { id: "orders", label: "ອໍເດີ", icon: ReceiptText, href: "/pos/orders" },
+        { id: "customers", label: "ລູກຄ້າ", icon: Users, href: "/pos/customers" },
+      ],
+    },
+    {
+      id: "catalog",
+      label: "ສິນຄ້າ & ເມນູ",
+      items: [
+        { id: "products", label: "ສິນຄ້າ", icon: ShoppingBag, href: "/pos/products" },
+        { id: "categories", label: "ໝວດໝູ່", icon: FolderTree, href: "/pos/categories" },
+        { id: "combos", label: "ຄອມໂບ", icon: Layers3, href: "/pos/combos" },
+        { id: "promotions", label: "ໂປຣໂມຊັນ", icon: BadgePercent, href: "/pos/promotions" },
+      ],
+    },
+    {
+      id: "operations",
+      label: "ການດຳເນີນງານ",
+      items: [
+        { id: "stock", label: "ສາງສິນຄ້າ", icon: Warehouse, href: "/pos/stock" },
+        { id: "reports", label: "ລາຍງານ", icon: BarChart3, href: "/pos/reports" },
+        { id: "staff", label: "ພະນັກງານ", icon: UserCog, href: "/pos/staff" },
+        { id: "settings", label: "ຕັ້ງຄ່າ", icon: Settings, href: "/pos/settings" },
+      ],
+    },
+  ],
+  categories: [
+    { id: "all", label: "ທັງໝົດ", icon: Grid2X2 },
+    { id: "coffee", label: "ກາເຟ", icon: Coffee },
+    { id: "tea", label: "ຊາ", icon: IceCreamBowl },
+    { id: "frappe", label: "ປັ່ນ", icon: CupSoda },
+    { id: "juice", label: "ນ້ຳໝາກໄມ້", icon: Store },
+    { id: "cake", label: "ເຄັກ", icon: Beef },
+    { id: "other", label: "ອື່ນໆ", icon: Package },
+  ],
+  quickActions: [
+    { id: "promotion", label: "ໂປຣໂມຊັນ", icon: Tag },
+    { id: "return", label: "ຄືນສິນຄ້າ", icon: Undo2 },
+    { id: "print", label: "ພິມໃບບິນ", icon: ReceiptText },
+    { id: "logout", label: "ອອກລະບົບ", icon: LogOut },
+  ],
+}
