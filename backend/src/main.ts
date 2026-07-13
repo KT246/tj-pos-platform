@@ -16,12 +16,25 @@ function enforceJsonUtf8(_request: Request, response: Response, next: NextFuncti
   next();
 }
 
+function getCorsOrigin() {
+  const origins = (process.env.CORS_ORIGIN ?? "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+  if (origins.length > 0) {
+    return origins;
+  }
+
+  return process.env.NODE_ENV === "production" ? false : true;
+}
+
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const port = Number(process.env.PORT ?? 3001);
 
   app.enableCors({
-    origin: true,
+    origin: getCorsOrigin(),
     credentials: true
   });
 

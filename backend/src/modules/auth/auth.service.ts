@@ -459,14 +459,26 @@ export class AuthService implements OnModuleInit {
   private async seedBusinessAdminAccount() {
     const businessId = "11111111-1111-4111-8111-111111111111";
     const userId = "22222222-2222-4222-8222-222222222222";
-    const passwordHash = await bcrypt.hash("VtCoffee@2025!", 12);
+    const isProduction = process.env.NODE_ENV === "production";
+    const password = process.env.INITIAL_ADMIN_PASSWORD ?? (isProduction ? "" : "VtCoffee@2025!");
+
+    if (!password) {
+      throw new Error("INITIAL_ADMIN_PASSWORD is required in production");
+    }
+
+    const businessSlug = process.env.INITIAL_BUSINESS_SLUG ?? "tj-cafe-vientiane";
+    const businessName = process.env.INITIAL_BUSINESS_NAME ?? "TJ Cafe Vientiane";
+    const adminName = process.env.INITIAL_ADMIN_NAME ?? "Somchai Phommaseanh";
+    const adminUsername = process.env.INITIAL_ADMIN_USERNAME ?? "owner";
+    const adminEmail = process.env.INITIAL_ADMIN_EMAIL ?? "owner@tjcafe.la";
+    const passwordHash = await bcrypt.hash(password, 12);
 
     await this.database.sql`
       INSERT INTO businesses (id, slug, name, type, status)
       VALUES (
         ${businessId},
-        'tj-cafe-vientiane',
-        'TJ Cafe Vientiane',
+        ${businessSlug},
+        ${businessName},
         'cafe',
         'active'
       )
@@ -481,9 +493,9 @@ export class AuthService implements OnModuleInit {
       INSERT INTO users (id, name, username, email, password_hash, status)
       VALUES (
         ${userId},
-        'Somchai Phommaseanh',
-        'owner',
-        'owner@tjcafe.la',
+        ${adminName},
+        ${adminUsername},
+        ${adminEmail},
         ${passwordHash},
         'active'
       )
@@ -522,8 +534,10 @@ export class AuthService implements OnModuleInit {
         updated_at = now()
     `;
 
-    await this.seedOptionalBusiness("33333333-3333-4333-8333-333333333333", "tj-restaurant-vientiane", "TJ Restaurant Vientiane", "restaurant");
-    await this.seedOptionalBusiness("44444444-4444-4444-8444-444444444444", "tj-retail-vientiane", "TJ Retail Vientiane", "retail");
+    if (!isProduction) {
+      await this.seedOptionalBusiness("33333333-3333-4333-8333-333333333333", "tj-restaurant-vientiane", "TJ Restaurant Vientiane", "restaurant");
+      await this.seedOptionalBusiness("44444444-4444-4444-8444-444444444444", "tj-retail-vientiane", "TJ Retail Vientiane", "retail");
+    }
   }
 
   private async seedOptionalBusiness(id: string, slug: string, name: string, type: string) {
