@@ -121,8 +121,8 @@ export function PosLoginPage() {
   }
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#f7f0e7] text-[#3b2511]">
-      <div className="grid min-h-screen lg:grid-cols-[1.05fr_1fr]">
+    <main className="min-h-[100dvh] overflow-x-hidden bg-[#f7f0e7] text-[#3b2511]">
+      <div className="grid min-h-[100dvh] lg:grid-cols-[1.05fr_1fr]">
         <section className="relative hidden min-h-screen overflow-hidden bg-[radial-gradient(circle_at_50%_44%,#fffaf4_0%,#f4e6d5_52%,#ead8c3_100%)] px-10 py-7 lg:block">
           <div className="absolute -left-[20%] top-[3%] h-[88%] w-[96%] rounded-full border border-white/80 bg-white/22" />
           <div className="absolute left-4 top-32 grid grid-cols-4 gap-3 opacity-50">
@@ -183,14 +183,14 @@ export function PosLoginPage() {
           </div>
         </section>
 
-        <section className="relative flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_50%_12%,#fffaf4_0%,#f8f1e8_42%,#f2e7da_100%)] px-5 py-8">
+        <section className="relative flex min-h-[100dvh] items-center justify-center bg-[radial-gradient(circle_at_50%_12%,#fffaf4_0%,#f8f1e8_42%,#f2e7da_100%)] px-4 py-6 sm:px-5 sm:py-8">
           <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.78),rgba(255,255,255,0.18))]" />
 
           <div className="relative z-10 w-full max-w-[540px]">
-            <div className="mb-7 flex items-center justify-center gap-3 lg:hidden">
-              <Coffee className="h-10 w-10 text-[#5a3718]" />
+            <div className="mb-5 flex items-center justify-center gap-3 sm:mb-7 lg:hidden">
+              <Coffee className="h-9 w-9 text-[#5a3718] sm:h-10 sm:w-10" />
               <div>
-                <h1 className="font-serif text-3xl font-black leading-none text-[#3b2511]">
+                <h1 className="font-serif text-[28px] font-black leading-none text-[#3b2511] sm:text-3xl">
                   TJ POS
                 </h1>
                 <p className="mt-1 text-sm font-semibold text-[#7c6448]">
@@ -204,53 +204,53 @@ export function PosLoginPage() {
                 event.preventDefault()
                 void handleLogin()
               }}
-              className="rounded-[24px] border border-[#ded0bf] bg-white/88 px-8 py-10 shadow-[0_24px_70px_rgba(80,54,27,0.14)] backdrop-blur md:px-12 md:py-12"
+              className="rounded-xl border border-[#ded0bf] bg-white/88 px-5 py-7 shadow-[0_24px_70px_rgba(80,54,27,0.14)] backdrop-blur sm:rounded-[24px] sm:px-8 sm:py-10 md:px-12 md:py-12"
             >
               <div className="flex flex-col items-center text-center">
-                <span className="flex h-20 w-20 items-center justify-center rounded-full bg-[#f3eadf] text-[#5a3718]">
-                  <LockKeyhole className="h-9 w-9" strokeWidth={1.8} />
+                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#f3eadf] text-[#5a3718] sm:h-20 sm:w-20">
+                  <LockKeyhole className="h-8 w-8 sm:h-9 sm:w-9" strokeWidth={1.8} />
                 </span>
-                <h2 className="mt-7 text-[32px] font-black leading-tight text-[#3b2511] md:text-[36px]">
+                <h2 className="mt-5 text-[28px] font-black leading-tight text-[#3b2511] sm:mt-7 sm:text-[32px] md:text-[36px]">
                   ເຂົ້າລະບົບ
                 </h2>
               </div>
 
-              <div className="mt-10 space-y-6">
+              <div className="mt-7 space-y-5 sm:mt-10 sm:space-y-6">
                 <label className="block">
-                  <span className="text-base font-black text-[#3b2511]">
+                  <span className="text-sm font-black text-[#3b2511] sm:text-base">
                     ຊື່ຜູ້ໃຊ້
                   </span>
-                  <span className="mt-3 flex h-16 items-center rounded-xl border border-[#d8c8b8] bg-white px-5 text-[#7c6448] transition focus-within:border-[#8a5f36] focus-within:ring-4 focus-within:ring-[#ead7c1]">
-                    <User className="h-6 w-6 shrink-0" strokeWidth={1.8} />
+                  <span className="mt-2 flex h-14 items-center rounded-xl border border-[#d8c8b8] bg-white px-4 text-[#7c6448] transition focus-within:border-[#8a5f36] focus-within:ring-4 focus-within:ring-[#ead7c1] sm:mt-3 sm:h-16 sm:px-5">
+                    <User className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" strokeWidth={1.8} />
                     <input
                       type="text"
                       value={username}
                       onChange={(event) => setUsername(event.target.value)}
                       placeholder="ໃສ່ຊື່ຜູ້ໃຊ້"
-                      className="ml-4 min-w-0 flex-1 bg-transparent text-lg font-semibold text-[#3b2511] outline-none placeholder:text-[#b3a394]"
+                      className="ml-3 min-w-0 flex-1 bg-transparent text-base font-semibold text-[#3b2511] outline-none placeholder:text-[#b3a394] sm:ml-4 sm:text-lg"
                       autoComplete="username"
                     />
                   </span>
                 </label>
 
                 <label className="block">
-                  <span className="text-base font-black text-[#3b2511]">
+                  <span className="text-sm font-black text-[#3b2511] sm:text-base">
                     ລະຫັດຜ່ານ
                   </span>
-                  <span className="mt-3 flex h-16 items-center rounded-xl border border-[#d8c8b8] bg-white px-5 text-[#7c6448] transition focus-within:border-[#8a5f36] focus-within:ring-4 focus-within:ring-[#ead7c1]">
-                    <LockKeyhole className="h-6 w-6 shrink-0" strokeWidth={1.8} />
+                  <span className="mt-2 flex h-14 items-center rounded-xl border border-[#d8c8b8] bg-white px-4 text-[#7c6448] transition focus-within:border-[#8a5f36] focus-within:ring-4 focus-within:ring-[#ead7c1] sm:mt-3 sm:h-16 sm:px-5">
+                    <LockKeyhole className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" strokeWidth={1.8} />
                     <input
                       type={showPassword ? "text" : "password"}
                       value={password}
                       onChange={(event) => setPassword(event.target.value)}
                       placeholder="ໃສ່ລະຫັດຜ່ານ"
-                      className="ml-4 min-w-0 flex-1 bg-transparent text-lg font-semibold text-[#3b2511] outline-none placeholder:text-[#b3a394]"
+                      className="ml-3 min-w-0 flex-1 bg-transparent text-base font-semibold text-[#3b2511] outline-none placeholder:text-[#b3a394] sm:ml-4 sm:text-lg"
                       autoComplete="current-password"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword((value) => !value)}
-                      className="ml-3 flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg text-[#8a5f36] transition hover:bg-[#f7efe5]"
+                      className="ml-2 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg text-[#8a5f36] transition hover:bg-[#f7efe5] sm:ml-3 sm:h-10 sm:w-10"
                       aria-label={showPassword ? "ເຊື່ອງລະຫັດຜ່ານ" : "ສະແດງລະຫັດຜ່ານ"}
                     >
                       {showPassword ? (
@@ -265,7 +265,7 @@ export function PosLoginPage() {
                 <button
                   type="button"
                   onClick={() => setRemember((value) => !value)}
-                  className="flex cursor-pointer items-center gap-3 text-base font-bold text-[#3b2511]"
+                  className="flex cursor-pointer items-center gap-3 text-sm font-bold text-[#3b2511] sm:text-base"
                 >
                   <span
                     className={cn(
@@ -283,19 +283,19 @@ export function PosLoginPage() {
                 <button
                   type="submit"
                   disabled={loggingIn}
-                  className="h-16 w-full cursor-pointer rounded-xl bg-[linear-gradient(135deg,#6d421f_0%,#3b2511_100%)] text-xl font-black text-white shadow-[0_18px_32px_rgba(80,54,27,0.22)] transition hover:brightness-110"
+                  className="h-14 w-full cursor-pointer rounded-xl bg-[linear-gradient(135deg,#6d421f_0%,#3b2511_100%)] text-lg font-black text-white shadow-[0_18px_32px_rgba(80,54,27,0.22)] transition hover:brightness-110 sm:h-16 sm:text-xl"
                 >
                   {loggingIn ? "ກຳລັງເຂົ້າລະບົບ..." : "ເຂົ້າລະບົບ"}
                 </button>
 
-                <div className="flex items-center gap-3 rounded-xl bg-[#fff7ee] px-5 py-4 text-sm font-semibold text-[#7c6448]">
+                <div className="flex items-center gap-3 rounded-xl bg-[#fff7ee] px-4 py-3 text-xs font-semibold text-[#7c6448] sm:px-5 sm:py-4 sm:text-sm">
                   <Info className="h-5 w-5 shrink-0 text-[#8a5f36]" />
                   ກະລຸນາໃສ່ບັນຊີ ແລະ ລະຫັດຜ່ານໃຫ້ຖືກຕ້ອງ
                 </div>
               </div>
             </form>
 
-            <p className="mt-9 text-center text-base font-semibold text-[#9b8a7b]">
+            <p className="mt-6 text-center text-sm font-semibold text-[#9b8a7b] sm:mt-9 sm:text-base">
               © 2026 TJ POS
             </p>
           </div>
