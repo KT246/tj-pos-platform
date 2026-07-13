@@ -10,8 +10,8 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3001
-    ports:
-      - "${API_PORT:-3001}:3001"
+    expose:
+      - "3001"
     volumes:
       - backend_uploads:/app/uploads
     healthcheck:
@@ -26,6 +26,17 @@ services:
       timeout: 5s
       retries: 3
       start_period: 20s
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: tj-pos-cloudflared
+    restart: unless-stopped
+    env_file:
+      - ${TUNNEL_ENV_FILE:-.env.tunnel}
+    command: tunnel --no-autoupdate run
+    depends_on:
+      backend:
+        condition: service_healthy
 
 volumes:
   backend_uploads:
