@@ -523,7 +523,8 @@ export class AuthService implements OnModuleInit {
           "payments:manage",
           "reports:read",
           "staff:manage",
-          "settings:manage"
+          "settings:manage",
+          "platform:manage"
         ]},
         'active'
       )
@@ -534,21 +535,5 @@ export class AuthService implements OnModuleInit {
         updated_at = now()
     `;
 
-    if (!isProduction) {
-      await this.seedOptionalBusiness("33333333-3333-4333-8333-333333333333", "tj-restaurant-vientiane", "TJ Restaurant Vientiane", "restaurant");
-      await this.seedOptionalBusiness("44444444-4444-4444-8444-444444444444", "tj-retail-vientiane", "TJ Retail Vientiane", "retail");
-    }
-  }
-
-  private async seedOptionalBusiness(id: string, slug: string, name: string, type: string) {
-    await this.database.sql`
-      INSERT INTO businesses (id, slug, name, type, status)
-      VALUES (${id}, ${slug}, ${name}, ${type}, 'active')
-      ON CONFLICT (slug) DO UPDATE SET
-        name = EXCLUDED.name,
-        type = EXCLUDED.type,
-        status = EXCLUDED.status,
-        updated_at = now()
-    `;
   }
 }

@@ -4,9 +4,13 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm --filter pos dev",
+    "dev:web": "pnpm --filter web dev",
     "build": "pnpm --filter pos build",
+    "build:web": "pnpm --filter web build",
     "typecheck": "pnpm --filter pos typecheck",
-    "lint": "pnpm --filter pos lint"
+    "typecheck:web": "pnpm --filter web typecheck",
+    "lint": "pnpm --filter pos lint",
+    "lint:web": "pnpm --filter web lint"
   },
   "devDependencies": {
     "typescript": "latest"

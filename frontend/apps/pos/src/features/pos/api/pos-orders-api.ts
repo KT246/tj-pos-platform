@@ -116,26 +116,23 @@ export type PosOrderReceipt = {
   order: PosBusinessOrder
 }
 
-const businessSlug =
-  import.meta.env.VITE_POS_BUSINESS_SLUG || "tj-cafe-vientiane"
-
 export function createPosOrder(body: CreatePosOrderBody) {
   return apiPost<PosBusinessOrder, CreatePosOrderBody>(
-    `/pos/${businessSlug}/orders`,
+    `/pos/${getBusinessSlug()}/orders`,
     body,
   )
 }
 
 export function payPosOrder(orderId: string, body: CreatePosOrderPaymentBody) {
   return apiPost<PosBusinessOrder, CreatePosOrderPaymentBody>(
-    `/pos/${businessSlug}/orders/${orderId}/payments`,
+    `/pos/${getBusinessSlug()}/orders/${orderId}/payments`,
     body,
   )
 }
 
 export function updatePosOrderDraft(orderId: string, body: CreatePosOrderBody) {
   return apiPatch<PosBusinessOrder, CreatePosOrderBody>(
-    `/pos/${businessSlug}/orders/${orderId}/draft`,
+    `/pos/${getBusinessSlug()}/orders/${orderId}/draft`,
     body,
   )
 }
@@ -143,48 +140,56 @@ export function updatePosOrderDraft(orderId: string, body: CreatePosOrderBody) {
 export function listPosOrders(status?: PosOrderStatus) {
   const query = status ? `?status=${encodeURIComponent(status)}` : ""
 
-  return apiGet<PosOrdersResponse>(`/pos/${businessSlug}/orders${query}`)
+  return apiGet<PosOrdersResponse>(`/pos/${getBusinessSlug()}/orders${query}`)
 }
 
 export function getPosOrder(orderId: string) {
-  return apiGet<PosBusinessOrder>(`/pos/${businessSlug}/orders/${orderId}`)
+  return apiGet<PosBusinessOrder>(`/pos/${getBusinessSlug()}/orders/${orderId}`)
 }
 
 export function getPosOrderReceipt(orderId: string) {
-  return apiGet<PosOrderReceipt>(`/pos/${businessSlug}/orders/${orderId}/receipt`)
+  return apiGet<PosOrderReceipt>(`/pos/${getBusinessSlug()}/orders/${orderId}/receipt`)
 }
 
 export function updatePosOrderStatus(orderId: string, status: PosOrderStatus) {
   return apiPatch<PosBusinessOrder, { status: PosOrderStatus }>(
-    `/pos/${businessSlug}/orders/${orderId}/status`,
+    `/pos/${getBusinessSlug()}/orders/${orderId}/status`,
     { status },
   )
 }
 
 export function sendPosOrderToKitchen(orderId: string) {
   return apiPost<PosBusinessOrder, Record<string, never>>(
-    `/pos/${businessSlug}/orders/${orderId}/send-to-kitchen`,
+    `/pos/${getBusinessSlug()}/orders/${orderId}/send-to-kitchen`,
     {},
   )
 }
 
 export function cancelPosOrder(orderId: string) {
   return apiPost<PosBusinessOrder, Record<string, never>>(
-    `/pos/${businessSlug}/orders/${orderId}/cancel`,
+    `/pos/${getBusinessSlug()}/orders/${orderId}/cancel`,
     {},
   )
 }
 
 export function voidPosOrder(orderId: string) {
   return apiPost<PosBusinessOrder, Record<string, never>>(
-    `/pos/${businessSlug}/orders/${orderId}/void`,
+    `/pos/${getBusinessSlug()}/orders/${orderId}/void`,
     {},
   )
 }
 
 export function refundPosOrder(orderId: string) {
   return apiPost<PosBusinessOrder, Record<string, never>>(
-    `/pos/${businessSlug}/orders/${orderId}/refund`,
+    `/pos/${getBusinessSlug()}/orders/${orderId}/refund`,
     {},
+  )
+}
+
+function getBusinessSlug() {
+  return (
+    window.localStorage.getItem("tj_pos_business_slug") ||
+    import.meta.env.VITE_POS_BUSINESS_SLUG ||
+    "tj-cafe-vientiane"
   )
 }

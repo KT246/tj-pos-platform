@@ -11,9 +11,14 @@ export const api = axios.create({
 
 api.interceptors.request.use((config) => {
   const token = window.localStorage.getItem("tj_pos_access_token")
+  const sessionBusinessSlug = window.localStorage.getItem("tj_pos_business_slug")
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
+  }
+
+  if (sessionBusinessSlug) {
+    config.headers["x-business-slug"] = sessionBusinessSlug
   }
 
   return config
