@@ -5,6 +5,8 @@ dist/
 **/dist/
 .next/
 **/.next/
+.open-next/
+**/.open-next/
 coverage/
 **/coverage/
 playwright-report/
