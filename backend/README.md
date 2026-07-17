@@ -34,4 +34,4 @@ docker compose logs -f cloudflared
 
 The server needs only outbound network access for `cloudflared`; do not open inbound ports `80`, `443`, or `3001` for this API. Uploaded images are stored in the Docker volume `backend_uploads`.
 
-On the first startup against an empty Supabase database, the backend creates its required tables and creates the initial administrator from `INITIAL_ADMIN_*`. Keep the Supabase connection string and all JWT values only in `.env.production`; never commit that file.
+On the first startup against an empty Supabase database, the backend creates its required tables and creates the platform administrator from `INITIAL_ADMIN_USERNAME` and `INITIAL_ADMIN_PASSWORD`. This account is not attached to a POS business; each POS business is created through Platform Admin. Keep the Supabase connection string and all JWT values only in `.env.production`; never commit that file.

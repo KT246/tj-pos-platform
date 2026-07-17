@@ -43,6 +43,16 @@ type PosAccountAuthRow = {
   business_status: string;
 };
 
+type PlatformAdminRow = {
+  user_id: string;
+  user_name: string;
+  user_email: string;
+  user_username: string | null;
+  user_status: string;
+  password_hash: string;
+  platform_status: string;
+};
+
 type AuthTokenPayload = {
   sub: string;
   businessId: string;
@@ -54,6 +64,14 @@ type AuthTokenPayload = {
 
 const maxFailedLoginAttempts = 5;
 const loginLockMs = 60_000;
+const platformAdminPermissions = ["platform:manage"];
+const platformBusiness: BusinessAuthBusiness = {
+  id: "platform",
+  slug: "platform",
+  name: "TJ Platform",
+  type: "platform",
+  status: "active"
+};
 
 @Injectable()
 export class AuthService implements OnModuleInit {
@@ -64,7 +82,7 @@ export class AuthService implements OnModuleInit {
 
   async onModuleInit() {
     await this.ensureAuthSchema();
-    await this.seedBusinessAdminAccount();
+    await this.seedPlatformAdminAccount();
   }
 
   async loginBusiness(
@@ -144,6 +162,32 @@ export class AuthService implements OnModuleInit {
         permissions: ["orders:read", "orders:manage", "payments:manage"],
         accountType: "pos"
       };
+    }
+
+    const [platformAdmin] = await this.database.sql<PlatformAdminRow[]>`
+      SELECT
+        u.id AS user_id,
+        u.name AS user_name,
+        u.email AS user_email,
+        u.username AS user_username,
+        u.status AS user_status,
+        u.password_hash,
+        pa.status AS platform_status
+      FROM users u
+      INNER JOIN platform_admins pa ON pa.user_id = u.id
+      WHERE lower(u.email) = ${normalizedIdentifier}
+         OR lower(u.username) = ${normalizedIdentifier}
+      LIMIT 1
+    `;
+
+    if (platformAdmin) {
+      if (platformAdmin.user_status !== "active" || platformAdmin.platform_status !== "active" || !await bcrypt.compare(password, platformAdmin.password_hash)) {
+        await this.registerFailedLogin(normalizedIdentifier);
+        throw new UnauthorizedException("Invalid email or password");
+      }
+
+      await this.resetLoginAttempts(normalizedIdentifier);
+      return this.createPlatformAdminSession(platformAdmin, rememberMe);
     }
 
     const [row] = await this.database.sql<BusinessUserRow[]>`
@@ -276,6 +320,29 @@ export class AuthService implements OnModuleInit {
       };
     }
 
+    if (payload.role === "platform_admin" && payload.businessId === platformBusiness.id) {
+      const [platformAdmin] = await this.database.sql<PlatformAdminRow[]>`
+        SELECT
+          u.id AS user_id,
+          u.name AS user_name,
+          u.email AS user_email,
+          u.username AS user_username,
+          u.status AS user_status,
+          u.password_hash,
+          pa.status AS platform_status
+        FROM users u
+        INNER JOIN platform_admins pa ON pa.user_id = u.id
+        WHERE u.id = ${payload.sub}
+        LIMIT 1
+      `;
+
+      if (!platformAdmin || platformAdmin.user_status !== "active" || platformAdmin.platform_status !== "active") {
+        throw new UnauthorizedException("Session expired");
+      }
+
+      return this.createPlatformAdminSession(platformAdmin);
+    }
+
     const [row] = await this.database.sql<BusinessUserRow[]>`
       SELECT
         u.id AS user_id,
@@ -389,6 +456,15 @@ export class AuthService implements OnModuleInit {
     `;
 
     await this.database.sql`
+      CREATE TABLE IF NOT EXISTS platform_admins (
+        user_id uuid PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+        status text NOT NULL DEFAULT 'active',
+        created_at timestamptz NOT NULL DEFAULT now(),
+        updated_at timestamptz NOT NULL DEFAULT now()
+      )
+    `;
+
+    await this.database.sql`
       CREATE TABLE IF NOT EXISTS auth_login_attempts (
         email text PRIMARY KEY,
         failed_count integer NOT NULL DEFAULT 0,
@@ -456,84 +532,95 @@ export class AuthService implements OnModuleInit {
     `;
   }
 
-  private async seedBusinessAdminAccount() {
-    const businessId = "11111111-1111-4111-8111-111111111111";
+  private async seedPlatformAdminAccount() {
     const userId = "22222222-2222-4222-8222-222222222222";
     const isProduction = process.env.NODE_ENV === "production";
     const password = process.env.INITIAL_ADMIN_PASSWORD ?? (isProduction ? "" : "VtCoffee@2025!");
+    const adminUsername = process.env.INITIAL_ADMIN_USERNAME?.trim().toLowerCase() ?? "admin";
 
     if (!password) {
       throw new Error("INITIAL_ADMIN_PASSWORD is required in production");
     }
 
-    const businessSlug = process.env.INITIAL_BUSINESS_SLUG ?? "tj-cafe-vientiane";
-    const businessName = process.env.INITIAL_BUSINESS_NAME ?? "TJ Cafe Vientiane";
-    const adminName = process.env.INITIAL_ADMIN_NAME ?? "Somchai Phommaseanh";
-    const adminUsername = process.env.INITIAL_ADMIN_USERNAME ?? "owner";
-    const adminEmail = process.env.INITIAL_ADMIN_EMAIL ?? "owner@tjcafe.la";
-    const passwordHash = await bcrypt.hash(password, 12);
+    if (!adminUsername) {
+      throw new Error("INITIAL_ADMIN_USERNAME is required");
+    }
 
-    await this.database.sql`
-      INSERT INTO businesses (id, slug, name, type, status)
-      VALUES (
-        ${businessId},
-        ${businessSlug},
-        ${businessName},
-        'cafe',
-        'active'
-      )
-      ON CONFLICT (slug) DO UPDATE SET
-        name = EXCLUDED.name,
-        type = EXCLUDED.type,
-        status = EXCLUDED.status,
-        updated_at = now()
-    `;
+    const passwordHash = await bcrypt.hash(password, 12);
+    const adminEmail = `${adminUsername}@platform.local`;
 
     await this.database.sql`
       INSERT INTO users (id, name, username, email, password_hash, status)
       VALUES (
         ${userId},
-        ${adminName},
+        'TJ Platform Admin',
         ${adminUsername},
         ${adminEmail},
         ${passwordHash},
         'active'
       )
-      ON CONFLICT (email) DO UPDATE SET
+      ON CONFLICT (id) DO UPDATE SET
         name = EXCLUDED.name,
         username = EXCLUDED.username,
+        email = EXCLUDED.email,
         password_hash = EXCLUDED.password_hash,
         status = EXCLUDED.status,
         updated_at = now()
     `;
 
     await this.database.sql`
-      INSERT INTO business_users (business_id, user_id, role, permissions, status)
-      VALUES (
-        ${businessId},
-        ${userId},
-        'owner',
-        ${[
-          "business:read",
-          "business:update",
-          "dashboard:read",
-          "items:manage",
-          "inventory:manage",
-          "orders:manage",
-          "payments:manage",
-          "reports:read",
-          "staff:manage",
-          "settings:manage",
-          "platform:manage"
-        ]},
-        'active'
-      )
-      ON CONFLICT (business_id, user_id) DO UPDATE SET
-        role = EXCLUDED.role,
-        permissions = EXCLUDED.permissions,
+      INSERT INTO platform_admins (user_id, status)
+      VALUES (${userId}, 'active')
+      ON CONFLICT (user_id) DO UPDATE SET
         status = EXCLUDED.status,
         updated_at = now()
     `;
 
+    await this.database.sql`
+      DELETE FROM business_users bu
+      USING businesses b
+      WHERE bu.business_id = b.id
+        AND bu.user_id = ${userId}
+        AND b.id = '11111111-1111-4111-8111-111111111111'
+        AND b.slug = 'tj-platform-bootstrap'
+    `;
+
+    await this.database.sql`
+      DELETE FROM businesses
+      WHERE id = '11111111-1111-4111-8111-111111111111'
+        AND slug = 'tj-platform-bootstrap'
+    `;
+  }
+
+  private async createPlatformAdminSession(
+    platformAdmin: PlatformAdminRow,
+    rememberMe = false
+  ): Promise<BusinessLoginResponse> {
+    const accessToken = await this.jwtService.signAsync({
+      sub: platformAdmin.user_id,
+      businessId: platformBusiness.id,
+      businessSlug: platformBusiness.slug,
+      role: "platform_admin",
+      email: platformAdmin.user_email,
+      accountType: "admin"
+    } satisfies AuthTokenPayload, {
+      expiresIn: rememberMe ? "30d" : "1d"
+    });
+
+    return {
+      accessToken,
+      tokenType: "Bearer",
+      user: {
+        id: platformAdmin.user_id,
+        name: platformAdmin.user_name,
+        email: platformAdmin.user_email,
+        username: platformAdmin.user_username,
+        status: platformAdmin.user_status
+      },
+      business: platformBusiness,
+      role: "platform_admin",
+      permissions: platformAdminPermissions,
+      accountType: "admin"
+    };
   }
 }
